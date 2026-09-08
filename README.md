@@ -113,6 +113,12 @@ python -X utf8 scripts/install.py --project "D:\小说\我的写作项目"
 
 手动安装可下载本页顶部的技能 ZIP，将其中的 `story-codex` 目录放入目标项目 `.agents/skills/`。下载包包含 13 个文件；GitHub 的自动 Source code ZIP 则包含整个仓库。克隆本仓库并在其中使用 Codex 时，项目内已具备技能目录。
 
+### GitHub Packages
+
+本仓库的 [Packages](https://github.com/users/Cuinings/packages?repo_name=story-skill) 使用 npm 分发包 `@cuinings/story-codex`，由已发布的 Release ZIP 构建，保留完整技能文件。它是内容包，不会通过 npm 安装脚本自动注册 Codex 技能；在 Codex 中使用时，仍推荐本页的一行安装指令。
+
+GitHub 的 npm 注册表下载需要认证，即使包是公开的也一样。后续正式 Release 发布后，工作流同步同版本包；已有版本会先下载核对，不覆盖不同内容。历史版本可从 Actions 手动同步。[同步流程与验证](docs/github-release.md)
+
 ## 验证与开发
 
 v0.3.0 发布前，**226 项测试、12 项整包检查全部通过**。另有实际中文稿件重放、75 次 CLI 调用的多线修订演练、三个旧工程副本迁移，以及 GitHub main / v0.3.0 的实际安装验证。GitHub 安装的 13 个技能文件与发布 ZIP 逐字节一致；这次验证涵盖版本、帮助、初始化和状态读取。

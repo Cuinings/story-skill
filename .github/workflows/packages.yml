@@ -1,0 +1,56 @@
+name: Sync GitHub Packages
+run-name: Sync ${{ inputs.tag || github.event.release.tag_name }} to GitHub Packages
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Published stable Release tag to synchronize
+        required: true
+        default: v0.3.0
+        type: string
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency:
+  group: packages-${{ inputs.tag || github.event.release.tag_name }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    if: github.repository == 'Cuinings/story-skill'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '24'
+      - name: Validate package tooling
+        run: |
+          python -B -X utf8 -m unittest discover -s tests -p test_package_npm.py
+          python -B -X utf8 -m unittest discover -s tests -p test_sync_packages.py
+      - name: Publish and verify the Release payload
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PACKAGE_TAG: ${{ inputs.tag || github.event.release.tag_name }}
+        run: python -B -X utf8 scripts/sync_packages.py --tag "$PACKAGE_TAG"
+      - name: Preserve synchronization receipt
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: packages-sync-${{ inputs.tag || github.event.release.tag_name }}
+          path: |
+            dist/packages-sync/receipt*.json
+            dist/packages-sync/downloaded-package.tgz
+          if-no-files-found: ignore
+          retention-days: 14

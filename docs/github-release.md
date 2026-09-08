@@ -77,3 +77,27 @@ Get-FileHash -Algorithm SHA256 -LiteralPath "dist/story-codex-0.3.0.zip"
 普通用户只需要技能目录，不需要维护者的测试环境、benchmark、示例数据库或 dist。安装成功以后，在实际安装目录运行 `python -B -X utf8 scripts/story.py --help` 应能加载完整运行时；是否实际显示在技能列表还应在 Codex 中确认。
 
 维护者的完整历史验证依赖本地保留的旧版 ZIP 和三个旧示例数据库；这些文件受 `.gitignore` 保护。新 clone 不含它们，不能直接将新 clone 的完整验证等同于发布机器的历史验收。`scripts/smoke.py` 和 `scripts/long_acceptance.py` 会自行创建临时工程，可用于新 clone 的 CLI 检查；完整迁移复验需先准备明确的旧版测试材料。技能安装不会迁移任何书库，旧书迁移仍按 [恢复指南](recovery.md) 在独立副本进行。
+
+## 同步到 GitHub Packages
+
+[Packages 页面](https://github.com/users/Cuinings/packages?repo_name=story-skill) 与 Release 附件是两个分发渠道。本项目使用 GitHub npm 注册表，包名为 `@cuinings/story-codex`，版本与 Release 的技能版本一致。包内为 `story-codex/` 完整技能目录及两份 npm 元数据文件；没有依赖、安装钩子或自动注册 Codex 的脚本。
+
+[同步工作流](../.github/workflows/packages.yml) 在正式 Release 发布时执行；也可以打开 [Actions](https://github.com/Cuinings/story-skill/actions/workflows/packages.yml)，选择 **Run workflow**，填写已发布的 tag，例如 `v0.3.0`，补同步历史版本。工作流需存在于被触发的代码版本中；较早的 tag 使用 main 分支的手动运行入口。
+
+同步只读取对应 Release 的 `story-codex-<版本>.zip` 和 `.zip.sha256`，不会把当前 main 的其他改动装进旧版本包。使用仓库 `GITHUB_TOKEN`，权限限定为 `contents: read` 和 `packages: write`，不用创建或提交个人访问令牌。发布完成后，从 npm 注册表重新下载 tarball，检查 SHA-512、包身份和每个技能文件，并在临时工程执行版本、帮助、初始化和状态检查。回执保留为 Actions artifact。
+
+重复同步时先核对现有版本。内容一致则记为已同步，内容不同则停止，不删除或覆盖该版本。修改了技能文件清单时，也须更新构建器的显式白名单，避免新文件在分发中缺失。
+
+只在本地构建和验证，不发布：
+
+```powershell
+python -B -X utf8 scripts/sync_packages.py --tag v0.3.0 --prepare-only
+```
+
+已经按 GitHub 的 npm 说明完成认证后，可以下载内容包：
+
+```powershell
+npm pack @cuinings/story-codex@0.3.0 --registry=https://npm.pkg.github.com
+```
+
+npm tarball 不是本项目 `install.py` 的托管安装。包的可见性与仓库可见性分别管理；以 Packages 页面实际设置为准。GitHub npm 即使公开也需要认证下载，普通 Codex 用户仍使用 GitHub 技能路径安装。[GitHub npm 官方说明](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)
