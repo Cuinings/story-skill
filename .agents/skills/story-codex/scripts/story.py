@@ -92,12 +92,40 @@ def safe_path(root, relative):
     return current
 
 
+def _publish_no_replace(source, target):
+    """Publish a complete same-directory stage without replacing an existing path."""
+    if os.name == "nt":
+        # Windows rename fails when target exists, including on exFAT where
+        # hard links are unavailable. POSIX rename would overwrite the target.
+        os.rename(source, target)
+    else:
+        os.link(source, target)
+
+
+def _restore_displaced_file(backup, target):
+    if os.name != "nt":
+        _publish_no_replace(backup, target)
+        return
+    # Do not rename the backup itself: keep it available even after restoration
+    # and when an editor still has the displaced file open.
+    fd, staged = tempfile.mkstemp(prefix=".story-restore-", dir=target.parent)
+    try:
+        with os.fdopen(fd, "wb") as handle:
+            handle.write(backup.read_bytes())
+            handle.flush()
+            os.fsync(handle.fileno())
+        _publish_no_replace(staged, target)
+    finally:
+        if os.path.exists(staged):
+            os.unlink(staged)
+
+
 def atomic_write(path, content, allowed_hashes, backup):
     """Preserve the displaced inode and publish without clobbering a concurrent save.
 
-    Requires hard links on the book filesystem. Failure leaves a retryable export,
-    never falls back to an unconditional replacement. Backups are retained even
-    after success so an editor holding the old inode cannot lose its later write.
+    Windows uses no-replace rename; POSIX uses a hard link. Failure leaves a
+    retryable export, never an unconditional replacement. Backups are retained
+    even after success so an editor holding the old inode keeps its later write.
     """
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp = tempfile.mkstemp(prefix=".story-tmp-", dir=path.parent)
@@ -115,15 +143,14 @@ def atomic_write(path, content, allowed_hashes, backup):
             if hashlib.sha256(backup.read_bytes()).hexdigest() not in allowed_hashes:
                 fail("export_conflict", "File changed during export; displaced version preserved",
                      path=str(path), backup=str(backup))
-        # Unlike replace(), link() refuses to overwrite a path created by an editor.
-        os.link(tmp, path)
+        _publish_no_replace(tmp, path)
         if hashlib.sha256(path.read_bytes()).hexdigest() != digest(content):
             fail("export_conflict", "File changed during publication; preserve it and reconcile", path=str(path))
         return str(backup) if displaced else None
     except (OSError, StoryError) as error:
         if displaced:
             try:
-                os.link(backup, path)
+                _restore_displaced_file(backup, path)
             except OSError:
                 pass  # A newer file may exist. Never overwrite it to restore a backup.
             if isinstance(error, StoryError):

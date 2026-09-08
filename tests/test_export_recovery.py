@@ -134,7 +134,7 @@ class ExportRecoveryTests(unittest.TestCase):
     def test_file_recreated_during_safe_publication_is_not_overwritten(self):
         self.first.unlink()
         outside = b"Editor saved this file while recovery was running"
-        original_link = story.os.link
+        original_publish = story._publish_no_replace
         recreated = False
 
         def editor_recreates_target(source, target, *args, **kwargs):
@@ -142,9 +142,9 @@ class ExportRecoveryTests(unittest.TestCase):
             if Path(target) == self.first and not recreated:
                 self.first.write_bytes(outside)
                 recreated = True
-            return original_link(source, target, *args, **kwargs)
+            return original_publish(source, target, *args, **kwargs)
 
-        with patch.object(story.os, "link", side_effect=editor_recreates_target):
+        with patch.object(story, "_publish_no_replace", side_effect=editor_recreates_target):
             result = self.book.export(safe_only=True)
         self.assertTrue(recreated)
         self.assertFalse(result["exports_complete"])

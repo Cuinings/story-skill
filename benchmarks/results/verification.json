@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "date": "2026-09-08T04:14:49.260784+00:00",
+  "date": "2026-09-08T05:50:43.181286+00:00",
   "environment": {
     "platform": "Windows-11-10.0.26200-SP0",
     "python": "3.14.6",
@@ -19,10 +19,10 @@
       "LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
       "references/analyze.md": "06684da84cef9f12e93c76cc3d34289c9f82378984185a097d02272605c43af0",
       "references/research.md": "2ccd803f66b12ce456c2b13a7b51a0ba927e26280509cb82a7fb832cca0c7a2c",
-      "references/revise.md": "fd658fe5791d72656a13df9ca0ad64351d8e7beca8e01c9cdfd52d2fe753a4ea",
-      "references/write.md": "0caa8a5edd6e74eadcb9fefc0e42c853f2728fcfe487689f8470b07b9bcd4249",
-      "scripts/story.py": "b970c779bbddd3f46de72fa5b95908004c4c056c848e5e939c0b74208deccc38",
-      "SKILL.md": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278"
+      "references/revise.md": "2d3974e5846fa6761e47213646d069984c245671cd5b43a6b44f152bd2c79bda",
+      "references/write.md": "ee2c4c726dd2b9e06a3210e8096cd0deaa19343b408921529bb7f35e42363e0f",
+      "scripts/story.py": "fa4851ffea30b496fb9cd93c3a705dda6c79b84f84ead77ee2be53a0d42c968c",
+      "SKILL.md": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05"
     }
   },
   "unit_tests": {
@@ -33,16 +33,16 @@
       "utf8",
       "D:\\Developer\\WorkSpace\\story-skill\\scripts\\verify.py",
       "--unittest-report",
-      "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-4x8qcn1s\\unittest.json"
+      "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-2y3d5qr3\\unittest.json"
     ],
     "exit_code": 0,
     "stdout": "",
-    "stderr": ".....................................................................................................\r\n----------------------------------------------------------------------\r\nRan 101 tests in 12.171s\r\n\r\nOK\r\n",
-    "duration_seconds": 12.44,
+    "stderr": ".....................................................................................................................................\r\n----------------------------------------------------------------------\r\nRan 133 tests in 14.747s\r\n\r\nOK\r\n",
+    "duration_seconds": 15.144,
     "status": "passed",
     "ok": true,
-    "run": 101,
-    "passed": 101,
+    "run": 133,
+    "passed": 133,
     "failed": 0,
     "errors": 0,
     "skipped": 0,
@@ -64,12 +64,12 @@
       "utf8",
       "D:\\Developer\\WorkSpace\\story-skill\\scripts\\smoke.py",
       "--output",
-      "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-4x8qcn1s\\smoke.json"
+      "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-2y3d5qr3\\smoke.json"
     ],
     "exit_code": 0,
-    "stdout": "{\"ok\": true, \"method\": \"Synthetic fixture via real CLI subprocesses; no model or API calls\", \"commands_executed\": [\"init\", \"notes\", \"plan\", \"context\", \"lint\", \"commit\", \"commit\", \"reconcile\", \"lint\", \"reconcile\", \"reconcile\", \"ingest\", \"next\", \"record\", \"record\", \"next\", \"coverage\", \"findings\", \"report\", \"coverage\"], \"visible_chars\": 213, \"draft_sha256\": \"850c68d3d529515d70fdfc502ffb292bc5fc7f94403b7399adfdc7020dbf1d38\", \"reconciled_draft_sha256\": \"17826832bfce7015ed7ad76723f49b2fe00fa587dceb02251419424b428a5725\", \"context_bytes\": 678, \"context_budget_bytes\": 4000, \"chapter_commit_idempotent\": true, \"export_bytes_verified\": true, \"reconcile_idempotent\": true, \"external_backup_verified\": true, \"non_content_chunks_completed\": 1, \"analysis_coverage\": {\"analyzed\": 3, \"chunks_total\": 3, \"complete_for_imported_text\": true, \"next_chunk\": null, \"pending\": 0, \"report_path\": \".story/analysis/8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe/report.md\", \"source\": \"8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe\", \"source_coverage\": \"partial\", \"text_coverage_contiguous\": true}, \"finding_pages_returned\": 3, \"final_report_exported\": true, \"literary_quality_tested\": false}\r\n",
+    "stdout": "{\"ok\": true, \"method\": \"Synthetic fixture via real CLI subprocesses; no model or API calls\", \"commands_executed\": [\"init\", \"notes\", \"plan\", \"context\", \"lint\", \"commit\", \"commit\", \"reconcile\", \"lint\", \"reconcile\", \"reconcile\", \"ingest\", \"next\", \"record\", \"record\", \"next\", \"coverage\", \"findings\", \"report\", \"coverage\"], \"visible_chars\": 213, \"draft_sha256\": \"850c68d3d529515d70fdfc502ffb292bc5fc7f94403b7399adfdc7020dbf1d38\", \"reconciled_draft_sha256\": \"17826832bfce7015ed7ad76723f49b2fe00fa587dceb02251419424b428a5725\", \"context_bytes\": 735, \"context_budget_bytes\": 4000, \"chapter_commit_idempotent\": true, \"export_bytes_verified\": true, \"reconcile_idempotent\": true, \"external_backup_verified\": true, \"non_content_chunks_completed\": 1, \"analysis_coverage\": {\"analyzed\": 3, \"chunks_total\": 3, \"complete_for_imported_text\": true, \"next_chunk\": null, \"pending\": 0, \"report_path\": \".story/analysis/8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe/report.md\", \"source\": \"8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe\", \"source_coverage\": \"partial\", \"text_coverage_contiguous\": true}, \"finding_pages_returned\": 3, \"final_report_exported\": true, \"literary_quality_tested\": false}\r\n",
     "stderr": "",
-    "duration_seconds": 2.919,
+    "duration_seconds": 3.421,
     "status": "passed",
     "evidence": {
       "ok": true,
@@ -99,7 +99,7 @@
       "visible_chars": 213,
       "draft_sha256": "850c68d3d529515d70fdfc502ffb292bc5fc7f94403b7399adfdc7020dbf1d38",
       "reconciled_draft_sha256": "17826832bfce7015ed7ad76723f49b2fe00fa587dceb02251419424b428a5725",
-      "context_bytes": 678,
+      "context_bytes": 735,
       "context_budget_bytes": 4000,
       "chapter_commit_idempotent": true,
       "export_bytes_verified": true,
@@ -122,6 +122,631 @@
       "literary_quality_tested": false
     }
   },
+  "chinese_manuscript_replay": {
+    "command": [
+      "C:\\Python314\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "D:\\Developer\\WorkSpace\\story-skill\\scripts\\chinese_acceptance.py",
+      "--output",
+      "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-2y3d5qr3\\chinese.json"
+    ],
+    "exit_code": 0,
+    "stdout": "{\"ok\": true, \"books\": [\"渡口夜账\", \"留半寸\"], \"retained_workdir\": null}\r\n",
+    "stderr": "",
+    "duration_seconds": 13.743,
+    "status": "passed",
+    "result": {
+      "ok": true,
+      "method": "Fixed original manuscripts with recorded semantic review, replayed through real CLI subprocesses; no new model evaluation",
+      "retained_workdir": null,
+      "runtime_sha256": "fa4851ffea30b496fb9cd93c3a705dda6c79b84f84ead77ee2be53a0d42c968c",
+      "books": [
+        {
+          "title": "渡口夜账",
+          "kind": "long",
+          "book": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-chinese-xttkcmym\\渡口夜账",
+          "chapters": [
+            {
+              "draft": "drafts/01.md",
+              "chapter": 1,
+              "mode": "next",
+              "sha256": "2fd4f5bc9e4e017cd6d32d313c5621ab8aaec972e36f231560534ebc20444296",
+              "lint": {
+                "count_method": "visible_nonspace_v1",
+                "count_scope": "body_and_lead_without_first_h1",
+                "counts": {
+                  "han_v1": 1879,
+                  "letters_numbers_v1": 1879,
+                  "visible_nonspace_v1": 2260
+                },
+                "draft_sha256": "2fd4f5bc9e4e017cd6d32d313c5621ab8aaec972e36f231560534ebc20444296",
+                "errors": [],
+                "length_count": 2260,
+                "ok": true,
+                "unicode_version": "16.0.0",
+                "visible_chars": 2260,
+                "warnings": []
+              },
+              "context_bytes": 8238,
+              "revision": 5,
+              "idempotent_retry": true,
+              "resumed_committed_export": false
+            },
+            {
+              "draft": "drafts/02.md",
+              "chapter": 2,
+              "mode": "next",
+              "sha256": "da19c8ca5f4738c5921ec6567e515140e99aaf0410eb1ce32135a7f8f7d9e592",
+              "lint": {
+                "count_method": "visible_nonspace_v1",
+                "count_scope": "body_and_lead_without_first_h1",
+                "counts": {
+                  "han_v1": 1892,
+                  "letters_numbers_v1": 1892,
+                  "visible_nonspace_v1": 2240
+                },
+                "draft_sha256": "da19c8ca5f4738c5921ec6567e515140e99aaf0410eb1ce32135a7f8f7d9e592",
+                "errors": [],
+                "length_count": 2240,
+                "ok": true,
+                "unicode_version": "16.0.0",
+                "visible_chars": 2240,
+                "warnings": []
+              },
+              "context_bytes": 9553,
+              "revision": 6,
+              "idempotent_retry": true,
+              "resumed_committed_export": false
+            },
+            {
+              "draft": "drafts/03.md",
+              "chapter": 3,
+              "mode": "next",
+              "sha256": "9f6bceb6f09072cdc0cc06f529795b77ea65f1ac2177ac9a69b99359334bb8a1",
+              "lint": {
+                "count_method": "visible_nonspace_v1",
+                "count_scope": "body_and_lead_without_first_h1",
+                "counts": {
+                  "han_v1": 2003,
+                  "letters_numbers_v1": 2011,
+                  "visible_nonspace_v1": 2346
+                },
+                "draft_sha256": "9f6bceb6f09072cdc0cc06f529795b77ea65f1ac2177ac9a69b99359334bb8a1",
+                "errors": [],
+                "length_count": 2346,
+                "ok": true,
+                "unicode_version": "16.0.0",
+                "visible_chars": 2346,
+                "warnings": []
+              },
+              "context_bytes": 9993,
+              "revision": 7,
+              "idempotent_retry": true,
+              "resumed_committed_export": false
+            },
+            {
+              "draft": "drafts/03-r1.md",
+              "chapter": 3,
+              "mode": "replace_last",
+              "sha256": "276c57114538ee387f5c82505d3d0b525fdbcb0137af6193cb9cafa98d55d787",
+              "lint": {
+                "count_method": "visible_nonspace_v1",
+                "count_scope": "body_and_lead_without_first_h1",
+                "counts": {
+                  "han_v1": 2004,
+                  "letters_numbers_v1": 2012,
+                  "visible_nonspace_v1": 2347
+                },
+                "draft_sha256": "276c57114538ee387f5c82505d3d0b525fdbcb0137af6193cb9cafa98d55d787",
+                "errors": [],
+                "length_count": 2347,
+                "ok": true,
+                "unicode_version": "16.0.0",
+                "visible_chars": 2347,
+                "warnings": []
+              },
+              "context_bytes": 10002,
+              "revision": 8,
+              "idempotent_retry": true,
+              "resumed_committed_export": false
+            },
+            {
+              "draft": "drafts/03-r2.md",
+              "chapter": 3,
+              "mode": "reconcile_last",
+              "sha256": "1cc3165c3a5b1f8d4df740ff65e60ddec839fc29b94edc22f9c598f68354aede",
+              "lint": {
+                "count_method": "visible_nonspace_v1",
+                "count_scope": "body_and_lead_without_first_h1",
+                "counts": {
+                  "han_v1": 2191,
+                  "letters_numbers_v1": 2199,
+                  "visible_nonspace_v1": 2564
+                },
+                "draft_sha256": "1cc3165c3a5b1f8d4df740ff65e60ddec839fc29b94edc22f9c598f68354aede",
+                "errors": [],
+                "length_count": 2564,
+                "ok": true,
+                "unicode_version": "16.0.0",
+                "visible_chars": 2564,
+                "warnings": []
+              },
+              "context_bytes": 10364,
+              "revision": 10,
+              "idempotent_retry": true,
+              "resumed_committed_export": false
+            }
+          ],
+          "recovery": {
+            "missing_chapter_restored": true,
+            "outside_draft_preserved": true,
+            "remaining_changes": [
+              "chapters/0003.md"
+            ]
+          },
+          "analysis": null,
+          "status": {
+            "book": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-chinese-xttkcmym\\渡口夜账",
+            "cards": 14,
+            "changed_export_count": 0,
+            "changed_exports": [],
+            "id": "58a5b6e1-4ce2-49c4-b0bc-2b785da245bb",
+            "imported_through": 0,
+            "kind": "long",
+            "last_chapter": 3,
+            "more_sources": false,
+            "next_chapter": 4,
+            "pending_export_count": 0,
+            "pending_exports": [],
+            "recent_sources": [],
+            "revision": 10,
+            "sources": 0,
+            "title": "渡口夜账"
+          },
+          "commands": [
+            {
+              "command": "init",
+              "exit_code": 0
+            },
+            {
+              "command": "notes",
+              "exit_code": 0
+            },
+            {
+              "command": "status",
+              "exit_code": 0
+            },
+            {
+              "command": "plan",
+              "exit_code": 0
+            },
+            {
+              "command": "status",
+              "exit_code": 0
+            },
+            {
+              "command": "plan",
+              "exit_code": 0
+            },
+            {
+              "command": "status",
+              "exit_code": 0
+            },
+            {
+              "command": "plan",
+              "exit_code": 0
+            },
+            {
+              "command": "context",
+              "exit_code": 0
+            },
+            {
+              "command": "prepare",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "context",
+              "exit_code": 0
+            },
+            {
+              "command": "prepare",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "context",
+              "exit_code": 0
+            },
+            {
+              "command": "prepare",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "context",
+              "exit_code": 0
+            },
+            {
+              "command": "prepare",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "status",
+              "exit_code": 0
+            },
+            {
+              "command": "plan",
+              "exit_code": 0
+            },
+            {
+              "command": "reconcile",
+              "exit_code": 2
+            },
+            {
+              "command": "export",
+              "exit_code": 2
+            },
+            {
+              "command": "export",
+              "exit_code": 2
+            },
+            {
+              "command": "reconcile",
+              "exit_code": 0
+            },
+            {
+              "command": "prepare",
+              "exit_code": 0
+            },
+            {
+              "command": "reconcile",
+              "exit_code": 0
+            },
+            {
+              "command": "reconcile",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "status",
+              "exit_code": 0
+            }
+          ],
+          "scenario_sha256": "d37d91c8f90f2bb07a277b7e0ed7102bcc69973a8c3451085b4c27f12cf77044"
+        },
+        {
+          "title": "留半寸",
+          "kind": "short",
+          "book": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-chinese-xttkcmym\\留半寸",
+          "chapters": [
+            {
+              "draft": "drafts/01.md",
+              "chapter": 1,
+              "mode": "next",
+              "sha256": "f3e5fe8e806e066578e4354104df318ea77ff16432b362492b81dbca6ea5d3fb",
+              "lint": {
+                "count_method": "visible_nonspace_v1",
+                "count_scope": "body_and_lead_without_first_h1",
+                "counts": {
+                  "han_v1": 1781,
+                  "letters_numbers_v1": 1781,
+                  "visible_nonspace_v1": 2108
+                },
+                "draft_sha256": "f3e5fe8e806e066578e4354104df318ea77ff16432b362492b81dbca6ea5d3fb",
+                "errors": [],
+                "length_count": 2108,
+                "ok": true,
+                "unicode_version": "16.0.0",
+                "visible_chars": 2108,
+                "warnings": []
+              },
+              "context_bytes": 1887,
+              "revision": 3,
+              "idempotent_retry": true,
+              "resumed_committed_export": false
+            }
+          ],
+          "recovery": null,
+          "analysis": {
+            "coverage": {
+              "analyzed": 2,
+              "chunks_total": 2,
+              "complete_for_imported_text": true,
+              "next_chunk": null,
+              "pending": 0,
+              "report_path": ".story/analysis/71468575e14ea2321f98e6c8c88213c74677128eb1d046aaf2d7b6b1cf4cef3e/report.md",
+              "source": "71468575e14ea2321f98e6c8c88213c74677128eb1d046aaf2d7b6b1cf4cef3e",
+              "source_coverage": "complete",
+              "text_coverage_contiguous": true
+            },
+            "resumed_ordinals": [
+              1,
+              2
+            ],
+            "source_sha256": "71468575e14ea2321f98e6c8c88213c74677128eb1d046aaf2d7b6b1cf4cef3e",
+            "report_path": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-chinese-xttkcmym\\留半寸_拆文\\.story\\analysis\\71468575e14ea2321f98e6c8c88213c74677128eb1d046aaf2d7b6b1cf4cef3e\\report.md",
+            "report_sha256": "22619a85401269bac1e77552b59888899aa0cddda8fbeea6d698e382df79159f"
+          },
+          "status": {
+            "book": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-chinese-xttkcmym\\留半寸",
+            "cards": 3,
+            "changed_export_count": 0,
+            "changed_exports": [],
+            "id": "a3453429-e51f-4bba-8907-65884204f986",
+            "imported_through": 0,
+            "kind": "short",
+            "last_chapter": 1,
+            "more_sources": false,
+            "next_chapter": 2,
+            "pending_export_count": 0,
+            "pending_exports": [],
+            "recent_sources": [],
+            "revision": 3,
+            "sources": 0,
+            "title": "留半寸"
+          },
+          "commands": [
+            {
+              "command": "init",
+              "exit_code": 0
+            },
+            {
+              "command": "notes",
+              "exit_code": 0
+            },
+            {
+              "command": "status",
+              "exit_code": 0
+            },
+            {
+              "command": "plan",
+              "exit_code": 0
+            },
+            {
+              "command": "context",
+              "exit_code": 0
+            },
+            {
+              "command": "prepare",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "commit",
+              "exit_code": 0
+            },
+            {
+              "command": "recall",
+              "exit_code": 0
+            },
+            {
+              "command": "status",
+              "exit_code": 0
+            },
+            {
+              "command": "init",
+              "exit_code": 0
+            },
+            {
+              "command": "ingest",
+              "exit_code": 0
+            },
+            {
+              "command": "next",
+              "exit_code": 0
+            },
+            {
+              "command": "record",
+              "exit_code": 0
+            },
+            {
+              "command": "next",
+              "exit_code": 0
+            },
+            {
+              "command": "record",
+              "exit_code": 0
+            },
+            {
+              "command": "next",
+              "exit_code": 0
+            },
+            {
+              "command": "report",
+              "exit_code": 0
+            },
+            {
+              "command": "coverage",
+              "exit_code": 0
+            }
+          ],
+          "scenario_sha256": "3ed56af5d08404d0a4a78eb5b1d6bee56333060c9e4e71aa28cf825eb93870cf"
+        }
+      ]
+    }
+  },
   "skill_frontmatter": {
     "command": [
       "C:\\Python314\\python.exe",
@@ -134,7 +759,7 @@
     "exit_code": 0,
     "stdout": "Skill is valid!\r\n",
     "stderr": "",
-    "duration_seconds": 0.06,
+    "duration_seconds": 0.078,
     "status": "passed"
   },
   "actual_package_install": {
@@ -149,17 +774,17 @@
         "utf8",
         "D:\\Developer\\WorkSpace\\story-skill\\scripts\\install.py",
         "--project",
-        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-4x8qcn1s\\安装验证项目"
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-2y3d5qr3\\安装验证项目"
       ],
       "exit_code": 0,
-      "stdout": "{\"status\": \"installed\", \"path\": \"C:\\\\Users\\\\Work\\\\AppData\\\\Local\\\\Temp\\\\story-release-verify-4x8qcn1s\\\\安装验证项目\\\\.agents\\\\skills\\\\story-codex\", \"backup\": null, \"files\": 8}\r\n",
+      "stdout": "{\"status\": \"installed\", \"path\": \"C:\\\\Users\\\\Work\\\\AppData\\\\Local\\\\Temp\\\\story-release-verify-2y3d5qr3\\\\安装验证项目\\\\.agents\\\\skills\\\\story-codex\", \"backup\": null, \"files\": 8}\r\n",
       "stderr": "",
-      "duration_seconds": 0.101,
+      "duration_seconds": 0.134,
       "status": "passed"
     },
     "receipt": {
       "status": "installed",
-      "path": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-4x8qcn1s\\安装验证项目\\.agents\\skills\\story-codex",
+      "path": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-2y3d5qr3\\安装验证项目\\.agents\\skills\\story-codex",
       "backup": null,
       "files": 8
     },
@@ -169,13 +794,13 @@
         "-B",
         "-X",
         "utf8",
-        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-4x8qcn1s\\安装验证项目\\.agents\\skills\\story-codex\\scripts\\story.py",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-2y3d5qr3\\安装验证项目\\.agents\\skills\\story-codex\\scripts\\story.py",
         "--help"
       ],
       "exit_code": 0,
-      "stdout": "usage: story.py [-h] [--version]\n                {template,init,status,export,notes,plan,context,reconcile,recall,sources,lint,commit,adopt,ingest,coverage,next,record,findings,source-read,report} ...\n\nStory Codex: local, bounded context and transactional writing state. No API\ncalls.\n\npositional arguments:\n  {template,init,status,export,notes,plan,context,reconcile,recall,sources,lint,commit,adopt,ingest,coverage,next,record,findings,source-read,report}\n    template            Print just one JSON input example\n    init                Create state once; never overwrite an existing book\n    status              Compact checkpoint and export health\n    export              Repair missing exports without replacing outside edits\n    notes               Save cards or a chapter plan with optimistic\n                        concurrency\n    plan                Save cards or a chapter plan with optimistic\n                        concurrency\n    context             Build a bounded chapter context packet\n    reconcile           Inspect an outside edit of the latest native chapter,\n                        or apply its reviewed draft\n    recall              Search cards and chapter summaries; read exact prose\n                        separately\n    sources             Find saved source IDs and analysis checkpoints after a\n                        new session\n    lint                Check, commit, or import one last complete chapter\n    commit              Check, commit, or import one last complete chapter\n    adopt               Check, commit, or import one last complete chapter\n    ingest              Snapshot source text and split without losing bonus\n                        chapters\n    coverage            Incremental source analysis and evidence-backed\n                        checkpoints\n    next                Incremental source analysis and evidence-backed\n                        checkpoints\n    record              Incremental source analysis and evidence-backed\n                        checkpoints\n    findings            Incremental source analysis and evidence-backed\n                        checkpoints\n    source-read         Incremental source analysis and evidence-backed\n                        checkpoints\n    report              Incremental source analysis and evidence-backed\n                        checkpoints\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show program's version number and exit\n",
+      "stdout": "usage: story.py [-h] [--version]\n                {template,init,status,export,notes,plan,context,prepare,reconcile,recall,sources,lint,commit,adopt,ingest,coverage,next,record,findings,source-read,report} ...\n\nStory Codex: local, bounded context and transactional writing state. No API\ncalls.\n\npositional arguments:\n  {template,init,status,export,notes,plan,context,prepare,reconcile,recall,sources,lint,commit,adopt,ingest,coverage,next,record,findings,source-read,report}\n    template            Print just one JSON input example\n    init                Create state once; never overwrite an existing book\n    status              Compact checkpoint and export health\n    export              Repair exports without replacing outside edits\n    notes               Save cards or a chapter plan with optimistic\n                        concurrency\n    plan                Save cards or a chapter plan with optimistic\n                        concurrency\n    context             Build a bounded chapter context packet\n    prepare             Read-only review scaffold bound to the current book,\n                        state and draft\n    reconcile           Inspect an outside edit of the latest native chapter,\n                        or apply its reviewed draft\n    recall              Search cards and chapter summaries; read exact prose\n                        separately\n    sources             Find saved source IDs and analysis checkpoints after a\n                        new session\n    lint                Check, commit, or import one last complete chapter\n    commit              Check, commit, or import one last complete chapter\n    adopt               Check, commit, or import one last complete chapter\n    ingest              Snapshot source text and split without losing bonus\n                        chapters\n    coverage            Incremental source analysis and evidence-backed\n                        checkpoints\n    next                Incremental source analysis and evidence-backed\n                        checkpoints\n    record              Incremental source analysis and evidence-backed\n                        checkpoints\n    findings            Incremental source analysis and evidence-backed\n                        checkpoints\n    source-read         Incremental source analysis and evidence-backed\n                        checkpoints\n    report              Incremental source analysis and evidence-backed\n                        checkpoints\n\noptions:\n  -h, --help            show this help message and exit\n  --version             show program's version number and exit\n",
       "stderr": "",
-      "duration_seconds": 0.092,
+      "duration_seconds": 0.112,
       "status": "passed"
     },
     "cli_smoke": {
@@ -187,13 +812,13 @@
         "-c",
         "import importlib.util,pathlib,sys; spec=importlib.util.spec_from_file_location('release_smoke',sys.argv[1]); module=importlib.util.module_from_spec(spec); spec.loader.exec_module(module); module.TOOL=pathlib.Path(sys.argv[2]); sys.argv=[sys.argv[1],'--output',sys.argv[3]]; module.main()",
         "D:\\Developer\\WorkSpace\\story-skill\\scripts\\smoke.py",
-        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-4x8qcn1s\\安装验证项目\\.agents\\skills\\story-codex\\scripts\\story.py",
-        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-4x8qcn1s\\installed-smoke.json"
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-2y3d5qr3\\安装验证项目\\.agents\\skills\\story-codex\\scripts\\story.py",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-release-verify-2y3d5qr3\\installed-smoke.json"
       ],
       "exit_code": 0,
-      "stdout": "{\"ok\": true, \"method\": \"Synthetic fixture via real CLI subprocesses; no model or API calls\", \"commands_executed\": [\"init\", \"notes\", \"plan\", \"context\", \"lint\", \"commit\", \"commit\", \"reconcile\", \"lint\", \"reconcile\", \"reconcile\", \"ingest\", \"next\", \"record\", \"record\", \"next\", \"coverage\", \"findings\", \"report\", \"coverage\"], \"visible_chars\": 213, \"draft_sha256\": \"850c68d3d529515d70fdfc502ffb292bc5fc7f94403b7399adfdc7020dbf1d38\", \"reconciled_draft_sha256\": \"17826832bfce7015ed7ad76723f49b2fe00fa587dceb02251419424b428a5725\", \"context_bytes\": 678, \"context_budget_bytes\": 4000, \"chapter_commit_idempotent\": true, \"export_bytes_verified\": true, \"reconcile_idempotent\": true, \"external_backup_verified\": true, \"non_content_chunks_completed\": 1, \"analysis_coverage\": {\"analyzed\": 3, \"chunks_total\": 3, \"complete_for_imported_text\": true, \"next_chunk\": null, \"pending\": 0, \"report_path\": \".story/analysis/8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe/report.md\", \"source\": \"8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe\", \"source_coverage\": \"partial\", \"text_coverage_contiguous\": true}, \"finding_pages_returned\": 3, \"final_report_exported\": true, \"literary_quality_tested\": false}\r\n",
+      "stdout": "{\"ok\": true, \"method\": \"Synthetic fixture via real CLI subprocesses; no model or API calls\", \"commands_executed\": [\"init\", \"notes\", \"plan\", \"context\", \"lint\", \"commit\", \"commit\", \"reconcile\", \"lint\", \"reconcile\", \"reconcile\", \"ingest\", \"next\", \"record\", \"record\", \"next\", \"coverage\", \"findings\", \"report\", \"coverage\"], \"visible_chars\": 213, \"draft_sha256\": \"850c68d3d529515d70fdfc502ffb292bc5fc7f94403b7399adfdc7020dbf1d38\", \"reconciled_draft_sha256\": \"17826832bfce7015ed7ad76723f49b2fe00fa587dceb02251419424b428a5725\", \"context_bytes\": 735, \"context_budget_bytes\": 4000, \"chapter_commit_idempotent\": true, \"export_bytes_verified\": true, \"reconcile_idempotent\": true, \"external_backup_verified\": true, \"non_content_chunks_completed\": 1, \"analysis_coverage\": {\"analyzed\": 3, \"chunks_total\": 3, \"complete_for_imported_text\": true, \"next_chunk\": null, \"pending\": 0, \"report_path\": \".story/analysis/8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe/report.md\", \"source\": \"8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe\", \"source_coverage\": \"partial\", \"text_coverage_contiguous\": true}, \"finding_pages_returned\": 3, \"final_report_exported\": true, \"literary_quality_tested\": false}\r\n",
       "stderr": "",
-      "duration_seconds": 2.604,
+      "duration_seconds": 3.105,
       "status": "passed",
       "evidence": {
         "ok": true,
@@ -223,7 +848,7 @@
         "visible_chars": 213,
         "draft_sha256": "850c68d3d529515d70fdfc502ffb292bc5fc7f94403b7399adfdc7020dbf1d38",
         "reconciled_draft_sha256": "17826832bfce7015ed7ad76723f49b2fe00fa587dceb02251419424b428a5725",
-        "context_bytes": 678,
+        "context_bytes": 735,
         "context_budget_bytes": 4000,
         "chapter_commit_idempotent": true,
         "export_bytes_verified": true,
@@ -249,43 +874,43 @@
   },
   "benchmark_candidate_file_hashes": {
     "status": "passed",
-    "report_sha256": "b84063c65820c0c45eb1a840f5dc5762802ed6bfdb0ec6514e6ff3b1e5b7cd2f",
-    "scope": "Candidate file hashes and profile configuration only; tokenizer not rerun",
+    "report_sha256": "f3620793f2e1b9f2a55150ffe0120ee1497cbc5dfaeb5b7198a9908153fbe79f",
+    "scope": "Candidate file hashes, both input lists, profile configuration and arithmetic; tokenizer not rerun and upstream file contents not revalidated",
     "files": [
       {
         "profile": "long_chapter_required_minimum",
         "path": ".agents/skills/story-codex/SKILL.md",
         "matches": true,
-        "recorded_sha256": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278",
-        "current_sha256": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278"
+        "recorded_sha256": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05",
+        "current_sha256": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05"
       },
       {
         "profile": "long_chapter_required_minimum",
         "path": ".agents/skills/story-codex/references/write.md",
         "matches": true,
-        "recorded_sha256": "0caa8a5edd6e74eadcb9fefc0e42c853f2728fcfe487689f8470b07b9bcd4249",
-        "current_sha256": "0caa8a5edd6e74eadcb9fefc0e42c853f2728fcfe487689f8470b07b9bcd4249"
+        "recorded_sha256": "ee2c4c726dd2b9e06a3210e8096cd0deaa19343b408921529bb7f35e42363e0f",
+        "current_sha256": "ee2c4c726dd2b9e06a3210e8096cd0deaa19343b408921529bb7f35e42363e0f"
       },
       {
         "profile": "short_write_conservative",
         "path": ".agents/skills/story-codex/SKILL.md",
         "matches": true,
-        "recorded_sha256": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278",
-        "current_sha256": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278"
+        "recorded_sha256": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05",
+        "current_sha256": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05"
       },
       {
         "profile": "short_write_conservative",
         "path": ".agents/skills/story-codex/references/write.md",
         "matches": true,
-        "recorded_sha256": "0caa8a5edd6e74eadcb9fefc0e42c853f2728fcfe487689f8470b07b9bcd4249",
-        "current_sha256": "0caa8a5edd6e74eadcb9fefc0e42c853f2728fcfe487689f8470b07b9bcd4249"
+        "recorded_sha256": "ee2c4c726dd2b9e06a3210e8096cd0deaa19343b408921529bb7f35e42363e0f",
+        "current_sha256": "ee2c4c726dd2b9e06a3210e8096cd0deaa19343b408921529bb7f35e42363e0f"
       },
       {
         "profile": "long_analysis_conservative",
         "path": ".agents/skills/story-codex/SKILL.md",
         "matches": true,
-        "recorded_sha256": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278",
-        "current_sha256": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278"
+        "recorded_sha256": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05",
+        "current_sha256": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05"
       },
       {
         "profile": "long_analysis_conservative",
@@ -298,32 +923,32 @@
         "profile": "review_conservative",
         "path": ".agents/skills/story-codex/SKILL.md",
         "matches": true,
-        "recorded_sha256": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278",
-        "current_sha256": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278"
+        "recorded_sha256": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05",
+        "current_sha256": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05"
       },
       {
         "profile": "review_conservative",
         "path": ".agents/skills/story-codex/references/revise.md",
         "matches": true,
-        "recorded_sha256": "fd658fe5791d72656a13df9ca0ad64351d8e7beca8e01c9cdfd52d2fe753a4ea",
-        "current_sha256": "fd658fe5791d72656a13df9ca0ad64351d8e7beca8e01c9cdfd52d2fe753a4ea"
+        "recorded_sha256": "2d3974e5846fa6761e47213646d069984c245671cd5b43a6b44f152bd2c79bda",
+        "current_sha256": "2d3974e5846fa6761e47213646d069984c245671cd5b43a6b44f152bd2c79bda"
       }
     ],
     "problems": []
   },
   "local_markdown_links": {
     "status": "passed",
-    "files_scanned": 10,
-    "links_checked": 21,
+    "files_scanned": 12,
+    "links_checked": 43,
     "missing": [],
     "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
   },
   "package": {
     "status": "passed",
-    "archive": "D:\\Developer\\WorkSpace\\story-skill\\dist\\story-codex-0.1.2.zip",
-    "version": "0.1.2",
-    "sha256": "3a59f47419b80f60df0d393764761b73a3c0097f12808265bf757c29caaf8789",
-    "bytes": 26357,
+    "archive": "D:\\Developer\\WorkSpace\\story-skill\\dist\\story-codex-0.2.0.zip",
+    "version": "0.2.0",
+    "sha256": "efdfd997ecac9564fc737b22df8969c7770858a354084132c7d1ce274486a37e",
+    "bytes": 29325,
     "files": 8,
     "contents_match_current_skill": true,
     "missing": [],

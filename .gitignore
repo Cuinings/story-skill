@@ -1,7 +1,50 @@
+# Python environments and bytecode
 .venv/
+venv/
 __pycache__/
-*.pyc
-.pytest_cache/
-*.sqlite3*
-dist/
+*.py[cod]
 
+# Test and analysis caches
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+
+# Build and packaging artifacts
+dist/
+build/
+*.egg-info/
+.story-codex-package-*.zip
+
+# Local story state and recovery artifacts
+# Keep drafts, chapter exports, analysis reports and benchmark results versioned.
+*.sqlite3*
+**/.story/export-backups/
+.story-tmp-*
+.story-restore-*
+.story-codex-install.lock
+.story-codex-stage-*/
+.story-codex-backups/
+
+# Verification temporary output and leftover test fixtures
+.verification-*.json
+examples/_portable-export-*/
+
+# Local environment configuration
+.env
+.env.*
+!.env.example
+!.env.sample
+!.env.template
+
+# Editors and operating systems
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+Desktop.ini

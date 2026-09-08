@@ -29,7 +29,7 @@ def fixture(base, relative):
     return path
 
 
-def replay(root, scenario_path):
+def replay(root, scenario_path, resume_prepared_first=False):
     scenario = json.loads(scenario_path.read_text(encoding="utf-8"))
     base = scenario_path.parent
     book = root / scenario["title"]
@@ -44,16 +44,26 @@ def replay(root, scenario_path):
         calls.append({"command": command, "exit_code": proc.returncode})
         return result
 
-    call("init", "--title", scenario["title"], "--kind", scenario["kind"])
-    for name in ("创作约定.md", "设定.md", "大纲.md"):
-        source = base / name
-        if source.is_file():
-            (book / name).write_bytes(source.read_bytes())
-    call("notes", "--input", write_json(book / ".story/drafts/notes.json", scenario["notes"]), "--expect", 0)
-    for number, plan in enumerate(scenario["plans"], 1):
-        revision = call("status")["revision"]
-        call("plan", "--chapter", number, "--input", write_json(book / f".story/drafts/plan-{number}.json", plan),
-             "--expect", revision)
+    if resume_prepared_first:
+        # A narrowly scoped recovery of the actual exFAT first-export failure.
+        # Reuse the saved reviewed delta; never regenerate its revision or reset state.
+        state = call("status")
+        if state["last_chapter"] != 1 or state["title"] != scenario["title"]:
+            raise ValueError("Expected only the first native chapter at this recovery checkpoint")
+        saved_notes = json.loads((book / ".story/drafts/notes.json").read_text(encoding="utf-8"))
+        if saved_notes != scenario["notes"]:
+            raise ValueError("Initial scenario changed; do not replay it onto existing state")
+    else:
+        call("init", "--title", scenario["title"], "--kind", scenario["kind"])
+        for name in ("创作约定.md", "设定.md", "大纲.md"):
+            source = base / name
+            if source.is_file():
+                (book / name).write_bytes(source.read_bytes())
+        call("notes", "--input", write_json(book / ".story/drafts/notes.json", scenario["notes"]), "--expect", 0)
+        for number, plan in enumerate(scenario["plans"], 1):
+            revision = call("status")["revision"]
+            call("plan", "--chapter", number, "--input", write_json(book / f".story/drafts/plan-{number}.json", plan),
+                 "--expect", revision)
     recovery = None
     for index, unit in enumerate(scenario["units"], 1):
         number = unit["chapter"]
@@ -61,7 +71,12 @@ def replay(root, scenario_path):
         if sha(raw) != unit["reviewed_sha256"]:
             raise AssertionError(f"Manuscript changed after semantic review: {unit['draft']}")
         draft = book / f".story/drafts/{index:02d}.md"
-        draft.write_bytes(raw)
+        retry_prepared = resume_prepared_first and index == 1
+        if retry_prepared:
+            if draft.read_bytes() != raw:
+                raise ValueError("Saved recovery draft differs from the reviewed manuscript")
+        else:
+            draft.write_bytes(raw)
         if unit.get("plan"):
             call("plan", "--chapter", number, "--input", write_json(book / f".story/drafts/plan-{index}-revision.json", unit["plan"]),
                  "--expect", call("status")["revision"])
@@ -81,16 +96,26 @@ def replay(root, scenario_path):
             assert last.read_bytes() == raw
             recovery = {"missing_chapter_restored": True, "outside_draft_preserved": True,
                         "remaining_changes": recovered["changed_exports"]}
-        context_cmd = "reconcile" if unit.get("external_recovery") else "context"
-        packet = call(context_cmd, "--chapter", number, "--budget-bytes", 16000)
-        write_json(book / f".story/drafts/{index:02d}-context.json", packet)
-        extra = ["--reconcile"] if unit.get("external_recovery") else []
-        prepared = call("prepare", "--chapter", number, "--draft", draft, *extra)
-        assert not prepared["ready_to_commit"] and prepared["lint"]["ok"]
-        delta = prepared["delta"]
-        delta.update(summary=unit["summary"], changes=unit["changes"])
-        delta["review"].update(checks=unit["checks"], issues=unit.get("issues", []))
-        data = write_json(book / f".story/drafts/{index:02d}-delta.json", delta)
+        if retry_prepared:
+            packet = json.loads((book / ".story/drafts/01-context.json").read_text(encoding="utf-8"))
+            data = book / ".story/drafts/01-delta.json"
+            delta = json.loads(data.read_text(encoding="utf-8"))
+            if (delta["book_id"] != state["id"] or delta["base_revision"] + 1 != state["revision"]
+                    or delta["changes"] != unit["changes"] or delta["summary"] != unit["summary"]
+                    or delta["review"]["checks"] != unit["checks"]):
+                raise ValueError("Saved delta is not this first reviewed transaction")
+            prepared = {"lint": call("lint", "--chapter", number, "--draft", draft)}
+        else:
+            context_cmd = "reconcile" if unit.get("external_recovery") else "context"
+            packet = call(context_cmd, "--chapter", number, "--budget-bytes", 16000)
+            write_json(book / f".story/drafts/{index:02d}-context.json", packet)
+            extra = ["--reconcile"] if unit.get("external_recovery") else []
+            prepared = call("prepare", "--chapter", number, "--draft", draft, *extra)
+            assert not prepared["ready_to_commit"] and prepared["lint"]["ok"]
+            delta = prepared["delta"]
+            delta.update(summary=unit["summary"], changes=unit["changes"])
+            delta["review"].update(checks=unit["checks"], issues=unit.get("issues", []))
+            data = write_json(book / f".story/drafts/{index:02d}-delta.json", delta)
         command = "reconcile" if unit.get("external_recovery") else "commit"
         arguments = ["--chapter", number, "--draft", draft, "--input", data]
         if unit.get("replace_last") and not unit.get("external_recovery"):
@@ -105,7 +130,8 @@ def replay(root, scenario_path):
             assert card["text"] == expected_text, cid
         chapters.append({"draft": unit["draft"], "chapter": number, "mode": packet["mode"],
                          "sha256": sha(raw), "lint": prepared["lint"], "context_bytes": packet["budget"]["used"],
-                         "revision": saved["revision"], "idempotent_retry": repeated["idempotent"]})
+                         "revision": saved["revision"], "idempotent_retry": repeated["idempotent"],
+                         "resumed_committed_export": retry_prepared})
     final = call("status")
     assert final["pending_export_count"] == final["changed_export_count"] == 0
     checkpoint = book / "验收断点.md"

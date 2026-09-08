@@ -210,15 +210,15 @@ class RecoveryRegressionTests(unittest.TestCase):
         revised = DRAFT + "她没有回头。\n"
         self.draft.write_bytes(revised.encode("utf-8"))
         external = b"a later editor save must win\n"
-        original_link = story.os.link
+        original_publish = story._publish_no_replace
 
         def editor_save_then_link(source, destination):
             if Path(source).name.startswith(".story-tmp-"):
                 self.assertFalse(target.exists())
                 target.write_bytes(external)
-            return original_link(source, destination)
+            return original_publish(source, destination)
 
-        with patch.object(story.os, "link", side_effect=editor_save_then_link):
+        with patch.object(story, "_publish_no_replace", side_effect=editor_save_then_link):
             result = self.book.commit(1, self.draft, self.delta(revised), replace_last=True)
         self.assertTrue(result["committed"])
         self.assertFalse(result["exports_complete"])
@@ -231,14 +231,14 @@ class RecoveryRegressionTests(unittest.TestCase):
         revised = DRAFT + "她没有回头。\n"
         self.draft.write_bytes(revised.encode("utf-8"))
         delta = self.delta(revised)
-        original_link = story.os.link
+        original_publish = story._publish_no_replace
 
         def publication_fails(source, destination):
             if Path(source).name.startswith(".story-tmp-"):
                 raise OSError("publication interrupted")
-            return original_link(source, destination)
+            return original_publish(source, destination)
 
-        with patch.object(story.os, "link", side_effect=publication_fails):
+        with patch.object(story, "_publish_no_replace", side_effect=publication_fails):
             result = self.book.commit(1, self.draft, delta, replace_last=True)
         self.assertTrue(result["committed"])
         self.assertFalse(result["exports_complete"])

@@ -67,7 +67,7 @@ python -X utf8 scripts/install.py --project "D:\小说\我的写作项目"
 
 `commit` 在一个 SQLite 事务中保存正文和状态，然后导出 Markdown。数据库已提交但导出失败（包括 SQLite 锁冲突）时返回 `committed: true, exports_complete: false`；解除故障后运行 `export` 或原命令重试，不会重复推进状态。
 
-外部修改的最新原生章用 `reconcile` 读取修订上下文、核对稿件后提交。导出会复核文件、保留被换下的版本，并拒绝覆盖写入期间出现的新文件；完成回执表示导出后的核验通过，之后的外部修改由 `status` 检出。导出要求文件系统支持硬链接（如 NTFS），不支持时保留待恢复状态。[恢复操作与边界](docs/recovery.md)
+外部修改的最新原生章用 `reconcile` 读取修订上下文、核对稿件后提交。导出会复核文件、保留被换下的版本，并拒绝覆盖写入期间出现的新文件。Windows 使用同目录拒覆盖重命名，已在本机 D 盘 exFAT 实测完整中文稿件；POSIX 路径仍使用硬链接。完成回执表示导出后的核验通过，之后的外部修改由 `status` 检出。[恢复操作与边界](docs/recovery.md)
 
 如果旧章缺失而最新章有外改，`export --safe-only` 可先恢复安全路径，再对账外改章；回执列出全部剩余问题，不把部分恢复报成完成。
 
@@ -106,7 +106,7 @@ python -X utf8 scripts/package.py
 python -X utf8 scripts/verify.py
 ```
 
-`verify.py` 实际运行回归测试、CLI 冒烟、临时项目安装与运行，并核对技能包内容、基准文件哈希及本地文档链接；测试数从执行结果生成，失败不会覆盖既有成功报告。[验证记录](benchmarks/results/verification.json)
+`verify.py` 实际运行回归测试、CLI 冒烟、真实中文稿件重放、临时项目安装与运行，并核对技能包内容、基准文件哈希及本地文档链接；测试数从执行结果生成，失败不会覆盖既有成功报告。[验证记录](benchmarks/results/verification.json)
 
 `python -B -X utf8 scripts/upgrade_probe.py` 使用真实 v0.1.2 技能包验证升级到 v0.2.0、旧版备份完整性、安装清单一致性及重复更新。[升级记录](benchmarks/results/upgrade.json)
 

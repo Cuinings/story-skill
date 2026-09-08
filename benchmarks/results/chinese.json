@@ -1,0 +1,586 @@
+{
+  "ok": true,
+  "method": "Original Chinese manuscripts written and semantically reviewed in this Codex task, then submitted via real CLI subprocesses; fixed replay fixtures do not call a model again.",
+  "retained_workdir": "D:\\Developer\\WorkSpace\\story-skill\\examples\\实测工程-v0.2.0",
+  "runtime_sha256": "fa4851ffea30b496fb9cd93c3a705dda6c79b84f84ead77ee2be53a0d42c968c",
+  "books": [
+    {
+      "title": "渡口夜账",
+      "kind": "long",
+      "book": "D:\\Developer\\WorkSpace\\story-skill\\examples\\实测工程-v0.2.0\\渡口夜账",
+      "chapters": [
+        {
+          "draft": "drafts/01.md",
+          "chapter": 1,
+          "mode": "next",
+          "sha256": "2fd4f5bc9e4e017cd6d32d313c5621ab8aaec972e36f231560534ebc20444296",
+          "lint": {
+            "count_method": "visible_nonspace_v1",
+            "count_scope": "body_and_lead_without_first_h1",
+            "counts": {
+              "han_v1": 1879,
+              "letters_numbers_v1": 1879,
+              "visible_nonspace_v1": 2260
+            },
+            "draft_sha256": "2fd4f5bc9e4e017cd6d32d313c5621ab8aaec972e36f231560534ebc20444296",
+            "errors": [],
+            "length_count": 2260,
+            "ok": true,
+            "unicode_version": "16.0.0",
+            "visible_chars": 2260,
+            "warnings": []
+          },
+          "context_bytes": 8238,
+          "revision": 5,
+          "idempotent_retry": true,
+          "resumed_committed_export": true
+        },
+        {
+          "draft": "drafts/02.md",
+          "chapter": 2,
+          "mode": "next",
+          "sha256": "da19c8ca5f4738c5921ec6567e515140e99aaf0410eb1ce32135a7f8f7d9e592",
+          "lint": {
+            "count_method": "visible_nonspace_v1",
+            "count_scope": "body_and_lead_without_first_h1",
+            "counts": {
+              "han_v1": 1892,
+              "letters_numbers_v1": 1892,
+              "visible_nonspace_v1": 2240
+            },
+            "draft_sha256": "da19c8ca5f4738c5921ec6567e515140e99aaf0410eb1ce32135a7f8f7d9e592",
+            "errors": [],
+            "length_count": 2240,
+            "ok": true,
+            "unicode_version": "16.0.0",
+            "visible_chars": 2240,
+            "warnings": []
+          },
+          "context_bytes": 9553,
+          "revision": 6,
+          "idempotent_retry": true,
+          "resumed_committed_export": false
+        },
+        {
+          "draft": "drafts/03.md",
+          "chapter": 3,
+          "mode": "next",
+          "sha256": "9f6bceb6f09072cdc0cc06f529795b77ea65f1ac2177ac9a69b99359334bb8a1",
+          "lint": {
+            "count_method": "visible_nonspace_v1",
+            "count_scope": "body_and_lead_without_first_h1",
+            "counts": {
+              "han_v1": 2003,
+              "letters_numbers_v1": 2011,
+              "visible_nonspace_v1": 2346
+            },
+            "draft_sha256": "9f6bceb6f09072cdc0cc06f529795b77ea65f1ac2177ac9a69b99359334bb8a1",
+            "errors": [],
+            "length_count": 2346,
+            "ok": true,
+            "unicode_version": "16.0.0",
+            "visible_chars": 2346,
+            "warnings": []
+          },
+          "context_bytes": 9993,
+          "revision": 7,
+          "idempotent_retry": true,
+          "resumed_committed_export": false
+        },
+        {
+          "draft": "drafts/03-r1.md",
+          "chapter": 3,
+          "mode": "replace_last",
+          "sha256": "276c57114538ee387f5c82505d3d0b525fdbcb0137af6193cb9cafa98d55d787",
+          "lint": {
+            "count_method": "visible_nonspace_v1",
+            "count_scope": "body_and_lead_without_first_h1",
+            "counts": {
+              "han_v1": 2004,
+              "letters_numbers_v1": 2012,
+              "visible_nonspace_v1": 2347
+            },
+            "draft_sha256": "276c57114538ee387f5c82505d3d0b525fdbcb0137af6193cb9cafa98d55d787",
+            "errors": [],
+            "length_count": 2347,
+            "ok": true,
+            "unicode_version": "16.0.0",
+            "visible_chars": 2347,
+            "warnings": []
+          },
+          "context_bytes": 10002,
+          "revision": 8,
+          "idempotent_retry": true,
+          "resumed_committed_export": false
+        },
+        {
+          "draft": "drafts/03-r2.md",
+          "chapter": 3,
+          "mode": "reconcile_last",
+          "sha256": "1cc3165c3a5b1f8d4df740ff65e60ddec839fc29b94edc22f9c598f68354aede",
+          "lint": {
+            "count_method": "visible_nonspace_v1",
+            "count_scope": "body_and_lead_without_first_h1",
+            "counts": {
+              "han_v1": 2191,
+              "letters_numbers_v1": 2199,
+              "visible_nonspace_v1": 2564
+            },
+            "draft_sha256": "1cc3165c3a5b1f8d4df740ff65e60ddec839fc29b94edc22f9c598f68354aede",
+            "errors": [],
+            "length_count": 2564,
+            "ok": true,
+            "unicode_version": "16.0.0",
+            "visible_chars": 2564,
+            "warnings": []
+          },
+          "context_bytes": 10371,
+          "revision": 10,
+          "idempotent_retry": true,
+          "resumed_committed_export": false
+        }
+      ],
+      "recovery": {
+        "missing_chapter_restored": true,
+        "outside_draft_preserved": true,
+        "remaining_changes": [
+          "chapters/0003.md"
+        ]
+      },
+      "analysis": null,
+      "status": {
+        "book": "D:\\Developer\\WorkSpace\\story-skill\\examples\\实测工程-v0.2.0\\渡口夜账",
+        "cards": 14,
+        "changed_export_count": 0,
+        "changed_exports": [],
+        "id": "84608a48-85a3-49e2-8560-bebb6797a209",
+        "imported_through": 0,
+        "kind": "long",
+        "last_chapter": 3,
+        "more_sources": false,
+        "next_chapter": 4,
+        "pending_export_count": 0,
+        "pending_exports": [],
+        "recent_sources": [],
+        "revision": 10,
+        "sources": 0,
+        "title": "渡口夜账"
+      },
+      "commands": [
+        {
+          "command": "status",
+          "exit_code": 0
+        },
+        {
+          "command": "lint",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "context",
+          "exit_code": 0
+        },
+        {
+          "command": "prepare",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "context",
+          "exit_code": 0
+        },
+        {
+          "command": "prepare",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "context",
+          "exit_code": 0
+        },
+        {
+          "command": "prepare",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "status",
+          "exit_code": 0
+        },
+        {
+          "command": "plan",
+          "exit_code": 0
+        },
+        {
+          "command": "reconcile",
+          "exit_code": 2
+        },
+        {
+          "command": "export",
+          "exit_code": 2
+        },
+        {
+          "command": "export",
+          "exit_code": 2
+        },
+        {
+          "command": "reconcile",
+          "exit_code": 0
+        },
+        {
+          "command": "prepare",
+          "exit_code": 0
+        },
+        {
+          "command": "reconcile",
+          "exit_code": 0
+        },
+        {
+          "command": "reconcile",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "status",
+          "exit_code": 0
+        }
+      ],
+      "scenario_sha256": "d37d91c8f90f2bb07a277b7e0ed7102bcc69973a8c3451085b4c27f12cf77044"
+    },
+    {
+      "title": "留半寸",
+      "kind": "short",
+      "book": "D:\\Developer\\WorkSpace\\story-skill\\examples\\实测工程-v0.2.0\\留半寸",
+      "chapters": [
+        {
+          "draft": "drafts/01.md",
+          "chapter": 1,
+          "mode": "next",
+          "sha256": "f3e5fe8e806e066578e4354104df318ea77ff16432b362492b81dbca6ea5d3fb",
+          "lint": {
+            "count_method": "visible_nonspace_v1",
+            "count_scope": "body_and_lead_without_first_h1",
+            "counts": {
+              "han_v1": 1781,
+              "letters_numbers_v1": 1781,
+              "visible_nonspace_v1": 2108
+            },
+            "draft_sha256": "f3e5fe8e806e066578e4354104df318ea77ff16432b362492b81dbca6ea5d3fb",
+            "errors": [],
+            "length_count": 2108,
+            "ok": true,
+            "unicode_version": "16.0.0",
+            "visible_chars": 2108,
+            "warnings": []
+          },
+          "context_bytes": 1887,
+          "revision": 3,
+          "idempotent_retry": true,
+          "resumed_committed_export": false
+        }
+      ],
+      "recovery": null,
+      "analysis": {
+        "coverage": {
+          "analyzed": 2,
+          "chunks_total": 2,
+          "complete_for_imported_text": true,
+          "next_chunk": null,
+          "pending": 0,
+          "report_path": ".story/analysis/71468575e14ea2321f98e6c8c88213c74677128eb1d046aaf2d7b6b1cf4cef3e/report.md",
+          "source": "71468575e14ea2321f98e6c8c88213c74677128eb1d046aaf2d7b6b1cf4cef3e",
+          "source_coverage": "complete",
+          "text_coverage_contiguous": true
+        },
+        "resumed_ordinals": [
+          1,
+          2
+        ],
+        "source_sha256": "71468575e14ea2321f98e6c8c88213c74677128eb1d046aaf2d7b6b1cf4cef3e",
+        "report_path": "D:\\Developer\\WorkSpace\\story-skill\\examples\\实测工程-v0.2.0\\留半寸_拆文\\.story\\analysis\\71468575e14ea2321f98e6c8c88213c74677128eb1d046aaf2d7b6b1cf4cef3e\\report.md",
+        "report_sha256": "22619a85401269bac1e77552b59888899aa0cddda8fbeea6d698e382df79159f"
+      },
+      "status": {
+        "book": "D:\\Developer\\WorkSpace\\story-skill\\examples\\实测工程-v0.2.0\\留半寸",
+        "cards": 3,
+        "changed_export_count": 0,
+        "changed_exports": [],
+        "id": "ff3d3682-031c-45e3-94fe-f589744c4633",
+        "imported_through": 0,
+        "kind": "short",
+        "last_chapter": 1,
+        "more_sources": false,
+        "next_chapter": 2,
+        "pending_export_count": 0,
+        "pending_exports": [],
+        "recent_sources": [],
+        "revision": 3,
+        "sources": 0,
+        "title": "留半寸"
+      },
+      "commands": [
+        {
+          "command": "init",
+          "exit_code": 0
+        },
+        {
+          "command": "notes",
+          "exit_code": 0
+        },
+        {
+          "command": "status",
+          "exit_code": 0
+        },
+        {
+          "command": "plan",
+          "exit_code": 0
+        },
+        {
+          "command": "context",
+          "exit_code": 0
+        },
+        {
+          "command": "prepare",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "commit",
+          "exit_code": 0
+        },
+        {
+          "command": "recall",
+          "exit_code": 0
+        },
+        {
+          "command": "status",
+          "exit_code": 0
+        },
+        {
+          "command": "init",
+          "exit_code": 0
+        },
+        {
+          "command": "ingest",
+          "exit_code": 0
+        },
+        {
+          "command": "next",
+          "exit_code": 0
+        },
+        {
+          "command": "record",
+          "exit_code": 0
+        },
+        {
+          "command": "next",
+          "exit_code": 0
+        },
+        {
+          "command": "record",
+          "exit_code": 0
+        },
+        {
+          "command": "next",
+          "exit_code": 0
+        },
+        {
+          "command": "report",
+          "exit_code": 0
+        },
+        {
+          "command": "coverage",
+          "exit_code": 0
+        }
+      ],
+      "scenario_sha256": "3ed56af5d08404d0a4a78eb5b1d6bee56333060c9e4e71aa28cf825eb93870cf"
+    }
+  ],
+  "filesystem_observation": {
+    "platform": "Windows",
+    "drive": "D",
+    "filesystem": "exFAT",
+    "checked_with": "Get-Volume -DriveLetter C,D",
+    "initial_export_error": "WinError 1 on hard-link publication after durable chapter 1 commit at revision 5",
+    "recovered_same_book_id": "84608a48-85a3-49e2-8560-bebb6797a209",
+    "original_delta_retried_without_reinitializing": true
+  }
+}
