@@ -1,0 +1,107 @@
+{
+  "runtime_version": "0.2.0",
+  "runtime_sha256": "fa4851ffea30b496fb9cd93c3a705dda6c79b84f84ead77ee2be53a0d42c968c",
+  "method": "Synthetic repeated 2500-character chapters and unrelated cards, direct fixture inserts, one instrumented warm local run per size; not a complete event history, cold-disk benchmark or model/novel evaluation.",
+  "timing_caveat": "Path.read_bytes instrumentation adds overhead; byte counts are application reads, not physical disk IO. Data was created in system TEMP, not the user's novel directories.",
+  "cases": [
+    {
+      "chapters": 400,
+      "manuscript_characters": 1000000,
+      "cards": 2000,
+      "operations": {
+        "status": {
+          "elapsed_seconds": 0.1245,
+          "manuscript_file_reads": 800,
+          "manuscript_bytes_read": 6000000
+        },
+        "context": {
+          "elapsed_seconds": 0.1251,
+          "manuscript_file_reads": 800,
+          "manuscript_bytes_read": 6000000
+        },
+        "prepare": {
+          "elapsed_seconds": 0.1241,
+          "manuscript_file_reads": 800,
+          "manuscript_bytes_read": 6000000
+        },
+        "recall_exact_id": {
+          "elapsed_seconds": 0.0178,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0
+        },
+        "export_no_changes": {
+          "elapsed_seconds": 0.3,
+          "manuscript_file_reads": 2000,
+          "manuscript_bytes_read": 15000000
+        },
+        "commit_one_next_chapter": {
+          "elapsed_seconds": 0.446,
+          "manuscript_file_reads": 2803,
+          "manuscript_bytes_read": 21022500
+        }
+      },
+      "context_output_bytes": 2553,
+      "required_card_overload": {
+        "error": "budget_exceeded",
+        "minimum_bytes": 47952,
+        "budget_bytes": 16000
+      }
+    },
+    {
+      "chapters": 4000,
+      "manuscript_characters": 10000000,
+      "cards": 20000,
+      "operations": {
+        "status": {
+          "elapsed_seconds": 1.2909,
+          "manuscript_file_reads": 8000,
+          "manuscript_bytes_read": 60000000
+        },
+        "context": {
+          "elapsed_seconds": 1.2021,
+          "manuscript_file_reads": 8000,
+          "manuscript_bytes_read": 60000000
+        },
+        "prepare": {
+          "elapsed_seconds": 1.1856,
+          "manuscript_file_reads": 8000,
+          "manuscript_bytes_read": 60000000
+        },
+        "recall_exact_id": {
+          "elapsed_seconds": 0.1726,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0
+        },
+        "export_no_changes": {
+          "elapsed_seconds": 6.5192,
+          "manuscript_file_reads": 20000,
+          "manuscript_bytes_read": 150000000
+        },
+        "commit_one_next_chapter": {
+          "elapsed_seconds": 18.1493,
+          "manuscript_file_reads": 28003,
+          "manuscript_bytes_read": 210022500
+        }
+      },
+      "context_output_bytes": 2557,
+      "required_card_overload": {
+        "error": "budget_exceeded",
+        "minimum_bytes": 47956,
+        "budget_bytes": 16000
+      }
+    }
+  ],
+  "chinese_search_probe": {
+    "sqlite_version": "3.50.4",
+    "unicode61": {
+      "江棠": 0,
+      "杜承安": 0,
+      "把船票": 0
+    },
+    "trigram": {
+      "江棠": 0,
+      "杜承安": 1,
+      "把船票": 1
+    }
+  }
+}

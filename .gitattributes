@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Preserve the exact bytes bound by release archives and evidence hashes.
+/.agents/skills/story-codex/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/benchmarks/results/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

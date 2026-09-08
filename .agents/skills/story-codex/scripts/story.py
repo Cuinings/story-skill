@@ -15,9 +15,11 @@ import sys
 import tempfile
 import unicodedata
 import uuid
+import importlib.util
+from types import SimpleNamespace
 
-VERSION = "0.2.0"
-SCHEMA_VERSION = 1
+VERSION = "0.3.0"
+SCHEMA_VERSION = 2
 CHECKS = ("causality", "continuity", "constraints", "style")
 KINDS = ("fact", "character", "world", "hook", "preference", "contract")
 COUNT_METHODS = ("visible_nonspace_v1", "letters_numbers_v1", "han_v1")
@@ -193,10 +195,16 @@ def valid_card(raw):
     due = raw.get("due")
     if due is not None:
         integer(due, "card.due", 1)
-    return {"id": cid, "kind": kind, "text": text_field(raw.get("text"), "card.text"),
+    result = {"id": cid, "kind": kind, "text": text_field(raw.get("text"), "card.text"),
             "source": text_field(raw.get("source"), "card.source", 1400),
             "tags": string_list(raw.get("tags", []), "card.tags", 24),
             "critical": raw.get("critical", False), "status": status, "due": due}
+    if "scope" in raw:
+        scope = text_field(raw["scope"], "card.scope", 180)
+        if scope != "global" and not re.fullmatch(r"(volume|arc|line|entity):[\w.-]+", scope):
+            fail("invalid_input", "scope must be global or volume/arc/line/entity:ID")
+        result["scope"] = scope
+    return result
 
 
 def valid_plan(raw):
@@ -228,6 +236,21 @@ def valid_plan(raw):
     if type(include_title) is not bool:
         fail("invalid_input", "plan.count_title must be boolean")
     result.update(count_method=method, count_title=include_title)
+    for key in ("volume", "arc", "line"):
+        if key in raw:
+            result[key] = text_field(raw[key], "plan." + key, 80)
+    if "entities" in raw:
+        result["entities"] = string_list(raw["entities"], "plan.entities", 40)
+    if "time" in raw:
+        stamp = object_value(raw["time"], "plan.time")
+        result["time"] = {"clock": text_field(stamp.get("clock"), "plan.time.clock", 80)}
+        for key in ("start", "end"):
+            value = stamp.get(key)
+            if value is not None and type(value) is not int:
+                fail("invalid_input", "Story time must be integer ticks or null")
+            result["time"][key] = value
+        if stamp.get("start") is not None and stamp.get("end") is not None and stamp["end"] < stamp["start"]:
+            fail("invalid_input", "Story time end precedes start")
     return result
 
 
@@ -278,11 +301,8 @@ SCHEMA = """
 CREATE TABLE meta(key TEXT PRIMARY KEY, value TEXT NOT NULL);
 CREATE TABLE cards(id TEXT PRIMARY KEY, data TEXT NOT NULL);
 CREATE TABLE plans(chapter INTEGER PRIMARY KEY, data TEXT NOT NULL);
-CREATE TABLE chapters(chapter INTEGER PRIMARY KEY, text TEXT NOT NULL, sha TEXT NOT NULL,
- summary TEXT NOT NULL, receipt TEXT NOT NULL, input_hash TEXT NOT NULL, imported INTEGER NOT NULL DEFAULT 0);
 CREATE TABLE events(seq INTEGER PRIMARY KEY AUTOINCREMENT, revision INTEGER NOT NULL,
  kind TEXT NOT NULL, data TEXT NOT NULL, created TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
-CREATE TABLE artifacts(path TEXT PRIMARY KEY, content TEXT NOT NULL, sha TEXT NOT NULL, written_sha TEXT);
 CREATE TABLE sources(id TEXT PRIMARY KEY, name TEXT NOT NULL, text TEXT NOT NULL,
  coverage TEXT NOT NULL, encoding TEXT NOT NULL);
 CREATE TABLE chunks(source TEXT NOT NULL REFERENCES sources(id), ordinal INTEGER NOT NULL,
@@ -291,8 +311,43 @@ CREATE TABLE chunks(source TEXT NOT NULL REFERENCES sources(id), ordinal INTEGER
 """
 
 
+def index_card(db, card):
+    cid = card["id"]
+    db.execute("INSERT INTO card_index VALUES (?,?,?,?,?,?) ON CONFLICT(id) DO UPDATE SET "
+               "kind=excluded.kind,status=excluded.status,critical=excluded.critical,due=excluded.due,scope=excluded.scope",
+               (cid, card["kind"], card["status"], int(card["critical"]), card["due"], card.get("scope", "global")))
+    db.execute("DELETE FROM card_tags WHERE id=?", (cid,))
+    db.executemany("INSERT INTO card_tags VALUES (?,?)", ((tag, cid) for tag in card["tags"]))
+    search.upsert(db, "card", cid, dumps(card), {"id": cid})
+
+
+def compact_event(db, kind, payload):
+    if kind not in ("commit_chapter", "replace_chapter"):
+        return payload
+    payload = dict(payload)
+    def body_ref(value):
+        value = dict(value)
+        if "text" in value:
+            body = value.pop("text")
+            sha = digest(body)
+            db.execute("INSERT OR IGNORE INTO core_objects VALUES (?,?)", (sha, body))
+            value["body_sha256"] = sha
+        return value
+    payload = body_ref(payload)
+    if payload.get("previous"):
+        payload["previous"] = body_ref(payload["previous"])
+    return payload
+
+
 class Book:
-    def __init__(self, root):
+    fail = staticmethod(fail)
+    safe_path = staticmethod(safe_path)
+
+    def __init__(self, root, integrity="strict"):
+        if integrity not in ("strict", "local"):
+            fail("invalid_input", "integrity must be strict or local")
+        self.integrity = integrity
+        self._verified_paths = 0
         self.root = Path(root).expanduser().resolve()
         self.path = safe_path(self.root, ".story/state.sqlite3")
         if not self.path.is_file():
@@ -309,7 +364,7 @@ class Book:
             raise
         if schema != SCHEMA_VERSION:
             self.db.close()
-            fail("schema_mismatch", "Unsupported state schema; do not overwrite the database")
+            fail("schema_mismatch", "Run migrate on a backed-up book copy to upgrade; do not overwrite the database", actual=schema, required=SCHEMA_VERSION)
 
     def close(self):
         self.db.close()
@@ -330,7 +385,7 @@ class Book:
             fail("book_exists", "State already exists; use status, never reinitialize", book=str(root))
         db = sqlite3.connect(path)
         try:
-            db.executescript(SCHEMA)
+            db.executescript(SCHEMA + storage.SCHEMA + search.SCHEMA + world.SCHEMA + history.SCHEMA)
             values = {"schema": SCHEMA_VERSION, "revision": 0, "last_chapter": 0,
                       "imported_through": 0, "title": title, "kind": kind, "id": str(uuid.uuid4())}
             with db:
@@ -346,33 +401,55 @@ class Book:
         return json.loads(row[0])
 
     def set_meta(self, key, value):
-        self.db.execute("UPDATE meta SET value=? WHERE key=?", (dumps(value), key))
+        self.db.execute("INSERT INTO meta VALUES (?,?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (key, dumps(value)))
 
     @contextmanager
     def transaction(self, expected=None):
-        self.db.execute("BEGIN IMMEDIATE")
-        try:
-            if expected is not None and integer(expected, "expected revision") != self.meta("revision"):
-                fail("stale_revision", "State changed; reload context and recheck the draft",
-                     expected=expected, actual=self.meta("revision"))
-            yield
-            self.db.commit()
-        except BaseException:
-            self.db.rollback()
-            raise
+        with storage.operation_lock(self):
+            self.db.execute("BEGIN IMMEDIATE")
+            try:
+                if expected is not None and integer(expected, "expected revision") != self.meta("revision"):
+                    fail("stale_revision", "State changed; reload context and recheck the draft",
+                         expected=expected, actual=self.meta("revision"))
+                yield
+                self.db.commit()
+            except BaseException:
+                self.db.rollback()
+                raise
 
     def event(self, kind, payload):
         rev = self.meta("revision") + 1
         self.set_meta("revision", rev)
-        self.db.execute("INSERT INTO events(revision,kind,data) VALUES (?,?,?)", (rev, kind, dumps(payload)))
+        self.db.execute("INSERT INTO events(revision,kind,data) VALUES (?,?,?)", (rev, kind, dumps(compact_event(self.db, kind, payload))))
         return rev
 
-    def cards(self):
-        return {row[0]: json.loads(row[1]) for row in self.db.execute("SELECT id,data FROM cards ORDER BY id")}
+    def cards(self, ids=None):
+        if ids is None:
+            rows = self.db.execute("SELECT id,data FROM cards ORDER BY id")
+        else:
+            ids = list(set(ids))
+            if not ids:
+                return {}
+            rows = self.db.execute("SELECT id,data FROM cards WHERE id IN (" + ",".join("?" for _ in ids) + ")", ids)
+        return {row[0]: json.loads(row[1]) for row in rows}
+
+    def intern_body(self, text):
+        sha = digest(text)
+        self.db.execute("INSERT OR IGNORE INTO core_objects VALUES (?,?)", (sha, text))
+        return sha
+
+    def index_chapter(self, chapter, text, summary):
+        search.upsert(self.db, "chapter", str(chapter), text, {"chapter": chapter, "summary": summary})
+        search.upsert(self.db, "chapter_summary", str(chapter), summary, {"chapter": chapter})
 
     def put_card(self, card):
         self.db.execute("INSERT INTO cards VALUES (?,?) ON CONFLICT(id) DO UPDATE SET data=excluded.data",
                         (card["id"], dumps(card)))
+        index_card(self.db, card)
+
+    def delete_card(self, cid):
+        search.remove(self.db, "card", cid)
+        self.db.execute("DELETE FROM cards WHERE id=?", (cid,))
 
     def get_plan(self, chapter):
         row = self.db.execute("SELECT data FROM plans WHERE chapter=?", (chapter,)).fetchone()
@@ -387,7 +464,7 @@ class Book:
         if len({card["id"] for card in cards}) != len(cards):
             fail("duplicate_id", "Duplicate card ids in the same batch")
         with self.transaction(expected):
-            old = self.cards()
+            old = self.cards(c["id"] for c in cards)
             changes = [card for card in cards if old.get(card["id"]) != card]
             if changes:
                 for card in changes:
@@ -410,6 +487,7 @@ class Book:
 
     def _check_artifact(self, relative, new_sha, old_sha):
         target = safe_path(self.root, relative)
+        current = None
         if target.exists():
             if not target.is_file():
                 fail("export_conflict", "Export target is not a regular file", path=str(target))
@@ -417,93 +495,111 @@ class Book:
             if current not in {new_sha, old_sha}:
                 fail("export_conflict", "Export file was edited outside the state tool; preserve it and reconcile",
                      path=str(target))
+        self._last_artifact_check = (relative, current)
         return target
 
     def queue_artifact(self, relative, content, accepted_sha=None):
         row = self.db.execute("SELECT written_sha FROM artifacts WHERE path=?", (relative,)).fetchone()
         self._check_artifact(relative, digest(content), accepted_sha or (row[0] if row else None))
-        self.db.execute("INSERT INTO artifacts(path,content,sha) VALUES (?,?,?) "
-                        "ON CONFLICT(path) DO UPDATE SET content=excluded.content,sha=excluded.sha",
+        self.db.execute("INSERT INTO artifacts(path,content,sha) VALUES (?,?,?)",
                         (relative, content, digest(content)))
         if accepted_sha:
             # Persist the reviewed disk version for post-commit export retries.
             self.db.execute("UPDATE artifacts SET written_sha=? WHERE path=?", (accepted_sha, relative))
 
-    def _export_safe(self):
+    def _artifact_rows(self):
+        if self.integrity == "strict":
+            return self.db.execute("SELECT path,sha,written_sha FROM artifact_state ORDER BY path").fetchall()
+        paths = set(getattr(self, "_local_artifacts", []))
+        paths.add(f"chapters/{self.meta('last_chapter'):04d}.md")
+        marks = ",".join("?" for _ in paths)
+        return self.db.execute("SELECT path,sha,written_sha FROM artifact_state WHERE "
+            f"path IN ({marks}) UNION SELECT path,sha,written_sha FROM artifact_state "
+            "WHERE written_sha IS NULL OR written_sha<>sha ORDER BY path", tuple(paths)).fetchall()
+
+    def _integrity_report(self):
+        total = self.db.execute("SELECT count(*) FROM artifact_state").fetchone()[0]
+        audit = self.db.execute("SELECT revision FROM integrity_audits WHERE id=1").fetchone()
+        return {"mode": self.integrity, "verified_file_count": self._verified_paths,
+                "unverified_archive_count": max(0, total-self._verified_paths),
+                "last_full_audit_revision": audit[0] if audit else None,
+                "full_book_verified": self.integrity == "strict" and getattr(self, "_health_clean", False),
+                "note": "Hash verification is a point-in-time observation; outside editors can save again."}
+
+    def export(self, safe_only=False):
         written, backups, errors = [], [], {}
-
-        def remember_error(relative, error):
-            entry = errors.setdefault(relative, {
-                "path": relative, "message": str(error),
+        def remember(relative, error):
+            item = errors.setdefault(relative, {"path": relative, "message": str(error),
                 "code": error.code if isinstance(error, StoryError) else "io_error"})
-            if isinstance(error, StoryError) and error.details:
-                # A later health check must not discard the preserved backup
-                # reported by an earlier failed publication of this path.
-                entry.setdefault("details", {}).update(error.details)
-
-        with self.transaction():
-            rows = self.db.execute("SELECT * FROM artifacts ORDER BY path").fetchall()
+            if isinstance(error, StoryError):
+                item.setdefault("details", {}).update(error.details)
+        # The OS lock serializes compliant state writers. File I/O does not hold a
+        # SQLite write transaction; the expected SHA is rechecked before acknowledgement.
+        with storage.operation_lock(self):
+            rows = self._artifact_rows()
+            snapshots = {}
             for row in rows:
                 try:
-                    target = self._check_artifact(row["path"], row["sha"], row["written_sha"])
-                    if not target.exists() or hashlib.sha256(target.read_bytes()).hexdigest() != row["sha"]:
-                        backup = safe_path(self.root, f".story/export-backups/{uuid.uuid4().hex}/{row['path']}")
-                        saved = atomic_write(target, row["content"], {row["sha"], row["written_sha"]}, backup)
+                    self._check_artifact(row["path"], row["sha"], row["written_sha"])
+                    snapshots[row["path"]] = self._last_artifact_check[1]
+                except (OSError, StoryError) as error:
+                    if not safe_only:
+                        raise
+                    remember(row["path"], error)
+            for row in rows:
+                relative = row["path"]
+                if relative in errors:
+                    continue
+                try:
+                    if snapshots[relative] != row["sha"]:
+                        target = self._check_artifact(relative, row["sha"], row["written_sha"])
+                        content = self.db.execute("SELECT text FROM core_objects WHERE sha=?", (row["sha"],)).fetchone()[0]
+                        backup = safe_path(self.root, f".story/export-backups/{uuid.uuid4().hex}/{relative}")
+                        saved = atomic_write(target, content, {row["sha"], row["written_sha"]}, backup)
                         if saved:
                             backups.append(saved)
-                        written.append(row["path"])
-                    if hashlib.sha256(target.read_bytes()).hexdigest() != row["sha"]:
-                        fail("export_conflict", "File changed during export", path=str(target))
-                    self.db.execute("UPDATE artifacts SET written_sha=? WHERE path=?", (row["sha"], row["path"]))
+                        written.append(relative)
+                    if row["written_sha"] != row["sha"]:
+                        with self.transaction():
+                            live = self.db.execute("SELECT sha FROM artifact_state WHERE path=?", (relative,)).fetchone()
+                            if not live or live[0] != row["sha"]:
+                                fail("stale_export", "Queued content changed during export; retry", path=relative)
+                            self.db.execute("UPDATE artifact_state SET written_sha=? WHERE path=?", (row["sha"], relative))
                 except (OSError, StoryError) as error:
-                    # Other independently recoverable artifacts must not be blocked
-                    # by one outside edit, unavailable path, or publication conflict.
-                    remember_error(row["path"], error)
-
+                    if not safe_only:
+                        raise
+                    remember(relative, error)
+            # A second pass catches edits of an early file while later files were processed.
             pending, changed = [], []
-            for row in self.db.execute("SELECT path,sha,written_sha FROM artifacts ORDER BY path"):
+            for row in rows:
                 try:
-                    target = self._check_artifact(row["path"], row["sha"], row["written_sha"])
-                    if not target.exists() or hashlib.sha256(target.read_bytes()).hexdigest() != row["sha"]:
+                    self._check_artifact(row["path"], row["sha"], row["written_sha"])
+                    if self._last_artifact_check[1] != row["sha"]:
                         pending.append(row["path"])
                 except (OSError, StoryError) as error:
                     changed.append(row["path"])
-                    remember_error(row["path"], error)
-            result = {"safe_only": True, "exported": written, "backups": backups,
-                      "exports_complete": not pending and not changed,
-                      "pending_exports": pending[:20], "pending_export_count": len(pending),
-                      "changed_exports": changed[:20], "changed_export_count": len(changed),
-                      "export_errors": list(errors.values())[:20], "export_error_count": len(errors)}
-            if pending or changed:
-                result["recovery"] = ("Resolve the remaining paths; reconcile an externally edited latest chapter "
-                                      "after other pending exports have been recovered.")
-        return result
-
-    def export(self, safe_only=False):
-        if safe_only:
-            return self._export_safe()
-        written, backups = [], []
-        # Serialize exports with state commits, so old content cannot race a newer commit.
-        with self.transaction():
-            rows = self.db.execute("SELECT * FROM artifacts ORDER BY path").fetchall()
-            targets = [self._check_artifact(r["path"], r["sha"], r["written_sha"]) for r in rows]
-            for row, target in zip(rows, targets):
-                self._check_artifact(row["path"], row["sha"], row["written_sha"])
-                if not target.exists() or hashlib.sha256(target.read_bytes()).hexdigest() != row["sha"]:
-                    backup = safe_path(self.root, f".story/export-backups/{uuid.uuid4().hex}/{row['path']}")
-                    saved = atomic_write(target, row["content"], {row["sha"], row["written_sha"]}, backup)
-                    if saved:
-                        backups.append(saved)
-                    written.append(row["path"])
-                if hashlib.sha256(target.read_bytes()).hexdigest() != row["sha"]:
-                    fail("export_conflict", "File changed during export", path=str(target))
-                self.db.execute("UPDATE artifacts SET written_sha=? WHERE path=?", (row["sha"], row["path"]))
-            # Later exports can take time; recheck earlier files before reporting completion.
-            for row in rows:
-                target = safe_path(self.root, row["path"])
-                if hashlib.sha256(target.read_bytes()).hexdigest() != row["sha"]:
-                    fail("export_conflict", "File changed while other artifacts were exported", path=str(target))
-        return {"exported": written, "exports_complete": True, "backups": backups}
+                    remember(row["path"], error)
+                    if not safe_only:
+                        raise
+            self._verified_paths = len(rows)
+            clean = not pending and not changed
+            self._health_clean = clean
+            if not clean and not safe_only:
+                fail("export_conflict", "Files changed or disappeared during export", pending=pending[:20], changed=changed[:20])
+            if clean and self.integrity == "strict":
+                with self.transaction():
+                    self.db.execute("INSERT OR REPLACE INTO integrity_audits(id,revision,checked) VALUES(1,?,?)",
+                                    (self.meta("revision"), len(rows)))
+            result = {"exported": written, "backups": backups,
+                      "exports_complete": clean if self.integrity == "strict" else (False if not clean else None),
+                      "scope_exports_complete": clean, "integrity": self._integrity_report()}
+            if safe_only:
+                result.update(safe_only=True, pending_exports=pending[:20], pending_export_count=len(pending),
+                    changed_exports=changed[:20], changed_export_count=len(changed),
+                    export_errors=list(errors.values())[:20], export_error_count=len(errors))
+                if not clean:
+                    result["recovery"] = "Resolve remaining paths; use reconcile for an outside edit of the latest chapter."
+            return result
 
     def delivery(self, result):
         try:
@@ -518,13 +614,16 @@ class Book:
 
     def _export_health(self):
         pending, drift = [], []
-        for row in self.db.execute("SELECT path,sha,written_sha FROM artifacts ORDER BY path"):
+        rows = self._artifact_rows()
+        for row in rows:
             try:
-                target = self._check_artifact(row["path"], row["sha"], row["written_sha"])
-                if not target.exists() or hashlib.sha256(target.read_bytes()).hexdigest() != row["sha"]:
+                self._check_artifact(row["path"], row["sha"], row["written_sha"])
+                if self._last_artifact_check[1] != row["sha"] or row["written_sha"] != row["sha"]:
                     pending.append(row["path"])
             except StoryError:
                 drift.append(row["path"])
+        self._verified_paths = len(rows)
+        self._health_clean = not pending and not drift
         return pending, drift
 
     def status(self):
@@ -538,7 +637,7 @@ class Book:
                 "pending_exports": pending[:20], "pending_export_count": len(pending),
                 "changed_exports": drift[:20], "changed_export_count": len(drift),
                 "sources": sources["total"], "recent_sources": sources["results"],
-                "more_sources": sources["next_offset"] < sources["total"]}
+                "more_sources": sources["next_offset"] < sources["total"], "integrity": self._integrity_report()}
 
     def _external_snapshot(self, chapter):
         existing = self.db.execute("SELECT imported FROM chapters WHERE chapter=?", (chapter,)).fetchone()
@@ -570,13 +669,33 @@ class Book:
             if pending or drift:
                 fail("exports_unresolved", "Recover exports or reconcile outside edits before writing",
                      pending=pending[:10], changed=drift[:10])
-            plan, cards = self.get_plan(chapter), self.cards()
+            plan = self.get_plan(chapter)
+            scopes = {"global"}
+            scopes.update(f"{key}:{plan[key]}" for key in ("volume", "arc", "line") if key in plan)
+            scopes.update("entity:" + eid for eid in world.resolve(self, plan.get("entities", []), plan.get("line")))
+            marks = ",".join("?" for _ in scopes)
+            pinned = {r[0] for r in self.db.execute(
+                f"SELECT id FROM card_index WHERE scope IN ({marks}) AND status='active' "
+                "AND (critical=1 OR (kind='hook' AND due<=?))", (*sorted(scopes), chapter))}
+            selected = pinned | set(plan["requires"])
+            tags = plan["tags"]
+            if tags:
+                selected.update(r[0] for r in self.db.execute(
+                    "SELECT DISTINCT i.id FROM card_tags t JOIN card_index i ON i.id=t.id "
+                    f"WHERE t.tag IN ({','.join('?' for _ in tags)}) AND i.scope IN ({marks}) "
+                    "AND i.status='active' ORDER BY i.id LIMIT 256", (*tags, *sorted(scopes))))
+            replacing = self.db.execute("SELECT receipt FROM chapters WHERE chapter=?", (chapter,)).fetchone()
+            if replacing:
+                receipt = json.loads(replacing[0])
+                if receipt.get("history_branch") or receipt.get("world_changes"):
+                    fail("history_revision_required", "Use a history branch to revise a chapter published with a global state correction")
+                selected.update(receipt.get("before", {}))
+            cards = self.cards(selected)
             last = self.meta("last_chapter")
             if chapter not in (last, last + 1):
                 fail("chapter_order", "Context supports the next chapter or revision of the latest chapter")
-            previous = self.db.execute("SELECT chapter,summary,text FROM chapters WHERE chapter<? ORDER BY chapter DESC LIMIT 1",
+            previous = self.db.execute("SELECT chapter,summary,substr(text,-600) FROM chapters WHERE chapter<? ORDER BY chapter DESC LIMIT 1",
                                        (chapter,)).fetchone()
-            replacing = self.db.execute("SELECT receipt FROM chapters WHERE chapter=?", (chapter,)).fetchone()
             if replacing:
                 receipt = json.loads(replacing[0])
                 for cid, value in receipt.get("before", {}).items():
@@ -591,7 +710,7 @@ class Book:
             if missing:
                 fail("missing_required_cards", "Plan references unknown cards", ids=missing)
             required.update(c["id"] for c in cards.values()
-                            if c["status"] == "active" and (c["critical"] or
+                            if c.get("scope", "global") in scopes and c["status"] == "active" and (c["critical"] or
                                (c["kind"] == "hook" and c["due"] is not None and c["due"] <= chapter)))
             packet = {"book_id": self.meta("id"), "revision": self.meta("revision"), "chapter": chapter,
                       "mode": "replace_last" if replacing else "next", "plan": plan,
@@ -600,13 +719,18 @@ class Book:
                       "omitted_optional_count": 0}
             if external:
                 packet.update(mode="reconcile_last", external_edit=external)
+            if any(key in plan for key in ("volume", "arc", "line", "entities", "time")):
+                packet["world"] = world.context(self, plan, chapter)
+            if self.integrity != "strict":
+                packet["integrity"] = self._integrity_report()
             tags = set(plan["tags"])
             search = dumps(plan).casefold()
             optional = [c for c in cards.values() if c["id"] not in required and c["status"] == "active"]
             def score(card):
                 return 5 * len(tags.intersection(card["tags"])) + sum(tag.casefold() in search for tag in card["tags"]) + 2 * (card["id"].casefold() in search)
             candidates = sorted((c for c in optional if score(c) > 0), key=lambda c: (-score(c), c["id"]))
-            packet["omitted_optional_count"] = len(optional)
+            active_total = self.db.execute("SELECT count(*) FROM card_index WHERE status='active'").fetchone()[0]
+            packet["omitted_optional_count"] = max(0, active_total - sum(c["status"] == "active" for c in packet["required_cards"]))
             bounded_packet(packet, budget)
             for card in candidates:
                 packet["optional_cards"].append(card)
@@ -623,16 +747,21 @@ class Book:
             self.db.rollback()
 
     def recall(self, query, budget=8000):
-        terms = text_field(query, "query", 200).casefold().split()
+        text_field(query, "query", 200)
+        result = search.query(self.db, query, limit=128)
+        cards = self.cards(item["key"] for item in result["matches"] if item["kind"] == "card")
         found = []
-        for card in self.cards().values():
-            if any(term in dumps(card).casefold() for term in terms):
-                found.append({"type": "card", **card})
-        for row in self.db.execute("SELECT chapter,summary FROM chapters ORDER BY chapter DESC"):
-            if any(term in row[1].casefold() for term in terms):
-                found.append({"type": "chapter_summary", "chapter": row[0], "summary": row[1],
-                              "path": f"chapters/{row[0]:04d}.md"})
-        packet = {"query": query, "matches": [], "total": len(found), "omitted": len(found)}
+        for item in result["matches"]:
+            if item["kind"] == "card" and item["key"] in cards:
+                found.append({"type": "card", **cards[item["key"]]})
+            else:
+                found.append({"type": item["kind"], "chapter": item["metadata"].get("chapter"),
+                              "snippet": item["snippet"], "source_sha256": item["source_sha256"],
+                              "path": f"chapters/{int(item['key']):04d}.md" if item["kind"] in ("chapter", "chapter_summary") else None})
+        packet = {"query": query, "matches": [], "total": len(found), "omitted": len(found),
+                  "complete": result["complete"], "no_match_confirmed": result["no_match_confirmed"],
+                  "truncated_reasons": result["truncated_reasons"],
+                  "total_semantics": "bounded verified matches; use a narrower query if incomplete"}
         for item in found:
             packet["matches"].append(item)
             packet["omitted"] -= 1
@@ -648,6 +777,79 @@ class Book:
     def lint(self, chapter, draft):
         return lint_text(read_text(draft), self.get_plan(chapter))
 
+    def chapter_read(self, chapter, sha=None, start=0, end=None, budget=12000):
+        integer(chapter, "chapter", 1)
+        integer(start, "start")
+        if sha is None:
+            row = self.db.execute("SELECT sha FROM chapter_state WHERE chapter=?", (chapter,)).fetchone()
+        else:
+            if not re.fullmatch(r"[0-9a-f]{64}", sha):
+                fail("invalid_input", "sha256 must be a SHA-256 digest")
+            row = self.db.execute("SELECT sha FROM chapter_state WHERE chapter=? AND sha=? UNION "
+                "SELECT sha FROM history_versions WHERE chapter=? AND sha=? LIMIT 1", (chapter, sha, chapter, sha)).fetchone()
+        if not row:
+            fail("chapter_missing", "No matching immutable chapter version in this book", chapter=chapter)
+        sha = row[0]
+        size = self.db.execute("SELECT length(text) FROM core_objects WHERE sha=?", (sha,)).fetchone()[0]
+        end = min(start + 2000, size) if end is None else integer(end, "end", 1)
+        if not start < end <= size:
+            fail("invalid_range", "Use Unicode character offsets within this chapter", characters=size)
+        text = self.db.execute("SELECT substr(text,?,?) FROM core_objects WHERE sha=?", (start+1, end-start, sha)).fetchone()[0]
+        return bounded_packet({"chapter": chapter, "source_sha256": sha, "start": start, "end": end,
+                               "characters": size, "next_start": end if end < size else None, "text": text}, budget)
+
+    def dependency_candidates(self, chapter, budget=16000):
+        packet = self.context(chapter, budget)
+        found = {("card", c["id"]): {"kind": "card", "ref": c["id"], "sha": digest(dumps(c))}
+                 for c in packet["required_cards"] + packet["optional_cards"]}
+        world_packet = packet.get("world", {})
+        for field, kind in (("entities", "entities"), ("facts", "facts"), ("propositions", "facts"),
+                            ("knowledge", "knowledge"), ("hooks", "hooks"), ("rules", "rules"),
+                            ("uses", "uses"), ("arc_steps", "arc_steps"), ("line", "lines")):
+            values = world_packet.get(field, [])
+            if values is None:
+                continue
+            if isinstance(values, dict):
+                values = [values]
+            for record in values:
+                sha = world.resolve_dependency(self, kind, record["id"])
+                if sha:
+                    key = ("world." + kind, record["id"])
+                    found[key] = {"kind": key[0], "ref": key[1], "sha": sha}
+        for key in ("previous",):
+            if packet.get(key):
+                ref = packet[key]["chapter"]
+                row = self.db.execute("SELECT sha FROM chapter_state WHERE chapter=?", (ref,)).fetchone()
+                found[("chapter", str(ref))] = {"kind": "chapter", "ref": str(ref), "sha": row[0]}
+        if packet["revision"] != self.meta("revision"):
+            fail("stale_revision", "State changed while resolving dependency candidates; retry")
+        return bounded_packet({"book_id": packet["book_id"], "revision": packet["revision"], "chapter": chapter,
+            "candidates": [found[k] for k in sorted(found)],
+            "review_required": "Select actual dependencies, add missing sources, then declare completeness with a concrete review note."}, budget)
+
+    def world_read(self, kind, rid, budget=12000):
+        if kind not in world.FIELDS or kind == "aliases":
+            fail("invalid_input", "Choose an individual world record kind; resolve aliases through entities")
+        value = world._stored(self, kind, text_field(rid, "record id", 80))
+        if value is None:
+            fail("world_reference", "Unknown world record", kind=kind, id=rid)
+        row, evidence, entities, requires = value
+        record = dict(row)
+        for field, typ in world.FIELDS[kind].items():
+            if typ == "bool":
+                record[field] = bool(record[field])
+        if evidence:
+            record["evidence"] = ({"kind": "chapter", "chapter": evidence["chapter"], "sha256": evidence["sha"], "quote": evidence["quote"]}
+                                  if evidence["mode"] == "chapter" else {"kind": "author_plan", "note": evidence["note"]})
+        if entities:
+            record["entities"] = entities
+        if kind == "rules":
+            record["requires"] = requires
+        sha = world.resolve_dependency(self, kind, rid)
+        retired = self.db.execute("SELECT retired FROM world_evidence WHERE kind=? AND record_id=?", (kind,rid)).fetchone()
+        return bounded_packet({"kind": kind, "id": rid, "record_sha256": sha, "evidence_current": sha is not None,
+                               "retired": bool(retired[0]) if retired else False, "payload": {kind: [record]}}, budget)
+
     def prepare(self, chapter, draft, reconcile=False, budget=16000):
         # Context captures a consistent plan/revision and checks recovery/replace
         # boundaries. Later changes are rejected by commit's existing fences.
@@ -662,9 +864,12 @@ class Book:
                             "issues": [{"severity": "blocker", "issue": "尚未完成语义审查；填写观察与引文并处理实际问题后移除此占位项。"}]}}
         if reconcile:
             delta["external_sha256"] = packet["external_edit"]["sha256"]
-        return bounded_packet({"mode": packet["mode"], "lint": lint, "delta": delta,
+        result = {"mode": packet["mode"], "lint": lint, "delta": delta,
                 "ready_to_commit": False,
-                "next": "Complete the summary, evidence-based review and state changes; do not change identity or hash fields."}, budget)
+                "next": "Complete the summary, evidence-based review and state changes; do not change identity or hash fields."}
+        if "world" in packet:
+            result["world_check"] = world.check(self, {**packet["plan"], "chapter": chapter})
+        return bounded_packet(result, budget)
 
     def validate_delta(self, text, raw):
         raw = object_value(raw, "delta")
@@ -702,6 +907,8 @@ class Book:
                 fail("invalid_evidence", "State change quote is absent from the draft", card=change["id"])
         if len(set(ids)) != len(ids):
             fail("duplicate_id", "Each card can change once per transaction")
+        if "world_changes" in raw:
+            object_value(raw["world_changes"], "delta.world_changes")
         return raw
 
     def commit(self, chapter, draft, raw, replace_last=False, accept_external=False):
@@ -744,20 +951,24 @@ class Book:
                 check = lint_text(text, plan)
                 if not check["ok"]:
                     fail("lint_failed", "Draft fails deterministic checks", lint=check)
-                before_state = self.cards()
+                previous = json.loads(existing["receipt"]) if replace_last else {}
+                if previous.get("history_branch") or previous.get("world_changes"):
+                    fail("history_revision_required", "Use a history branch for this revision")
+                touched = set(plan["requires"]) | {c["id"] for c in raw["changes"]} | set(previous.get("before", {}))
+                before_state = self.cards(touched)
                 if replace_last:
-                    previous = json.loads(existing["receipt"])
                     for cid, value in previous["before"].items():
                         if before_state.get(cid) != previous["after"].get(cid):
                             fail("revised_state_conflict", "Card changed since last chapter; reconcile first", card=cid)
                         if value is None:
-                            self.db.execute("DELETE FROM cards WHERE id=?", (cid,))
+                            self.delete_card(cid)
                         else:
                             self.put_card(value)
-                state = self.cards()
+                state = self.cards(touched)
                 missing = sorted(set(plan["requires"]) - state.keys())
                 if missing:
                     fail("missing_required_cards", "Plan references unknown cards", ids=missing)
+                dependency_metadata = history.validate_commit_dependencies(self, raw, chapter)
                 before, after = {}, {}
                 for change in raw["changes"]:
                     cid = change["id"]
@@ -768,15 +979,25 @@ class Book:
                     self.put_card(card)
                     after[cid] = card
                 receipt = {"input": raw, "before": before, "after": after, "lint": check}
+                receipt.update(dependency_metadata)
                 self.queue_artifact(f"chapters/{chapter:04d}.md", text,
                                     accepted_sha=raw["external_sha256"] if accept_external else None)
-                self.db.execute("INSERT INTO chapters VALUES (?,?,?,?,?,?,0) ON CONFLICT(chapter) DO UPDATE SET "
-                                "text=excluded.text,sha=excluded.sha,summary=excluded.summary,receipt=excluded.receipt,input_hash=excluded.input_hash",
+                self.db.execute("INSERT INTO chapters VALUES (?,?,?,?,?,?,0)",
                                 (chapter, text, digest(text), raw["summary"], dumps(receipt), input_hash))
+                if raw.get("world_changes"):
+                    changes = world.apply_in_transaction(self, raw["world_changes"])
+                    receipt["world_changes"] = changes
+                    checked_world = world.check_transition(self, plan, chapter, raw["world_changes"])
+                    if not checked_world["ok"]:
+                        fail("world_constraint", "Resolve recorded rule/resource conflicts in the actual chapter changes", checks=checked_world)
+                    receipt["world_checks"] = checked_world
+                    self.db.execute("UPDATE chapters SET receipt=? WHERE chapter=?", (dumps(receipt), chapter))
+                self.index_chapter(chapter, text, raw["summary"])
                 self.set_meta("last_chapter", chapter)
                 self.event("replace_chapter" if replace_last else "commit_chapter",
                            {"chapter": chapter, "text": text, "receipt": receipt,
                             "previous": dict(existing) if existing else None})
+                history.on_commit(self, chapter, plan, receipt, text, digest(text))
             # Construct the durable receipt from this transaction, before another
             # writer can acquire an exclusive lock and block post-commit reads.
             revision = self.meta("revision")
@@ -796,9 +1017,11 @@ class Book:
             self.queue_artifact(f"chapters/{chapter:04d}.md", text)
             self.db.execute("INSERT INTO chapters VALUES (?,?,?,?,?,?,1)",
                             (chapter, text, digest(text), summary, dumps(receipt), digest(dumps(receipt))))
+            self.index_chapter(chapter, text, summary)
             self.set_meta("last_chapter", chapter)
             self.set_meta("imported_through", chapter)
             self.event("adopt", {"chapter": chapter, "receipt": receipt, "summary": summary})
+            history.on_commit(self, chapter, {}, receipt, text, digest(text))
             revision = self.meta("revision")
         return self.delivery({"adopted_through": chapter, "revision": revision,
                               "quality": "imported_unverified"})
@@ -809,18 +1032,35 @@ class Book:
             fail("source_missing", "Unknown source id", source=sid)
         return row
 
-    def _complete_noncontent_chunks(self, sid, text):
-        """Called inside the caller's transaction; preserve all saved chunk boundaries."""
-        rows = self.db.execute(
-            "SELECT ordinal,start,end,sha FROM chunks WHERE source=? AND analysis IS NULL ORDER BY ordinal",
-            (sid,)).fetchall()
+    def source_info(self, sid):
+        row = self.db.execute("SELECT s.id,s.name,s.coverage,s.encoding,t.characters FROM sources s "
+                              "JOIN source_stats t ON t.source=s.id WHERE s.id=?", (sid,)).fetchone()
+        if not row:
+            fail("source_missing", "Unknown source id", source=sid)
+        return row
+
+    def _source_slice(self, sid, start, end):
+        return self.db.execute("SELECT substr(text,?,?) FROM sources WHERE id=?", (start+1, end-start, sid)).fetchone()[0]
+
+    def _complete_noncontent_chunks(self, sid, text=None):
+        # Classify new/legacy chunks once. Later calls inspect only known whitespace
+        # candidates, not every pending narrative chunk or the whole source in Python.
+        unclassified = self.db.execute("SELECT c.ordinal,c.start,c.end FROM chunks c LEFT JOIN chunk_classification k "
+            "ON k.source=c.source AND k.ordinal=c.ordinal WHERE c.source=? AND k.ordinal IS NULL", (sid,)).fetchall()
+        if unclassified:
+            if text is None:
+                text = self.source(sid)["text"]
+            self.db.executemany("INSERT INTO chunk_classification VALUES (?,?,?)",
+                ((sid, r["ordinal"], int(not text[r["start"]:r["end"]].strip())) for r in unclassified))
+        rows = self.db.execute("SELECT c.ordinal,c.start,c.end,c.sha FROM chunk_classification k JOIN chunks c "
+            "ON c.source=k.source AND c.ordinal=k.ordinal WHERE k.source=? AND k.noncontent=1 "
+            "AND c.analysis IS NULL ORDER BY c.ordinal", (sid,)).fetchall()
         for row in rows:
-            chunk = text[row["start"]:row["end"]]
+            chunk = text[row["start"]:row["end"]] if text is not None else self._source_slice(sid,row["start"],row["end"])
             if not chunk or chunk.strip():
                 continue
             if digest(chunk) != row["sha"]:
-                fail("source_hash_mismatch", "Saved whitespace chunk does not match its source hash",
-                     source=sid, chunk=row["ordinal"])
+                fail("source_hash_mismatch", "Saved whitespace chunk does not match its source hash", source=sid, chunk=row["ordinal"])
             analysis = {"kind": "non_content", "chunk_sha256": row["sha"],
                         "summary": "此块仅含空白字符；保留原文范围，不生成剧情或文学结论。", "findings": []}
             self.db.execute("UPDATE chunks SET analysis=? WHERE source=? AND ordinal=? AND analysis IS NULL",
@@ -845,6 +1085,7 @@ class Book:
                 return {"source": sid, "idempotent": True, **self.coverage(sid)}
             self.db.execute("INSERT INTO sources VALUES (?,?,?,?,?)",
                             (sid, str(Path(file).resolve()), text, coverage, encoding))
+            self.db.execute("UPDATE source_stats SET characters=? WHERE source=?", (len(text), sid))
             chunks = split_source(text, chunk_chars)
             self.db.executemany("INSERT INTO chunks(source,ordinal,start,end,title,sha) VALUES (?,?,?,?,?,?)",
                                 [(sid, i, start, end, title, digest(text[start:end]))
@@ -855,10 +1096,10 @@ class Book:
         return {"source": sid, "idempotent": False, **status}
 
     def coverage(self, sid):
-        source = self.source(sid)
-        rows = self.db.execute("SELECT ordinal,start,end,analysis FROM chunks WHERE source=? ORDER BY ordinal", (sid,)).fetchall()
+        source = self.source_info(sid)
+        rows = self.db.execute("SELECT ordinal,start,end,CASE WHEN analysis IS NULL THEN NULL ELSE 1 END FROM chunks WHERE source=? ORDER BY ordinal", (sid,)).fetchall()
         missing = [r[0] for r in rows if r[3] is None]
-        contiguous = bool(rows) and rows[0][1] == 0 and rows[-1][2] == len(source["text"])
+        contiguous = bool(rows) and rows[0][1] == 0 and rows[-1][2] == source["characters"]
         contiguous = contiguous and all(a[2] == b[1] for a, b in zip(rows, rows[1:]))
         report_path = f".story/analysis/{sid}/report.md"
         finalized = self.db.execute("SELECT 1 FROM artifacts WHERE path=?", (report_path,)).fetchone() is not None
@@ -890,13 +1131,13 @@ class Book:
     def next_chunks(self, sid, limit=2, budget=22000):
         integer(limit, "limit", 1)
         with self.transaction():
-            source = self.source(sid)
-            self._complete_noncontent_chunks(sid, source["text"])
+            source = self.source_info(sid)
+            self._complete_noncontent_chunks(sid)
             rows = self.db.execute("SELECT * FROM chunks WHERE source=? AND analysis IS NULL ORDER BY ordinal LIMIT ?", (sid, min(limit, 50))).fetchall()
             packet = {"source": sid, "source_coverage": source["coverage"], "chunks": [], "pending": self.coverage(sid)["pending"]}
             for row in rows:
                 item = {k: row[k] for k in ("ordinal", "start", "end", "title", "sha")}
-                item["text"] = source["text"][row["start"]:row["end"]]
+                item["text"] = self._source_slice(sid, row["start"], row["end"])
                 packet["chunks"].append(item)
                 try:
                     bounded_packet(packet, budget)
@@ -908,12 +1149,12 @@ class Book:
             return bounded_packet(packet, budget)
 
     def source_read(self, sid, start, end, budget):
-        source = self.source(sid)
+        source = self.source_info(sid)
         integer(start, "start")
         integer(end, "end", 1)
-        if not start < end <= len(source["text"]):
+        if not start < end <= source["characters"]:
             fail("invalid_range", "Use Unicode character offsets: 0 <= start < end <= source length")
-        return bounded_packet({"source": sid, "start": start, "end": end, "text": source["text"][start:end]}, budget)
+        return bounded_packet({"source": sid, "start": start, "end": end, "text": self._source_slice(sid, start, end)}, budget)
 
     def record(self, sid, ordinal, payload, replace=False):
         integer(ordinal, "chunk", 1)
@@ -924,7 +1165,7 @@ class Book:
                 fail("chunk_mismatch", "Analysis chunk must match the requested chunk",
                      expected=ordinal, actual=embedded)
         with self.transaction():
-            source = self.source(sid)
+            self.source_info(sid)
             row = self.db.execute("SELECT * FROM chunks WHERE source=? AND ordinal=?", (sid, ordinal)).fetchone()
             if not row:
                 fail("chunk_missing", "Unknown chunk number")
@@ -934,7 +1175,7 @@ class Book:
             findings = payload.get("findings")
             if not isinstance(findings, list) or not 1 <= len(findings) <= 30:
                 fail("invalid_input", "Analysis requires 1 to 30 evidence-backed findings")
-            text = source["text"][row["start"]:row["end"]]
+            text = self._source_slice(sid, row["start"], row["end"])
             for finding in findings:
                 object_value(finding, "finding")
                 text_field(finding.get("claim"), "finding.claim", 1200)
@@ -959,7 +1200,7 @@ class Book:
         return result
 
     def findings(self, sid, offset=0, limit=10, budget=20000):
-        self.source(sid)
+        self.source_info(sid)
         integer(offset, "offset")
         integer(limit, "limit", 1)
         rows = self.db.execute("SELECT ordinal,analysis FROM chunks WHERE source=? AND analysis IS NOT NULL ORDER BY ordinal LIMIT ? OFFSET ?",
@@ -1044,6 +1285,7 @@ def parser():
     def command(name, help_text, budget=None):
         s = sub.add_parser(name, help=help_text)
         s.add_argument("--book", required=True, help="Explicit, isolated book directory")
+        s.add_argument("--integrity", choices=("strict", "local"), default="strict", help="strict hashes all exports; local verifies recent/queued files and reports unverified archives")
         if budget:
             s.add_argument("--budget-bytes", type=int, default=budget, help="Hard limit on compact JSON UTF-8 bytes")
         return s
@@ -1051,6 +1293,17 @@ def parser():
     s.add_argument("--title", required=True)
     s.add_argument("--kind", choices=("long", "short", "analysis"), default="long")
     command("status", "Compact checkpoint and export health")
+    command("migrate", "Explicit schema upgrade with a consistent rollback backup")
+    command("audit", "Hash every managed export and report conflicts")
+    s = command("world-save", "Save structured story state with cited evidence")
+    s.add_argument("--input", required=True)
+    s.add_argument("--expect", type=int, required=True)
+    s = command("world-check", "Check recorded rules, knowledge and continuity", 16000)
+    s.add_argument("--chapter", type=int, required=True)
+    s = command("world-read", "Inspect one stored narrative record, including stale evidence for reviewed repair", 12000)
+    s.add_argument("--kind", choices=sorted(set(world.FIELDS)-{"aliases"}), required=True)
+    s.add_argument("--id", required=True)
+    history.register_parser(sub, command)
     s = command("export", "Repair exports without replacing outside edits")
     s.add_argument("--safe-only", action="store_true",
                    help="Recover known versions and missing files while leaving conflicting paths untouched")
@@ -1070,8 +1323,15 @@ def parser():
     s.add_argument("--chapter", type=int, required=True)
     s.add_argument("--draft")
     s.add_argument("--input")
-    s = command("recall", "Search cards and chapter summaries; read exact prose separately", 8000)
+    s = command("recall", "Bounded literal substring search of cards, summaries and chapter prose", 8000)
     s.add_argument("--query", required=True)
+    s = command("chapter-read", "Read a bounded excerpt of a current or immutable historical chapter", 12000)
+    s.add_argument("--chapter", type=int, required=True)
+    s.add_argument("--sha256")
+    s.add_argument("--start", type=int, default=0)
+    s.add_argument("--end", type=int)
+    s = command("dependencies", "Resolve candidate evidence hashes for a reviewed chapter dependency declaration", 16000)
+    s.add_argument("--chapter", type=int, required=True)
     s = command("sources", "Find saved source IDs and analysis checkpoints after a new session", 12000)
     s.add_argument("--offset", type=int, default=0)
     s.add_argument("--limit", type=int, default=10)
@@ -1116,8 +1376,21 @@ def run(args):
         return TEMPLATES[args.kind]
     if cmd == "init":
         return Book.create(args.book, args.title, args.kind)
-    book = Book(args.book)
+    if cmd == "migrate":
+        return storage.migrate(CORE, args.book)
+    book = Book(args.book, integrity=getattr(args, "integrity", "strict"))
     try:
+        if cmd.startswith("history-") or cmd.startswith("cache-"):
+            return history.run(book, args)
+        if cmd == "world-save":
+            return world.save(book, read_json(args.input), args.expect)
+        if cmd == "world-check":
+            return bounded_packet(world.check(book, {**book.get_plan(args.chapter), "chapter": args.chapter}), args.budget_bytes)
+        if cmd == "world-read":
+            return book.world_read(args.kind, args.id, args.budget_bytes)
+        if cmd == "audit":
+            book.integrity = "strict"
+            return book.export(safe_only=True)
         if cmd == "status":
             return book.status()
         if cmd == "export":
@@ -1135,6 +1408,10 @@ def run(args):
                                   args.budget_bytes)
         if cmd == "recall":
             return book.recall(args.query, args.budget_bytes)
+        if cmd == "chapter-read":
+            return book.chapter_read(args.chapter, args.sha256, args.start, args.end, args.budget_bytes)
+        if cmd == "dependencies":
+            return book.dependency_candidates(args.chapter, args.budget_bytes)
         if cmd == "sources":
             return book.list_sources(args.offset, args.limit, args.budget_bytes)
         if cmd == "lint":
@@ -1179,6 +1456,22 @@ def main():
     except (OSError, ValueError, sqlite3.Error, LookupError) as error:
         print(dumps({"ok": False, "error": "io_or_input_error", "message": str(error)}), file=sys.stderr)
         return 2
+
+
+def _load_extension(name):
+    spec = importlib.util.spec_from_file_location("story_codex_" + name, Path(__file__).with_name("story_" + name + ".py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+storage, search, world, history = (_load_extension(name) for name in ("storage", "search", "world", "history"))
+CORE = SimpleNamespace(**globals())
+for extension in (search, world, history):
+    extension.inject(CORE)
+TEMPLATES["world"] = world.template()
+for world_kind in world.FIELDS:
+    TEMPLATES["world-" + world_kind] = world.template(world_kind)
 
 
 if __name__ == "__main__":

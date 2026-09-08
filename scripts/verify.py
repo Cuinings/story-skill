@@ -334,6 +334,7 @@ def verify(archive=None, validator=None, validator_python=None, timeout=300):
         check("unit_tests", lambda: check_unittest(temp / "unittest.json", timeout))
         check("cli_smoke", lambda: check_smoke(temp / "smoke.json", timeout))
         check("chinese_manuscript_replay", lambda: check_chinese(temp / "chinese.json", timeout))
+        check("long_form_cli_replay", lambda: check_long_form(temp / "long-form.json", timeout))
         if validator:
             check("skill_frontmatter", lambda: run(
                 [str(validator_python or sys.executable), "-B", "-X", "utf8",
@@ -342,6 +343,7 @@ def verify(archive=None, validator=None, validator_python=None, timeout=300):
             report["skill_frontmatter"] = {"status": "skipped", "reason": "No --skill-validator supplied"}
         check("actual_package_install", lambda: check_install(temp, timeout))
         check("benchmark_candidate_file_hashes", check_benchmark)
+        check("scale_and_migration_evidence", check_recorded_probes)
         check("local_markdown_links", check_markdown_links)
         check("package", lambda: check_archive(select_archive(archive)))
         check("skill_input_stability", lambda: {"status": "passed" if (
@@ -349,6 +351,37 @@ def verify(archive=None, validator=None, validator_python=None, timeout=300):
             "scope": "Skill files must remain unchanged throughout verification"})
     report["ok"] = all(result["status"] == "passed" for result in checks)
     return report
+
+
+def check_long_form(output, timeout):
+    result = run(PYTHON + [str(ROOT / "scripts/long_acceptance.py"), "--output", str(output)], timeout)
+    if output.is_file():
+        evidence = json.loads(output.read_text(encoding="utf-8"))
+        result["evidence"] = evidence
+        if not evidence.get("ok") or not evidence.get("runtime_stable"):
+            result["status"] = "failed"
+    else:
+        result["status"] = "failed"
+    return result
+
+
+def check_recorded_probes():
+    current = {p.name: digest(p) for p in (SKILL / "scripts").glob("*.py")}
+    results = []
+    for filename, key in (("scaling-v0.3.json", "runtime_files"), ("migration-v0.3.json", "runtime")):
+        path = ROOT / "benchmarks/results" / filename
+        evidence = json.loads(path.read_text(encoding="utf-8"))
+        valid = evidence.get("ok") is True and evidence.get(key) == current
+        if filename.startswith("scaling"):
+            coverage = {(c["chapters"], c["cards"], c["integrity_mode"]) for c in evidence.get("cases", []) if c.get("ok") is True}
+            valid = valid and evidence.get("runtime_stable") is True and {
+                (400,2000,"strict"),(400,2000,"local"),(4000,20000,"strict"),(4000,20000,"local")} <= coverage
+        else:
+            valid = valid and evidence.get("original_tree_unchanged") is True and len(evidence.get("books", [])) == 3
+        results.append({"path": str(path), "sha256": digest(path), "matches_current_runtime": evidence.get(key) == current,
+                        "status": "passed" if valid else "failed"})
+    return {"status": "passed" if all(r["status"] == "passed" for r in results) else "failed", "reports": results,
+            "scope": "Stored probe success, required capacity sizes and current runtime hashes; these probes are not rerun by verify.py"}
 
 
 def main():

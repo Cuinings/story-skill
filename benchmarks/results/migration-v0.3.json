@@ -1,0 +1,48 @@
+{
+  "version": "0.3.0",
+  "scope": "Existing reviewed Chinese fixtures copied to isolated TEMP; original books unchanged",
+  "runtime": {
+    "story.py": "b390723cd2de0cd06e269dc337dc4e531d857e5449ffa24e3992d8cf9d52b062",
+    "story_storage.py": "f3b74767ee90ae34a0dd4390968ef0731b6c2128ccb609d42a707d11f902aeeb",
+    "story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
+    "story_world.py": "ea14f42d8defcb6a59f9d60499bad9705bc5966b50d48296b11c71895e8e3c92",
+    "story_history.py": "0ac81506a47ece5b33da91db2000a8ff5c935a9afb9f4243abb6230be381548f"
+  },
+  "books": [
+    {
+      "title": "渡口夜账",
+      "book_id": "84608a48-85a3-49e2-8560-bebb6797a209",
+      "revision": 10,
+      "last_chapter": 3,
+      "sources": 0,
+      "migrated": true,
+      "original_manuscript_and_summary_preserved": true,
+      "exports_clean": true,
+      "old_runtime_rollback_copy_verified": true
+    },
+    {
+      "title": "留半寸",
+      "book_id": "ff3d3682-031c-45e3-94fe-f589744c4633",
+      "revision": 3,
+      "last_chapter": 1,
+      "sources": 0,
+      "migrated": true,
+      "original_manuscript_and_summary_preserved": true,
+      "exports_clean": true,
+      "old_runtime_rollback_copy_verified": true
+    },
+    {
+      "title": "留半寸_拆文",
+      "book_id": "cd588c55-5bac-4f19-adad-937782bb3394",
+      "revision": 4,
+      "last_chapter": 0,
+      "sources": 1,
+      "migrated": true,
+      "original_manuscript_and_summary_preserved": true,
+      "exports_clean": true,
+      "old_runtime_rollback_copy_verified": true
+    }
+  ],
+  "original_tree_unchanged": true,
+  "ok": true
+}

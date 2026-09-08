@@ -210,7 +210,7 @@ class ReceiptLockTests(unittest.TestCase):
         before_revision = self.book.meta("revision")
         before_cards = self.book.cards()
         before_events = self.book.db.execute("SELECT count(*) FROM events").fetchone()[0]
-        self.book.db.execute("CREATE TRIGGER fail_chapter BEFORE INSERT ON chapters "
+        self.book.db.execute("CREATE TRIGGER fail_chapter BEFORE INSERT ON chapter_state "
                              "BEGIN SELECT RAISE(ABORT, 'injected chapter SQL failure'); END")
         delta = self.delta()
         delta["changes"] = [{"id": "hero", "text": "沈禾已交出钥匙。", "quote": QUOTE}]

@@ -1,0 +1,1355 @@
+{
+  "schema": 3,
+  "date": "2026-09-08T07:12:00.161592+00:00",
+  "ok": true,
+  "runtime_version": "0.3.0",
+  "runtime_sha256": "b390723cd2de0cd06e269dc337dc4e531d857e5449ffa24e3992d8cf9d52b062",
+  "runtime_files": {
+    "story.py": "b390723cd2de0cd06e269dc337dc4e531d857e5449ffa24e3992d8cf9d52b062",
+    "story_history.py": "0ac81506a47ece5b33da91db2000a8ff5c935a9afb9f4243abb6230be381548f",
+    "story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
+    "story_storage.py": "f3b74767ee90ae34a0dd4390968ef0731b6c2128ccb609d42a707d11f902aeeb",
+    "story_world.py": "ea14f42d8defcb6a59f9d60499bad9705bc5966b50d48296b11c71895e8e3c92"
+  },
+  "python_version": "3.14.6",
+  "sqlite_version": "3.50.4",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "baseline": {
+    "path": "benchmarks/results/scaling.json",
+    "sha256": "0e57ddafa8ffa3db317419e2afe3f9d233f393d3c98dd991f3ba53f651c937a8"
+  },
+  "method": "Synthetic repeated 2500-character chapters and unrelated cards. Direct state/view and index fixture inserts, one measured warm run per operation, size and integrity mode. Each mode starts from a fresh copy of the same fixture. Not a complete event history, cold-disk benchmark, real ten-million-character novel, model test or literary-quality validation.",
+  "measurement_scope": {
+    "reads": "Path.read_bytes application reads, not physical disk IO; database-native reads are not included",
+    "memory": "tracemalloc peak Python allocations during each operation; excludes SQLite native allocations, OS file cache and RSS",
+    "sql": "SQLite trace callbacks, including repeated trigger callbacks; not VM step counts or decoded row counts",
+    "decodes": "actual json.loads calls and input bytes; decoded_card_objects counts top-level card-shaped objects",
+    "search": "actual search.query counters, including candidate/text bounds and completeness",
+    "timing": "Single warm runs with instrumentation overhead and possible CPU contention from concurrent local tests. Fixture setup, cloning, CLI corroboration and report serialization are excluded from operation timings."
+  },
+  "fixtures": [
+    {
+      "chapters": 400,
+      "cards": 2000,
+      "chapter_body_sha256": "420e95605813533ecdb05bef2b01d972400f26bcbe660d4932d697891acfdb72",
+      "chapter_unique_body_count": 1,
+      "database_bytes": 15368192,
+      "search_documents": 2800,
+      "search_postings": 349112,
+      "core_objects": 2401
+    },
+    {
+      "chapters": 4000,
+      "cards": 20000,
+      "chapter_body_sha256": "420e95605813533ecdb05bef2b01d972400f26bcbe660d4932d697891acfdb72",
+      "chapter_unique_body_count": 1,
+      "database_bytes": 148754432,
+      "search_documents": 28000,
+      "search_postings": 3504486,
+      "core_objects": 24001
+    }
+  ],
+  "cases": [
+    {
+      "chapters": 400,
+      "manuscript_characters": 1000000,
+      "cards": 2000,
+      "integrity_mode": "strict",
+      "operations": {
+        "status": {
+          "ok": true,
+          "elapsed_seconds": 0.629571,
+          "python_peak_allocated_bytes": 174686,
+          "file_reads": 400,
+          "file_bytes_read": 3000000,
+          "manuscript_file_reads": 400,
+          "manuscript_bytes_read": 3000000,
+          "json_decode_calls": 7,
+          "json_decode_input_bytes": 93,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 13,
+          "sql_callbacks_by_verb": {
+            "SELECT": 13
+          },
+          "search_calls": [],
+          "output_json_bytes": 705,
+          "integrity": {
+            "mode": "strict",
+            "verified_file_count": 400,
+            "unverified_archive_count": 0,
+            "last_full_audit_revision": null,
+            "full_book_verified": true,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          }
+        },
+        "context": {
+          "ok": true,
+          "elapsed_seconds": 1.371709,
+          "python_peak_allocated_bytes": 146252,
+          "file_reads": 400,
+          "file_bytes_read": 3000000,
+          "manuscript_file_reads": 400,
+          "manuscript_bytes_read": 3000000,
+          "json_decode_calls": 5,
+          "json_decode_input_bytes": 510,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 13,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 11,
+            "ROLLBACK": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 2655,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 16000,
+            "used": 2590
+          }
+        },
+        "prepare": {
+          "ok": true,
+          "elapsed_seconds": 2.33679,
+          "python_peak_allocated_bytes": 186390,
+          "file_reads": 401,
+          "file_bytes_read": 3007500,
+          "manuscript_file_reads": 400,
+          "manuscript_bytes_read": 3000000,
+          "json_decode_calls": 5,
+          "json_decode_input_bytes": 510,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 13,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 11,
+            "ROLLBACK": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 1328,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 16000,
+            "used": 1252
+          }
+        },
+        "recall_exact_id": {
+          "ok": true,
+          "elapsed_seconds": 0.462043,
+          "python_peak_allocated_bytes": 644368,
+          "file_reads": 0,
+          "file_bytes_read": 0,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0,
+          "json_decode_calls": 2,
+          "json_decode_input_bytes": 218,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 1035,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 1033,
+            "ROLLBACK": 1
+          },
+          "search_calls": [
+            {
+              "query": "c00000",
+              "metrics": {
+                "query_grams": 2,
+                "intersection_grams": 2,
+                "seed_document_frequency": 1023,
+                "seed_postings_read": 1023,
+                "posting_candidates_examined": 1023,
+                "intersection_candidates": 1019,
+                "documents_verified": 1019,
+                "unique_sources_read": 1019,
+                "source_chars_read": 168048
+              },
+              "scope": {
+                "indexed_documents": 2800,
+                "kinds": {
+                  "card": 2000,
+                  "chapter": 400,
+                  "chapter_summary": 400
+                },
+                "requested_kinds": null,
+                "unindexed_sources": "not_searched"
+              },
+              "complete": true,
+              "search_complete": true,
+              "truncated_reasons": []
+            }
+          ],
+          "output_json_bytes": 511,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 8000,
+            "used": 472
+          }
+        },
+        "chinese_substring_search": {
+          "ok": true,
+          "elapsed_seconds": 0.001755,
+          "python_peak_allocated_bytes": 11259,
+          "file_reads": 0,
+          "file_bytes_read": 0,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0,
+          "json_decode_calls": 1,
+          "json_decode_input_bytes": 15,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 8,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 6,
+            "ROLLBACK": 1
+          },
+          "search_calls": [
+            {
+              "query": "江棠",
+              "metrics": {
+                "query_grams": 1,
+                "intersection_grams": 1,
+                "seed_document_frequency": 1,
+                "seed_postings_read": 1,
+                "posting_candidates_examined": 1,
+                "intersection_candidates": 1,
+                "documents_verified": 1,
+                "unique_sources_read": 1,
+                "source_chars_read": 167
+              },
+              "scope": {
+                "indexed_documents": 2800,
+                "kinds": {
+                  "card": 2000,
+                  "chapter": 400,
+                  "chapter_summary": 400
+                },
+                "requested_kinds": null,
+                "unindexed_sources": "not_searched"
+              },
+              "complete": true,
+              "search_complete": true,
+              "truncated_reasons": []
+            }
+          ],
+          "output_json_bytes": 1765
+        },
+        "export_no_changes": {
+          "ok": true,
+          "elapsed_seconds": 1.558058,
+          "python_peak_allocated_bytes": 333184,
+          "file_reads": 800,
+          "file_bytes_read": 6000000,
+          "manuscript_file_reads": 800,
+          "manuscript_bytes_read": 6000000,
+          "json_decode_calls": 1,
+          "json_decode_input_bytes": 1,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 7,
+          "sql_callbacks_by_verb": {
+            "SELECT": 4,
+            "BEGIN": 1,
+            "INSERT": 1,
+            "COMMIT": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 333,
+          "integrity": {
+            "mode": "strict",
+            "verified_file_count": 400,
+            "unverified_archive_count": 0,
+            "last_full_audit_revision": 1,
+            "full_book_verified": true,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "exports_complete": true,
+          "scope_exports_complete": true
+        },
+        "commit_one_next_chapter": {
+          "ok": true,
+          "elapsed_seconds": 1.920015,
+          "python_peak_allocated_bytes": 497152,
+          "file_reads": 1203,
+          "file_bytes_read": 9022500,
+          "manuscript_file_reads": 1202,
+          "manuscript_bytes_read": 9015000,
+          "json_decode_calls": 12,
+          "json_decode_input_bytes": 921,
+          "decoded_card_objects": 3,
+          "sql_statement_callbacks": 198,
+          "sql_callbacks_by_verb": {
+            "SELECT": 24,
+            "BEGIN": 3,
+            "INSERT": 162,
+            "SAVEPOINT": 2,
+            "RELEASE": 2,
+            "DELETE": 1,
+            "COMMIT": 3,
+            "UPDATE": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 531,
+          "integrity": {
+            "mode": "strict",
+            "verified_file_count": 401,
+            "unverified_archive_count": 0,
+            "last_full_audit_revision": 2,
+            "full_book_verified": true,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "exports_complete": true,
+          "scope_exports_complete": true,
+          "committed": true
+        }
+      },
+      "ok": true,
+      "cli_status": {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "D:\\Developer\\WorkSpace\\story-skill\\.agents\\skills\\story-codex\\scripts\\story.py",
+          "status",
+          "--book",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-scale-v03-4tkyphbj\\case-0-strict",
+          "--integrity",
+          "strict"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 0.279064,
+        "stderr": "",
+        "instrumentation": "separate process; no Python allocation/read/SQL counters attached",
+        "ok": true,
+        "integrity": {
+          "full_book_verified": true,
+          "last_full_audit_revision": null,
+          "mode": "strict",
+          "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+          "unverified_archive_count": 0,
+          "verified_file_count": 400
+        }
+      },
+      "context_output_bytes": 2590,
+      "required_card_overload": {
+        "expected_error_observed": true,
+        "error": "budget_exceeded",
+        "details": {
+          "minimum_bytes": 50389,
+          "budget_bytes": 16000
+        },
+        "measurement": {
+          "ok": false,
+          "error": {
+            "type": "StoryError",
+            "message": "Required content cannot fit; increase the budget or narrow the range",
+            "code": "budget_exceeded",
+            "details": {
+              "minimum_bytes": 50389,
+              "budget_bytes": 16000
+            }
+          },
+          "elapsed_seconds": 0.578894,
+          "python_peak_allocated_bytes": 310204,
+          "file_reads": 401,
+          "file_bytes_read": 3007500,
+          "manuscript_file_reads": 401,
+          "manuscript_bytes_read": 3007500,
+          "json_decode_calls": 107,
+          "json_decode_input_bytes": 50144,
+          "decoded_card_objects": 101,
+          "sql_statement_callbacks": 13,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 11,
+            "ROLLBACK": 1
+          },
+          "search_calls": []
+        }
+      },
+      "overload_cleanup": {
+        "cards": 2000,
+        "indexed_cards": 2000,
+        "ok": true
+      }
+    },
+    {
+      "chapters": 400,
+      "manuscript_characters": 1000000,
+      "cards": 2000,
+      "integrity_mode": "local",
+      "operations": {
+        "status": {
+          "ok": true,
+          "elapsed_seconds": 0.004998,
+          "python_peak_allocated_bytes": 16261,
+          "file_reads": 1,
+          "file_bytes_read": 7500,
+          "manuscript_file_reads": 1,
+          "manuscript_bytes_read": 7500,
+          "json_decode_calls": 8,
+          "json_decode_input_bytes": 96,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 14,
+          "sql_callbacks_by_verb": {
+            "SELECT": 14
+          },
+          "search_calls": [],
+          "output_json_bytes": 704,
+          "integrity": {
+            "mode": "local",
+            "verified_file_count": 1,
+            "unverified_archive_count": 399,
+            "last_full_audit_revision": null,
+            "full_book_verified": false,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          }
+        },
+        "context": {
+          "ok": true,
+          "elapsed_seconds": 0.009089,
+          "python_peak_allocated_bytes": 21557,
+          "file_reads": 1,
+          "file_bytes_read": 7500,
+          "manuscript_file_reads": 1,
+          "manuscript_bytes_read": 7500,
+          "json_decode_calls": 6,
+          "json_decode_input_bytes": 513,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 16,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 14,
+            "ROLLBACK": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 2902,
+          "integrity": {
+            "mode": "local",
+            "verified_file_count": 1,
+            "unverified_archive_count": 399,
+            "last_full_audit_revision": null,
+            "full_book_verified": false,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 16000,
+            "used": 2824
+          }
+        },
+        "prepare": {
+          "ok": true,
+          "elapsed_seconds": 0.0525,
+          "python_peak_allocated_bytes": 186118,
+          "file_reads": 2,
+          "file_bytes_read": 15000,
+          "manuscript_file_reads": 1,
+          "manuscript_bytes_read": 7500,
+          "json_decode_calls": 6,
+          "json_decode_input_bytes": 513,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 16,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 14,
+            "ROLLBACK": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 1328,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 16000,
+            "used": 1252
+          }
+        },
+        "recall_exact_id": {
+          "ok": true,
+          "elapsed_seconds": 0.170914,
+          "python_peak_allocated_bytes": 493048,
+          "file_reads": 0,
+          "file_bytes_read": 0,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0,
+          "json_decode_calls": 2,
+          "json_decode_input_bytes": 218,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 1035,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 1033,
+            "ROLLBACK": 1
+          },
+          "search_calls": [
+            {
+              "query": "c00000",
+              "metrics": {
+                "query_grams": 2,
+                "intersection_grams": 2,
+                "seed_document_frequency": 1023,
+                "seed_postings_read": 1023,
+                "posting_candidates_examined": 1023,
+                "intersection_candidates": 1019,
+                "documents_verified": 1019,
+                "unique_sources_read": 1019,
+                "source_chars_read": 168048
+              },
+              "scope": {
+                "indexed_documents": 2800,
+                "kinds": {
+                  "card": 2000,
+                  "chapter": 400,
+                  "chapter_summary": 400
+                },
+                "requested_kinds": null,
+                "unindexed_sources": "not_searched"
+              },
+              "complete": true,
+              "search_complete": true,
+              "truncated_reasons": []
+            }
+          ],
+          "output_json_bytes": 511,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 8000,
+            "used": 472
+          }
+        },
+        "chinese_substring_search": {
+          "ok": true,
+          "elapsed_seconds": 0.000615,
+          "python_peak_allocated_bytes": 10140,
+          "file_reads": 0,
+          "file_bytes_read": 0,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0,
+          "json_decode_calls": 1,
+          "json_decode_input_bytes": 15,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 8,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 6,
+            "ROLLBACK": 1
+          },
+          "search_calls": [
+            {
+              "query": "江棠",
+              "metrics": {
+                "query_grams": 1,
+                "intersection_grams": 1,
+                "seed_document_frequency": 1,
+                "seed_postings_read": 1,
+                "posting_candidates_examined": 1,
+                "intersection_candidates": 1,
+                "documents_verified": 1,
+                "unique_sources_read": 1,
+                "source_chars_read": 167
+              },
+              "scope": {
+                "indexed_documents": 2800,
+                "kinds": {
+                  "card": 2000,
+                  "chapter": 400,
+                  "chapter_summary": 400
+                },
+                "requested_kinds": null,
+                "unindexed_sources": "not_searched"
+              },
+              "complete": true,
+              "search_complete": true,
+              "truncated_reasons": []
+            }
+          ],
+          "output_json_bytes": 1765
+        },
+        "export_no_changes": {
+          "ok": true,
+          "elapsed_seconds": 0.001837,
+          "python_peak_allocated_bytes": 149050,
+          "file_reads": 2,
+          "file_bytes_read": 15000,
+          "manuscript_file_reads": 2,
+          "manuscript_bytes_read": 15000,
+          "json_decode_calls": 1,
+          "json_decode_input_bytes": 3,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 4,
+          "sql_callbacks_by_verb": {
+            "SELECT": 4
+          },
+          "search_calls": [],
+          "output_json_bytes": 336,
+          "integrity": {
+            "mode": "local",
+            "verified_file_count": 1,
+            "unverified_archive_count": 399,
+            "last_full_audit_revision": null,
+            "full_book_verified": false,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "exports_complete": null,
+          "scope_exports_complete": true
+        },
+        "commit_one_next_chapter": {
+          "ok": true,
+          "elapsed_seconds": 0.086289,
+          "python_peak_allocated_bytes": 316561,
+          "file_reads": 4,
+          "file_bytes_read": 30000,
+          "manuscript_file_reads": 3,
+          "manuscript_bytes_read": 22500,
+          "json_decode_calls": 13,
+          "json_decode_input_bytes": 926,
+          "decoded_card_objects": 3,
+          "sql_statement_callbacks": 196,
+          "sql_callbacks_by_verb": {
+            "SELECT": 25,
+            "BEGIN": 2,
+            "INSERT": 161,
+            "SAVEPOINT": 2,
+            "RELEASE": 2,
+            "DELETE": 1,
+            "COMMIT": 2,
+            "UPDATE": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 533,
+          "integrity": {
+            "mode": "local",
+            "verified_file_count": 1,
+            "unverified_archive_count": 400,
+            "last_full_audit_revision": null,
+            "full_book_verified": false,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "exports_complete": null,
+          "scope_exports_complete": true,
+          "committed": true
+        }
+      },
+      "ok": true,
+      "cli_status": {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "D:\\Developer\\WorkSpace\\story-skill\\.agents\\skills\\story-codex\\scripts\\story.py",
+          "status",
+          "--book",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-scale-v03-4tkyphbj\\case-0-local",
+          "--integrity",
+          "local"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 0.544318,
+        "stderr": "",
+        "instrumentation": "separate process; no Python allocation/read/SQL counters attached",
+        "ok": true,
+        "integrity": {
+          "full_book_verified": false,
+          "last_full_audit_revision": null,
+          "mode": "local",
+          "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+          "unverified_archive_count": 399,
+          "verified_file_count": 1
+        }
+      },
+      "context_output_bytes": 2824,
+      "required_card_overload": {
+        "expected_error_observed": true,
+        "error": "budget_exceeded",
+        "details": {
+          "minimum_bytes": 50623,
+          "budget_bytes": 16000
+        },
+        "measurement": {
+          "ok": false,
+          "error": {
+            "type": "StoryError",
+            "message": "Required content cannot fit; increase the budget or narrow the range",
+            "code": "budget_exceeded",
+            "details": {
+              "minimum_bytes": 50623,
+              "budget_bytes": 16000
+            }
+          },
+          "elapsed_seconds": 0.043711,
+          "python_peak_allocated_bytes": 312790,
+          "file_reads": 1,
+          "file_bytes_read": 7500,
+          "manuscript_file_reads": 1,
+          "manuscript_bytes_read": 7500,
+          "json_decode_calls": 108,
+          "json_decode_input_bytes": 50147,
+          "decoded_card_objects": 101,
+          "sql_statement_callbacks": 16,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 14,
+            "ROLLBACK": 1
+          },
+          "search_calls": []
+        }
+      },
+      "overload_cleanup": {
+        "cards": 2000,
+        "indexed_cards": 2000,
+        "ok": true
+      }
+    },
+    {
+      "chapters": 4000,
+      "manuscript_characters": 10000000,
+      "cards": 20000,
+      "integrity_mode": "strict",
+      "operations": {
+        "status": {
+          "ok": true,
+          "elapsed_seconds": 5.451712,
+          "python_peak_allocated_bytes": 1567686,
+          "file_reads": 4000,
+          "file_bytes_read": 30000000,
+          "manuscript_file_reads": 4000,
+          "manuscript_bytes_read": 30000000,
+          "json_decode_calls": 7,
+          "json_decode_input_bytes": 95,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 13,
+          "sql_callbacks_by_verb": {
+            "SELECT": 13
+          },
+          "search_calls": [],
+          "output_json_bytes": 709,
+          "integrity": {
+            "mode": "strict",
+            "verified_file_count": 4000,
+            "unverified_archive_count": 0,
+            "last_full_audit_revision": null,
+            "full_book_verified": true,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          }
+        },
+        "context": {
+          "ok": true,
+          "elapsed_seconds": 5.698999,
+          "python_peak_allocated_bytes": 1453404,
+          "file_reads": 4000,
+          "file_bytes_read": 30000000,
+          "manuscript_file_reads": 4000,
+          "manuscript_bytes_read": 30000000,
+          "json_decode_calls": 5,
+          "json_decode_input_bytes": 511,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 13,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 11,
+            "ROLLBACK": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 2659,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 16000,
+            "used": 2594
+          }
+        },
+        "prepare": {
+          "ok": true,
+          "elapsed_seconds": 5.573901,
+          "python_peak_allocated_bytes": 1453180,
+          "file_reads": 4001,
+          "file_bytes_read": 30007500,
+          "manuscript_file_reads": 4000,
+          "manuscript_bytes_read": 30000000,
+          "json_decode_calls": 5,
+          "json_decode_input_bytes": 511,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 13,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 11,
+            "ROLLBACK": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 1328,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 16000,
+            "used": 1252
+          }
+        },
+        "recall_exact_id": {
+          "ok": true,
+          "elapsed_seconds": 0.273933,
+          "python_peak_allocated_bytes": 622184,
+          "file_reads": 0,
+          "file_bytes_read": 0,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0,
+          "json_decode_calls": 2,
+          "json_decode_input_bytes": 218,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 1191,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 1189,
+            "ROLLBACK": 1
+          },
+          "search_calls": [
+            {
+              "query": "c00000",
+              "metrics": {
+                "query_grams": 2,
+                "intersection_grams": 2,
+                "seed_document_frequency": 1518,
+                "seed_postings_read": 1518,
+                "posting_candidates_examined": 1518,
+                "intersection_candidates": 1171,
+                "documents_verified": 1171,
+                "unique_sources_read": 1171,
+                "source_chars_read": 193280
+              },
+              "scope": {
+                "indexed_documents": 28000,
+                "kinds": {
+                  "card": 20000,
+                  "chapter": 4000,
+                  "chapter_summary": 4000
+                },
+                "requested_kinds": null,
+                "unindexed_sources": "not_searched"
+              },
+              "complete": true,
+              "search_complete": true,
+              "truncated_reasons": []
+            }
+          ],
+          "output_json_bytes": 511,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 8000,
+            "used": 472
+          }
+        },
+        "chinese_substring_search": {
+          "ok": true,
+          "elapsed_seconds": 0.001578,
+          "python_peak_allocated_bytes": 10140,
+          "file_reads": 0,
+          "file_bytes_read": 0,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0,
+          "json_decode_calls": 1,
+          "json_decode_input_bytes": 15,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 8,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 6,
+            "ROLLBACK": 1
+          },
+          "search_calls": [
+            {
+              "query": "江棠",
+              "metrics": {
+                "query_grams": 1,
+                "intersection_grams": 1,
+                "seed_document_frequency": 1,
+                "seed_postings_read": 1,
+                "posting_candidates_examined": 1,
+                "intersection_candidates": 1,
+                "documents_verified": 1,
+                "unique_sources_read": 1,
+                "source_chars_read": 167
+              },
+              "scope": {
+                "indexed_documents": 28000,
+                "kinds": {
+                  "card": 20000,
+                  "chapter": 4000,
+                  "chapter_summary": 4000
+                },
+                "requested_kinds": null,
+                "unindexed_sources": "not_searched"
+              },
+              "complete": true,
+              "search_complete": true,
+              "truncated_reasons": []
+            }
+          ],
+          "output_json_bytes": 1771
+        },
+        "export_no_changes": {
+          "ok": true,
+          "elapsed_seconds": 10.659773,
+          "python_peak_allocated_bytes": 2109952,
+          "file_reads": 8000,
+          "file_bytes_read": 60000000,
+          "manuscript_file_reads": 8000,
+          "manuscript_bytes_read": 60000000,
+          "json_decode_calls": 1,
+          "json_decode_input_bytes": 1,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 7,
+          "sql_callbacks_by_verb": {
+            "SELECT": 4,
+            "BEGIN": 1,
+            "INSERT": 1,
+            "COMMIT": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 334,
+          "integrity": {
+            "mode": "strict",
+            "verified_file_count": 4000,
+            "unverified_archive_count": 0,
+            "last_full_audit_revision": 1,
+            "full_book_verified": true,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "exports_complete": true,
+          "scope_exports_complete": true
+        },
+        "commit_one_next_chapter": {
+          "ok": true,
+          "elapsed_seconds": 18.215244,
+          "python_peak_allocated_bytes": 2415248,
+          "file_reads": 12003,
+          "file_bytes_read": 90022500,
+          "manuscript_file_reads": 12002,
+          "manuscript_bytes_read": 90015000,
+          "json_decode_calls": 12,
+          "json_decode_input_bytes": 922,
+          "decoded_card_objects": 3,
+          "sql_statement_callbacks": 198,
+          "sql_callbacks_by_verb": {
+            "SELECT": 24,
+            "BEGIN": 3,
+            "INSERT": 162,
+            "SAVEPOINT": 2,
+            "RELEASE": 2,
+            "DELETE": 1,
+            "COMMIT": 3,
+            "UPDATE": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 533,
+          "integrity": {
+            "mode": "strict",
+            "verified_file_count": 4001,
+            "unverified_archive_count": 0,
+            "last_full_audit_revision": 2,
+            "full_book_verified": true,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "exports_complete": true,
+          "scope_exports_complete": true,
+          "committed": true
+        }
+      },
+      "ok": true,
+      "cli_status": {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "D:\\Developer\\WorkSpace\\story-skill\\.agents\\skills\\story-codex\\scripts\\story.py",
+          "status",
+          "--book",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-scale-v03-4tkyphbj\\case-1-strict",
+          "--integrity",
+          "strict"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 1.018609,
+        "stderr": "",
+        "instrumentation": "separate process; no Python allocation/read/SQL counters attached",
+        "ok": true,
+        "integrity": {
+          "full_book_verified": true,
+          "last_full_audit_revision": null,
+          "mode": "strict",
+          "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+          "unverified_archive_count": 0,
+          "verified_file_count": 4000
+        }
+      },
+      "context_output_bytes": 2594,
+      "required_card_overload": {
+        "expected_error_observed": true,
+        "error": "budget_exceeded",
+        "details": {
+          "minimum_bytes": 50393,
+          "budget_bytes": 16000
+        },
+        "measurement": {
+          "ok": false,
+          "error": {
+            "type": "StoryError",
+            "message": "Required content cannot fit; increase the budget or narrow the range",
+            "code": "budget_exceeded",
+            "details": {
+              "minimum_bytes": 50393,
+              "budget_bytes": 16000
+            }
+          },
+          "elapsed_seconds": 6.325537,
+          "python_peak_allocated_bytes": 1453495,
+          "file_reads": 4001,
+          "file_bytes_read": 30007500,
+          "manuscript_file_reads": 4001,
+          "manuscript_bytes_read": 30007500,
+          "json_decode_calls": 107,
+          "json_decode_input_bytes": 50145,
+          "decoded_card_objects": 101,
+          "sql_statement_callbacks": 13,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 11,
+            "ROLLBACK": 1
+          },
+          "search_calls": []
+        }
+      },
+      "overload_cleanup": {
+        "cards": 20000,
+        "indexed_cards": 20000,
+        "ok": true
+      }
+    },
+    {
+      "chapters": 4000,
+      "manuscript_characters": 10000000,
+      "cards": 20000,
+      "integrity_mode": "local",
+      "operations": {
+        "status": {
+          "ok": true,
+          "elapsed_seconds": 0.010056,
+          "python_peak_allocated_bytes": 16237,
+          "file_reads": 1,
+          "file_bytes_read": 7500,
+          "manuscript_file_reads": 1,
+          "manuscript_bytes_read": 7500,
+          "json_decode_calls": 8,
+          "json_decode_input_bytes": 99,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 14,
+          "sql_callbacks_by_verb": {
+            "SELECT": 14
+          },
+          "search_calls": [],
+          "output_json_bytes": 708,
+          "integrity": {
+            "mode": "local",
+            "verified_file_count": 1,
+            "unverified_archive_count": 3999,
+            "last_full_audit_revision": null,
+            "full_book_verified": false,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          }
+        },
+        "context": {
+          "ok": true,
+          "elapsed_seconds": 0.027954,
+          "python_peak_allocated_bytes": 21583,
+          "file_reads": 1,
+          "file_bytes_read": 7500,
+          "manuscript_file_reads": 1,
+          "manuscript_bytes_read": 7500,
+          "json_decode_calls": 6,
+          "json_decode_input_bytes": 515,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 16,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 14,
+            "ROLLBACK": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 2907,
+          "integrity": {
+            "mode": "local",
+            "verified_file_count": 1,
+            "unverified_archive_count": 3999,
+            "last_full_audit_revision": null,
+            "full_book_verified": false,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 16000,
+            "used": 2829
+          }
+        },
+        "prepare": {
+          "ok": true,
+          "elapsed_seconds": 0.034162,
+          "python_peak_allocated_bytes": 186119,
+          "file_reads": 2,
+          "file_bytes_read": 15000,
+          "manuscript_file_reads": 1,
+          "manuscript_bytes_read": 7500,
+          "json_decode_calls": 6,
+          "json_decode_input_bytes": 515,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 16,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 14,
+            "ROLLBACK": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 1328,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 16000,
+            "used": 1252
+          }
+        },
+        "recall_exact_id": {
+          "ok": true,
+          "elapsed_seconds": 0.211105,
+          "python_peak_allocated_bytes": 579872,
+          "file_reads": 0,
+          "file_bytes_read": 0,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0,
+          "json_decode_calls": 2,
+          "json_decode_input_bytes": 218,
+          "decoded_card_objects": 1,
+          "sql_statement_callbacks": 1191,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 1189,
+            "ROLLBACK": 1
+          },
+          "search_calls": [
+            {
+              "query": "c00000",
+              "metrics": {
+                "query_grams": 2,
+                "intersection_grams": 2,
+                "seed_document_frequency": 1518,
+                "seed_postings_read": 1518,
+                "posting_candidates_examined": 1518,
+                "intersection_candidates": 1171,
+                "documents_verified": 1171,
+                "unique_sources_read": 1171,
+                "source_chars_read": 193280
+              },
+              "scope": {
+                "indexed_documents": 28000,
+                "kinds": {
+                  "card": 20000,
+                  "chapter": 4000,
+                  "chapter_summary": 4000
+                },
+                "requested_kinds": null,
+                "unindexed_sources": "not_searched"
+              },
+              "complete": true,
+              "search_complete": true,
+              "truncated_reasons": []
+            }
+          ],
+          "output_json_bytes": 511,
+          "budget": {
+            "unit": "utf8_bytes",
+            "limit": 8000,
+            "used": 472
+          }
+        },
+        "chinese_substring_search": {
+          "ok": true,
+          "elapsed_seconds": 0.001516,
+          "python_peak_allocated_bytes": 10460,
+          "file_reads": 0,
+          "file_bytes_read": 0,
+          "manuscript_file_reads": 0,
+          "manuscript_bytes_read": 0,
+          "json_decode_calls": 1,
+          "json_decode_input_bytes": 15,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 8,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 6,
+            "ROLLBACK": 1
+          },
+          "search_calls": [
+            {
+              "query": "江棠",
+              "metrics": {
+                "query_grams": 1,
+                "intersection_grams": 1,
+                "seed_document_frequency": 1,
+                "seed_postings_read": 1,
+                "posting_candidates_examined": 1,
+                "intersection_candidates": 1,
+                "documents_verified": 1,
+                "unique_sources_read": 1,
+                "source_chars_read": 167
+              },
+              "scope": {
+                "indexed_documents": 28000,
+                "kinds": {
+                  "card": 20000,
+                  "chapter": 4000,
+                  "chapter_summary": 4000
+                },
+                "requested_kinds": null,
+                "unindexed_sources": "not_searched"
+              },
+              "complete": true,
+              "search_complete": true,
+              "truncated_reasons": []
+            }
+          ],
+          "output_json_bytes": 1771
+        },
+        "export_no_changes": {
+          "ok": true,
+          "elapsed_seconds": 0.006742,
+          "python_peak_allocated_bytes": 149466,
+          "file_reads": 2,
+          "file_bytes_read": 15000,
+          "manuscript_file_reads": 2,
+          "manuscript_bytes_read": 15000,
+          "json_decode_calls": 1,
+          "json_decode_input_bytes": 4,
+          "decoded_card_objects": 0,
+          "sql_statement_callbacks": 4,
+          "sql_callbacks_by_verb": {
+            "SELECT": 4
+          },
+          "search_calls": [],
+          "output_json_bytes": 337,
+          "integrity": {
+            "mode": "local",
+            "verified_file_count": 1,
+            "unverified_archive_count": 3999,
+            "last_full_audit_revision": null,
+            "full_book_verified": false,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "exports_complete": null,
+          "scope_exports_complete": true
+        },
+        "commit_one_next_chapter": {
+          "ok": true,
+          "elapsed_seconds": 0.119904,
+          "python_peak_allocated_bytes": 315697,
+          "file_reads": 4,
+          "file_bytes_read": 30000,
+          "manuscript_file_reads": 3,
+          "manuscript_bytes_read": 22500,
+          "json_decode_calls": 13,
+          "json_decode_input_bytes": 929,
+          "decoded_card_objects": 3,
+          "sql_statement_callbacks": 196,
+          "sql_callbacks_by_verb": {
+            "SELECT": 25,
+            "BEGIN": 2,
+            "INSERT": 161,
+            "SAVEPOINT": 2,
+            "RELEASE": 2,
+            "DELETE": 1,
+            "COMMIT": 2,
+            "UPDATE": 1
+          },
+          "search_calls": [],
+          "output_json_bytes": 535,
+          "integrity": {
+            "mode": "local",
+            "verified_file_count": 1,
+            "unverified_archive_count": 4000,
+            "last_full_audit_revision": null,
+            "full_book_verified": false,
+            "note": "Hash verification is a point-in-time observation; outside editors can save again."
+          },
+          "exports_complete": null,
+          "scope_exports_complete": true,
+          "committed": true
+        }
+      },
+      "ok": true,
+      "cli_status": {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "D:\\Developer\\WorkSpace\\story-skill\\.agents\\skills\\story-codex\\scripts\\story.py",
+          "status",
+          "--book",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-scale-v03-4tkyphbj\\case-1-local",
+          "--integrity",
+          "local"
+        ],
+        "returncode": 0,
+        "elapsed_seconds": 0.165059,
+        "stderr": "",
+        "instrumentation": "separate process; no Python allocation/read/SQL counters attached",
+        "ok": true,
+        "integrity": {
+          "full_book_verified": false,
+          "last_full_audit_revision": null,
+          "mode": "local",
+          "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+          "unverified_archive_count": 3999,
+          "verified_file_count": 1
+        }
+      },
+      "context_output_bytes": 2829,
+      "required_card_overload": {
+        "expected_error_observed": true,
+        "error": "budget_exceeded",
+        "details": {
+          "minimum_bytes": 50628,
+          "budget_bytes": 16000
+        },
+        "measurement": {
+          "ok": false,
+          "error": {
+            "type": "StoryError",
+            "message": "Required content cannot fit; increase the budget or narrow the range",
+            "code": "budget_exceeded",
+            "details": {
+              "minimum_bytes": 50628,
+              "budget_bytes": 16000
+            }
+          },
+          "elapsed_seconds": 0.040749,
+          "python_peak_allocated_bytes": 312304,
+          "file_reads": 1,
+          "file_bytes_read": 7500,
+          "manuscript_file_reads": 1,
+          "manuscript_bytes_read": 7500,
+          "json_decode_calls": 108,
+          "json_decode_input_bytes": 50149,
+          "decoded_card_objects": 101,
+          "sql_statement_callbacks": 16,
+          "sql_callbacks_by_verb": {
+            "BEGIN": 1,
+            "SELECT": 14,
+            "ROLLBACK": 1
+          },
+          "search_calls": []
+        }
+      },
+      "overload_cleanup": {
+        "cards": 20000,
+        "indexed_cards": 20000,
+        "ok": true
+      }
+    }
+  ],
+  "temporary_data_removed": true,
+  "runtime_stable": true,
+  "baseline_unchanged": true
+}

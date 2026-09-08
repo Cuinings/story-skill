@@ -215,7 +215,8 @@ class StoryTests(unittest.TestCase):
         self.assertNotIn("debt", self.book.cards())
         self.assertEqual(self.book.cards()["hero"]["text"], "沈禾还持有钥匙。")
         event = self.book.db.execute("SELECT data FROM events WHERE kind='replace_chapter'").fetchone()[0]
-        self.assertEqual(json.loads(event)["previous"]["text"], DRAFT)
+        previous_sha = json.loads(event)["previous"]["body_sha256"]
+        self.assertEqual(self.book.db.execute("SELECT text FROM core_objects WHERE sha=?", (previous_sha,)).fetchone()[0], DRAFT)
 
     def test_replace_detects_intervening_card_edit(self):
         self.book.commit(1, self.draft, self.delta(changes=[{"id": "hero", "text": "已交出钥匙", "quote": "沈禾把唯一的钥匙交给守门人。"}]))
