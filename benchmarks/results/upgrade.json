@@ -1,0 +1,260 @@
+{
+  "schema": 1,
+  "date": "2026-09-08T05:33:21.400486+00:00",
+  "ok": true,
+  "method": "Prior release ZIP installed and upgraded through real install.py CLI subprocesses",
+  "scope": "Managed skill files, backup bytes, update idempotency, installed version and prepare CLI help",
+  "environment": {
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.14.6",
+    "executable": "C:\\Python314\\python.exe"
+  },
+  "commands": [
+    {
+      "name": "install_old_release",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\旧版安装源\\scripts\\install.py",
+        "--project",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"installed\", \"path\": \"C:\\\\Users\\\\Work\\\\AppData\\\\Local\\\\Temp\\\\story-upgrade-probe-hsyeu__t\\\\升级验证项目\\\\.agents\\\\skills\\\\story-codex\", \"backup\": null, \"files\": 8}\r\n",
+      "stderr": "",
+      "duration_seconds": 0.097
+    },
+    {
+      "name": "old_installed_version",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目\\.agents\\skills\\story-codex\\scripts\\story.py",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "0.1.2\n",
+      "stderr": "",
+      "duration_seconds": 0.096
+    },
+    {
+      "name": "update_to_canonical",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\Developer\\WorkSpace\\story-skill\\scripts\\install.py",
+        "--project",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目",
+        "--update"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"updated\", \"path\": \"C:\\\\Users\\\\Work\\\\AppData\\\\Local\\\\Temp\\\\story-upgrade-probe-hsyeu__t\\\\升级验证项目\\\\.agents\\\\skills\\\\story-codex\", \"backup\": \"C:\\\\Users\\\\Work\\\\AppData\\\\Local\\\\Temp\\\\story-upgrade-probe-hsyeu__t\\\\升级验证项目\\\\.agents\\\\.story-codex-backups\\\\8fb4994788b54f1b980985fa5a448830\", \"files\": 8}\r\n",
+      "stderr": "",
+      "duration_seconds": 0.117
+    },
+    {
+      "name": "updated_installed_version",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目\\.agents\\skills\\story-codex\\scripts\\story.py",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "0.2.0\n",
+      "stderr": "",
+      "duration_seconds": 0.095
+    },
+    {
+      "name": "updated_prepare_help",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目\\.agents\\skills\\story-codex\\scripts\\story.py",
+        "prepare",
+        "--help"
+      ],
+      "exit_code": 0,
+      "stdout": "usage: story.py prepare [-h] --book BOOK [--budget-bytes BUDGET_BYTES]\n                        --chapter CHAPTER --draft DRAFT [--reconcile]\n\noptions:\n  -h, --help            show this help message and exit\n  --book BOOK           Explicit, isolated book directory\n  --budget-bytes BUDGET_BYTES\n                        Hard limit on compact JSON UTF-8 bytes\n  --chapter CHAPTER\n  --draft DRAFT\n  --reconcile           Bind the inspected outside edit for a reviewed\n                        reconciliation\n",
+      "stderr": "",
+      "duration_seconds": 0.093
+    },
+    {
+      "name": "repeat_update",
+      "command": [
+        "C:\\Python314\\python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "D:\\Developer\\WorkSpace\\story-skill\\scripts\\install.py",
+        "--project",
+        "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目",
+        "--update"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"status\": \"unchanged\", \"path\": \"C:\\\\Users\\\\Work\\\\AppData\\\\Local\\\\Temp\\\\story-upgrade-probe-hsyeu__t\\\\升级验证项目\\\\.agents\\\\skills\\\\story-codex\"}\r\n",
+      "stderr": "",
+      "duration_seconds": 0.086
+    }
+  ],
+  "checks": {
+    "current_archive_matches_canonical": {
+      "status": "passed"
+    },
+    "version_advances": {
+      "status": "passed",
+      "old_version": "0.1.2",
+      "new_version": "0.2.0"
+    },
+    "archive_extraction_exact": {
+      "status": "passed"
+    },
+    "installer_copy_exact": {
+      "status": "passed",
+      "copied_sha256": "30b5afe6f2818b50193280a08de4b2111cb66bc971a6d6547305f085b441879c"
+    },
+    "old_release_managed_install": {
+      "status": "passed"
+    },
+    "old_manifest_matches_archive": {
+      "status": "passed"
+    },
+    "old_installed_version": {
+      "status": "passed",
+      "actual": "0.1.2"
+    },
+    "update_status": {
+      "status": "passed"
+    },
+    "previous_release_backup_exact": {
+      "status": "passed",
+      "original_files_sha256": {
+        ".story-codex-install.json": "22c43697b6dfbc58efb84eeb1a32ae3d97f8a27e88bda2cbb3441feb3877dba7",
+        "agents/openai.yaml": "d34634e53f6f55985a8c86e9370a2300c700398725c64bed354eb8a9ec9d9eee",
+        "LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+        "references/analyze.md": "06684da84cef9f12e93c76cc3d34289c9f82378984185a097d02272605c43af0",
+        "references/research.md": "2ccd803f66b12ce456c2b13a7b51a0ba927e26280509cb82a7fb832cca0c7a2c",
+        "references/revise.md": "fd658fe5791d72656a13df9ca0ad64351d8e7beca8e01c9cdfd52d2fe753a4ea",
+        "references/write.md": "0caa8a5edd6e74eadcb9fefc0e42c853f2728fcfe487689f8470b07b9bcd4249",
+        "scripts/story.py": "b970c779bbddd3f46de72fa5b95908004c4c056c848e5e939c0b74208deccc38",
+        "SKILL.md": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278"
+      },
+      "backup_files_sha256": {
+        ".story-codex-install.json": "22c43697b6dfbc58efb84eeb1a32ae3d97f8a27e88bda2cbb3441feb3877dba7",
+        "agents/openai.yaml": "d34634e53f6f55985a8c86e9370a2300c700398725c64bed354eb8a9ec9d9eee",
+        "LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+        "references/analyze.md": "06684da84cef9f12e93c76cc3d34289c9f82378984185a097d02272605c43af0",
+        "references/research.md": "2ccd803f66b12ce456c2b13a7b51a0ba927e26280509cb82a7fb832cca0c7a2c",
+        "references/revise.md": "fd658fe5791d72656a13df9ca0ad64351d8e7beca8e01c9cdfd52d2fe753a4ea",
+        "references/write.md": "0caa8a5edd6e74eadcb9fefc0e42c853f2728fcfe487689f8470b07b9bcd4249",
+        "scripts/story.py": "b970c779bbddd3f46de72fa5b95908004c4c056c848e5e939c0b74208deccc38",
+        "SKILL.md": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278"
+      }
+    },
+    "updated_manifest_matches_canonical": {
+      "status": "passed",
+      "installed_files_sha256": {
+        ".story-codex-install.json": "a9acefd1d49329639895e5ffbb8d9a688fc401bd463d10d83821d43b383c9885",
+        "agents/openai.yaml": "d34634e53f6f55985a8c86e9370a2300c700398725c64bed354eb8a9ec9d9eee",
+        "LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+        "references/analyze.md": "06684da84cef9f12e93c76cc3d34289c9f82378984185a097d02272605c43af0",
+        "references/research.md": "2ccd803f66b12ce456c2b13a7b51a0ba927e26280509cb82a7fb832cca0c7a2c",
+        "references/revise.md": "2d3974e5846fa6761e47213646d069984c245671cd5b43a6b44f152bd2c79bda",
+        "references/write.md": "ee2c4c726dd2b9e06a3210e8096cd0deaa19343b408921529bb7f35e42363e0f",
+        "scripts/story.py": "49805ff8fea6fe963fbbe073e200c5b9126d5551795897ec0ac225d059099d64",
+        "SKILL.md": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05"
+      }
+    },
+    "updated_installed_version": {
+      "status": "passed",
+      "actual": "0.2.0"
+    },
+    "prepare_cli_available": {
+      "status": "passed"
+    },
+    "repeat_update_idempotent": {
+      "status": "passed",
+      "backup_count": 1
+    },
+    "input_files_unchanged": {
+      "status": "passed"
+    },
+    "current_archive_unchanged": {
+      "status": "passed"
+    }
+  },
+  "initial_archive": {
+    "path": "D:\\Developer\\WorkSpace\\story-skill\\dist\\story-codex-0.1.2.zip",
+    "sha256": "3a59f47419b80f60df0d393764761b73a3c0097f12808265bf757c29caaf8789",
+    "bytes": 26357,
+    "version": "0.1.2",
+    "files": {
+      "agents/openai.yaml": "d34634e53f6f55985a8c86e9370a2300c700398725c64bed354eb8a9ec9d9eee",
+      "LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "references/analyze.md": "06684da84cef9f12e93c76cc3d34289c9f82378984185a097d02272605c43af0",
+      "references/research.md": "2ccd803f66b12ce456c2b13a7b51a0ba927e26280509cb82a7fb832cca0c7a2c",
+      "references/revise.md": "fd658fe5791d72656a13df9ca0ad64351d8e7beca8e01c9cdfd52d2fe753a4ea",
+      "references/write.md": "0caa8a5edd6e74eadcb9fefc0e42c853f2728fcfe487689f8470b07b9bcd4249",
+      "scripts/story.py": "b970c779bbddd3f46de72fa5b95908004c4c056c848e5e939c0b74208deccc38",
+      "SKILL.md": "97b605f721c3e1c4d8040816d2a0ed68f4c9529e76d96ad0ce175f9bef8b1278"
+    }
+  },
+  "current_source": {
+    "version": "0.2.0",
+    "files": {
+      "agents/openai.yaml": "d34634e53f6f55985a8c86e9370a2300c700398725c64bed354eb8a9ec9d9eee",
+      "LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "references/analyze.md": "06684da84cef9f12e93c76cc3d34289c9f82378984185a097d02272605c43af0",
+      "references/research.md": "2ccd803f66b12ce456c2b13a7b51a0ba927e26280509cb82a7fb832cca0c7a2c",
+      "references/revise.md": "2d3974e5846fa6761e47213646d069984c245671cd5b43a6b44f152bd2c79bda",
+      "references/write.md": "ee2c4c726dd2b9e06a3210e8096cd0deaa19343b408921529bb7f35e42363e0f",
+      "scripts/story.py": "49805ff8fea6fe963fbbe073e200c5b9126d5551795897ec0ac225d059099d64",
+      "SKILL.md": "f0f2e32d8ee6f88189011f81589d9a424f8bc24987a27b1c5abe3a4d27cd5c05"
+    }
+  },
+  "installer": {
+    "path": "D:\\Developer\\WorkSpace\\story-skill\\scripts\\install.py",
+    "sha256": "30b5afe6f2818b50193280a08de4b2111cb66bc971a6d6547305f085b441879c"
+  },
+  "current_archive": {
+    "status": "passed",
+    "archive": "D:\\Developer\\WorkSpace\\story-skill\\dist\\story-codex-0.2.0.zip",
+    "version": "0.2.0",
+    "sha256": "296e2ce1efed50a74f3b794220d47b9b599df06f04be0253b55d5865ef5fcbf7",
+    "bytes": 29085,
+    "files": 8,
+    "contents_match_current_skill": true,
+    "missing": [],
+    "extra": [],
+    "changed": [],
+    "duplicate_entries": [],
+    "corrupt_entry": null
+  },
+  "initial_install": {
+    "status": "installed",
+    "path": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目\\.agents\\skills\\story-codex",
+    "backup": null,
+    "files": 8
+  },
+  "update": {
+    "status": "updated",
+    "path": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目\\.agents\\skills\\story-codex",
+    "backup": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目\\.agents\\.story-codex-backups\\8fb4994788b54f1b980985fa5a448830",
+    "files": 8
+  },
+  "repeat_update": {
+    "status": "unchanged",
+    "path": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-upgrade-probe-hsyeu__t\\升级验证项目\\.agents\\skills\\story-codex"
+  },
+  "temporary_project_removed": true
+}

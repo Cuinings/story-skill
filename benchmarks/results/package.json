@@ -1,0 +1,14 @@
+{
+  "status": "passed",
+  "archive": "D:\\Developer\\WorkSpace\\story-skill\\dist\\story-codex-0.1.2.zip",
+  "version": "0.1.2",
+  "sha256": "3a59f47419b80f60df0d393764761b73a3c0097f12808265bf757c29caaf8789",
+  "bytes": 26357,
+  "files": 8,
+  "contents_match_current_skill": true,
+  "missing": [],
+  "extra": [],
+  "changed": [],
+  "duplicate_entries": [],
+  "corrupt_entry": null
+}

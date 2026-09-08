@@ -1,0 +1,2 @@
+# Optional benchmark only. The installed skill runtime and its unit tests use Python's standard library.
+tiktoken==0.14.0

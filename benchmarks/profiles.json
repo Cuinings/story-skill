@@ -1,0 +1,45 @@
+{
+  "repository": "https://github.com/zenstory-ai/oh-story-claudecode",
+  "revision": "4daac79077928d0d5ba0eda93e46ce68dfcd40ae",
+  "encoding": "o200k_base",
+  "profiles": [
+    {
+      "id": "long_chapter_required_minimum",
+      "label": "长篇单章：明确必读指令下限",
+      "upstream": [
+        "skills/story-long-write/SKILL.md",
+        "skills/story-long-write/references/workflow-chapter.md",
+        "skills/story-long-write/references/long-format.md",
+        "skills/story-long-write/references/writing-craft.md",
+        "skills/story-long-write/references/long-chapter-quality.md",
+        "skills/story-long-write/references/long-chapter-hooks.md"
+      ],
+      "candidate": [
+        ".agents/skills/story-codex/SKILL.md",
+        ".agents/skills/story-codex/references/write.md"
+      ],
+      "scope": "Cold instruction load only. Upstream excludes other conditional references, project files and agents. Candidate includes entry plus full writing workflow; command templates and tool results are excluded on both sides."
+    },
+    {
+      "id": "short_write_conservative",
+      "label": "短篇：上游仅入口 vs 新版入口与流程",
+      "upstream": ["skills/story-short-write/SKILL.md"],
+      "candidate": [".agents/skills/story-codex/SKILL.md", ".agents/skills/story-codex/references/write.md"],
+      "scope": "Conservative lower bound for upstream: its required short-fiction references are deliberately excluded."
+    },
+    {
+      "id": "long_analysis_conservative",
+      "label": "长篇拆文：上游仅入口 vs 新版入口与流程",
+      "upstream": ["skills/story-long-analyze/SKILL.md"],
+      "candidate": [".agents/skills/story-codex/SKILL.md", ".agents/skills/story-codex/references/analyze.md"],
+      "scope": "Upstream analysis references and all source text are excluded. No reduction in required source coverage is assumed."
+    },
+    {
+      "id": "review_conservative",
+      "label": "审稿：上游仅入口 vs 新版入口与流程",
+      "upstream": ["skills/story-review/SKILL.md"],
+      "candidate": [".agents/skills/story-codex/SKILL.md", ".agents/skills/story-codex/references/revise.md"],
+      "scope": "Review instructions only. Reviewer-agent context, manuscripts and any extra write.md load for committing a revision are excluded."
+    }
+  ]
+}
