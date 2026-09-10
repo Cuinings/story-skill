@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+    "--source",
+    "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "--start",
+    "178",
+    "--end",
+    "210"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"budget\":{\"limit\":12000,\"unit\":\"utf8_bytes\",\"used\":259},\"end\":210,\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"start\":178,\"text\":\"只有穿長衫的，纔踱進店面隔壁的房子裏，要酒要菜，慢慢地坐喝。\\n\\n\"}\n",
+  "stderr": ""
+}

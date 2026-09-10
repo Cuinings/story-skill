@@ -1,0 +1,74 @@
+"""Reopen this completed analysis in fresh CLI processes and retry its original input."""
+from pathlib import Path
+import datetime
+import hashlib
+import json
+import sqlite3
+import subprocess
+import sys
+
+out = Path(__file__).resolve().parent
+run = out / "run"
+manifest = json.loads((out / "manifest.json").read_text())
+tool = Path(manifest["frozen_skill_dir"]) / "story-codex/scripts/story.py"
+if not tool.exists():
+    tool = out.parents[2] / "skills/story-codex/scripts/story.py"
+assert hashlib.sha256(tool.read_bytes()).hexdigest() == manifest["skills_sha256"]["story-codex/scripts/story.py"]
+sid = manifest["source_sha256"]
+report = run / f".story/analysis/{sid}/report.md"
+original = run / "report_submission.md"
+dbpath = run / ".story/state.sqlite3"
+hashfile = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
+def logical_snapshot():
+    db = sqlite3.connect(dbpath.as_uri() + "?mode=ro", uri=True)
+    result = {}
+    for (name,) in db.execute("SELECT name FROM sqlite_master WHERE type='table' ORDER BY name").fetchall():
+        quoted = '"' + name.replace('"', '""') + '"'
+        selection = "id,revision,checked" if name == "integrity_audits" else "*"
+        rows = [list(r) for r in db.execute("SELECT " + selection + " FROM " + quoted)]
+        encoded_rows = sorted(json.dumps(r, ensure_ascii=False, default=lambda b: b.hex()) for r in rows)
+        result[name] = {"rows": len(rows), "sha256": hashlib.sha256("\n".join(encoded_rows).encode()).hexdigest()}
+    db.close()
+    return result
+
+before = {"database": hashfile(dbpath), "report": hashfile(report), "input": hashfile(original)}
+logical_before = logical_snapshot()
+logs = out / "reopen"
+logs.mkdir(exist_ok=True)
+commands = [
+    ["status"],
+    ["coverage", "--source", sid],
+    ["next", "--source", sid, "--limit", "2", "--budget-bytes", "22000"],
+    ["findings", "--source", sid, "--offset", "0", "--limit", "100", "--budget-bytes", "120000"],
+    ["report", "--source", sid, "--file", str(original)],
+]
+responses = []
+for i, command in enumerate(commands, 1):
+    argv = [sys.executable, "-B", "-X", "utf8", str(tool), *command, "--book", str(run)]
+    completed = subprocess.run(argv, capture_output=True, text=True, timeout=60)
+    entry = {"argv": argv, "exit_code": completed.returncode, "stdout": completed.stdout,
+             "stderr": completed.stderr, "recorded_utc": datetime.datetime.now(datetime.timezone.utc).isoformat()}
+    (logs / f"{i:02d}-{command[0]}.json").write_text(json.dumps(entry, ensure_ascii=False, indent=2) + "\n")
+    if completed.returncode:
+        raise RuntimeError(f"Failed {command[0]}; raw output preserved")
+    responses.append(json.loads(completed.stdout))
+after = {"database": hashfile(dbpath), "report": hashfile(report), "input": hashfile(original)}
+logical_after = logical_snapshot()
+status, coverage, next_result, findings, saved = responses
+checks = {
+    "source_recovered_in_status": any(s.get("source") == sid for s in status.get("recent_sources", [])),
+    "coverage_complete": coverage["complete_for_imported_text"] and coverage["pending"] == 0,
+    "next_empty": next_result["chunks"] == [],
+    "all_fourteen_records_recovered": findings["total"] == 14 and len(findings["results"]) == 14
+        and {f["chunk"] for f in findings["results"]} == set(range(1, 15)),
+    "same_input_retry_finalized": saved["finalized"] is True and saved["exports_complete"] is True,
+    "report_and_input_bytes_unchanged": all(before[k] == after[k] for k in ("report", "input")),
+    "all_database_nonvolatile_contents_unchanged": logical_before == logical_after,
+}
+result = {"ok": all(checks.values()), "checks": checks, "before": before, "after": after,
+          "logical_before": logical_before, "logical_after": logical_after,
+          "initial_check_correction": "Initial checks wrongly required SQLite byte identity, then identity of all table fields. Strict export auditing refreshes integrity_audits.created via INSERT OR REPLACE and DEFAULT CURRENT_TIMESTAMP. Both initial observations are preserved; this check compares all logical contents except that timestamp, retaining audit id/revision/checked and exact report/input bytes.",
+          "source_sha256": sid, "scope": "Fresh CLI processes reopen an intact local book and retry the original report input; no fault injection or literary evaluation."}
+(out / "reopen-check.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+print(json.dumps({"ok": result["ok"], "checks": checks}, ensure_ascii=False))
+raise SystemExit(0 if result["ok"] else 1)

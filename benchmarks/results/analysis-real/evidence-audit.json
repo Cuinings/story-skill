@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "reviewer_type": "independent_model_agent",
+  "task": "real_evidence_audit",
+  "scope": [
+    "baseline/kongyiji",
+    "candidate/kongyiji",
+    "baseline/mingmingniao"
+  ],
+  "fourth_run_included": false,
+  "read_only": true,
+  "literary_quality_reviewed": false,
+  "necessary_corrections": [],
+  "observations": {
+    "complete_chunks": [
+      2,
+      2,
+      8
+    ],
+    "exact_recorded_quotes": 72,
+    "matching_source_rereads": 21,
+    "original_findings_match_reopened": true,
+    "reports_and_export_hashes_match": true,
+    "prior_regression_not_misrepresented_as_rerun": true,
+    "template_book_argument_failure_attributed_to_trial_wrapper": true,
+    "recovery_claim_limited_to_fresh_process_read_and_identical_report_retry": true
+  },
+  "note": "The independent agent inspected the three already archived runs. The fourth run is covered by the root restart and process checks, not by this audit.",
+  "final_document_review": {
+    "scope": "Result README and main deep-reading document versus final comparison, process check and manifest; all four runs represented",
+    "necessary_correction": "Main document said he still requested cash and good wine; corrected to emphasizing that he pays cash and asking for good wine.",
+    "correction_applied": true,
+    "other_requested_claims_supported": true,
+    "raw_reports_or_reviews_edited": false
+  }
+}

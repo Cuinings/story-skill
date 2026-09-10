@@ -1,0 +1,18 @@
+{
+  "fixture_root": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5",
+  "book": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程",
+  "progress": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/revisions/门边-第1次/进度.md",
+  "draft": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/revisions/门边-第1次/report.md",
+  "source": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/原文.txt",
+  "old_report": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/已提交分析.md",
+  "exported": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/.story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md",
+  "source_id": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+  "protected_sha256": {
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/原文.txt": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/已提交分析.md": "19e48afee3d1015b8e1c5271c3cb5551a66a8fe3c33542ad1a06f2f782409f97",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/.story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md": "2f04a3310b5f88b82fe7ddd14d7cd5f62b150c183131cc77bd09107b7d55d63b",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/.story/state.sqlite3": "edce6baf93cfc9d91af3ad737bb7432f0218edce39b88972add3d657c0686f12"
+  },
+  "draft_before_sha256": "0e944b833c9b5ed978fb4510c0da7e3a143c0dbec130b0a5236ad4c291a927c6",
+  "note": "Synthetic workflow fixture reuses project-owned teaching text; not literary quality evidence or held-out material."
+}

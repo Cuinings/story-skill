@@ -1,0 +1,294 @@
+{
+  "ok": true,
+  "review_sha256": "84231b5357dad82f56c5908e0ee110dbef9084f8ab0ec8c6bbe2a00590666b86",
+  "evidence_quotes_checked": 91,
+  "mismatches": [],
+  "core_claim_reread_map": [
+    {
+      "id": "C1",
+      "criterion": "核心跨章结论一：精神胜利能暂时修复受辱感，不能取消外部代价",
+      "semantic_status": "成立",
+      "evidence": [
+        {
+          "quote": "他這回纔有些感到失敗的苦痛了。",
+          "chapter": "第二章　優勝記略",
+          "range": [
+            3850,
+            3865
+          ],
+          "reread_sequences": [
+            35
+          ],
+          "initial_next_chunk": [
+            2
+          ]
+        },
+        {
+          "quote": "似乎打的是自己，被打的是別一個自己，不久也就彷彿是自己打了別個一般",
+          "chapter": "第二章　優勝記略",
+          "range": [
+            3920,
+            3953
+          ],
+          "reread_sequences": [
+            35
+          ],
+          "initial_next_chunk": [
+            2
+          ]
+        },
+        {
+          "quote": "而阿Q卻仍然沒有人來叫他做短工。",
+          "chapter": "第五章　生計問題",
+          "range": [
+            10221,
+            10237
+          ],
+          "reread_sequences": [
+            40
+          ],
+          "initial_next_chunk": [
+            6
+          ]
+        },
+        {
+          "quote": "待三個蘿蔔喫完時，他已經打定了進城的主意了。",
+          "chapter": "第五章　生計問題",
+          "range": [
+            11254,
+            11276
+          ],
+          "reread_sequences": [],
+          "initial_next_chunk": [
+            6
+          ]
+        },
+        {
+          "quote": "孫子纔畫得很圓的圓圈呢。",
+          "chapter": "第九章　大團圓",
+          "range": [
+            20590,
+            20602
+          ],
+          "reread_sequences": [
+            47
+          ],
+          "initial_next_chunk": [
+            13
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C2",
+      "criterion": "核心跨章结论二：关系认可随资源与威胁变化，革命尝试延续等级欲望",
+      "semantic_status": "成立",
+      "evidence": [
+        {
+          "quote": "『你怎麽會姓趙！——你那裏配姓趙！』",
+          "chapter": "第一章　序",
+          "range": [
+            850,
+            868
+          ],
+          "reread_sequences": [
+            33
+          ],
+          "initial_next_chunk": [
+            1
+          ]
+        },
+        {
+          "quote": "或者因爲阿Q說是趙太爺的本家，雖然挨了打，大家也還怕有些眞",
+          "chapter": "第三章　續優勝記略",
+          "range": [
+            4337,
+            4366
+          ],
+          "reread_sequences": [
+            36
+          ],
+          "initial_next_chunk": [
+            3
+          ]
+        },
+        {
+          "quote": "因爲這是『我』去叫他的",
+          "chapter": "第六章　從中興到末路",
+          "range": [
+            12994,
+            13005
+          ],
+          "reread_sequences": [
+            51
+          ],
+          "initial_next_chunk": [
+            7
+          ]
+        },
+        {
+          "quote": "村人對于阿Q的『敬而遠之』者，本因爲怕結怨，誰料他不過是一個不敢再偸的偸兒呢？",
+          "chapter": "第六章　從中興到末路",
+          "range": [
+            13973,
+            14012
+          ],
+          "reread_sequences": [
+            41
+          ],
+          "initial_next_chunk": [
+            8
+          ]
+        },
+        {
+          "quote": "叫小D來搬，要搬得快，搬得不快打嘴巴",
+          "chapter": "第七章　革命",
+          "range": [
+            15633,
+            15651
+          ],
+          "reread_sequences": [
+            43
+          ],
+          "initial_next_chunk": [
+            9
+          ]
+        },
+        {
+          "quote": "阿Q萬料不到他也敢這樣做，自己也決不准他這樣做",
+          "chapter": "第八章　不准革命",
+          "range": [
+            17226,
+            17249
+          ],
+          "reread_sequences": [
+            44
+          ],
+          "initial_next_chunk": [
+            11
+          ]
+        },
+        {
+          "quote": "第一着仍然要和革命黨去結識。",
+          "chapter": "第八章　不准革命",
+          "range": [
+            17624,
+            17638
+          ],
+          "reread_sequences": [
+            44
+          ],
+          "initial_next_chunk": [
+            11
+          ]
+        }
+      ]
+    },
+    {
+      "id": "C3",
+      "criterion": "核心跨章结论三：信息与观看角色的安排把主体感受交给他人定名和裁断",
+      "semantic_status": "成立",
+      "evidence": [
+        {
+          "quote": "我雖不知道是眞沒有，還是沒有查",
+          "chapter": "第一章　序",
+          "range": [
+            1389,
+            1404
+          ],
+          "reread_sequences": [
+            34
+          ],
+          "initial_next_chunk": [
+            1
+          ]
+        },
+        {
+          "quote": "爲滿足那些賞鑒家起見",
+          "chapter": "第三章　續優勝記略",
+          "range": [
+            6101,
+            6111
+          ],
+          "reread_sequences": [
+            37
+          ],
+          "initial_next_chunk": [
+            3
+          ]
+        },
+        {
+          "quote": "咳，好看。殺革命黨。唉，好看好看",
+          "chapter": "第六章　從中興到末路",
+          "range": [
+            12252,
+            12268
+          ],
+          "reread_sequences": [
+            50
+          ],
+          "initial_next_chunk": [
+            7
+          ]
+        },
+        {
+          "quote": "現在你的同黨在那里？",
+          "chapter": "第九章　大團圓",
+          "range": [
+            19967,
+            19977
+          ],
+          "reread_sequences": [
+            46
+          ],
+          "initial_next_chunk": [
+            13
+          ]
+        },
+        {
+          "quote": "這些眼睛們似乎連成一氣，已經在那里咬他的靈魂。",
+          "chapter": "第九章　大團圓",
+          "range": [
+            21795,
+            21818
+          ],
+          "reread_sequences": [
+            48
+          ],
+          "initial_next_chunk": [
+            14
+          ]
+        },
+        {
+          "quote": "被鎗斃便是他的壞的證據",
+          "chapter": "第九章　大團圓",
+          "range": [
+            22003,
+            22014
+          ],
+          "reread_sequences": [
+            48
+          ],
+          "initial_next_chunk": [
+            14
+          ]
+        },
+        {
+          "quote": "他們白跟一趟了",
+          "chapter": "第九章　大團圓",
+          "range": [
+            22090,
+            22097
+          ],
+          "reread_sequences": [
+            48
+          ],
+          "initial_next_chunk": [
+            14
+          ]
+        }
+      ]
+    }
+  ],
+  "scope": "Program verifies reviewer quote ranges and maps its selected core evidence onto previously saved generation reads; it does not alter the original review or retrospectively add reads."
+}

@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--source",
+    "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5",
+    "--start",
+    "3789",
+    "--end",
+    "4362",
+    "--budget-bytes",
+    "12000",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/mingmingniao/book"
+  ],
+  "returncode": 0,
+  "stdout": "{\"budget\":{\"limit\":12000,\"unit\":\"utf8_bytes\",\"used\":1857},\"end\":4362,\"source\":\"e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5\",\"start\":3789,\"text\":\"　　敏明兩手拿住兩把孔雀翎，舞得非常的嫻熟。加陵所奏的巴打拉也還跟得上。舞過一會，加陵就奏起「恩斯民」的曲調，只聽敏明唱道：\\n\\n「孔雀！孔雀！你不必讚我生得俊美；\\n\\n我也不必嫌你長得醜劣。\\n\\n咱們是同一個身心，\\n\\n同一副手脚。\\n\\n我和你永遠同在一個身裏住着。\\n\\n我就是你啊你就是我。\\n\\n別人把咱們的身體分做兩個，\\n\\n是他們把自己的指頭壓在眼上，\\n\\n所以會生出這樣的錯。\\n\\n你不要像他們這樣的眼光，\\n\\n要知道我就是你啊你就是我。」\\n\\n　　敏明唱完，又舞了一會。加陵說：「我今天才知道你的技藝精到這個地步。你所唱的也是很好。且把這歌曲的故事說給我聽。」敏明說：「這曲倒沒有什麼故事；不過是平常的戀歌，你能把裏頭的意思聽出來就够了。」加陵說：「那麼，你這枝曲是爲我唱的。我也很願意對你說：我就是你，你就是我。」\\n\\n　　他們二人的感情幾年來就漸漸濃厚。這次見面的時候，又受了那麼好的感觸，所以彼此的心裏都承認他們求婚的機會已經成熟。\\n\\n　　敏明願意再幫父親二三年才嫁，可是她沒有向加陵說明。加陵起先以爲敏明是一個很信佛法的女子，怕她後來要到尼庵去實行她的獨身主義，所以不敢動求婚的念頭。現在瞧出她的心志不在那裏，他就決意回去要求婆多瓦底的同意，把她娶過來。照緬甸的風俗，子女的婚嫁本沒有要求父母同意的必要。加陵很尊重他父親的意見，所以要履行這種手續。\\n\\n\"}\n",
+  "stderr": ""
+}

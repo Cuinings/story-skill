@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--source",
+    "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "--start",
+    "730",
+    "--end",
+    "893",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/candidate/kongyiji/book"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"budget\":{\"limit\":12000,\"unit\":\"utf8_bytes\",\"used\":652},\"end\":893,\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"start\":730,\"text\":\"你一定又偸了人家的東西了！』孔乙己睜大眼睛說：『你怎麽這樣憑空汚人淸白……』『什麽淸白？我前天親眼見你偸了何家的書，弔着打。』孔乙己便漲紅了臉，額上的靑筋條條綻出，爭辯道：『竊書不能算偸……竊書！……讀書人的事，能算偸麽？』接連便是難懂的話，什麽『君子固窮』，什麽『者乎』之類，引得衆人都哄笑起來；店內外充滿了快活的空氣。\\n\\n\"}\n",
+  "stderr": ""
+}

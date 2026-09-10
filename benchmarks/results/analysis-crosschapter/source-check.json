@@ -1,0 +1,74 @@
+{
+  "ok": true,
+  "source_sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+  "unicode_characters": 22112,
+  "chapter_count": 9,
+  "chapters": [
+    {
+      "title": "第一章　序",
+      "start": 0,
+      "first_paragraph": 1,
+      "web_line": 124,
+      "end": 1748
+    },
+    {
+      "title": "第二章　優勝記略",
+      "start": 1748,
+      "first_paragraph": 15,
+      "web_line": 149,
+      "end": 3991
+    },
+    {
+      "title": "第三章　續優勝記略",
+      "start": 3991,
+      "first_paragraph": 46,
+      "web_line": 207,
+      "end": 6266
+    },
+    {
+      "title": "第四章　戀愛的悲劇",
+      "start": 6266,
+      "first_paragraph": 87,
+      "web_line": 285,
+      "end": 8985
+    },
+    {
+      "title": "第五章　生計問題",
+      "start": 8985,
+      "first_paragraph": 133,
+      "web_line": 372,
+      "end": 11278
+    },
+    {
+      "title": "第六章　從中興到末路",
+      "start": 11278,
+      "first_paragraph": 163,
+      "web_line": 428,
+      "end": 14028
+    },
+    {
+      "title": "第七章　革命",
+      "start": 14028,
+      "first_paragraph": 196,
+      "web_line": 490,
+      "end": 16546
+    },
+    {
+      "title": "第八章　不准革命",
+      "start": 16546,
+      "first_paragraph": 245,
+      "web_line": 579,
+      "end": 19148
+    },
+    {
+      "title": "第九章　大團圓",
+      "start": 19148,
+      "first_paragraph": 277,
+      "web_line": 639,
+      "end": 22112
+    }
+  ],
+  "mapping_rebuilds_exact_source": true,
+  "renderer_domain_suffixes_removed": 2,
+  "scope": "Rendered-text and local range checks, not scan-image collation."
+}

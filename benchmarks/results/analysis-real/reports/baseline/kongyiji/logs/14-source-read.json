@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+    "--source",
+    "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "--start",
+    "1796",
+    "--end",
+    "2064"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"budget\":{\"limit\":12000,\"unit\":\"utf8_bytes\",\"used\":967},\"end\":2064,\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"start\":1796,\"text\":\"孔乙己是這樣的使人快活，可是沒有他，別人也便這麽過。\\n\\n有一天，大約是中秋前的兩三天，掌櫃正在慢慢的結帳，取下粉板，忽然說：『孔乙己長久沒有來了。還欠十九個錢呢！』我纔也覺得他的確長久沒有來了。一個喝酒的人說道，『他怎麽會來？……他打折了腿了。』掌櫃說：『哦！』『他總仍舊是偸。這一回，是自己發昏，竟偸到丁舉人家裏去了。他家的東西，偸得的麽？』『後來怎麽樣？』『怎麽樣？先寫服辯，後來是打，打了大半夜，再打折了腿。』『後來呢？』『後來打折了腿了。』『打折了怎樣呢？』『怎樣？……誰曉得？許是死了。』掌櫃也不再問，仍然慢慢的算他的帳。\\n\\n\"}\n",
+  "stderr": ""
+}

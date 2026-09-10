@@ -276,15 +276,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--from-archive", default=str(ROOT / "dist/story-codex-0.4.0.zip"),
                         help="Trusted local prior release ZIP; defaults to version 0.4.0")
-    parser.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.5.0/upgrade.json"),
-                        help="Evidence JSON; failed reruns preserve an existing report using a .failed sibling")
+    parser.add_argument("--output", help="Defaults to benchmarks/results/v<runtime VERSION>/upgrade.json; "
+                        "failed reruns preserve an existing report using a .failed sibling")
     parser.add_argument("--timeout", type=int, default=60, help="Maximum seconds for each CLI command")
     args = parser.parse_args()
     if args.timeout < 1:
         parser.error("--timeout must be positive")
     try:
         verification = load_script("verify")
-        output = verification.report_path(args.output)
+        output = verification.report_path(args.output if args.output is not None else
+                                          verification.current_evidence_directory() / "upgrade.json")
         result = probe(args.from_archive, args.timeout)
         output = verification.write_report(result, output)
         print(json.dumps({"ok": result["ok"], "report": str(output),

@@ -1,0 +1,20 @@
+{
+  "body_nonspace_characters": 1620,
+  "quoted_fragments": 24,
+  "unmatched_quotes": [],
+  "chunks": [
+    {
+      "chunk": 1,
+      "hash_matches": true,
+      "quotes_match": true,
+      "finding_count": 8
+    },
+    {
+      "chunk": 2,
+      "hash_matches": true,
+      "quotes_match": true,
+      "finding_count": 11
+    }
+  ],
+  "scope": "仅核对字数、原文范围、哈希和引文字形，不据此声称文学判断成立。"
+}

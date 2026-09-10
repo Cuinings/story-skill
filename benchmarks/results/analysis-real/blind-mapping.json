@@ -1,0 +1,13 @@
+{
+  "seed": 20260911,
+  "mapping": {
+    "kongyiji": {
+      "A": "baseline",
+      "B": "candidate"
+    },
+    "mingmingniao": {
+      "A": "candidate",
+      "B": "baseline"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+usage: story.py source-read [-h] --book BOOK [--integrity {strict,local}]
+                            [--budget-bytes BUDGET_BYTES] --source SOURCE
+                            --start START --end END
+
+options:
+  -h, --help            show this help message and exit
+  --book BOOK           Explicit, isolated book directory
+  --integrity {strict,local}
+                        strict hashes all exports; local verifies
+                        recent/queued files and reports unverified archives
+  --budget-bytes BUDGET_BYTES
+                        Hard limit on compact JSON UTF-8 bytes
+  --source SOURCE
+  --start START
+  --end END

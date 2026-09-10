@@ -1,0 +1,658 @@
+{
+  "scope": "Literal quote containment in actual saved source-read returns; short repeated words may match multiple contexts. This does not replace the core-claim semantic audit or require every quote to be reread. All original chunks were read separately via next.",
+  "quotes_contained": 16,
+  "quotes_total": 17,
+  "checks": [
+    {
+      "quote": "死了以後，便沒有一個人再叫阿Quei了",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            1039,
+            1058
+          ],
+          "read_sequence": 34,
+          "read_range": [
+            1022,
+            1417
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "自己打了別個",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            3945,
+            3951
+          ],
+          "read_sequence": 35,
+          "read_range": [
+            3792,
+            3986
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "孫子纔畫得很圓的圓圈呢",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            20590,
+            20601
+          ],
+          "read_sequence": 47,
+          "read_range": [
+            20460,
+            20819
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "再用力的一擰",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            6112,
+            6118
+          ],
+          "read_sequence": 37,
+          "read_range": [
+            6027,
+            6264
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "斷子絕孫",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            6201,
+            6205
+          ],
+          "read_sequence": 37,
+          "read_range": [
+            6027,
+            6264
+          ]
+        },
+        {
+          "range": [
+            6617,
+            6621
+          ],
+          "read_sequence": 38,
+          "read_range": [
+            6616,
+            6870
+          ]
+        },
+        {
+          "range": [
+            6655,
+            6659
+          ],
+          "read_sequence": 38,
+          "read_range": [
+            6616,
+            6870
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "不准再去索取工錢和布衫",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            8827,
+            8838
+          ],
+          "read_sequence": 39,
+          "read_range": [
+            8660,
+            9136
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "仍然沒有人來叫他做短工",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            10225,
+            10236
+          ],
+          "read_sequence": 40,
+          "read_range": [
+            10186,
+            10407
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "你那裏配姓趙",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            860,
+            866
+          ],
+          "read_sequence": 33,
+          "read_range": [
+            850,
+            1001
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "我",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            987,
+            988
+          ],
+          "read_sequence": 33,
+          "read_range": [
+            850,
+            1001
+          ]
+        },
+        {
+          "range": [
+            1105,
+            1106
+          ],
+          "read_sequence": 34,
+          "read_range": [
+            1022,
+            1417
+          ]
+        },
+        {
+          "range": [
+            1269,
+            1270
+          ],
+          "read_sequence": 34,
+          "read_range": [
+            1022,
+            1417
+          ]
+        },
+        {
+          "range": [
+            1334,
+            1335
+          ],
+          "read_sequence": 34,
+          "read_range": [
+            1022,
+            1417
+          ]
+        },
+        {
+          "range": [
+            1389,
+            1390
+          ],
+          "read_sequence": 34,
+          "read_range": [
+            1022,
+            1417
+          ]
+        },
+        {
+          "range": [
+            6068,
+            6069
+          ],
+          "read_sequence": 37,
+          "read_range": [
+            6027,
+            6264
+          ]
+        },
+        {
+          "range": [
+            6791,
+            6792
+          ],
+          "read_sequence": 38,
+          "read_range": [
+            6616,
+            6870
+          ]
+        },
+        {
+          "range": [
+            6854,
+            6855
+          ],
+          "read_sequence": 38,
+          "read_range": [
+            6616,
+            6870
+          ]
+        },
+        {
+          "range": [
+            6925,
+            6926
+          ],
+          "read_sequence": 49,
+          "read_range": [
+            6872,
+            7823
+          ]
+        },
+        {
+          "range": [
+            6970,
+            6971
+          ],
+          "read_sequence": 49,
+          "read_range": [
+            6872,
+            7823
+          ]
+        },
+        {
+          "range": [
+            7667,
+            7668
+          ],
+          "read_sequence": 49,
+          "read_range": [
+            6872,
+            7823
+          ]
+        },
+        {
+          "range": [
+            7715,
+            7716
+          ],
+          "read_sequence": 49,
+          "read_range": [
+            6872,
+            7823
+          ]
+        },
+        {
+          "range": [
+            7734,
+            7735
+          ],
+          "read_sequence": 49,
+          "read_range": [
+            6872,
+            7823
+          ]
+        },
+        {
+          "range": [
+            7740,
+            7741
+          ],
+          "read_sequence": 49,
+          "read_range": [
+            6872,
+            7823
+          ]
+        },
+        {
+          "range": [
+            12818,
+            12819
+          ],
+          "read_sequence": 51,
+          "read_range": [
+            12470,
+            13031
+          ]
+        },
+        {
+          "range": [
+            12999,
+            13000
+          ],
+          "read_sequence": 51,
+          "read_range": [
+            12470,
+            13031
+          ]
+        },
+        {
+          "range": [
+            15146,
+            15147
+          ],
+          "read_sequence": 42,
+          "read_range": [
+            14957,
+            15247
+          ]
+        },
+        {
+          "range": [
+            15191,
+            15192
+          ],
+          "read_sequence": 42,
+          "read_range": [
+            14957,
+            15247
+          ]
+        },
+        {
+          "range": [
+            18140,
+            18141
+          ],
+          "read_sequence": 45,
+          "read_range": [
+            18056,
+            18460
+          ]
+        },
+        {
+          "range": [
+            18154,
+            18155
+          ],
+          "read_sequence": 45,
+          "read_range": [
+            18056,
+            18460
+          ]
+        },
+        {
+          "range": [
+            19886,
+            19887
+          ],
+          "read_sequence": 46,
+          "read_range": [
+            19885,
+            20093
+          ]
+        },
+        {
+          "range": [
+            19950,
+            19951
+          ],
+          "read_sequence": 46,
+          "read_range": [
+            19885,
+            20093
+          ]
+        },
+        {
+          "range": [
+            20012,
+            20013
+          ],
+          "read_sequence": 46,
+          "read_range": [
+            19885,
+            20093
+          ]
+        },
+        {
+          "range": [
+            20063,
+            20064
+          ],
+          "read_sequence": 46,
+          "read_range": [
+            19885,
+            20093
+          ]
+        },
+        {
+          "range": [
+            20076,
+            20077
+          ],
+          "read_sequence": 46,
+          "read_range": [
+            19885,
+            20093
+          ]
+        },
+        {
+          "range": [
+            20692,
+            20693
+          ],
+          "read_sequence": 47,
+          "read_range": [
+            20460,
+            20819
+          ]
+        },
+        {
+          "range": [
+            20717,
+            20718
+          ],
+          "read_sequence": 47,
+          "read_range": [
+            20460,
+            20819
+          ]
+        },
+        {
+          "range": [
+            20739,
+            20740
+          ],
+          "read_sequence": 47,
+          "read_range": [
+            20460,
+            20819
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "老Q",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            14958,
+            14960
+          ],
+          "read_sequence": 42,
+          "read_range": [
+            14957,
+            15247
+          ]
+        },
+        {
+          "range": [
+            15035,
+            15037
+          ],
+          "read_sequence": 42,
+          "read_range": [
+            14957,
+            15247
+          ]
+        },
+        {
+          "range": [
+            15088,
+            15090
+          ],
+          "read_sequence": 42,
+          "read_range": [
+            14957,
+            15247
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "革過",
+      "contained_in_a_reread": false,
+      "matches": []
+    },
+    {
+      "quote": "你的同黨",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            19969,
+            19973
+          ],
+          "read_sequence": 46,
+          "read_range": [
+            19885,
+            20093
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "第一要示衆",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            20652,
+            20657
+          ],
+          "read_sequence": 47,
+          "read_range": [
+            20460,
+            20819
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "好看",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            12254,
+            12256
+          ],
+          "read_sequence": 50,
+          "read_range": [
+            12052,
+            12437
+          ]
+        },
+        {
+          "range": [
+            12264,
+            12266
+          ],
+          "read_sequence": 50,
+          "read_range": [
+            12052,
+            12437
+          ]
+        },
+        {
+          "range": [
+            12266,
+            12268
+          ],
+          "read_sequence": 50,
+          "read_range": [
+            12052,
+            12437
+          ]
+        },
+        {
+          "range": [
+            22054,
+            22056
+          ],
+          "read_sequence": 48,
+          "read_range": [
+            21265,
+            22098
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "救命",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            21821,
+            21823
+          ],
+          "read_sequence": 48,
+          "read_range": [
+            21265,
+            22098
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "被鎗斃便是他的壞的證據",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            22003,
+            22014
+          ],
+          "read_sequence": 48,
+          "read_range": [
+            21265,
+            22098
+          ]
+        }
+      ]
+    },
+    {
+      "quote": "雖然史無明文，我們也假定",
+      "contained_in_a_reread": true,
+      "matches": [
+        {
+          "range": [
+            6918,
+            6930
+          ],
+          "read_sequence": 49,
+          "read_range": [
+            6872,
+            7823
+          ]
+        }
+      ]
+    }
+  ]
+}

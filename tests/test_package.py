@@ -13,8 +13,8 @@ package = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(package)
 
 
-def fixture_suite(source, version="2.4.6"):
-    for name in package.SUITE_FILES:
+def fixture_suite(source, version="0.5.1", files=None):
+    for name in (package.suite_files(version) if files is None else files):
         path = source / name
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_bytes(b"fixture content\n")
@@ -35,12 +35,12 @@ class PackageVersionTests(unittest.TestCase):
             root = Path(directory)
             source = root / "skill"
             fixture_suite(source)
-            runtime = b'VERSION = "2.4.6"\n'
+            runtime = b'VERSION = "0.5.1"\n'
             with patch.object(package, "ROOT", root), patch.object(package, "SOURCE", source):
                 result = package.package()
-            archive_path = root / "dist/story-codex-2.4.6.zip"
+            archive_path = root / "dist/story-codex-0.5.1.zip"
             self.assertEqual(Path(result["archive"]), archive_path)
-            self.assertEqual(result["version"], "2.4.6")
+            self.assertEqual(result["version"], "0.5.1")
             with zipfile.ZipFile(archive_path) as archive:
                 self.assertEqual(archive.read("story-codex/scripts/story.py"), runtime)
 
@@ -49,12 +49,43 @@ class PackageVersionTests(unittest.TestCase):
             root = Path(directory)
             source = root / "skill"
             fixture_suite(source)
-            output = root / "story-codex-2.4.5.zip"
+            output = root / "story-codex-0.5.0.zip"
             output.write_bytes(b"existing reviewed artifact")
             with patch.object(package, "ROOT", root), patch.object(package, "SOURCE", source):
                 with self.assertRaisesRegex(ValueError, "differs from runtime VERSION"):
                     package.package(output)
             self.assertEqual(output.read_bytes(), b"existing reviewed artifact")
+
+    def test_manifest_is_bound_to_version_and_unknown_families_are_rejected(self):
+        for version, files in (("0.4.0", package.LEGACY_SUITE_FILES),
+                               ("0.4.9", package.LEGACY_SUITE_FILES),
+                               ("0.5.0", package.LEGACY_SUITE_FILES),
+                               ("0.5.1", package.SUITE_FILES),
+                               ("0.5.12", package.SUITE_FILES)):
+            with self.subTest(version=version), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                fixture_suite(root / "skills", version)
+                with patch.object(package, "ROOT", root), patch.object(package, "SOURCE", root / "skills"):
+                    result = package.package()
+                self.assertEqual(result["files"], len(files))
+                with zipfile.ZipFile(result["archive"]) as archive:
+                    self.assertEqual(archive.namelist(), list(files))
+        for version in ("0.5.01", "0.6.0", "1.0.0", "2.4.6"):
+            with self.subTest(version=version), self.assertRaisesRegex(ValueError, "no reviewed suite layout"):
+                package.suite_files(version)
+
+    def test_historical_and_current_manifests_cannot_be_interchanged(self):
+        for version, files in (("0.4.0", package.SUITE_FILES), ("0.5.0", package.SUITE_FILES),
+                               ("0.5.1", package.LEGACY_SUITE_FILES)):
+            with self.subTest(version=version), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                fixture_suite(root / "skills", version, files)
+                output = root / f"story-codex-{version}.zip"
+                output.write_bytes(b"existing reviewed artifact")
+                with patch.object(package, "SOURCE", root / "skills"):
+                    with self.assertRaisesRegex(ValueError, "reviewed file manifest"):
+                        package.package(output)
+                self.assertEqual(output.read_bytes(), b"existing reviewed artifact")
 
 
 class PackagePublicationTests(unittest.TestCase):

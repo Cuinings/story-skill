@@ -1,0 +1,36 @@
+{
+  "schema": 1,
+  "date": "2026-09-10T08:22:08.433258+00:00",
+  "local_links": {
+    "status": "passed",
+    "files_scanned": 74,
+    "links_checked": 338,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "development_archive": {
+    "status": "passed",
+    "archive": "/Users/cuining/Documents/GitHub/story-skill/dist/story-codex-0.5.1.zip",
+    "version": "0.5.1",
+    "sha256": "8acea76d49c7ddd206f95a567193a1eb8aa8a4d496a2d2152325438668a14f34",
+    "bytes": 108278,
+    "files": 33,
+    "contents_match_current_skill": true,
+    "missing": [],
+    "extra": [],
+    "changed": [],
+    "duplicate_entries": [],
+    "corrupt_entry": null
+  },
+  "evidence_hashes": {
+    "status": "passed",
+    "reports": 12,
+    "reviews": 2,
+    "skill_files": 33,
+    "changed": []
+  },
+  "v050_zip_sha256": "d65504d907110ad59fa465566f7374991a216c03cdd42edc81b19ddcc87810a8",
+  "v050_tag": "549e5c98b3f79e61d702cbdd8ddbbebf1619f41a",
+  "historical_v050_evidence_unchanged": true,
+  "ok": true
+}

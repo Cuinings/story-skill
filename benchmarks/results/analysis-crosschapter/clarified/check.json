@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "checks": {
+    "only_five_declared_replacements": true,
+    "body_length": true,
+    "all_seventeen_quotes_exact": true,
+    "all_followup_quote_positions_exact": true,
+    "four_rereads_match_source": true,
+    "original_sha_unchanged": true,
+    "clarified_sha_matches_review": true,
+    "no_new_required_changes": true
+  },
+  "body_characters": 1984,
+  "followup_quote_positions_checked": 24,
+  "mismatches": []
+}

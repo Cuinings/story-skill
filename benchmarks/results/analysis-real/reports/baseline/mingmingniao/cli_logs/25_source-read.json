@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--source",
+    "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5",
+    "--start",
+    "4614",
+    "--end",
+    "4886",
+    "--budget-bytes",
+    "12000",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/mingmingniao/book"
+  ],
+  "returncode": 0,
+  "stdout": "{\"budget\":{\"limit\":12000,\"unit\":\"utf8_bytes\",\"used\":981},\"end\":4886,\"source\":\"e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5\",\"start\":4614,\"text\":\"　　瑪彌把檳榔送到宋志屋裏，見他躺在席上，好像想什麼事情似的。宋志一見瑪彌進來，就起身對她說：「我瞧他們兩人實在好得太利害。若是敏明跟了他，我必要喫虧。你有什麼好方法教他們二人的愛情冷淡沒有？」瑪彌說：「我又不是蠱師，那有好方法離間他們？我想主人你也不必想什麼方法，敏明姑娘必不致於嫁他。因爲他們一個是屬蛇，一個是屬鼠的（緬甸的生肖是算日的，禮拜四生的屬鼠，禮拜六生的屬蛇）；就算我們肯將姑娘嫁給他，他的父親也不願意。」宋志說：「你說的雖然有理，但現在生肖相剋的話，好些人都不注重了。倒不如請一位蠱師來，請他在二人身上施一點法術更爲得計。」\\n\\n\"}\n",
+  "stderr": ""
+}

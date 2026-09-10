@@ -174,12 +174,15 @@ class PackageSyncTests(unittest.TestCase):
         self.assertTrue(sync.sync("v0.4.0", self.root)["ok"])
         self.assertEqual([c.args[0][0] for c in self.npm.call_args_list], ["whoami", "publish"])
 
-    def smoke_archive(self, names=None, changed=None):
+    def smoke_archive(self, names=None, changed=None, version="0.5.1"):
         archive = self.root / "suite.tgz"
         root = SCRIPTS.parent / "skills"
         with tarfile.open(archive, "w:gz") as bundle:
-            for name in (sync.package_npm.SUITE_FILES if names is None else names):
+            for name in (sync.package_npm.payload_files(version) if names is None else names):
                 raw = changed if name == "story-codex-plan/SKILL.md" and changed is not None else (root / name).read_bytes()
+                if version != "0.5.1" and name.endswith("/SKILL.md"):
+                    # Model the historical layout without borrowing today's reference links.
+                    raw = b"# Historical suite smoke fixture\n"
                 member = tarfile.TarInfo("package/" + name)
                 member.size = len(raw)
                 bundle.addfile(member, io.BytesIO(raw))
@@ -187,7 +190,7 @@ class PackageSyncTests(unittest.TestCase):
 
     def test_runtime_smoke_installs_all_suite_dependencies_before_execution(self):
         archive = self.smoke_archive()
-        results = [SimpleNamespace(returncode=0, stdout="0.4.0\n"), SimpleNamespace(returncode=0, stdout="help"),
+        results = [SimpleNamespace(returncode=0, stdout="0.5.1\n"), SimpleNamespace(returncode=0, stdout="help"),
                    SimpleNamespace(returncode=0, stdout="{}"), SimpleNamespace(returncode=0, stdout='{"last_chapter":0}')]
 
         def execute(arguments, **kwargs):
@@ -197,8 +200,8 @@ class PackageSyncTests(unittest.TestCase):
             return results.pop(0)
 
         with patch.object(sync.subprocess, "run", side_effect=execute):
-            result = sync.runtime_smoke(archive, "0.4.0")
-        self.assertEqual(result["skill_files"], 31)
+            result = sync.runtime_smoke(archive, "0.5.1")
+        self.assertEqual(result["skill_files"], 33)
         self.assertEqual(set(result["skills"]), set(sync.package_npm.SKILL_NAMES))
         self.assertTrue(result["temporary_book_removed"])
 
@@ -206,15 +209,28 @@ class PackageSyncTests(unittest.TestCase):
         archive = self.smoke_archive([name for name in sync.package_npm.SUITE_FILES if name.startswith("story-codex/")])
         with patch.object(sync.subprocess, "run") as execute:
             with self.assertRaisesRegex(ValueError, "missing required skill dependencies"):
-                sync.runtime_smoke(archive, "0.4.0")
+                sync.runtime_smoke(archive, "0.5.1")
         execute.assert_not_called()
 
     def test_runtime_smoke_rejects_broken_sibling_link_before_execution(self):
         archive = self.smoke_archive(changed=b"[missing shared rules](../story-codex/missing.md)")
         with patch.object(sync.subprocess, "run") as execute:
             with self.assertRaisesRegex(ValueError, "broken local dependency"):
-                sync.runtime_smoke(archive, "0.4.0")
+                sync.runtime_smoke(archive, "0.5.1")
         execute.assert_not_called()
+
+    def test_historical_runtime_smoke_does_not_require_new_analysis_references(self):
+        for version in ("0.4.0", "0.5.0"):
+            with self.subTest(version=version):
+                archive = self.smoke_archive(version=version)
+                results = [SimpleNamespace(returncode=0, stdout=version + "\n"),
+                           SimpleNamespace(returncode=0, stdout="help"),
+                           SimpleNamespace(returncode=0, stdout="{}"),
+                           SimpleNamespace(returncode=0, stdout='{"last_chapter":0}')]
+                with patch.object(sync.subprocess, "run", side_effect=results):
+                    result = sync.runtime_smoke(archive, version)
+                self.assertEqual(result["skill_files"], 31)
+                self.assertTrue(result["temporary_book_removed"])
 
 
 if __name__ == "__main__":

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "trial_wrapper_issue": {
+    "instruction": "所有 CLI 均显式 --book 绝对路径",
+    "scope_problem": "template is a book-independent command and does not accept --book; the wrapper is broader than the skill instruction, which applies to book commands only.",
+    "handling": "All four generators received the same wrapper. Original task and snapshots remain frozen; failures are retained. A future trial wrapper should apply --book to book commands only.",
+    "inference_limit": "Template argument rejection caused by this wrapper is not evidence of a new skill or runtime regression."
+  },
+  "root_checker_correction": {
+    "tool": "temporary saved-log auditor",
+    "initial_error": "KeyError: start while treating source-read --help output as a source read",
+    "correction": "Exclude --help calls from content-output checks. Re-ran the saved-log audit successfully.",
+    "generation_artifacts_changed": false
+  },
+  "review_staging": {
+    "method": "Both anonymous reviewers finish kongyiji first; after both mingmingniao reports are finalized, the same independent reviewers append that case. First-case semantic JSON hashes are frozen before the follow-up.",
+    "version_mapping_shared_with_reviewers": false,
+    "other_reviewer_output_shared": false
+  }
+}

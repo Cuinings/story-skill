@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "date": "2026-09-10",
+  "review_type": "unblinded_targeted_editorial_followup_review",
+  "new_blind_review": false,
+  "reviewer_previously_authored_revision_suggestions": true,
+  "scope": "Only the four editorial edits after the first final review, with a complete reread of the current baseline 05 report and its relevant source context. Baseline 06 and candidate 02 were checked for unchanged bytes, not newly rescored.",
+  "overall": {
+    "ready_for_delivery": true,
+    "ready_scope": "baseline 05 as a revised report within the original 500—800 character requirement; the prior targeted semantic acceptance of unchanged baseline 06 and candidate 02 remains applicable.",
+    "original_three_disputes_reopened": false,
+    "all_four_edits_accepted": true,
+    "new_fact_errors_from_edits": [],
+    "residual_dependency_conflicts": [],
+    "open_items_from_first_final_review_resolved": true
+  },
+  "reviewed_report": {
+    "path": "benchmarks/results/analysis-followup/revised/baseline/05/report.md",
+    "sha256": "355f2dc5cd878a832865c2f3269de656b9f35228fbe459402baad2eb0d713f22",
+    "complete_report_read": true,
+    "body_non_whitespace_characters": 799,
+    "original_500_800_range_met": true,
+    "counting_method": "去除Markdown标题行与所有空白，含标点和引文，按Unicode字符计数。"
+  },
+  "edit_reviews": [
+    {
+      "edit": 1,
+      "accepted": true,
+      "reason": "删去原替换范围外遗留的句首但，消除了但……但……的拼接问题；怀疑、其他声源可能和不能坐实背叛的边界均保留。"
+    },
+    {
+      "edit": 2,
+      "accepted": true,
+      "reason": "压缩开头仍保留关切可辨、细节作用、悬念与行动可理解性三项尺度及不能用事件数量判优劣的限制。“这两段开场”保留了只评所给开场的范围，未扩大为全篇或同一作品。"
+    },
+    {
+      "edit": 3,
+      "accepted": true,
+      "reason": "存储卡首尾再次硌舌与保护信息的联系延续原报告本段开头的解释；新句没有补出信息内容、价值或去向，未引入新的情节事实。它仍是基于藏卡、逃离和保留卡的阅读解释，不是对存储内容的外部核实。"
+    },
+    {
+      "edit": 4,
+      "accepted": true,
+      "reason": "删去尚、这条等冗余字仍明确原文未独立证实规则，与若接应人的说法可靠、可能更易暴露的条件句一致。"
+    }
+  ],
+  "full_report_dependency_review": "全文仍按甲的逃脱与信任疑点、乙的日常照料与惜别可能分别评价；声源与黑暗规则保留未知，饭盒仅写取出，小孩仅被纳入安排，末尾众人实际挪凳另有原文支撑。后续悬念公平讨论不以规则为真，陶艺教室迁移例也不依赖饭盒已借出。四处压缩未恢复先前争议断言，未发现同报告依赖冲突。",
+  "resolved_first_review_items": [
+    {
+      "id": "05-duplicated-adversative",
+      "resolved": true,
+      "evidence": "首个但已删除，现为这会……，但同样……。"
+    },
+    {
+      "id": "05-original-length-range",
+      "resolved": true,
+      "before_count": 823,
+      "after_count": 799,
+      "within_500_800": true
+    }
+  ],
+  "provenance": {
+    "exact_four_edit_reconstruction_matches": true,
+    "before_snapshot_path": "benchmarks/results/analysis-followup/reviewed-drafts/baseline/05/pass-1.md",
+    "before_snapshot_sha256": "72b46640078a198a3e964358e0dedb31a0025b55ab017f3df245ae3cbd968554",
+    "before_snapshot_matches_first_review_hash": true,
+    "first_review_path": "benchmarks/results/analysis-followup/pilot-final-review.json",
+    "first_review_ready_for_delivery_remains_false": true,
+    "initial_revision_manifest_preserved": true,
+    "historical_manifest_note": "pilot-changes.json 保留第一次修订的路径与哈希；05的第一次修订字节由 reviewed-drafts/baseline/05/pass-1.md 保存，当前最终稿另由本记录与 pilot-editorial-followup.json 绑定。"
+  },
+  "unchanged_other_report_checks": [
+    {
+      "case": "06",
+      "variant": "baseline",
+      "path": "benchmarks/results/analysis-followup/revised/baseline/06/report.md",
+      "sha256": "31cd51145d1f5fe44389b3114ccfd1c1574e2093004e90524db27d40de1975cf",
+      "matches_prior_reviewed_hash": true,
+      "prior_targeted_semantic_ready": true
+    },
+    {
+      "case": "02",
+      "variant": "candidate",
+      "path": "benchmarks/results/analysis-followup/revised/candidate/02/report.md",
+      "sha256": "f177792aef75fb1f500f00af4ae7d414b40b102a7e26ecd867eb567c3d01abbc",
+      "matches_prior_reviewed_hash": true,
+      "prior_targeted_semantic_ready": true
+    }
+  ],
+  "input_hashes": {
+    "benchmarks/results/analysis-followup/pilot-editorial-followup.json": "9af6f0e2633e7092e866c904be7799497ac288e3fa7aa18796b4cd858ac9f040",
+    "benchmarks/results/analysis-followup/pilot-final-review.json": "3abf6fda76744f141c780f91723a55716d73b0b16648f31979ec3bef0dd1a2e6",
+    "benchmarks/results/analysis-followup/reviewed-drafts/baseline/05/pass-1.md": "72b46640078a198a3e964358e0dedb31a0025b55ab017f3df245ae3cbd968554",
+    "benchmarks/results/analysis-followup/revised/baseline/05/report.md": "355f2dc5cd878a832865c2f3269de656b9f35228fbe459402baad2eb0d713f22",
+    "benchmarks/analysis-depth/holdout/05/source.txt": "5d6495719f9a97156b3c09c25ba8ebf9603436cf8cd8ba74cc6b238bb368445a",
+    "benchmarks/results/analysis-followup/pilot-changes.json": "a6d8a035ee906f6fd1a02b278f17d24623ccd349955b5543b18f7f759589d4bc",
+    "benchmarks/results/analysis-followup/pilot-disputes.md": "6927ab88434bd7e4035dbc27b8181b4332482c23d0dbecc18534f40fc6b56b89",
+    "benchmarks/results/analysis-followup/pilot-disputes.json": "38c1534fb321c5c096fc217c644005fe6399aa74c2ca3ff5faffcc2a55fba288",
+    "benchmarks/results/analysis-followup/revised/baseline/06/report.md": "31cd51145d1f5fe44389b3114ccfd1c1574e2093004e90524db27d40de1975cf",
+    "benchmarks/results/analysis-followup/revised/candidate/02/report.md": "f177792aef75fb1f500f00af4ae7d414b40b102a7e26ecd867eb567c3d01abbc"
+  },
+  "preservation": {
+    "only_new_output_written": "benchmarks/results/analysis-followup/pilot-final-review-followup.json",
+    "prior_review_or_evidence_overwritten": false,
+    "review_input_hashes_unchanged_during_write": true
+  },
+  "limitations": [
+    "可交付仅指本次三处争议及相关边界修订、四处后续编辑和原篇幅要求已闭合；不宣称全部潜在审美问题清零。",
+    "这是已知版本与先前意见后的编辑复核，未运行新盲评、重复生成或人类编辑评价。",
+    "不重算第一轮评分或偏好，也不构成版本质量提升的因果证明。"
+  ]
+}

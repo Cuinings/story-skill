@@ -67,9 +67,24 @@
       ],
       "candidate": [
         "skills/story-codex/SKILL.md",
-        "skills/story-codex-analyze/SKILL.md"
+        "skills/story-codex-analyze/SKILL.md",
+        "skills/story-codex-analyze/references/deep-reading.md"
       ],
-      "scope": "Upstream analysis references and all source text are excluded. No reduction in required source coverage is assumed."
+      "scope": "Conservative upstream entry-only comparison. Candidate includes the shared entry, analysis entry and deep-reading reference required for whole-work synthesis. Conditional teaching examples, all source text, reports and tool output are excluded. No reduction in required source coverage is assumed; this is not a quality or billed-usage comparison."
+    },
+    {
+      "id": "analysis_with_examples",
+      "label": "深读示范：含按需分析对照样例",
+      "upstream": [
+        "skills/story-long-analyze/SKILL.md"
+      ],
+      "candidate": [
+        "skills/story-codex/SKILL.md",
+        "skills/story-codex-analyze/SKILL.md",
+        "skills/story-codex-analyze/references/deep-reading.md",
+        "skills/story-codex-analyze/references/examples.md"
+      ],
+      "scope": "Conservative upstream entry-only comparison. Candidate includes shared and analysis entries, the deep-reading guide and conditional teaching examples. Source texts, reports, tools and evaluator instructions are excluded; this profile describes the larger teaching/repair instruction load, not every analysis request."
     },
     {
       "id": "review_conservative",
@@ -97,5 +112,5 @@
       "scope": "Conservative upstream entry-only comparison. Candidate includes shared entry, review entry and conditional Chinese conflict/payoff reference. Manuscripts, tools and historical revision references are excluded."
     }
   ],
-  "report_path": "benchmarks/results/v0.5.0/tokens.json"
+  "report_path": "benchmarks/results/v0.5.1/tokens.json"
 }

@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "skill": "story-codex",
+      "exit_code": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    },
+    {
+      "skill": "story-codex-analyze",
+      "exit_code": 0,
+      "stdout": "Skill is valid!\n",
+      "stderr": ""
+    }
+  ]
+}

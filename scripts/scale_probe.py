@@ -23,7 +23,6 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "skills/story-codex/scripts/story.py"
 BASELINE = ROOT / "benchmarks/results/scaling.json"
-DEFAULT_OUTPUT = ROOT / "benchmarks/results/v0.5.0/scaling.json"
 
 
 def load_module(name, path):
@@ -295,7 +294,8 @@ def main():
     parser.add_argument("--cards", type=int, nargs="+", help="One count per chapter size; defaults to 2000/20000")
     parser.add_argument("--integrity", choices=("strict", "local"), nargs="+", default=["strict", "local"])
     parser.add_argument("--timeout", type=int, default=300, help="Seconds allowed for each CLI corroboration")
-    parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT)
+    parser.add_argument("--output", type=Path,
+                        help="Defaults to benchmarks/results/v<runtime VERSION>/scaling.json")
     args = parser.parse_args()
     if any(count < 1 for count in args.chapters) or args.timeout < 1:
         parser.error("chapter counts and timeout must be positive")
@@ -304,7 +304,8 @@ def main():
     if len(set(args.integrity)) != len(args.integrity):
         parser.error("integrity modes must not be repeated")
     writer = load_module("scale_report_writer", ROOT / "scripts/verify.py")
-    output = writer.report_path(args.output)
+    output = writer.report_path(args.output if args.output is not None else
+                                writer.current_evidence_directory() / "scaling.json")
     if output == BASELINE.resolve():
         parser.error("The v0.2 scaling.json baseline is immutable; select another --output")
     try:

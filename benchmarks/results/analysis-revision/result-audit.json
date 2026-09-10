@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "reviewer_type": "independent_model_agent",
+  "task": "revision_result_audit",
+  "scope": "Final result claims against archived manifests, review receipts, quotation counts and engineering receipts; not a new literary review",
+  "necessary_corrections": [],
+  "supported_claims": [
+    "Editorial revision and independent review, not a new version blind trial",
+    "Three literary reviewers produced four files, including the same reviewer follow-up; first rejection retained",
+    "Four reports: 1654/1705/1664/1777 non-whitespace characters and 86 quotation occurrences",
+    "Transfer output: 800 characters and 12 quotations; one version and no repeated sampling",
+    "No runtime-code change; previous regression not rerun; development version unpublished"
+  ]
+}

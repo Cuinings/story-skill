@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--source",
+    "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "--start",
+    "0",
+    "--end",
+    "210",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/candidate/kongyiji/book"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"budget\":{\"limit\":12000,\"unit\":\"utf8_bytes\",\"used\":791},\"end\":210,\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"start\":0,\"text\":\"魯鎭的酒店的格局，是和別處不同的：都是當街一個曲尺形的大櫃臺，櫃裏面豫備着熱水，可以隨時温酒。做工的人，傍午傍晚散了工，每每花四文銅錢，買一碗酒——這是二十多年前的事，現在每碗要漲到十文，——靠櫃外站着，熱熱的喝了休息；倘肯多花一文，便可以買一碟鹽煑筍，或者茴香豆，做下酒物了，如果出到了十幾文，那就能買一樣葷菜，但這些顧客，多是短衣幫，大抵沒有這樣闊綽。只有穿長衫的，纔踱進店面隔壁的房子裏，要酒要菜，慢慢地坐喝。\\n\\n\"}\n",
+  "stderr": ""
+}

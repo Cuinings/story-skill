@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "report",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+    "--source",
+    "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "--file",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/report.md"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"analyzed\":2,\"backups\":[],\"chunks_total\":2,\"complete_for_imported_text\":true,\"exported\":[\".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md\"],\"exports_complete\":true,\"finalized\":true,\"integrity\":{\"full_book_verified\":true,\"last_full_audit_revision\":4,\"mode\":\"strict\",\"note\":\"Hash verification is a point-in-time observation; outside editors can save again.\",\"unverified_archive_count\":0,\"verified_file_count\":1},\"next_chunk\":null,\"pending\":0,\"report\":\"/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book/.story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md\",\"report_path\":\".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md\",\"scope_exports_complete\":true,\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}\n",
+  "stderr": ""
+}

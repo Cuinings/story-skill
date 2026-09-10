@@ -1,0 +1,158 @@
+{
+  "status": "passed_local_material_integrity",
+  "audited_at_utc": "2026-09-10T10:13:33.897054+00:00",
+  "scope": "本地材料一致性及纯切块函数兼容性核验，不是扫描校勘。",
+  "input_sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+  "measurements": {
+    "utf8_bytes": 64393,
+    "unicode_codepoints": 22112,
+    "paragraphs_including_headings": 324,
+    "chapters": 9,
+    "U200B_count": 57
+  },
+  "checks": {
+    "paragraph_text_ranges_and_sha256": "全部324段匹配source中的Unicode码点范围及文本SHA256；序号连续，web_line递增。",
+    "exact_reconstruction": "以两个LF连接324段，再追加一个LF，与source.txt字节完全一致。",
+    "chapter_metadata": "9章标题、首段编号、web_line和起止范围互相一致，连续覆盖[0,22112)。",
+    "opening_and_closing": "首段第一章　序；末段（一九二一年十二月。）；闭合日期后有单LF。",
+    "provenance_metadata": "SHA256、字节数、码点数、段数、章数、标题和末尾日期与材料一致。",
+    "source_md_summary": "SOURCE.md中的SHA256、字符总数及九章范围说明与材料一致。",
+    "source_and_rights_statements": "作者、来源URL、页面oldid、获取时间、原作公版声明、网页贡献者及CC BY-SA/使用条款说明内部自洽；明确不随项目MIT重新授权。",
+    "renderer_suffix_removal": "无残留†或两个外链域名；旧新全文比较仅第3段的两个域名尾标及其紧随空格被删除。",
+    "unicode_coordinates": "范围均按Python Unicode码点验证；补充平面汉字𩓐位于[12325,12326)，保留的唯一ASCII空格位于第11段[1315,1316)。"
+  },
+  "chapter_ranges": [
+    [
+      0,
+      1748
+    ],
+    [
+      1748,
+      3991
+    ],
+    [
+      3991,
+      6266
+    ],
+    [
+      6266,
+      8985
+    ],
+    [
+      8985,
+      11278
+    ],
+    [
+      11278,
+      14028
+    ],
+    [
+      14028,
+      16546
+    ],
+    [
+      16546,
+      19148
+    ],
+    [
+      19148,
+      22112
+    ]
+  ],
+  "split_source": {
+    "method": "从当前story.py抽取并执行纯split_source函数AST，未导入或访问分析数据库。",
+    "tested_maxima": {
+      "256": 104,
+      "1200": 23,
+      "2400": 14,
+      "10000": 9
+    },
+    "all_tests": "每个上限下均覆盖连续、重建精确，且所有块均在各自声明章节内。",
+    "default_2400_ranges": [
+      [
+        0,
+        1748
+      ],
+      [
+        1748,
+        3991
+      ],
+      [
+        3991,
+        6266
+      ],
+      [
+        6266,
+        8660
+      ],
+      [
+        8660,
+        8985
+      ],
+      [
+        8985,
+        11278
+      ],
+      [
+        11278,
+        13634
+      ],
+      [
+        13634,
+        14028
+      ],
+      [
+        14028,
+        16242
+      ],
+      [
+        16242,
+        16546
+      ],
+      [
+        16546,
+        18932
+      ],
+      [
+        18932,
+        19148
+      ],
+      [
+        19148,
+        21524
+      ],
+      [
+        21524,
+        22112
+      ]
+    ]
+  },
+  "preserved_attempt": {
+    "directory": "benchmarks/results/analysis-crosschapter/attempts/source-extraction-1",
+    "old_input_sha256": "d2624a1d4c1861a3a1583d59f4d7a6b7e874036a95a5bd58394d02e80a49fe69",
+    "old_source_sha256_verified": true,
+    "old_five_source_files_present": true,
+    "run_files_observed": 18,
+    "database_path_observed": "run/.story/state.sqlite3",
+    "exact_source_difference": {
+      "paragraph": 3,
+      "removed_unicode_codepoints": 37,
+      "removed_utf8_bytes": 41,
+      "removed_strings": [
+        "†zh.wikipedia.org ",
+        "†en.wikisource.org "
+      ]
+    },
+    "preservation_limit": "验证旧输入哈希并检查归档文件存在；未读取日志、数据库分析内容或分析报告，未验证旧运行记录是否穷尽此前全部历史。"
+  },
+  "documentation_notes_observed": [
+    "核验时provenance.extraction和SOURCE.md尚未明示末尾单LF及Unicode码点零基左闭右开约定；实际数据通过，不影响本文字节核验。",
+    "保留第11段内部链接后ASCII空格的策略可进一步明示为网页渲染格式；不将其断言为原刊排版。"
+  ],
+  "limits": [
+    "未联网，未逐字对照扫描件或底层HTML；本地一致性不证明版本文字准确或独立认证原作完整性。",
+    "未提供原始四个网页窗口，无法独立重演重叠窗口一致及空白/UI行排除声明。",
+    "来源页公版及网页授权声明仅核对内部自洽，未外部验证。",
+    "未阅读分析报告或评价生成者；材料、旧尝试和运行中的分析库均未改动。"
+  ]
+}

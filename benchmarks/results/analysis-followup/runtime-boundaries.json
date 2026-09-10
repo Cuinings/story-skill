@@ -1,0 +1,293 @@
+{
+  "ok": true,
+  "commands": [
+    {
+      "command": "init",
+      "arguments": [
+        "--title",
+        "门边流程验收",
+        "--kind",
+        "analysis"
+      ],
+      "exit_code": 0,
+      "result": {
+        "created": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程",
+        "id": "5d0caaa3-313a-49ba-8025-881388cdf077",
+        "imported_through": 0,
+        "kind": "analysis",
+        "last_chapter": 0,
+        "revision": 0,
+        "schema": 2,
+        "title": "门边流程验收"
+      }
+    },
+    {
+      "command": "ingest",
+      "arguments": [
+        "--file",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/原文.txt",
+        "--coverage",
+        "complete"
+      ],
+      "exit_code": 0,
+      "result": {
+        "analyzed": 0,
+        "chunks_total": 1,
+        "complete_for_imported_text": false,
+        "idempotent": false,
+        "next_chunk": 1,
+        "pending": 1,
+        "report_path": null,
+        "source": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "source_coverage": "complete",
+        "text_coverage_contiguous": true
+      }
+    },
+    {
+      "command": "next",
+      "arguments": [
+        "--source",
+        "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7"
+      ],
+      "exit_code": 0,
+      "result": {
+        "budget": {
+          "limit": 22000,
+          "unit": "utf8_bytes",
+          "used": 828
+        },
+        "chunks": [
+          {
+            "end": 167,
+            "ordinal": 1,
+            "sha": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+            "start": 0,
+            "text": "门锁响时，林秋把第二只碗藏到电饭锅后面。\n弟弟进门，没有脱外套。“我拿了户口本就走。”\n“抽屉里。”\n他拉开抽屉，又关上。\n“没等你。”她把电视开大了一格。\n电视里的人笑起来。他们都没有笑。\n他拿着户口本走到门口，停下：“饭还有吗？”\n林秋没答，伸手取出那只碗。\n“锅里。”她说。\n弟弟脱掉外套，搭在门边的椅背上。户口本仍攥在手里。\n",
+            "title": "未命名文本 / 前言"
+          }
+        ],
+        "pending": 1,
+        "source": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "source_coverage": "complete"
+      }
+    },
+    {
+      "command": "record",
+      "arguments": [
+        "--source",
+        "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "--chunk",
+        "1",
+        "--input",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/record.json"
+      ],
+      "exit_code": 0,
+      "result": {
+        "analyzed": 1,
+        "chunks_total": 1,
+        "complete_for_imported_text": true,
+        "idempotent": false,
+        "next_chunk": null,
+        "pending": 0,
+        "recorded": 1,
+        "report_path": null,
+        "source": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "source_coverage": "complete",
+        "text_coverage_contiguous": true
+      }
+    },
+    {
+      "command": "record",
+      "arguments": [
+        "--source",
+        "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "--chunk",
+        "1",
+        "--input",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/revised-record.json",
+        "--replace"
+      ],
+      "exit_code": 0,
+      "result": {
+        "analyzed": 1,
+        "chunks_total": 1,
+        "complete_for_imported_text": true,
+        "idempotent": false,
+        "next_chunk": null,
+        "pending": 0,
+        "recorded": 1,
+        "report_path": null,
+        "source": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "source_coverage": "complete",
+        "text_coverage_contiguous": true
+      }
+    },
+    {
+      "command": "report",
+      "arguments": [
+        "--source",
+        "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "--file",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/已提交分析.md"
+      ],
+      "exit_code": 0,
+      "result": {
+        "analyzed": 1,
+        "backups": [],
+        "chunks_total": 1,
+        "complete_for_imported_text": true,
+        "exported": [
+          ".story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md"
+        ],
+        "exports_complete": true,
+        "finalized": true,
+        "integrity": {
+          "full_book_verified": true,
+          "last_full_audit_revision": 4,
+          "mode": "strict",
+          "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+          "unverified_archive_count": 0,
+          "verified_file_count": 1
+        },
+        "next_chunk": null,
+        "pending": 0,
+        "report": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/.story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md",
+        "report_path": ".story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md",
+        "scope_exports_complete": true,
+        "source": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "source_coverage": "complete",
+        "text_coverage_contiguous": true
+      }
+    },
+    {
+      "command": "report",
+      "arguments": [
+        "--source",
+        "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "--file",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/已提交分析.md"
+      ],
+      "exit_code": 0,
+      "result": {
+        "analyzed": 1,
+        "backups": [],
+        "chunks_total": 1,
+        "complete_for_imported_text": true,
+        "exported": [],
+        "exports_complete": true,
+        "finalized": true,
+        "integrity": {
+          "full_book_verified": true,
+          "last_full_audit_revision": 4,
+          "mode": "strict",
+          "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+          "unverified_archive_count": 0,
+          "verified_file_count": 1
+        },
+        "next_chunk": null,
+        "pending": 0,
+        "report": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/.story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md",
+        "report_path": ".story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md",
+        "scope_exports_complete": true,
+        "source": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "source_coverage": "complete",
+        "text_coverage_contiguous": true
+      }
+    },
+    {
+      "command": "record",
+      "arguments": [
+        "--source",
+        "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "--chunk",
+        "1",
+        "--input",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/after-final-record.json",
+        "--replace"
+      ],
+      "exit_code": 2,
+      "result": {
+        "error": "report_already_final",
+        "message": "This analysis has a final report; create a separately reviewed revision",
+        "ok": false
+      }
+    },
+    {
+      "command": "report",
+      "arguments": [
+        "--source",
+        "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "--file",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/不同分析.md"
+      ],
+      "exit_code": 2,
+      "result": {
+        "error": "report_exists",
+        "message": "Final report is preserved; save a separately reviewed revision",
+        "ok": false
+      }
+    },
+    {
+      "command": "report",
+      "arguments": [
+        "--source",
+        "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+        "--file",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/.story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md"
+      ],
+      "exit_code": 2,
+      "result": {
+        "error": "report_exists",
+        "message": "Final report is preserved; save a separately reviewed revision",
+        "ok": false
+      }
+    },
+    {
+      "command": "status",
+      "arguments": [],
+      "exit_code": 0,
+      "result": {
+        "book": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程",
+        "cards": 0,
+        "changed_export_count": 0,
+        "changed_exports": [],
+        "id": "5d0caaa3-313a-49ba-8025-881388cdf077",
+        "imported_through": 0,
+        "integrity": {
+          "full_book_verified": true,
+          "last_full_audit_revision": 4,
+          "mode": "strict",
+          "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+          "unverified_archive_count": 0,
+          "verified_file_count": 1
+        },
+        "kind": "analysis",
+        "last_chapter": 0,
+        "more_sources": false,
+        "next_chapter": 1,
+        "pending_export_count": 0,
+        "pending_exports": [],
+        "recent_sources": [
+          {
+            "analyzed": 1,
+            "chunks_total": 1,
+            "complete_for_imported_text": true,
+            "name": "原文.txt",
+            "next_chunk": null,
+            "pending": 0,
+            "report_path": ".story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md",
+            "source": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+            "source_coverage": "complete",
+            "text_coverage_contiguous": true
+          }
+        ],
+        "revision": 4,
+        "sources": 1,
+        "title": "门边流程验收"
+      }
+    }
+  ],
+  "protected_export_sha256": "2f04a3310b5f88b82fe7ddd14d7cd5f62b150c183131cc77bd09107b7d55d63b",
+  "method": "Real CLI subprocesses in a temporary book; no database editing",
+  "fixture": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5"
+}

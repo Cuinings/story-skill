@@ -1,0 +1,18 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "-X",
+    "utf8",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-crosschapter-skills-upw24kgs/story-codex/scripts/story.py",
+    "coverage",
+    "--source",
+    "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+    "--book",
+    "/Users/cuining/Documents/GitHub/story-skill/benchmarks/results/analysis-crosschapter/run"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"analyzed\":14,\"chunks_total\":14,\"complete_for_imported_text\":true,\"next_chunk\":null,\"pending\":0,\"report_path\":\".story/analysis/d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c/report.md\",\"source\":\"d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}\n",
+  "stderr": "",
+  "recorded_utc": "2026-09-10T10:30:12.730124+00:00"
+}

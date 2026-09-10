@@ -1,0 +1,39 @@
+{
+  "title": "阿Q正傳",
+  "author": "魯迅",
+  "retrieved_utc": "2026-09-10T10:03:43.070580+00:00",
+  "page_url": "https://zh.wikisource.org/wiki/阿Q正傳",
+  "page_reported_oldid": 2633268,
+  "fixed_revision_link": "https://zh.wikisource.org/w/index.php?title=阿Q正傳&oldid=2633268",
+  "acquisition": "web tool rendered text from four overlapping page windows; all lines124–729 present and overlapping text equal. Direct REST requests returned HTTP403 and were not used.",
+  "extraction": "From first chapter heading through the closing date. Omit blank/UI edit lines; convert the internal link to its displayed title; remove Markdown heading prefix; join displayed body paragraphs with two LF. Preserve visible punctuation, variants and U+200B present in the renderer.",
+  "input_sha256": "d2624a1d4c1861a3a1583d59f4d7a6b7e874036a95a5bd58394d02e80a49fe69",
+  "bytes": 64434,
+  "characters": 22149,
+  "paragraphs_including_headings": 324,
+  "chapter_count": 9,
+  "chapter_titles": [
+    "第一章　序",
+    "第二章　優勝記略",
+    "第三章　續優勝記略",
+    "第四章　戀愛的悲劇",
+    "第五章　生計問題",
+    "第六章　從中興到末路",
+    "第七章　革命",
+    "第八章　不准革命",
+    "第九章　大團圓"
+  ],
+  "closing_text": "（一九二一年十二月。）",
+  "source_scope": "The complete nine-chapter body in the retrieved rendered page. Not a scan-collated critical edition; renderer may normalize layout.",
+  "rights": {
+    "original": "Page marks the original work public domain; author1936, PD-old-80-1996. Original text is not relicensed under project MIT.",
+    "web_contributions": "Wikisource contributors, CC BY-SA 4.0 and page terms where applicable; attribution retained.",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "terms_url": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use"
+  },
+  "limits": [
+    "Classic work may occur in model training; not unseen or held-out.",
+    "oldid identifies the main page; transcluded dependencies and renderer output may change. Exact input is the local SHA256.",
+    "Web rendering was matched across overlapping windows; underlying HTML and scan images were not compared character by character."
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "init",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+    "--title",
+    "孔乙己",
+    "--kind",
+    "analysis"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"created\":\"/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book\",\"id\":\"a5b0a62f-8095-4cb5-b068-3468fb7cf458\",\"imported_through\":0,\"kind\":\"analysis\",\"last_chapter\":0,\"revision\":0,\"schema\":2,\"title\":\"孔乙己\"}\n",
+  "stderr": ""
+}

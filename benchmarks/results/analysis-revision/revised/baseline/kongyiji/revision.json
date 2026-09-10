@@ -1,0 +1,8 @@
+{
+  "source_report": "benchmarks/results/analysis-real/reports/baseline/kongyiji/report.md",
+  "source_report_sha256": "7a6d183547a10349da7cf59f6a272cc03b5fed2312f45965eb7a0b19de7d4e1e",
+  "revised_report_sha256": "453bd6e8e0dd7afb1c46e2365e8b141c3f6ce481b6e2d108a1fd4205b6211c89",
+  "body_non_whitespace_characters": 1654,
+  "status": "ready_after_independent_model_review",
+  "scope": "New editorial copy made using known prior feedback; not a newly generated blind comparison output; not a CLI final-report replacement"
+}

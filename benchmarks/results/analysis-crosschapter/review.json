@@ -1,0 +1,939 @@
+{
+  "review_type": "独立代理文本评阅",
+  "reviewed_report": {
+    "path": "/Users/cuining/Documents/GitHub/story-skill/benchmarks/results/analysis-crosschapter/original-report.md",
+    "sha256": "a2bdb3b8f1fade545ed0dae060e59f10a9c8f375cde1374464350bf3ad6441b1"
+  },
+  "source": {
+    "path": "/Users/cuining/Documents/GitHub/story-skill/benchmarks/analysis-crosschapter/source.txt",
+    "unicode_codepoints": 22112,
+    "chapter_count": 9
+  },
+  "scope": {
+    "read_materials": [
+      "/Users/cuining/Documents/GitHub/story-skill/benchmarks/analysis-crosschapter/source.txt",
+      "/Users/cuining/Documents/GitHub/story-skill/benchmarks/analysis-crosschapter/chapters.json",
+      "/Users/cuining/Documents/GitHub/story-skill/benchmarks/analysis-crosschapter/task.md",
+      "/Users/cuining/Documents/GitHub/story-skill/benchmarks/results/analysis-crosschapter/original-report.md"
+    ],
+    "method": "先完整阅读九章原文、目录及任务，收到冻结完成稿后再逐项核对；没有读取过程文件、部分报告、技能说明、历史评阅或外部评论，没有联系生成者或联网。",
+    "offset_convention": "所有范围均为对应 UTF-8 文件解码后的 Unicode 码点，零起点、右端不含；保留原文换行与不可见字符。报告范围含标题。",
+    "not_assessed": [
+      "不认证导入、十四块覆盖、工具回读或其他实际程序行为；报告自述不作为这些行为的证据。",
+      "未取得导入块表，故不认证报告块号定位；本评阅另给可独立复核的原文码点范围。",
+      "不设总分、排名或大师认证，也不以人类评阅者身份陈述。"
+    ]
+  },
+  "overall": {
+    "status": "成立",
+    "must_modify": false,
+    "reason": "三项核心跨章判断都有前后证据，连接没有依赖外部常识。人物改变被限制为行动办法的调整，欲望延续与权力差异同时保留；临终恐惧没有被拔高为道德觉醒。对参与抢案、女人接近与末尾停唱的竞争解释实际降低了结论强度。未发现必须修改的实质误读或无证据的决定性推论。",
+    "required_revisions": [],
+    "nonblocking_note_ids": [
+      "N1",
+      "N2"
+    ]
+  },
+  "assessments": [
+    {
+      "id": "C1",
+      "criterion": "核心跨章结论一：精神胜利能暂时修复受辱感，不能取消外部代价",
+      "status": "成立",
+      "must_modify": false,
+      "report_evidence": [
+        {
+          "quote": "精神胜利是调整受辱经验的办法，却不是从不痛苦。",
+          "unicode_codepoint_range": [
+            198,
+            221
+          ]
+        },
+        {
+          "quote": "同一种护面子的解释，可以救一夜情绪，却遮蔽眼前程序的后果。",
+          "unicode_codepoint_range": [
+            344,
+            373
+          ]
+        },
+        {
+          "quote": "外部损失终于迫使他求食、进城，故不能说他只会空想。",
+          "unicode_codepoint_range": [
+            572,
+            597
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "他這回纔有些感到失敗的苦痛了。",
+          "chapter": "第二章　優勝記略",
+          "unicode_codepoint_range": [
+            3850,
+            3865
+          ],
+          "evidence_type": "叙述者描写人物感受"
+        },
+        {
+          "quote": "似乎打的是自己，被打的是別一個自己，不久也就彷彿是自己打了別個一般",
+          "chapter": "第二章　優勝記略",
+          "unicode_codepoint_range": [
+            3920,
+            3953
+          ],
+          "evidence_type": "叙述者描写人物想象"
+        },
+        {
+          "quote": "而阿Q卻仍然沒有人來叫他做短工。",
+          "chapter": "第五章　生計問題",
+          "unicode_codepoint_range": [
+            10221,
+            10237
+          ],
+          "evidence_type": "叙述事件后果"
+        },
+        {
+          "quote": "待三個蘿蔔喫完時，他已經打定了進城的主意了。",
+          "chapter": "第五章　生計問題",
+          "unicode_codepoint_range": [
+            11254,
+            11276
+          ],
+          "evidence_type": "叙述人物决定"
+        },
+        {
+          "quote": "孫子纔畫得很圓的圓圈呢。",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            20590,
+            20602
+          ],
+          "evidence_type": "人物想法"
+        }
+      ],
+      "reason": "第二章失钱时既有旧说法失效，也有自打后改换施受位置；第五章争斗结束却未恢复工作；第九章画圈后的释然再次把注意力放在面子。报告据此比较同一心理操作在不同代价下的作用，而非把九章概括成永远不痛或永远不行动。衣衫变尿布与求后代失败的呼应是有物证支撑的分析性联想，不是声称赵家整体由阿Q供养。",
+      "boundary": "“遮蔽程序后果”可成立为叙事效果判断；不能据此断言精神胜利是无知或死亡的唯一原因。报告后文另列办案者的目标，已限制这种单因解释。"
+    },
+    {
+      "id": "C2",
+      "criterion": "核心跨章结论二：关系认可随资源与威胁变化，革命尝试延续等级欲望",
+      "status": "成立",
+      "must_modify": false,
+      "report_evidence": [
+        {
+          "quote": "敬重追随可利用或须防备的力量，尚未变成对人的稳定承认。",
+          "unicode_codepoint_range": [
+            757,
+            784
+          ]
+        },
+        {
+          "quote": "他想占据旧等级的上端，这比已经追求平等的解释少作假设。",
+          "unicode_codepoint_range": [
+            866,
+            893
+          ]
+        },
+        {
+          "quote": "变化在办法，欲望结构仍延续；对方以棍棒和旁人吆喝逐客，他自己想排斥小D时却未真正动手，双方权力并不对等。",
+          "unicode_codepoint_range": [
+            931,
+            983
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "『你怎麽會姓趙！——你那裏配姓趙！』",
+          "chapter": "第一章　序",
+          "unicode_codepoint_range": [
+            850,
+            868
+          ],
+          "evidence_type": "人物直接话语"
+        },
+        {
+          "quote": "或者因爲阿Q說是趙太爺的本家，雖然挨了打，大家也還怕有些眞",
+          "chapter": "第三章　續優勝記略",
+          "unicode_codepoint_range": [
+            4337,
+            4366
+          ],
+          "evidence_type": "叙述者提出的可能解释"
+        },
+        {
+          "quote": "因爲這是『我』去叫他的",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            12994,
+            13005
+          ],
+          "evidence_type": "叙述者转述赵太爷的判断"
+        },
+        {
+          "quote": "村人對于阿Q的『敬而遠之』者，本因爲怕結怨，誰料他不過是一個不敢再偸的偸兒呢？",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            13973,
+            14012
+          ],
+          "evidence_type": "叙述者说明村人的态度变化"
+        },
+        {
+          "quote": "叫小D來搬，要搬得快，搬得不快打嘴巴",
+          "chapter": "第七章　革命",
+          "unicode_codepoint_range": [
+            15633,
+            15651
+          ],
+          "evidence_type": "人物革命幻想"
+        },
+        {
+          "quote": "阿Q萬料不到他也敢這樣做，自己也決不准他這樣做",
+          "chapter": "第八章　不准革命",
+          "unicode_codepoint_range": [
+            17226,
+            17249
+          ],
+          "evidence_type": "叙述者描写人物想法"
+        },
+        {
+          "quote": "第一着仍然要和革命黨去結識。",
+          "chapter": "第八章　不准革命",
+          "unicode_codepoint_range": [
+            17624,
+            17638
+          ],
+          "evidence_type": "人物所悟办法"
+        }
+      ],
+      "reason": "姓氏门槛、购物时重新开门、偷盗能力披露后敬畏消退，构成条件变化后的连续检验；第七章支使小D的幻想与第八章不准小D盘辫互证，足以限制“已转向平等”的说法。求见旧仇人又证明办法有所调整，报告未把欲望延续误写为行为完全不变。",
+      "reasonable_alternative": "可更强调阿Q渴求承认、对排斥感到不公，而不只强调居上欲望；但这并不能取消小D必须服役且不得同样革命的证据，属于侧重点差异。"
+    },
+    {
+      "id": "C3",
+      "criterion": "核心跨章结论三：信息与观看角色的安排把主体感受交给他人定名和裁断",
+      "status": "成立",
+      "must_modify": false,
+      "report_evidence": [
+        {
+          "quote": "立传者连名字也不能坐实，与结尾村人轻易断定他坏相接：知识不足没有妨碍判词成立。",
+          "unicode_codepoint_range": [
+            157,
+            196
+          ]
+        },
+        {
+          "quote": "观看的角色倒转尤为尖锐。",
+          "unicode_codepoint_range": [
+            1239,
+            1251
+          ]
+        },
+        {
+          "quote": "结尾把私人感知突然截断，转交众人的账目。",
+          "unicode_codepoint_range": [
+            1444,
+            1464
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "我雖不知道是眞沒有，還是沒有查",
+          "chapter": "第一章　序",
+          "unicode_codepoint_range": [
+            1389,
+            1404
+          ],
+          "evidence_type": "立传叙述者明示知识限制"
+        },
+        {
+          "quote": "爲滿足那些賞鑒家起見",
+          "chapter": "第三章　續優勝記略",
+          "unicode_codepoint_range": [
+            6101,
+            6111
+          ],
+          "evidence_type": "叙述者说明阿Q加码欺凌的动机"
+        },
+        {
+          "quote": "咳，好看。殺革命黨。唉，好看好看",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            12252,
+            12268
+          ],
+          "evidence_type": "人物直接话语"
+        },
+        {
+          "quote": "現在你的同黨在那里？",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            19967,
+            19977
+          ],
+          "evidence_type": "问讯者预设同党身份的话语"
+        },
+        {
+          "quote": "這些眼睛們似乎連成一氣，已經在那里咬他的靈魂。",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            21795,
+            21818
+          ],
+          "evidence_type": "带人物感受的叙述比喻"
+        },
+        {
+          "quote": "被鎗斃便是他的壞的證據",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            22003,
+            22014
+          ],
+          "evidence_type": "叙述者转述未庄舆论"
+        },
+        {
+          "quote": "他們白跟一趟了",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            22090,
+            22097
+          ],
+          "evidence_type": "叙述者转述城里看客的评价"
+        }
+      ],
+      "reason": "开篇记录不能坐实与结尾无须了解便定罪相连；第三章借看客赏识施害、第六章欣赏杀头与末章被期待表演形成角色换位。最后从阿Q的恐惧转入各家的损失和公众评价，是可直接定位的叙述转场，不只是主题概括。",
+      "boundary": "“被抹去”在报告中可理解为姓名、经历与自述不获承认的主题判断；原文不支持据案卷查不到姓名进一步认定有人蓄意销毁档案，报告没有作出这一越界判断。"
+    },
+    {
+      "id": "T1",
+      "criterion": "人物轨迹：是否把处境差异错判为人格改变",
+      "status": "成立",
+      "must_modify": false,
+      "report_evidence": [
+        {
+          "quote": "但他并非没有学习：自封与盘辫无效后，他悟到须结识革命党，并鼓勇求见旧日仇人。",
+          "unicode_codepoint_range": [
+            893,
+            931
+          ]
+        },
+        {
+          "quote": "这里停唱首先有身体原因，不能直接算人格转变。",
+          "unicode_codepoint_range": [
+            1314,
+            1336
+          ]
+        },
+        {
+          "quote": "恐惧压断了表演和自我安慰，但没有反省自己欺人的文字，称临终道德觉醒仍嫌证据不足。",
+          "unicode_codepoint_range": [
+            1402,
+            1442
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "其實他的生活，倒也並不比造反之前反艱難，人見他也客氣，店舖也不說要現錢。",
+          "chapter": "第八章　不准革命",
+          "unicode_codepoint_range": [
+            17118,
+            17154
+          ],
+          "evidence_type": "叙述者区分生活处境与人物失意"
+        },
+        {
+          "quote": "第一着仍然要和革命黨去結識。",
+          "chapter": "第八章　不准革命",
+          "unicode_codepoint_range": [
+            17624,
+            17638
+          ],
+          "evidence_type": "人物办法调整"
+        },
+        {
+          "quote": "但他終于饒放了，單是怒目而視的吐一口唾沫道",
+          "chapter": "第八章　不准革命",
+          "unicode_codepoint_range": [
+            17313,
+            17334
+          ],
+          "evidence_type": "叙述人物实际行为"
+        },
+        {
+          "quote": "纔記得這兩手原來都綑着，于是『手執鋼鞭』也不唱了。",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            21431,
+            21456
+          ],
+          "evidence_type": "叙述停止唱戏的直接身体条件"
+        },
+        {
+          "quote": "過了二十年又是一個",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            21459,
+            21468
+          ],
+          "evidence_type": "人物随后仍作出的英雄姿态话语"
+        },
+        {
+          "quote": "『救命，……』\n\n然而阿Q沒有說。",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            21820,
+            21837
+          ],
+          "evidence_type": "人物未说出口的求救及叙述说明"
+        }
+      ],
+      "reason": "报告把策略学习、等级欲望、行动能力和临终恐惧分开。它没有用此前能欺人而后来被逐来证明性格突然懦弱，也没有把手被绑导致停唱算作醒悟；随后的英雄套话更支持这种限制。恐惧终止眼前表演不等于形成了可持续的新认识，报告没有跨过这一证据边界。",
+      "nonblocking_note": "N1 对“无效”及“老Q”句子的程度和顺序提出措辞澄清，不改变本项结论。"
+    },
+    {
+      "id": "E1",
+      "criterion": "事实、人物自述、叙述者评价与分析推断是否分明",
+      "status": "成立",
+      "must_modify": false,
+      "report_evidence": [
+        {
+          "quote": "挨名人打又获得敬意，叙述却对宗亲传言、沾名禁忌保留不同解释（块3）。",
+          "unicode_codepoint_range": [
+            630,
+            664
+          ]
+        },
+        {
+          "quote": "第六章先给中兴排场和阿Q的不满城人说，再披露惊逃经历；",
+          "unicode_codepoint_range": [
+            999,
+            1026
+          ]
+        },
+        {
+          "quote": "它不能当作作品认同责女的直接证据。",
+          "unicode_codepoint_range": [
+            1660,
+            1677
+          ]
+        },
+        {
+          "quote": "上述是写法推断与建议，并非经读者实验验证；",
+          "unicode_codepoint_range": [
+            1945,
+            1966
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "據阿Q說，他是在舉人老爺家裏幫忙",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            11846,
+            11862
+          ],
+          "evidence_type": "叙述者标记人物自述"
+        },
+        {
+          "quote": "只有一班閒人們卻還要尋根究底的去探阿Q的細底。阿Q也並不諱飾，傲然的說出他的經驗來。",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            13817,
+            13859
+          ],
+          "evidence_type": "叙述者交代后续披露也来自人物讲述"
+        },
+        {
+          "quote": "或者因爲阿Q說是趙太爺的本家，雖然挨了打，大家也還怕有些眞",
+          "chapter": "第三章　續優勝記略",
+          "unicode_codepoint_range": [
+            4337,
+            4366
+          ],
+          "evidence_type": "叙述者推测"
+        },
+        {
+          "quote": "否則，也如孔廟裏的太牢一般",
+          "chapter": "第三章　續優勝記略",
+          "unicode_codepoint_range": [
+            4377,
+            4390
+          ],
+          "evidence_type": "叙述者另提比拟解释"
+        },
+        {
+          "quote": "雖然史無明文，我們也假定",
+          "chapter": "第四章　戀愛的悲劇",
+          "unicode_codepoint_range": [
+            6918,
+            6930
+          ],
+          "evidence_type": "叙述者仿正经论证的反讽话语"
+        },
+        {
+          "quote": "不錯，應該有一個女人，斷子絕孫便沒有人供一碗飯",
+          "chapter": "第四章　戀愛的悲劇",
+          "unicode_codepoint_range": [
+            6644,
+            6667
+          ],
+          "evidence_type": "阿Q的想法"
+        },
+        {
+          "quote": "所以他那思想，其實是樣樣合於聖經賢傳的",
+          "chapter": "第四章　戀愛的悲劇",
+          "unicode_codepoint_range": [
+            6710,
+            6729
+          ],
+          "evidence_type": "叙述者用典评论"
+        }
+      ],
+      "reason": "报告在关键风险处保留了说话者和知识边界：城人评价归于阿Q，村人敬意的两个原因不强选其一，责女话语不直接上升为作品价值，阅读效果及迁移建议以可能或推断处理。第四章“以供饭、留后来解释欲望”可由人物自己的供饭想法支持，并不必须把其后的圣贤用典也当作阿Q明确说出的完整理论。",
+      "boundary": "第六章惊逃的细节也是阿Q自述，经叙述者转述后成为村人所信信息；报告将其称为“披露”可以成立，但不能把这一措辞升级为独立调查已经证实全部细节。报告并未作这种升级。"
+    },
+    {
+      "id": "A1",
+      "criterion": "有歧义判断的竞争解释是否真正改变结论强度",
+      "status": "成立",
+      "must_modify": false,
+      "cases": [
+        {
+          "topic": "临终觉醒与停止唱戏",
+          "status": "成立",
+          "report_evidence": [
+            {
+              "quote": "这里停唱首先有身体原因，不能直接算人格转变。",
+              "unicode_codepoint_range": [
+                1314,
+                1336
+              ]
+            },
+            {
+              "quote": "称临终道德觉醒仍嫌证据不足。",
+              "unicode_codepoint_range": [
+                1428,
+                1442
+              ]
+            }
+          ],
+          "source_evidence": [
+            {
+              "quote": "纔記得這兩手原來都綑着，于是『手執鋼鞭』也不唱了。",
+              "chapter": "第九章　大團圓",
+              "unicode_codepoint_range": [
+                21431,
+                21456
+              ],
+              "evidence_type": "身体限制"
+            },
+            {
+              "quote": "過了二十年又是一個",
+              "chapter": "第九章　大團圓",
+              "unicode_codepoint_range": [
+                21459,
+                21468
+              ],
+              "evidence_type": "停唱后仍持续的表演性话语"
+            },
+            {
+              "quote": "覺得全身彷彿微塵似的迸散了。",
+              "chapter": "第九章　大團圓",
+              "unicode_codepoint_range": [
+                21853,
+                21867
+              ],
+              "evidence_type": "极端恐惧的感受描写"
+            }
+          ],
+          "effect_on_judgment": "身体受缚与绝境恐惧实际替代了“人格进步”的解释，因此报告只断言眼前表演、自我安慰被压断。若把觉醒弱定义为首次切身感到看客可怕，可以作此读法；但道德反省仍缺证据。"
+        },
+        {
+          "topic": "旁观抢案是否足以证明参与",
+          "status": "成立",
+          "report_evidence": [
+            {
+              "quote": "想参与、旧日偷盗、此次在场观看不能合并为抢案参与证据。",
+              "unicode_codepoint_range": [
+                1134,
+                1161
+              ]
+            },
+            {
+              "quote": "文本没有交代锁定他的全部调查过程。",
+              "unicode_codepoint_range": [
+                1220,
+                1237
+              ]
+            }
+          ],
+          "source_evidence": [
+            {
+              "quote": "似乎許多白盔白甲的人",
+              "chapter": "第八章　不准革命",
+              "unicode_codepoint_range": [
+                18745,
+                18755
+              ],
+              "evidence_type": "夜间人物所见带不确定性"
+            },
+            {
+              "quote": "但是不分明",
+              "chapter": "第八章　不准革命",
+              "unicode_codepoint_range": [
+                18785,
+                18790
+              ],
+              "evidence_type": "叙述明确限制观看清晰度"
+            },
+            {
+              "quote": "擡得他自己有些不信他的眼睛了",
+              "chapter": "第八章　不准革命",
+              "unicode_codepoint_range": [
+                18895,
+                18909
+              ],
+              "evidence_type": "人物怀疑所见"
+            },
+            {
+              "quote": "他們沒有來叫我。他們自己搬走了。",
+              "chapter": "第九章　大團圓",
+              "unicode_codepoint_range": [
+                20006,
+                20022
+              ],
+              "evidence_type": "阿Q在问讯中的自述"
+            },
+            {
+              "quote": "舉人老爺主張第一要追贓，把總主張第一要示衆。",
+              "chapter": "第九章　大團圓",
+              "unicode_codepoint_range": [
+                20636,
+                20658
+              ],
+              "evidence_type": "叙述者揭示办案者的不同目标"
+            }
+          ],
+          "effect_on_judgment": "报告没有因阿Q有偷盗经历或想分赃就认定此次同谋；也没有把旁观范围的叙述扩成已知全部侦查内情。竞争解释促使死亡因果从阿Q误解扩大到办案者的目标，同时保留调查过程空白。"
+        },
+        {
+          "topic": "女人重新接近与吴妈不看阿Q",
+          "status": "成立",
+          "report_evidence": [
+            {
+              "quote": "女人为廉价衣物追上他，不能据此推断爱情或宽恕。",
+              "unicode_codepoint_range": [
+                676,
+                699
+              ]
+            },
+            {
+              "quote": "吴妈只看洋炮，也不足以证明她故意报复。",
+              "unicode_codepoint_range": [
+                1336,
+                1355
+              ]
+            }
+          ],
+          "source_evidence": [
+            {
+              "quote": "不但見了不逃避，有時阿Q已經走過了，也還要追上去叫住他",
+              "chapter": "第六章　從中興到末路",
+              "unicode_codepoint_range": [
+                12671,
+                12698
+              ],
+              "evidence_type": "交易情境中的态度变化"
+            },
+            {
+              "quote": "阿Q，你還有綢裙麽？沒有？紗衫也要的，有罷？",
+              "chapter": "第六章　從中興到末路",
+              "unicode_codepoint_range": [
+                12705,
+                12727
+              ],
+              "evidence_type": "女人们询问商品的直接话语"
+            },
+            {
+              "quote": "似乎伊一向並沒有見他，卻只是出神的看着兵們背上的洋礮。",
+              "chapter": "第九章　大團圓",
+              "unicode_codepoint_range": [
+                21549,
+                21576
+              ],
+              "evidence_type": "带“似乎”的人物所见及叙述"
+            }
+          ],
+          "effect_on_judgment": "商品需求提供比感情变化更直接的解释，故报告只判断关系的用途变化。吴妈可能疏离、未注意或专注枪械，原文没有交代报复意图，报告因此没有补写她的动机。这些限制影响了人物关系判断，不是装饰性列举反例。"
+        }
+      ]
+    },
+    {
+      "id": "NARR1",
+      "criterion": "叙述机制是否具体并与文本效果连接",
+      "status": "成立",
+      "must_modify": false,
+      "report_evidence": [
+        {
+          "quote": "叙述让读者逐次修正所得消息。",
+          "unicode_codepoint_range": [
+            985,
+            999
+          ]
+        },
+        {
+          "quote": "信息晚到，既制造失落，也使口号与实际所得分离。",
+          "unicode_codepoint_range": [
+            1071,
+            1094
+          ]
+        },
+        {
+          "quote": "文风的效力来自正经口吻与推理破绽相撞。",
+          "unicode_codepoint_range": [
+            1603,
+            1622
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "據阿Q說，他是在舉人老爺家裏幫忙",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            11846,
+            11862
+          ],
+          "evidence_type": "先出现的中兴自述"
+        },
+        {
+          "quote": "只有一班閒人們卻還要尋根究底的去探阿Q的細底。阿Q也並不諱飾，傲然的說出他的經驗來。",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            13817,
+            13859
+          ],
+          "evidence_type": "后出现的细底披露"
+        },
+        {
+          "quote": "那秀才和洋鬼子！",
+          "chapter": "第七章　革命",
+          "unicode_codepoint_range": [
+            16176,
+            16184
+          ],
+          "evidence_type": "阿Q先从尼姑处听到革命者身份"
+        },
+        {
+          "quote": "這事阿Q後來纔知道",
+          "chapter": "第七章　革命",
+          "unicode_codepoint_range": [
+            16482,
+            16491
+          ],
+          "evidence_type": "补叙后明确人物迟知"
+        },
+        {
+          "quote": "全不破案，我的面子在那里？",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            20712,
+            20725
+          ],
+          "evidence_type": "阿Q不在场的办案者话语"
+        },
+        {
+          "quote": "雖然史無明文，我們也假定",
+          "chapter": "第四章　戀愛的悲劇",
+          "unicode_codepoint_range": [
+            6918,
+            6930
+          ],
+          "evidence_type": "正经口吻内部的推理破绽"
+        }
+      ],
+      "reason": "报告具体指出先摆排场后讲逃归、先碰到革过的庵后补叙发生经过、由人物有限所见转入办案者争执、最后由个人感知转向众人评价。它也用“无明文仍假定”解释反讽如何显露，均不是只列术语。",
+      "reasonable_alternative": "第六章末段也可更强调村人因怕硬欺软而变脸；第七章补叙也可更强调阿Q被排除。这些补充与报告的信息迟到分析兼容。“读者失落、不安”是可能效果，不必要求所有读者反应一致。"
+    },
+    {
+      "id": "M1",
+      "criterion": "创作迁移方法是否具体且给出适用条件与失败风险",
+      "status": "成立",
+      "must_modify": false,
+      "report_evidence": [
+        {
+          "quote": "写自我欺骗，可让相同解释在小挫折、实际损失、不可逆后果中重复，并每次留下未被安慰消除的东西；若始终零代价，就只剩笑话。",
+          "unicode_codepoint_range": [
+            1790,
+            1849
+          ]
+        },
+        {
+          "quote": "写关系翻转，可固定称呼、门槛或交易对象，再改变资源和威胁，先交代行动用途，免把逐利误写成感情成长。",
+          "unicode_codepoint_range": [
+            1849,
+            1898
+          ]
+        },
+        {
+          "quote": "写悲剧回声，可让人物从观看者变成被观看者，同时改变身体与信息条件；若只复用同一句话，便成装饰。",
+          "unicode_codepoint_range": [
+            1898,
+            1945
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "他這回纔有些感到失敗的苦痛了。",
+          "chapter": "第二章　優勝記略",
+          "unicode_codepoint_range": [
+            3850,
+            3865
+          ],
+          "evidence_type": "自我解释遭遇未消除的损失"
+        },
+        {
+          "quote": "因爲這是『我』去叫他的",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            12994,
+            13005
+          ],
+          "evidence_type": "门槛随关系用途改变"
+        },
+        {
+          "quote": "咳，好看。殺革命黨。唉，好看好看",
+          "chapter": "第六章　從中興到末路",
+          "unicode_codepoint_range": [
+            12252,
+            12268
+          ],
+          "evidence_type": "人物作为观看者"
+        },
+        {
+          "quote": "纔記得這兩手原來都綑着，于是『手執鋼鞭』也不唱了。",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            21431,
+            21456
+          ],
+          "evidence_type": "人物成为被观看者后的身体条件"
+        },
+        {
+          "quote": "他們白跟一趟了",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            22090,
+            22097
+          ],
+          "evidence_type": "看客对被观看者的评价"
+        }
+      ],
+      "reason": "三项均说明可操作的变量：重复解释时保留代价、固定关系标记而改变资源与威胁、角色换位同时改变身体及信息条件；相应指出空转为笑话、逐利被误认感情成长、复述沦为装饰的风险。报告还标明它们是写法建议，未冒充读者实验结论。",
+      "nonblocking_note": "N2 建议进一步明确悲剧累积这一目标，使两句较强的失败判断不被误读为所有作品的普遍定律。"
+    }
+  ],
+  "nonblocking_notes": [
+    {
+      "id": "N1",
+      "status": "成立",
+      "must_modify": false,
+      "type": "可澄清的程度与顺序压缩",
+      "report_evidence": [
+        {
+          "quote": "太爷低声叫『老Q』（块9），阿Q便把旁人的恐惧当成新身份。",
+          "unicode_codepoint_range": [
+            798,
+            827
+          ]
+        },
+        {
+          "quote": "自封与盘辫无效后",
+          "unicode_codepoint_range": [
+            902,
+            910
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "忽而似乎革命黨便是自己，未莊人卻都是他的俘虜了",
+          "chapter": "第七章　革命",
+          "unicode_codepoint_range": [
+            14697,
+            14720
+          ],
+          "evidence_type": "“老Q”称呼之前已有的身份幻想"
+        },
+        {
+          "quote": "阿Q料不到他的名字會和『老』字聯結起來，以爲是一句別的話，與己無干",
+          "chapter": "第七章　革命",
+          "unicode_codepoint_range": [
+            14982,
+            15015
+          ],
+          "evidence_type": "他初听称呼时未认作自己"
+        },
+        {
+          "quote": "其實他的生活，倒也並不比造反之前反艱難，人見他也客氣，店舖也不說要現錢。",
+          "chapter": "第八章　不准革命",
+          "unicode_codepoint_range": [
+            17118,
+            17154
+          ],
+          "evidence_type": "自称革命及盘辫阶段仍有的礼遇与赊账条件"
+        }
+      ],
+      "judgment": "按该段论证目标，“无效”指没有取得所想的革命身份及参与资格；“老Q”是地位暂变的例子。这样读与原文相容，前文也已写到礼遇。若逐字读成老Q称呼直接生成身份想象、或者自封盘辫毫无社会效果，就比原文更强。该问题尚不足以推翻或必须重写人物轨迹。",
+      "optional_revision": "可改为“众人的恐惧强化了他自居革命党的想象，赵太爷甚至低声叫他老Q”；把“自封与盘辫无效后”限定为“自封与盘辫虽换来一时礼遇，却未带来参与资格后”。"
+    },
+    {
+      "id": "N2",
+      "status": "成立",
+      "must_modify": false,
+      "type": "迁移建议的目标范围可更明示",
+      "report_evidence": [
+        {
+          "quote": "若始终零代价，就只剩笑话。",
+          "unicode_codepoint_range": [
+            1836,
+            1849
+          ]
+        },
+        {
+          "quote": "若只复用同一句话，便成装饰。",
+          "unicode_codepoint_range": [
+            1931,
+            1945
+          ]
+        }
+      ],
+      "source_evidence": [
+        {
+          "quote": "而阿Q卻仍然沒有人來叫他做短工。",
+          "chapter": "第五章　生計問題",
+          "unicode_codepoint_range": [
+            10221,
+            10237
+          ],
+          "evidence_type": "本作以持续外部代价推进事件"
+        },
+        {
+          "quote": "以爲鎗斃並無殺頭這般好看",
+          "chapter": "第九章　大團圓",
+          "unicode_codepoint_range": [
+            22044,
+            22056
+          ],
+          "evidence_type": "角色换位后仍延续的观看逻辑"
+        }
+      ],
+      "judgment": "置于本报告对悲剧累积与角色回声的讨论中，这两句是清楚的失败风险提示；但它们不是已证明适用于一切自欺故事或重复修辞的必然定律。报告已用“可”及“推断与建议”降低断言强度，因此不列必须修改。",
+      "optional_revision": "可在方法段首补“若目标是让自欺逐步累积成悲剧”，并把“就只剩”“便成”改成“容易只剩”“容易成为”。"
+    }
+  ]
+}

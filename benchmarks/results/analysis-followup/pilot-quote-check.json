@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "scope": "Exact source quotation presence. Explicit analyst labels listed separately; semantic support requires rereading.",
+  "reports": [
+    {
+      "case": "05",
+      "variant": "baseline",
+      "visible_non_whitespace_characters": 830,
+      "direct_quotes_checked": 6,
+      "analyst_labels": {
+        "实际困难承载情感": "分析者提炼的方法名称，原报告明确作为可迁移技法命名。"
+      },
+      "missing_quotes": []
+    },
+    {
+      "case": "06",
+      "variant": "baseline",
+      "visible_non_whitespace_characters": 781,
+      "direct_quotes_checked": 12,
+      "analyst_labels": {
+        "制度全然冷酷": "分析者提出并修正的概括，并非声称来自原文的引语。"
+      },
+      "missing_quotes": []
+    },
+    {
+      "case": "02",
+      "variant": "candidate",
+      "visible_non_whitespace_characters": 770,
+      "direct_quotes_checked": 9,
+      "analyst_labels": {},
+      "missing_quotes": []
+    }
+  ]
+}

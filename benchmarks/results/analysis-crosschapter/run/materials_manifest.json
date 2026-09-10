@@ -1,0 +1,32 @@
+[
+  {
+    "name": "task",
+    "path": "/Users/cuining/Documents/GitHub/story-skill/benchmarks/analysis-crosschapter/task.md",
+    "sha256": "cfe8101348e1d66a348c28c917de2656768644ff2e9ea0d25436ed6bdc30c8e3"
+  },
+  {
+    "name": "chapter_index",
+    "path": "/Users/cuining/Documents/GitHub/story-skill/benchmarks/analysis-crosschapter/chapters.json",
+    "sha256": "037448e1969060a4c970d1135b87c932270880985793e57f81cf7c2431a7a93f"
+  },
+  {
+    "name": "source",
+    "path": "/Users/cuining/Documents/GitHub/story-skill/benchmarks/analysis-crosschapter/source.txt",
+    "sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c"
+  },
+  {
+    "name": "analysis_skill",
+    "path": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-crosschapter-skills-upw24kgs/story-codex-analyze/SKILL.md",
+    "sha256": "ce6fe0be2ca7b51824c46e9c0516d70174eedb1c53a81e876afd1be832fa8725"
+  },
+  {
+    "name": "shared_skill",
+    "path": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-crosschapter-skills-upw24kgs/story-codex/SKILL.md",
+    "sha256": "27414c93216c0b26490c06d6c65ba84ca0454bd4babae47570ac28becfbb6022"
+  },
+  {
+    "name": "deep_reading",
+    "path": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-crosschapter-skills-upw24kgs/story-codex-analyze/references/deep-reading.md",
+    "sha256": "a41fc259d192a81e3ae4da1579892e922d9a8f5d269929315ec9f9d6a6d8db0c"
+  }
+]

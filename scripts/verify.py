@@ -97,6 +97,11 @@ def package_module():
     return module
 
 
+def current_evidence_directory():
+    version = package_module().current_version(SKILL / "scripts/story.py")
+    return ROOT / "benchmarks/results" / f"v{version}"
+
+
 def skill_files():
     files = {}
     names = package_module().SKILL_NAMES
@@ -386,9 +391,10 @@ def check_long_form(output, timeout):
 
 def check_recorded_probes():
     current = {p.name: digest(p) for p in (SKILL / "scripts").glob("*.py")}
+    directory = current_evidence_directory()
     results = []
     for filename, key in (("scaling.json", "runtime_files"), ("migration.json", "runtime")):
-        path = ROOT / "benchmarks/results/v0.5.0" / filename
+        path = directory / filename
         evidence = json.loads(path.read_text(encoding="utf-8"))
         valid = evidence.get("ok") is True and evidence.get(key) == current
         if filename.startswith("scaling"):
@@ -407,8 +413,8 @@ def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.5.0/verification.json"),
-                        help="Report path; a failed rerun uses a .failed sibling if this file exists")
+    parser.add_argument("--output", help="Report path; defaults to benchmarks/results/v<runtime VERSION>/verification.json. "
+                        "A failed rerun uses a .failed sibling if this file exists")
     parser.add_argument("--archive", help="Archive to compare; defaults to the canonical runtime VERSION")
     parser.add_argument("--skill-validator", help="Optional bundled quick_validate.py path")
     parser.add_argument("--validator-python", help="Python executable with the optional validator's dependencies")
@@ -422,7 +428,7 @@ def main():
     if args.validator_python and not args.skill_validator:
         parser.error("--validator-python requires --skill-validator")
     try:
-        output = report_path(args.output)
+        output = report_path(args.output if args.output is not None else current_evidence_directory() / "verification.json")
         report = verify(args.archive, args.skill_validator, args.validator_python, args.timeout)
         output = write_report(report, output)
         print(json.dumps({"ok": report["ok"], "report": str(output),

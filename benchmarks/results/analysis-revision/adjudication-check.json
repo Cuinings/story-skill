@@ -1,0 +1,97 @@
+{
+  "schema": 1,
+  "checks": [
+    {
+      "case": "kongyiji",
+      "quote": "這一回是現錢，酒要好。",
+      "start": 2295,
+      "end": 2306,
+      "matches": true
+    },
+    {
+      "case": "kongyiji",
+      "quote": "但他這回卻不十分分辯，單說了一句『不要取笑！』",
+      "start": 2337,
+      "end": 2360,
+      "matches": true
+    },
+    {
+      "case": "kongyiji",
+      "quote": "討飯一樣的人，也配考我麽？",
+      "start": 1397,
+      "end": 1410,
+      "matches": true
+    },
+    {
+      "case": "kongyiji",
+      "quote": "我和掌櫃的等級還很遠呢，而且我們掌櫃也從不將茴香豆上帳",
+      "start": 1478,
+      "end": 1505,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "我想再入高等學校念書",
+      "start": 1831,
+      "end": 1841,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "我不厭世。因爲你底原故，我願意和你同行。",
+      "start": 10258,
+      "end": 10278,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "更不料他一下就決心要跟從她",
+      "start": 10470,
+      "end": 10483,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "各個男子底回答也是一字不改",
+      "start": 7987,
+      "end": 8000,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "那班男女立刻變成很凶惡的容貌，互相囓食起來。",
+      "start": 8029,
+      "end": 8051,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "好在你不在那邊。幸虧我不能過去。",
+      "start": 8342,
+      "end": 8358,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "以爲自己沒有向她求婚，所以不高興",
+      "start": 8462,
+      "end": 8478,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "知道他與自己底覺悟雖然不同",
+      "start": 10494,
+      "end": 10507,
+      "matches": true
+    },
+    {
+      "case": "mingmingniao",
+      "quote": "把他們底軀殼送回來",
+      "start": 10893,
+      "end": 10902,
+      "matches": true
+    }
+  ],
+  "all_match": true
+}

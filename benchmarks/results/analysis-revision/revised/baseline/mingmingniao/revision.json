@@ -1,0 +1,8 @@
+{
+  "source_report": "benchmarks/results/analysis-real/reports/baseline/mingmingniao/report.md",
+  "source_report_sha256": "76b2098b31fb72f7f3c30fc1be34ad61b6bac2c9678465664941afcd6c28a888",
+  "revised_report_sha256": "09c36e8af75c81954e6c4eb558f79eff99febb30cafc4ef2030e50a9992e46fc",
+  "body_non_whitespace_characters": 1664,
+  "status": "ready_after_independent_model_review",
+  "scope": "New editorial copy made using known prior feedback; not a newly generated blind comparison output; not a CLI final-report replacement"
+}

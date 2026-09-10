@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/candidate/mingmingniao/book",
+    "--source",
+    "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5",
+    "--start",
+    "8720",
+    "--end",
+    "9310",
+    "--budget-bytes",
+    "10000"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"budget\":{\"limit\":10000,\"unit\":\"utf8_bytes\",\"used\":1930},\"end\":9310,\"source\":\"e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5\",\"start\":8720,\"text\":\"是眞，就把前日向父親要求底情形說給她聽。他說：“好朋友，你瞧我底父親多麼固執。他一意要我去當和尚，我前天向他說些咱們底事，他還要請人來給我說法，你說好笑不好笑？”敏明說：“什麼法？”加陵說：“那天晚上，父親把曇摩蜱請來。我以爲有別的事要和他商量，誰知他叫我到跟前教訓一頓。你猜他對我講什麼經呢？好些話我都忘記了。內中有一段是很有趣、很容易記底。我且念給你聽：\\n\\n佛問摩鄧曰：『女愛阿難何似？』女言：『我愛阿難眼；愛阿難鼻；愛阿難口；愛阿難耳；愛阿難聲音；愛阿難行步。』佛言：『眼中但有淚；鼻中但有洟；口中但有唾；耳中但有垢；身中但有屎尿，臭氣不淨。』\\n\\n　　「曇摩蜱說得天花亂墜，我只是偷笑。因爲身體上的汙穢，人人都有，那能因着這些小事，就把愛情割斷呢？況且這經本來不合對我說；若是對你念，還可以解釋得去。」\\n\\n　　敏明聽了加陵末了那句話，忙問道：「我是摩鄧嗎？怎樣說對我念就可以解釋得去？」加陵知道失言，忙回答說：「請你原諒，我說錯了。我底意思不是說你是摩鄧，是說這本經合於對女人說。」加陵本是要向敏明解嘲，不意反觸犯了她。敏明聽了那幾句經，心裏更是明白。他們兩人各有各底心事，總沒有盡情吐露出來。加陵坐不多會，就告辭回家去了。\\n\\n　　湼般節近啦。敏明底父親直催她上比古去，加陵知道敏明明日要動身，在那晚上到她家裏，爲底是要給她送行。但一進門，連人影也沒有，轉過角門，只見瑪彌在\"}\n",
+  "stderr": ""
+}

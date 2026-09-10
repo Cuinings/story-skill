@@ -1,0 +1,122 @@
+"""Read-only audit of this trial's source, SQLite records and saved CLI outputs.
+
+Run with Python 3 from any directory. Writes technical.json beside this script;
+does not modify run/. This is evidence checking, not literary evaluation.
+"""
+from pathlib import Path
+import datetime
+import hashlib
+import json
+import sqlite3
+
+OUT = Path(__file__).resolve().parent
+MATERIAL = OUT.parents[1] / "analysis-crosschapter"
+RUN = OUT / "run"
+
+
+def sha(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def locate(text, quote, start, end):
+    positions = []
+    cursor = start
+    while quote and (found := text.find(quote, cursor, end)) >= 0:
+        positions.append([found, found + len(quote)])
+        cursor = found + 1
+    return positions
+
+
+def main():
+    raw = (MATERIAL / "source.txt").read_bytes()
+    text = raw.decode("utf-8")
+    chapters = json.loads((MATERIAL / "chapters.json").read_text())
+    paragraphs = json.loads((MATERIAL / "rendered-paragraphs.json").read_text())
+    db = sqlite3.connect((RUN / ".story/state.sqlite3").as_uri() + "?mode=ro", uri=True)
+    db.row_factory = sqlite3.Row
+    sources = [dict(r) for r in db.execute("SELECT * FROM sources")]
+    rows = [dict(r) for r in db.execute("SELECT * FROM chunks ORDER BY ordinal")]
+    sid = sha(raw)
+    chunks, quotes = [], []
+    for r in rows:
+        body = text[r["start"]:r["end"]]
+        owners = [c["title"] for c in chapters if c["start"] <= r["start"] < r["end"] <= c["end"]]
+        analysis = json.loads(r["analysis"]) if r["analysis"] else None
+        chunks.append({"ordinal": r["ordinal"], "start": r["start"], "end": r["end"],
+                       "source_matches": r["source"] == sid, "chapter": owners,
+                       "sha_matches": sha(body.encode()) == r["sha"],
+                       "analyzed": analysis is not None,
+                       "analysis_sha_matches": bool(analysis) and analysis.get("chunk_sha256") == r["sha"]})
+        for i, f in enumerate((analysis or {}).get("findings", []), 1):
+            positions = locate(text, f["quote"], r["start"], r["end"])
+            quotes.append({"chunk": r["ordinal"], "finding": i, "quote": f["quote"],
+                           "claim": f["claim"], "kind": f["kind"], "ranges": positions,
+                           "exact_in_claimed_chunk": bool(positions)})
+    artifact_path = f".story/analysis/{sid}/report.md"
+    artifact = db.execute("SELECT sha FROM artifacts WHERE path=?", (artifact_path,)).fetchone()
+    db.close()
+    process = json.loads((RUN / "process.json").read_text())
+    calls, reads, next_chunks, reports = [], [], [], []
+    for entry in process.get("commands", []):
+        argv = entry.get("argv", [])
+        call = {k: entry[k] for k in ("sequence", "timestamp", "argv", "exit_code", "stdout") if k in entry}
+        calls.append(call)
+        if entry.get("exit_code") != 0 or "--help" in argv:
+            continue
+        try:
+            response = json.loads((RUN / entry["stdout"]).read_text())
+        except (ValueError, KeyError):
+            continue
+        if "source-read" in argv:
+            reads.append({"sequence": entry["sequence"], "start": response["start"], "end": response["end"],
+                          "text_matches_source": response["text"] == text[response["start"]:response["end"]],
+                          "source_matches": response["source"] == sid})
+        elif "next" in argv:
+            for c in response.get("chunks", []):
+                next_chunks.append({"sequence": entry["sequence"], "ordinal": c["ordinal"],
+                                    "text_matches_source": c["text"] == text[c["start"]:c["end"]],
+                                    "sha_matches": sha(c["text"].encode()) == c["sha"]})
+        elif "report" in argv:
+            reports.append({"sequence": entry["sequence"], "finalized": response.get("finalized"),
+                            "report_path": response.get("report_path"), "delivery": response.get("delivery")})
+    exported = RUN / artifact_path
+    checks = {
+        "source_db_bytes_match": len(sources) == 1 and sources[0]["id"] == sid and sources[0]["text"] == text,
+        "paragraphs_reconstruct_source": ("\n\n".join(p["text"] for p in paragraphs) + "\n").encode() == raw,
+        "chapters_cover_source": bool(chapters) and chapters[0]["start"] == 0 and chapters[-1]["end"] == len(text)
+          and all(a["end"] == b["start"] for a, b in zip(chapters, chapters[1:])),
+        "chunks_cover_source": bool(chunks) and chunks[0]["start"] == 0 and chunks[-1]["end"] == len(text)
+          and all(a["end"] == b["start"] for a, b in zip(chunks, chunks[1:])),
+        "ordinals_contiguous": [c["ordinal"] for c in chunks] == list(range(1, len(chunks) + 1)),
+        "chunks_within_one_chapter": all(len(c["chapter"]) == 1 for c in chunks),
+        "chunk_source_and_hashes_match": all(c["source_matches"] and c["sha_matches"] for c in chunks),
+        "all_chunks_analyzed": bool(chunks) and all(c["analyzed"] and c["analysis_sha_matches"] for c in chunks),
+        "all_finding_quotes_exact": bool(quotes) and all(q["exact_in_claimed_chunk"] for q in quotes),
+        "all_chunks_returned_by_next": set(c["ordinal"] for c in next_chunks) == set(c["ordinal"] for c in chunks),
+        "next_outputs_match": bool(next_chunks) and all(c["text_matches_source"] and c["sha_matches"] for c in next_chunks),
+        "reread_outputs_match": bool(reads) and all(r["text_matches_source"] and r["source_matches"] for r in reads),
+        "rereads_before_final_report": bool(reads) and bool(reports)
+          and max(r["sequence"] for r in reads) < min(r["sequence"] for r in reports),
+        "report_saved": bool(reports) and all(r["finalized"] for r in reports) and exported.is_file(),
+        "report_matches_artifact_hash": bool(artifact) and exported.is_file() and sha(exported.read_bytes()) == artifact[0],
+    }
+    result = {"recorded_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
+              "ok": all(checks.values()), "checks": checks, "source_sha256": sid,
+              "source_coverage": sources[0]["coverage"] if sources else None,
+              "unicode_codepoints": len(text), "chapter_count": len(chapters),
+              "chunks_total": len(chunks), "analyzed": sum(c["analyzed"] for c in chunks),
+              "findings_total": len(quotes), "source_rereads": len(reads),
+              "chapters": chapters, "chunks": chunks, "findings": quotes,
+              "rereads": reads, "next_chunks": next_chunks, "reports": reports,
+              "failed_calls": [c for c in calls if c.get("exit_code") != 0],
+              "command_log_index": calls,
+              "limits": ["Saved CLI output and SQLite contents, not independent system access telemetry.",
+                         "Source and coverage match this rendered input, not a scan-collated edition.",
+                         "Exact quotations and successful saving do not validate literary explanations."]}
+    (OUT / "technical.json").write_text(json.dumps(result, ensure_ascii=False, indent=2) + "\n")
+    print(json.dumps({k: result[k] for k in ("ok", "checks", "chunks_total", "analyzed", "findings_total", "source_rereads", "failed_calls")}, ensure_ascii=False))
+    return 0 if result["ok"] else 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

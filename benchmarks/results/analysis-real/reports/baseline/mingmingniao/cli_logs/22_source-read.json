@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--source",
+    "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5",
+    "--start",
+    "0",
+    "--end",
+    "103",
+    "--budget-bytes",
+    "12000",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/mingmingniao/book"
+  ],
+  "returncode": 0,
+  "stdout": "{\"budget\":{\"limit\":12000,\"unit\":\"utf8_bytes\",\"used\":470},\"end\":103,\"source\":\"e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5\",\"start\":0,\"text\":\"　　敏明坐在席上，手裏拿着一本《八大人覺經》，流水似的念着。她的席在東邊的窗下，早晨日光射在她的臉上，照得她的身體全然變成黃金的顏色。她不理會日光晒着她，却不歇地抬頭去瞧壁上的時計，好像等什麼人來似的。\\n\\n\"}\n",
+  "stderr": ""
+}

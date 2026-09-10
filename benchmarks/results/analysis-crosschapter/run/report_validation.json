@@ -1,0 +1,152 @@
+{
+  "body_characters_no_whitespace": 1945,
+  "length_range": [
+    1800,
+    2400
+  ],
+  "length_pass": true,
+  "report_sha256": "a2bdb3b8f1fade545ed0dae060e59f10a9c8f375cde1374464350bf3ad6441b1",
+  "source_sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+  "quotes": [
+    {
+      "quote": "死了以後，便沒有一個人再叫阿Quei了",
+      "exact_in_source": true
+    },
+    {
+      "quote": "自己打了別個",
+      "exact_in_source": true
+    },
+    {
+      "quote": "孫子纔畫得很圓的圓圈呢",
+      "exact_in_source": true
+    },
+    {
+      "quote": "再用力的一擰",
+      "exact_in_source": true
+    },
+    {
+      "quote": "斷子絕孫",
+      "exact_in_source": true
+    },
+    {
+      "quote": "不准再去索取工錢和布衫",
+      "exact_in_source": true
+    },
+    {
+      "quote": "仍然沒有人來叫他做短工",
+      "exact_in_source": true
+    },
+    {
+      "quote": "你那裏配姓趙",
+      "exact_in_source": true
+    },
+    {
+      "quote": "我",
+      "exact_in_source": true
+    },
+    {
+      "quote": "老Q",
+      "exact_in_source": true
+    },
+    {
+      "quote": "革過",
+      "exact_in_source": true
+    },
+    {
+      "quote": "你的同黨",
+      "exact_in_source": true
+    },
+    {
+      "quote": "第一要示衆",
+      "exact_in_source": true
+    },
+    {
+      "quote": "好看",
+      "exact_in_source": true
+    },
+    {
+      "quote": "救命",
+      "exact_in_source": true
+    },
+    {
+      "quote": "被鎗斃便是他的壞的證據",
+      "exact_in_source": true
+    },
+    {
+      "quote": "雖然史無明文，我們也假定",
+      "exact_in_source": true
+    }
+  ],
+  "chunks": [
+    {
+      "chunk": 1,
+      "findings": 4,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 2,
+      "findings": 5,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 3,
+      "findings": 4,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 4,
+      "findings": 5,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 5,
+      "findings": 3,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 6,
+      "findings": 5,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 7,
+      "findings": 5,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 8,
+      "findings": 3,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 9,
+      "findings": 5,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 10,
+      "findings": 5,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 11,
+      "findings": 6,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 12,
+      "findings": 2,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 13,
+      "findings": 6,
+      "all_quotes_exact": true
+    },
+    {
+      "chunk": 14,
+      "findings": 6,
+      "all_quotes_exact": true
+    }
+  ]
+}

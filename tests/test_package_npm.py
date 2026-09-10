@@ -100,6 +100,20 @@ class NpmPackageTests(unittest.TestCase):
             "package.json": "da354ce0b6d066562b308ae94421266bf9b3424f6e344efb22e0b12847ccb086",
             "README.md": "8e1927337054a60d02a67a2b4e177c44ccc531c77af61bf3ad8a8d6005a5c957"})
 
+    def test_published_suite_wrappers_preserve_the_original_bytes(self):
+        expected = {
+            "0.4.0": {
+                "package.json": "b2bd06124a2ecca52cf129455e6c55b1a6d2fe817eab1e9ae932c1a4f01b7426",
+                "README.md": "5e6db786403cd3acfaa1598c8ec55a95b2038c4ca04117f961b0339dd495d158"},
+            "0.5.0": {
+                "package.json": "9576eee516a3ef82edf6d17e69fb18b0dadd53beb0044cf0a299372bcfd08550",
+                "README.md": "8ea0b2ab04033a20e5386c6cad96e02ad21f53b03a59439d885609d14ea5d46c"},
+        }
+        for version, hashes in expected.items():
+            with self.subTest(version=version):
+                _, files = npm.wrapper_files(version)
+                self.assertEqual({name: hashlib.sha256(raw).hexdigest() for name, raw in files.items()}, hashes)
+
     def test_checksum_binds_exact_filename_and_archive_bytes(self):
         correct = self.checksum.read_text(encoding="utf-8")
         for invalid in [correct.replace(self.archive.name, "another.zip"),
@@ -272,7 +286,7 @@ class NpmSuiteTests(NpmPackageTests):
         super().setUp()
         self.version = "0.4.0"
         self.archive = self.root / "story-codex-0.4.0.zip"
-        self.payload = {name: ("原始套件字节：" + name + "\r\n").encode() for name in npm.SUITE_FILES}
+        self.payload = {name: ("原始套件字节：" + name + "\r\n").encode() for name in npm.LEGACY_SUITE_FILES}
         self.payload["story-codex/scripts/story.py"] = (
             b'VERSION = "0.4.0"\nraise RuntimeError("must never run payload")\n')
         self.write_zip()
@@ -308,19 +322,54 @@ class NpmSuiteTests(NpmPackageTests):
             result = npm.build(self.archive, self.checksum, self.root / "v050")
         self.assertEqual(result["version"], "0.5.0")
         self.assertEqual(result["name"], "@ningcui29/story-codex")
-        self.assertEqual(set(result["payload_manifest"]), set(npm.SUITE_FILES))
+        self.assertEqual(set(result["payload_manifest"]), set(npm.LEGACY_SUITE_FILES))
         _, wrapper = npm.wrapper_files(self.version)
         self.assertIn("blob/main/INSTALL.md", wrapper["README.md"].decode())
         self.assertIn("固定使用 v0.5.0", wrapper["README.md"].decode())
         with self.assertRaisesRegex(ValueError, "no reviewed payload layout"):
             npm.payload_files("0.6.0")
 
+    def test_new_analysis_references_roundtrip_in_current_patch_only(self):
+        for version in ("0.5.1", "0.5.12"):
+            with self.subTest(version=version):
+                self.version = version
+                self.archive = self.root / f"story-codex-{version}.zip"
+                self.payload = {name: ("完整技能字节：" + name + "\r\n").encode() for name in npm.SUITE_FILES}
+                self.payload["story-codex/scripts/story.py"] = f'VERSION = "{version}"\n'.encode()
+                self.write_zip()
+                with patch.object(npm, "npm_pack", side_effect=self.fake_pack):
+                    result = npm.build(self.archive, self.checksum, self.root / version)
+                self.assertEqual(len(result["payload_manifest"]), 33)
+                self.assertEqual(set(result["payload_manifest"]), set(npm.SUITE_FILES))
+                self.assertIn(f"固定使用 v{version}", npm.wrapper_files(version)[1]["README.md"].decode())
+
+    def test_release_version_cannot_accept_another_reviewed_layout(self):
+        for version, files in (("0.4.0", npm.SUITE_FILES), ("0.4.9", npm.SUITE_FILES),
+                               ("0.5.0", npm.SUITE_FILES), ("0.5.1", npm.LEGACY_SUITE_FILES),
+                               ("0.5.12", npm.LEGACY_SUITE_FILES)):
+            with self.subTest(version=version):
+                self.archive = self.root / f"story-codex-{version}.zip"
+                self.payload = {name: b"layout fixture" for name in files}
+                self.payload["story-codex/scripts/story.py"] = f'VERSION = "{version}"\n'.encode()
+                self.write_zip()
+                with self.assertRaisesRegex(ValueError, "version's reviewed layout"):
+                    npm.read_release(self.archive, self.checksum)
+
+    def test_unknown_or_noncanonical_versions_have_no_layout(self):
+        for version in ("0.3.1", "0.4.01", "0.5.01", "0.6.0", "1.0.0"):
+            with self.subTest(version=version), self.assertRaisesRegex(ValueError, "no reviewed payload layout"):
+                npm.payload_files(version)
+
     def test_zip_and_npm_share_the_same_explicit_suite_manifest(self):
         spec = importlib.util.spec_from_file_location("zip_suite_manifest", ROOT / "scripts/package.py")
         zip_package = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(zip_package)
         self.assertEqual(npm.SUITE_FILES, zip_package.SUITE_FILES)
-        self.assertEqual(len(npm.SUITE_FILES), 31)
+        self.assertEqual(npm.LEGACY_SUITE_FILES, zip_package.LEGACY_SUITE_FILES)
+        self.assertEqual(len(npm.SUITE_FILES), 33)
+        self.assertEqual(len(npm.LEGACY_SUITE_FILES), 31)
+        for version in ("0.4.0", "0.4.12", "0.5.0", "0.5.1", "0.5.12"):
+            self.assertEqual(npm.payload_files(version), zip_package.suite_files(version))
         self.assertEqual({name.split("/", 1)[0] for name in npm.SUITE_FILES}, set(npm.SKILL_NAMES))
         self.assertIn("all seven", npm.wrapper_files(self.version)[1]["README.md"].decode())
 

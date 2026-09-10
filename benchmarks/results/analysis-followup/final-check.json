@@ -1,0 +1,80 @@
+{
+  "ok": true,
+  "finished_utc": "2026-09-10T09:58:33.699089+00:00",
+  "errors": [],
+  "historical_files_preserved": 301,
+  "only_changed_skill_files": [
+    "skills/story-codex-analyze/SKILL.md",
+    "skills/story-codex/SKILL.md"
+  ],
+  "runtime_unchanged": true,
+  "archive": {
+    "status": "passed",
+    "archive": "/Users/cuining/Documents/GitHub/story-skill/dist/story-codex-0.5.1.zip",
+    "version": "0.5.1",
+    "sha256": "419aa4277c609c5626862cdf5a78c6d6f7d67bbef17d018f53ad64dea225900c",
+    "bytes": 109889,
+    "files": 33,
+    "contents_match_current_skill": true,
+    "missing": [],
+    "extra": [],
+    "changed": [],
+    "duplicate_entries": [],
+    "corrupt_entry": null
+  },
+  "benchmark_status": "passed",
+  "installed_files_match": true,
+  "installed_file_count": 33,
+  "prior_archives": {
+    "story-codex-0.5.0.zip": "d65504d907110ad59fa465566f7374991a216c03cdd42edc81b19ddcc87810a8",
+    "story-codex-analysis-depth-pilot.zip": "8acea76d49c7ddd206f95a567193a1eb8aa8a4d496a2d2152325438668a14f34",
+    "story-codex-analysis-real.zip": "2dfe3a82ec4a6eee1edfa66ef6cb8de7f61ec91eb97537a48519606c953efac3",
+    "story-codex-analysis-revision.zip": "218300b6f152e85dae1f8b829d216edd87eea0120aae7fd4615b615fc486a6c2"
+  },
+  "final_reports": [
+    {
+      "case": "05",
+      "variant": "baseline",
+      "path": "benchmarks/results/analysis-followup/revised/baseline/05/report.md",
+      "sha256": "355f2dc5cd878a832865c2f3269de656b9f35228fbe459402baad2eb0d713f22",
+      "body_characters": 799,
+      "direct_quotes_checked": 6,
+      "analyst_labels": [
+        "实际困难承载情感"
+      ]
+    },
+    {
+      "case": "06",
+      "variant": "baseline",
+      "path": "benchmarks/results/analysis-followup/revised/baseline/06/report.md",
+      "sha256": "31cd51145d1f5fe44389b3114ccfd1c1574e2093004e90524db27d40de1975cf",
+      "body_characters": 771,
+      "direct_quotes_checked": 12,
+      "analyst_labels": [
+        "制度全然冷酷"
+      ]
+    },
+    {
+      "case": "02",
+      "variant": "candidate",
+      "path": "benchmarks/results/analysis-followup/revised/candidate/02/report.md",
+      "sha256": "f177792aef75fb1f500f00af4ae7d414b40b102a7e26ecd867eb567c3d01abbc",
+      "body_characters": 761,
+      "direct_quotes_checked": 9,
+      "analyst_labels": []
+    }
+  ],
+  "pilot_final_review_ready": true,
+  "workflow_files_verified": true,
+  "workflow_temp_removed": true,
+  "markdown_links": {
+    "status": "passed",
+    "files_scanned": 111,
+    "links_checked": 430,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "git_diff_check": "passed",
+  "scope": "Integrity and process checks; independent targeted report review is recorded separately. No new full unit-test suite or publication.",
+  "documentation_review": "passed"
+}

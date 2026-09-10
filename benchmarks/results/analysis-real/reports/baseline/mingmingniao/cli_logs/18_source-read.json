@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--help",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/mingmingniao/book"
+  ],
+  "returncode": 0,
+  "stdout": "usage: story.py source-read [-h] --book BOOK [--integrity {strict,local}]\n                            [--budget-bytes BUDGET_BYTES] --source SOURCE\n                            --start START --end END\n\noptions:\n  -h, --help            show this help message and exit\n  --book BOOK           Explicit, isolated book directory\n  --integrity {strict,local}\n                        strict hashes all exports; local verifies\n                        recent/queued files and reports unverified archives\n  --budget-bytes BUDGET_BYTES\n                        Hard limit on compact JSON UTF-8 bytes\n  --source SOURCE\n  --start START\n  --end END\n",
+  "stderr": ""
+}

@@ -1,0 +1,255 @@
+{
+  "coverage": {
+    "source_characters": 22112,
+    "source_file_sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+    "chapters_count": 9,
+    "chunks_count": 14,
+    "all_chunk_text_exact": true,
+    "contiguous": true,
+    "chapter_checks": [
+      {
+        "title": "第一章　序",
+        "start": 0,
+        "end": 1748,
+        "title_matches": true,
+        "chunks": [
+          1
+        ],
+        "exact_coverage": true
+      },
+      {
+        "title": "第二章　優勝記略",
+        "start": 1748,
+        "end": 3991,
+        "title_matches": true,
+        "chunks": [
+          2
+        ],
+        "exact_coverage": true
+      },
+      {
+        "title": "第三章　續優勝記略",
+        "start": 3991,
+        "end": 6266,
+        "title_matches": true,
+        "chunks": [
+          3
+        ],
+        "exact_coverage": true
+      },
+      {
+        "title": "第四章　戀愛的悲劇",
+        "start": 6266,
+        "end": 8985,
+        "title_matches": true,
+        "chunks": [
+          4,
+          5
+        ],
+        "exact_coverage": true
+      },
+      {
+        "title": "第五章　生計問題",
+        "start": 8985,
+        "end": 11278,
+        "title_matches": true,
+        "chunks": [
+          6
+        ],
+        "exact_coverage": true
+      },
+      {
+        "title": "第六章　從中興到末路",
+        "start": 11278,
+        "end": 14028,
+        "title_matches": true,
+        "chunks": [
+          7,
+          8
+        ],
+        "exact_coverage": true
+      },
+      {
+        "title": "第七章　革命",
+        "start": 14028,
+        "end": 16546,
+        "title_matches": true,
+        "chunks": [
+          9,
+          10
+        ],
+        "exact_coverage": true
+      },
+      {
+        "title": "第八章　不准革命",
+        "start": 16546,
+        "end": 19148,
+        "title_matches": true,
+        "chunks": [
+          11,
+          12
+        ],
+        "exact_coverage": true
+      },
+      {
+        "title": "第九章　大團圓",
+        "start": 19148,
+        "end": 22112,
+        "title_matches": true,
+        "chunks": [
+          13,
+          14
+        ],
+        "exact_coverage": true
+      }
+    ]
+  },
+  "reread_plan": [
+    {
+      "id": 1,
+      "purpose": "姓氏资格和旁观认可",
+      "start": 850,
+      "end": 1001,
+      "chunk_ids": [
+        1
+      ]
+    },
+    {
+      "id": 2,
+      "purpose": "考据限度与先告死讯",
+      "start": 1022,
+      "end": 1417,
+      "chunk_ids": [
+        1
+      ]
+    },
+    {
+      "id": 3,
+      "purpose": "精神胜利受到损失挑战",
+      "start": 3792,
+      "end": 3986,
+      "chunk_ids": [
+        2
+      ]
+    },
+    {
+      "id": 4,
+      "purpose": "受打反获尊敬的竞争解释",
+      "start": 4145,
+      "end": 4437,
+      "chunk_ids": [
+        3
+      ]
+    },
+    {
+      "id": 5,
+      "purpose": "观看鼓励施暴",
+      "start": 6027,
+      "end": 6264,
+      "chunk_ids": [
+        3
+      ]
+    },
+    {
+      "id": 6,
+      "purpose": "欲望的后代名义",
+      "start": 6616,
+      "end": 6870,
+      "chunk_ids": [
+        4
+      ]
+    },
+    {
+      "id": 7,
+      "purpose": "处罚转为财物并延续寒冷",
+      "start": 8660,
+      "end": 9136,
+      "chunk_ids": [
+        5,
+        6
+      ]
+    },
+    {
+      "id": 8,
+      "purpose": "对抗小D没有恢复饭碗",
+      "start": 10186,
+      "end": 10407,
+      "chunk_ids": [
+        6
+      ]
+    },
+    {
+      "id": 9,
+      "purpose": "中兴身份再被后续揭示修正",
+      "start": 13817,
+      "end": 14026,
+      "chunk_ids": [
+        8
+      ]
+    },
+    {
+      "id": 10,
+      "purpose": "革命让称呼反转",
+      "start": 14957,
+      "end": 15247,
+      "chunk_ids": [
+        9
+      ]
+    },
+    {
+      "id": 11,
+      "purpose": "革命梦想重复旧支配",
+      "start": 15471,
+      "end": 15860,
+      "chunk_ids": [
+        9
+      ]
+    },
+    {
+      "id": 12,
+      "purpose": "不准他人和自己受限并非平等",
+      "start": 17202,
+      "end": 17705,
+      "chunk_ids": [
+        11
+      ]
+    },
+    {
+      "id": 13,
+      "purpose": "熟悉棍棒与失意后的幻想",
+      "start": 18056,
+      "end": 18460,
+      "chunk_ids": [
+        11
+      ]
+    },
+    {
+      "id": 14,
+      "purpose": "抢案限知与问讯预设",
+      "start": 19885,
+      "end": 20093,
+      "chunk_ids": [
+        13
+      ]
+    },
+    {
+      "id": 15,
+      "purpose": "圆圈安慰及示众动机",
+      "start": 20460,
+      "end": 20819,
+      "chunk_ids": [
+        13
+      ]
+    },
+    {
+      "id": 16,
+      "purpose": "表演动作受限到求救与死后舆论",
+      "start": 21265,
+      "end": 22098,
+      "chunk_ids": [
+        13,
+        14
+      ]
+    }
+  ]
+}

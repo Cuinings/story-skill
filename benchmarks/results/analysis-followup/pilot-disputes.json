@@ -1,0 +1,219 @@
+{
+  "schema": 1,
+  "date": "2026-09-10",
+  "review_type": "unblinded_targeted_editorial_followup",
+  "new_blind_review": false,
+  "new_evaluation_run": false,
+  "new_full_report_revisions_written": false,
+  "causal_quality_improvement_claim": false,
+  "scope": "First pilot three pending wording disputes, complete corresponding source and report reread, related review passages and dependency check. Known labels; not a new performance comparison.",
+  "decision_semantics": "needs_revision indicates warranted editorial narrowing, not a confirmed contradictory or fabricated fact. Original pending entries, ordinal ratings and preferences are preserved.",
+  "cases": [
+    {
+      "id": "baseline-05-borrow-lunchbox",
+      "case": "05",
+      "version": "baseline",
+      "anonymous_label": "A",
+      "disposition": "needs_revision",
+      "disposition_zh": "需改（动作阶段与借还关系的精度）",
+      "confirmed_hard_fact_error": false,
+      "source_path": "benchmarks/analysis-depth/holdout/05/source.txt",
+      "source_location": "乙段，source.txt:7",
+      "report_path": "benchmarks/results/analysis-depth/reports/baseline/05/report.md",
+      "report_location": "report.md:11",
+      "original_sentence": "也可把乙读成普通邻里互助：加蛋、借饭盒都不必等于伤感。",
+      "source_quotes": [
+        "何婶把墙上挂的旧饭盒取下来，试着扣上盖子，卡扣响了一声，又弹开。",
+        "她叫坐在门边的小孩去找一根橡皮筋。"
+      ],
+      "reason": "取盒和试盖是已写出的动作；为邮递员准备容器是有语境支持的意图推断。原文未写交付，也未限定为需要归还的借用。借饭盒可被理解为意图概括，所以不判定确定虚构；用于定稿仍应删去不必要的交易与动作完成暗示。",
+      "minimal_replacement": "也可把乙读成普通邻里互助：加蛋、取饭盒都不必等于伤感。",
+      "reviewer_references": [
+        "reviewer-1.json cases[4].ratings.A.facts[0] / needs_support / uncertainty",
+        "reviewer-2.json cases[4].ratings.A.dimensions.ambiguity_genre.limit"
+      ],
+      "dependency_review": {
+        "requires_conclusion_change": false,
+        "suggested_same_mechanism_clarification": [
+          {
+            "original": "旧饭盒扣不上，才需要小孩找橡皮筋，照顾由一个人扩展到旁人",
+            "replacement": "旧饭盒扣不上，何婶便叫小孩找橡皮筋，照顾的安排也开始把旁人纳入",
+            "reason": "原文确认何婶发出请托，未确认小孩已找来橡皮筋或完成修整。此句并非依赖借出结果，但一并按动作阶段收窄更一致。"
+          }
+        ],
+        "unchanged_supported_claims": [
+          "紧接换线消息可支持惜别的解释；加蛋是否出于惜别仍非已知心理事实。",
+          "末尾众人已经挪凳并为信包让出干地方，集体照料有独立的已写出动作。",
+          "陶艺教室迁移例是独立新场景，不依赖饭盒已经借出。"
+        ]
+      },
+      "other_existing_issues_outside_this_dispute": [
+        {
+          "claim": "这只能支持接应人在附近或通信有风险",
+          "recommendation": "改为这会引出接应人在附近或通信有风险的怀疑，但同样的提示音也可能来自无关设备，不能坐实背叛。",
+          "reason": "这是甲段的声源推断问题，与饭盒争议无依赖关系；评阅者2已经指出。"
+        },
+        {
+          "claim": "使倒计时归零成为危险升级",
+          "recommendation": "改为若接应人的说法可靠，灯亮便可能意味着更易暴露；原文尚未独立证实这条规则。",
+          "reason": "这是把人物说法当作世界规则的问题，与饭盒争议无依赖关系；两位评阅者都已指出。"
+        }
+      ]
+    },
+    {
+      "id": "baseline-06-delayed-processing",
+      "case": "06",
+      "version": "baseline",
+      "anonymous_label": "A",
+      "disposition": "needs_revision",
+      "disposition_zh": "需改（记录终点与事件时长应分开）",
+      "confirmed_hard_fact_error": false,
+      "source_path": "benchmarks/analysis-depth/holdout/06/source.txt",
+      "source_location": "三月八日早班备注，source.txt:25",
+      "report_path": "benchmarks/results/analysis-depth/reports/baseline/06/report.md",
+      "report_location": "report.md:9",
+      "original_sentence": "句子停在询问，使处理迟迟没有完成。",
+      "source_quotes": [
+        "备注：抽屉有保温盒一个，无姓名，勿倒。此项是否需要编号，待问。"
+      ],
+      "reason": "待问只说明这条记录没有给出是否编号的答案，不提供问题已持续多久或以后如何处理。句子停在询问提示一种可接受的阅读悬置解释，但使处理迟迟没有完成又容易被读成现实处理被长期拖延，需在定稿中明确对象与范围。",
+      "minimal_replacement": "记录到此结束，读者没有得到是否编号的答案。",
+      "reviewer_references": [
+        "reviewer-1.json cases[5].ratings.A.facts[0] / dimensions.evidence.limit / needs_support / uncertainty",
+        "reviewer-2.json cases[5].ratings.A.dimensions.evidence.limit / needs_support"
+      ],
+      "dependency_review": {
+        "requires_conclusion_change": false,
+        "suggested_same_mechanism_clarification": [
+          {
+            "original": "前者先保留一件来历未明的东西",
+            "replacement": "前者要求保留一件来历未明的东西",
+            "reason": "勿倒首先是文字指令，不能据此确认指令已被执行；这是同一段中的指令与现实结果边界，建议同时收窄，非迟迟一词引出的必然错误。"
+          }
+        ],
+        "unchanged_supported_claims": [
+          "开头说明日期有缺口、记录有限，修订后与这一范围限制一致。",
+          "三月四日只证明请求被移出物品交接，不证明请假遭拒；该结论不依赖三月八日问题持续时间。",
+          "照料与管理方式并置、盒主未知以及关切可能性，均不依赖长期拖延。",
+          "航天日志迁移建议没有以迟迟未处理作为事实前提。"
+        ]
+      },
+      "other_existing_issues_outside_this_dispute": [
+        {
+          "claim": "规章也可能保护日常生活",
+          "recommendation": "保留可能语气；若展开，区分具体照料动作与规章导致照料的因果，不把行动者或原因说定。",
+          "reason": "原有评阅者已指出照料者与原因未知；报告本身已使用可能，不因修订迟迟而需要撤回此竞争读法。"
+        }
+      ]
+    },
+    {
+      "id": "candidate-02-two-hands",
+      "case": "02",
+      "version": "candidate",
+      "anonymous_label": "B",
+      "disposition": "needs_revision",
+      "disposition_zh": "需改（删除未明示数量）",
+      "confirmed_hard_fact_error": false,
+      "source_path": "benchmarks/analysis-depth/development/02/source.txt",
+      "source_location": "第五自然段，source.txt:11",
+      "report_path": "benchmarks/results/analysis-depth/reports/candidate/02/report.md",
+      "report_location": "report.md:9",
+      "original_sentence": "末段错签日期、翻转双手后诉诸玻璃，显示他仍在维护疤痕这一凭据，却没有解决左右手的疑问。",
+      "source_quotes": [
+        "记录员问疤在左手还是右手。",
+        "我把自己的手压在桌上，掌心朝下，又翻过来。"
+      ],
+      "reason": "自己的手在汉语中不限定单复数；材料既不足以确定双手，也不足以断定只有一只。分析不需要手的数量，删除双字即可保留动作及其解释，不应反向改成单手。",
+      "minimal_replacement": "末段错签日期、翻手后诉诸玻璃，显示他仍在维护疤痕这一凭据，却没有解决左右手的疑问。",
+      "reviewer_references": [
+        "reviewer-1.json cases[1].uncertainty",
+        "reviewer-2.json cases[1].ratings.B.facts[0] / dimensions.evidence.limit / needs_support / uncertainty"
+      ],
+      "dependency_review": {
+        "requires_conclusion_change": false,
+        "suggested_same_mechanism_clarification": [],
+        "unchanged_supported_claims": [
+          "左右手未能核定来自记录员的明确追问和叙述者未直接作答，不依赖他翻了一只还是两只手。",
+          "证词不断修补、真诚误记与求关注可以并存的读法都不以手的数量为前提。",
+          "竹帘的延后披露、报纸信息与目击之间的关系，以及家庭争执迁移建议均无数量依赖。"
+        ]
+      },
+      "other_existing_issues_outside_this_dispute": [
+        {
+          "claim": "这能支持他当时在场，却不能直接证明他看清了交包。",
+          "recommendation": "改为这仍是他的自述，只解释了停电为何不妨碍他留亭听球赛，不能独立核实他当时在场或看清了交包。",
+          "reason": "两位评阅者均指出自述不能成为独立在场证明；此处与手的数量无依赖关系，应作为另一个已知澄清点保留。"
+        }
+      ]
+    }
+  ],
+  "inputs": [
+    {
+      "path": "benchmarks/results/analysis-depth/README.md",
+      "sha256": "87e70724c0ac0b1d3d4467d5d7861229985d789d05cb51380a1c2190a71cf1ac",
+      "read_scope": "complete"
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reviewer-1.json",
+      "sha256": "e230125eecc7ff7b8ae234f759078b1174378b75a1c718863a0c6db4c067805a",
+      "read_scope": "relevant cases and passages"
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reviewer-2.json",
+      "sha256": "01ee59ccb0bf7836e83b954b150059bd52c1839bac4c19b6912e239591cae407",
+      "read_scope": "relevant cases and passages"
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/blind-mapping.json",
+      "sha256": "f0d18b545da62373df6986bce736cd700108630116548f036fecc5312515f791",
+      "read_scope": "complete"
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/comparison.json",
+      "sha256": "d83c7f784d191ad9909a59a7da33ab17b1191b4bf881f1424a02333746bcfa27",
+      "read_scope": "relevant cases and passages"
+    },
+    {
+      "path": "benchmarks/analysis-depth/holdout/05/source.txt",
+      "sha256": "5d6495719f9a97156b3c09c25ba8ebf9603436cf8cd8ba74cc6b238bb368445a",
+      "read_scope": "complete"
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/05/report.md",
+      "sha256": "a4374764347a76ee360552844393732e4ade97b22d56d2d103267ff24f353dbd",
+      "read_scope": "complete"
+    },
+    {
+      "path": "benchmarks/analysis-depth/holdout/06/source.txt",
+      "sha256": "34ada7262c9ebe98e6c694aa356c5dbdd23c1d4fc8c11d01904893981fef84b1",
+      "read_scope": "complete"
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/06/report.md",
+      "sha256": "a90e047d7520cb0707cb8609b2f5fddd200e0be76aabc60e53078463ec350cd4",
+      "read_scope": "complete"
+    },
+    {
+      "path": "benchmarks/analysis-depth/development/02/source.txt",
+      "sha256": "93630146b6b3d5773ed06b1a6aa539f5eb73eb1d22881e2973127d465a81d477",
+      "read_scope": "complete"
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/02/report.md",
+      "sha256": "24d6ac8386195abe60b40e26ce7a03a66e80d09e2f2ab35654e75bc807711683",
+      "read_scope": "complete"
+    }
+  ],
+  "preservation": {
+    "original_inputs_modified": false,
+    "hashes_unchanged_after_output_write": true,
+    "original_pending_statuses_rewritten": false,
+    "original_scores_or_preferences_recomputed": false
+  },
+  "limitations": [
+    "Known cases and version labels; not a blind review.",
+    "No model regeneration, repeated sampling or human editor evaluation.",
+    "Suggested replacements are not full revised reports and have not been evaluated as such.",
+    "This followup does not establish causal or general quality improvement."
+  ]
+}

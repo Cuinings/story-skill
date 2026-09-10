@@ -82,6 +82,8 @@ def benchmark(upstream, output):
     except ImportError:
         raise SystemExit("Install the optional benchmark dependency: python -m pip install -r requirements-dev.txt")
     config = json.loads((ROOT / "benchmarks/profiles.json").read_text(encoding="utf-8"))
+    if output is None:
+        output = (ROOT / config.get("report_path", "benchmarks/results/tokens.json")).parent
     upstream = Path(upstream).resolve()
     revision = subprocess.check_output(["git", "-C", str(upstream), "rev-parse", "HEAD"], text=True).strip()
     if revision != config["revision"]:
@@ -129,7 +131,7 @@ def benchmark(upstream, output):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--upstream", required=True)
-    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.5.0"))
+    p.add_argument("--output", help="Output directory; defaults to the configured benchmark report directory")
     args = p.parse_args()
     print(json.dumps(benchmark(args.upstream, args.output), ensure_ascii=False))
 

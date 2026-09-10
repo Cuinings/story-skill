@@ -1,0 +1,627 @@
+{
+  "schema": 1,
+  "date": "2026-09-10T08:36:09.670107+00:00",
+  "sources": {
+    "kongyiji": {
+      "matches_manifest": true,
+      "sha256": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+      "bytes": 7860,
+      "characters": 2638,
+      "paragraphs": 14,
+      "job_sources_match": true,
+      "provenance_text": {
+        "file": "source.txt",
+        "encoding": "UTF-8",
+        "sha256": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+        "bytes": 7860,
+        "characters_including_separators": 2638,
+        "characters_excluding_separators": 2611,
+        "characters_excluding_all_whitespace": 2611,
+        "paragraph_count": 14,
+        "paragraph_definition": "一个非空 HTML p 对应一个输出文本段；包括正文内引文诗行及存在时的日期落款。",
+        "first_paragraph": "魯鎭的酒店的格局，是和別處不同的：都是當街一個曲尺形的大櫃臺，櫃裏面豫備着熱水，可以隨時温酒。做工的人，傍午傍晚散了工，每每花四文銅錢，買一碗酒——這是二十多年前的事，現在每碗要漲到十文，——靠櫃外站着，熱熱的喝了休息；倘肯多花一文，便可以買一碟鹽煑筍，或者茴香豆，做下酒物了，如果出到了十幾文，那就能買一樣葷菜，但這些顧客，多是短衣幫，大抵沒有這樣闊綽。只有穿長衫的，纔踱進店面隔壁的房子裏，要酒要菜，慢慢地坐喝。",
+        "last_paragraph": "（一九一九年三月。）",
+        "closing_date": "（一九一九年三月。）",
+        "paragraphs": [
+          {
+            "paragraph": 1,
+            "dom_id": "mwBQ",
+            "characters": 208,
+            "sha256": "ae906ae55a937df45f1c038da3806dbc31e274a97714c89f82cdeb4a7e677b58"
+          },
+          {
+            "paragraph": 2,
+            "dom_id": "mwCg",
+            "characters": 189,
+            "sha256": "29687f65d337c54131165617853b31e181384b920c4ee158e66c0d5bcab587ae"
+          },
+          {
+            "paragraph": 3,
+            "dom_id": "mwDw",
+            "characters": 90,
+            "sha256": "b492337966bd37b455934e6a88513aa22b0091f53c01d5efee6db21795d42b7a"
+          },
+          {
+            "paragraph": 4,
+            "dom_id": "mwEg",
+            "characters": 398,
+            "sha256": "8f2faa1ace943c63eb2fc77f2578354aeb9fc41f4abe42495597c7fc5bd6de9f"
+          },
+          {
+            "paragraph": 5,
+            "dom_id": "mwHw",
+            "characters": 213,
+            "sha256": "b22698ef6a363a0be708fdf0ef4407f5dde1d37ec5ed584baddd0dcfc8bb1ec1"
+          },
+          {
+            "paragraph": 6,
+            "dom_id": "mwJA",
+            "characters": 160,
+            "sha256": "54e32601681903f8b4ef1ce594567c07dfb35e214199086ea95a943f87fe928c"
+          },
+          {
+            "paragraph": 7,
+            "dom_id": "mwLA",
+            "characters": 380,
+            "sha256": "ff104a2833a3b4495f9db2a06f714340ba7e2ca839eb005fc4047f5f5c3843de"
+          },
+          {
+            "paragraph": 8,
+            "dom_id": "mwMw",
+            "characters": 142,
+            "sha256": "9f1d4ef31e3a954fe5a6da68f341229a1531d6f65172fd5fbba9473da5400548"
+          },
+          {
+            "paragraph": 9,
+            "dom_id": "mwOQ",
+            "characters": 26,
+            "sha256": "480ccf0e3240dd99b67c63cbe5c16fe6a4c48f4605c9a6e6d36c5c5b0fd94800"
+          },
+          {
+            "paragraph": 10,
+            "dom_id": "mwPA",
+            "characters": 238,
+            "sha256": "bfacc000305caa45aa2c084e39060b7cab8eaf1bc31325a16e96bbb46c65099b"
+          },
+          {
+            "paragraph": 11,
+            "dom_id": "mwQA",
+            "characters": 450,
+            "sha256": "91230fb744c394fd8382cfd73b5fd24bbb6dcf41429333ebc57bc76e64a4aa84"
+          },
+          {
+            "paragraph": 12,
+            "dom_id": "mwSQ",
+            "characters": 86,
+            "sha256": "679c67a88b1207c53631ae6689a4f82b4ac0a46b9c6e47517acd59b0226815c0"
+          },
+          {
+            "paragraph": 13,
+            "dom_id": "mwTg",
+            "characters": 21,
+            "sha256": "7c4c1fe7d3b1e857a8abc5a6cc8f2e0768d18b7b2c4da32e3289f3c1d834de89"
+          },
+          {
+            "paragraph": 14,
+            "dom_id": "mwUg",
+            "characters": 10,
+            "sha256": "a0fd38d5b3be5c137ce65e571e4db4e17d5292a03a604cf6b0acc4e72ee21d2a"
+          }
+        ]
+      },
+      "provenance_verification": {
+        "complete_body_text_matches_downloaded_html": true,
+        "method": "对完整正文容器（孔乙己）或首末正文段之间所有兄弟节点（命命鳥）取 text_content；仅移除已记录页码标记后，忽略排版空白的全文比较与输出完全一致。另核对首段、末段、日期落款存在与否、每段摘要、段数及字节/字符计数。",
+        "date_handling": "保留原有正文日期落款；正文不存在日期落款时不新增。",
+        "scan_images_collated": false
+      }
+    },
+    "mingmingniao": {
+      "matches_manifest": true,
+      "sha256": "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5",
+      "bytes": 32398,
+      "characters": 10904,
+      "paragraphs": 79,
+      "job_sources_match": true,
+      "provenance_text": {
+        "file": "source.txt",
+        "encoding": "UTF-8",
+        "sha256": "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5",
+        "bytes": 32398,
+        "characters_including_separators": 10904,
+        "characters_excluding_separators": 10747,
+        "characters_excluding_all_whitespace": 10615,
+        "paragraph_count": 79,
+        "paragraph_definition": "一个非空 HTML p 对应一个输出文本段；包括正文内引文诗行及存在时的日期落款。",
+        "first_paragraph": "　　敏明坐在席上，手裏拿着一本《八大人覺經》，流水似的念着。她的席在東邊的窗下，早晨日光射在她的臉上，照得她的身體全然變成黃金的顏色。她不理會日光晒着她，却不歇地抬頭去瞧壁上的時計，好像等什麼人來似的。",
+        "last_paragraph": "　　現在他們去了！月光還是照着他們所走底路；瑞大光遠遠送一點鼓樂底聲音來；動物園底野獸也都爲他們唱很雄壯的歡送歌；惟有那不懂人情底水，不願意替他們守這旅行底秘密，要找機會把他們底軀殼送回來。",
+        "closing_date": null,
+        "paragraphs": [
+          {
+            "paragraph": 1,
+            "dom_id": "mwAg",
+            "characters": 101,
+            "sha256": "acc9b674332464cb10041630f2df27313b2786e5a297911b3a1c02e72551bcbd"
+          },
+          {
+            "paragraph": 2,
+            "dom_id": "mwAw",
+            "characters": 87,
+            "sha256": "5ac2f3e7581127d99ca543e9e8eb33cb458c7f18e1747779411961e9c0485c6f"
+          },
+          {
+            "paragraph": 3,
+            "dom_id": "mwBA",
+            "characters": 83,
+            "sha256": "16b590c011e0f4b3b101d71a9400b8274c85f6d0ec6a35f192e29087e9f699df"
+          },
+          {
+            "paragraph": 4,
+            "dom_id": "mwBQ",
+            "characters": 60,
+            "sha256": "c3f942eebdc6af60df66bf5d3ea902c0c3c5a7ff58a0789337f3975228c4bf45"
+          },
+          {
+            "paragraph": 5,
+            "dom_id": "mwBg",
+            "characters": 159,
+            "sha256": "29df8cd60babc84a5abc5ffd3426c36bc3134b782b251807441224ea6f366726"
+          },
+          {
+            "paragraph": 6,
+            "dom_id": "mwBw",
+            "characters": 108,
+            "sha256": "1c06939ed90f0d472afd0e0376eada700076b1c523510191c756429fb2f7a6a4"
+          },
+          {
+            "paragraph": 7,
+            "dom_id": "mwCA",
+            "characters": 427,
+            "sha256": "131218f65f80d2f4319a963086d023958516215c3e4acf10dbf6870773a923a2"
+          },
+          {
+            "paragraph": 8,
+            "dom_id": "mwCQ",
+            "characters": 274,
+            "sha256": "f653ec38fa15c055b23229abf813d2006a2cf738cc63e6531e54cf911298c349"
+          },
+          {
+            "paragraph": 9,
+            "dom_id": "mwCg",
+            "characters": 146,
+            "sha256": "dd3b622d358f08f3f3943583c11bc96d584df6c8243bd2bd1694ba3e8e17a76a"
+          },
+          {
+            "paragraph": 10,
+            "dom_id": "mwCw",
+            "characters": 113,
+            "sha256": "c5efb62bfd4b6ed83010728d163cc35bbe07cea78c4646dec52f4e0e67f556a1"
+          },
+          {
+            "paragraph": 11,
+            "dom_id": "mwDA",
+            "characters": 969,
+            "sha256": "27379fc2844069679e43149845896e7d9dc0a2d41db5ef8942afbf7fd21c7e33"
+          },
+          {
+            "paragraph": 12,
+            "dom_id": "mwDQ",
+            "characters": 200,
+            "sha256": "3ceae9be90c0cd85c0c3cccffe198c1cd8f140924243c80d265364718827a1cb"
+          },
+          {
+            "paragraph": 13,
+            "dom_id": "mwDg",
+            "characters": 126,
+            "sha256": "ddfc1d708a12e3753b69a5d6526805947e9a5340c4683a74c7d97bb0c4872d61"
+          },
+          {
+            "paragraph": 14,
+            "dom_id": "mwDw",
+            "characters": 143,
+            "sha256": "6e595ef8211a896c178fec952d92fe4d84f35431f45edc845f114b23ceb71c24"
+          },
+          {
+            "paragraph": 15,
+            "dom_id": "mwEA",
+            "characters": 238,
+            "sha256": "1c35cf66c73b62b07d960b2a028e327078c2b48623b0d3debbdee98e9fde50d6"
+          },
+          {
+            "paragraph": 16,
+            "dom_id": "mwEQ",
+            "characters": 219,
+            "sha256": "0de533ee944a6668d2e2bd69f7eab5be58f3afdaed85cd5b6166b9711bc78622"
+          },
+          {
+            "paragraph": 17,
+            "dom_id": "mwEg",
+            "characters": 227,
+            "sha256": "66cdf6e12fbaa690e4b78b5d0251f6d04a851790c84e0cf68726605a5fed3b5f"
+          },
+          {
+            "paragraph": 18,
+            "dom_id": "mwEw",
+            "characters": 73,
+            "sha256": "e201a30d7f5a0254ed951be1c8a7cd5032314d2548e2f8bc103d7c7eff4c16dd"
+          },
+          {
+            "paragraph": 19,
+            "dom_id": "mwFA",
+            "characters": 62,
+            "sha256": "0217e48b05d94f6e84950318d342f9cd7ee2bacf269371d0317037b2ed08568b"
+          },
+          {
+            "paragraph": 20,
+            "dom_id": null,
+            "characters": 17,
+            "sha256": "9ac0a5132bb09a00bbc5ab9d5b178a49452b3af84a4ce14defa5688e3fc9b882"
+          },
+          {
+            "paragraph": 21,
+            "dom_id": null,
+            "characters": 11,
+            "sha256": "9d7ea2be9254c8a2a44c89eee696c5d9a5a722726678686f7a614a521a6abf6c"
+          },
+          {
+            "paragraph": 22,
+            "dom_id": null,
+            "characters": 9,
+            "sha256": "02e35d1b7e2a7282b1e9abd4723d18f346ae33ff7a19b89a44effdaaed7421e5"
+          },
+          {
+            "paragraph": 23,
+            "dom_id": null,
+            "characters": 6,
+            "sha256": "ffb0c999de7f61ca2d8354632382317a5efa999719221e06d9b8162ac8d8f39b"
+          },
+          {
+            "paragraph": 24,
+            "dom_id": null,
+            "characters": 14,
+            "sha256": "60a37d5ed800dc9067689adb6a7672a7dbb9109441db33e17fa8fe1d3978211a"
+          },
+          {
+            "paragraph": 25,
+            "dom_id": null,
+            "characters": 10,
+            "sha256": "8069981e71e300079dbe6b0abb364c13152df4a10da4d29a13220e862a43e99c"
+          },
+          {
+            "paragraph": 26,
+            "dom_id": null,
+            "characters": 13,
+            "sha256": "c2ae7a680c85c6a9484f4918b5eacbc85bdc02e5454fefb058b121073f589833"
+          },
+          {
+            "paragraph": 27,
+            "dom_id": null,
+            "characters": 14,
+            "sha256": "abefb896bbaf5127791e4d686a7e9d8b292e9ef5a510d66e3969e546c33a2c2e"
+          },
+          {
+            "paragraph": 28,
+            "dom_id": null,
+            "characters": 10,
+            "sha256": "3ed49f64781d5b313a8d686d3ca3541403fc8f098a47a8764b73f022922e3fd3"
+          },
+          {
+            "paragraph": 29,
+            "dom_id": null,
+            "characters": 12,
+            "sha256": "33a7ae66af9940f517b767185fbcd02271ff2662d1bfcc87a5625cdd64727ade"
+          },
+          {
+            "paragraph": 30,
+            "dom_id": null,
+            "characters": 14,
+            "sha256": "f13f210ee272a1c9544e19b16fce2792f5f507da827e9e1416f93ad968ad7ac5"
+          },
+          {
+            "paragraph": 31,
+            "dom_id": "mwFg",
+            "characters": 136,
+            "sha256": "dcc4335442b8bdd19efcb45d7b17f887b770389293975956fda8d3c2d0aefcba"
+          },
+          {
+            "paragraph": 32,
+            "dom_id": "mwFw",
+            "characters": 58,
+            "sha256": "972315fbfcb77a9e6bd117d66c9ea00ac638ed7d3d4d7e799eac6f7e8b8dd6cb"
+          },
+          {
+            "paragraph": 33,
+            "dom_id": "mwGA",
+            "characters": 157,
+            "sha256": "099e6dc7dc8b99155d34c80e05161046685dd67fce8f91f793c6e9818a414068"
+          },
+          {
+            "paragraph": 34,
+            "dom_id": "mwGQ",
+            "characters": 161,
+            "sha256": "c48b9a93073fff6f9fa8fbe25997240f266daa3b7ff16a6feaae919c55417c8b"
+          },
+          {
+            "paragraph": 35,
+            "dom_id": "mwGg",
+            "characters": 87,
+            "sha256": "f5a03b42d24a374c18ffd626bd6b0bc0d1026995b0e65bb55955ce9d921c453c"
+          },
+          {
+            "paragraph": 36,
+            "dom_id": "mwGw",
+            "characters": 270,
+            "sha256": "f0b32112f38292fb0c714c544fa9f63f11533c1184f6e243a9209fde4e00d443"
+          },
+          {
+            "paragraph": 37,
+            "dom_id": "mwHA",
+            "characters": 126,
+            "sha256": "db251cfb9733faf4568bc6b4139b82f6e77261460eb6815ec7cabcafc2f2a486"
+          },
+          {
+            "paragraph": 38,
+            "dom_id": "mwHQ",
+            "characters": 99,
+            "sha256": "01ea98f278511bead381e520c36b5832f98a03a06b49bae8f79817c2df85026f"
+          },
+          {
+            "paragraph": 39,
+            "dom_id": "mwHg",
+            "characters": 161,
+            "sha256": "7c65427ae61b232a36aa17b01c49089cb1b515e49beb2540c692e864ae70cc75"
+          },
+          {
+            "paragraph": 40,
+            "dom_id": "mwHw",
+            "characters": 178,
+            "sha256": "f816eae62aa7ef69507ae51fff80781da9b7e89b2ee5e93c42819b7f7ab3dba4"
+          },
+          {
+            "paragraph": 41,
+            "dom_id": "mwIA",
+            "characters": 69,
+            "sha256": "4a26a5259829d2fe79b732b662f5cdf26f89bd89320f81c84a74326ccc61c975"
+          },
+          {
+            "paragraph": 42,
+            "dom_id": "mwIQ",
+            "characters": 64,
+            "sha256": "bab6b409f45a23f1ade152ce764469676730d9f0d784c26ccd89b3b533f5ee99"
+          },
+          {
+            "paragraph": 43,
+            "dom_id": "mwIg",
+            "characters": 110,
+            "sha256": "0a302b8f8b281f84af5d89954dc0f28245a2c24213d04516e528e640cb412e3c"
+          },
+          {
+            "paragraph": 44,
+            "dom_id": "mwIw",
+            "characters": 269,
+            "sha256": "84ea615ff4f39528276d47161151e7e28b19d251ae6e48f095fbab422e4ecc23"
+          },
+          {
+            "paragraph": 45,
+            "dom_id": "mwJA",
+            "characters": 327,
+            "sha256": "f19f8c9a0e7e3e32209e33813cdbb48a0dab7558e641ad3cd2131ab4d0f71862"
+          },
+          {
+            "paragraph": 46,
+            "dom_id": "mwJQ",
+            "characters": 86,
+            "sha256": "1704ce07e7ee8cbbe79786cf5769d28e810f3381095796df9bfe4e2868e45b6e"
+          },
+          {
+            "paragraph": 47,
+            "dom_id": "mwJg",
+            "characters": 197,
+            "sha256": "9336bcc0cca56e608d3b07c6a958ed40f3d85fee13cdc22b684ab39c542fcdbe"
+          },
+          {
+            "paragraph": 48,
+            "dom_id": "mwJw",
+            "characters": 157,
+            "sha256": "1681d3a9c49bb4e61afb174d99459688ad5b33f18c11deee8326b86e5df072a1"
+          },
+          {
+            "paragraph": 49,
+            "dom_id": "mwKA",
+            "characters": 202,
+            "sha256": "b4e6e8209e61ee034d5e5240a91395610fc9daa9a0fd8cf7f0427a7c45ef1d51"
+          },
+          {
+            "paragraph": 50,
+            "dom_id": "mwKQ",
+            "characters": 152,
+            "sha256": "59d79487e672b3df452a79a94986bebc9546911e89fd7b177e4f35c37f3b8c19"
+          },
+          {
+            "paragraph": 51,
+            "dom_id": "mwKg",
+            "characters": 121,
+            "sha256": "f25527ddb744dd4d9c777ca9e55b9194b865841e6de33f5bfac5b188c8c2c0e7"
+          },
+          {
+            "paragraph": 52,
+            "dom_id": "mwKw",
+            "characters": 290,
+            "sha256": "842e29e4151829c79125d8a10efbfa1e47eecabea6fce571b678befc0d59f2e1"
+          },
+          {
+            "paragraph": 53,
+            "dom_id": "mwLA",
+            "characters": 243,
+            "sha256": "5af70f47592b607f1c2d5294401dbd3552c2e006bc8f807f8adf4d52fba5420b"
+          },
+          {
+            "paragraph": 54,
+            "dom_id": "mwLQ",
+            "characters": 189,
+            "sha256": "1b8f0357b20705a1ecd98ea0d48b52ea952d3c22e23314064ee59649073b8522"
+          },
+          {
+            "paragraph": 55,
+            "dom_id": "mwLg",
+            "characters": 132,
+            "sha256": "514b8ef415d7a83b6b9961219b8a6082b73fa2527c8a01bc16160316ab357ad4"
+          },
+          {
+            "paragraph": 56,
+            "dom_id": "mwLw",
+            "characters": 112,
+            "sha256": "501fe30d57f6ac09e1f08e7a61e8327058147d1d949043a954c1ce8f84aab736"
+          },
+          {
+            "paragraph": 57,
+            "dom_id": "mwMA",
+            "characters": 149,
+            "sha256": "afd818a5ff10bb8fc691de38f86bd9c4e2f2eaadf37d5061a208ec1e387e91a8"
+          },
+          {
+            "paragraph": 58,
+            "dom_id": "mwMQ",
+            "characters": 67,
+            "sha256": "0bcaaf4725a43ddcee60a7beb0a1cc5d870915e540610868e7f71d0f8338f44e"
+          },
+          {
+            "paragraph": 59,
+            "dom_id": "mwMg",
+            "characters": 140,
+            "sha256": "7424bd659dd3f67e41e3395bef789853027c2823bf38d3be91f5589f831b4536"
+          },
+          {
+            "paragraph": 60,
+            "dom_id": "mwMw",
+            "characters": 136,
+            "sha256": "021c28702e26be51a7e09dbe884887baf18674cab8e9756569fa9a55877ebb7d"
+          },
+          {
+            "paragraph": 61,
+            "dom_id": "mwNA",
+            "characters": 189,
+            "sha256": "4aed0997c1d7bd1379def8b1dbce1253a803e82d56e74302e53e5eecb6848c5c"
+          },
+          {
+            "paragraph": 62,
+            "dom_id": null,
+            "characters": 94,
+            "sha256": "6d3d0843da295a348119e8c29329e5953a60a273f3fe2c3d658c05601e176ab4"
+          },
+          {
+            "paragraph": 63,
+            "dom_id": "mwNg",
+            "characters": 77,
+            "sha256": "0c340df6b069c31d103e986353c8df31314b1ac1fe6ada922e584913391478d5"
+          },
+          {
+            "paragraph": 64,
+            "dom_id": "mwNw",
+            "characters": 159,
+            "sha256": "d2067d36bcdd6d94478751b88a03b5997c565b09da01cde769d0f685772ef866"
+          },
+          {
+            "paragraph": 65,
+            "dom_id": "mwOA",
+            "characters": 92,
+            "sha256": "2070345c2b5b9eec5e832cc1af4a82ab41697b6370e5888da13b029d601f58b4"
+          },
+          {
+            "paragraph": 66,
+            "dom_id": "mwOQ",
+            "characters": 124,
+            "sha256": "d143da0be545542209aa7c24238d84af813fcd4ba87e5fb4557d6aa2343e4772"
+          },
+          {
+            "paragraph": 67,
+            "dom_id": "mwOg",
+            "characters": 98,
+            "sha256": "9c4c73bd1b356c077b304c0494147282ea767f3a6f91173ae702c1fd1b113a9c"
+          },
+          {
+            "paragraph": 68,
+            "dom_id": "mwOw",
+            "characters": 124,
+            "sha256": "8ed98c16578e9bb2fd807e5257762e0c36547fc0aa6981fac1e898606223dff0"
+          },
+          {
+            "paragraph": 69,
+            "dom_id": "mwPA",
+            "characters": 77,
+            "sha256": "2f533e620246ab18169c54e7d241d3f504986a2797ad7eaabd83c0c3df368b20"
+          },
+          {
+            "paragraph": 70,
+            "dom_id": "mwPQ",
+            "characters": 138,
+            "sha256": "3fc298737d94e3e42e0d7ee149a3cc457c00d0af530e2f30b37b026f8299a698"
+          },
+          {
+            "paragraph": 71,
+            "dom_id": "mwPg",
+            "characters": 86,
+            "sha256": "8cdd0c26ddfb688cf6e35fcfa654c4c67e4fdd6778686811b871834ac019d273"
+          },
+          {
+            "paragraph": 72,
+            "dom_id": "mwPw",
+            "characters": 25,
+            "sha256": "8f1d2d6a6e5ae58e7d9765903e5ef2d0ec0e4a63f453dbff534ff02e17300d12"
+          },
+          {
+            "paragraph": 73,
+            "dom_id": null,
+            "characters": 116,
+            "sha256": "cf8f718a741be46819b47cd299f4d294dd12ca7178a1327903db54b7f739017c"
+          },
+          {
+            "paragraph": 74,
+            "dom_id": "mwQQ",
+            "characters": 84,
+            "sha256": "2fadf858d609ec474835b97d4a6813bbbca866831c5152237dbe2dc80a91e967"
+          },
+          {
+            "paragraph": 75,
+            "dom_id": "mwQg",
+            "characters": 380,
+            "sha256": "95feb9d7331e30b22bc747f2fc9b86ece21950d5e155ee388493af68821785ad"
+          },
+          {
+            "paragraph": 76,
+            "dom_id": "mwQw",
+            "characters": 44,
+            "sha256": "fca08b9665c15445e7154a0b7477d31fa88d695a6e8bbdd29e89ea0b25ed3ab7"
+          },
+          {
+            "paragraph": 77,
+            "dom_id": "mwRA",
+            "characters": 77,
+            "sha256": "7c7510790da688500ca2317aa9de4609dcf2bc6600b35cfa6e7662f11ebfe662"
+          },
+          {
+            "paragraph": 78,
+            "dom_id": "mwRQ",
+            "characters": 78,
+            "sha256": "fd230c676906c770ee7c03980de6994e90b0163b2e02da06e58a7ffa157bf3ff"
+          },
+          {
+            "paragraph": 79,
+            "dom_id": "mwRg",
+            "characters": 95,
+            "sha256": "f2b4267ec7b633262efa2bc2e98d7f1c86d62735cbf4a10bb22a77334022b5ca"
+          }
+        ]
+      },
+      "provenance_verification": {
+        "complete_body_text_matches_downloaded_html": true,
+        "method": "对完整正文容器（孔乙己）或首末正文段之间所有兄弟节点（命命鳥）取 text_content；仅移除已记录页码标记后，忽略排版空白的全文比较与输出完全一致。另核对首段、末段、日期落款存在与否、每段摘要、段数及字节/字符计数。",
+        "date_handling": "保留原有正文日期落款；正文不存在日期落款时不新增。",
+        "scan_images_collated": false
+      }
+    }
+  },
+  "snapshot_hashes_match": true,
+  "candidate_matches_current": true,
+  "protocol_matches_freeze": true
+}

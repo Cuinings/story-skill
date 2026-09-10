@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "method": "Separate read-only agent checked runtime contracts, current documentation and supporting receipts. Root applied its optional provenance clarification.",
+  "required_issues": [],
+  "optional_clarification_applied": "The targeted pilot reviewer had previously authored revision suggestions; not a blinded or uninformed review.",
+  "scope_excluded": "Final-check.json was still being generated during the separate review; root verified it afterwards."
+}

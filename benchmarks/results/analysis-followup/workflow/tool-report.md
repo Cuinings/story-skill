@@ -1,0 +1,8 @@
+> source_sha256: c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7
+> source_coverage: complete
+> analyzed_chunks: 1/1
+> Coverage refers to imported text, not independently verified whole-book completeness.
+
+# 门边分析
+
+林秋藏起第二只碗又否认等待，表明她可能想让弟弟留下；两人的短答和电视笑声中的沉默，让未说清的分歧占据现场。弟弟询问饭食后脱下外套，说明姐弟已经彻底和解、弟弟放弃了离开的打算。结尾他仍攥着户口本，证明两人接下来必然再次决裂。写作时可以让物件和行动承接人物难以直说的情绪。

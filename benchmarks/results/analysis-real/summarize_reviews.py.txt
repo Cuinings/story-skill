@@ -1,0 +1,17 @@
+from pathlib import Path
+import json,hashlib,shutil,datetime
+W=Path(__file__).parent;root=Path('/Users/cuining/Documents/GitHub/story-skill');out=root/'benchmarks/results/analysis-real';mapping=json.loads((W/'blind-mapping.json').read_text())['mapping'];stage=json.loads((W/'review-stage1-hashes.json').read_text());comparison={'schema':1,'scope':'Two independent anonymous model reviewers; two complete real short stories; one report per snapshot/case; no combined score','reviews':[]};levels={'充分','可用但有缺口','明显不足','不适用'};dims={'evidence','mechanism','consistency','ambiguity_genre','transfer'}
+for i in (1,2):
+ src=W/f'reviewer-{i}.json';r=json.loads(src.read_text());assert sorted(x['case'] for x in r['cases'])==['kongyiji','mingmingniao'];k=next(x for x in r['cases'] if x['case']=='kongyiji');assert hashlib.sha256(json.dumps(k,ensure_ascii=False,sort_keys=True).encode()).hexdigest()==stage[str(i)];shutil.copyfile(src,out/src.name)
+ cr={'reviewer':i,'sha256':hashlib.sha256(src.read_bytes()).hexdigest(),'stage1_judgment_unchanged':True,'cases':[]}
+ for c in r['cases']:
+  names=mapping[c['case']];assert c['preference'] in {'A','B','tie','mixed'}
+  for label in ('A','B'):
+   assert set(c['ratings'][label])==dims
+   assert all(v['level'] in levels for v in c['ratings'][label].values())
+  cr['cases'].append({'case':c['case'],'preference':names.get(c['preference'],c['preference']),'reason':c['preference_reason'],'ratings':{names[k]:v for k,v in c['ratings'].items()},'confirmed_errors':[{**e,'side':names[e['report']]} for e in c['confirmed_errors']],'pending_issues':[{**e,'side':names[e['report']]} for e in c['pending_issues']]})
+ comparison['reviews'].append(cr)
+(out/'comparison.json').write_text(json.dumps(comparison,ensure_ascii=False,indent=2)+'\n');m=json.loads((out/'manifest.json').read_text());m['reviewers']=[{'reviewer':r['reviewer'],'type':'independent_model','path':f"reviewer-{r['reviewer']}.json",'sha256':r['sha256'],'stage1_judgment_unchanged':r['stage1_judgment_unchanged']} for r in comparison['reviews']];m.update(review_completed_at=datetime.datetime.now(datetime.timezone.utc).isoformat(),review_status='two anonymous model reviewers completed both cases; raw judgments retained',review_protocol_staged=True,version_mapping_hidden_from_reviewers=True,followup_instruction_changes_after_generation=False);(out/'manifest.json').write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n')
+for r in comparison['reviews']:
+ for c in r['cases']:
+  print(json.dumps({'reviewer':r['reviewer'],'case':c['case'],'preference':c['preference'],'reason':c['reason'],'confirmed_errors':c['confirmed_errors'],'pending_issues':c['pending_issues']},ensure_ascii=False))

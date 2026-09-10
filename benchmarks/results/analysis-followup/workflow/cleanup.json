@@ -1,0 +1,13 @@
+{
+  "temporary_root": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5",
+  "removed": true,
+  "archived_materials": [
+    "source.txt",
+    "submitted-report.md",
+    "tool-report.md",
+    "revised-report.md",
+    "progress-after.md",
+    "agent-process.json"
+  ],
+  "scope": "Temporary workflow fixture removed after archived copies and protected original hashes were verified."
+}

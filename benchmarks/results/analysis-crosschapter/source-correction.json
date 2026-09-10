@@ -1,0 +1,20 @@
+{
+  "date_utc": "2026-09-10T10:07:54.126630+00:00",
+  "reason": "Web renderer external-link domain suffixes were retained in the first extraction",
+  "attempt_1_completed_analysis_chunks": 0,
+  "attempt_1_imported_chunks": 14,
+  "attempt_1_preserved": "benchmarks/results/analysis-crosschapter/attempts/source-extraction-1",
+  "before_sha256": "d2624a1d4c1861a3a1583d59f4d7a6b7e874036a95a5bd58394d02e80a49fe69",
+  "after_sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+  "removed_rendering_metadata_count": 2,
+  "removed_unicode_characters": 37,
+  "changes": [
+    {
+      "paragraph": 3,
+      "web_line": 129,
+      "before": "然而要做這一篇速朽的文章，纔下筆，便感到萬分的困難了。第一是文章的名目。孔子曰：『名不正則言不順。』這原是應該極注意的。傳的名目很繁多：列傳、自傳、內傳、外傳、別傳、家傳、小傳，……而可惜都不合。『列傳』麽，這一篇並非和許多闊人排在『正史』裏；『自傳』麽，我又並非就是阿Q。說是『外傳』，『內傳』在那里呢？倘用『內傳』，阿​Q又決不是神仙。『別傳』呢，阿Q實在未曾有大總統上諭宣付國史館立『本傳』——雖說英國正史上並無『博徒列傳』，而文豪迭更司†zh.wikipedia.org 也做過博徒別傳†en.wikisource.org 這一部書，但文豪則可，在我輩卻不可的。其次是『家傳』，則我旣不知與阿Q是否同宗，也未曾受他子孫的拜託；或『小傳』，則阿Q又更無別的『大傳』了。總而言之，這一篇也便是『本傳』，但從我的文章着想，因爲文體卑下，是『引車賣漿者流』所用的話，所以不敢僭稱，便從不入三教九流的小說家所謂『閒話休題言歸正傳』這一句套話裏，取出『正傳』兩個字來，作爲名目，卽使與古人所撰書法正傳的『正傳』字面上很相混，也顧不得了。",
+      "after": "然而要做這一篇速朽的文章，纔下筆，便感到萬分的困難了。第一是文章的名目。孔子曰：『名不正則言不順。』這原是應該極注意的。傳的名目很繁多：列傳、自傳、內傳、外傳、別傳、家傳、小傳，……而可惜都不合。『列傳』麽，這一篇並非和許多闊人排在『正史』裏；『自傳』麽，我又並非就是阿Q。說是『外傳』，『內傳』在那里呢？倘用『內傳』，阿​Q又決不是神仙。『別傳』呢，阿Q實在未曾有大總統上諭宣付國史館立『本傳』——雖說英國正史上並無『博徒列傳』，而文豪迭更司也做過博徒別傳這一部書，但文豪則可，在我輩卻不可的。其次是『家傳』，則我旣不知與阿Q是否同宗，也未曾受他子孫的拜託；或『小傳』，則阿Q又更無別的『大傳』了。總而言之，這一篇也便是『本傳』，但從我的文章着想，因爲文體卑下，是『引車賣漿者流』所用的話，所以不敢僭稱，便從不入三教九流的小說家所謂『閒話休題言歸正傳』這一句套話裏，取出『正傳』兩個字來，作爲名目，卽使與古人所撰書法正傳的『正傳』字面上很相混，也顧不得了。"
+    }
+  ],
+  "handling": "Interrupted generation before any chunk record, preserved all original artifacts, fixed extraction, then restart with a fresh generator. Not a semantic-quality retry."
+}

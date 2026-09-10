@@ -1,0 +1,246 @@
+{
+  "schema": 1,
+  "experiment": "analysis-real-2026-09-10",
+  "frozen_at": "2026-09-10T08:26:41.970414+00:00",
+  "baseline": "First-round development 0.5.1 before action-comparability refinement",
+  "candidate": "Same development 0.5.1 plus one general action-comparability sentence",
+  "repository_head": "f9d648bb0a887b45dc67168b98aba66afff87db7",
+  "snapshots": {
+    "baseline": {
+      "skills/story-codex/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex/SKILL.md": "0b5a01c6cb0b33d1f3ea82702b4a4fc04c7dffae432e799cb81b86dcf067054a",
+      "skills/story-codex/agents/openai.yaml": "15aa0bdd2ba3803da40a00ef96899a09da1e7f6a6d52a01fdccd73f130615617",
+      "skills/story-codex/references/project-state.md": "2bf653bc4960eb65277e034a8312b91e62931bfa87061261e241e01a057b04b7",
+      "skills/story-codex/scripts/story.py": "5527d93f7ee3f49b42891b814ae4d635e728db482d1c44067d41586b92f884e5",
+      "skills/story-codex/scripts/story_history.py": "17c9ba82ab72f2d7b3a6679b6f7ca27bfe193ad8c9fa772ca19f6a93ff52739a",
+      "skills/story-codex/scripts/story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
+      "skills/story-codex/scripts/story_storage.py": "f3b74767ee90ae34a0dd4390968ef0731b6c2128ccb609d42a707d11f902aeeb",
+      "skills/story-codex/scripts/story_world.py": "26ff12ff415753592aff933b4236095735706c9aac58a1c479312b66e4d3e74a",
+      "skills/story-codex-analyze/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-analyze/SKILL.md": "a5e723670540d447eb7e49ee63ececc87424a604c8811d9796624d4c4f122add",
+      "skills/story-codex-analyze/agents/openai.yaml": "af9aa6755f241868eaf640dfa5b6b130bab29f32e13b05872e4caf73dda194ae",
+      "skills/story-codex-analyze/references/deep-reading.md": "630104e2cd900c1778c6e7273e875782e50a4cac0087265538273e1be5f9191e",
+      "skills/story-codex-analyze/references/examples.md": "a8b05cbe936eaec5583d74994948a1abb11c25d28e32bd8310e265d522c92a72",
+      "skills/story-codex-cover/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-cover/SKILL.md": "15b21ebc8b26c17641ea32e1feddffafbfa5710940ef863fee54d6775ffd58b3",
+      "skills/story-codex-cover/agents/openai.yaml": "a62ccc4aa41734b35bd4bb8beeef721d6ec531bab19bd9721dc3266e9b219bdc",
+      "skills/story-codex-plan/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-plan/SKILL.md": "c437b2354cf8955771d43f6596ebe290e839ad09a871fb754a240d27cb679e5e",
+      "skills/story-codex-plan/agents/openai.yaml": "91d5054d329cba6094bf952128f8b45204a6998c532ff9359de912c6cf4461c3",
+      "skills/story-codex-research/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-research/SKILL.md": "87da9985f5e65c544bb36963409ba19ad8ea7c26f68a14439716b7533f736152",
+      "skills/story-codex-research/agents/openai.yaml": "c1d004732ad14aeb4de504637fb614174dfc8e2eeb77fb750d038a23be1106b0",
+      "skills/story-codex-review/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-review/SKILL.md": "39f246774c8a75324446c46d3cbc2ece9968cd7f350517cc3bbbea917a25ea63",
+      "skills/story-codex-review/agents/openai.yaml": "49767d87691f46c0819c920284d9c2847880a2fab69225b90c4df7734ded9bab",
+      "skills/story-codex-review/references/history.md": "80687aad2d22dd61db6eff1c90c2462162de1ba3ff0927816c843238139d0e74",
+      "skills/story-codex-write/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-write/SKILL.md": "1dfcccafcb95a4f1eacf48d4514bced347a6e1799305ab9bde5ea1ec7bd56d1d",
+      "skills/story-codex-write/agents/openai.yaml": "aaf575e3af0e3ef0f7cb648c065fd3b7c1d1e8f7c022e76ba04ecf9b705377e3",
+      "skills/story-codex-write/references/chapter.md": "57eb844fd2ccd9a56430f71f3d543e9435801b9859f243d743955a1a267c8d7c",
+      "skills/story-codex-write/references/drama.md": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+      "skills/story-codex-write/references/long-form.md": "6e1928b860c10a74f9946d0c3e3d914c21da98adc355710cb7957c1580c7f41e"
+    },
+    "candidate": {
+      "skills/story-codex/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex/SKILL.md": "0b5a01c6cb0b33d1f3ea82702b4a4fc04c7dffae432e799cb81b86dcf067054a",
+      "skills/story-codex/agents/openai.yaml": "15aa0bdd2ba3803da40a00ef96899a09da1e7f6a6d52a01fdccd73f130615617",
+      "skills/story-codex/references/project-state.md": "2bf653bc4960eb65277e034a8312b91e62931bfa87061261e241e01a057b04b7",
+      "skills/story-codex/scripts/story.py": "5527d93f7ee3f49b42891b814ae4d635e728db482d1c44067d41586b92f884e5",
+      "skills/story-codex/scripts/story_history.py": "17c9ba82ab72f2d7b3a6679b6f7ca27bfe193ad8c9fa772ca19f6a93ff52739a",
+      "skills/story-codex/scripts/story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
+      "skills/story-codex/scripts/story_storage.py": "f3b74767ee90ae34a0dd4390968ef0731b6c2128ccb609d42a707d11f902aeeb",
+      "skills/story-codex/scripts/story_world.py": "26ff12ff415753592aff933b4236095735706c9aac58a1c479312b66e4d3e74a",
+      "skills/story-codex-analyze/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-analyze/SKILL.md": "a5e723670540d447eb7e49ee63ececc87424a604c8811d9796624d4c4f122add",
+      "skills/story-codex-analyze/agents/openai.yaml": "af9aa6755f241868eaf640dfa5b6b130bab29f32e13b05872e4caf73dda194ae",
+      "skills/story-codex-analyze/references/deep-reading.md": "a41fc259d192a81e3ae4da1579892e922d9a8f5d269929315ec9f9d6a6d8db0c",
+      "skills/story-codex-analyze/references/examples.md": "a8b05cbe936eaec5583d74994948a1abb11c25d28e32bd8310e265d522c92a72",
+      "skills/story-codex-cover/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-cover/SKILL.md": "15b21ebc8b26c17641ea32e1feddffafbfa5710940ef863fee54d6775ffd58b3",
+      "skills/story-codex-cover/agents/openai.yaml": "a62ccc4aa41734b35bd4bb8beeef721d6ec531bab19bd9721dc3266e9b219bdc",
+      "skills/story-codex-plan/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-plan/SKILL.md": "c437b2354cf8955771d43f6596ebe290e839ad09a871fb754a240d27cb679e5e",
+      "skills/story-codex-plan/agents/openai.yaml": "91d5054d329cba6094bf952128f8b45204a6998c532ff9359de912c6cf4461c3",
+      "skills/story-codex-research/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-research/SKILL.md": "87da9985f5e65c544bb36963409ba19ad8ea7c26f68a14439716b7533f736152",
+      "skills/story-codex-research/agents/openai.yaml": "c1d004732ad14aeb4de504637fb614174dfc8e2eeb77fb750d038a23be1106b0",
+      "skills/story-codex-review/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-review/SKILL.md": "39f246774c8a75324446c46d3cbc2ece9968cd7f350517cc3bbbea917a25ea63",
+      "skills/story-codex-review/agents/openai.yaml": "49767d87691f46c0819c920284d9c2847880a2fab69225b90c4df7734ded9bab",
+      "skills/story-codex-review/references/history.md": "80687aad2d22dd61db6eff1c90c2462162de1ba3ff0927816c843238139d0e74",
+      "skills/story-codex-write/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-write/SKILL.md": "1dfcccafcb95a4f1eacf48d4514bced347a6e1799305ab9bde5ea1ec7bd56d1d",
+      "skills/story-codex-write/agents/openai.yaml": "aaf575e3af0e3ef0f7cb648c065fd3b7c1d1e8f7c022e76ba04ecf9b705377e3",
+      "skills/story-codex-write/references/chapter.md": "57eb844fd2ccd9a56430f71f3d543e9435801b9859f243d743955a1a267c8d7c",
+      "skills/story-codex-write/references/drama.md": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+      "skills/story-codex-write/references/long-form.md": "6e1928b860c10a74f9946d0c3e3d914c21da98adc355710cb7957c1580c7f41e"
+    }
+  },
+  "source_cases": [
+    "kongyiji",
+    "mingmingniao"
+  ],
+  "runs_per_side_per_case": 1,
+  "case_order": [
+    "kongyiji",
+    "mingmingniao"
+  ],
+  "model": "same inherited host settings; no explicit override",
+  "exact_model_identifier": null,
+  "reasoning_effort": null,
+  "temperature": null,
+  "usage": null,
+  "chunk_chars": 1600,
+  "report_length_non_whitespace": [
+    1200,
+    1800
+  ],
+  "randomization_seed": 20260911,
+  "reviewers_planned": 2,
+  "human_reviewers": 0,
+  "scope": "Paired complete-short-story analysis with real CLI ingestion, chunk recording, targeted source rereading, final report, and restart inspection",
+  "limitations": [
+    "two famous public-domain short stories, not long novels or unseen training material",
+    "single run per case/version does not estimate generation variance",
+    "agent reviews are not human reviews",
+    "root saw parts of source pages during sourcing; not a strict held-out literary trial",
+    "a one-sentence refinement based on prior synthetic observations; quality improvement is not assumed"
+  ],
+  "protocol_sha256": "915d9c613a8050cc89ccb1ca7d00f4f75599862e240d12ca8639fdeabbe3d1ca",
+  "sources": {
+    "kongyiji": {
+      "path": "benchmarks/analysis-real/sources/kongyiji/source.txt",
+      "sha256": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133"
+    },
+    "mingmingniao": {
+      "path": "benchmarks/analysis-real/sources/mingmingniao/source.txt",
+      "sha256": "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5"
+    }
+  },
+  "tasks": {
+    "kongyiji": {
+      "path": "benchmarks/analysis-real/tasks/kongyiji/task.md",
+      "sha256": "363b89c7780e4701e08f0c85e217ff5dfd815e0ce184451c9e3f4b976c3365ff"
+    },
+    "mingmingniao": {
+      "path": "benchmarks/analysis-real/tasks/mingmingniao/task.md",
+      "sha256": "363b89c7780e4701e08f0c85e217ff5dfd815e0ce184451c9e3f4b976c3365ff"
+    }
+  },
+  "outputs": [
+    {
+      "case": "kongyiji",
+      "side": "baseline",
+      "anonymous_id": "kongyiji-A",
+      "path": "benchmarks/results/analysis-real/reports/baseline/kongyiji/report.md",
+      "sha256": "7a6d183547a10349da7cf59f6a272cc03b5fed2312f45965eb7a0b19de7d4e1e",
+      "process_sha256": "dba4e3d49eacccca6ab12cf71084169322c9884def419d723c6238add6d61ea2",
+      "export_sha256": "366538fdab5f07435c287778201789951f173ac6deabe1a421cafa7e250ecbce",
+      "body_non_whitespace_characters": 1606,
+      "body_han_characters": 1377,
+      "analyzed_chunks": 2,
+      "generator_task": "real_analysis_b_kong",
+      "raw_matches_completed_trial": true,
+      "blind_matches_original": true,
+      "reported_skills_read": [
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex-analyze/SKILL.md",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/SKILL.md",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex-analyze/references/deep-reading.md"
+      ]
+    },
+    {
+      "case": "mingmingniao",
+      "side": "baseline",
+      "anonymous_id": "mingmingniao-B",
+      "path": "benchmarks/results/analysis-real/reports/baseline/mingmingniao/report.md",
+      "sha256": "76b2098b31fb72f7f3c30fc1be34ad61b6bac2c9678465664941afcd6c28a888",
+      "process_sha256": "6b5e91165ed849aae07f0408f4a998032b7a433a94bc0061d5f2f0e634a5cca7",
+      "export_sha256": "340643604a90a0cb4e45434e01923cc0ebbac6c85fc6e77f2faf9f44cf7c04a4",
+      "body_non_whitespace_characters": 1594,
+      "body_han_characters": 1372,
+      "analyzed_chunks": 8,
+      "generator_task": "real_analysis_b_ming",
+      "raw_matches_completed_trial": true,
+      "blind_matches_original": true,
+      "reported_skills_read": [
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex-analyze/SKILL.md",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/SKILL.md",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex-analyze/references/deep-reading.md"
+      ]
+    },
+    {
+      "case": "kongyiji",
+      "side": "candidate",
+      "anonymous_id": "kongyiji-B",
+      "path": "benchmarks/results/analysis-real/reports/candidate/kongyiji/report.md",
+      "sha256": "5f2e48b54d078fc9d9a0cd5ae0d05905c5b8c0bef545bdc1b844754e734a7bae",
+      "process_sha256": "dca5aee9a6a4a14d132a6f3add6c6b05238e9216beb4ee320586e2126438f1e5",
+      "export_sha256": "b044ff6a0b31bdc028fb60073869a190e028518e6df46f26d170e9f068e184bd",
+      "body_non_whitespace_characters": 1620,
+      "body_han_characters": 1383,
+      "analyzed_chunks": 2,
+      "generator_task": "real_analysis_c_kong",
+      "raw_matches_completed_trial": true,
+      "blind_matches_original": true,
+      "reported_skills_read": [
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex-analyze/SKILL.md",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex/SKILL.md",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex-analyze/references/deep-reading.md"
+      ]
+    },
+    {
+      "case": "mingmingniao",
+      "side": "candidate",
+      "anonymous_id": "mingmingniao-A",
+      "path": "benchmarks/results/analysis-real/reports/candidate/mingmingniao/report.md",
+      "sha256": "bab792bf3a296d4817a5fe110cff603904734eb7936d6d28e0891f0137273491",
+      "process_sha256": "eae119947489bdb373caf360c6655da902c13d3626146909852eb1fc71fd8f14",
+      "export_sha256": "ed239dc40f3bd79921d46e45071261d7afb695b3ff0b886fa7e78825d5427adc",
+      "body_non_whitespace_characters": 1593,
+      "body_han_characters": 1377,
+      "analyzed_chunks": 8,
+      "generator_task": "real_analysis_c_ming",
+      "raw_matches_completed_trial": true,
+      "blind_matches_original": true,
+      "reported_skills_read": [
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex-analyze/SKILL.md",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex/SKILL.md",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex-analyze/references/deep-reading.md"
+      ]
+    }
+  ],
+  "generation_completed_at": "2026-09-10T08:47:12.958228+00:00",
+  "all_generation_completed": true,
+  "raw_outputs_retained_without_editorial_changes": true,
+  "instructions_unchanged_during_generation": true,
+  "review_protocol_sha256": "5233d66074a7272dbf2ca16251a0603bc24ee8a955704e248ef0f41b41d1ec8f",
+  "driver_notes": "driver-notes.json",
+  "freeze_timing_note": "frozen_at records the initial skill-snapshot and generation-setting freeze. The final source and task hashes were added before generator dispatch, after source retrieval at 08:27 UTC. That attachment timestamp was not separately recorded; do not treat frozen_at as the source-download time.",
+  "reviewers": [
+    {
+      "reviewer": 1,
+      "type": "independent_model",
+      "path": "reviewer-1.json",
+      "sha256": "001912e3d538a43711c27975c4c50aa94c521752fb8a48031e0212ad1c3f7048",
+      "stage1_judgment_unchanged": true
+    },
+    {
+      "reviewer": 2,
+      "type": "independent_model",
+      "path": "reviewer-2.json",
+      "sha256": "dbdd27b3a22bc69521085514b28d4241d8fa1fe6ded6fb961b6a60fa86e8813d",
+      "stage1_judgment_unchanged": true
+    }
+  ],
+  "review_completed_at": "2026-09-10T08:52:25.217809+00:00",
+  "review_status": "two anonymous model reviewers completed both cases; raw judgments retained",
+  "review_protocol_staged": true,
+  "version_mapping_hidden_from_reviewers": true,
+  "followup_instruction_changes_after_generation": false,
+  "temporary_workspaces_removed": {
+    "trial_books_and_instruction_copies": true,
+    "raw_source_html": true,
+    "note": "Raw reports, per-chunk inputs, CLI logs, source provenance, instruction text snapshots and verification receipts are archived in this results directory; actual book SQLite databases are not committed."
+  }
+}

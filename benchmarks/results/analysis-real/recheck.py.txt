@@ -1,0 +1,31 @@
+from pathlib import Path
+import sys,json,hashlib,subprocess,sqlite3,shutil,datetime,re
+W=Path(__file__).parent; ROOT=Path('/Users/cuining/Documents/GitHub/story-skill'); OUT=ROOT/'benchmarks/results/analysis-real'
+def sha(data): return hashlib.sha256(data).hexdigest()
+def write(p,v): p.parent.mkdir(parents=True,exist_ok=True);p.write_text(json.dumps(v,ensure_ascii=False,indent=2)+'\n')
+for pair in sys.argv[1:]:
+ side,case=pair.split('/'); job=W/'jobs'/side/case; dest=OUT/'reports'/side/case;dest.mkdir(parents=True,exist_ok=True)
+ source=(job/'source.txt').read_text(); sid=sha(source.encode()); tool=W/side/'skills/story-codex/scripts/story.py';book=job/'book'; raw=(job/'report.md').read_bytes(); art=book/f'.story/analysis/{sid}/report.md'; before=art.read_bytes();calls=[]
+ def run(command,*args):
+  cmd=[sys.executable,'-B',str(tool),command,'--book',str(book),*map(str,args)]; p=subprocess.run(cmd,capture_output=True,text=True);rec={'command':cmd,'exit_code':p.returncode,'stdout':p.stdout,'stderr':p.stderr};calls.append(rec);assert p.returncode==0,rec;return json.loads(p.stdout)
+ status=run('status');sources=run('sources');coverage=run('coverage','--source',sid);nxt=run('next','--source',sid)
+ findings=[];offset=0
+ while True:
+  f=run('findings','--source',sid,'--offset',offset,'--limit',2);findings+=f['results'];offset=f['next_offset']
+  if offset>=f['total']:break
+ report=run('report','--source',sid,'--file',job/'report.md'); after=art.read_bytes()
+ db=sqlite3.connect('file:'+str(book/'.story/state.sqlite3')+'?mode=ro',uri=True);db.row_factory=sqlite3.Row
+ stored=db.execute('select text,coverage,encoding from sources where id=?',(sid,)).fetchone(); chunks=[dict(r) for r in db.execute('select ordinal,start,end,title,sha,analysis from chunks where source=? order by ordinal',(sid,))];artifact=dict(db.execute('select path,sha,written_sha from artifacts where path=?',(f'.story/analysis/{sid}/report.md',)).fetchone());db.close()
+ evidence=[]
+ for c in chunks:
+  data=source[c['start']:c['end']];a=json.loads(c.pop('analysis'));c['analysis']=a
+  evidence.append({'chunk':c['ordinal'],'source_slice_sha_matches':sha(data.encode())==c['sha'],'analysis_sha_matches':a['chunk_sha256']==c['sha'],'quotes': [{'quote':f['quote'],'exact_match_in_chunk':f['quote'] in data} for f in a.get('findings',[])]})
+ body='\n'.join(l for l in raw.decode().splitlines() if not re.match(r'^\s*#{1,6}\s',l));visible=''.join(body.split());length=len(visible)
+ expected=(f'> source_sha256: {sid}\n> source_coverage: complete\n> analyzed_chunks: {len(chunks)}/{len(chunks)}\n> Coverage refers to imported text, not independently verified whole-book completeness.\n\n').encode()+raw
+ checks={'fresh_process_each_command':True,'source_snapshot_matches':stored['text']==source,'source_id_matches':sha(stored['text'].encode())==sid,'complete_imported_coverage':coverage['complete_for_imported_text'] and coverage['pending']==0 and coverage['source_coverage']=='complete','next_empty':nxt['chunks']==[] and nxt['pending']==0,'all_findings_reopened':len(findings)==len(chunks),'report_retry_finalized':report['finalized'],'report_retry_bytes_unchanged':before==after,'export_exact_with_header':after==expected,'artifact_hashes_match':artifact['sha']==artifact['written_sha']==sha(after),'report_length_in_range':1200<=length<=1800,'all_recorded_quotes_exact':all(q['exact_match_in_chunk'] for x in evidence for q in x['quotes']),'all_chunk_hashes_match':all(x['source_slice_sha_matches'] and x['analysis_sha_matches'] for x in evidence)}
+ for file in job.rglob('*.json'):
+  if 'book' not in file.relative_to(job).parts: d=dest/file.relative_to(job);d.parent.mkdir(parents=True,exist_ok=True);shutil.copyfile(file,d)
+ shutil.copyfile(job/'report.md',dest/'report.md');shutil.copyfile(art,dest/'exported-report.md')
+ write(dest/'reopened-findings.json',findings);write(dest/'chunk-snapshot.json',chunks)
+ write(dest/'restart-check.json',{'schema':1,'date':datetime.datetime.now(datetime.timezone.utc).isoformat(),'scope':'Fresh subprocess continuation and unchanged report retry on the actual finished analysis book; no crash injection','original_job_directory':str(job),'source':sid,'report_sha256':sha(raw),'export_sha256':sha(after),'body_non_whitespace_characters':length,'body_han_characters':sum('\u3400'<=c<='\u9fff' for c in visible),'checks':checks,'status':status,'sources':sources,'coverage':coverage,'next':nxt,'report_retry':report,'recorded_evidence':evidence,'commands':calls})
+ print(json.dumps({'case':pair,'body_chars':length,'chunks':len(chunks),'quotes':sum(len(x['quotes']) for x in evidence),'checks':checks},ensure_ascii=False));assert all(checks.values()),checks

@@ -1,0 +1,1 @@
+{"chunk_sha256":"<填写next返回的sha>","findings":[{"claim":"<填写可证实的结论>","kind":"因果","quote":"<填写本块精确摘录>"}],"summary":"<填写本块事件与选择>"}

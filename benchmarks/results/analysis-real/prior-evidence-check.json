@@ -1,0 +1,155 @@
+{
+  "schema": 1,
+  "first_round_output_and_review_checks": [
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/01/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/01/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/01/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/01/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/02/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/02/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/02/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/02/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/03/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/03/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/03/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/03/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/04/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/04/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/04/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/04/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/05/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/05/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/05/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/05/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/06/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/baseline/06/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/06/report.md",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reports/candidate/06/process.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reviewer-1.json",
+      "matches": true
+    },
+    {
+      "path": "benchmarks/results/analysis-depth/reviewer-2.json",
+      "matches": true
+    }
+  ],
+  "all_match_prior_manifest": true,
+  "first_round_local_archive_preserved_as": "dist/story-codex-analysis-depth-pilot.zip",
+  "note": "Historical first-round receipts keep the original dist/story-codex-0.5.1.zip build path and original hash. The preserved pilot copy binds those bytes; the canonical development filename now contains the second-round candidate.",
+  "prior_evidence_inventory": {
+    "benchmarks/results/analysis-depth/blind-mapping.json": "f0d18b545da62373df6986bce736cd700108630116548f036fecc5312515f791",
+    "benchmarks/results/analysis-depth/reviewer-1.json": "e230125eecc7ff7b8ae234f759078b1174378b75a1c718863a0c6db4c067805a",
+    "benchmarks/results/analysis-depth/final-check.json": "284a3484550c1b683b2ab1d7407becb2ed834f1d33723b9094199f5aabb7bf77",
+    "benchmarks/results/analysis-depth/comparison.json": "d83c7f784d191ad9909a59a7da33ab17b1191b4bf881f1424a02333746bcfa27",
+    "benchmarks/results/analysis-depth/README.md": "87e70724c0ac0b1d3d4467d5d7861229985d789d05cb51380a1c2190a71cf1ac",
+    "benchmarks/results/analysis-depth/unit-tests.json": "881a418c0d7f36ff04cc85197a5c84c1db24c5e420baf6d4160eabbe37aa119e",
+    "benchmarks/results/analysis-depth/reviewer-2.json": "01ee59ccb0bf7836e83b954b150059bd52c1839bac4c19b6912e239591cae407",
+    "benchmarks/results/analysis-depth/manifest.json": "65ad3422942f14a41778deef3641d8766d98144a1308d59ac824ca6924c147ee",
+    "benchmarks/results/analysis-depth/technical.json": "8924d478faf15866bb5e9cac9e267e395fd693fc6cc52faae5af989ca20df2da",
+    "benchmarks/results/analysis-depth/tokens.json": "646efc998911125a09d28845260f3d07fb2777f77c450c792cb3dc98d206e341",
+    "benchmarks/results/analysis-depth/tokens.md": "69b350e4dc1ee55deabe6d1148b2d78f3e44f01f5e0d83875a470ed7fcf21f4e",
+    "benchmarks/results/analysis-depth/instructions/candidate/story-codex-analyze/SKILL.md.txt": "a5e723670540d447eb7e49ee63ececc87424a604c8811d9796624d4c4f122add",
+    "benchmarks/results/analysis-depth/instructions/candidate/story-codex/SKILL.md.txt": "0b5a01c6cb0b33d1f3ea82702b4a4fc04c7dffae432e799cb81b86dcf067054a",
+    "benchmarks/results/analysis-depth/instructions/candidate/story-codex-analyze/references/deep-reading.md.txt": "630104e2cd900c1778c6e7273e875782e50a4cac0087265538273e1be5f9191e",
+    "benchmarks/results/analysis-depth/instructions/candidate/story-codex-analyze/references/examples.md.txt": "a8b05cbe936eaec5583d74994948a1abb11c25d28e32bd8310e265d522c92a72",
+    "benchmarks/results/analysis-depth/instructions/baseline/story-codex-analyze/SKILL.md.txt": "50dc30426f04d70e5bfb7f7f97601b6d39e287ea51110046a86253fad00e9e59",
+    "benchmarks/results/analysis-depth/instructions/baseline/story-codex/SKILL.md.txt": "0b5a01c6cb0b33d1f3ea82702b4a4fc04c7dffae432e799cb81b86dcf067054a",
+    "benchmarks/results/analysis-depth/reports/candidate/03/report.md": "1c7056d631b6d56efc9a2efdce3a37590c13ca6755ded89273a456a74b01c132",
+    "benchmarks/results/analysis-depth/reports/candidate/03/process.json": "d27c74c42802617c3e6556ee1893ee2d9e0531effd5c3ee5ef4a3181f13c60b6",
+    "benchmarks/results/analysis-depth/reports/candidate/04/report.md": "c46af09e5e806ebd8252d9b69c723d626cd0f2e66c0f46fbef66cd39f2eda8f1",
+    "benchmarks/results/analysis-depth/reports/candidate/04/process.json": "36132e436167b2d931d3b452d19844ddec23e2a76006a8f92f2cae2e92c03376",
+    "benchmarks/results/analysis-depth/reports/candidate/05/report.md": "d70ed9b5d80184e80ee798e52a73f143ea0d5761ac5345f25a81a61983db3d3b",
+    "benchmarks/results/analysis-depth/reports/candidate/05/process.json": "445f8c7912df18b1813c9d8b707e5838d35887623f92ae9cf4f9199f8b0f4720",
+    "benchmarks/results/analysis-depth/reports/candidate/02/report.md": "24d6ac8386195abe60b40e26ce7a03a66e80d09e2f2ab35654e75bc807711683",
+    "benchmarks/results/analysis-depth/reports/candidate/02/process.json": "445f8c7912df18b1813c9d8b707e5838d35887623f92ae9cf4f9199f8b0f4720",
+    "benchmarks/results/analysis-depth/reports/candidate/01/report.md": "f9e977271de843917497b128ec9183e10567029530b528178bf8cb3fe1945686",
+    "benchmarks/results/analysis-depth/reports/candidate/01/process.json": "445f8c7912df18b1813c9d8b707e5838d35887623f92ae9cf4f9199f8b0f4720",
+    "benchmarks/results/analysis-depth/reports/candidate/06/report.md": "014dfca1582fad4895cc615f12b9151c6a69660cc4202e332158f3b05a1707a9",
+    "benchmarks/results/analysis-depth/reports/candidate/06/process.json": "d27c74c42802617c3e6556ee1893ee2d9e0531effd5c3ee5ef4a3181f13c60b6",
+    "benchmarks/results/analysis-depth/reports/baseline/03/report.md": "8cf71e3d969ba4336f2926d506e7501cb6664a8e6a6ba14b05efa2e36db35139",
+    "benchmarks/results/analysis-depth/reports/baseline/03/process.json": "d4f5c4de10ad2acb899a64cd26f5522ed07735974cba6d74e8bc16b7e748204e",
+    "benchmarks/results/analysis-depth/reports/baseline/04/report.md": "6dc9557d750b12a6c751d6690a7a441a85c7daf299f1917b8bc90ef02cefc411",
+    "benchmarks/results/analysis-depth/reports/baseline/04/process.json": "205109f568b69ea75996ef572304e2a71671e2e32e543610995b283ad9b555ff",
+    "benchmarks/results/analysis-depth/reports/baseline/05/report.md": "a4374764347a76ee360552844393732e4ade97b22d56d2d103267ff24f353dbd",
+    "benchmarks/results/analysis-depth/reports/baseline/05/process.json": "d4f5c4de10ad2acb899a64cd26f5522ed07735974cba6d74e8bc16b7e748204e",
+    "benchmarks/results/analysis-depth/reports/baseline/02/report.md": "f1c2e4be50e903249a8cb53323aa21c5772791c473ac8b85c0f6bf0427fec06b",
+    "benchmarks/results/analysis-depth/reports/baseline/02/process.json": "d4f5c4de10ad2acb899a64cd26f5522ed07735974cba6d74e8bc16b7e748204e",
+    "benchmarks/results/analysis-depth/reports/baseline/01/report.md": "02c4ff92715e49b63fbafb698bbcc8a3c1f0b4aafbdc1abe239406221882e495",
+    "benchmarks/results/analysis-depth/reports/baseline/01/process.json": "205109f568b69ea75996ef572304e2a71671e2e32e543610995b283ad9b555ff",
+    "benchmarks/results/analysis-depth/reports/baseline/06/report.md": "a90e047d7520cb0707cb8609b2f5fddd200e0be76aabc60e53078463ec350cd4",
+    "benchmarks/results/analysis-depth/reports/baseline/06/process.json": "d4f5c4de10ad2acb899a64cd26f5522ed07735974cba6d74e8bc16b7e748204e"
+  }
+}

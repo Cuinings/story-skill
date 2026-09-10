@@ -1,0 +1,30 @@
+{
+  "seed": 20260910,
+  "mapping": {
+    "01": {
+      "A": "candidate",
+      "B": "baseline"
+    },
+    "02": {
+      "A": "baseline",
+      "B": "candidate"
+    },
+    "03": {
+      "A": "candidate",
+      "B": "baseline"
+    },
+    "04": {
+      "A": "candidate",
+      "B": "baseline"
+    },
+    "05": {
+      "A": "baseline",
+      "B": "candidate"
+    },
+    "06": {
+      "A": "baseline",
+      "B": "candidate"
+    }
+  },
+  "not_supplied_to_reviewers": true
+}

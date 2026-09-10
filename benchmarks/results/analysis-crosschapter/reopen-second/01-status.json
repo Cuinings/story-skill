@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "-B",
+    "-X",
+    "utf8",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-crosschapter-skills-upw24kgs/story-codex/scripts/story.py",
+    "status",
+    "--book",
+    "/Users/cuining/Documents/GitHub/story-skill/benchmarks/results/analysis-crosschapter/run"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"book\":\"/Users/cuining/Documents/GitHub/story-skill/benchmarks/results/analysis-crosschapter/run\",\"cards\":0,\"changed_export_count\":0,\"changed_exports\":[],\"id\":\"28163d9b-f126-4f46-bcb2-73dc19882173\",\"imported_through\":0,\"integrity\":{\"full_book_verified\":true,\"last_full_audit_revision\":18,\"mode\":\"strict\",\"note\":\"Hash verification is a point-in-time observation; outside editors can save again.\",\"unverified_archive_count\":0,\"verified_file_count\":1},\"kind\":\"analysis\",\"last_chapter\":0,\"more_sources\":false,\"next_chapter\":1,\"pending_export_count\":0,\"pending_exports\":[],\"recent_sources\":[{\"analyzed\":14,\"chunks_total\":14,\"complete_for_imported_text\":true,\"name\":\"source.txt\",\"next_chunk\":null,\"pending\":0,\"report_path\":\".story/analysis/d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c/report.md\",\"source\":\"d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}],\"revision\":18,\"sources\":1,\"title\":\"阿Q正傳\"}\n",
+  "stderr": "",
+  "recorded_utc": "2026-09-10T10:30:12.573096+00:00"
+}

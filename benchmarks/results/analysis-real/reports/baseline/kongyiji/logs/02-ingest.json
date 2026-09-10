@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "ingest",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+    "--file",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/source.txt",
+    "--coverage",
+    "complete",
+    "--chunk-chars",
+    "1600"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"analyzed\":0,\"chunks_total\":2,\"complete_for_imported_text\":false,\"idempotent\":false,\"next_chunk\":1,\"pending\":2,\"report_path\":null,\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}\n",
+  "stderr": ""
+}

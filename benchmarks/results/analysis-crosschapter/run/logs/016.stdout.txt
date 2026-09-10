@@ -1,0 +1,1 @@
+{"analyzed":7,"chunks_total":14,"complete_for_imported_text":false,"idempotent":false,"next_chunk":8,"pending":7,"recorded":7,"report_path":null,"source":"d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c","source_coverage":"complete","text_coverage_contiguous":true}

@@ -1,0 +1,25 @@
+from pathlib import Path
+import json,hashlib,re
+R=Path('/Users/cuining/Documents/GitHub/story-skill'); O=R/'benchmarks/results/analysis-revision'; changes=[]
+replacements={
+('baseline','kongyiji'):[
+('《孔乙己》的残酷，在于一个人的需要不断改变，别人却始终用取乐与算账回应他。他起初争取读书人的体面，后来只请求停止取笑，最终连生死也无人确知。','《孔乙己》的残酷，在于孔乙己受伤后的处境已改变，酒店仍重复原有的取笑和算账。他以读书人身份争取体面，重伤后仍强调付现钱、要求酒好，受辱时的辩护却缩成请求停止取笑；最终连生死也无人确知。','K1'),
+('孔乙己的语言却已从争论概念缩成','孔乙己受辱时的语言却已从争论概念缩成','K1'),
+('需要已经降到如此低，回应仍未改变，笑声便显出对具体处境的拒绝辨认。','他仍强调“這一回是現錢，酒要好”，买酒也得以完成；停止取笑的请求却落了空。惯常笑声因此显出对伤残处境的拒绝辨认。','K1')],
+('candidate','kongyiji'):[
+('贫穷先取消了说话资格，实用性只是随后补上的理由。','伙计尚未听到教字的用途，贫穷就已成为排斥孔乙己的理由。孔乙己随后提出写账用途，伙计才以自身等级和店里不记豆账回应；后一层质疑有具体店务经验作根据。身份轻蔑与用途不合叠在一起，交流连续受阻，不能仅凭先后就把用途顾虑判成借口。','K2')],
+('baseline','mingmingniao'):[
+('此处转折也有代价：先前坚持求学、反驳断爱之说的加陵，几乎瞬间放弃人生，长期亲密能说明追随方向，却不足以细写跨越生死的心理门槛；轻快因此既构成诡异感，也留下动机过渡偏薄的问题。','加陵先前反复向父亲争取求学，这里却在听到异象前就答应同行。不愿分离的愿望从出游比喻一直延续到入水，使迅速决定有了情感连续性，也让轻快显得骇人。叙述取舍在于：先前经过争辩才保住的求学目标，没有再次进入取舍。读者看见依恋压过其他目标，却看不到他怎样衡量这项牺牲；这不等于他缺乏动机，补写犹豫也未必更适合结尾的抒情方式。','M1')],
+('candidate','mingmingniao'):[
+('浪漫成全的读法有修辞依据，却不能无视死亡的物质代价。','浪漫成全的读法有修辞依据，却不能无视死亡的物质代价；躯壳将返也未裁定彼岸是否存在。','M2'),
+('文本留着人间出路，最后的死亡还需要人物对出路本身发生误认。','父辈反对尚未封死婚姻；但加陵提出逃走时，把敏明的变化理解为未获求婚的不快（块6），未触及她已改变的婚姻观。到湖边，她明知两人觉悟不同仍容许同行，不能把死亡一概归于双方不知道差异；逃婚也未必仍是她接受的出路。','M2'),
+('相比之下，梦里所有男女整齐地撒谎、互噬，心理层次较薄；它有效表现敏明眼中的恐惧寓言，若当成现实爱情的完整论证，整齐反而暴露了概括过度。','梦中男女的齐整也应放在这一叙述方式中理解：反复情话之后，狂风让所有人一同互噬，把许诺失信和身体伤害压缩为突变。各对关系的差别及失信走向伤害的过程退出画面，恐惧迅速笼罩全景；小说的心理分辨则集中在敏明醒后怎样筛选异象、保留两人的特殊归属。群像简化服务于这种分配，不能仅凭它判定人物单薄，更不能把梦境当成现实爱情必然伤人的证明。','M3')]
+}
+for (side,case),items in replacements.items():
+ original=R/'benchmarks/results/analysis-real/reports'/side/case/'report.md';text=original.read_text();before=text
+ for old,new,issue in items:
+  assert text.count(old)==1,(side,case,old);text=text.replace(old,new);changes.append({'issue':issue,'case':case,'origin':side,'old':old,'new':new})
+ dest=O/'revised'/side/case/'report.md';dest.parent.mkdir(parents=True,exist_ok=True);dest.write_text(text)
+ body=''.join(''.join(line.split()) for line in text.splitlines() if not re.match(r'^\s*#{1,6}\s',line));print(side,case,len(body));assert 1200<=len(body)<=1800
+ log={'source_report':str(original.relative_to(R)),'source_report_sha256':hashlib.sha256(before.encode()).hexdigest(),'revised_report_sha256':hashlib.sha256(text.encode()).hexdigest(),'body_non_whitespace_characters':len(body),'status':'editorial_revision_pending_independent_review','scope':'New editorial copy made using known prior feedback; not a newly generated blind comparison output; not a CLI final-report replacement'};(dest.parent/'revision.json').write_text(json.dumps(log,ensure_ascii=False,indent=2)+'\n')
+(O/'changes.json').write_text(json.dumps({'schema':1,'changes':changes},ensure_ascii=False,indent=2)+'\n')

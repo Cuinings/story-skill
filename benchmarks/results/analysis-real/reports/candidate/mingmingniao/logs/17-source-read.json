@@ -1,0 +1,20 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex/scripts/story.py",
+    "source-read",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/candidate/mingmingniao/book",
+    "--source",
+    "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5",
+    "--start",
+    "2150",
+    "--end",
+    "2620",
+    "--budget-bytes",
+    "10000"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"budget\":{\"limit\":10000,\"unit\":\"utf8_bytes\",\"used\":1576},\"end\":2620,\"source\":\"e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5\",\"start\":2150,\"text\":\"的事，就不由得我不恨西洋人。我最沉痛的是他們在蠻得勒將白象主擄去；和在瑞大光塔設駐防營。瑞大光塔是我們的聖地，他們竟然叫些行兇的人在那裏住，豈不是把我們的戒律打破了嗎？……我盻望你不要入他們的學校，還是清清淨淨去當沙門：一則可以爲白象主懺悔；二則可以爲你的父母積福；三則爲你將來往生極樂的預備。出家能得這幾種好處，總比西洋的學問強得多。」加陵說：「出家修行，我也很願意。但無論如何，現在決不能辦。不如一面入學，一面跟着曇摩埤學些經典。」婆多瓦底知道勸不過來，就說：「你既是決意要入別的學校，我也無可奈何，我很喜歡你跟曇摩蜱學習經典。你畢業後就轉入仰光高等學校罷。那學校對於緬甸的風俗比較的保存一點。」加陵說：「那麼，我明天就去告訴曇摩蜱和法輪學校的教師。」婆多瓦底說：「也好。今天的天氣很清爽，下午你又沒有功課，不如在午飯後一塊兒到湖裏逛逛。你就叫他們開飯罷。」婆多瓦底說完就進臥房換衣服去了。\\n\\n　　原來加陵住的地方離綠綺湖不遠。綠綺湖是仰光第一大、第一好的公園，緬甸人叫他做干多支；「綠綺」的名字是英國人替他起的。湖邊滿是熱帶植物。那些\"}\n",
+  "stderr": ""
+}

@@ -30,20 +30,25 @@ PAYLOAD_FILES = tuple("story-codex/" + name for name in (
 ))
 SKILL_NAMES = ("story-codex", "story-codex-plan", "story-codex-write", "story-codex-analyze",
                "story-codex-review", "story-codex-research", "story-codex-cover")
-SUITE_FILES = tuple(sorted(
+LEGACY_SUITE_FILES = tuple(sorted(
     [f"{name}/{relative}" for name in SKILL_NAMES for relative in ("LICENSE", "SKILL.md", "agents/openai.yaml")]
     + ["story-codex/scripts/" + name for name in (
         "story.py", "story_history.py", "story_search.py", "story_storage.py", "story_world.py")]
     + ["story-codex/references/project-state.md", "story-codex-write/references/chapter.md",
        "story-codex-write/references/long-form.md", "story-codex-write/references/drama.md",
        "story-codex-review/references/history.md"]))
+SUITE_FILES = tuple(sorted(LEGACY_SUITE_FILES + (
+    "story-codex-analyze/references/deep-reading.md",
+    "story-codex-analyze/references/examples.md")))
 MAX_BYTES = 256 * 1024 * 1024
 
 
 def payload_files(version):
     if version == "0.3.0":
         return PAYLOAD_FILES
-    if re.fullmatch(r"0\.(?:4|5)\.(?:0|[1-9][0-9]*)", version):
+    if re.fullmatch(r"0\.4\.(?:0|[1-9][0-9]*)", version) or version == "0.5.0":
+        return LEGACY_SUITE_FILES
+    if re.fullmatch(r"0\.5\.[1-9][0-9]*", version):
         return SUITE_FILES
     raise ValueError(f"Release version has no reviewed payload layout: {version}")
 
@@ -87,7 +92,8 @@ def read_release(archive, sha256_file):
     with zipfile.ZipFile(io.BytesIO(raw)) as bundle:
         members = bundle.infolist()
         names = [member.filename for member in members]
-        if len(names) != len(set(names)) or set(names) not in (set(PAYLOAD_FILES), set(SUITE_FILES)):
+        layouts = (set(PAYLOAD_FILES), set(LEGACY_SUITE_FILES), set(SUITE_FILES))
+        if len(names) != len(set(names)) or set(names) not in layouts:
             raise ValueError("Release ZIP must contain exactly a reviewed skill file list, without duplicates")
         if sum(member.file_size for member in members) > MAX_BYTES:
             raise ValueError("Release ZIP payload is too large")
@@ -160,6 +166,14 @@ def wrapper_files(version):
         readme = readme.replace(previous_request,
             "$skill-installer 按 https://github.com/NingCui29/story-skill/blob/main/INSTALL.md "
             f"安装或升级 Story Codex，固定使用 v{version}。")
+    if version == "0.5.1":
+        readme = readme.replace("In Codex, ask:", "For macOS/Linux, in Codex, ask:")
+        readme = readme.replace("The shared Python runtime is", (
+            "Platform scope: v0.5.1 is released for macOS/Linux. Windows manuscript and report "
+            "export still has the known WinError 32 limitation; Windows users should retain "
+            "the verified v0.4.0 suite. Do not automatically downgrade a book already processed "
+            "by v0.5.x; preserve the complete book and skill backup first.\n\n"
+            "The shared Python runtime is"))
     return manifest, {
         "package.json": (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8"),
         "README.md": readme.encode("utf-8"),

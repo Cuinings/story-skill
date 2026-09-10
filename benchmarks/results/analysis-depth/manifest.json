@@ -1,0 +1,379 @@
+{
+  "schema": 1,
+  "experiment": "analysis-depth-pilot-2026-09-10",
+  "frozen_at": "2026-09-10T08:01:32.614916+00:00",
+  "baseline_commit": "549e5c98b3f79e61d702cbdd8ddbbebf1619f41a",
+  "candidate_base_commit": "f9d648bb0a887b45dc67168b98aba66afff87db7",
+  "candidate_status": "uncommitted development 0.5.1 snapshot",
+  "source_type": "original synthetic fixtures; not published literary works",
+  "repetitions_per_case_per_version": 1,
+  "cases": 6,
+  "holdout_cases": [
+    "05",
+    "06"
+  ],
+  "generation_context": "fresh subagent for each case/version, fork_turns=none",
+  "model": "inherited host default; no explicit model override",
+  "exact_model_identifier": null,
+  "reasoning_effort": null,
+  "temperature": null,
+  "usage": null,
+  "limits": [
+    "single run per case; no variance estimate",
+    "six short synthetic inputs; no real whole-novel validation",
+    "two anonymous model reviewers planned; no human review",
+    "root and skill authors did not read held-out source text before freezing"
+  ],
+  "snapshots": {
+    "baseline": {
+      "skills/story-codex/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex/SKILL.md": "0b5a01c6cb0b33d1f3ea82702b4a4fc04c7dffae432e799cb81b86dcf067054a",
+      "skills/story-codex/agents/openai.yaml": "15aa0bdd2ba3803da40a00ef96899a09da1e7f6a6d52a01fdccd73f130615617",
+      "skills/story-codex/references/project-state.md": "2bf653bc4960eb65277e034a8312b91e62931bfa87061261e241e01a057b04b7",
+      "skills/story-codex/scripts/story.py": "e75752fef5b0edaacf0edead35024e90149e0d659906d5153d30f4f2fb74c647",
+      "skills/story-codex/scripts/story_history.py": "17c9ba82ab72f2d7b3a6679b6f7ca27bfe193ad8c9fa772ca19f6a93ff52739a",
+      "skills/story-codex/scripts/story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
+      "skills/story-codex/scripts/story_storage.py": "f3b74767ee90ae34a0dd4390968ef0731b6c2128ccb609d42a707d11f902aeeb",
+      "skills/story-codex/scripts/story_world.py": "26ff12ff415753592aff933b4236095735706c9aac58a1c479312b66e4d3e74a",
+      "skills/story-codex-analyze/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-analyze/SKILL.md": "50dc30426f04d70e5bfb7f7f97601b6d39e287ea51110046a86253fad00e9e59",
+      "skills/story-codex-analyze/agents/openai.yaml": "af9aa6755f241868eaf640dfa5b6b130bab29f32e13b05872e4caf73dda194ae",
+      "skills/story-codex-cover/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-cover/SKILL.md": "15b21ebc8b26c17641ea32e1feddffafbfa5710940ef863fee54d6775ffd58b3",
+      "skills/story-codex-cover/agents/openai.yaml": "a62ccc4aa41734b35bd4bb8beeef721d6ec531bab19bd9721dc3266e9b219bdc",
+      "skills/story-codex-plan/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-plan/SKILL.md": "c437b2354cf8955771d43f6596ebe290e839ad09a871fb754a240d27cb679e5e",
+      "skills/story-codex-plan/agents/openai.yaml": "91d5054d329cba6094bf952128f8b45204a6998c532ff9359de912c6cf4461c3",
+      "skills/story-codex-research/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-research/SKILL.md": "87da9985f5e65c544bb36963409ba19ad8ea7c26f68a14439716b7533f736152",
+      "skills/story-codex-research/agents/openai.yaml": "c1d004732ad14aeb4de504637fb614174dfc8e2eeb77fb750d038a23be1106b0",
+      "skills/story-codex-review/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-review/SKILL.md": "39f246774c8a75324446c46d3cbc2ece9968cd7f350517cc3bbbea917a25ea63",
+      "skills/story-codex-review/agents/openai.yaml": "49767d87691f46c0819c920284d9c2847880a2fab69225b90c4df7734ded9bab",
+      "skills/story-codex-review/references/history.md": "80687aad2d22dd61db6eff1c90c2462162de1ba3ff0927816c843238139d0e74",
+      "skills/story-codex-write/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-write/SKILL.md": "1dfcccafcb95a4f1eacf48d4514bced347a6e1799305ab9bde5ea1ec7bd56d1d",
+      "skills/story-codex-write/agents/openai.yaml": "aaf575e3af0e3ef0f7cb648c065fd3b7c1d1e8f7c022e76ba04ecf9b705377e3",
+      "skills/story-codex-write/references/chapter.md": "57eb844fd2ccd9a56430f71f3d543e9435801b9859f243d743955a1a267c8d7c",
+      "skills/story-codex-write/references/drama.md": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+      "skills/story-codex-write/references/long-form.md": "6e1928b860c10a74f9946d0c3e3d914c21da98adc355710cb7957c1580c7f41e"
+    },
+    "candidate": {
+      "skills/story-codex/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex/SKILL.md": "0b5a01c6cb0b33d1f3ea82702b4a4fc04c7dffae432e799cb81b86dcf067054a",
+      "skills/story-codex/agents/openai.yaml": "15aa0bdd2ba3803da40a00ef96899a09da1e7f6a6d52a01fdccd73f130615617",
+      "skills/story-codex/references/project-state.md": "2bf653bc4960eb65277e034a8312b91e62931bfa87061261e241e01a057b04b7",
+      "skills/story-codex/scripts/story.py": "5527d93f7ee3f49b42891b814ae4d635e728db482d1c44067d41586b92f884e5",
+      "skills/story-codex/scripts/story_history.py": "17c9ba82ab72f2d7b3a6679b6f7ca27bfe193ad8c9fa772ca19f6a93ff52739a",
+      "skills/story-codex/scripts/story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
+      "skills/story-codex/scripts/story_storage.py": "f3b74767ee90ae34a0dd4390968ef0731b6c2128ccb609d42a707d11f902aeeb",
+      "skills/story-codex/scripts/story_world.py": "26ff12ff415753592aff933b4236095735706c9aac58a1c479312b66e4d3e74a",
+      "skills/story-codex-analyze/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-analyze/SKILL.md": "a5e723670540d447eb7e49ee63ececc87424a604c8811d9796624d4c4f122add",
+      "skills/story-codex-analyze/agents/openai.yaml": "af9aa6755f241868eaf640dfa5b6b130bab29f32e13b05872e4caf73dda194ae",
+      "skills/story-codex-analyze/references/deep-reading.md": "630104e2cd900c1778c6e7273e875782e50a4cac0087265538273e1be5f9191e",
+      "skills/story-codex-analyze/references/examples.md": "a8b05cbe936eaec5583d74994948a1abb11c25d28e32bd8310e265d522c92a72",
+      "skills/story-codex-cover/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-cover/SKILL.md": "15b21ebc8b26c17641ea32e1feddffafbfa5710940ef863fee54d6775ffd58b3",
+      "skills/story-codex-cover/agents/openai.yaml": "a62ccc4aa41734b35bd4bb8beeef721d6ec531bab19bd9721dc3266e9b219bdc",
+      "skills/story-codex-plan/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-plan/SKILL.md": "c437b2354cf8955771d43f6596ebe290e839ad09a871fb754a240d27cb679e5e",
+      "skills/story-codex-plan/agents/openai.yaml": "91d5054d329cba6094bf952128f8b45204a6998c532ff9359de912c6cf4461c3",
+      "skills/story-codex-research/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-research/SKILL.md": "87da9985f5e65c544bb36963409ba19ad8ea7c26f68a14439716b7533f736152",
+      "skills/story-codex-research/agents/openai.yaml": "c1d004732ad14aeb4de504637fb614174dfc8e2eeb77fb750d038a23be1106b0",
+      "skills/story-codex-review/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-review/SKILL.md": "39f246774c8a75324446c46d3cbc2ece9968cd7f350517cc3bbbea917a25ea63",
+      "skills/story-codex-review/agents/openai.yaml": "49767d87691f46c0819c920284d9c2847880a2fab69225b90c4df7734ded9bab",
+      "skills/story-codex-review/references/history.md": "80687aad2d22dd61db6eff1c90c2462162de1ba3ff0927816c843238139d0e74",
+      "skills/story-codex-write/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "skills/story-codex-write/SKILL.md": "1dfcccafcb95a4f1eacf48d4514bced347a6e1799305ab9bde5ea1ec7bd56d1d",
+      "skills/story-codex-write/agents/openai.yaml": "aaf575e3af0e3ef0f7cb648c065fd3b7c1d1e8f7c022e76ba04ecf9b705377e3",
+      "skills/story-codex-write/references/chapter.md": "57eb844fd2ccd9a56430f71f3d543e9435801b9859f243d743955a1a267c8d7c",
+      "skills/story-codex-write/references/drama.md": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+      "skills/story-codex-write/references/long-form.md": "6e1928b860c10a74f9946d0c3e3d914c21da98adc355710cb7957c1580c7f41e"
+    }
+  },
+  "tasks": {
+    "01/source.txt": "f73ff44c6dc4f610bfed9c2fb1caada554d3d7c1ba1ed4aa1b03c0ddd6405ce0",
+    "01/task.md": "06d6ec7d9ef0a871e740c77cfcfb8fbf4f6df3fddac73102791e94930e8ace4d",
+    "02/source.txt": "93630146b6b3d5773ed06b1a6aa539f5eb73eb1d22881e2973127d465a81d477",
+    "02/task.md": "2bc4cf06cf8e168abf6af605ce7f8ad81d1a3e8298d9f0437df15e30f666de2a",
+    "03/source.txt": "c45a42f81515db504797c3ba6f3b9a4d9256e992fffe7ca0d78a8acbe3a918d3",
+    "03/task.md": "ce0df742a4eb7fdf18184891f481d2ffd29239aca01b6f99a616f80c415ee18d",
+    "04/source.txt": "90d44da2889f4363ede3c720e6ea4e73d33a210e4093a72d8592120471b67642",
+    "04/task.md": "0325fe8a37ff6c1233f2b9fbd4463ef8a2d5d19c9b437563bbadaa01f905a151",
+    "05/source.txt": "5d6495719f9a97156b3c09c25ba8ebf9603436cf8cd8ba74cc6b238bb368445a",
+    "05/task.md": "2bbd7c566d987e54f48e1aa0faeb484539c432b761e57e63d09f4bce2378c865",
+    "06/source.txt": "34ada7262c9ebe98e6c694aa356c5dbdd23c1d4fc8c11d01904893981fef84b1",
+    "06/task.md": "1ec5a5da76d7af93facbe118363ad563185799347c83787b10339d167de0b92d"
+  },
+  "protocol_sha256": "725ed9005503e200c246af9963dc440bd900a1612f592db61c98327828602a12",
+  "randomization_seed": 20260910,
+  "outputs": [
+    {
+      "case": "01",
+      "side": "candidate",
+      "anonymous_id": "01-A",
+      "path": "benchmarks/results/analysis-depth/reports/candidate/01/report.md",
+      "sha256": "f9e977271de843917497b128ec9183e10567029530b528178bf8cb3fe1945686",
+      "process_sha256": "445f8c7912df18b1813c9d8b707e5838d35887623f92ae9cf4f9199f8b0f4720",
+      "body_non_whitespace_characters": 705,
+      "body_han_characters": 629,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_c01"
+    },
+    {
+      "case": "01",
+      "side": "baseline",
+      "anonymous_id": "01-B",
+      "path": "benchmarks/results/analysis-depth/reports/baseline/01/report.md",
+      "sha256": "02c4ff92715e49b63fbafb698bbcc8a3c1f0b4aafbdc1abe239406221882e495",
+      "process_sha256": "205109f568b69ea75996ef572304e2a71671e2e32e543610995b283ad9b555ff",
+      "body_non_whitespace_characters": 712,
+      "body_han_characters": 644,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_b01"
+    },
+    {
+      "case": "02",
+      "side": "baseline",
+      "anonymous_id": "02-A",
+      "path": "benchmarks/results/analysis-depth/reports/baseline/02/report.md",
+      "sha256": "f1c2e4be50e903249a8cb53323aa21c5772791c473ac8b85c0f6bf0427fec06b",
+      "process_sha256": "d4f5c4de10ad2acb899a64cd26f5522ed07735974cba6d74e8bc16b7e748204e",
+      "body_non_whitespace_characters": 710,
+      "body_han_characters": 625,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_b02"
+    },
+    {
+      "case": "02",
+      "side": "candidate",
+      "anonymous_id": "02-B",
+      "path": "benchmarks/results/analysis-depth/reports/candidate/02/report.md",
+      "sha256": "24d6ac8386195abe60b40e26ce7a03a66e80d09e2f2ab35654e75bc807711683",
+      "process_sha256": "445f8c7912df18b1813c9d8b707e5838d35887623f92ae9cf4f9199f8b0f4720",
+      "body_non_whitespace_characters": 743,
+      "body_han_characters": 665,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_c02"
+    },
+    {
+      "case": "03",
+      "side": "candidate",
+      "anonymous_id": "03-A",
+      "path": "benchmarks/results/analysis-depth/reports/candidate/03/report.md",
+      "sha256": "1c7056d631b6d56efc9a2efdce3a37590c13ca6755ded89273a456a74b01c132",
+      "process_sha256": "d27c74c42802617c3e6556ee1893ee2d9e0531effd5c3ee5ef4a3181f13c60b6",
+      "body_non_whitespace_characters": 750,
+      "body_han_characters": 670,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_c03"
+    },
+    {
+      "case": "03",
+      "side": "baseline",
+      "anonymous_id": "03-B",
+      "path": "benchmarks/results/analysis-depth/reports/baseline/03/report.md",
+      "sha256": "8cf71e3d969ba4336f2926d506e7501cb6664a8e6a6ba14b05efa2e36db35139",
+      "process_sha256": "d4f5c4de10ad2acb899a64cd26f5522ed07735974cba6d74e8bc16b7e748204e",
+      "body_non_whitespace_characters": 721,
+      "body_han_characters": 644,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_b03"
+    },
+    {
+      "case": "04",
+      "side": "candidate",
+      "anonymous_id": "04-A",
+      "path": "benchmarks/results/analysis-depth/reports/candidate/04/report.md",
+      "sha256": "c46af09e5e806ebd8252d9b69c723d626cd0f2e66c0f46fbef66cd39f2eda8f1",
+      "process_sha256": "36132e436167b2d931d3b452d19844ddec23e2a76006a8f92f2cae2e92c03376",
+      "body_non_whitespace_characters": 730,
+      "body_han_characters": 643,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_c04"
+    },
+    {
+      "case": "04",
+      "side": "baseline",
+      "anonymous_id": "04-B",
+      "path": "benchmarks/results/analysis-depth/reports/baseline/04/report.md",
+      "sha256": "6dc9557d750b12a6c751d6690a7a441a85c7daf299f1917b8bc90ef02cefc411",
+      "process_sha256": "205109f568b69ea75996ef572304e2a71671e2e32e543610995b283ad9b555ff",
+      "body_non_whitespace_characters": 751,
+      "body_han_characters": 659,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_b04"
+    },
+    {
+      "case": "05",
+      "side": "baseline",
+      "anonymous_id": "05-A",
+      "path": "benchmarks/results/analysis-depth/reports/baseline/05/report.md",
+      "sha256": "a4374764347a76ee360552844393732e4ade97b22d56d2d103267ff24f353dbd",
+      "process_sha256": "d4f5c4de10ad2acb899a64cd26f5522ed07735974cba6d74e8bc16b7e748204e",
+      "body_non_whitespace_characters": 778,
+      "body_han_characters": 698,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_b05"
+    },
+    {
+      "case": "05",
+      "side": "candidate",
+      "anonymous_id": "05-B",
+      "path": "benchmarks/results/analysis-depth/reports/candidate/05/report.md",
+      "sha256": "d70ed9b5d80184e80ee798e52a73f143ea0d5761ac5345f25a81a61983db3d3b",
+      "process_sha256": "445f8c7912df18b1813c9d8b707e5838d35887623f92ae9cf4f9199f8b0f4720",
+      "body_non_whitespace_characters": 722,
+      "body_han_characters": 639,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_c05"
+    },
+    {
+      "case": "06",
+      "side": "baseline",
+      "anonymous_id": "06-A",
+      "path": "benchmarks/results/analysis-depth/reports/baseline/06/report.md",
+      "sha256": "a90e047d7520cb0707cb8609b2f5fddd200e0be76aabc60e53078463ec350cd4",
+      "process_sha256": "d4f5c4de10ad2acb899a64cd26f5522ed07735974cba6d74e8bc16b7e748204e",
+      "body_non_whitespace_characters": 766,
+      "body_han_characters": 674,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_b06"
+    },
+    {
+      "case": "06",
+      "side": "candidate",
+      "anonymous_id": "06-B",
+      "path": "benchmarks/results/analysis-depth/reports/candidate/06/report.md",
+      "sha256": "014dfca1582fad4895cc615f12b9151c6a69660cc4202e332158f3b05a1707a9",
+      "process_sha256": "d27c74c42802617c3e6556ee1893ee2d9e0531effd5c3ee5ef4a3181f13c60b6",
+      "body_non_whitespace_characters": 708,
+      "body_han_characters": 617,
+      "length_500_800_non_whitespace": true,
+      "generator_task": "analysis_trial_c06"
+    }
+  ],
+  "scope": "Six paired single-pass text analyses, with no book database workflow; not CLI analysis end-to-end validation",
+  "holdout_access": "Held-out source text was not supplied in the root or skill-author contexts before freezing. Fixture author necessarily saw it; independent generators first saw their individual task after the freeze.",
+  "generation_completed_at": "2026-09-10T08:10:51.727099+00:00",
+  "all_generation_completed": true,
+  "instructions_unchanged_during_generation": true,
+  "raw_outputs_retained_without_editorial_changes": true,
+  "review_status": "completed",
+  "randomization_timing": "Seed selected after generation and before review; root had inspected completion/length records, not report content.",
+  "observed_process_records": {
+    "baseline": {
+      "01": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md"
+        ]
+      },
+      "02": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md"
+        ]
+      },
+      "03": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md"
+        ]
+      },
+      "04": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md"
+        ]
+      },
+      "05": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md"
+        ]
+      },
+      "06": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md"
+        ]
+      }
+    },
+    "candidate": {
+      "01": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md",
+          "story-codex-analyze/references/deep-reading.md"
+        ]
+      },
+      "02": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md",
+          "story-codex-analyze/references/deep-reading.md"
+        ]
+      },
+      "03": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md",
+          "story-codex-analyze/references/deep-reading.md"
+        ]
+      },
+      "04": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md",
+          "story-codex-analyze/references/deep-reading.md"
+        ]
+      },
+      "05": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md",
+          "story-codex-analyze/references/deep-reading.md"
+        ]
+      },
+      "06": {
+        "completed": true,
+        "declared_skill_reads": [
+          "story-codex-analyze/SKILL.md",
+          "story-codex/SKILL.md",
+          "story-codex-analyze/references/deep-reading.md"
+        ]
+      }
+    }
+  },
+  "reviewers": [
+    {
+      "type": "independent_model",
+      "file": "reviewer-1.json",
+      "sha256": "e230125eecc7ff7b8ae234f759078b1174378b75a1c718863a0c6db4c067805a"
+    },
+    {
+      "type": "independent_model",
+      "file": "reviewer-2.json",
+      "sha256": "01ee59ccb0bf7836e83b954b150059bd52c1839bac4c19b6912e239591cae407"
+    }
+  ],
+  "review_completed_at": "2026-09-10T08:19:41.156782+00:00",
+  "human_reviewers": 0,
+  "followup_instruction_changes": false,
+  "temporary_workspaces_removed": true
+}

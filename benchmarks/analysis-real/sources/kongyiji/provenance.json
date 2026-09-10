@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "source_id": "kongyiji",
+  "title": "孔乙己",
+  "author": "魯迅",
+  "first_publication_year": 1919,
+  "oldid": 2605389,
+  "source_url": "https://zh.wikisource.org/w/index.php?oldid=2605389&title=%E5%AD%94%E4%B9%99%E5%B7%B1",
+  "copyright_template": "PD-old-80-1996",
+  "original_author_death_year": 1936,
+  "download": {
+    "url": "https://zh.wikisource.org/api/rest_v1/page/html/%E5%AD%94%E4%B9%99%E5%B7%B1/2605389",
+    "method": "HTTPS GET，Wikisource REST page/html/{title}/{revision}，urllib.request；固定页面普通入口当时返回 HTTP 403，公开 REST 固定修订入口返回 HTTP 200。",
+    "retrieved_at_utc": "2026-09-10T08:27:14Z",
+    "http_status": 200,
+    "html_sha256": "6aff1af2b7362df653eda87e7680ae51ad125cf4f366b30188aff7b680442a52",
+    "html_bytes": 35435,
+    "html_retained_in_repository": false,
+    "page_revision_sha1": "t3ifqwq0oe39a2cjvjw9qxxz1jgbf6n",
+    "page_revision_modified_at": "2025-10-12T03:55:07Z"
+  },
+  "extraction": {
+    "parser": "lxml.html.fromstring",
+    "selection_rule": "//div[contains(concat(\" \", normalize-space(@class), \" \"), \" prp-pages-output \")]//p；按 DOM 顺序包含末尾日期落款；先删除 ws-pagenum 页面导航节点并保留节点尾文。",
+    "normalization": [
+      "解码 HTML 字符实体并去除文本格式标签；不进行简繁转换、Unicode NFC/NFKC 正规化、标点替换或凭记忆纠字。",
+      "只裁去各选中 p 的首尾 ASCII 空白（空格、制表符、CR、LF），保留全角缩进、异体字与正文内空白。",
+      "按原 DOM 顺序以两个 LF 连接文本段，文件尾追加一个 LF；这只是文本存储格式，不表示恢复原刊排版。",
+      "只移除 ws-pagenum 页码导航节点及其零宽空格；不全局删除未知字符。"
+    ],
+    "trimmed_ascii_whitespace_characters": 0,
+    "removed_page_markers": [
+      {
+        "page": "Page:魯迅全集01 (1948).pdf/313",
+        "printed_page": "292",
+        "text": "​"
+      },
+      {
+        "page": "Page:魯迅全集01 (1948).pdf/314",
+        "printed_page": "293",
+        "text": "​"
+      },
+      {
+        "page": "Page:魯迅全集01 (1948).pdf/315",
+        "printed_page": "294",
+        "text": "​"
+      },
+      {
+        "page": "Page:魯迅全集01 (1948).pdf/316",
+        "printed_page": "295",
+        "text": "​"
+      },
+      {
+        "page": "Page:魯迅全集01 (1948).pdf/317",
+        "printed_page": "296",
+        "text": "​"
+      },
+      {
+        "page": "Page:魯迅全集01 (1948).pdf/318",
+        "printed_page": "297",
+        "text": "​"
+      }
+    ],
+    "excluded": "网页导航、作品信息 header、版权牌、分类、模板样式、HTML 属性；两篇所选正文均未含需另行剔除的脚注 UI。",
+    "source_notes": [
+      "页面 header 说明此版本取自《魯迅全集》；正文转录容器实际引用 Index:魯迅全集01_(1948).pdf，第 313–318 个扫描页面（印刷页码 292–297）。此差异原样记录，不据此声称校勘定本。",
+      "本次没有读取扫描图像进行逐字校勘；核对范围是所下载 HTML 正文与输出文本。"
+    ]
+  },
+  "text": {
+    "file": "source.txt",
+    "encoding": "UTF-8",
+    "sha256": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "bytes": 7860,
+    "characters_including_separators": 2638,
+    "characters_excluding_separators": 2611,
+    "characters_excluding_all_whitespace": 2611,
+    "paragraph_count": 14,
+    "paragraph_definition": "一个非空 HTML p 对应一个输出文本段；包括正文内引文诗行及存在时的日期落款。",
+    "first_paragraph": "魯鎭的酒店的格局，是和別處不同的：都是當街一個曲尺形的大櫃臺，櫃裏面豫備着熱水，可以隨時温酒。做工的人，傍午傍晚散了工，每每花四文銅錢，買一碗酒——這是二十多年前的事，現在每碗要漲到十文，——靠櫃外站着，熱熱的喝了休息；倘肯多花一文，便可以買一碟鹽煑筍，或者茴香豆，做下酒物了，如果出到了十幾文，那就能買一樣葷菜，但這些顧客，多是短衣幫，大抵沒有這樣闊綽。只有穿長衫的，纔踱進店面隔壁的房子裏，要酒要菜，慢慢地坐喝。",
+    "last_paragraph": "（一九一九年三月。）",
+    "closing_date": "（一九一九年三月。）",
+    "paragraphs": [
+      {
+        "paragraph": 1,
+        "dom_id": "mwBQ",
+        "characters": 208,
+        "sha256": "ae906ae55a937df45f1c038da3806dbc31e274a97714c89f82cdeb4a7e677b58"
+      },
+      {
+        "paragraph": 2,
+        "dom_id": "mwCg",
+        "characters": 189,
+        "sha256": "29687f65d337c54131165617853b31e181384b920c4ee158e66c0d5bcab587ae"
+      },
+      {
+        "paragraph": 3,
+        "dom_id": "mwDw",
+        "characters": 90,
+        "sha256": "b492337966bd37b455934e6a88513aa22b0091f53c01d5efee6db21795d42b7a"
+      },
+      {
+        "paragraph": 4,
+        "dom_id": "mwEg",
+        "characters": 398,
+        "sha256": "8f2faa1ace943c63eb2fc77f2578354aeb9fc41f4abe42495597c7fc5bd6de9f"
+      },
+      {
+        "paragraph": 5,
+        "dom_id": "mwHw",
+        "characters": 213,
+        "sha256": "b22698ef6a363a0be708fdf0ef4407f5dde1d37ec5ed584baddd0dcfc8bb1ec1"
+      },
+      {
+        "paragraph": 6,
+        "dom_id": "mwJA",
+        "characters": 160,
+        "sha256": "54e32601681903f8b4ef1ce594567c07dfb35e214199086ea95a943f87fe928c"
+      },
+      {
+        "paragraph": 7,
+        "dom_id": "mwLA",
+        "characters": 380,
+        "sha256": "ff104a2833a3b4495f9db2a06f714340ba7e2ca839eb005fc4047f5f5c3843de"
+      },
+      {
+        "paragraph": 8,
+        "dom_id": "mwMw",
+        "characters": 142,
+        "sha256": "9f1d4ef31e3a954fe5a6da68f341229a1531d6f65172fd5fbba9473da5400548"
+      },
+      {
+        "paragraph": 9,
+        "dom_id": "mwOQ",
+        "characters": 26,
+        "sha256": "480ccf0e3240dd99b67c63cbe5c16fe6a4c48f4605c9a6e6d36c5c5b0fd94800"
+      },
+      {
+        "paragraph": 10,
+        "dom_id": "mwPA",
+        "characters": 238,
+        "sha256": "bfacc000305caa45aa2c084e39060b7cab8eaf1bc31325a16e96bbb46c65099b"
+      },
+      {
+        "paragraph": 11,
+        "dom_id": "mwQA",
+        "characters": 450,
+        "sha256": "91230fb744c394fd8382cfd73b5fd24bbb6dcf41429333ebc57bc76e64a4aa84"
+      },
+      {
+        "paragraph": 12,
+        "dom_id": "mwSQ",
+        "characters": 86,
+        "sha256": "679c67a88b1207c53631ae6689a4f82b4ac0a46b9c6e47517acd59b0226815c0"
+      },
+      {
+        "paragraph": 13,
+        "dom_id": "mwTg",
+        "characters": 21,
+        "sha256": "7c4c1fe7d3b1e857a8abc5a6cc8f2e0768d18b7b2c4da32e3289f3c1d834de89"
+      },
+      {
+        "paragraph": 14,
+        "dom_id": "mwUg",
+        "characters": 10,
+        "sha256": "a0fd38d5b3be5c137ce65e571e4db4e17d5292a03a604cf6b0acc4e72ee21d2a"
+      }
+    ]
+  },
+  "rights": {
+    "status": "公有领域原作品正文的网页转录摘出",
+    "evidence": "固定页面标示 PD-old-80-1996；原作者与来源保留。",
+    "license_boundary": "source.txt 中原作品文字不是本项目原创内容，不以仓库 MIT 声明重新许可。维基文库网页的编辑、模板或其他可能受保护贡献另有其页面所示 CC BY-SA 4.0 与使用条款边界；本文不宣称将该等贡献重新许可为 MIT。导航、版权说明及编辑性 header 未作为正文收录。",
+    "wikisource_terms_url": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+    "wikisource_license_url": "https://creativecommons.org/licenses/by-sa/4.0/"
+  },
+  "limitations": [
+    "固定 oldid 固定主页面修订；转录页、模板等依赖可能随渲染时间变化。实际评估输入以随附 source.txt 的 SHA-256 为准，不能只凭主页面 oldid 推定未来重新下载字节一致。",
+    "这是此次抓取的完整网页正文转录，不是校勘定本。",
+    "真实经典可能已出现在模型训练或既有阅读中；不宣称训练集未见、保密题或独立于模型知识。"
+  ],
+  "verification": {
+    "complete_body_text_matches_downloaded_html": true,
+    "method": "对完整正文容器（孔乙己）或首末正文段之间所有兄弟节点（命命鳥）取 text_content；仅移除已记录页码标记后，忽略排版空白的全文比较与输出完全一致。另核对首段、末段、日期落款存在与否、每段摘要、段数及字节/字符计数。",
+    "date_handling": "保留原有正文日期落款；正文不存在日期落款时不新增。",
+    "scan_images_collated": false
+  }
+}

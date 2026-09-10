@@ -1,0 +1,13 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "template",
+    "analysis",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/mingmingniao/book"
+  ],
+  "returncode": 2,
+  "stdout": "",
+  "stderr": "usage: story.py [-h] [--version]\n                {template,init,status,migrate,audit,world-save,world-check,world-read,cache-get,cache-put,history-deps,history-inspect,history-publish,history-refresh,history-snapshot,history-start,history-state,history-update,export,notes,plan,context,prepare,reconcile,recall,chapter-read,dependencies,sources,lint,commit,adopt,ingest,coverage,next,record,findings,source-read,report}\n                ...\nstory.py: error: unrecognized arguments: --book /private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/mingmingniao/book\n"
+}

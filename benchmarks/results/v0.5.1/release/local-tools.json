@@ -1,0 +1,4 @@
+{
+  "npm_shim_directory": "/private/tmp/story-v051-release-tools-2mzqtari",
+  "purpose": "Use available npm JS entry with bundled Node on this Mac; no package code or global installation modified."
+}

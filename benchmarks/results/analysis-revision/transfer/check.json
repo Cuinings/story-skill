@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "body_non_whitespace_characters": 800,
+  "quotes": [
+    {
+      "quote": "这本也走？",
+      "start": 90,
+      "exact_match": true
+    },
+    {
+      "quote": "该换就换",
+      "start": 266,
+      "exact_match": true
+    },
+    {
+      "quote": "可能",
+      "start": 320,
+      "exact_match": true
+    },
+    {
+      "quote": "不得照此改装",
+      "start": 403,
+      "exact_match": true
+    },
+    {
+      "quote": "这里亮堂",
+      "start": 204,
+      "exact_match": true
+    },
+    {
+      "quote": "仍有读者使用",
+      "start": 244,
+      "exact_match": true
+    },
+    {
+      "quote": "注销",
+      "start": 512,
+      "exact_match": true
+    },
+    {
+      "quote": "借阅零次",
+      "start": 545,
+      "exact_match": true
+    },
+    {
+      "quote": "1",
+      "start": 584,
+      "exact_match": true
+    },
+    {
+      "quote": "暂存",
+      "start": 528,
+      "exact_match": true
+    },
+    {
+      "quote": "勘误说明夹进书里",
+      "start": 516,
+      "exact_match": true
+    },
+    {
+      "quote": "1",
+      "start": 584,
+      "exact_match": true
+    }
+  ],
+  "example_read_reported": true,
+  "source_sha256": "9155bbb7c70976afffd96f8daa7891e94525cc38aa1cc327722933f524bf9d05",
+  "report_sha256": "1e98d8106420e17b1571b8e489dcfdf895e4800871d270434121d10d4b82fee5",
+  "scope": "Character count and exact quotation check; reported skill reads are agent records, not filesystem telemetry",
+  "ok": true
+}

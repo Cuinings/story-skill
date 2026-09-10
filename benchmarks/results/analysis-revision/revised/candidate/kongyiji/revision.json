@@ -1,0 +1,9 @@
+{
+  "source_report": "benchmarks/results/analysis-real/reports/candidate/kongyiji/report.md",
+  "source_report_sha256": "5f2e48b54d078fc9d9a0cd5ae0d05905c5b8c0bef545bdc1b844754e734a7bae",
+  "revised_report_sha256": "60347db2e6ff60a0a2ed1af4de084cf8311454ed6f1fe01525a7612161bc0c8c",
+  "body_non_whitespace_characters": 1705,
+  "status": "ready_after_independent_model_review",
+  "scope": "New editorial copy made using known prior feedback; not a newly generated blind comparison output; not a CLI final-report replacement",
+  "first_pass_sha256": "e2c5409a82c4cd9c0af4d3859414556e35fca5f72dd1363246cc7e23cab3bd51"
+}

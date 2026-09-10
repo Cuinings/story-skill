@@ -1,0 +1,24 @@
+{
+  "version": "0.5.1",
+  "status": "preparing",
+  "release_url": "https://github.com/NingCui29/story-skill/releases/tag/v0.5.1",
+  "target_platforms": [
+    "macOS",
+    "Linux"
+  ],
+  "windows": "Known WinError32 export limitation remains; use v0.4.0.",
+  "tag_commit": null,
+  "local_verification": {
+    "status": "passed",
+    "report": "../verification.json",
+    "tests_run": 397,
+    "tests_passed": 390,
+    "tests_skipped": 7,
+    "failed": 0,
+    "errors": 0
+  },
+  "remote_ci": "pending",
+  "release_assets": "pending",
+  "fixed_tag_install": "pending",
+  "packages": "pending"
+}

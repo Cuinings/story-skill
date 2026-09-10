@@ -1,0 +1,16 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "init",
+    "--title",
+    "冥冥鸟",
+    "--kind",
+    "analysis",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/mingmingniao/book"
+  ],
+  "returncode": 0,
+  "stdout": "{\"created\":\"/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/mingmingniao/book\",\"id\":\"6af9a300-2ad8-4e56-931e-388f3671fbd6\",\"imported_through\":0,\"kind\":\"analysis\",\"last_chapter\":0,\"revision\":0,\"schema\":2,\"title\":\"冥冥鸟\"}\n",
+  "stderr": ""
+}

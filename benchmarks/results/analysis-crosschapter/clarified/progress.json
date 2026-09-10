@@ -1,0 +1,42 @@
+{
+  "saved_utc": "2026-09-10T10:36:06.425292+00:00",
+  "parent_report": "../original-report.md",
+  "parent_sha256": "a2bdb3b8f1fade545ed0dae060e59f10a9c8f375cde1374464350bf3ad6441b1",
+  "source": "../../../analysis-crosschapter/source.txt",
+  "source_sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+  "review": "../review.json",
+  "review_sha256": "84231b5357dad82f56c5908e0ee110dbef9084f8ab0ec8c6bbe2a00590666b86",
+  "current_report": "report.md",
+  "current_sha256": "95a2348cb3b3dfb759d839987d0734a70c74d03201a12ff8ed01e039b3d1b2e7",
+  "body_characters": 1984,
+  "status": "complete",
+  "reason": "Original independent review has no mandatory changes. Editor elected to clarify only N1 chronology/effect scope and N2 transfer-goal limits. Original finalized book/report remains preserved.",
+  "edits": [
+    {
+      "before": "太爷低声叫『老Q』（块9），阿Q便把旁人的恐惧当成新身份。",
+      "after": "众人的恐惧强化了阿Q自居革命党的想象，赵太爷甚至低声叫他『老Q』（块9）。"
+    },
+    {
+      "before": "自封与盘辫无效后，他悟到须结识革命党",
+      "after": "自封与盘辫虽换来一时礼遇，却未带来参与资格；他于是悟到须结识革命党"
+    },
+    {
+      "before": "写自我欺骗，可让相同解释在小挫折、实际损失、不可逆后果中重复",
+      "after": "若要写自我欺骗如何逐步累积成悲剧，可让相同解释在小挫折、实际损失、不可逆后果中重复"
+    },
+    {
+      "before": "若始终零代价，就只剩笑话。",
+      "after": "若始终零代价，就容易只剩笑话。"
+    },
+    {
+      "before": "若只复用同一句话，便成装饰。",
+      "after": "若只复用同一句话，便容易成为装饰。"
+    }
+  ],
+  "remaining": [],
+  "review_followup": "review-followup.json",
+  "review_followup_sha256": "3b958f66e863be20d64bd073a5f6ff6daeda007b73e634634b0cc1f4757e3e32",
+  "completed_utc": "2026-09-10T10:39:48.112365+00:00",
+  "validation": "check.json",
+  "book_final_report": "Original remains finalized in ../run/.story; clarification is an external file only."
+}

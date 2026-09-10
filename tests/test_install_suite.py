@@ -27,7 +27,7 @@ class SuiteInstallTests(unittest.TestCase):
         for name in ["story.py", "story_storage.py", "story_history.py", "story_search.py", "story_world.py"]:
             path = self.source / "story-codex/scripts" / name
             path.parent.mkdir(exist_ok=True)
-            path.write_text('VERSION = "0.4.0"\n', encoding="utf-8")
+            path.write_text('VERSION = "0.5.1"\n', encoding="utf-8")
         for name in installer.SUITE_FILES:
             if "/references/" in name:
                 path = self.source / name
@@ -90,6 +90,56 @@ class SuiteInstallTests(unittest.TestCase):
         package = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(package)
         self.assertEqual(installer.SUITE_FILES, package.SUITE_FILES)
+        self.assertEqual(installer.LEGACY_SUITE_FILES, package.LEGACY_SUITE_FILES)
+        for version in ("0.4.0", "0.4.12", "0.5.0", "0.5.1", "0.5.12"):
+            self.assertEqual(installer.suite_files(version), package.suite_files(version))
+
+    def test_historical_suite_installs_then_upgrades_with_new_analysis_references(self):
+        added = set(installer.SUITE_FILES) - set(installer.LEGACY_SUITE_FILES)
+        original = {name: (self.source / name).read_bytes() for name in added}
+        runtime = self.source / "story-codex/scripts/story.py"
+        for version in ("0.4.0", "0.5.0"):
+            with self.subTest(version=version):
+                project = self.root / ("upgrade-from-" + version)
+                for name in added:
+                    (self.source / name).unlink()
+                runtime.write_text(f'VERSION = "{version}"\n', encoding="utf-8")
+                result = installer.install(project, source=self.source)
+                self.assertEqual(result["files"], 31)
+                for name, raw in original.items():
+                    (self.source / name).write_bytes(raw)
+                runtime.write_text('VERSION = "0.5.1"\n', encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "--update"):
+                    installer.install(project, source=self.source)
+                upgraded = installer.install(project, True, self.source)
+                self.assertEqual(upgraded["files"], 33)
+                backup = Path(upgraded["backup"])
+                self.assertEqual((backup / "story-codex/scripts/story.py").read_text(), f'VERSION = "{version}"\n')
+                for name in added:
+                    self.assertEqual((project / ".agents/skills" / name).read_bytes(), original[name])
+                    self.assertFalse((backup / name).exists())
+
+    def test_analysis_reference_layout_cannot_be_mislabeled_as_an_old_release(self):
+        runtime = self.source / "story-codex/scripts/story.py"
+        for version in ("0.4.0", "0.5.0"):
+            with self.subTest(version=version):
+                runtime.write_text(f'VERSION = "{version}"\n', encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "unreviewed files"):
+                    self.install()
+        runtime.write_text('VERSION = "0.5.1"\n', encoding="utf-8")
+        (self.source / "story-codex-analyze/references/deep-reading.md").unlink()
+        with self.assertRaisesRegex(ValueError, "incomplete"):
+            self.install()
+        self.assertFalse(self.target("story-codex").exists())
+
+    def test_unknown_suite_version_is_rejected_before_writing_targets(self):
+        runtime = self.source / "story-codex/scripts/story.py"
+        for version in ("0.5.01", "0.6.0", "1.0.0"):
+            with self.subTest(version=version):
+                runtime.write_text(f'VERSION = "{version}"\n', encoding="utf-8")
+                with self.assertRaisesRegex(ValueError, "no reviewed suite layout"):
+                    self.install()
+        self.assertFalse(self.target("story-codex").exists())
 
     def test_legacy_managed_core_upgrades_with_backup_and_requires_update(self):
         legacy = self.root / "legacy"

@@ -1,0 +1,1176 @@
+{
+  "schema": 1,
+  "scope": "Exact quote matching and paragraph-declared block union against the unchanged previous chunk ranges. It does not establish semantic support or validate every unquoted statement.",
+  "reports": [
+    {
+      "path": "benchmarks/results/analysis-revision/revised/candidate/mingmingniao/report.md",
+      "sha256": "8de019ca72a4fd4397cfe2190d4774059cd2f9847b283c0c575d596f7cc3fa58",
+      "body_non_whitespace_characters": 1777,
+      "quotes": [
+        {
+          "quote": "不歇地抬頭去瞧壁上的時計",
+          "source_start": 78,
+          "exact_match": true
+        },
+        {
+          "quote": "咱們是同一個身心",
+          "source_start": 3885,
+          "exact_match": true
+        },
+        {
+          "quote": "可是她沒有向加陵說明",
+          "source_start": 4219,
+          "exact_match": true
+        },
+        {
+          "quote": "必要喫虧",
+          "source_start": 4685,
+          "exact_match": true
+        },
+        {
+          "quote": "本沒有要求父母同意的必要",
+          "source_start": 4325,
+          "exact_match": true
+        },
+        {
+          "quote": "照例逃走",
+          "source_start": 8654,
+          "exact_match": true
+        },
+        {
+          "quote": "已經現出催眠的狀態",
+          "source_start": 5765,
+          "exact_match": true
+        },
+        {
+          "quote": "一個字也不改",
+          "source_start": 7886,
+          "exact_match": true
+        },
+        {
+          "quote": "幸虧我不能過去",
+          "source_start": 8350,
+          "exact_match": true
+        },
+        {
+          "quote": "好在你不在那邊",
+          "source_start": 8342,
+          "exact_match": true
+        },
+        {
+          "quote": "我底眼花了",
+          "source_start": 7225,
+          "exact_match": true
+        },
+        {
+          "quote": "心裏更是明白",
+          "source_start": 9192,
+          "exact_match": true
+        },
+        {
+          "quote": "墮入輪迴，成女人身",
+          "source_start": 10047,
+          "exact_match": true
+        },
+        {
+          "quote": "誓不再戀天人",
+          "source_start": 10076,
+          "exact_match": true
+        },
+        {
+          "quote": "我不厭世",
+          "source_start": 10258,
+          "exact_match": true
+        },
+        {
+          "quote": "不甚阻止他",
+          "source_start": 10528,
+          "exact_match": true
+        },
+        {
+          "quote": "好像不曾聽見，還是直地走",
+          "source_start": 10713,
+          "exact_match": true
+        },
+        {
+          "quote": "把他們底軀殼送回來",
+          "source_start": 10893,
+          "exact_match": true
+        }
+      ],
+      "paragraph_block_checks": [
+        {
+          "quote": "不歇地抬頭去瞧壁上的時計",
+          "paragraph_declared_blocks": [
+            1,
+            3
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "咱們是同一個身心",
+          "paragraph_declared_blocks": [
+            1,
+            3
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "可是她沒有向加陵說明",
+          "paragraph_declared_blocks": [
+            1,
+            3
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "必要喫虧",
+          "paragraph_declared_blocks": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "本沒有要求父母同意的必要",
+          "paragraph_declared_blocks": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "照例逃走",
+          "paragraph_declared_blocks": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "已經現出催眠的狀態",
+          "paragraph_declared_blocks": [
+            4,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "一個字也不改",
+          "paragraph_declared_blocks": [
+            4,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "幸虧我不能過去",
+          "paragraph_declared_blocks": [
+            5,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "好在你不在那邊",
+          "paragraph_declared_blocks": [
+            5,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "我底眼花了",
+          "paragraph_declared_blocks": [
+            5,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "心裏更是明白",
+          "paragraph_declared_blocks": [
+            6,
+            7
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "墮入輪迴，成女人身",
+          "paragraph_declared_blocks": [
+            6,
+            7
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "誓不再戀天人",
+          "paragraph_declared_blocks": [
+            7,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "我不厭世",
+          "paragraph_declared_blocks": [
+            7,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "不甚阻止他",
+          "paragraph_declared_blocks": [
+            7,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "好像不曾聽見，還是直地走",
+          "paragraph_declared_blocks": [
+            7,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "把他們底軀殼送回來",
+          "paragraph_declared_blocks": [
+            8
+          ],
+          "match_in_a_declared_block": true
+        }
+      ],
+      "all_quotes_exact": true,
+      "all_declared_block_checks_pass": true
+    },
+    {
+      "path": "benchmarks/results/analysis-revision/revised/candidate/kongyiji/report.md",
+      "sha256": "60347db2e6ff60a0a2ed1af4de084cf8311454ed6f1fe01525a7612161bc0c8c",
+      "body_non_whitespace_characters": 1705,
+      "quotes": [
+        {
+          "quote": "纔可以笑幾聲，所以至今還記得",
+          "source_start": 476,
+          "exact_match": true
+        },
+        {
+          "quote": "孔乙己還欠十九個錢呢！",
+          "source_start": 2546,
+          "exact_match": true
+        },
+        {
+          "quote": "慢慢地坐喝",
+          "source_start": 202,
+          "exact_match": true
+        },
+        {
+          "quote": "站着喝酒而穿長衫的唯一的人",
+          "source_start": 497,
+          "exact_match": true
+        },
+        {
+          "quote": "坐喝",
+          "source_start": 205,
+          "exact_match": true
+        },
+        {
+          "quote": "我",
+          "source_start": 210,
+          "exact_match": true
+        },
+        {
+          "quote": "掌櫃是一副凶臉孔",
+          "source_start": 443,
+          "exact_match": true
+        },
+        {
+          "quote": "討飯一樣的人，也配考我麽？",
+          "source_start": 1397,
+          "exact_match": true
+        },
+        {
+          "quote": "讀書人的事，能算偸麽？",
+          "source_start": 830,
+          "exact_match": true
+        },
+        {
+          "quote": "將來做掌櫃的時候，寫帳要用",
+          "source_start": 1460,
+          "exact_match": true
+        },
+        {
+          "quote": "我便考你一考",
+          "source_start": 1374,
+          "exact_match": true
+        },
+        {
+          "quote": "便只好向孩子說話",
+          "source_start": 1331,
+          "exact_match": true
+        },
+        {
+          "quote": "好喝嬾做",
+          "source_start": 977,
+          "exact_match": true
+        },
+        {
+          "quote": "聽人家背地裏談論",
+          "source_start": 893,
+          "exact_match": true
+        },
+        {
+          "quote": "他家的東西，偸得的麽？",
+          "source_start": 1956,
+          "exact_match": true
+        },
+        {
+          "quote": "誰曉得？許是死了",
+          "source_start": 2035,
+          "exact_match": true
+        },
+        {
+          "quote": "品行卻比別人都好，就是從不拖欠",
+          "source_start": 1048,
+          "exact_match": true
+        },
+        {
+          "quote": "看時又全沒有人",
+          "source_start": 2154,
+          "exact_match": true
+        },
+        {
+          "quote": "原來他便用這手走來的",
+          "source_start": 2472,
+          "exact_match": true
+        },
+        {
+          "quote": "跌斷，跌，跌……",
+          "source_start": 2386,
+          "exact_match": true
+        },
+        {
+          "quote": "這一回是現錢，酒要好",
+          "source_start": 2295,
+          "exact_match": true
+        },
+        {
+          "quote": "大約孔乙己的確死了",
+          "source_start": 2615,
+          "exact_match": true
+        },
+        {
+          "quote": "大約",
+          "source_start": 1828,
+          "exact_match": true
+        },
+        {
+          "quote": "的確",
+          "source_start": 1884,
+          "exact_match": true
+        }
+      ],
+      "paragraph_block_checks": [
+        {
+          "quote": "纔可以笑幾聲，所以至今還記得",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "孔乙己還欠十九個錢呢！",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "慢慢地坐喝",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "站着喝酒而穿長衫的唯一的人",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "坐喝",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "我",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "掌櫃是一副凶臉孔",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "討飯一樣的人，也配考我麽？",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "讀書人的事，能算偸麽？",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "將來做掌櫃的時候，寫帳要用",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "我便考你一考",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "便只好向孩子說話",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "好喝嬾做",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "聽人家背地裏談論",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "他家的東西，偸得的麽？",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "誰曉得？許是死了",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "品行卻比別人都好，就是從不拖欠",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "看時又全沒有人",
+          "paragraph_declared_blocks": [
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "原來他便用這手走來的",
+          "paragraph_declared_blocks": [
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "跌斷，跌，跌……",
+          "paragraph_declared_blocks": [
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "這一回是現錢，酒要好",
+          "paragraph_declared_blocks": [
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "大約孔乙己的確死了",
+          "paragraph_declared_blocks": [
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "大約",
+          "paragraph_declared_blocks": [
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "的確",
+          "paragraph_declared_blocks": [
+            2
+          ],
+          "match_in_a_declared_block": true
+        }
+      ],
+      "all_quotes_exact": true,
+      "all_declared_block_checks_pass": true
+    },
+    {
+      "path": "benchmarks/results/analysis-revision/revised/baseline/mingmingniao/report.md",
+      "sha256": "09c36e8af75c81954e6c4eb558f79eff99febb30cafc4ef2030e50a9992e46fc",
+      "body_non_whitespace_characters": 1664,
+      "quotes": [
+        {
+          "quote": "不歇地抬頭去瞧壁上的時計",
+          "source_start": 78,
+          "exact_match": true
+        },
+        {
+          "quote": "我和你永遠同在一個身裏住着",
+          "source_start": 3904,
+          "exact_match": true
+        },
+        {
+          "quote": "我必要喫虧",
+          "source_start": 4684,
+          "exact_match": true
+        },
+        {
+          "quote": "本沒有要求父母同意的必要",
+          "source_start": 4325,
+          "exact_match": true
+        },
+        {
+          "quote": "照例逃走",
+          "source_start": 8654,
+          "exact_match": true
+        },
+        {
+          "quote": "催眠的狀態",
+          "source_start": 5769,
+          "exact_match": true
+        },
+        {
+          "quote": "除你以外，我沒有愛過別人",
+          "source_start": 7607,
+          "exact_match": true
+        },
+        {
+          "quote": "也許是我底眼花了",
+          "source_start": 7222,
+          "exact_match": true
+        },
+        {
+          "quote": "好在你不在那邊",
+          "source_start": 8342,
+          "exact_match": true
+        },
+        {
+          "quote": "就把愛情割斷",
+          "source_start": 9039,
+          "exact_match": true
+        },
+        {
+          "quote": "合於對女人說",
+          "source_start": 9156,
+          "exact_match": true
+        },
+        {
+          "quote": "因此墮入輪迴，成女人身",
+          "source_start": 10045,
+          "exact_match": true
+        },
+        {
+          "quote": "誓不再戀天人",
+          "source_start": 10076,
+          "exact_match": true
+        },
+        {
+          "quote": "我不厭世",
+          "source_start": 10258,
+          "exact_match": true
+        },
+        {
+          "quote": "因爲你底原故，我願意和你同行",
+          "source_start": 10263,
+          "exact_match": true
+        },
+        {
+          "quote": "好像不曾聽見，還是直地走",
+          "source_start": 10713,
+          "exact_match": true
+        },
+        {
+          "quote": "新婚底男女携手入洞房",
+          "source_start": 10739,
+          "exact_match": true
+        },
+        {
+          "quote": "心中的憂鬱立刻消滅",
+          "source_start": 2715,
+          "exact_match": true
+        },
+        {
+          "quote": "軀殼送回來",
+          "source_start": 10897,
+          "exact_match": true
+        }
+      ],
+      "paragraph_block_checks": [
+        {
+          "quote": "不歇地抬頭去瞧壁上的時計",
+          "paragraph_declared_blocks": [
+            1,
+            3
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "我和你永遠同在一個身裏住着",
+          "paragraph_declared_blocks": [
+            1,
+            3
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "我必要喫虧",
+          "paragraph_declared_blocks": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "本沒有要求父母同意的必要",
+          "paragraph_declared_blocks": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "照例逃走",
+          "paragraph_declared_blocks": [
+            2,
+            3,
+            4,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "催眠的狀態",
+          "paragraph_declared_blocks": [
+            4,
+            5,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "除你以外，我沒有愛過別人",
+          "paragraph_declared_blocks": [
+            4,
+            5,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "也許是我底眼花了",
+          "paragraph_declared_blocks": [
+            4,
+            5,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "好在你不在那邊",
+          "paragraph_declared_blocks": [
+            4,
+            5,
+            6
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "就把愛情割斷",
+          "paragraph_declared_blocks": [
+            6,
+            7
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "合於對女人說",
+          "paragraph_declared_blocks": [
+            6,
+            7
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "因此墮入輪迴，成女人身",
+          "paragraph_declared_blocks": [
+            6,
+            7
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "誓不再戀天人",
+          "paragraph_declared_blocks": [
+            6,
+            7
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "我不厭世",
+          "paragraph_declared_blocks": [
+            7,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "因爲你底原故，我願意和你同行",
+          "paragraph_declared_blocks": [
+            7,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "好像不曾聽見，還是直地走",
+          "paragraph_declared_blocks": [
+            7,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "新婚底男女携手入洞房",
+          "paragraph_declared_blocks": [
+            2,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "心中的憂鬱立刻消滅",
+          "paragraph_declared_blocks": [
+            2,
+            8
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "軀殼送回來",
+          "paragraph_declared_blocks": [
+            2,
+            8
+          ],
+          "match_in_a_declared_block": true
+        }
+      ],
+      "all_quotes_exact": true,
+      "all_declared_block_checks_pass": true
+    },
+    {
+      "path": "benchmarks/results/analysis-revision/revised/baseline/kongyiji/report.md",
+      "sha256": "453bd6e8e0dd7afb1c46e2365e8b141c3f6ce481b6e2d108a1fd4205b6211c89",
+      "body_non_whitespace_characters": 1654,
+      "quotes": [
+        {
+          "quote": "慢慢地坐喝",
+          "source_start": 202,
+          "exact_match": true
+        },
+        {
+          "quote": "站着喝酒而穿長衫的唯一的人",
+          "source_start": 497,
+          "exact_match": true
+        },
+        {
+          "quote": "看時又全沒有人",
+          "source_start": 2154,
+          "exact_match": true
+        },
+        {
+          "quote": "纔可以笑幾聲，所以至今還記得",
+          "source_start": 476,
+          "exact_match": true
+        },
+        {
+          "quote": "討飯一樣的人，也配考我麽？",
+          "source_start": 1397,
+          "exact_match": true
+        },
+        {
+          "quote": "讀書人的事，能算偸麽？",
+          "source_start": 830,
+          "exact_match": true
+        },
+        {
+          "quote": "臉上籠上了一層灰色",
+          "source_start": 1207,
+          "exact_match": true
+        },
+        {
+          "quote": "等了許久",
+          "source_start": 1424,
+          "exact_match": true
+        },
+        {
+          "quote": "將來做掌櫃的時候，寫帳要用",
+          "source_start": 1460,
+          "exact_match": true
+        },
+        {
+          "quote": "一人一顆",
+          "source_start": 1687,
+          "exact_match": true
+        },
+        {
+          "quote": "快活的空氣",
+          "source_start": 885,
+          "exact_match": true
+        },
+        {
+          "quote": "同平常一樣",
+          "source_start": 2311,
+          "exact_match": true
+        },
+        {
+          "quote": "不要取笑！",
+          "source_start": 2354,
+          "exact_match": true
+        },
+        {
+          "quote": "跌斷，跌，跌……",
+          "source_start": 2386,
+          "exact_match": true
+        },
+        {
+          "quote": "這一回是現錢，酒要好",
+          "source_start": 2295,
+          "exact_match": true
+        },
+        {
+          "quote": "沒有他，別人也便這麽過",
+          "source_start": 1810,
+          "exact_match": true
+        },
+        {
+          "quote": "他家的東西，偸得的麽？",
+          "source_start": 1956,
+          "exact_match": true
+        },
+        {
+          "quote": "聽人家背地裏談論",
+          "source_start": 893,
+          "exact_match": true
+        },
+        {
+          "quote": "好喝嬾做",
+          "source_start": 977,
+          "exact_match": true
+        },
+        {
+          "quote": "品行卻比別人都好",
+          "source_start": 1048,
+          "exact_match": true
+        },
+        {
+          "quote": "就是從不拖欠",
+          "source_start": 1057,
+          "exact_match": true
+        },
+        {
+          "quote": "到中秋可是沒有說",
+          "source_start": 2582,
+          "exact_match": true
+        },
+        {
+          "quote": "大約孔乙己的確死了",
+          "source_start": 2615,
+          "exact_match": true
+        },
+        {
+          "quote": "大約",
+          "source_start": 1828,
+          "exact_match": true
+        },
+        {
+          "quote": "的確",
+          "source_start": 1884,
+          "exact_match": true
+        }
+      ],
+      "paragraph_block_checks": [
+        {
+          "quote": "慢慢地坐喝",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "站着喝酒而穿長衫的唯一的人",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "看時又全沒有人",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "纔可以笑幾聲，所以至今還記得",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "討飯一樣的人，也配考我麽？",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "讀書人的事，能算偸麽？",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "臉上籠上了一層灰色",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "等了許久",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "將來做掌櫃的時候，寫帳要用",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "一人一顆",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "快活的空氣",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "同平常一樣",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "不要取笑！",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "跌斷，跌，跌……",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "這一回是現錢，酒要好",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "沒有他，別人也便這麽過",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "他家的東西，偸得的麽？",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "聽人家背地裏談論",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "好喝嬾做",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "品行卻比別人都好",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "就是從不拖欠",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "到中秋可是沒有說",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "大約孔乙己的確死了",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "大約",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        },
+        {
+          "quote": "的確",
+          "paragraph_declared_blocks": [
+            1,
+            2
+          ],
+          "match_in_a_declared_block": true
+        }
+      ],
+      "all_quotes_exact": true,
+      "all_declared_block_checks_pass": true
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "body_chars_excluding_titles_whitespace": 1593,
+  "body_length_pass": true,
+  "quote_checks": [
+    {
+      "quote": "不歇地抬頭去瞧壁上的時計",
+      "found": true,
+      "start": 78,
+      "end": 90
+    },
+    {
+      "quote": "咱們是同一個身心",
+      "found": true,
+      "start": 3885,
+      "end": 3893
+    },
+    {
+      "quote": "可是她沒有向加陵說明",
+      "found": true,
+      "start": 4219,
+      "end": 4229
+    },
+    {
+      "quote": "必要喫虧",
+      "found": true,
+      "start": 4685,
+      "end": 4689
+    },
+    {
+      "quote": "本沒有要求父母同意的必要",
+      "found": true,
+      "start": 4325,
+      "end": 4337
+    },
+    {
+      "quote": "照例逃走",
+      "found": true,
+      "start": 8654,
+      "end": 8658
+    },
+    {
+      "quote": "已經現出催眠的狀態",
+      "found": true,
+      "start": 5765,
+      "end": 5774
+    },
+    {
+      "quote": "一個字也不改",
+      "found": true,
+      "start": 7886,
+      "end": 7892
+    },
+    {
+      "quote": "幸虧我不能過去",
+      "found": true,
+      "start": 8350,
+      "end": 8357
+    },
+    {
+      "quote": "好在你不在那邊",
+      "found": true,
+      "start": 8342,
+      "end": 8349
+    },
+    {
+      "quote": "我底眼花了",
+      "found": true,
+      "start": 7225,
+      "end": 7230
+    },
+    {
+      "quote": "心裏更是明白",
+      "found": true,
+      "start": 9192,
+      "end": 9198
+    },
+    {
+      "quote": "墮入輪迴，成女人身",
+      "found": true,
+      "start": 10047,
+      "end": 10056
+    },
+    {
+      "quote": "誓不再戀天人",
+      "found": true,
+      "start": 10076,
+      "end": 10082
+    },
+    {
+      "quote": "我不厭世",
+      "found": true,
+      "start": 10258,
+      "end": 10262
+    },
+    {
+      "quote": "不甚阻止他",
+      "found": true,
+      "start": 10528,
+      "end": 10533
+    },
+    {
+      "quote": "好像不曾聽見，還是直地走",
+      "found": true,
+      "start": 10713,
+      "end": 10725
+    },
+    {
+      "quote": "把他們底軀殼送回來",
+      "found": true,
+      "start": 10893,
+      "end": 10902
+    }
+  ],
+  "mechanical_check_scope": "Report length and exact source substrings only; literary judgments were reviewed separately.",
+  "semantic_review": {
+    "reviewer": "same analysis agent",
+    "independent_review": false,
+    "core_judgment": "共同死亡并未消除离欲与不分离两种不同欲望。",
+    "counterevidence_considered": [
+      "父亲准许入学与文本明确婚嫁不强制父母许可，限制绝对封锁解释。",
+      "敏明起初想过岸并在醒后把二人保留为此岸命命鸟，限制一概弃爱解释。",
+      "梦入口有疲乏催眠叙述、辨鸟时有自我怀疑，限制客观神谕解释。",
+      "喜筵洞房与欢送修辞支持浪漫感受，末句躯壳返回限制无保留的成全解释。"
+    ],
+    "claim_refinements": [
+      "没有把蠱术方案当成已施法事实。",
+      "末尾不回应亲吻与前段明说动机不同合看，不由单一动作推断不再爱。",
+      "经文转述与女人身祈祷只认定呼应，不认定单句导致全部决定。"
+    ],
+    "unresolved": "超越世界的客观真实性没有被原文外部验证；幻境可容许宗教与心理读法。"
+  }
+}

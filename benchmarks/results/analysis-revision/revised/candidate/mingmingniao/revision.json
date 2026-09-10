@@ -1,0 +1,8 @@
+{
+  "source_report": "benchmarks/results/analysis-real/reports/candidate/mingmingniao/report.md",
+  "source_report_sha256": "bab792bf3a296d4817a5fe110cff603904734eb7936d6d28e0891f0137273491",
+  "revised_report_sha256": "8de019ca72a4fd4397cfe2190d4774059cd2f9847b283c0c575d596f7cc3fa58",
+  "body_non_whitespace_characters": 1777,
+  "status": "ready_after_independent_model_review",
+  "scope": "New editorial copy made using known prior feedback; not a newly generated blind comparison output; not a CLI final-report replacement"
+}

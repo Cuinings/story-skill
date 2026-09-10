@@ -17,13 +17,25 @@ SKILL = SKILLS / "story-codex"
 SOURCE = SKILLS
 SKILL_NAMES = ("story-codex", "story-codex-plan", "story-codex-write", "story-codex-analyze",
                "story-codex-review", "story-codex-research", "story-codex-cover")
-SUITE_FILES = tuple(sorted(
+LEGACY_SUITE_FILES = tuple(sorted(
     [f"{name}/{relative}" for name in SKILL_NAMES for relative in ("LICENSE", "SKILL.md", "agents/openai.yaml")]
     + ["story-codex/scripts/" + name for name in (
         "story.py", "story_history.py", "story_search.py", "story_storage.py", "story_world.py")]
     + ["story-codex/references/project-state.md", "story-codex-write/references/chapter.md",
        "story-codex-write/references/long-form.md", "story-codex-write/references/drama.md",
        "story-codex-review/references/history.md"]))
+SUITE_FILES = tuple(sorted(LEGACY_SUITE_FILES + (
+    "story-codex-analyze/references/deep-reading.md",
+    "story-codex-analyze/references/examples.md")))
+
+
+def suite_files(version):
+    """Keep published layouts fixed while reviewing each supported version family."""
+    if re.fullmatch(r"0\.4\.(?:0|[1-9][0-9]*)", version) or version == "0.5.0":
+        return LEGACY_SUITE_FILES
+    if re.fullmatch(r"0\.5\.[1-9][0-9]*", version):
+        return SUITE_FILES
+    raise ValueError(f"Release version has no reviewed suite layout: {version}")
 
 
 def source_version(raw):
@@ -86,10 +98,14 @@ def source_entries():
                 files[relative.as_posix()] = path.read_bytes()
             elif not path.is_dir():
                 raise ValueError(f"Refusing special package content: {relative}")
-    if set(files) != set(SUITE_FILES):
+    runtime = files.get("story-codex/scripts/story.py")
+    if runtime is None:
+        raise ValueError("Source suite differs from its reviewed file manifest; missing scripts/story.py")
+    required = set(suite_files(source_version(runtime)))
+    if set(files) != required:
         raise ValueError(f"Source suite differs from its reviewed file manifest; "
-                         f"missing={sorted(set(SUITE_FILES) - files.keys())}, "
-                         f"extra={sorted(files.keys() - set(SUITE_FILES))}")
+                         f"missing={sorted(required - files.keys())}, "
+                         f"extra={sorted(files.keys() - required)}")
     return sorted(files.items())
 
 

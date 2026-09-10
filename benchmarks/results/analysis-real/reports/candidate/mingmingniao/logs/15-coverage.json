@@ -1,0 +1,14 @@
+{
+  "argv": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/candidate/skills/story-codex/scripts/story.py",
+    "coverage",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/candidate/mingmingniao/book",
+    "--source",
+    "e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5"
+  ],
+  "exit_code": 0,
+  "stdout": "{\"analyzed\":8,\"chunks_total\":8,\"complete_for_imported_text\":true,\"next_chunk\":null,\"pending\":0,\"report_path\":null,\"source\":\"e399782dd081a1cba41adaa98056c7aeff9b5f5d5c2cae0cb06557e188198fe5\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}\n",
+  "stderr": ""
+}

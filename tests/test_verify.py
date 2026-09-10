@@ -145,6 +145,87 @@ class VerificationEvidenceTests(unittest.TestCase):
             self.assertFalse(json.loads(failure_path.read_text(encoding="utf-8"))["ok"])
 
 
+class VersionedEvidenceTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="story-versioned-evidence-test-")
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name).resolve()
+        self.skill = self.root / "skills/story-codex"
+        (self.skill / "scripts").mkdir(parents=True)
+        self.runtime = self.skill / "scripts/story.py"
+        package = verify.package_module()
+        self.root_patch = patch.object(verify, "ROOT", self.root)
+        self.skill_patch = patch.object(verify, "SKILL", self.skill)
+        self.package_patch = patch.object(verify, "package_module", return_value=package)
+        for replacement in (self.root_patch, self.skill_patch, self.package_patch):
+            replacement.start()
+            self.addCleanup(replacement.stop)
+
+    def use_version(self, version):
+        self.runtime.write_text(f'VERSION = "{version}"\n', encoding="utf-8")
+        return self.root / "benchmarks/results" / f"v{version}"
+
+    def write_probes(self, directory, hashes):
+        directory.mkdir(parents=True, exist_ok=True)
+        reports = {
+            "scaling.json": {"ok": True, "runtime_files": hashes, "runtime_stable": True,
+                             "cases": [{"chapters": chapters, "cards": cards,
+                                        "integrity_mode": mode, "ok": True}
+                                       for chapters, cards in ((400, 2000), (4000, 20000))
+                                       for mode in ("strict", "local")]},
+            "migration.json": {"ok": True, "runtime": hashes, "original_tree_unchanged": True,
+                               "books": [{"fixture": number} for number in range(3)]},
+        }
+        for filename, report in reports.items():
+            (directory / filename).write_text(json.dumps(report), encoding="utf-8")
+
+    def test_default_output_uses_runtime_version_without_overwriting_other_releases(self):
+        previous = self.root / "benchmarks/results/v0.3.0/verification.json"
+        previous.parent.mkdir(parents=True)
+        previous.write_bytes(b"preserved historical evidence\n")
+        for version in ("0.4.0", "0.5.0", "0.5.1"):
+            with self.subTest(version=version):
+                directory = self.use_version(version)
+                with patch.object(verify.sys, "argv", ["verify.py"]), patch.object(
+                        verify, "verify", return_value={"ok": True, "fixture_version": version}), patch(
+                        "sys.stdout", new=io.StringIO()):
+                    self.assertEqual(verify.main(), 0)
+                output = directory / "verification.json"
+                self.assertEqual(json.loads(output.read_text(encoding="utf-8"))["fixture_version"], version)
+                self.assertEqual(previous.read_bytes(), b"preserved historical evidence\n")
+
+    def test_explicit_output_is_honored_without_creating_default_directory(self):
+        directory = self.use_version("0.5.1")
+        target = self.root / "custom/evidence.json"
+        with patch.object(verify.sys, "argv", ["verify.py", "--output", str(target)]), patch.object(
+                verify, "verify", return_value={"ok": True}), patch("sys.stdout", new=io.StringIO()):
+            self.assertEqual(verify.main(), 0)
+        self.assertTrue(target.is_file())
+        self.assertFalse(directory.exists())
+
+    def test_probes_follow_runtime_version_and_keep_exact_hash_binding(self):
+        for version in ("0.4.0", "0.5.0", "0.5.1"):
+            with self.subTest(version=version):
+                directory = self.use_version(version)
+                hashes = {"story.py": verify.digest(self.runtime)}
+                self.write_probes(directory, hashes)
+                result = verify.check_recorded_probes()
+                self.assertEqual(result["status"], "passed")
+                self.assertEqual({Path(item["path"]).parent for item in result["reports"]}, {directory})
+                self.runtime.write_text(f'VERSION = "{version}"\nCHANGED = True\n', encoding="utf-8")
+                changed = verify.check_recorded_probes()
+                self.assertEqual(changed["status"], "failed")
+                self.assertTrue(all(not item["matches_current_runtime"] for item in changed["reports"]))
+
+    def test_missing_current_probes_do_not_fall_back_to_a_previous_release(self):
+        current = self.use_version("0.5.1")
+        older = self.root / "benchmarks/results/v0.5.0"
+        self.write_probes(older, {"story.py": verify.digest(self.runtime)})
+        with self.assertRaises(FileNotFoundError) as error:
+            verify.check_recorded_probes()
+        self.assertEqual(Path(error.exception.filename), current / "scaling.json")
+
+
 class BenchmarkContractTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="story-benchmark-contract-test-")

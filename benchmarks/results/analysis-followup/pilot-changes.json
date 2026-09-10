@@ -1,0 +1,66 @@
+[
+  {
+    "case": "05",
+    "variant": "baseline",
+    "source": "benchmarks/analysis-depth/holdout/05/source.txt",
+    "source_sha256": "5d6495719f9a97156b3c09c25ba8ebf9603436cf8cd8ba74cc6b238bb368445a",
+    "old_report": "benchmarks/results/analysis-depth/reports/baseline/05/report.md",
+    "old_sha256": "a4374764347a76ee360552844393732e4ade97b22d56d2d103267ff24f353dbd",
+    "new_report": "benchmarks/results/analysis-followup/revised/baseline/05/report.md",
+    "new_sha256": "72b46640078a198a3e964358e0dedb31a0025b55ab017f3df245ae3cbd968554",
+    "replacements": [
+      {
+        "before": "这只能支持接应人在附近或通信有风险，不能坐实背叛。",
+        "after": "这会引出接应人在附近或通信有风险的怀疑，但同样的提示音也可能来自无关设备，不能坐实背叛。"
+      },
+      {
+        "before": "结尾灯亮与“他们就看不见你”相接，使倒计时归零成为危险升级；卡再次硌舌，也把注意力拉回她一直保护的东西。",
+        "after": "结尾灯亮与“他们就看不见你”相接：若接应人的说法可靠，灯亮便可能意味着更易暴露，原文尚未独立证实这条规则。卡再次硌舌，也把注意力拉回她一直保护的东西。"
+      },
+      {
+        "before": "旧饭盒扣不上，才需要小孩找橡皮筋，照顾由一个人扩展到旁人；",
+        "after": "旧饭盒扣不上，何婶便叫小孩找橡皮筋，照顾的安排也开始把旁人纳入；"
+      },
+      {
+        "before": "加蛋、借饭盒都不必等于伤感。",
+        "after": "加蛋、取饭盒都不必等于伤感。"
+      }
+    ]
+  },
+  {
+    "case": "06",
+    "variant": "baseline",
+    "source": "benchmarks/analysis-depth/holdout/06/source.txt",
+    "source_sha256": "34ada7262c9ebe98e6c694aa356c5dbdd23c1d4fc8c11d01904893981fef84b1",
+    "old_report": "benchmarks/results/analysis-depth/reports/baseline/06/report.md",
+    "old_sha256": "a90e047d7520cb0707cb8609b2f5fddd200e0be76aabc60e53078463ec350cd4",
+    "new_report": "benchmarks/results/analysis-followup/revised/baseline/06/report.md",
+    "new_sha256": "31cd51145d1f5fe44389b3114ccfd1c1574e2093004e90524db27d40de1975cf",
+    "replacements": [
+      {
+        "before": "前者先保留一件来历未明的东西，后者又寻找管理它的方式；句子停在询问，使处理迟迟没有完成。",
+        "after": "前者要求保留一件来历未明的东西，后者又寻找管理它的方式。记录到此结束，读者没有得到是否编号的答案。"
+      }
+    ]
+  },
+  {
+    "case": "02",
+    "variant": "candidate",
+    "source": "benchmarks/analysis-depth/development/02/source.txt",
+    "source_sha256": "93630146b6b3d5773ed06b1a6aa539f5eb73eb1d22881e2973127d465a81d477",
+    "old_report": "benchmarks/results/analysis-depth/reports/candidate/02/report.md",
+    "old_sha256": "24d6ac8386195abe60b40e26ce7a03a66e80d09e2f2ab35654e75bc807711683",
+    "new_report": "benchmarks/results/analysis-followup/revised/candidate/02/report.md",
+    "new_sha256": "f177792aef75fb1f500f00af4ae7d414b40b102a7e26ecd867eb567c3d01abbc",
+    "replacements": [
+      {
+        "before": "这能支持他当时在场，却不能直接证明他看清了交包。",
+        "after": "这仍是他的自述，只解释了停电为何不妨碍他留亭听球赛，不能独立核实他当时在场或看清了交包。"
+      },
+      {
+        "before": "末段错签日期、翻转双手后诉诸玻璃，",
+        "after": "末段错签日期、翻手后诉诸玻璃，"
+      }
+    ]
+  }
+]

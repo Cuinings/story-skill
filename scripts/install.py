@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import ast
 from contextlib import contextmanager
 import hashlib
 import json
@@ -19,14 +20,40 @@ ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "skills"
 SKILL_NAMES = ("story-codex", "story-codex-plan", "story-codex-write", "story-codex-analyze",
                "story-codex-review", "story-codex-research", "story-codex-cover")
-SUITE_FILES = tuple(sorted(
+LEGACY_SUITE_FILES = tuple(sorted(
     [f"{name}/{relative}" for name in SKILL_NAMES for relative in ("LICENSE", "SKILL.md", "agents/openai.yaml")]
     + ["story-codex/scripts/" + name for name in (
         "story.py", "story_history.py", "story_search.py", "story_storage.py", "story_world.py")]
     + ["story-codex/references/project-state.md", "story-codex-write/references/chapter.md",
        "story-codex-write/references/long-form.md", "story-codex-write/references/drama.md",
        "story-codex-review/references/history.md"]))
+SUITE_FILES = tuple(sorted(LEGACY_SUITE_FILES + (
+    "story-codex-analyze/references/deep-reading.md",
+    "story-codex-analyze/references/examples.md")))
 MARKER = ".story-codex-install.json"
+
+
+def suite_files(version):
+    if re.fullmatch(r"0\.4\.(?:0|[1-9][0-9]*)", version) or version == "0.5.0":
+        return LEGACY_SUITE_FILES
+    if re.fullmatch(r"0\.5\.[1-9][0-9]*", version):
+        return SUITE_FILES
+    raise ValueError(f"Source runtime version has no reviewed suite layout: {version}")
+
+
+def runtime_version(raw, allow_missing=False):
+    versions = []
+    for node in ast.parse(raw.decode("utf-8-sig")).body:
+        targets = node.targets if isinstance(node, ast.Assign) else (
+            [node.target] if isinstance(node, ast.AnnAssign) else [])
+        if any(isinstance(target, ast.Name) and target.id == "VERSION" for target in targets):
+            versions.append(ast.literal_eval(node.value))
+    if not versions and allow_missing:
+        return None
+    if (len(versions) != 1 or not isinstance(versions[0], str) or
+            not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", versions[0])):
+        raise ValueError("Source runtime must define one literal semantic VERSION")
+    return versions[0]
 
 
 def linked(path):
@@ -196,10 +223,14 @@ def suite_inventory(source):
     result = {}
     if linked(source):
         raise ValueError(f"Refusing linked source directory: {source}")
+    runtime = checked(source, "story-codex/scripts/story.py")
+    if not runtime.is_file():
+        raise ValueError("Source suite is incomplete: missing scripts/story.py")
+    reviewed = suite_files(runtime_version(runtime.read_bytes()))
     for name in SKILL_NAMES:
         directory = checked(source, name)
         files = inventory(directory)
-        required = {path.split("/", 1)[1] for path in SUITE_FILES if path.startswith(name + "/")}
+        required = {path.split("/", 1)[1] for path in reviewed if path.startswith(name + "/")}
         if not required <= files.keys():
             raise ValueError(f"Source suite is incomplete: {name} is missing {sorted(required - files.keys())}")
         if files.keys() != required:
@@ -330,18 +361,8 @@ def install(project, update=False, source=SOURCE):
         # A v0.4 core directory is never allowed to omit its sibling dependencies.
         runtime = source / "scripts/story.py"
         if runtime.is_file():
-            import ast
-            tree = ast.parse(runtime.read_text(encoding="utf-8-sig"))
-            versions = []
-            for node in tree.body:
-                targets = node.targets if isinstance(node, ast.Assign) else (
-                    [node.target] if isinstance(node, ast.AnnAssign) else [])
-                if any(isinstance(target, ast.Name) and target.id == "VERSION" for target in targets):
-                    versions.append(ast.literal_eval(node.value))
-            if versions and (len(versions) != 1 or not isinstance(versions[0], str) or
-                             not re.fullmatch(r"[0-9]+\.[0-9]+\.[0-9]+", versions[0])):
-                raise ValueError("Source runtime must define one literal semantic VERSION")
-            if versions and tuple(map(int, versions[0].split("."))) >= (0, 4, 0):
+            version = runtime_version(runtime.read_bytes(), allow_missing=True)
+            if version and tuple(map(int, version.split("."))) >= (0, 4, 0):
                 source = source.parent
             else:
                 return install_legacy(project, update, source)

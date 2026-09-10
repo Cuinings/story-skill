@@ -1,0 +1,26 @@
+{
+  "before_snapshot": "benchmarks/results/analysis-followup/reviewed-drafts/baseline/05/pass-1.md",
+  "before_sha256": "72b46640078a198a3e964358e0dedb31a0025b55ab017f3df245ae3cbd968554",
+  "after_report": "benchmarks/results/analysis-followup/revised/baseline/05/report.md",
+  "after_sha256": "355f2dc5cd878a832865c2f3269de656b9f35228fbe459402baad2eb0d713f22",
+  "body_characters_before": 823,
+  "body_characters_after": 799,
+  "edits": [
+    {
+      "before": "但这会引出接应人在附近或通信有风险的怀疑",
+      "after": "这会引出接应人在附近或通信有风险的怀疑"
+    },
+    {
+      "before": "比较两段，尺度应是：读者能否抓住当前关切，细节能否使这种关切加深，悬念是否仍允许理解人物行动；不能单用事件多少判优劣。以下只判断所给开场。",
+      "after": "比较这两段开场，应看关切是否清楚、细节怎样加深关切、悬念是否仍让人理解行动，不能单用事件多少判优劣。"
+    },
+    {
+      "before": "卡再次硌舌，也把注意力拉回她一直保护的东西。",
+      "after": "卡再次硌舌，让读者想起她仍在保护的信息。"
+    },
+    {
+      "before": "原文尚未独立证实这条规则。",
+      "after": "原文未独立证实该规则。"
+    }
+  ]
+}

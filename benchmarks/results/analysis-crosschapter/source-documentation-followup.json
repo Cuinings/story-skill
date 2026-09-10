@@ -1,0 +1,20 @@
+{
+  "recorded_utc": "2026-09-10T10:13:14.907102+00:00",
+  "source_sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+  "changes": [
+    "Document final single LF",
+    "Declare zero-based Unicode codepoint half-open ranges",
+    "Explicitly document retained U+200B and internal-link space"
+  ],
+  "source_bytes_changed": false,
+  "material_hashes": {
+    "README.md": "9e8577963e64ec02c2844b2f6bc824aeeaf6f0a6f6bf933fad839d3a68edaffa",
+    "SOURCE.md": "869769dca0b6fc9cd39fe0acb7202ec18e36889071059ae567dd3f55bc84816f",
+    "chapters.json": "037448e1969060a4c970d1135b87c932270880985793e57f81cf7c2431a7a93f",
+    "provenance.json": "d27e0c8acd2721cca26502ca6ededade438e49c23975b1ab40e83366058667f2",
+    "rendered-paragraphs.json": "15755cb2453e4c5b97b43b817edef82a2dfbb7a34575064b5a8f362fd464e373",
+    "source.txt": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+    "task.md": "cfe8101348e1d66a348c28c917de2656768644ff2e9ea0d25436ed6bdc30c8e3"
+  },
+  "audit_note": "Completes the non-content documentation gaps identified by source-audit; its original observation is preserved."
+}

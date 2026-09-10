@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "protected": {
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/原文.txt": {
+      "expected": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+      "actual": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7"
+    },
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/已提交分析.md": {
+      "expected": "19e48afee3d1015b8e1c5271c3cb5551a66a8fe3c33542ad1a06f2f782409f97",
+      "actual": "19e48afee3d1015b8e1c5271c3cb5551a66a8fe3c33542ad1a06f2f782409f97"
+    },
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/.story/analysis/c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7/report.md": {
+      "expected": "2f04a3310b5f88b82fe7ddd14d7cd5f62b150c183131cc77bd09107b7d55d63b",
+      "actual": "2f04a3310b5f88b82fe7ddd14d7cd5f62b150c183131cc77bd09107b7d55d63b"
+    },
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-followup-rr916sz5/分析工程/.story/state.sqlite3": {
+      "expected": "edce6baf93cfc9d91af3ad737bb7432f0218edce39b88972add3d657c0686f12",
+      "actual": "edce6baf93cfc9d91af3ad737bb7432f0218edce39b88972add3d657c0686f12"
+    }
+  },
+  "revised_sha256": "6c27bd4501301cbe8dd1d0e7772682e8f8a6cc1b9bf2d7c6b1ed2a9abf0041fe",
+  "initial_revision_draft_sha256": "0e944b833c9b5ed978fb4510c0da7e3a143c0dbec130b0a5236ad4c291a927c6",
+  "short_quotes_checked": 11,
+  "progress_current_hash_matches": true,
+  "archive_files": {
+    "source.txt": "c76221d63b425e487d90568d1f598ca83836ad66d44aa485ee513f3b69943db7",
+    "submitted-report.md": "19e48afee3d1015b8e1c5271c3cb5551a66a8fe3c33542ad1a06f2f782409f97",
+    "tool-report.md": "2f04a3310b5f88b82fe7ddd14d7cd5f62b150c183131cc77bd09107b7d55d63b",
+    "revised-report.md": "6c27bd4501301cbe8dd1d0e7772682e8f8a6cc1b9bf2d7c6b1ed2a9abf0041fe",
+    "progress-after.md": "2d5f2531a787db987202abbd1d20c7d9f1019e3e41ee826d96d79a5e86da300e",
+    "agent-process.json": "503c24b8da04bbaab481932f15a71b6ab280b45e21a3cb407b8f3a31da7ec73b"
+  },
+  "scope": "Root independently checked files and progress against pretrial hashes. Process log is agent-recorded; this is one workflow trial using teaching material, not blind literary evaluation."
+}

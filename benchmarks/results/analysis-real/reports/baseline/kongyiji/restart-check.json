@@ -1,0 +1,326 @@
+{
+  "schema": 1,
+  "date": "2026-09-10T08:38:41.948924+00:00",
+  "scope": "Fresh subprocess continuation and unchanged report retry on the actual finished analysis book; no crash injection",
+  "original_job_directory": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji",
+  "source": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+  "report_sha256": "7a6d183547a10349da7cf59f6a272cc03b5fed2312f45965eb7a0b19de7d4e1e",
+  "export_sha256": "366538fdab5f07435c287778201789951f173ac6deabe1a421cafa7e250ecbce",
+  "body_non_whitespace_characters": 1606,
+  "body_han_characters": 1377,
+  "checks": {
+    "fresh_process_each_command": true,
+    "source_snapshot_matches": true,
+    "source_id_matches": true,
+    "complete_imported_coverage": true,
+    "next_empty": true,
+    "all_findings_reopened": true,
+    "report_retry_finalized": true,
+    "report_retry_bytes_unchanged": true,
+    "export_exact_with_header": true,
+    "artifact_hashes_match": true,
+    "report_length_in_range": true,
+    "all_recorded_quotes_exact": true,
+    "all_chunk_hashes_match": true
+  },
+  "status": {
+    "book": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+    "cards": 0,
+    "changed_export_count": 0,
+    "changed_exports": [],
+    "id": "a5b0a62f-8095-4cb5-b068-3468fb7cf458",
+    "imported_through": 0,
+    "integrity": {
+      "full_book_verified": true,
+      "last_full_audit_revision": 4,
+      "mode": "strict",
+      "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+      "unverified_archive_count": 0,
+      "verified_file_count": 1
+    },
+    "kind": "analysis",
+    "last_chapter": 0,
+    "more_sources": false,
+    "next_chapter": 1,
+    "pending_export_count": 0,
+    "pending_exports": [],
+    "recent_sources": [
+      {
+        "analyzed": 2,
+        "chunks_total": 2,
+        "complete_for_imported_text": true,
+        "name": "source.txt",
+        "next_chunk": null,
+        "pending": 0,
+        "report_path": ".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md",
+        "source": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+        "source_coverage": "complete",
+        "text_coverage_contiguous": true
+      }
+    ],
+    "revision": 4,
+    "sources": 1,
+    "title": "孔乙己"
+  },
+  "sources": {
+    "budget": {
+      "limit": 12000,
+      "unit": "utf8_bytes",
+      "used": 466
+    },
+    "next_offset": 1,
+    "offset": 0,
+    "results": [
+      {
+        "analyzed": 2,
+        "chunks_total": 2,
+        "complete_for_imported_text": true,
+        "name": "source.txt",
+        "next_chunk": null,
+        "pending": 0,
+        "report_path": ".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md",
+        "source": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+        "source_coverage": "complete",
+        "text_coverage_contiguous": true
+      }
+    ],
+    "total": 1
+  },
+  "coverage": {
+    "analyzed": 2,
+    "chunks_total": 2,
+    "complete_for_imported_text": true,
+    "next_chunk": null,
+    "pending": 0,
+    "report_path": ".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md",
+    "source": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "source_coverage": "complete",
+    "text_coverage_contiguous": true
+  },
+  "next": {
+    "budget": {
+      "limit": 22000,
+      "unit": "utf8_bytes",
+      "used": 186
+    },
+    "chunks": [],
+    "pending": 0,
+    "source": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "source_coverage": "complete"
+  },
+  "report_retry": {
+    "analyzed": 2,
+    "backups": [],
+    "chunks_total": 2,
+    "complete_for_imported_text": true,
+    "exported": [],
+    "exports_complete": true,
+    "finalized": true,
+    "integrity": {
+      "full_book_verified": true,
+      "last_full_audit_revision": 4,
+      "mode": "strict",
+      "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+      "unverified_archive_count": 0,
+      "verified_file_count": 1
+    },
+    "next_chunk": null,
+    "pending": 0,
+    "report": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book/.story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md",
+    "report_path": ".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md",
+    "scope_exports_complete": true,
+    "source": "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+    "source_coverage": "complete",
+    "text_coverage_contiguous": true
+  },
+  "recorded_evidence": [
+    {
+      "chunk": 1,
+      "source_slice_sha_matches": true,
+      "analysis_sha_matches": true,
+      "quotes": [
+        {
+          "quote": "孔乙己是站着喝酒而穿長衫的唯一的人。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "只有孔乙己到店，纔可以笑幾聲，所以至今還記得。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "竊書不能算偸……竊書！……讀書人的事，能算偸麽？",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "孔乙己立刻顯出頹唐不安模樣，臉上籠上了一層灰色，嘴裏說些話；這回可是全是之乎者也之類，一些不懂了。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "聽人家背地裏談論，孔乙己原來也讀過書，但終于沒有進學，又不會營生；",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "但他在我們店裏，品行卻比別人都好，就是從不拖欠；",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "便排出九文大錢。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "店內外充滿了快活的空氣。",
+          "exact_match_in_chunk": true
+        }
+      ]
+    },
+    {
+      "chunk": 2,
+      "source_slice_sha_matches": true,
+      "analysis_sha_matches": true,
+      "quotes": [
+        {
+          "quote": "我想，討飯一樣的人，也配考我麽？",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "不能寫罷？……我教給你，記着！這些字應該記着。將來做掌櫃的時候，寫帳要用。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "他便給他們茴香豆喫，一人一顆。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "孔乙己着了慌，伸開五指將碟子罩住",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "孔乙己是這樣的使人快活，可是沒有他，別人也便這麽過。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "他家的東西，偸得的麽？",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "看時又全沒有人。站起來向外一望，那孔乙己便在櫃臺下對了門檻坐着。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "掌櫃仍然同平常一樣，笑着對他說",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "孔乙己低聲說道：『跌斷，跌，跌……』",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "他從破衣袋裏摸出四文大錢，放在我手裏，見他滿手是泥，原來他便用這手走來的。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "我到現在終于沒有見——大約孔乙己的確死了。",
+          "exact_match_in_chunk": true
+        },
+        {
+          "quote": "到中秋可是沒有說，再到年關也沒有看見他。",
+          "exact_match_in_chunk": true
+        }
+      ]
+    }
+  ],
+  "commands": [
+    {
+      "command": [
+        "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+        "status",
+        "--book",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"book\":\"/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book\",\"cards\":0,\"changed_export_count\":0,\"changed_exports\":[],\"id\":\"a5b0a62f-8095-4cb5-b068-3468fb7cf458\",\"imported_through\":0,\"integrity\":{\"full_book_verified\":true,\"last_full_audit_revision\":4,\"mode\":\"strict\",\"note\":\"Hash verification is a point-in-time observation; outside editors can save again.\",\"unverified_archive_count\":0,\"verified_file_count\":1},\"kind\":\"analysis\",\"last_chapter\":0,\"more_sources\":false,\"next_chapter\":1,\"pending_export_count\":0,\"pending_exports\":[],\"recent_sources\":[{\"analyzed\":2,\"chunks_total\":2,\"complete_for_imported_text\":true,\"name\":\"source.txt\",\"next_chunk\":null,\"pending\":0,\"report_path\":\".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md\",\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}],\"revision\":4,\"sources\":1,\"title\":\"孔乙己\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+        "sources",
+        "--book",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"budget\":{\"limit\":12000,\"unit\":\"utf8_bytes\",\"used\":466},\"next_offset\":1,\"offset\":0,\"results\":[{\"analyzed\":2,\"chunks_total\":2,\"complete_for_imported_text\":true,\"name\":\"source.txt\",\"next_chunk\":null,\"pending\":0,\"report_path\":\".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md\",\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}],\"total\":1}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+        "coverage",
+        "--book",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+        "--source",
+        "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"analyzed\":2,\"chunks_total\":2,\"complete_for_imported_text\":true,\"next_chunk\":null,\"pending\":0,\"report_path\":\".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md\",\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+        "next",
+        "--book",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+        "--source",
+        "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"budget\":{\"limit\":22000,\"unit\":\"utf8_bytes\",\"used\":186},\"chunks\":[],\"pending\":0,\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"source_coverage\":\"complete\"}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+        "findings",
+        "--book",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+        "--source",
+        "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+        "--offset",
+        "0",
+        "--limit",
+        "2"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"budget\":{\"limit\":20000,\"unit\":\"utf8_bytes\",\"used\":6752},\"next_offset\":2,\"offset\":0,\"results\":[{\"chunk\":1,\"chunk_sha256\":\"e2f0e08215904712d580e2786f70aac06236132bd6a3ba9652c49238a2c1bc57\",\"findings\":[{\"claim\":\"先建立长衫坐喝的常规，再将孔乙己作为唯一站喝的长衫人引入，使其身份愿望与生活处境的冲突先于个人履历可见。\",\"kind\":\"叙述机制\",\"quote\":\"孔乙己是站着喝酒而穿長衫的唯一的人。\"},{\"claim\":\"叙述者将记住孔乙己的理由系于可笑，这明确了记忆的选择标准；不能据成年回忆形式就推断他已经悔悟。\",\"kind\":\"视角事实与推断\",\"quote\":\"只有孔乙己到店，纔可以笑幾聲，所以至今還記得。\"},{\"claim\":\"遭追问时孔乙己用读书身份争取偷窃概念的豁免，暴露他借身份规则自保的需求；这是人物自辩，不能当作事实上的无罪证明。\",\"kind\":\"人物选择\",\"quote\":\"竊書不能算偸……竊書！……讀書人的事，能算偸麽？\"},{\"claim\":\"秀才问题直接刺中他声称的读书身份未获认可之处，使原有不屑转为不安；较偷窃争辩更少可懂话语，显示言语屏障失效。\",\"kind\":\"情绪与冲突\",\"quote\":\"孔乙己立刻顯出頹唐不安模樣，臉上籠上了一層灰色，嘴裏說些話；這回可是全是之乎者也之類，一些不懂了。\"},{\"claim\":\"履历与好喝懒做的评价处于背后谈论引出的段落，可据此说故事提供这一解释，不能视作叙述者亲见每一失业环节。\",\"kind\":\"信息边界\",\"quote\":\"聽人家背地裏談論，孔乙己原來也讀過書，但終于沒有進學，又不會營生；\"},{\"claim\":\"品行最高的判断被紧接的从不拖欠缩窄为交易可靠；这种措辞为后文欠款比人更被持续记住提供起点。\",\"kind\":\"语言与价值尺度\",\"quote\":\"但他在我們店裏，品行卻比別人都好，就是從不拖欠；\"},{\"claim\":\"排出钱使付款动作醒目，可读作维护作为顾客的体面；仅一字不足以证明得意或炫富，须与后文摸钱的处境比较。\",\"kind\":\"语言细节\",\"quote\":\"便排出九文大錢。\"},{\"claim\":\"同样的快活句收束偷书和秀才羞辱，将不同伤处转成相同集体回报，喜剧感与当事人的受辱并存。\",\"kind\":\"重复机制\",\"quote\":\"店內外充滿了快活的空氣。\"}],\"summary\":\"酒馆先按衣着、财力与站坐划分客人，十二岁伙计受等级和掌柜脸色约束，将孔乙己来店当作单调生活中获准取笑的机会。孔乙己以长衫与读书语言维护身份，面对伤疤和偷窃指责辩白，面对未进学问题则灰败；众人两度哄笑。关于读书、钞书和失业的经历由背后谈论传达，酒馆对其品行的肯定则以不拖欠为据。\"},{\"chunk\":2,\"chunk_sha256\":\"8dbf1fb7e2aa8641e283151fe5b1e6a5d49b47f697bf90b339af04ebfb1fbd7a\",\"findings\":[{\"claim\":\"伙计因讨饭般外表否定对方教自己的资格，显示等级判断并非仅在掌柜或富人那里发生。\",\"kind\":\"视角与环境\",\"quote\":\"我想，討飯一樣的人，也配考我麽？\"},{\"claim\":\"教字既是恳切交流也让孔乙己占据教导位置；以记账为用途却不合伙计实际，可见关怀、求认可和隔膜并存，不能独断为炫耀。\",\"kind\":\"竞争解释\",\"quote\":\"不能寫罷？……我教給你，記着！這些字應該記着。將來做掌櫃的時候，寫帳要用。\"},{\"claim\":\"分豆和护豆相接，表明他愿意给予又有匮乏的边界；不能把这段归为无私圣人或彻底自私。\",\"kind\":\"人物复杂性\",\"quote\":\"他便給他們茴香豆喫，一人一顆。\"},{\"claim\":\"罩住碟子是对孩子持续索取的限制，与前面的主动给豆合看，善意有物质限度；文言仍用于日常自我解说。\",\"kind\":\"人物动作\",\"quote\":\"孔乙己着了慌，伸開五指將碟子罩住\"},{\"claim\":\"过渡句承认孔乙己提供快活又不影响别人的继续生活，拆开被需要与被关心，为缺席和死亡无人确认奠基。\",\"kind\":\"结构转折\",\"quote\":\"孔乙己是這樣的使人快活，可是沒有他，別人也便這麽過。\"},{\"claim\":\"丁举人施暴的经过由酒客讲述，后来的残疾亲见印证重伤结果但不独立证实每一过程；酒客首先强调惹错对象，带有权势豁免的立场。\",\"kind\":\"信息与因果边界\",\"quote\":\"他家的東西，偸得的麽？\"},{\"claim\":\"先听熟悉声音再发现视野内无人，最后向下看才见其人，将身体的降低转成读者的信息延迟；重创无需正面刑罚场景也能显出。\",\"kind\":\"叙述安排\",\"quote\":\"看時又全沒有人。站起來向外一望，那孔乙己便在櫃臺下對了門檻坐着。\"},{\"claim\":\"对待重伤者仍用平常的笑问，使制度化取乐在新的处境中显得更残酷；全文并无救助行动，不能以笑声推定每个人内心一律无感。\",\"kind\":\"关系不变与处境变化\",\"quote\":\"掌櫃仍然同平常一樣，笑着對他說\"},{\"claim\":\"低声结巴的跌断说仍保全面子，却从争论身份特权收缩为避免揭伤；不要取笑是明确的关系请求，不能说他已毫无自尊。\",\"kind\":\"语言与选择变化\",\"quote\":\"孔乙己低聲說道：『跌斷，跌，跌……』\"},{\"claim\":\"摸出少量钱后立刻发现满手泥，钱的动作连向用手移动的生存代价；比孤立地把排与摸归纳为富与穷更贴合前后都贫困的处境。\",\"kind\":\"动作与物质条件\",\"quote\":\"他從破衣袋裏摸出四文大錢，放在我手裏，見他滿手是泥，原來他便用這手走來的。\"},{\"claim\":\"大约承认无人确认死讯，的确表达长期不见后的判断，形成生死缺乏见证而结局高度可推的张力；不能据此写有尸体或确切死因。\",\"kind\":\"结尾与认知边界\",\"quote\":\"我到現在終于沒有見——大約孔乙己的確死了。\"},{\"claim\":\"欠款反复被提后也不再被说起，表明名字曾由交易留存而后淡出；这与前块按从不拖欠评价品行互证，仍是主题解释而非人物思想独白。\",\"kind\":\"记忆物件\",\"quote\":\"到中秋可是沒有說，再到年關也沒有看見他。\"}],\"summary\":\"伙计获准附和取笑，并因孔乙己贫穷而拒绝受教；孔乙己转向孩子，显露教字的恳切与分豆的有限慷慨。叙述从惯常快活转入久未到店，欠款引出酒客关于丁举人家打折其腿的转述。近初冬孔乙己残疾来店，仍要求酒和暂缓还债，却只能请求不要取笑；众人仍笑，他用手慢慢离开。欠款在节日被反复提起后也消失，叙述者不知死亡实况，只以长期不见作推断。\"}],\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"total\":2}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-B",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+        "report",
+        "--book",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+        "--source",
+        "8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133",
+        "--file",
+        "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/report.md"
+      ],
+      "exit_code": 0,
+      "stdout": "{\"analyzed\":2,\"backups\":[],\"chunks_total\":2,\"complete_for_imported_text\":true,\"exported\":[],\"exports_complete\":true,\"finalized\":true,\"integrity\":{\"full_book_verified\":true,\"last_full_audit_revision\":4,\"mode\":\"strict\",\"note\":\"Hash verification is a point-in-time observation; outside editors can save again.\",\"unverified_archive_count\":0,\"verified_file_count\":1},\"next_chunk\":null,\"pending\":0,\"report\":\"/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book/.story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md\",\"report_path\":\".story/analysis/8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133/report.md\",\"scope_exports_complete\":true,\"source\":\"8aa6a3e99ba280f88e8e3506a20d8367e535dacfa27c3b7b22a2f2b0e36e5133\",\"source_coverage\":\"complete\",\"text_coverage_contiguous\":true}\n",
+      "stderr": ""
+    }
+  ]
+}

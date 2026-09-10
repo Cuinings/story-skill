@@ -8,3 +8,8 @@
 # Reviewed example prose is hashed as LF bytes; Windows checkout must retain LF.
 /examples/**/*.md text eol=lf
 /examples/**/*.txt text eol=lf
+
+# Keep frozen analysis inputs identical across checkouts for evidence hashes.
+/benchmarks/analysis-depth/** text eol=lf
+/benchmarks/analysis-real/** text eol=lf
+/benchmarks/analysis-crosschapter/** text eol=lf

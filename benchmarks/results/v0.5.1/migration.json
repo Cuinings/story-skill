@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "version": "0.5.1",
+  "date": "2026-09-10T10:46:23.437567+00:00",
+  "ok": true,
+  "mode": "generated-schema1-fixtures",
+  "scope": "Synthetic Chinese schema1 fixtures created by the fixed v0.2.0 runtime; not retained historical book databases",
+  "environment": {
+    "platform": "macOS-15.7.9-x86_64-i386-64bit",
+    "python": "3.12.14"
+  },
+  "legacy_runtime_archive": {
+    "path": "/Users/cuining/Documents/GitHub/story-skill/tests/fixtures/story-codex-0.2.0.zip",
+    "sha256": "efdfd997ecac9564fc737b22df8969c7770858a354084132c7d1ce274486a37e"
+  },
+  "runtime": {
+    "story.py": "5527d93f7ee3f49b42891b814ae4d635e728db482d1c44067d41586b92f884e5",
+    "story_world.py": "26ff12ff415753592aff933b4236095735706c9aac58a1c479312b66e4d3e74a",
+    "story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
+    "story_history.py": "17c9ba82ab72f2d7b3a6679b6f7ca27bfe193ad8c9fa772ca19f6a93ff52739a",
+    "story_storage.py": "f3b74767ee90ae34a0dd4390968ef0731b6c2128ccb609d42a707d11f902aeeb"
+  },
+  "books": [
+    {
+      "title": "合成迁移长篇",
+      "kind": "long",
+      "book_id": "d5ab2b12-45b7-4436-90e8-3ee74fd23639",
+      "revision": 2,
+      "last_chapter": 1,
+      "sources": 0,
+      "migrated": true,
+      "original_manuscript_and_summary_preserved": true,
+      "source_and_analysis_preserved": true,
+      "exports_clean": true,
+      "old_runtime_rollback_copy_verified": true
+    },
+    {
+      "title": "合成迁移短篇",
+      "kind": "short",
+      "book_id": "5b07bd97-35ae-4ba3-a090-9446f219a2e7",
+      "revision": 1,
+      "last_chapter": 1,
+      "sources": 0,
+      "migrated": true,
+      "original_manuscript_and_summary_preserved": true,
+      "source_and_analysis_preserved": true,
+      "exports_clean": true,
+      "old_runtime_rollback_copy_verified": true
+    },
+    {
+      "title": "合成迁移拆文",
+      "kind": "analysis",
+      "book_id": "9b87ab00-bcf8-43eb-a945-bc1b2ff9ce00",
+      "revision": 2,
+      "last_chapter": 0,
+      "sources": 1,
+      "migrated": true,
+      "original_manuscript_and_summary_preserved": true,
+      "source_and_analysis_preserved": true,
+      "exports_clean": true,
+      "old_runtime_rollback_copy_verified": true
+    }
+  ],
+  "source_inventory_sha256": "c18ed15ef682bc870b526c32d7cffdac248e12f52a5609973f2543c341e6d141",
+  "original_tree_unchanged": true,
+  "runtime_stable": true
+}

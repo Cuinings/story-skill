@@ -1,0 +1,15 @@
+请独立评阅本目录 kongyiji 与 mingmingniao 两道作品分析题。每题只有 source.txt、task.md、report-A.md、report-B.md。先通读完整给定原文，再核对两稿；不联网、不读其他文件或代理输出，不猜测版本或生成设置。
+
+任务的程序执行与保存记录由另一个检查环节处理，本次只评最终文学分析。每篇正文目标1200—1800字（去标题和空白，含标点和引文），长度另行核对，长稿不自动更好。不用作者生平、文学史、熟悉的评论或记忆纠正本次给定原文；页末日期可作为原文的一部分。报告引用的块号只是约1600字符的工程分块，不代表章节。核对原句与前后文后评判，合理的不同读法不算事实错误。
+
+对每题的每稿记录五个维度，等级限定为“充分／可用但有缺口／明显不足／不适用”，各附具体报告短句、对应原文位置和理由及限制：
+1. evidence：证据支持。引文准确、足以支持判断；人物说法、叙述者判断和分析推断分清。
+2. mechanism：机制解释。说明叙述或语言选择怎样影响理解，交代成立条件与代价。
+3. consistency：全篇一致。核心判断兼容相关前后文，识别解释边界，避免局部正确全篇失真。
+4. ambiguity_genre：多义与文类。有依据的不同读法、依据作品建立的期待评价，不补造背景或强套结论。
+5. transfer：迁移价值。可脱离原作人物事件的具体操作、适用情境和失败风险；不要求原创例子数量。
+
+单列 confirmed_errors 与 pending_issues：错引、伪连续拼接、人物/动作/时间归属错误、补造背景、范围夸大。仅在直接核对原文后将确定错误放入 confirmed_errors；有争议的解释归 pending_issues，并说明尚需什么证据。不要把“没有找到”当作已穷尽全部问题。维度不加总、不设大师级阈值。两稿整体选择 A／B／tie／mixed 并说明具体取舍；mixed表示各有优势，没有稳定整体优劣。对微小优势注明强度，不把谨慎措辞或术语数量当深度。
+
+输出一个 JSON：{"reviewer": "独立评阅编号", "cases": [{"case": "kongyiji 或 mingmingniao", "ratings": {"A": {"evidence": {"level": "...", "report_quote": "...", "source_location": "第几非空段或准确原句", "reason": "...", "limit": "..."}, "mechanism": {...}, "consistency": {...}, "ambiguity_genre": {...}, "transfer": {...}}, "B": {同五维}}, "confirmed_errors": [{"report": "A或B", "report_quote": "...", "source_quote": "...", "source_location": "...", "reason": "..."}], "pending_issues": [{同错误字段并增加 "needs_support": "..."}], "preference": "A或B或tie或mixed", "preference_reason": "..."}], "limitations": ["..."]}。
+保存到任务指定的评阅文件。两题都完成后只报告路径与完成状态，不能改写分析稿。

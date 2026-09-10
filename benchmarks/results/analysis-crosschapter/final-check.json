@@ -1,0 +1,61 @@
+{
+  "recorded_utc": "2026-09-10T10:41:00.773118+00:00",
+  "ok": true,
+  "checks": {
+    "prior_results_unchanged": true,
+    "archived_attempt_unchanged": true,
+    "generation_files_unchanged_except_database": true,
+    "current_material_hashes_match": true,
+    "canonical_skills_match_frozen": true,
+    "installed_skills_match_frozen": true,
+    "temporary_frozen_suite_matches": true,
+    "original_report_preserved": true,
+    "tool_report_preserved": true,
+    "technical_ok": true,
+    "reopen_ok": true,
+    "review_ranges_ok": true,
+    "clarification_ok": true,
+    "clarification_complete": true,
+    "archive_ok": true,
+    "local_markdown_links_ok": true,
+    "git_diff_check_ok": true
+  },
+  "prior_result_files_verified": 283,
+  "prior_changes": [],
+  "original_generation_files": 151,
+  "generation_file_changes": [
+    ".story/state.sqlite3"
+  ],
+  "database_change_scope": "Strict audit time refreshed during reopen checks; all nonvolatile logical table contents plus report/input bytes verified in reopen-check.json.",
+  "skills_files_verified": 33,
+  "archive": {
+    "status": "passed",
+    "archive": "/Users/cuining/Documents/GitHub/story-skill/dist/story-codex-0.5.1.zip",
+    "version": "0.5.1",
+    "sha256": "419aa4277c609c5626862cdf5a78c6d6f7d67bbef17d018f53ad64dea225900c",
+    "bytes": 109889,
+    "files": 33,
+    "contents_match_current_skill": true,
+    "missing": [],
+    "extra": [],
+    "changed": [],
+    "duplicate_entries": [],
+    "corrupt_entry": null
+  },
+  "markdown_links": {
+    "status": "passed",
+    "files_scanned": 126,
+    "links_checked": 466,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "git_diff_check": {
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  "full_unit_tests_rerun": false,
+  "token_counter_rerun": false,
+  "github_published": false,
+  "limits": "Single frozen version and one complete generated report, followed by a separate optional clarification. Semantic evaluation remains one model reviewer, no human review or repeated sampling."
+}

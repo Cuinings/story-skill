@@ -1,6 +1,10 @@
+from contextlib import ExitStack
 import importlib.util
+import io
+import json
 from pathlib import Path
 import stat
+import sys
 import tempfile
 import unittest
 import warnings
@@ -18,6 +22,65 @@ def load(name):
 
 
 migration, upgrade = load("migrate_probe"), load("upgrade_probe")
+scaling = load("scale_probe")
+
+
+class ProbeOutputTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory(prefix="story-probe-output-")
+        self.addCleanup(self.temp.cleanup)
+        self.root = Path(self.temp.name).resolve()
+        self.skill = self.root / "skills/story-codex"
+        (self.skill / "scripts").mkdir(parents=True)
+        self.writer = load("verify")
+        self.package = self.writer.package_module()
+        self.probes = ((scaling, "load_module", "scaling.json"),
+                       (upgrade, "load_script", "upgrade.json"),
+                       (migration, "load_runtime", "migration.json"))
+
+    def run_main(self, module, loader, version, output=None, ok=True):
+        (self.skill / "scripts/story.py").write_text(f'VERSION = "{version}"\n', encoding="utf-8")
+        arguments = [module.__file__] + (["--output", str(output)] if output is not None else [])
+        result = {"ok": ok, "fixture_version": version, "mode": "fixture", "books": [], "cases": []}
+        with ExitStack() as stack:
+            for target, attribute, value in ((module, "ROOT", self.root), (self.writer, "ROOT", self.root),
+                                              (self.writer, "SKILL", self.skill),
+                                              (migration.story, "VERSION", version), (sys, "argv", arguments)):
+                stack.enter_context(patch.object(target, attribute, value))
+            stack.enter_context(patch.object(self.writer, "package_module", return_value=self.package))
+            stack.enter_context(patch.object(module, loader, return_value=self.writer))
+            probe = stack.enter_context(patch.object(module, "probe", return_value=result))
+            stack.enter_context(patch("sys.stdout", new=io.StringIO()))
+            code = module.main()
+            probe.assert_called_once()
+        self.assertEqual(code, 0 if ok else 1)
+
+    def test_defaults_follow_current_version_and_preserve_previous_release(self):
+        for module, loader, filename in self.probes:
+            for version in ("0.4.0", "0.5.0", "0.5.1"):
+                with self.subTest(probe=filename, version=version):
+                    self.run_main(module, loader, version)
+            for version in ("0.4.0", "0.5.0", "0.5.1"):
+                path = self.root / "benchmarks/results" / f"v{version}" / filename
+                self.assertEqual(json.loads(path.read_text(encoding="utf-8"))["fixture_version"], version)
+
+    def test_explicit_output_is_honored_without_creating_version_directory(self):
+        for module, loader, filename in self.probes:
+            with self.subTest(probe=filename):
+                path = self.root / "custom" / filename
+                self.run_main(module, loader, "0.5.1", path)
+                self.assertTrue(path.is_file())
+        self.assertFalse((self.root / "benchmarks/results/v0.5.1").exists())
+
+    def test_failed_default_run_preserves_current_success(self):
+        for module, loader, filename in self.probes:
+            with self.subTest(probe=filename):
+                self.run_main(module, loader, "0.5.1")
+                path = self.root / "benchmarks/results/v0.5.1" / filename
+                original = path.read_bytes()
+                self.run_main(module, loader, "0.5.1", ok=False)
+                self.assertEqual(path.read_bytes(), original)
+                self.assertFalse(json.loads(path.with_suffix(".failed.json").read_text(encoding="utf-8"))["ok"])
 
 
 class ReleaseProbeTests(unittest.TestCase):

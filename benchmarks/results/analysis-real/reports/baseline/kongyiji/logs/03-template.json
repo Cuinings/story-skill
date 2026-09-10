@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/baseline/skills/story-codex/scripts/story.py",
+    "template",
+    "--book",
+    "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book",
+    "analysis"
+  ],
+  "exit_code": 2,
+  "stdout": "",
+  "stderr": "usage: story.py template [-h]\n                         {notes,plan,delta,analysis,world,world-entities,world-aliases,world-volumes,world-arcs,world-lines,world-facts,world-knowledge,world-hooks,world-rules,world-uses,world-transfers,world-arc_steps}\nstory.py template: error: argument kind: invalid choice: '/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-analysis-real-_c50j36_/jobs/baseline/kongyiji/book' (choose from notes, plan, delta, analysis, world, world-entities, world-aliases, world-volumes, world-arcs, world-lines, world-facts, world-knowledge, world-hooks, world-rules, world-uses, world-transfers, world-arc_steps)\n"
+}

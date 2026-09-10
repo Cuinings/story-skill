@@ -1,0 +1,365 @@
+{
+  "ok": true,
+  "checks": {
+    "source_recovered_in_status": true,
+    "coverage_complete": true,
+    "next_empty": true,
+    "all_fourteen_records_recovered": true,
+    "same_input_retry_finalized": true,
+    "report_and_input_bytes_unchanged": true,
+    "all_database_nonvolatile_contents_unchanged": true
+  },
+  "before": {
+    "database": "53e6d7801f1fef1c13aa4088ef98d9f53b5aecd3ef1bcc1113ab836474ef2b2f",
+    "report": "d36605b9ef4cbfd3b910ae276728b13ce2ab34a9888d7e4d1816370c3eaf9bfe",
+    "input": "a2bdb3b8f1fade545ed0dae060e59f10a9c8f375cde1374464350bf3ad6441b1"
+  },
+  "after": {
+    "database": "6d7b9d56886f16ed8726a556a8dd5959e1aaa458fe7bb0b399a68c2f7d5fabbb",
+    "report": "d36605b9ef4cbfd3b910ae276728b13ce2ab34a9888d7e4d1816370c3eaf9bfe",
+    "input": "a2bdb3b8f1fade545ed0dae060e59f10a9c8f375cde1374464350bf3ad6441b1"
+  },
+  "logical_before": {
+    "artifact_state": {
+      "rows": 1,
+      "sha256": "e4eabf86cd8f9ae12c865733dc0fb7114e26e7b96eef23aef02c4764b1b279b7"
+    },
+    "card_index": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "card_tags": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cards": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "chapter_state": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "chunk_classification": {
+      "rows": 14,
+      "sha256": "c6e5a7772f43f8b864b80562f8c4c8f011d08da36fca15a1625c756a93eaca25"
+    },
+    "chunks": {
+      "rows": 14,
+      "sha256": "2465ec6240296be7c8ed4896728f29ffbf3e841044d211985ccb1f6bd7b05d9d"
+    },
+    "core_objects": {
+      "rows": 1,
+      "sha256": "310a239e5cbb52fa6b1592dedf3051b4698cadf970629440626684cdde9049d6"
+    },
+    "events": {
+      "rows": 18,
+      "sha256": "ec386482608fba99a6da7163e57411e404e6798d3add604d36239372ef463d46"
+    },
+    "history_branches": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_cache": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_edges": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_heads": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_invalidations": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_snapshots": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_versions": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "integrity_audits": {
+      "rows": 1,
+      "sha256": "ff699dd08907a589948fa2f233064fa40133738daeea701ad4089312acdd7445"
+    },
+    "meta": {
+      "rows": 7,
+      "sha256": "d4e2fc4d54445fe4aca4f57e1ddba5bd8b1ccf8f92e928c761a5187e6804c780"
+    },
+    "plans": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "search_documents": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "search_grams": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "search_kinds": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "search_postings": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_stats": {
+      "rows": 1,
+      "sha256": "803626241688e1e3d2b7a427cd6a7def0c0bede1d8f3a92381365e64ae81cf04"
+    },
+    "sources": {
+      "rows": 1,
+      "sha256": "2e431d333a8e586b26e5e2e4e9a5e39b11f800ec2ce6820c8af66d6b122532fe"
+    },
+    "sqlite_sequence": {
+      "rows": 1,
+      "sha256": "b147ec53020f2ba0e7f8d6f8b6d0193a962ee4fc979a9aeeba81d5e1b3303154"
+    },
+    "world_aliases": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_arc_steps": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_arcs": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_entities": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_evidence": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_facts": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_hooks": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_knowledge": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_lines": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_links": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_retirements": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_rule_requires": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_rules": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_transfers": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_uses": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_volumes": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "logical_after": {
+    "artifact_state": {
+      "rows": 1,
+      "sha256": "e4eabf86cd8f9ae12c865733dc0fb7114e26e7b96eef23aef02c4764b1b279b7"
+    },
+    "card_index": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "card_tags": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "cards": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "chapter_state": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "chunk_classification": {
+      "rows": 14,
+      "sha256": "c6e5a7772f43f8b864b80562f8c4c8f011d08da36fca15a1625c756a93eaca25"
+    },
+    "chunks": {
+      "rows": 14,
+      "sha256": "2465ec6240296be7c8ed4896728f29ffbf3e841044d211985ccb1f6bd7b05d9d"
+    },
+    "core_objects": {
+      "rows": 1,
+      "sha256": "310a239e5cbb52fa6b1592dedf3051b4698cadf970629440626684cdde9049d6"
+    },
+    "events": {
+      "rows": 18,
+      "sha256": "ec386482608fba99a6da7163e57411e404e6798d3add604d36239372ef463d46"
+    },
+    "history_branches": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_cache": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_edges": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_heads": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_invalidations": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_snapshots": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "history_versions": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "integrity_audits": {
+      "rows": 1,
+      "sha256": "ff699dd08907a589948fa2f233064fa40133738daeea701ad4089312acdd7445"
+    },
+    "meta": {
+      "rows": 7,
+      "sha256": "d4e2fc4d54445fe4aca4f57e1ddba5bd8b1ccf8f92e928c761a5187e6804c780"
+    },
+    "plans": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "search_documents": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "search_grams": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "search_kinds": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "search_postings": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "source_stats": {
+      "rows": 1,
+      "sha256": "803626241688e1e3d2b7a427cd6a7def0c0bede1d8f3a92381365e64ae81cf04"
+    },
+    "sources": {
+      "rows": 1,
+      "sha256": "2e431d333a8e586b26e5e2e4e9a5e39b11f800ec2ce6820c8af66d6b122532fe"
+    },
+    "sqlite_sequence": {
+      "rows": 1,
+      "sha256": "b147ec53020f2ba0e7f8d6f8b6d0193a962ee4fc979a9aeeba81d5e1b3303154"
+    },
+    "world_aliases": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_arc_steps": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_arcs": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_entities": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_evidence": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_facts": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_hooks": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_knowledge": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_lines": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_links": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_retirements": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_rule_requires": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_rules": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_transfers": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_uses": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "world_volumes": {
+      "rows": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "initial_check_correction": "Initial checks wrongly required SQLite byte identity, then identity of all table fields. Strict export auditing refreshes integrity_audits.created via INSERT OR REPLACE and DEFAULT CURRENT_TIMESTAMP. Both initial observations are preserved; this check compares all logical contents except that timestamp, retaining audit id/revision/checked and exact report/input bytes.",
+  "source_sha256": "d26a3943479156a98e3d497db1730e57f0fc3f321f4f0a201070c5935b84a20c",
+  "scope": "Fresh CLI processes reopen an intact local book and retry the original report input; no fault injection or literary evaluation."
+}

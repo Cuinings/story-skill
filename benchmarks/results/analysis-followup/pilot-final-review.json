@@ -1,0 +1,176 @@
+{
+  "schema": 1,
+  "date": "2026-09-10",
+  "review_type": "unblinded_targeted_final_revision_review",
+  "independent_review_of_root_edits": true,
+  "reviewer_previously_authored_revision_suggestions": true,
+  "new_blind_review": false,
+  "reviewed_scope": "Three final revised reports; original three disputes plus sound-source and rule provenance in 05, instruction boundary in 06, self-report boundary in 02; review of modification-introduced errors and same-report dependencies. Not a full aesthetic re-evaluation.",
+  "overall": {
+    "targeted_semantic_ready": true,
+    "original_three_disputes_resolved": true,
+    "related_semantic_comments_resolved": true,
+    "new_fact_errors_from_changes": [],
+    "residual_dependency_conflicts": [],
+    "ready_for_delivery": false,
+    "reason": "语义复核通过；05仍有替换拼接造成的重复转折需校顺，且823字超出原任务500—800字。如果后续另定篇幅，应明确与原协议的区别，不把超限稿称为原规格验证通过。"
+  },
+  "cases": [
+    {
+      "case": "05",
+      "variant": "baseline",
+      "source": "benchmarks/analysis-depth/holdout/05/source.txt",
+      "source_sha256": "5d6495719f9a97156b3c09c25ba8ebf9603436cf8cd8ba74cc6b238bb368445a",
+      "report": "benchmarks/results/analysis-followup/revised/baseline/05/report.md",
+      "report_sha256": "72b46640078a198a3e964358e0dedb31a0025b55ab017f3df245ae3cbd968554",
+      "complete_source_and_report_read": true,
+      "targeted_semantic_ready": true,
+      "targeted_issues": [
+        {
+          "id": "borrow-lunchbox",
+          "resolved": true,
+          "final_wording": "加蛋、取饭盒都不必等于伤感。",
+          "source_support": "原文乙段明确取下旧饭盒并试扣盖子，未写借出；新稿不再增加交付结果或借还关系。"
+        },
+        {
+          "id": "child-help-action-stage",
+          "resolved": true,
+          "final_wording": "何婶便叫小孩找橡皮筋，照顾的安排也开始把旁人纳入",
+          "source_support": "原文明确发出请托，新稿限定为安排，不再暗示小孩已完成帮助。"
+        },
+        {
+          "id": "notification-sound-alternatives",
+          "resolved": true,
+          "final_wording": "同样的提示音也可能来自无关设备，不能坐实背叛",
+          "source_support": "原文只有同样提示音，并未确认声源；可能与怀疑标记保留了声源及接应可靠性的未知。"
+        },
+        {
+          "id": "darkness-rule-provenance",
+          "resolved": true,
+          "final_wording": "若接应人的说法可靠，灯亮便可能意味着更易暴露，原文尚未独立证实这条规则。",
+          "source_support": "黑暗遮蔽能力来自接应人的话，新稿明确条件与证据来源，不再当作已证实世界规则。"
+        }
+      ],
+      "new_fact_errors_from_changes": [],
+      "residual_dependency_conflicts": [],
+      "full_report_dependency_review": "逐段回读后，惜别仍是普通互助之外的有据读法；小孩参与限定在安排，末尾众人挪凳仍有独立动作证据。甲段关于人物已知信息及悬念公平不依赖接应人所说规则为真；陶艺教室新例也不依赖饭盒借出。未见修改导致的结论依赖冲突。",
+      "replacement_reconstruction_matches": true,
+      "manifest_hashes_match": true,
+      "body_non_whitespace_chars": 823,
+      "original_500_800_range_met": false
+    },
+    {
+      "case": "06",
+      "variant": "baseline",
+      "source": "benchmarks/analysis-depth/holdout/06/source.txt",
+      "source_sha256": "34ada7262c9ebe98e6c694aa356c5dbdd23c1d4fc8c11d01904893981fef84b1",
+      "report": "benchmarks/results/analysis-followup/revised/baseline/06/report.md",
+      "report_sha256": "31cd51145d1f5fe44389b3114ccfd1c1574e2093004e90524db27d40de1975cf",
+      "complete_source_and_report_read": true,
+      "targeted_semantic_ready": true,
+      "targeted_issues": [
+        {
+          "id": "processing-duration",
+          "resolved": true,
+          "final_wording": "记录到此结束，读者没有得到是否编号的答案。",
+          "source_support": "三月八日备注以待问结束；新稿描述文本收束，不再补出编号问题延续了多久。"
+        },
+        {
+          "id": "instruction-versus-execution",
+          "resolved": true,
+          "final_wording": "前者要求保留一件来历未明的东西",
+          "source_support": "勿倒是指令，新稿不再将指令直接视为已执行的保留结果。"
+        }
+      ],
+      "new_fact_errors_from_changes": [],
+      "residual_dependency_conflicts": [],
+      "full_report_dependency_review": "开头有限记录、请假移出交接不等于遭拒、盒主未知的边界与末条新句一致。下一段“具体照料”在前文已经明确勿倒是要求的条件下，可指照料性的指令，不必推出已经执行；规章保护仍保留可能语气。未见由本次修改引入的事实错误或依赖冲突。",
+      "replacement_reconstruction_matches": true,
+      "manifest_hashes_match": true,
+      "body_non_whitespace_chars": 771,
+      "original_500_800_range_met": true
+    },
+    {
+      "case": "02",
+      "variant": "candidate",
+      "source": "benchmarks/analysis-depth/development/02/source.txt",
+      "source_sha256": "93630146b6b3d5773ed06b1a6aa539f5eb73eb1d22881e2973127d465a81d477",
+      "report": "benchmarks/results/analysis-followup/revised/candidate/02/report.md",
+      "report_sha256": "f177792aef75fb1f500f00af4ae7d414b40b102a7e26ecd867eb567c3d01abbc",
+      "complete_source_and_report_read": true,
+      "targeted_semantic_ready": true,
+      "targeted_issues": [
+        {
+          "id": "hand-count",
+          "resolved": true,
+          "final_wording": "末段错签日期、翻手后诉诸玻璃",
+          "source_support": "原文自己的手未限定数量，新稿既未增加双手也未反向断言单手。"
+        },
+        {
+          "id": "self-report-versus-corroboration",
+          "resolved": true,
+          "final_wording": "这仍是他的自述，只解释了停电为何不妨碍他留亭听球赛，不能独立核实他当时在场或看清了交包。",
+          "source_support": "听球赛和电池来自同一叙述者，新稿明确不能独立证明在场或目击。"
+        }
+      ],
+      "new_fact_errors_from_changes": [],
+      "residual_dependency_conflicts": [],
+      "full_report_dependency_review": "左右手疑问仍由记录员追问与叙述者未直接作答支撑，不依赖手的数量；前后文把所长说法及叙述者回忆都限定为人物信息，与自述边界一致。竹帘、报纸、记忆与求关注兼容的分析不受局部替换影响。未见修改导致的结论依赖冲突。",
+      "replacement_reconstruction_matches": true,
+      "manifest_hashes_match": true,
+      "body_non_whitespace_chars": 761,
+      "original_500_800_range_met": true
+    }
+  ],
+  "open_delivery_items": [
+    {
+      "id": "05-duplicated-adversative",
+      "kind": "introduced_copyediting_issue",
+      "severity": "minor",
+      "report": "benchmarks/results/analysis-followup/revised/baseline/05/report.md",
+      "line": 5,
+      "claim": "但这会引出接应人在附近或通信有风险的怀疑，但同样的提示音也可能来自无关设备，不能坐实背叛。",
+      "explanation": "精确替换未包含原句前的但，导致但……但……重复；不改变证据判断，但应在交付前校顺。",
+      "minimal_fix": "删去句首但，保留这会……，但同样……。"
+    },
+    {
+      "id": "05-original-length-range",
+      "kind": "format_observation",
+      "severity": "minor",
+      "report": "benchmarks/results/analysis-followup/revised/baseline/05/report.md",
+      "actual_body_non_whitespace_chars": 823,
+      "original_requested_minimum": 500,
+      "original_requested_maximum": 800,
+      "counting_method": "去除Markdown标题行与所有空白，含标点和引文，Unicode字符计数；与第一轮结果的既有口径一致。",
+      "explanation": "若完整修订稿继续满足原任务要求，需压缩至少23字；删除重复但后仍为822字。若后续明确作为不限字数的编辑稿，则只登记偏离，不重算旧评分。"
+    }
+  ],
+  "limits": [
+    "审核者曾提出本轮修订建议，且已知原报告版本；这是独立检查根代理修改结果，不是新的无先验盲评。",
+    "本次结论只绑定下列文件哈希；之后任何改动需重新核对实际改动范围。",
+    "未补查旧报告所有潜在审美问题，未声称全文文学质量没有其他改进空间。",
+    "没有新生成对照、重复采样或人类编辑评价，不构成版本质量提高的因果证明。",
+    "原文、旧稿、旧评阅、建议文件及修订稿均未由本次复核修改；仅新增本JSON。"
+  ],
+  "input_hashes": {
+    "benchmarks/results/analysis-followup/pilot-changes.json": "a6d8a035ee906f6fd1a02b278f17d24623ccd349955b5543b18f7f759589d4bc",
+    "benchmarks/analysis-depth/holdout/05/source.txt": "5d6495719f9a97156b3c09c25ba8ebf9603436cf8cd8ba74cc6b238bb368445a",
+    "benchmarks/results/analysis-depth/reports/baseline/05/report.md": "a4374764347a76ee360552844393732e4ade97b22d56d2d103267ff24f353dbd",
+    "benchmarks/results/analysis-followup/revised/baseline/05/report.md": "72b46640078a198a3e964358e0dedb31a0025b55ab017f3df245ae3cbd968554",
+    "benchmarks/analysis-depth/holdout/06/source.txt": "34ada7262c9ebe98e6c694aa356c5dbdd23c1d4fc8c11d01904893981fef84b1",
+    "benchmarks/results/analysis-depth/reports/baseline/06/report.md": "a90e047d7520cb0707cb8609b2f5fddd200e0be76aabc60e53078463ec350cd4",
+    "benchmarks/results/analysis-followup/revised/baseline/06/report.md": "31cd51145d1f5fe44389b3114ccfd1c1574e2093004e90524db27d40de1975cf",
+    "benchmarks/analysis-depth/development/02/source.txt": "93630146b6b3d5773ed06b1a6aa539f5eb73eb1d22881e2973127d465a81d477",
+    "benchmarks/results/analysis-depth/reports/candidate/02/report.md": "24d6ac8386195abe60b40e26ce7a03a66e80d09e2f2ab35654e75bc807711683",
+    "benchmarks/results/analysis-followup/revised/candidate/02/report.md": "f177792aef75fb1f500f00af4ae7d414b40b102a7e26ecd867eb567c3d01abbc",
+    "benchmarks/analysis-depth/holdout/05/task.md": "2bbd7c566d987e54f48e1aa0faeb484539c432b761e57e63d09f4bce2378c865",
+    "benchmarks/analysis-depth/holdout/06/task.md": "1ec5a5da76d7af93facbe118363ad563185799347c83787b10339d167de0b92d",
+    "benchmarks/analysis-depth/development/02/task.md": "2bc4cf06cf8e168abf6af605ce7f8ad81d1a3e8298d9f0437df15e30f666de2a",
+    "benchmarks/results/analysis-followup/pilot-disputes.md": "6927ab88434bd7e4035dbc27b8181b4332482c23d0dbecc18534f40fc6b56b89",
+    "benchmarks/results/analysis-followup/pilot-disputes.json": "38c1534fb321c5c096fc217c644005fe6399aa74c2ca3ff5faffcc2a55fba288"
+  },
+  "preservation": {
+    "review_inputs_modified": false,
+    "hashes_unchanged_during_output_write": true
+  }
+}
