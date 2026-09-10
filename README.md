@@ -2,7 +2,7 @@
 
 面向 **Codex 的中文小说技能套件**。按开书规划、正文写作、拆文、审稿、资料研究和封面分工，共用一套断点、状态和证据工具。作者用自然语言提要求，Codex 维护稿件和进度。
 
-**版本 0.4.0：7 个技能入口、中文场景指导与运行时修复。** 发布附件、远端检查和包同步状态分别以 [Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0)、[Actions](https://github.com/NingCui29/story-skill/actions) 与 [Packages](https://github.com/users/NingCui29/packages?repo_name=story-skill) 为准。Python 3.10+ · 标准库运行时 · MIT License。
+**v0.4.0 已发布：7 个技能入口、中文场景指导与运行时修复。** 固定标签安装与 Release 附件已逐文件核对，Windows/Linux CI 及 GitHub Packages 发布、回下载验证已通过。[发布验证记录](docs/github-release.md) 保留各平台测试范围与回执。Python 3.10+ · 标准库运行时 · MIT License。
 
 [文档导航](docs/README.md) · [目录结构与职责](docs/目录结构.md) · [中文上手指南](docs/中文小说上手.md) · [超长篇实操](docs/超长篇实操.md) · [全仓审查与优化](docs/全仓审查与优化.md) · [安装与发布](docs/github-release.md) · [v0.4.0 Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0)
 
@@ -197,6 +197,6 @@ python -B -X utf8 scripts/package.py
 
 ## GitHub Packages 与许可
 
-当前仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)，0.4.0 npm 内容包使用 `@ningcui29/story-codex`，同步结果见 [Packages](https://github.com/users/NingCui29/packages?repo_name=story-skill) 与 [同步工作流](https://github.com/NingCui29/story-skill/actions/workflows/packages.yml)。历史 `@cuinings/story-codex v0.3.0` 的原始包身份和字节验证保留，当前注册表可访问性不作已验证承诺。Codex 技能安装优先使用上方固定 tag 或套件 ZIP；npm 没有自动注册 Codex 的安装钩子，正式同步会回下载核对，GitHub npm 下载需要认证。[同步说明](docs/github-release.md)
+当前仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)，`@ningcui29/story-codex@0.4.0` 已公开发布并通过注册表回下载核对，见 [Packages](https://github.com/NingCui29/story-skill/pkgs/npm/story-codex) 与 [成功工作流](https://github.com/NingCui29/story-skill/actions/runs/34431905475)。历史 `@cuinings/story-codex v0.3.0` 的原始包身份和字节验证保留，当前注册表可访问性不作已验证承诺。Codex 技能安装优先使用上方固定 tag 或套件 ZIP；npm 没有自动注册 Codex 的安装钩子，GitHub npm 即使公开也需要认证下载。[同步说明](docs/github-release.md)
 
 本项目分析 [oh-story-claudecode](https://github.com/zenstory-ai/oh-story-claudecode) 的公开流程后独立实现，未拷贝其小说 demo、参考教程或运行时代码。尚未通过同题盲评证明文笔优于原项目。[上游分析与设计取舍](docs/upstream-analysis.md) · [MIT License](LICENSE)

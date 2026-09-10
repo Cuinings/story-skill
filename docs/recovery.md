@@ -54,7 +54,7 @@ schema 1 书库先停止写入，保留原书并复制到独立目录，再 `mig
 
 中文实测曾在 D 盘 exFAT 触发硬链接 WinError 1：第1章已经提交为 revision 5，正文待导出。修复后用同一书 ID 和原 delta 重试成功，并继续写作、修订到 revision 10；没有重新初始化或丢弃旧状态。见 [中文实测](中文实测.md)。
 
-上述 NTFS/exFAT 说明来自已保留的本机实测。本地 v0.4.0 另完成 311 项单测和 12 项整包检查，包含历史依赖、并发快照、安装与恢复相关路径；远端 Linux CI 尚未在本轮运行，不把配置存在当成 POSIX 实机证明。[当前验证与边界](全仓审查与优化.md)
+上述 NTFS/exFAT 说明来自已保留的本机实测。本地 v0.4.0 另完成 311 项单测和 12 项整包检查，包含历史依赖、并发快照、安装与恢复相关路径。发布提交 `c1b3c3377573610a191e165ceb6866ae35afe5a8` 的 [远端 CI](https://github.com/NingCui29/story-skill/actions/runs/34431400166) 也已通过：Windows/Python 3.12 为 311 项通过、零跳过，Linux/Python 3.10 为 305 项通过、6 项 Windows 专用测试跳过。远端 runner 的成功不代表覆盖所有 POSIX 文件系统，也不替代本机 exFAT 实测。[发布验证与边界](github-release.md) · [发布前本地审查](全仓审查与优化.md)
 
 ## 完整核验与局部运行
 

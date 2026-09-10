@@ -1,6 +1,6 @@
 # Story Codex 文档导航
 
-文档版本：v0.4.0，更新日期：2026-09-10。此版本采用 7 个技能入口，包含中文场景指导和运行时修复；默认安装说明固定到 v0.4.0 标签。发布附件、远端 CI 与包同步状态分别查看 [Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0)、[Actions](https://github.com/NingCui29/story-skill/actions) 和 [Packages](https://github.com/users/NingCui29/packages?repo_name=story-skill)。历史 v0.3.0 保留旧单入口结构与固定链接。
+文档版本：v0.4.0，更新日期：2026-09-10。此版本已发布，采用 7 个技能入口，包含中文场景指导和运行时修复；默认安装说明固定到 v0.4.0 标签。Release 附件、固定标签安装、Windows/Linux CI 与公开 Packages 回下载验证均已完成，具体范围集中在 [发布验证记录](github-release.md)。历史 v0.3.0 保留旧单入口结构与固定链接。
 
 ## 开始使用
 

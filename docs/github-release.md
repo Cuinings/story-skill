@@ -1,8 +1,25 @@
 # 安装、升级与 GitHub 发布
 
-仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)。**版本 0.4.0 包含 7 个技能入口、中文场景指导与运行时修复，安装默认固定到 `v0.4.0` 标签。** 发布附件、远端检查与 npm 同步是独立步骤，实际状态分别以 [Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0)、[Actions](https://github.com/NingCui29/story-skill/actions) 和 [Packages](https://github.com/users/NingCui29/packages?repo_name=story-skill) 为准。历史 v0.3.0 继续使用旧单入口目录。
+仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)。**v0.4.0 已于 2026-09-10 正式发布，包含 7 个技能入口、中文场景指导与运行时修复，安装默认固定到 `v0.4.0` 标签。** 发布附件、远端检查与 npm 同步分别验证，结果见下表。历史 v0.3.0 保留旧单入口目录和固定链接。
 
 2026-09-10 本地验证记录：311 项测试、12 项整包检查通过，ZIP/npm 与源码的 31 个载荷文件一致，项目安装已核对。该记录不代替远端 CI、Release 下载或注册表验证。[完整修复与回执](全仓审查与优化.md) · [文档导航](README.md)
+
+## v0.4.0 发布验证记录
+
+固定标签指向提交 `c1b3c3377573610a191e165ceb6866ae35afe5a8`，不随后续文档更新移动。以下结果按发布环节分别记录：
+
+| 环节 | 实际结果与证据 |
+|---|---|
+| GitHub Release | [v0.4.0](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0) 于 2026-09-10 11:04:24（北京时间）发布，包含套件 ZIP 与 SHA-256 校验文件。[发布回执](../benchmarks/results/v0.4.0/release/release.json) |
+| 发布提交的远端 CI | [运行 34431400166](https://github.com/NingCui29/story-skill/actions/runs/34431400166) 全步骤成功。Windows/Python 3.12：311 项通过、零跳过；Linux/Python 3.10：305 项通过、6 项 Windows 专用测试跳过。两端均完成打包、CLI 冒烟、中文稿件重放和多线历史修订演练。[CI 回执](../benchmarks/results/v0.4.0/release/ci.json) |
+| 公共固定标签安装 | 用本机官方安装器从 `v0.4.0` 下载到隔离临时目录，7 个技能的 31 个文件与 Release ZIP、源码逐字节一致；安装后 `--version`、`--help`、`init`、`status` 全部成功。[安装回执](../benchmarks/results/v0.4.0/release/remote-install.json) |
+| GitHub Packages | [运行 34431905475](https://github.com/NingCui29/story-skill/actions/runs/34431905475) 成功发布 `@ningcui29/story-codex@0.4.0`，回下载 tarball 的 31 个技能文件与 Release 一致，4 项运行时检查通过。包可见性为 public，关联当前仓库；[未登录可见的包页面](https://github.com/NingCui29/story-skill/pkgs/npm/story-codex) 显示 0.4.0 Latest。[原始回执](../benchmarks/results/v0.4.0/release/packages.json) · [下载后再次核对](../benchmarks/results/v0.4.0/release/package-check.json) |
+
+Release ZIP 的 SHA-256 为 `087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a76ae20aff7d54b`。固定标签安装只操作临时技能与临时书库，不修改用户安装或小说；它验证文件安装与运行时启动，不等于 Codex UI 自动发现或长程文学质量验证。
+
+注册表回下载 tarball 的 SHA-256 为 `0cc37dcf98580b1ab7379ec7c54f23167b972e9e5d404679502fd975d982fa71`，与本地构建包逐字节一致；Actions 归档回执下载后也再次核对通过。[工作流与归档信息](../benchmarks/results/v0.4.0/release/packages-workflow.json)。公开包页面可浏览，GitHub npm 下载仍需要认证；npm 包本身不注册 Codex 技能。
+
+首轮远端 Windows 检查曾因 5 个测试夹具没有规范化 TEMP 的 8.3 短路径而失败；Linux 当轮已通过。随后仅修正测试路径，将修改提交为上述发布提交，再重新运行两端 CI；没有修改技能载荷或生产脚本。[首轮失败回执](../benchmarks/results/v0.4.0/release/ci-first-failed.json) 保留，发布前的本地审查与文学评阅也不回写成远端结果。
 
 ## Codex 一行安装 0.4.0
 
@@ -113,11 +130,11 @@ python -B -X utf8 scripts/package.py
 
 ## GitHub Packages 同步
 
-[Packages](https://github.com/users/NingCui29/packages?repo_name=story-skill) 使用 GitHub npm 注册表，0.4.0 包名为 `@ningcui29/story-codex`，同步状态见 [工作流执行记录](https://github.com/NingCui29/story-skill/actions/workflows/packages.yml)。仓库归属已核对为 `NingCui29/story-skill`；旧 `Cuinings` API 地址重定向到同一仓库 ID。新版工作流、包作用域、repository 元数据与安装链接均使用当前归属。npm 包不使用安装钩子注册 Codex；下载后不能当成已安装技能。
+[Packages](https://github.com/NingCui29/story-skill/pkgs/npm/story-codex) 使用 GitHub npm 注册表，`@ningcui29/story-codex@0.4.0` 已公开发布并完成回下载校验，详细证据见本页发布记录。仓库归属已核对为 `NingCui29/story-skill`；旧 `Cuinings` API 地址重定向到同一仓库 ID。新版工作流、包作用域、repository 元数据与安装链接均使用当前归属。npm 包不使用安装钩子注册 Codex；下载后不能当成已安装技能。
 
 [同步工作流](../.github/workflows/packages.yml) 在正式 Release 发布时运行，也可在 [Actions](https://github.com/NingCui29/story-skill/actions/workflows/packages.yml) 手动选择已发布的新版本 tag 补同步。工作流从该 Release 的 ZIP 和 checksum 构建，使用仓库 `GITHUB_TOKEN` 的 `contents: read`、`packages: write` 权限。其他仓库触发会被拒绝。
 
-历史 v0.3.0 的 13 文件布局、`@cuinings/story-codex` 身份及 npm 包装文件字节保持原样，可以构建校验；当前账号不会向旧作用域重新发布。2026-09-10 已从当前仓库的 v0.3.0 Release 实际下载、核对 ZIP/checksum、构建旧 npm 包并运行临时 CLI。此结果不代表旧作用域当前的注册表权限或可见性已验证，也不表示新版已发布。
+历史 v0.3.0 的 13 文件布局、`@cuinings/story-codex` 身份及 npm 包装文件字节保持原样，可以构建校验；当前账号不会向旧作用域重新发布。2026-09-10 已从当前仓库的 v0.3.0 Release 实际下载、核对 ZIP/checksum、构建旧 npm 包并运行临时 CLI。该旧版准备结果不代表旧作用域当前的注册表权限或可见性已验证。
 
 发布完成后回下载 npm tarball，核对 SHA-512、包身份、每个技能文件及共享依赖，再在临时工程运行核心的版本、帮助、初始化和状态检查。回执保存在 Actions artifact。重复同步先核对现有版本，内容不同则停止，不删除或覆盖。
 
@@ -127,7 +144,7 @@ python -B -X utf8 scripts/package.py
 python -B -X utf8 scripts/sync_packages.py --tag v0.3.0 --prepare-only
 ```
 
-对应版本同步成功、并按 GitHub npm 要求认证后，可下载内容包：
+按 GitHub npm 要求认证后，可下载已同步的 0.4.0 内容包：
 
 ```powershell
 npm pack @ningcui29/story-codex@0.4.0 --registry=https://npm.pkg.github.com

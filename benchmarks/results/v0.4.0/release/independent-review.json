@@ -1,0 +1,297 @@
+{
+  "ok": true,
+  "audited_at_utc": "2026-09-10T03:07:26.384474+00:00",
+  "repository": "NingCui29/story-skill",
+  "mode": "Independent public GitHub API and ref reads; only this report is written",
+  "checks": [
+    {
+      "name": "published_v040_is_latest",
+      "ok": true
+    },
+    {
+      "name": "fixed_v040_tag_commit",
+      "ok": true
+    },
+    {
+      "name": "public_refs_agree_with_api",
+      "ok": true
+    },
+    {
+      "name": "release_has_exact_two_uploaded_assets",
+      "ok": true
+    },
+    {
+      "name": "asset_bytes_and_api_digest:story-codex-0.4.0.zip",
+      "ok": true
+    },
+    {
+      "name": "asset_bytes_and_api_digest:story-codex-0.4.0.zip.sha256",
+      "ok": true
+    },
+    {
+      "name": "zip_and_published_checksum_match_expected",
+      "ok": true
+    },
+    {
+      "name": "release_suite_has_seven_skills_and_31_files",
+      "ok": true
+    },
+    {
+      "name": "isolated_install_has_exact_release_filelist",
+      "ok": true,
+      "workdir_exists": true
+    },
+    {
+      "name": "installed_files_match_remote_release_and_fixed_tag_commit",
+      "ok": true
+    },
+    {
+      "name": "installer_receipt_matches_remote_release",
+      "ok": true
+    },
+    {
+      "name": "legacy_release_metadata_and_assets_unchanged",
+      "ok": true
+    },
+    {
+      "name": "legacy_tag_unchanged",
+      "ok": true,
+      "tag_object_sha": "7d85d389182df134f09bda32bac0439e8d836dfe",
+      "tag_commit": "9f20eae4bd5e84b28065407c3eb4fa26c4d7fe59"
+    },
+    {
+      "name": "legacy_zip_bytes_unchanged",
+      "ok": true
+    },
+    {
+      "name": "prerelease_ci_success_matches_tag_commit",
+      "ok": true
+    }
+  ],
+  "limitations": [
+    "Read-only point-in-time verification of the public Release and tag refs; GitHub Release immutable is recorded separately from the fixed tag commit.",
+    "The existing isolated installer receipt and all installed file bytes were independently checked; its four runtime commands were not rerun in this review.",
+    "GitHub Packages publication is outside this review and is handled separately.",
+    "No claim about Codex UI discovery, literary quality, or long-run novel consistency is made."
+  ],
+  "release": {
+    "id": 385976731,
+    "tag_name": "v0.4.0",
+    "name": "Story Codex v0.4.0",
+    "draft": false,
+    "prerelease": false,
+    "immutable": false,
+    "html_url": "https://github.com/NingCui29/story-skill/releases/tag/v0.4.0",
+    "published_at": "2026-09-10T03:04:24Z",
+    "target_commitish": "c1b3c3377573610a191e165ceb6866ae35afe5a8"
+  },
+  "latest": {
+    "id": 385976731,
+    "tag_name": "v0.4.0",
+    "name": "Story Codex v0.4.0",
+    "draft": false,
+    "prerelease": false,
+    "immutable": false,
+    "html_url": "https://github.com/NingCui29/story-skill/releases/tag/v0.4.0",
+    "published_at": "2026-09-10T03:04:24Z",
+    "target_commitish": "c1b3c3377573610a191e165ceb6866ae35afe5a8"
+  },
+  "tags": {
+    "tag": {
+      "ref": "refs/tags/v0.4.0",
+      "object_sha": "edbb8744543398a823833cde2316d5580d463604",
+      "commit": "c1b3c3377573610a191e165ceb6866ae35afe5a8",
+      "annotated_chain": [
+        {
+          "tag_object_sha": "edbb8744543398a823833cde2316d5580d463604",
+          "tag": "v0.4.0",
+          "target": {
+            "sha": "c1b3c3377573610a191e165ceb6866ae35afe5a8",
+            "type": "commit",
+            "url": "https://api.github.com/repos/NingCui29/story-skill/git/commits/c1b3c3377573610a191e165ceb6866ae35afe5a8"
+          }
+        }
+      ]
+    },
+    "legacy_tag": {
+      "ref": "refs/tags/v0.3.0",
+      "object_sha": "7d85d389182df134f09bda32bac0439e8d836dfe",
+      "commit": "9f20eae4bd5e84b28065407c3eb4fa26c4d7fe59",
+      "annotated_chain": [
+        {
+          "tag_object_sha": "7d85d389182df134f09bda32bac0439e8d836dfe",
+          "tag": "v0.3.0",
+          "target": {
+            "sha": "9f20eae4bd5e84b28065407c3eb4fa26c4d7fe59",
+            "type": "commit",
+            "url": "https://api.github.com/repos/NingCui29/story-skill/git/commits/9f20eae4bd5e84b28065407c3eb4fa26c4d7fe59"
+          }
+        }
+      ]
+    }
+  },
+  "remote_refs": {
+    "refs/tags/v0.3.0": "7d85d389182df134f09bda32bac0439e8d836dfe",
+    "refs/tags/v0.3.0^{}": "9f20eae4bd5e84b28065407c3eb4fa26c4d7fe59",
+    "refs/tags/v0.4.0": "edbb8744543398a823833cde2316d5580d463604",
+    "refs/tags/v0.4.0^{}": "c1b3c3377573610a191e165ceb6866ae35afe5a8"
+  },
+  "assets": [
+    {
+      "id": 554104660,
+      "name": "story-codex-0.4.0.zip",
+      "url": "https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip",
+      "api_size": 93713,
+      "downloaded_bytes": 93713,
+      "api_digest": "sha256:087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a76ae20aff7d54b",
+      "downloaded_sha256": "087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a76ae20aff7d54b"
+    },
+    {
+      "id": 554104694,
+      "name": "story-codex-0.4.0.zip.sha256",
+      "url": "https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip.sha256",
+      "api_size": 88,
+      "downloaded_bytes": 88,
+      "api_digest": "sha256:e991396df8430c2b10f7d952a1d9c8c5540393c826bf3250add1f3e8c163e51a",
+      "downloaded_sha256": "e991396df8430c2b10f7d952a1d9c8c5540393c826bf3250add1f3e8c163e51a"
+    }
+  ],
+  "installation": {
+    "receipt": "D:\\Developer\\WorkSpace\\story-skill\\dist\\release-v0.4.0\\remote-install.json",
+    "receipt_sha256": "5119f9e16316d4b9468053783a6940973754f9291c962aac852dab0966fc5059",
+    "directory": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-v040-remote-install-ugd_agbw\\skills",
+    "skill_count": 7,
+    "file_count": 31,
+    "payload_manifest": {
+      "story-codex-analyze/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "story-codex-analyze/SKILL.md": "50dc30426f04d70e5bfb7f7f97601b6d39e287ea51110046a86253fad00e9e59",
+      "story-codex-analyze/agents/openai.yaml": "af9aa6755f241868eaf640dfa5b6b130bab29f32e13b05872e4caf73dda194ae",
+      "story-codex-cover/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "story-codex-cover/SKILL.md": "15b21ebc8b26c17641ea32e1feddffafbfa5710940ef863fee54d6775ffd58b3",
+      "story-codex-cover/agents/openai.yaml": "a62ccc4aa41734b35bd4bb8beeef721d6ec531bab19bd9721dc3266e9b219bdc",
+      "story-codex-plan/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "story-codex-plan/SKILL.md": "54aeb7b337f05c281e31ed5ee3f962ccadbe3f0bcc253b8f604f4eea4cc91796",
+      "story-codex-plan/agents/openai.yaml": "91d5054d329cba6094bf952128f8b45204a6998c532ff9359de912c6cf4461c3",
+      "story-codex-research/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "story-codex-research/SKILL.md": "87da9985f5e65c544bb36963409ba19ad8ea7c26f68a14439716b7533f736152",
+      "story-codex-research/agents/openai.yaml": "c1d004732ad14aeb4de504637fb614174dfc8e2eeb77fb750d038a23be1106b0",
+      "story-codex-review/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "story-codex-review/SKILL.md": "090242f8eacd9f72a57dd8413006dda256d6729c97acb7695fd1c7a59013d175",
+      "story-codex-review/agents/openai.yaml": "49767d87691f46c0819c920284d9c2847880a2fab69225b90c4df7734ded9bab",
+      "story-codex-review/references/history.md": "85cb0d81aa2e0a7998a87b53442465e3824ba4d357a25fd28727be8ec5da290b",
+      "story-codex-write/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "story-codex-write/SKILL.md": "1dfcccafcb95a4f1eacf48d4514bced347a6e1799305ab9bde5ea1ec7bd56d1d",
+      "story-codex-write/agents/openai.yaml": "aaf575e3af0e3ef0f7cb648c065fd3b7c1d1e8f7c022e76ba04ecf9b705377e3",
+      "story-codex-write/references/chapter.md": "cfa698c8485dc0325902fc1194172305d40d08ce1e81fe7793f673dd18c90a59",
+      "story-codex-write/references/drama.md": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+      "story-codex-write/references/long-form.md": "cc1b5bbc91d9494ba976624fab3bbc553d364411ee45941addc7eeaf7b1f8402",
+      "story-codex/LICENSE": "2351e1b2ef21fa45dd2140c9e88f6f55730e00cc2a30da5980a0af28e969bc32",
+      "story-codex/SKILL.md": "0d0995a5f0aa128373683ceffd8e96b39912b67be61febbf4d5246a35270e1cd",
+      "story-codex/agents/openai.yaml": "15aa0bdd2ba3803da40a00ef96899a09da1e7f6a6d52a01fdccd73f130615617",
+      "story-codex/references/project-state.md": "aaaadbe044aa548d998ca24640172f305af84e2a9e849ceeb1e9dc59b18507c6",
+      "story-codex/scripts/story.py": "3b223cd29c08abea59214847cff2f8ce27683c51f0f8a6372f9fca2fb64fbab5",
+      "story-codex/scripts/story_history.py": "d61c2d4204e58bcb556a4667ae4afab44ab0b82f0b44e162e11c139bb1b45263",
+      "story-codex/scripts/story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
+      "story-codex/scripts/story_storage.py": "f3b74767ee90ae34a0dd4390968ef0731b6c2128ccb609d42a707d11f902aeeb",
+      "story-codex/scripts/story_world.py": "9567ceb57c893a8a4bfb7336eb53f5dfe96dc7b7af3b00a439fb7dcbd6220a0b"
+    },
+    "mismatches": [],
+    "installer_exit_code": 0,
+    "runtime_commands": [
+      {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-v040-remote-install-ugd_agbw\\skills\\story-codex\\scripts\\story.py",
+          "--version"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "40b8eb4000a913a7791090535f291d3d369874162a89ef3c9e3d4e887a1b9e79",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-v040-remote-install-ugd_agbw\\skills\\story-codex\\scripts\\story.py",
+          "--help"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "0398029d9ed2cd51a9830a35f95c227322268facd61bbf6901eac5f599b7ba49",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-v040-remote-install-ugd_agbw\\skills\\story-codex\\scripts\\story.py",
+          "init",
+          "--book",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-v040-remote-install-ugd_agbw\\book",
+          "--title",
+          "发布后远端安装验证",
+          "--kind",
+          "long"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "584745bc89de70c8ec9cc9a6e550691a349747a464d6f8dce65062130636d4de",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "C:\\Python314\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-v040-remote-install-ugd_agbw\\skills\\story-codex\\scripts\\story.py",
+          "status",
+          "--book",
+          "C:\\Users\\Work\\AppData\\Local\\Temp\\story-v040-remote-install-ugd_agbw\\book"
+        ],
+        "exit_code": 0,
+        "stdout_sha256": "a52f09062e73491a6cf62ef9bdd6be508dd1c680fd9459736213ab464674b11e",
+        "stderr": ""
+      }
+    ]
+  },
+  "legacy_release": {
+    "id": 384525950,
+    "tag_name": "v0.3.0",
+    "name": "Story Codex v0.3.0",
+    "draft": false,
+    "prerelease": false,
+    "immutable": false,
+    "html_url": "https://github.com/NingCui29/story-skill/releases/tag/v0.3.0",
+    "published_at": "2026-09-08T07:39:03Z",
+    "target_commitish": "9f20eae4bd5e84b28065407c3eb4fa26c4d7fe59",
+    "initial_snapshot": "D:\\Developer\\WorkSpace\\story-skill\\dist\\release-v0.4.0\\initial-status.json",
+    "downloaded_zip_sha256": "9e72497995e2269066fe3222a004be353fbb3f014af7a842745505dec5612948"
+  },
+  "ci": {
+    "id": 34431400166,
+    "head_sha": "c1b3c3377573610a191e165ceb6866ae35afe5a8",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/NingCui29/story-skill/actions/runs/34431400166",
+    "jobs": [
+      {
+        "id": 102727479448,
+        "name": "test (windows-latest, 3.12)",
+        "status": "completed",
+        "conclusion": "success"
+      },
+      {
+        "id": 102727479540,
+        "name": "test (ubuntu-latest, 3.10)",
+        "status": "completed",
+        "conclusion": "success"
+      }
+    ]
+  }
+}

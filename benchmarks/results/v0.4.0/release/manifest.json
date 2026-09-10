@@ -1,0 +1,17 @@
+{
+  "version": "0.4.0",
+  "release_commit": "c1b3c3377573610a191e165ceb6866ae35afe5a8",
+  "sha256": {
+    "ci-first-failed.json": "0fc6321afd48c708880fba75861134719a889abb162e4572c454205d255f071b",
+    "ci.json": "283f94edec5e49a3414c8559361835c35feb756647eb45adf40e6260851b3381",
+    "independent-review.json": "0774a5bc6770a6f8a7e3c9a14ecc1548ec21869ae1404193f7e551abc40b57d6",
+    "package-check.json": "77d0d71b73120695f4eff20169f7498bb86f293f6a5f04c56e0caf888a7dd14d",
+    "packages-workflow.json": "570bc1b76568d7afa3f1e26f21dd0914f320643efca853347b32f3af48e69a8a",
+    "packages.json": "6f7e122eb8d38d1feada813a76676b02dc452765c255c85ba9b3275b86398a3a",
+    "README.md": "3fc573ed5a81bbc291abec04d62bc5bb7813c0ee7f52122c52309aac5e24e18f",
+    "release.json": "3336ed9e004fb8cf28b1af71c96d6bb17c1bbcd4a2e666ac4d70dc45203f38fc",
+    "remote-install.json": "5119f9e16316d4b9468053783a6940973754f9291c962aac852dab0966fc5059",
+    "repository.json": "3f69c8256d4984987835e2fd47ecd93f07051ddd048c3fa50fb2b5cc58493ed2",
+    "unit-shortpath.json": "a391a88bf98030021157c839671710f234da17f466fd7f18062e21f7bf35fae5"
+  }
+}
