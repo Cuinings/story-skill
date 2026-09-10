@@ -20,7 +20,7 @@ REVISED = "# 门后的雨\n沈禾收回了唯一的钥匙。\n她决定另找入
 class ExportRecoveryTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="story-export-recovery-")
-        self.root = Path(self.temp.name) / "book"
+        self.root = Path(self.temp.name).resolve() / "book"
         story.Book.create(self.root, "门后的雨", "long")
         self.book = story.Book(self.root)
         self.draft = self.root / ".story/drafts/chapter.md"

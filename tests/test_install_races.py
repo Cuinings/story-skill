@@ -18,7 +18,7 @@ spec.loader.exec_module(installer)
 class InstallationRaceTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="story-install-race-test-")
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()
         self.source = self.root / "source"
         (self.source / "scripts").mkdir(parents=True)
         (self.source / "SKILL.md").write_bytes(b"original skill\n")

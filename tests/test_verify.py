@@ -125,7 +125,7 @@ class VerificationEvidenceTests(unittest.TestCase):
 
     def test_default_archive_matches_canonical_version_even_if_other_versions_exist(self):
         with tempfile.TemporaryDirectory(prefix="story-verify-version-test-") as directory:
-            root = Path(directory)
+            root = Path(directory).resolve()
             (root / "dist").mkdir()
             current = root / "dist/story-codex-2.4.6.zip"
             current.write_bytes(b"current")
@@ -136,7 +136,7 @@ class VerificationEvidenceTests(unittest.TestCase):
 
     def test_failure_report_preserves_existing_success_evidence(self):
         with tempfile.TemporaryDirectory(prefix="story-verify-report-test-") as directory:
-            path = Path(directory) / "verification.json"
+            path = Path(directory).resolve() / "verification.json"
             passed = {"ok": True, "unit_tests": {"run": 57}}
             self.assertEqual(verify.write_report(passed, path), path)
             failure_path = verify.write_report({"ok": False}, path)
@@ -149,7 +149,7 @@ class BenchmarkContractTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="story-benchmark-contract-test-")
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()
         (self.root / "benchmarks/results").mkdir(parents=True)
         candidate = b"hello\n"
         (self.root / "candidate.md").write_bytes(candidate)

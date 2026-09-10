@@ -25,7 +25,7 @@ class NpmPackageTests(unittest.TestCase):
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix="story-npm-test-")
         self.addCleanup(self.temp.cleanup)
-        self.root = Path(self.temp.name)
+        self.root = Path(self.temp.name).resolve()
         self.version = "0.3.0"
         self.archive = self.root / "story-codex-0.3.0.zip"
         self.checksum = self.root / "release.sha256"
