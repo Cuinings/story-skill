@@ -68,7 +68,7 @@ class AnalysisRecoveryTests(unittest.TestCase):
             encoding="utf-8",
         )
         result = self.book.report(sid, report)
-        self.assertTrue(result["exports_complete"])
+        self.assertTrue(result["exports_complete"], result)
         self.assertTrue(Path(result["report"]).is_file())
 
     def check_new_source(self, text):
