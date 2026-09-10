@@ -2,7 +2,7 @@
 
 **本版 macOS／Linux 验证通过；Windows 正文和报告导出会遇到 WinError 32，保留待恢复状态。Windows 用户暂缓升级、保留现有 v0.4.0。已经使用 v0.5.0 的书先完整备份，不盲目降级或覆盖待恢复内容。** [CI 范围](../benchmarks/results/v0.5.0/release/ci.json) · [导出失败](../benchmarks/results/v0.5.0/release/ci-windows-export-failed.json)
 
-以下命令均需 `python "<核心技能目录>/scripts/story.py"` 前缀与 `--book "<书目录>"`。本页对应 v0.5.0，共享核心为 `story-codex`；数据库继续使用 schema 2，v0.3.0、v0.4.0 书库无需重新导入。分卷正文命名只应用到新保存的目标，已有旧章路径继续识别。
+以下命令均需 `python "<核心技能目录>/scripts/story.py"` 前缀与 `--book "<书目录>"`。本页对应已发布的 [v0.5.0](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0)，固定标签及安装文件已核验，平台限制见上方；共享核心为 `story-codex`；数据库继续使用 schema 2，v0.3.0、v0.4.0 书库无需重新导入。分卷正文命名只应用到新保存的目标，已有旧章路径继续识别。
 
 schema 1 书库先停止写入，保留原书并复制到独立目录，再 `migrate --book "<副本>"`。迁移前用 SQLite backup 生成一致备份并检查完整性；所有结构变更在同一事务中进行，失败回滚。迁移备份位于 `.story/migration-backups/`。回退时停止相关进程，在另一个独立书目录恢复备份并使用 v0.2.0；备份之后的新修改不会自动出现在旧版中。无须重新初始化或修改书籍身份。
 

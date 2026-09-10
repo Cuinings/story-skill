@@ -4,7 +4,7 @@
 
 面向 **Codex 的中文小说技能套件**。按开书规划、正文写作、拆文、审稿、资料研究和封面分工，共用一套断点、状态和证据工具。作者用自然语言提要求，Codex 维护稿件和进度。
 
-**v0.5.0：正文按具名分卷存放，章节统一命名，补齐改名、外部改稿与导出恢复保护。** 保留 7 个技能入口及旧书兼容；本版验证与远端发布状态见 [v0.5.0 说明](docs/releases/v0.5.0.md)。[发布验证记录](docs/github-release.md) 将本版结果与历史 v0.4.0 证据分开记录。Python 3.10+ · 标准库运行时 · MIT License。
+**v0.5.0 已发布：正文按具名分卷存放，章节统一命名，补齐改名、外部改稿与导出恢复保护。** 保留 7 个技能入口及旧书兼容；本版验证与远端发布状态见 [v0.5.0 说明](docs/releases/v0.5.0.md)。[发布验证记录](docs/github-release.md) 将本版结果与历史 v0.4.0 证据分开记录。Python 3.10+ · 标准库运行时 · MIT License。
 
 [文档导航](docs/README.md) · [目录结构与职责](docs/目录结构.md) · [中文上手指南](docs/中文小说上手.md) · [超长篇实操](docs/超长篇实操.md) · [全仓审查与优化](docs/全仓审查与优化.md) · [安装与发布](docs/github-release.md) · [v0.5.0 版本说明](docs/releases/v0.5.0.md)
 
@@ -55,7 +55,7 @@ Codex 先读取 [安装指引](INSTALL.md)，再调用官方安装脚本，自�
 
 本机官方安装器默认放到 `$CODEX_HOME/skills`（未设置时为 `~/.codex/skills`）；其他环境请以其安装器和实际技能目录为准。官方脚本仍会拒绝覆盖同名目录，升级处理由 Codex 按指引编排，**没有给官方脚本增加 `--update` 参数，也不修改系统 skill**。完成后下一条消息即可点名使用；未显示时重启 Codex。[手动安装参数与升级细节](docs/github-release.md)
 
-v0.5.0 套件附件名为 `story-codex-0.5.0.zip`，附独立 SHA-256 校验文件；[Release 与附件](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0) 的实际下载按 [安装指引](INSTALL.md) 核验。本地打包已核验 7 个同级技能、31 个载荷文件；GitHub 自动生成的 Source code ZIP 是整个源码仓库。历史 [v0.4.0 Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0) 保留原附件。
+v0.5.0 套件附件名为 `story-codex-0.5.0.zip`，附独立 SHA-256 校验文件；[Release 与附件](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0) 的实际下载按 [安装指引](INSTALL.md) 核验。远端附件和官方固定标签隔离安装已核验 7 个技能、31 个文件，版本、帮助、初始化、状态四项 CLI 通过。[下载及安装回执](benchmarks/results/v0.5.0/release/remote-install.json)。GitHub 自动生成的 Source code ZIP 是整个源码仓库。历史 [v0.4.0 Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0) 保留原附件。
 
 6 个专用技能依赖同级的 `story-codex`：共同约束和 `scripts/story.py` 只维护一份。优先整套安装，避免只下载一份 `SKILL.md`。缺少核心时，在同一安装父目录补装同一版本的 `story-codex`；已有同名技能先保留旧版与本地修改，不能混用新专用技能和 v0.3.0 核心。
 
@@ -197,6 +197,6 @@ python -B -X utf8 scripts/package.py
 
 ## GitHub Packages 与许可
 
-当前仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)，v0.5.0 的 Packages 同步及回下载尚待发布后验证。历史 `@ningcui29/story-codex@0.4.0` 已公开发布并通过注册表回下载核对，见 [Packages](https://github.com/NingCui29/story-skill/pkgs/npm/story-codex) 与 [成功工作流](https://github.com/NingCui29/story-skill/actions/runs/34431905475)。历史 `@cuinings/story-codex v0.3.0` 的原始包身份和字节验证保留，当前注册表可访问性不作已验证承诺。Codex 技能安装优先使用上方固定 tag 或套件 ZIP；npm 没有自动注册 Codex 的安装钩子，GitHub npm 即使公开也需要认证下载。[同步说明](docs/github-release.md)
+当前仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)，公开包 `@ningcui29/story-codex@0.5.0` 已发布，注册表回下载与本地包一致，31 个技能文件和四项 CLI 检查通过。[本版回执](benchmarks/results/v0.5.0/release/package-check.json)。历史 `@ningcui29/story-codex@0.4.0` 已公开发布并通过注册表回下载核对，见 [Packages](https://github.com/NingCui29/story-skill/pkgs/npm/story-codex) 与 [成功工作流](https://github.com/NingCui29/story-skill/actions/runs/34431905475)。历史 `@cuinings/story-codex v0.3.0` 的原始包身份和字节验证保留，当前注册表可访问性不作已验证承诺。Codex 技能安装优先使用上方固定 tag 或套件 ZIP；npm 没有自动注册 Codex 的安装钩子，GitHub npm 即使公开也需要认证下载。[同步说明](docs/github-release.md)
 
 本项目分析 [oh-story-claudecode](https://github.com/zenstory-ai/oh-story-claudecode) 的公开流程后独立实现，未拷贝其小说 demo、参考教程或运行时代码。尚未通过同题盲评证明文笔优于原项目。[上游分析与设计取舍](docs/upstream-analysis.md) · [MIT License](LICENSE)

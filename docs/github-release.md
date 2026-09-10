@@ -1,6 +1,6 @@
 # 安装、升级与 GitHub 发布
 
-仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)。**v0.5.0 新增正文具名分卷、固定章节文件名及相关恢复保护，macOS／Linux 验证通过。Windows 正文与报告导出存在 WinError 32，会保留待恢复状态，Windows 用户暂缓升级、保留现有 v0.4.0。已用 v0.5.0 处理的书先完整备份，不盲目降级。** 保留 7 个技能入口和旧书兼容。macOS／Linux 安装固定标签 `v0.5.0`，Windows 安装固定标签 `v0.4.0`；历史标签和附件不移动、不替换。[本版变化](releases/v0.5.0.md) · [文档导航](README.md)
+仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)。**v0.5.0 已于 2026-09-10 14:37:55（北京时间）发布，新增正文具名分卷、固定章节文件名及相关恢复保护，macOS／Linux 验证通过。Windows 正文与报告导出存在 WinError 32，会保留待恢复状态，Windows 用户暂缓升级、保留现有 v0.4.0。已用 v0.5.0 处理的书先完整备份，不盲目降级。** 保留 7 个技能入口和旧书兼容。macOS／Linux 安装固定标签 `v0.5.0`，Windows 安装固定标签 `v0.4.0`；历史标签和附件不移动、不替换。[本版变化](releases/v0.5.0.md) · [文档导航](README.md)
 
 ## v0.5.0 发布验证记录
 
@@ -14,21 +14,23 @@
 | 开书初始化 | [单事务及本地测量](../benchmarks/results/v0.5.0/initialization.json)：88 条建表相关语句与初始元数据一次提交，保留持久化设置；测量仅含每阶段八次 macOS 样本 |
 | 旧版升级 | [v0.4.0→v0.5.0 回执](../benchmarks/results/v0.5.0/upgrade.json)：18 项检查通过，完整旧版保留、七入口更新、重复执行、书籍与其他技能不变 |
 | schema 1 迁移与回滚 | [合成迁移回执](../benchmarks/results/v0.5.0/migration.json)：固定 v0.2.0 生成长篇、短篇导入、拆文三类夹具；原三本历史书库缺失，未将合成结果称为实书重验 |
-| 本地 npm 包 | [构建回执](../benchmarks/results/v0.5.0/npm-package.json)：身份为 `@ningcui29/story-codex@0.5.0`，31 个技能文件与 ZIP 一致；尚未证明注册表发布与下载 |
+| 本地 npm 包 | [构建回执](../benchmarks/results/v0.5.0/npm-package.json)：身份为 `@ningcui29/story-codex@0.5.0`，31 个技能文件与 ZIP 一致；注册表发布与回下载另见下行 |
 | 指令 token | [本版测量](../benchmarks/results/v0.5.0/tokens.md) 已生成，普通／多线写作为 5,324／7,091 tokens；输入文件哈希核验通过 |
-| 固定标签提交 | 待核验 `v0.5.0` 的实际提交 |
+| 固定标签提交 | `v0.5.0` → `549e5c98b3f79e61d702cbdd8ddbbebf1619f41a`，[标签解析回执](../benchmarks/results/v0.5.0/release/tag.json)；固定标签不随后续文档提交移动 |
 | 发布提交的 Linux／Windows CI | [CI 回执](../benchmarks/results/v0.5.0/release/ci.json)：Linux 379 项中 367 通过、12 平台跳过，全部步骤成功；Windows 执行 8 项、7 通过、1 失败，导出 WinError 32。该 CI 与发布包的 31 个技能文件一致，未宣称最终标签全平台通过 |
-| GitHub Release 与附件 | 待发布 `story-codex-0.5.0.zip` 及 `.zip.sha256`，再核对实际下载内容 |
-| 公共固定标签安装 | 待在隔离目录下载整套并逐文件核对，再检查版本、帮助、初始化和状态 |
-| GitHub Packages | 待同步 `@ningcui29/story-codex@0.5.0`，并回下载核对包身份、摘要与载荷 |
+| GitHub Release 与附件 | [v0.5.0](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0) 于 2026-09-10 14:37:55（北京时间）发布，ZIP 与校验文件已回下载，字节及 31 个载荷文件与本地包、源码一致。[发布回执](../benchmarks/results/v0.5.0/release/release.json) |
+| 公共固定标签安装 | 官方安装器从固定 `v0.5.0` 下载 7 个技能、31 个文件，与 Release ZIP 及源码一致；版本、帮助、初始化、状态四项 CLI 全部通过，临时数据已清理。[安装回执](../benchmarks/results/v0.5.0/release/remote-install.json) |
+| GitHub Packages | [工作流 34446075094](https://github.com/NingCui29/story-skill/actions/runs/34446075094) 成功发布公开包 `@ningcui29/story-codex@0.5.0`；注册表回下载的 31 个技能文件、2 个包装文件均匹配，四项 CLI 检查通过。[发布及回下载](../benchmarks/results/v0.5.0/release/packages.json) · [本地独立复核](../benchmarks/results/v0.5.0/release/package-check.json) |
 
-本地检查、远端 CI、Release 附件、实际安装和注册表下载分别验收；只完成其中一项，不将其他项标为通过。[统一安装指引](../INSTALL.md) 中的提交将在标签核验后填入；已登记的本地 ZIP 摘要还需与远端下载核对。
+本地检查、远端 CI、Release 附件、实际安装和注册表下载分别验收；只完成其中一项，不将其他项标为通过。[统一安装指引](../INSTALL.md) 已登记真实标签提交及与远端下载一致的 ZIP 摘要。
 
 首轮候选提交 `56cb3d109734b8b261fee25ca389494d1d7bc8cb` 的 [CI 34442222281](https://github.com/NingCui29/story-skill/actions/runs/34442222281) 中，Linux 完成，Windows 达到 20 分钟时限，未输出完整单测汇总；进度中的 6 个失败标记来自 4 个测试方法，不能算作 6 项完整测试结果。[首轮未完成回执](../benchmarks/results/v0.5.0/release/ci-first-incomplete.json)。随后 [诊断 CI 34443655732](https://github.com/NingCui29/story-skill/actions/runs/34443655732) 在 Windows 首个失败处停止，确认大小写等价路径错误分类不符。[诊断失败回执](../benchmarks/results/v0.5.0/release/ci-diagnostic-failed.json)。这些候选均未据此创建正式发布。
 
 修复保留三项具体变化：Windows 路径比较不再用自动忽略大小写的相等结果跳过别名检查；目录句柄补齐遍历权限以建立重命名保护；ZIP 检查原始成员名，防止路径规范化掩盖异常输入。另将开书的表结构与元数据初始化合并为一次事务，新增回滚与第二连接可见性回归；八次本地测量见 [初始化证据](../benchmarks/results/v0.5.0/initialization.json)，不将其作为 Windows 耗时或整场 CI 加速的证明。本地复验已完成；Windows 的最终现存限制见下段。
 
 Windows 后续 [CI 34444622625](https://github.com/NingCui29/story-skill/actions/runs/34444622625) 确认目录句柄会使普通文件重命名返回 WinError 32，报告导出保留为待恢复状态。[导出失败回执](../benchmarks/results/v0.5.0/release/ci-windows-export-failed.json)。[原生 API 诊断](../benchmarks/results/v0.5.0/release/windows-api-probe.json) 只用于定位限制，没有作为本版的新实现或通过验收依据。v0.5.0 按当前 macOS／Linux 通过范围发布，停止本轮 Windows 修复与验证循环；Windows 安装指引继续固定 v0.4.0。
+
+v0.5.0 注册表回下载 tarball 的 SHA-256 为 `f63bbddf2d0264ddcd1aa0e813fa4231596f959a923e66ffe7f81d941086cfc7`，与本地构建包字节一致；31 个技能文件及 2 个包装文件匹配，四项运行时检查通过，临时书库已删除。[工作流回执](../benchmarks/results/v0.5.0/release/packages-workflow.json) · [回下载与独立核对](../benchmarks/results/v0.5.0/release/package-check.json)。包可见性为 public；GitHub npm 下载仍需认证，npm 本身不注册 Codex 技能。实际隔离安装验证文件与 CLI，不代表 Codex UI 自动发现或文学质量验证。
 
 ## 历史 v0.4.0 发布验证记录
 
@@ -158,7 +160,7 @@ python -B -X utf8 scripts/package.py
 
 ## GitHub Packages 同步
 
-[Packages](https://github.com/NingCui29/story-skill/pkgs/npm/story-codex) 使用 GitHub npm 注册表。本版目标为 `@ningcui29/story-codex@0.5.0`，同步与回下载尚待验证；历史 `@ningcui29/story-codex@0.4.0` 的发布和下载结果保留在本页历史记录。仓库归属已核对为 `NingCui29/story-skill`；旧 `Cuinings` API 地址重定向到同一仓库 ID。新版工作流、包作用域、repository 元数据与安装链接均使用当前归属。npm 包不使用安装钩子注册 Codex；下载后不能当成已安装技能。
+[Packages](https://github.com/NingCui29/story-skill/pkgs/npm/story-codex) 使用 GitHub npm 注册表。本版公开包 `@ningcui29/story-codex@0.5.0` 已成功发布并通过注册表回下载和本地独立复核；历史 `@ningcui29/story-codex@0.4.0` 的发布和下载结果保留在本页历史记录。仓库归属已核对为 `NingCui29/story-skill`；旧 `Cuinings` API 地址重定向到同一仓库 ID。新版工作流、包作用域、repository 元数据与安装链接均使用当前归属。npm 包不使用安装钩子注册 Codex；下载后不能当成已安装技能。
 
 [同步工作流](../.github/workflows/packages.yml) 在正式 Release 发布时运行，也可在 [Actions](https://github.com/NingCui29/story-skill/actions/workflows/packages.yml) 手动选择已发布的新版本 tag 补同步。工作流从该 Release 的 ZIP 和 checksum 构建，使用仓库 `GITHUB_TOKEN` 的 `contents: read`、`packages: write` 权限。其他仓库触发会被拒绝。
 
@@ -172,7 +174,7 @@ python -B -X utf8 scripts/package.py
 python -B -X utf8 scripts/sync_packages.py --tag v0.3.0 --prepare-only
 ```
 
-本版同步及回下载核验完成后，按 GitHub npm 要求认证，可下载 0.5.0 内容包：
+本版已完成同步和回下载核验。按 GitHub npm 要求认证后，可下载 0.5.0 内容包：
 
 ```powershell
 npm pack @ningcui29/story-codex@0.5.0 --registry=https://npm.pkg.github.com

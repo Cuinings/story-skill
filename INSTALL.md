@@ -20,12 +20,12 @@ macOS／Linux 按下表安装或升级到 v0.5.0；先核验固定标签解析�
 |---|---|
 | 仓库 | `NingCui29/story-skill` |
 | macOS／Linux 目标标签 | `v0.5.0` |
-| 发布状态 | [v0.5.0 Release](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0)，远端发布及下载回执待登记 |
-| 标签提交 | 待发布后核验并填写 |
+| 发布状态 | [v0.5.0 已发布](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0)，2026-09-10 14:37:55（北京时间）；下载与安装已核验 |
+| 标签提交 | `549e5c98b3f79e61d702cbdd8ddbbebf1619f41a`；[标签回执](benchmarks/results/v0.5.0/release/tag.json) |
 | Python | 3.10 或更高 |
 | 目标载荷 | 7 个同级技能目录，共 31 个文件；本地打包已核验 |
 | Release ZIP | [story-codex-0.5.0.zip](https://github.com/NingCui29/story-skill/releases/download/v0.5.0/story-codex-0.5.0.zip) · [校验文件](https://github.com/NingCui29/story-skill/releases/download/v0.5.0/story-codex-0.5.0.zip.sha256) |
-| 本地构建 ZIP 的 SHA-256 | `d65504d907110ad59fa465566f7374991a216c03cdd42edc81b19ddcc87810a8`；待与远端下载核对 |
+| 已回下载核验的 ZIP SHA-256 | `d65504d907110ad59fa465566f7374991a216c03cdd42edc81b19ddcc87810a8`；[下载及安装回执](benchmarks/results/v0.5.0/release/remote-install.json) |
 | Windows 固定标签／提交 | `v0.4.0`／`c1b3c3377573610a191e165ceb6866ae35afe5a8` |
 | Windows 套件／校验文件 | [story-codex-0.4.0.zip](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip) · [校验文件](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip.sha256) |
 | Windows 套件 SHA-256 | `087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a76ae20aff7d54b`；7 个技能、31 个文件 |
