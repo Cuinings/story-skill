@@ -21,15 +21,21 @@ Release ZIP 的 SHA-256 为 `087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a7
 
 首轮远端 Windows 检查曾因 5 个测试夹具没有规范化 TEMP 的 8.3 短路径而失败；Linux 当轮已通过。随后仅修正测试路径，将修改提交为上述发布提交，再重新运行两端 CI；没有修改技能载荷或生产脚本。[首轮失败回执](../benchmarks/results/v0.4.0/release/ci-first-failed.json) 保留，发布前的本地审查与文学评阅也不回写成远端结果。
 
-## Codex 一行安装 0.4.0
+## Codex 一行安装或升级
 
-首次安装，在 Codex 对话框发送下面这一行；固定版本可避免跟随 main 的后续开发改动：
+首次安装、补齐技能和旧版升级都使用同一行：
 
 ```text
-$skill-installer 从 NingCui29/story-skill 的 v0.4.0 标签安装以下全部路径：skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover
+$skill-installer 按 https://github.com/NingCui29/story-skill/blob/main/INSTALL.md 安装或升级 Story Codex
 ```
 
-本机官方安装器支持一次 `--path` 接收多个路径。上面的请求对应以下参数；`<skill-installer目录>` 由 Codex 定位到本机实际路径：
+Codex 先读取仓库 [INSTALL.md](../INSTALL.md)，按照其中的固定版本与 7 个路径调用官方安装脚本，并处理已有目录、完整备份、文件核对和失败恢复。main 上维护的是安装指引，当前载荷固定到已发布的 `v0.4.0`；该 Markdown 文件不是可直接传给官方脚本的技能目录。
+
+官方脚本没有 `--update`，遇到同名目录仍拒绝覆盖。统一入口通过 Codex 编排安装与升级步骤，不修改用户的系统 skill；本仓库项目安装器的 `--update` 是另一项已有能力，适用条件见下文。
+
+## 手动复查：固定版本与安装器参数
+
+本机官方安装器支持一次 `--path` 接收多个路径。需要手动安装到没有同名技能的目录时，完整参数如下；`<skill-installer目录>` 由 Codex 定位到本机实际路径：
 
 ```powershell
 python "<skill-installer目录>/scripts/install-skill-from-github.py" --repo NingCui29/story-skill --ref v0.4.0 --path skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover
@@ -63,15 +69,9 @@ python -B -X utf8 scripts/install.py --project "D:\小说\我的写作项目"
 
 若在开发仓库本身试用，运行 `python -B -X utf8 scripts/install.py --project "."`。根 `.agents/skills/` 是安装副本，受 Git 忽略；它不会替代 `skills/` 源码，也不会随源码编辑自动更新。克隆新版仓库后仍需安装，再在 Codex 的下一条消息调用技能；未显示时重启 Codex。
 
-## 从 0.3.0 升级到 0.4.0
+## 手动复查：从 0.3.0 升级到 0.4.0
 
-在 Codex 对话框发送这一行：
-
-```text
-把已安装的 Story Codex 0.3.0 升级到 NingCui29/story-skill 的固定标签 v0.4.0：先定位原安装位置与安装方式；未修改的项目托管安装使用该版本 scripts/install.py --project 原项目路径 --update，其余安装先将旧技能目录连同本地修改移到技能扫描目录之外保留为完整备份，再从该标签安装 skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover 到原安装父目录；核对7个技能的版本与文件，保留备份并报告本地修改差异，不修改小说正文或书库。
-```
-
-所有安装均为文件副本，main 有新提交不会自动更新本机。先确认实际安装父目录和版本，再选择相同的安装方式；书目录无需搬动，技能安装也不会自动迁移书库。
+日常升级直接使用上面的统一入口；以下说明供复查具体处理方式。所有安装均为文件副本，main 有新提交不会自动更新本机。先确认实际安装父目录和版本，再选择相同的安装方式；书目录无需搬动，技能安装也不会自动迁移书库。
 
 | 当前安装方式 | 更新处理 |
 |---|---|

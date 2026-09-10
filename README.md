@@ -39,31 +39,23 @@ D:/小说/我的写作项目/
 
 技能内部的 `scripts/` 是小说运行工具；仓库根部的 `scripts/` 是开发与分发工具。源码迁到 `skills/` 后，克隆仓库本身不等于已安装技能；需要运行安装器。完整职责和放置规则见 [目录说明](docs/目录结构.md)。
 
-## 安装
+## 安装与升级
 
-### Codex 一行安装 0.4.0
-
-首次安装，在 Codex 对话框发送这一行，使用固定版本安装完整套件：
+首次安装、补齐技能或从 0.3.0 升级，都在 Codex 对话框发送同一行：
 
 ```text
-$skill-installer 从 NingCui29/story-skill 的 v0.4.0 标签安装以下全部路径：skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover
+$skill-installer 按 https://github.com/NingCui29/story-skill/blob/main/INSTALL.md 安装或升级 Story Codex
 ```
 
-本机官方安装器支持一次安装多个路径，默认放到 `$CODEX_HOME/skills`（未设置时为 `~/.codex/skills`）；其他环境请以其安装器和实际技能目录为准。安装完成后，在下一条消息点名使用；未显示时重启 Codex。**官方安装器遇到已有同名目录会拒绝覆盖，已有 0.3.0 请使用下方升级流程。**
+Codex 先读取 [安装指引](INSTALL.md)，再调用官方安装脚本，自动展开完整 7 个技能路径、核对已有安装并保留升级备份与本地修改。指引位于 main，当前技能载荷仍固定为已发布的 `v0.4.0`，无需用户列出 7 个路径。
+
+本机官方安装器默认放到 `$CODEX_HOME/skills`（未设置时为 `~/.codex/skills`）；其他环境请以其安装器和实际技能目录为准。官方脚本仍会拒绝覆盖同名目录，升级处理由 Codex 按指引编排，**没有给官方脚本增加 `--update` 参数，也不修改系统 skill**。完成后下一条消息即可点名使用；未显示时重启 Codex。[手动安装参数与升级细节](docs/github-release.md)
 
 [下载 0.4.0 技能 ZIP](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip) · [SHA-256 校验文件](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip.sha256)。套件附件包含 7 个同级技能、31 个文件；GitHub 自动生成的 Source code ZIP 是整个源码仓库。
 
 6 个专用技能依赖同级的 `story-codex`：共同约束和 `scripts/story.py` 只维护一份。优先整套安装，避免只下载一份 `SKILL.md`。缺少核心时，在同一安装父目录补装同一版本的 `story-codex`；已有同名技能先保留旧版与本地修改，不能混用新专用技能和 v0.3.0 核心。
 
-### 已安装 0.3.0：一行升级请求
-
-在 Codex 对话框发送：
-
-```text
-把已安装的 Story Codex 0.3.0 升级到 NingCui29/story-skill 的固定标签 v0.4.0：先定位原安装位置与安装方式；未修改的项目托管安装使用该版本 scripts/install.py --project 原项目路径 --update，其余安装先将旧技能目录连同本地修改移到技能扫描目录之外保留为完整备份，再从该标签安装 skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover 到原安装父目录；核对7个技能的版本与文件，保留备份并报告本地修改差异，不修改小说正文或书库。
-```
-
-`--update` 只适用于本项目安装器管理、且与托管清单一致的安装；检测到本地修改会停止覆盖。官方安装器或手动安装不能直接套用这个参数。0.3.0 书库无需因技能拆分重新导入。[完整升级与恢复说明](docs/github-release.md)
+0.3.0 书库无需因技能拆分重新导入，升级只处理技能。旧版与本地修改保存在技能扫描目录之外；保留修改不等于已经将其合并到新版。[完整升级与恢复说明](docs/github-release.md)
 
 ### 安装到指定写作项目
 
