@@ -180,6 +180,9 @@ class RetirementPathRaceTests(unittest.TestCase):
                 os.replace(parent, parent.with_name("moved-parent"))
             (parent / "child.txt").write_bytes(b"ordinary child write")
         self.assertEqual((parent / "child.txt").read_bytes(), b"ordinary child write")
+        moved = parent.with_name("moved-parent")
+        os.replace(parent, moved)
+        self.assertEqual((moved / "child.txt").read_bytes(), b"ordinary child write")
 
 
 if __name__ == "__main__":

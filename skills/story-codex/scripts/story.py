@@ -161,7 +161,10 @@ def _windows_path_handle(path, directory=False):
     name = str(path)
     if not name.startswith("\\\\?\\"):
         name = "\\\\?\\UNC\\" + name[2:] if name.startswith("\\\\") else "\\\\?\\" + name
-    handle = kernel.CreateFileW(name, 0x80 if directory else 0x80000000,
+    # Metadata-only opens do not participate in share-access checks. Request
+    # FILE_TRAVERSE as well as FILE_READ_ATTRIBUTES so withholding share-delete
+    # actually pins each directory; no listing, write or delete access is needed.
+    handle = kernel.CreateFileW(name, 0xA0 if directory else 0x80000000,
                                 0x1 if directory else 0x7, None, 3,
                                 0x00200000 | (0x02000000 if directory else 0), None)
     if handle == ctypes.c_void_p(-1).value:
@@ -703,10 +706,12 @@ class Book:
             fail("book_exists", "State already exists; use status, never reinitialize", book=str(root))
         db = sqlite3.connect(path)
         try:
-            db.executescript(SCHEMA + storage.SCHEMA + search.SCHEMA + world.SCHEMA + history.SCHEMA)
-            values = {"schema": SCHEMA_VERSION, "revision": 0, "last_chapter": 0,
-                      "imported_through": 0, "title": title, "kind": kind, "id": str(uuid.uuid4())}
             with db:
+                # Keep all schema and identity writes in one durable transaction.
+                db.execute("BEGIN IMMEDIATE")
+                storage.execute_schema(db, SCHEMA + storage.SCHEMA + search.SCHEMA + world.SCHEMA + history.SCHEMA)
+                values = {"schema": SCHEMA_VERSION, "revision": 0, "last_chapter": 0,
+                          "imported_through": 0, "title": title, "kind": kind, "id": str(uuid.uuid4())}
                 db.executemany("INSERT INTO meta VALUES (?,?)", [(k, dumps(v)) for k, v in values.items()])
         finally:
             db.close()
@@ -888,7 +893,8 @@ class Book:
             for old_part, new_part in zip(Path(previous).parts, Path(relative).parts):
                 source, target = source / old_part, target / new_part
                 old_path, new_path = safe_path(self.root, source), safe_path(self.root, target)
-                if source != target and old_path.exists() and new_path.exists() and old_path.samefile(new_path):
+                # WindowsPath equality folds case; compare the stored spelling first.
+                if source.parts != target.parts and old_path.exists() and new_path.exists() and old_path.samefile(new_path):
                     fail("export_path_alias", "These names refer to the same file or directory; rename through a distinct intermediate name",
                          previous=previous, requested=relative)
         reused_row = self.db.execute("SELECT value FROM meta WHERE key=?", ("chapter_retired:" + relative,)).fetchone()

@@ -84,11 +84,34 @@ class ReleaseProbeTests(unittest.TestCase):
                     with warnings.catch_warnings():
                         warnings.filterwarnings("ignore", message="Duplicate name:", category=UserWarning)
                         for name in members:
-                            bundle.writestr(name, "bad")
+                            # Preserve the raw member spelling on Windows too;
+                            # ZipInfo(name) otherwise rewrites backslashes.
+                            member = zipfile.ZipInfo()
+                            member.filename = member.orig_filename = name
+                            bundle.writestr(member, "bad")
                 with self.assertRaises(ValueError):
                     upgrade.unpack_old_archive(archive, root / "unpacked")
                 self.assertFalse((root / "unpacked").exists())
                 self.assertFalse((root / "escaped").exists())
+
+    def test_reader_normalized_archive_path_is_rejected_before_extraction(self):
+        with tempfile.TemporaryDirectory(prefix="story-upgrade-normalized-") as directory:
+            root = Path(directory).resolve()
+            archive = root / "normalized.zip"
+            with zipfile.ZipFile(archive, "w") as bundle:
+                bundle.writestr("story-codex/SKILL.md", "# Core")
+                bundle.writestr("story-codex/scripts/story.py", 'VERSION = "0.3.0"\n')
+                member = zipfile.ZipInfo()
+                member.filename = member.orig_filename = "story-codex\\extra.txt"
+                bundle.writestr(member, "extra")
+            # Reproduce Windows ZipInfo normalization on every test platform.
+            with patch.object(zipfile.os, "sep", "\\"):
+                with zipfile.ZipFile(archive) as bundle:
+                    member = bundle.infolist()[-1]
+                    self.assertNotEqual(member.orig_filename, member.filename)
+                with self.assertRaisesRegex(ValueError, "Non-portable archive path"):
+                    upgrade.unpack_old_archive(archive, root / "unpacked")
+            self.assertFalse((root / "unpacked").exists())
 
     def test_archive_link_or_partial_suite_is_rejected(self):
         for special in (True, False):

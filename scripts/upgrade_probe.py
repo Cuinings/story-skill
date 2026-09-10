@@ -58,7 +58,9 @@ def unpack_old_archive(archive_path, skill_parent):
             raise ValueError("Old archive failed its CRC check")
         seen = set()
         for entry in archive.infolist():
-            if "\\" in entry.filename:
+            # ZipInfo may normalize Windows separators or truncate NULs while
+            # reading. Validate the original spelling before using its path.
+            if entry.orig_filename != entry.filename or "\\" in entry.orig_filename:
                 raise ValueError(f"Non-portable archive path: {entry.filename}")
             parts = entry.filename.split("/")
             if entry.is_dir():
