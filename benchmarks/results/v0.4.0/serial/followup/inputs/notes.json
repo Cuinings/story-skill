@@ -1,0 +1,46 @@
+[
+  {
+    "id": "jiang",
+    "kind": "character",
+    "text": "江离，新任巡河吏，在渡口长大。认识方叙，愿夜渡安全。只掌握调查中得到的证据。",
+    "source": "brief.txt 已定前提",
+    "critical": true,
+    "status": "active",
+    "tags": [
+      "江离"
+    ]
+  },
+  {
+    "id": "fang",
+    "kind": "character",
+    "text": "方叙，渡头行首，江离旧友，希望夜渡安全，也要保住渡工生计。具体知情范围须在正文逐步交代。",
+    "source": "brief.txt 已定前提",
+    "critical": true,
+    "status": "active",
+    "tags": [
+      "方叙"
+    ]
+  },
+  {
+    "id": "echo",
+    "kind": "world",
+    "text": "回声匣只能重放最后一次封口后十二息内的环境声音，不重现画面、不读心、不判断真假；拆开破坏该记录。外侧拨舌可重放，不必开匣。",
+    "source": "brief.txt 器物硬约束；外侧拨舌为无扩展功能的操作界面",
+    "critical": true,
+    "status": "active",
+    "tags": [
+      "回声匣"
+    ]
+  },
+  {
+    "id": "case",
+    "kind": "fact",
+    "text": "雨夜渡船按名单应载七人却空返，匣留“人齐了，开船”。全面停渡会切断南岸日常运送。三章内须解开本次主要谜面。",
+    "source": "brief.txt 已定前提和结尾要求",
+    "critical": true,
+    "status": "active",
+    "tags": [
+      "渡船案"
+    ]
+  }
+]

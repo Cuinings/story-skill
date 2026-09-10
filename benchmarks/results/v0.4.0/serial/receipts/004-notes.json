@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\before\\skills\\story-codex\\scripts\\story.py",
+    "notes",
+    "--input",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer\\.story\\inputs\\notes.json",
+    "--expect",
+    "0",
+    "--book",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer"
+  ],
+  "exit_status": 0,
+  "stdout": "{\"revision\":1,\"updated\":4}\n",
+  "stderr": ""
+}

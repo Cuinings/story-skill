@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\before\\skills\\story-codex\\scripts\\story.py",
+    "prepare",
+    "--chapter",
+    "1",
+    "--draft",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer\\.story\\drafts\\0001.md",
+    "--book",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer"
+  ],
+  "exit_status": 0,
+  "stdout": "{\"budget\":{\"limit\":16000,\"unit\":\"utf8_bytes\",\"used\":1252},\"delta\":{\"base_revision\":4,\"book_id\":\"9c2665f9-b0d3-4792-98ef-c78c30ac1fcc\",\"changes\":[],\"review\":{\"checks\":{\"causality\":{\"note\":\"<填写审查观察>\",\"quote\":\"<填写正文原句>\"},\"constraints\":{\"note\":\"<填写审查观察>\",\"quote\":\"<填写正文原句>\"},\"continuity\":{\"note\":\"<填写审查观察>\",\"quote\":\"<填写正文原句>\"},\"style\":{\"note\":\"<填写审查观察>\",\"quote\":\"<填写正文原句>\"}},\"draft_sha256\":\"8000abd81ef263821b19e2952120910615cc1bb6c7627839bf9876598ca806f9\",\"issues\":[{\"issue\":\"尚未完成语义审查；填写观察与引文并处理实际问题后移除此占位项。\",\"severity\":\"blocker\"}]},\"summary\":\"<填写本章实际结果与下一章衔接>\"},\"lint\":{\"count_method\":\"visible_nonspace_v1\",\"count_scope\":\"body_and_lead_without_first_h1\",\"counts\":{\"han_v1\":1996,\"letters_numbers_v1\":1996,\"visible_nonspace_v1\":2348},\"draft_sha256\":\"8000abd81ef263821b19e2952120910615cc1bb6c7627839bf9876598ca806f9\",\"errors\":[],\"length_count\":2348,\"ok\":true,\"unicode_version\":\"16.0.0\",\"visible_chars\":2348,\"warnings\":[]},\"mode\":\"next\",\"next\":\"Complete the summary, evidence-based review and state changes; do not change identity or hash fields.\",\"ready_to_commit\":false}\n",
+  "stderr": ""
+}

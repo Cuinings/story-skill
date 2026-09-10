@@ -1,0 +1,45 @@
+{
+  "candidate": "a",
+  "briefs_read": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-craft-eval-qw5ghqhl\\briefs.json",
+  "skills_and_references_read": [
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-craft-eval-qw5ghqhl\\baseline\\skills\\story-codex-write\\SKILL.md",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-craft-eval-qw5ghqhl\\baseline\\skills\\story-codex\\SKILL.md",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-craft-eval-qw5ghqhl\\baseline\\skills\\story-codex-write\\references\\chapter.md"
+  ],
+  "artifacts": {
+    "workshop": {
+      "path": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-craft-eval-qw5ghqhl\\candidate-a\\workshop.md",
+      "visible_nonspace_characters_excluding_first_line_title": 921,
+      "utf8_bytes": 2810,
+      "sha256": "63a110521ebb85f99e635c4243768eac0850d4556a3f1f713b2002b2fa08f4cd"
+    },
+    "quiet": {
+      "path": "C:\\Users\\Work\\AppData\\Local\\Temp\\story-craft-eval-qw5ghqhl\\candidate-a\\quiet.md",
+      "visible_nonspace_characters_excluding_first_line_title": 936,
+      "utf8_bytes": 2861,
+      "sha256": "650407990d5fb253d934c58177c90e975e14cacd8903791f73b41f4caa543a05"
+    }
+  },
+  "count_method": "Python standard library: exclude the first title line, whitespace, Unicode Cc and Cf characters; include punctuation. Counted exact text passed to write_bytes, not platform back-office word counts.",
+  "scope": "Two independent scenes only. No project initialization, database, status/context/commit/export commands, real novel files, repository source, or other candidate directories were read.",
+  "workflow_adaptation": "The explicit standalone-scene authorization takes precedence over managed-book database steps. Followed writing and semantic review requirements in chapter.md; used Python standard library for deterministic length checks.",
+  "self_review": {
+    "workshop": {
+      "causality": "验出四把松动，明早无法可靠交齐；陈渠同意延收余款、承担替代搬运，并暂缓接桌子订单。资金代价与缩规模意见在同场发生。",
+      "continuity": "全篇保持当晚验货场景；问题椅保留砂纸标记后搬入里间。父亲围裙中的铅笔没有跳换位置。",
+      "user_constraints": "陈渠接手父亲作坊、三十把、明早交货、今晚验货、姐姐管账与规模意见均落实；无事故、羞辱、贵人或神秘来客结尾。",
+      "style_evidence": "“别收，明早搬错了。” 姐姐的谨慎落在实务动作；客户需要开业座位，保留协商理由。"
+    },
+    "quiet": {
+      "causality": "女儿要留鞋楦，母亲顾虑累赘；一起整理剪刀和零料后，母亲为楦底剪毛毡，实际允许女儿留下。",
+      "continuity": "全篇留在鞋铺收拾过程。自审修正鞋楦位置跳变，明确剪刀交接。",
+      "user_constraints": "保留温和母女关系；没有争吵与新来客；对搬家和继续照顾家人的担心通过工具与裤脚对话含蓄呈现。",
+      "style_evidence": "“底下毛糙，别刮坏桌子。” 母亲以使用上的照料表达让步，不补解释性升华。"
+    }
+  },
+  "limitations": [
+    "Semantic review was performed by the writing agent itself, not an independent blind review.",
+    "No managed-book state, continuity database, or external factual research was used or claimed.",
+    "Counts and hashes establish mechanical properties only; they do not prove literary quality or originality."
+  ]
+}

@@ -19,6 +19,9 @@ build/
 *.egg-info/
 .story-codex-package-*.zip
 
+# Project-local installed skill copies; canonical sources live in /skills/.
+/.agents/skills/
+
 # Local story state and recovery artifacts
 # Keep drafts, chapter exports, analysis reports and benchmark results versioned.
 *.sqlite3*

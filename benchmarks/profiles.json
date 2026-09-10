@@ -15,10 +15,13 @@
         "skills/story-long-write/references/long-chapter-hooks.md"
       ],
       "candidate": [
-        ".agents/skills/story-codex/SKILL.md",
-        ".agents/skills/story-codex/references/write.md"
+        "skills/story-codex/SKILL.md",
+        "skills/story-codex-write/SKILL.md",
+        "skills/story-codex/references/project-state.md",
+        "skills/story-codex-write/references/chapter.md",
+        "skills/story-codex-write/references/drama.md"
       ],
-      "scope": "Cold instruction load only. Upstream excludes other conditional references, project files and agents. Candidate includes entry plus full writing workflow; command templates and tool results are excluded on both sides."
+      "scope": "Cold instruction load only. Candidate includes the full shared entry, specialized writing entry, project-state guide and chapter workflow. Upstream excludes other conditional references, project files and agents; command templates and tool results are excluded on both sides. Candidate also includes the required Chinese conflict, reader-payoff and scene-craft guide, counted in full."
     },
     {
       "id": "long_multi_line",
@@ -32,11 +35,14 @@
         "skills/story-long-write/references/long-chapter-hooks.md"
       ],
       "candidate": [
-        ".agents/skills/story-codex/SKILL.md",
-        ".agents/skills/story-codex/references/write.md",
-        ".agents/skills/story-codex/references/long-form.md"
+        "skills/story-codex/SKILL.md",
+        "skills/story-codex-write/SKILL.md",
+        "skills/story-codex/references/project-state.md",
+        "skills/story-codex-write/references/chapter.md",
+        "skills/story-codex-write/references/drama.md",
+        "skills/story-codex-write/references/long-form.md"
       ],
-      "scope": "Cold instruction load only. Includes entry, writing workflow and the complete conditional long-form guide for the candidate. Upstream uses the same verified required-file lower bound; domain templates, tool output and manuscript context are excluded on both sides."
+      "scope": "Cold instruction load only. Candidate includes shared entry, specialized writing entry, shared planning state, chapter workflow and conditional world-state guide. Planning/import and historical-revision workflows are separate tasks. Upstream retains its verified required-file lower bound. Domain templates, tool output and manuscript context are excluded on both sides. Candidate also includes the required Chinese conflict, reader-payoff and scene-craft guide, counted in full."
     },
     {
       "id": "short_write_conservative",
@@ -45,10 +51,13 @@
         "skills/story-short-write/SKILL.md"
       ],
       "candidate": [
-        ".agents/skills/story-codex/SKILL.md",
-        ".agents/skills/story-codex/references/write.md"
+        "skills/story-codex/SKILL.md",
+        "skills/story-codex-write/SKILL.md",
+        "skills/story-codex/references/project-state.md",
+        "skills/story-codex-write/references/chapter.md",
+        "skills/story-codex-write/references/drama.md"
       ],
-      "scope": "Conservative lower bound for upstream: its required short-fiction references are deliberately excluded."
+      "scope": "Conservative lower bound for upstream: its required short-fiction references are deliberately excluded. Candidate also includes the required Chinese conflict, reader-payoff and scene-craft guide, counted in full."
     },
     {
       "id": "long_analysis_conservative",
@@ -57,8 +66,8 @@
         "skills/story-long-analyze/SKILL.md"
       ],
       "candidate": [
-        ".agents/skills/story-codex/SKILL.md",
-        ".agents/skills/story-codex/references/analyze.md"
+        "skills/story-codex/SKILL.md",
+        "skills/story-codex-analyze/SKILL.md"
       ],
       "scope": "Upstream analysis references and all source text are excluded. No reduction in required source coverage is assumed."
     },
@@ -69,10 +78,24 @@
         "skills/story-review/SKILL.md"
       ],
       "candidate": [
-        ".agents/skills/story-codex/SKILL.md",
-        ".agents/skills/story-codex/references/revise.md"
+        "skills/story-codex/SKILL.md",
+        "skills/story-codex-review/SKILL.md"
       ],
-      "scope": "Review instructions only. Reviewer-agent context, manuscripts and any extra write.md load for committing a revision are excluded."
+      "scope": "Review instructions only, including shared entry and specialized review entry. Reviewer-agent context, manuscripts, conditional historical-revision instructions and tool output are excluded. Conditional drama.md used for conflict/payoff critique is excluded here and measured separately."
+    },
+    {
+      "id": "review_conflict",
+      "label": "冲突与看点审查：含中文场景参考",
+      "upstream": [
+        "skills/story-review/SKILL.md"
+      ],
+      "candidate": [
+        "skills/story-codex/SKILL.md",
+        "skills/story-codex-review/SKILL.md",
+        "skills/story-codex-write/references/drama.md"
+      ],
+      "scope": "Conservative upstream entry-only comparison. Candidate includes shared entry, review entry and conditional Chinese conflict/payoff reference. Manuscripts, tools and historical revision references are excluded."
     }
-  ]
+  ],
+  "report_path": "benchmarks/results/v0.4.0/tokens.json"
 }

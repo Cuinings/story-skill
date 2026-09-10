@@ -21,7 +21,8 @@ from urllib.parse import unquote, urlsplit
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / ".agents/skills/story-codex"
+SKILL = ROOT / "skills/story-codex"
+SKILLS = ROOT / "skills"
 PYTHON = [sys.executable, "-B", "-X", "utf8"]
 
 
@@ -98,14 +99,21 @@ def package_module():
 
 def skill_files():
     files = {}
-    for path in sorted(SKILL.rglob("*")):
-        relative = path.relative_to(SKILL)
+    names = package_module().SKILL_NAMES
+    actual_names = {path.name for path in SKILLS.iterdir() if path.is_dir()}
+    if actual_names != set(names):
+        raise ValueError("Skill suite directories differ from the supported skill list")
+    for path in sorted(SKILLS.rglob("*")):
+        relative = path.relative_to(SKILLS)
         if path.is_symlink() or getattr(path, "is_junction", lambda: False)():
             raise ValueError(f"Linked skill content: {relative}")
         if path.is_file() and "__pycache__" not in relative.parts and path.suffix != ".pyc":
             files[relative.as_posix()] = digest(path)
-    if "SKILL.md" not in files or "scripts/story.py" not in files:
-        raise ValueError("Skill is incomplete")
+    for name in names:
+        if not {f"{name}/SKILL.md", f"{name}/agents/openai.yaml", f"{name}/LICENSE"} <= files.keys():
+            raise ValueError(f"Skill is incomplete: {name}")
+    if "story-codex/scripts/story.py" not in files:
+        raise ValueError("Shared runtime is missing")
     return files
 
 
@@ -113,8 +121,7 @@ def check_archive(path):
     package = package_module()
     version = package.current_version(SKILL / "scripts/story.py")
     package.validate_archive_name(path, version)
-    expected = {f"story-codex/{name}": sha for name, sha in skill_files().items()}
-    expected.setdefault("story-codex/LICENSE", digest(ROOT / "LICENSE"))
+    expected = skill_files()
     with zipfile.ZipFile(path) as archive:
         names = archive.namelist()
         actual = {name: hashlib.sha256(archive.read(name)).hexdigest() for name in names}
@@ -130,9 +137,9 @@ def check_archive(path):
 
 
 def check_benchmark():
-    path = ROOT / "benchmarks/results/tokens.json"
-    report = json.loads(path.read_text(encoding="utf-8"))
     config = json.loads((ROOT / "benchmarks/profiles.json").read_text(encoding="utf-8"))
+    path = ROOT / config.get("report_path", "benchmarks/results/tokens.json")
+    report = json.loads(path.read_text(encoding="utf-8"))
     profiles = {item["id"]: item for item in report["profiles"]}
     problems, files = [], []
     if type(report.get("schema")) is not int or report["schema"] != 1:
@@ -198,7 +205,7 @@ def check_benchmark():
 
 def check_markdown_links():
     files = set(ROOT.glob("*.md"))
-    for directory in (ROOT / "docs", ROOT / "benchmarks", SKILL):
+    for directory in (ROOT / "docs", ROOT / "benchmarks", SKILLS):
         files.update(directory.rglob("*.md"))
     checked, missing = [], []
     link = re.compile(r"!?\[[^\]\n]*\]\(\s*(?:<([^>]+)>|([^\s)]+))(?:\s+[\"'][^\n]*[\"'])?\s*\)")
@@ -255,17 +262,24 @@ def check_install(temp, timeout):
     if installed["exit_code"] != 0:
         return installed
     receipt = json.loads(installed["stdout"])
-    target = project / ".agents/skills/story-codex"
+    parent = project / ".agents/skills"
+    target = parent / "story-codex"
     expected = skill_files()
-    marker = json.loads((target / ".story-codex-install.json").read_text(encoding="utf-8"))
-    actual = {path.relative_to(target).as_posix(): digest(path) for path in target.rglob("*")
-              if path.is_file() and path.name != ".story-codex-install.json"}
-    matching = expected == actual == marker["files"]
+    actual, managed = {}, {}
+    for name in package_module().SKILL_NAMES:
+        directory = parent / name
+        marker = json.loads((directory / ".story-codex-install.json").read_text(encoding="utf-8"))
+        managed.update({f"{name}/{key}": value for key, value in marker["files"].items()})
+        actual.update({f"{name}/{path.relative_to(directory).as_posix()}": digest(path)
+                       for path in directory.rglob("*") if path.is_file()
+                       and path.name != ".story-codex-install.json"})
+    matching = expected == actual == managed
     help_result = run(PYTHON + [str(target / "scripts/story.py"), "--help"], timeout)
     smoke_result = check_smoke(temp / "installed-smoke.json", timeout, target / "scripts/story.py")
     passed = matching and receipt.get("status") == "installed" and all(
         result["status"] == "passed" for result in (installed, help_result, smoke_result))
     return {"status": "passed" if passed else "failed", "files": len(actual),
+            "skills": len(package_module().SKILL_NAMES),
             "installed_files_match": matching, "installation": installed, "receipt": receipt,
             "cli_help": help_result, "cli_smoke": smoke_result}
 
@@ -336,9 +350,14 @@ def verify(archive=None, validator=None, validator_python=None, timeout=300):
         check("chinese_manuscript_replay", lambda: check_chinese(temp / "chinese.json", timeout))
         check("long_form_cli_replay", lambda: check_long_form(temp / "long-form.json", timeout))
         if validator:
-            check("skill_frontmatter", lambda: run(
-                [str(validator_python or sys.executable), "-B", "-X", "utf8",
-                 str(Path(validator).expanduser().resolve()), str(SKILL)], timeout))
+            def validate_skills():
+                results = {name: run(
+                    [str(validator_python or sys.executable), "-B", "-X", "utf8",
+                     str(Path(validator).expanduser().resolve()), str(SKILLS / name)], timeout)
+                    for name in package_module().SKILL_NAMES}
+                return {"status": "passed" if all(item["status"] == "passed" for item in results.values())
+                        else "failed", "skills": results}
+            check("skill_frontmatter", validate_skills)
         else:
             report["skill_frontmatter"] = {"status": "skipped", "reason": "No --skill-validator supplied"}
         check("actual_package_install", lambda: check_install(temp, timeout))
@@ -368,8 +387,8 @@ def check_long_form(output, timeout):
 def check_recorded_probes():
     current = {p.name: digest(p) for p in (SKILL / "scripts").glob("*.py")}
     results = []
-    for filename, key in (("scaling-v0.3.json", "runtime_files"), ("migration-v0.3.json", "runtime")):
-        path = ROOT / "benchmarks/results" / filename
+    for filename, key in (("scaling.json", "runtime_files"), ("migration.json", "runtime")):
+        path = ROOT / "benchmarks/results/v0.4.0" / filename
         evidence = json.loads(path.read_text(encoding="utf-8"))
         valid = evidence.get("ok") is True and evidence.get(key) == current
         if filename.startswith("scaling"):
@@ -388,7 +407,7 @@ def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", default=str(ROOT / "benchmarks/results/verification.json"),
+    parser.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.4.0/verification.json"),
                         help="Report path; a failed rerun uses a .failed sibling if this file exists")
     parser.add_argument("--archive", help="Archive to compare; defaults to the canonical runtime VERSION")
     parser.add_argument("--skill-validator", help="Optional bundled quick_validate.py path")

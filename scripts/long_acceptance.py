@@ -15,8 +15,8 @@ import time
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOL = ROOT / ".agents/skills/story-codex/scripts/story.py"
-OUTPUT = ROOT / "benchmarks/results/long-acceptance.json"
+TOOL = ROOT / "skills/story-codex/scripts/story.py"
+OUTPUT = ROOT / "benchmarks/results/v0.4.0/long-acceptance.json"
 
 SCENES = {
     1: """# 第1章 蓝线钥匙
@@ -71,6 +71,7 @@ class Session:
         self.root, self.report = root, report
         self.revision = 0
         self.serial = 0
+        self.plans = {}
 
     def file(self, name, value):
         path = self.root / name if name == "创作约定.md" else self.root / ".acceptance-inputs" / name
@@ -139,6 +140,7 @@ def chapter_plan(chapter):
 
 def native_commit(session, chapter, plan, text, summary, key_text=None, world_changes=None):
     session.run(f"保存第{chapter}章计划", "plan", "--chapter", chapter, payload=plan, expect_revision=True)
+    session.plans[chapter] = plan
     context = session.run(f"读取第{chapter}章上下文", "context", "--chapter", chapter, "--budget-bytes", 16000)
     draft = session.file(f"chapter-{chapter}.md", text)
     prepared = session.run(f"准备第{chapter}章审查", "prepare", "--chapter", chapter, "--draft", draft)
@@ -277,12 +279,35 @@ def acceptance(session):
 
 
 def historical_branch(session):
+    # Historical dependency review uses the current cards actually read here,
+    # not invented snapshots of what those cards contained before each chapter.
+    required = {cid for plan in session.plans.values() for cid in plan["requires"]}
+    review_plan = chapter_plan(max(SCENES) + 1)
+    review_plan["requires"] = sorted(required)
+    session.run("保存历史复核所需的下一章取材计划", "plan", "--chapter", max(SCENES) + 1,
+                payload=review_plan, expect_revision=True)
+    context = session.run("读取历史复核实际使用的现态卡片", "context", "--chapter", max(SCENES) + 1,
+                          "--budget-bytes", 16000)
+    cards = {card["id"]: card for card in context["required_cards"]}
+    session.check("历史复核已读卡片覆盖每章明确requires", required <= cards.keys(),
+                  required=sorted(required), read_cards=sorted(cards))
+    card_dependencies = {cid: {"kind": "card", "ref": cid,
+        "sha": sha(json.dumps(cards[cid], ensure_ascii=False, sort_keys=True, separators=(",", ":")))}
+        for cid in sorted(required)}
+    session.report["history_card_review"] = {
+        "revision": context["revision"], "cards": {cid: cards[cid] for cid in sorted(required)},
+        "dependencies": list(card_dependencies.values()),
+        "scope": "Current card values and sources rechecked against all eleven scenes for historical review; not pre-chapter card snapshots."}
+    reviewed_dependencies = {}
     for chapter in sorted(SCENES):
         dependency = 1 if chapter == 11 else chapter - 1 if 3 <= chapter <= 10 else None
-        dependencies = [] if dependency is None else [{"kind": "chapter", "ref": dependency, "sha": sha(SCENES[dependency])}]
+        dependencies = [dict(card_dependencies[cid]) for cid in session.plans[chapter]["requires"]]
+        if dependency is not None:
+            dependencies.append({"kind": "chapter", "ref": dependency, "sha": sha(SCENES[dependency])})
+        reviewed_dependencies[chapter] = dependencies
         session.run(f"记录第{chapter}章实际复核的依赖", "history-deps", payload={
             "chapter": chapter, "chapter_sha": sha(SCENES[chapter]), "dependencies": dependencies, "complete": True,
-            "note": "逐段读过本验收全文：北线末段依赖首次钥匙交接，南线短景依赖自己的前一段，不借同名猜测额外关系。"}, expect_revision=True)
+            "note": "逐段复核全文和刚读取的现态卡片及来源：每章保留plan.requires中的限制卡，北线另核对钥匙卡；北线末段依赖首次交接，南线依赖自己的前一段。卡片SHA是本次历史复核现态，不冒称旧章起草快照。"}, expect_revision=True)
     session.run("保存修订前状态快照", "history-snapshot", "--label", "十一段短景的修订前状态", expect_revision=True)
     started = session.run("创建钥匙颜色修正的历史分支", "history-start", "--chapter", 1,
                           "--label", "把蓝线改成红线，同步晚章与领域证据", expect_revision=True)
@@ -300,8 +325,8 @@ def historical_branch(session):
                for chapter, text in SCENES.items()}
     candidates = []
     for chapter in affected:
-        dependency = 1 if chapter == 11 else chapter - 1 if 3 <= chapter <= 10 else None
-        dependencies = [] if dependency is None else [{"kind": "chapter", "ref": dependency, "sha": sha(revised[dependency])}]
+        dependencies = [{**item, "sha": sha(revised[int(item["ref"])])} if item["kind"] == "chapter"
+                        else dict(item) for item in reviewed_dependencies[chapter]]
         candidates.append({"chapter": chapter, "text": revised[chapter],
                            "summary": "修订颜色后的北线短景：" + next(line for line in revised[chapter].splitlines()
                                                                          if line and not line.startswith("#")),

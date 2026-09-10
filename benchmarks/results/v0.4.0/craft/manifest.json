@@ -1,0 +1,92 @@
+{
+  "status": "completed_mixed_comparison_and_final_holdout",
+  "method": "Two fresh writer agents, identical Chinese prompts, separate old/new instruction snapshots; final specimens reviewed by a third fresh agent without author/version labels; pair order counterbalanced",
+  "counts": {
+    "baseline/workshop": 921,
+    "baseline/quiet": 936,
+    "revised/workshop": 932,
+    "revised/quiet": 908
+  },
+  "count_method": "Non-whitespace visible Unicode characters excluding first H1 title and Cc/Cf; includes punctuation",
+  "artifacts": {
+    "baseline/process.json": "cf08a34a405ae5f38f19f972ea3f97f3badd90f68c3c35e8f0bee5b2bc49513f",
+    "baseline/quiet.md": "650407990d5fb253d934c58177c90e975e14cacd8903791f73b41f4caa543a05",
+    "baseline/workshop.md": "63a110521ebb85f99e635c4243768eac0850d4556a3f1f713b2002b2fa08f4cd",
+    "baseline-instructions.json": "d07acfeff50d3058bcadef9a62c14b1196f72e691e75df1a6cb351fba58c6bc0",
+    "baseline-tokens.json": "39452456f5e531d6d9f9e4c3d3f5597d13de8b109c612c4c36ad89f358ca92e1",
+    "blind-judgment.json": "97c5980a0a6039607ab24bd36b8c90f594ebff106855c594e91b11cd05c50dd8",
+    "blind-judgment.md": "5f2d4f23dc82ad5bf393470d5d77a7f516793f3fa949f42f43d7b4feb240bde7",
+    "blind-mapping.json": "bf05e366bf70bb9d75f2571e22592bb813334e8652cf541de61803d9d3d94551",
+    "briefs.json": "13d8304cf8fcab10673c20199c380b656bbc6d9b42e236df0a80909bd76fa4a8",
+    "final-instructions.json": "4b84bd00b436ba0c56bbae56716765dc5f62c4ffbfa6f0f97a33afea421b0534",
+    "holdout/brief.txt": "fd071979c74bb9e5e15b096e8a83cab1c2190bd5a4db35ed64965074403d3ff0",
+    "holdout/process.json": "53b53008aa4168f74ba81fbe1a8a89821e54d636e046f4f62f26513173047b67",
+    "holdout/review.json": "5968ed59268a0161c6b406e887ec61c00137fc4eb9210d0906fbb49f6b91203d",
+    "holdout/review.md": "7f8f260a9fff381e05609f7b03f070bd1a9f94430014f6c0804597b28812ced2",
+    "holdout/scene.md": "98efa0fe31784540e9d60b589e47c9e2582eb49fa637142bd4abbd768997cbb2",
+    "revised/process.json": "56be9268d42fa32c3272d5c2eec63a27e4cf7a610f28d416eb313f980f80d07e",
+    "revised/quiet.md": "f671181bb8e3e82647dcac3e1113a649dd54c4f3b3e824f0c8f92939c5cb9fb9",
+    "revised/workshop.md": "756e15a9536e1aad42d721194c4e1a844c00bb8c9dec44becf115dbf7a29c474",
+    "revised-instructions.json": "88129398287f98c9b59b89f0f666ad29c748a8b5dbbc086a3fb94752471ac8fb"
+  },
+  "revised_instruction_hashes": {
+    "skills/story-codex/SKILL.md": "0d0995a5f0aa128373683ceffd8e96b39912b67be61febbf4d5246a35270e1cd",
+    "skills/story-codex-plan/SKILL.md": "54aeb7b337f05c281e31ed5ee3f962ccadbe3f0bcc253b8f604f4eea4cc91796",
+    "skills/story-codex-write/SKILL.md": "1dfcccafcb95a4f1eacf48d4514bced347a6e1799305ab9bde5ea1ec7bd56d1d",
+    "skills/story-codex-analyze/SKILL.md": "50dc30426f04d70e5bfb7f7f97601b6d39e287ea51110046a86253fad00e9e59",
+    "skills/story-codex-review/SKILL.md": "090242f8eacd9f72a57dd8413006dda256d6729c97acb7695fd1c7a59013d175",
+    "skills/story-codex-research/SKILL.md": "87da9985f5e65c544bb36963409ba19ad8ea7c26f68a14439716b7533f736152",
+    "skills/story-codex-cover/SKILL.md": "15b21ebc8b26c17641ea32e1feddffafbfa5710940ef863fee54d6775ffd58b3",
+    "skills/story-codex-review/references/history.md": "85cb0d81aa2e0a7998a87b53442465e3824ba4d357a25fd28727be8ec5da290b",
+    "skills/story-codex-write/references/chapter.md": "3fb19018e9465a101fe76698a7757c5843900ef501151e0f45a930c4e89f55f3",
+    "skills/story-codex-write/references/long-form.md": "e49fea777d871e8f8e5b6595e010cf9647b01848205f5e76c3a9e7d1c3fdd9bc",
+    "skills/story-codex-write/references/drama.md": "f85f0d060c171066af958124a066ea48495a49b190e9ed125a18bd32f82eb6b7",
+    "skills/story-codex/references/project-state.md": "ae24149b4e8b98d8feb83d7e1f8a95c20bf225b2a397b700686f013572ca4f09"
+  },
+  "runtime_changed": false,
+  "versions": {
+    "baseline": "Local 0.4.0 directory refactor before this craft change",
+    "revised": "Initial craft guidance used for paired comparison; frozen before blind review",
+    "final": "Two narrow guidance additions after mixed blind review; used only for new holdout"
+  },
+  "model_settings": "No model or reasoning overrides were requested for either fresh writer or reviewer; host configuration inherited",
+  "provider_usage": null,
+  "limits": [
+    "Two prompts, one final specimen per version per prompt; single agent reviewer, not human panel or statistical evidence",
+    "Both writers may self-review; hidden drafting effort and real account usage are not controlled or measured",
+    "This compares two local skill revisions, not oh-story outputs",
+    "Does not establish long-novel quality, originality or automatic UI discovery",
+    "Final refinements received one new holdout specimen, not a second paired comparison; no overall quality advantage established"
+  ],
+  "comparison_result": {
+    "workshop": "tie",
+    "quiet": "slight preference for baseline",
+    "overall_improvement_demonstrated": false,
+    "raw_judgment": "blind-judgment.json",
+    "labels": "blind-mapping.json"
+  },
+  "final_instruction_hashes": {
+    "skills/story-codex/references/project-state.md": "ae24149b4e8b98d8feb83d7e1f8a95c20bf225b2a397b700686f013572ca4f09",
+    "skills/story-codex/SKILL.md": "0d0995a5f0aa128373683ceffd8e96b39912b67be61febbf4d5246a35270e1cd",
+    "skills/story-codex-analyze/SKILL.md": "50dc30426f04d70e5bfb7f7f97601b6d39e287ea51110046a86253fad00e9e59",
+    "skills/story-codex-cover/SKILL.md": "15b21ebc8b26c17641ea32e1feddffafbfa5710940ef863fee54d6775ffd58b3",
+    "skills/story-codex-plan/SKILL.md": "54aeb7b337f05c281e31ed5ee3f962ccadbe3f0bcc253b8f604f4eea4cc91796",
+    "skills/story-codex-research/SKILL.md": "87da9985f5e65c544bb36963409ba19ad8ea7c26f68a14439716b7533f736152",
+    "skills/story-codex-review/references/history.md": "85cb0d81aa2e0a7998a87b53442465e3824ba4d357a25fd28727be8ec5da290b",
+    "skills/story-codex-review/SKILL.md": "090242f8eacd9f72a57dd8413006dda256d6729c97acb7695fd1c7a59013d175",
+    "skills/story-codex-write/references/chapter.md": "3fb19018e9465a101fe76698a7757c5843900ef501151e0f45a930c4e89f55f3",
+    "skills/story-codex-write/references/drama.md": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+    "skills/story-codex-write/references/long-form.md": "e49fea777d871e8f8e5b6595e010cf9647b01848205f5e76c3a9e7d1c3fdd9bc",
+    "skills/story-codex-write/SKILL.md": "1dfcccafcb95a4f1eacf48d4514bced347a6e1799305ab9bde5ea1ec7bd56d1d"
+  },
+  "holdout": {
+    "body_characters": 834,
+    "fresh_writer": true,
+    "reviewer": "Independent from author; same reviewer as paired comparison, only new brief and specimen supplied for this pass",
+    "comparison": false,
+    "independent_review": "holdout/review.json",
+    "provider_usage": null
+  },
+  "source_binding": "Paired specimens bind to revised_instruction_hashes, not final_instruction_hashes; final holdout binds to final snapshot",
+  "process_paths": "Absolute TEMP paths in raw author records describe original execution; archived paths are listed here"
+}

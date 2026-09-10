@@ -1,0 +1,59 @@
+{
+  "task": "依据 revised 技能，完成 workshop 与 quiet 两个独立场景",
+  "inputs_read": [
+    "C:/Users/Work/AppData/Local/Temp/story-craft-eval-qw5ghqhl/briefs.json",
+    "C:/Users/Work/AppData/Local/Temp/story-craft-eval-qw5ghqhl/revised/skills/story-codex-write/SKILL.md",
+    "C:/Users/Work/AppData/Local/Temp/story-craft-eval-qw5ghqhl/revised/skills/story-codex/SKILL.md",
+    "C:/Users/Work/AppData/Local/Temp/story-craft-eval-qw5ghqhl/revised/skills/story-codex-write/references/chapter.md",
+    "C:/Users/Work/AppData/Local/Temp/story-craft-eval-qw5ghqhl/revised/skills/story-codex-write/references/drama.md"
+  ],
+  "scope": "仅生成两个场景 Markdown 和本说明文件；未读取其他 candidate、真实小说、仓库资料或记忆；未初始化工程或创建数据库。",
+  "workflow": "依次读取正文入口、公共约束、章流程、冲突与场景参考；针对用户的单场景授权直接起草，用 Python 标准库核对字数，并进行当前会话语义自审。工程 context、prepare、commit、export 不适用于此次明确禁止初始化和建库的授权，未执行也未宣称执行。",
+  "count_method": {
+    "name": "visible_nonspace_v1",
+    "description": "排除首行标题、空白以及 Unicode Cc/Cf 控制和格式字符，保留中文、数字和标点；在写入时对同一正文字符串计数。",
+    "range": [
+      800,
+      1000
+    ]
+  },
+  "outputs": {
+    "workshop": {
+      "file": "C:/Users/Work/AppData/Local/Temp/story-craft-eval-qw5ghqhl/candidate-b/workshop.md",
+      "title": "留样",
+      "body_visible_nonspace": 932,
+      "review": {
+        "causality": "验货发现六把椅子有问题；拖至中午的方案不能满足十桌同时用餐；旧样椅只获部分接受，陈渠承担补买两把和四把降价的成本，完成本场交货协商。",
+        "continuity": "限定今晚验货与准备；三十把最终分为二十四把合格新椅、四把折价旧样椅、两把待当晚买回的椅子；尚未写明晨交货完成。",
+        "user_constraints": "保留父亲作坊、资金紧张、姐姐管账与缩规模的建议；没有车祸、羞辱、贵人或神秘人收尾。",
+        "voice": "以验椅、记账和实际议价体现人物；郭老板的拒绝有开张安排支撑，姐姐提出有额外成本的替代方案，陈渠在交易后才接受腾出后院。",
+        "evidence": [
+          "明天我那店重新开张。十张桌，不能让一家三口站一个。",
+          "这两把我们去桥头买，今晚拉过来。那四把旧的，每把减五十。你验过再结尾款。",
+          "明天跟房东说，月底腾出来。"
+        ]
+      }
+    },
+    "quiet": {
+      "file": "C:/Users/Work/AppData/Local/Temp/story-craft-eval-qw5ghqhl/candidate-b/quiet.md",
+      "title": "半只鞋",
+      "body_visible_nonspace": 908,
+      "review": {
+        "causality": "女儿想留鞋楦，母亲先要求弃置；自行收进包后硌身，母亲出手重新包裹；围裙从母亲行李中转作包布，让轻装与保存物件在行动里取得局部妥协。",
+        "continuity": "始终处于闭店后的收拾过程；母亲尚未搬走；女儿只带走这一只鞋楦，其余归箱，抽屉擦拭合上完成场景。",
+        "user_constraints": "温和、善意；无吵架、恶人、病危、身世揭露、突然来客或强行悬念；不完结整部小说。",
+        "voice": "对白谈书架、围裙、行李和下次搬家，母亲对子女家中空间与旧物负担的顾虑留在具体交谈中；没有以旁白解释全部情绪。",
+        "evidence": [
+          "你屋里那个架子，本来就挤。",
+          "以后搬家，别为了这个多装一箱。",
+          "母亲抬了抬右边，抽屉就合上了。"
+        ]
+      }
+    }
+  },
+  "limitations": [
+    "语义审查是写作者当前会话自审，不是独立盲审。",
+    "未查询外部木作或修鞋资料，未把脚本计数当作文学质量、逻辑或原创性的证明。",
+    "单独交付场景，未建立后续小说计划或工程状态。"
+  ]
+}

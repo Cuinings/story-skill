@@ -66,18 +66,20 @@ class NpmPackageTests(unittest.TestCase):
         return npm.verify_tarball(self.archive, self.checksum, self.tarball, expected)
 
     def fake_pack(self, stage, destination):
-        self.assertEqual({name: (stage / name).read_bytes() for name in npm.PAYLOAD_FILES}, self.payload)
+        self.assertEqual({name: (stage / name).read_bytes() for name in self.payload}, self.payload)
         files = {"package/" + p.relative_to(stage).as_posix(): p.read_bytes()
                  for p in stage.rglob("*") if p.is_file()}
-        filename = "cuinings-story-codex-0.3.0.tgz"
+        name = npm.wrapper_files(self.version)[0]["name"]
+        filename = name.removeprefix("@").replace("/", "-") + f"-{self.version}.tgz"
         path = self.write_tar(files, destination=destination / filename)
-        return {"name": npm.NAME, "version": self.version, "filename": filename,
+        return {"name": name, "version": self.version, "filename": filename,
                 "integrity": npm.integrity(path.read_bytes())}
 
     def prepare_existing(self):
         output = self.root / "out"
         output.mkdir()
-        previous = output / "cuinings-story-codex-0.3.0.tgz"
+        name = npm.wrapper_files(self.version)[0]["name"]
+        previous = output / (name.removeprefix("@").replace("/", "-") + f"-{self.version}.tgz")
         previous.write_bytes(b"previous reviewed tarball")
         return output, previous
 
@@ -88,8 +90,15 @@ class NpmPackageTests(unittest.TestCase):
     def test_read_release_preserves_crlf_without_executing_payload(self):
         payload, version, checksum = npm.read_release(self.archive, self.checksum)
         self.assertEqual(payload, self.payload)
-        self.assertEqual(version, "0.3.0")
+        self.assertEqual(version, self.version)
         self.assertEqual(checksum, hashlib.sha256(self.archive.read_bytes()).hexdigest())
+
+    def test_legacy_wrapper_preserves_the_original_published_bytes(self):
+        manifest, files = npm.wrapper_files("0.3.0")
+        self.assertEqual(manifest["name"], "@cuinings/story-codex")
+        self.assertEqual({name: hashlib.sha256(raw).hexdigest() for name, raw in files.items()}, {
+            "package.json": "da354ce0b6d066562b308ae94421266bf9b3424f6e344efb22e0b12847ccb086",
+            "README.md": "8e1927337054a60d02a67a2b4e177c44ccc531c77af61bf3ad8a8d6005a5c957"})
 
     def test_checksum_binds_exact_filename_and_archive_bytes(self):
         correct = self.checksum.read_text(encoding="utf-8")
@@ -114,7 +123,7 @@ class NpmPackageTests(unittest.TestCase):
                 npm.read_release(self.archive, self.checksum)
 
     def test_version_must_be_single_literal_and_match_archive_name(self):
-        for code in [b'VERSION = str("0.3.0")', b'VERSION = "0.4.0"',
+        for code in [b'VERSION = str("0.3.0")', b'VERSION = "99.0.0"',
                      b'VERSION = "0.3.0"\nVERSION = "0.3.0"']:
             with self.subTest(code=code), self.assertRaises(ValueError):
                 self.payload["story-codex/scripts/story.py"] = code
@@ -130,7 +139,7 @@ class NpmPackageTests(unittest.TestCase):
         self.assertEqual(result["payload_manifest"], {k: npm.sha256(v) for k, v in self.payload.items()})
         self.assertEqual(set(result["wrapper_manifest"]), {"README.md", "package.json"})
         manifest = result["package_manifest"]
-        self.assertEqual(manifest["files"], list(npm.PAYLOAD_FILES))
+        self.assertEqual(manifest["files"], list(npm.payload_files(self.version)))
         self.assertEqual(manifest["publishConfig"]["registry"], "https://npm.pkg.github.com")
         self.assertTrue({"scripts", "bin", "dependencies", "devDependencies", "main"}.isdisjoint(manifest))
 
@@ -242,6 +251,48 @@ class NpmPackageTests(unittest.TestCase):
         self.assertEqual(run.call_args.args[0], ["node", "npm-cli.js", "pack", "--json", "--ignore-scripts",
                                                "--pack-destination", str(self.root / "directory with spaces & literal chars")])
         self.assertNotIn("shell", run.call_args.kwargs)
+
+
+class NpmSuiteTests(NpmPackageTests):
+    def setUp(self):
+        super().setUp()
+        self.version = "0.4.0"
+        self.archive = self.root / "story-codex-0.4.0.zip"
+        self.payload = {name: ("原始套件字节：" + name + "\r\n").encode() for name in npm.SUITE_FILES}
+        self.payload["story-codex/scripts/story.py"] = (
+            b'VERSION = "0.4.0"\nraise RuntimeError("must never run payload")\n')
+        self.write_zip()
+
+    def test_new_version_rejects_old_single_skill_layout(self):
+        self.write_zip({name: self.payload.get(name, b"legacy") for name in npm.PAYLOAD_FILES})
+        with self.assertRaisesRegex(ValueError, "reviewed layout"):
+            npm.read_release(self.archive, self.checksum)
+
+    def test_current_package_identity_matches_current_repository_owner(self):
+        manifest, _ = npm.wrapper_files(self.version)
+        self.assertEqual(manifest["name"], "@ningcui29/story-codex")
+        self.assertEqual(manifest["repository"]["url"], "https://github.com/NingCui29/story-skill.git")
+        self.assertEqual(manifest["homepage"], "https://github.com/NingCui29/story-skill#readme")
+        with patch.object(npm, "npm_pack", side_effect=self.fake_pack):
+            result = npm.build(self.archive, self.checksum, self.root / "current")
+        self.assertEqual(Path(result["tarball"]).name, "ningcui29-story-codex-0.4.0.tgz")
+        self.assertEqual(result["name"], manifest["name"])
+
+    def test_old_version_rejects_new_layout(self):
+        self.archive = self.root / "story-codex-0.3.0.zip"
+        self.payload["story-codex/scripts/story.py"] = b'VERSION = "0.3.0"\n'
+        self.write_zip()
+        with self.assertRaisesRegex(ValueError, "reviewed layout"):
+            npm.read_release(self.archive, self.checksum)
+
+    def test_zip_and_npm_share_the_same_explicit_suite_manifest(self):
+        spec = importlib.util.spec_from_file_location("zip_suite_manifest", ROOT / "scripts/package.py")
+        zip_package = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(zip_package)
+        self.assertEqual(npm.SUITE_FILES, zip_package.SUITE_FILES)
+        self.assertEqual(len(npm.SUITE_FILES), 31)
+        self.assertEqual({name.split("/", 1)[0] for name in npm.SUITE_FILES}, set(npm.SKILL_NAMES))
+        self.assertIn("all seven", npm.wrapper_files(self.version)[1]["README.md"].decode())
 
 
 if __name__ == "__main__":

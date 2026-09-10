@@ -1,0 +1,21 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\before\\skills\\story-codex\\scripts\\story.py",
+    "commit",
+    "--chapter",
+    "2",
+    "--draft",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer\\.story\\drafts\\0002.md",
+    "--input",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer\\.story\\inputs\\delta-2.json",
+    "--book",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer"
+  ],
+  "exit_status": 0,
+  "stdout": "{\"backups\":[],\"chapter\":2,\"committed\":true,\"exported\":[\"chapters/0002.md\"],\"exports_complete\":true,\"idempotent\":false,\"integrity\":{\"full_book_verified\":true,\"last_full_audit_revision\":6,\"mode\":\"strict\",\"note\":\"Hash verification is a point-in-time observation; outside editors can save again.\",\"unverified_archive_count\":0,\"verified_file_count\":2},\"path\":\"C:\\\\Users\\\\Work\\\\AppData\\\\Local\\\\Temp\\\\story-serial-eval-8wuy07z0\\\\writer\\\\chapters\\\\0002.md\",\"revision\":6,\"scope_exports_complete\":true}\n",
+  "stderr": ""
+}

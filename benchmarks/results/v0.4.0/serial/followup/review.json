@@ -1,0 +1,363 @@
+{
+  "schema_version": 1,
+  "review_type": "independent_followup_semantic_review",
+  "target_chapter": 4,
+  "scope": {
+    "read_sources": [
+      "followup/brief.txt",
+      "followup/chapters/0001.md",
+      "followup/chapters/0002.md",
+      "followup/chapters/0003.md",
+      "followup/chapters/0004.md"
+    ],
+    "excluded": [
+      "skills",
+      "process",
+      "plans",
+      "state",
+      "self_review",
+      "other_versions",
+      "other_agent_results"
+    ],
+    "original_writer_directory_accessed": false,
+    "process_compliance_verified": false,
+    "previous_chapters_byte_compared_to_original": false,
+    "actual_stop_verified": false,
+    "baseline_comparison_claim": null,
+    "long_range_capability_proven": false
+  },
+  "counting_method": "Remove first H1 title line; exclude all Unicode whitespace and count remaining characters including punctuation; verify no non-whitespace Cc/Cf characters.",
+  "body_hash_method": "Decode UTF-8 (BOM removed if any), normalize CRLF and CR to LF, remove opening H1 and its following newline, preserve remaining whitespace, encode UTF-8 and hash SHA-256.",
+  "body_nonwhitespace_hash_method": "Use body_hash_method text, additionally remove every character for which str.isspace() is true, then hash UTF-8 bytes with SHA-256.",
+  "chapters": [
+    {
+      "chapter": 1,
+      "nonwhitespace_visible_body_characters": 2357,
+      "file_sha256": "f7a96ddb0f4595cdf8b7bfce2bbb166576c819036572d8f3d55a0003f4e91611",
+      "body_utf8_lf_sha256": "634dd6e1ed2d93147386070c513ed324faef927a3738a66e5deca96b059f6fd8",
+      "body_nonwhitespace_sha256": "68a661e395c2a6f475b0b0557d75b005efecd8ea24fb8eac3ec61d53f9822275"
+    },
+    {
+      "chapter": 2,
+      "nonwhitespace_visible_body_characters": 2418,
+      "file_sha256": "028a18bb1350832c7d16912fbb7df568c2f49e04fa5067fdf871bcc19a449761",
+      "body_utf8_lf_sha256": "b67768cb98158b8f89d02e28d6b7448c54091008f20e7caf6e0297a78d084f2f",
+      "body_nonwhitespace_sha256": "bd1f81d0f1da42a7d403dd3407ac812098410da71a22c9d73edd7dc77e5aef76"
+    },
+    {
+      "chapter": 3,
+      "nonwhitespace_visible_body_characters": 2254,
+      "file_sha256": "9db7e826ce9704e05ec4e591c9bc45b07e42abe9d6c4c95d41b3cca7a973ebef",
+      "body_utf8_lf_sha256": "b629e74429e80bfb240230c9c2b26b2405ab5fb4b2200d15f5157634744e66b6",
+      "body_nonwhitespace_sha256": "953c4e2c862704aef0745bf475fe076fefece4f15f6573c6a4cc5e455dee7198"
+    },
+    {
+      "chapter": 4,
+      "nonwhitespace_visible_body_characters": 2268,
+      "file_sha256": "3bfe7e9bcf155180fe553f8b70a1721c96f110ab96726d478c8581f494c8e83d",
+      "body_utf8_lf_sha256": "77b2e4a432eec0c24d2d1aa95bf8e0ac94e2782768419a02aae3acec2b8c4afd",
+      "body_nonwhitespace_sha256": "14eb26677f3535ace960e6c4510d87d186a1185da79dcfcbc928cfff284273ff"
+    }
+  ],
+  "chapter_4_length_requirement": [
+    2200,
+    2800
+  ],
+  "chapter_4_within_length": true,
+  "overall": "第4章属于明确授权，正文2268字；未发现确定矛盾，既定事实和代价持续，有限复航与收入分配带来实际推进。临行有小幅措辞歧义，章末反复强调分项记录的节奏评价属于偏好。",
+  "certain_contradictions": [],
+  "conclusions": [
+    {
+      "id": "C01",
+      "topic": "authorization_and_length",
+      "assessment": "续写题设明确授权写至第四章；本章2268个正文非空白可见字符，符合2200至2800。章末保留宽头船待查和赔补问题，未写成全书终结。过程遵循和真实停笔不在本次文本审查可验证范围。",
+      "evidence_ids": [
+        "A01",
+        "E24"
+      ]
+    },
+    {
+      "id": "C02",
+      "topic": "facts_and_character_knowledge",
+      "assessment": "三条余船承接第三章验页，未翻案空船事故。偏载查验来自周槐经验提醒及江离已取得的陶杏口供，未给回声匣新增能力；随船前扣除两人体重，未见明确人数或载重口径冲突。",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E05",
+        "E06",
+        "E07",
+        "E10",
+        "E11"
+      ]
+    },
+    {
+      "id": "C03",
+      "topic": "persistent_costs",
+      "assessment": "收费印仍被押、板租先扣、旧号牌有效、工钱与赔偿欠账持续，救人没有清零经济后果。放弃急运费造成新的分配压力。",
+      "evidence_ids": [
+        "E13",
+        "E14",
+        "E15",
+        "E16",
+        "E17",
+        "E18",
+        "E19",
+        "E20",
+        "E21"
+      ]
+    },
+    {
+      "id": "C04",
+      "topic": "actual_progress",
+      "assessment": "乌篷船从未复查转为半载分置试验及一趟南渡核验后的有限运行，宽头船继续待查；冲突从救援占用运力发展到能运行后如何排序与分收入。仍使用查验和记账结构，但没有把前章选择全部重置。",
+      "evidence_ids": [
+        "E07",
+        "E08",
+        "E09",
+        "E12",
+        "E14",
+        "E16",
+        "E24"
+      ]
+    },
+    {
+      "id": "C05",
+      "topic": "relationship_and_chinese_narration",
+      "assessment": "江离承认能力与权限边界，方叙仍与她争运费且实际退让自己的份钱；周槐以专业经验参与，方叙主动补记周槐工钱。对白有具体诉求，合作仍保留张力。",
+      "evidence_ids": [
+        "E04",
+        "E07",
+        "E19",
+        "E22",
+        "E23",
+        "E26",
+        "E30"
+      ]
+    }
+  ],
+  "findings": [
+    {
+      "id": "F01",
+      "classification": "ambiguity",
+      "importance": "low",
+      "title": "临行作为记录结论略有歧义",
+      "evidence_ids": [
+        "E09",
+        "E12"
+      ],
+      "assessment": "临行在通常中文里可指临出发时，此处与全验相对，似乎指临时放行或临时通行。上下文能帮助理解，但第一次出现没有说明该记录用语。",
+      "suggestion": "若指许可状态，改为临时放行或试行，或在首次记入时明示；这不构成船已全验与尚未全验的事实矛盾。"
+    },
+    {
+      "id": "F02",
+      "classification": "reader_preference",
+      "importance": "low",
+      "title": "反复落笔分项的主题清楚，章末重复较密",
+      "evidence_ids": [
+        "E25",
+        "E27",
+        "E12",
+        "E28"
+      ],
+      "assessment": "验到哪一步、宽头船待查、不把临行改成全验、另开一页连续强化逐船逐项取证。同一章已有偏载试验和排队分钱两次实质变化，不能判没有推进；但末段较多记录动作会使偏好高悬念的读者感到节奏平稳。",
+      "suggestion": "若希望收束更利落，可少留一次已充分建立的记账原则解释；不要求新增反派或强行另开案件。"
+    }
+  ],
+  "evidence": {
+    "A01": {
+      "source": "followup/brief.txt",
+      "chapter": null,
+      "quote": "本次明确授权把书内前三章的停笔约定更新为写到第4章后停止。",
+      "line": 1
+    },
+    "E01": {
+      "source": "followup/chapters/0003.md",
+      "chapter": 3,
+      "quote": "江离把册子放到两人之间，翻开余下三条船的验页。",
+      "line": 79
+    },
+    "E02": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "三条里，小渡昨夜查过底，仍照两客行走；乌篷船只补过舷边，宽头船换过底板。",
+      "line": 11
+    },
+    "E03": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "江离叫书吏先送昨夜封好的责任纸与证物，又另开一页复查记录。",
+      "line": 17
+    },
+    "E04": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“我能证明你们做过。钱几时给，要他说明白。”",
+      "line": 31
+    },
+    "E05": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "江离想起陶杏说过，哥哥把工具箱拖向船头；昨夜人挪开，船也跟着变了吃水。",
+      "line": 55
+    },
+    "E06": {
+      "source": "followup/chapters/0003.md",
+      "chapter": 3,
+      "quote": "陶杏记得周槐喊挪人时，哥哥正把工具箱拖向船头；匣里的两声闷响，则是开船前工具箱落板，不是中途撞船。",
+      "line": 51
+    },
+    "E07": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“是我没想到。”她按住那支笔，“照平日货位再放。”",
+      "line": 57
+    },
+    "E08": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "靠左、靠右、前后各挪过一回，船底仍干。",
+      "line": 63
+    },
+    "E09": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "最后添上限半载、货物依试验位置分置。",
+      "line": 67
+    },
+    "E10": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "开船前，她把两人的重量也从可载货重中扣下，货主留在岸上等返单。",
+      "line": 113
+    },
+    "E11": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "隔着渐宽的水，她看不清每人分到了几枚。",
+      "line": 113
+    },
+    "E12": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "她将这个结果另起一行写下，没有把先前的“临行”涂成“全验”。",
+      "line": 117
+    },
+    "E13": {
+      "source": "followup/chapters/0002.md",
+      "chapter": 2,
+      "quote": "“押我的收费印。明早你派人到柜上收租，不够从我份钱里扣。”",
+      "line": 99
+    },
+    "E14": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "收费印仍在船主那里。伙计先圈下该扣的板租，不肯抹掉。",
+      "line": 97
+    },
+    "E15": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "面商从领口掏出号牌，翻过来，背后还有昨夜方叙写的次序。",
+      "line": 79
+    },
+    "E16": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“救人的时候我让过。现在又让我让？”",
+      "line": 81
+    },
+    "E17": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "她把牌还给面商，没有说出更好的来钱办法。渡工听见了，搬袋的手慢下来。",
+      "line": 95
+    },
+    "E18": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“余钱先分给当班的，各人实拿多少写多少。不足的我押字。”",
+      "line": 99
+    },
+    "E19": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“你那份呢？”伙计问。\n\n“先别列。”",
+      "line": 101
+    },
+    "E20": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "两笔不能混成一笔；少了他的份钱，昨夜欠下的诊费以外那些钱，也不会自己补齐。",
+      "line": 105
+    },
+    "E21": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“这个别算运钱了，我拿回去。”",
+      "line": 109
+    },
+    "E22": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "周槐没同她闲谈，每次调索都先说一声，她便移灯照向舷侧。",
+      "line": 115
+    },
+    "E23": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "江离伸手要取，他却先把漏记的周槐名字补到当班栏里，再将笔递过来。",
+      "line": 125
+    },
+    "E24": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "方叙报了乌篷船的号，没把宽头船算进去。",
+      "line": 127
+    },
+    "E25": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“验到哪一步，先放哪一步。”",
+      "line": 45
+    },
+    "E26": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“知道少收。可这个次序也是你写的。”",
+      "line": 93
+    },
+    "E27": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "江离在宽头船那一行写“待查”，没有沿着上面画一道省事的同字。",
+      "line": 77
+    },
+    "E28": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "“另开一页。它换过底板。”",
+      "line": 123
+    },
+    "E29": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "她把记录念给他听：今晨水位，试重，挪袋位置，底缝所见。",
+      "line": 67
+    },
+    "E30": {
+      "source": "followup/chapters/0004.md",
+      "chapter": 4,
+      "quote": "方叙接过秤杆，重新称。他没说面还能卖，江离也没说总算人都活着。",
+      "line": 111
+    }
+  },
+  "unresolved_items_not_automatically_defects": [
+    "宽头船待查",
+    "收费印与板租结算",
+    "赔补欠账及未足额工资",
+    "上司对前案责任复核"
+  ],
+  "literary_numeric_score": null,
+  "provider_usage": null
+}

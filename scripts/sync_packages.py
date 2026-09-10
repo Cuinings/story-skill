@@ -20,10 +20,10 @@ import urllib.request
 
 import package_npm
 
-REPOSITORY = "Cuinings/story-skill"
+REPOSITORY = "NingCui29/story-skill"
 API = "https://api.github.com/repos/" + REPOSITORY
 REGISTRY = "https://npm.pkg.github.com"
-NAME = "@cuinings/story-codex"
+NAME = package_npm.NAME
 MAX_BYTES = 20 * 1024 * 1024
 
 
@@ -107,7 +107,7 @@ def npm_command(arguments, env):
 
 def registry_version(version, token):
     try:
-        metadata = read_json(REGISTRY + "/@cuinings%2fstory-codex", token, "npm.pkg.github.com")
+        metadata = read_json(REGISTRY + "/" + NAME.replace("/", "%2f"), token, "npm.pkg.github.com")
     except urllib.error.HTTPError as error:
         if error.code == 404:
             error.close()
@@ -117,12 +117,12 @@ def registry_version(version, token):
 
 
 def verify_download(metadata, built, archive, checksum, output, token):
-    if metadata.get("name") != NAME or metadata.get("version") != built["version"]:
+    expected_name, expected_repo = package_npm.package_identity(built["version"])
+    if metadata.get("name") != expected_name or metadata.get("version") != built["version"]:
         raise ValueError("Registry returned another package or version")
     repo = metadata.get("repository", {})
     repo_url = repo.get("url") if isinstance(repo, dict) else repo
-    if repo_url not in ("https://github.com/" + REPOSITORY + ".git",
-                        "git+https://github.com/" + REPOSITORY + ".git"):
+    if repo_url not in (expected_repo, "git+" + expected_repo):
         raise ValueError("Registry package is associated with another repository")
     dist = metadata["dist"]
     if urllib.parse.urlsplit(dist["tarball"]).hostname != "npm.pkg.github.com":
@@ -141,13 +141,41 @@ def runtime_smoke(tarball, version):
     """Execute only after verify_tarball has matched all files to the Release."""
     with tempfile.TemporaryDirectory(prefix="story-npm-runtime-") as folder:
         root = Path(folder)
+        expected = set(package_npm.payload_files(version))
+        seen = set()
         with tarfile.open(tarball, "r:gz") as bundle:
             for member in bundle.getmembers():
-                if member.name.startswith("package/story-codex/"):
-                    relative = Path(member.name).relative_to("package")
+                if member.name in {"package/package.json", "package/README.md"}:
+                    continue
+                if member.name.startswith("package/"):
+                    name = member.name[len("package/"):]
+                    if name not in expected or name in seen or not member.isfile():
+                        raise ValueError("Runtime smoke received an unverified skill member")
+                    seen.add(name)
+                    relative = Path(name)
                     target = root / relative
                     target.parent.mkdir(parents=True, exist_ok=True)
                     target.write_bytes(bundle.extractfile(member).read())
+                else:
+                    raise ValueError("Runtime smoke received an unexpected package root")
+        if seen != expected:
+            raise ValueError("Runtime smoke is missing required skill dependencies")
+        skills = sorted({name.split("/", 1)[0] for name in expected})
+        if version != "0.3.0":
+            # Local Markdown links and task runtime paths must survive sibling installation.
+            for name in skills:
+                entry = root / name / "SKILL.md"
+                content = entry.read_text(encoding="utf-8-sig")
+                for link in re.findall(r"\[[^\]]*\]\(([^)]+)\)", content):
+                    link = link.split("#", 1)[0]
+                    if not link or "://" in link:
+                        continue
+                    destination = (entry.parent / link).resolve()
+                    destination.relative_to(root.resolve())
+                    if not destination.is_file():
+                        raise ValueError(f"Installed skill has a broken local dependency: {name}: {link}")
+                if name != "story-codex" and not (entry.parent / "../story-codex/scripts/story.py").is_file():
+                    raise ValueError(f"Installed task skill has no shared runtime: {name}")
         tool = root / "story-codex/scripts/story.py"
         prefix = [sys.executable, "-B", "-X", "utf8", str(tool)]
         book = root / "book"
@@ -163,11 +191,16 @@ def runtime_smoke(tarball, version):
                 raise ValueError("Installed runtime version differs from its npm version")
             if index == 3 and json.loads(process.stdout)["last_chapter"] != 0:
                 raise ValueError("New package smoke book has unexpected state")
-    return {"ok": True, "commands": 4, "temporary_book_removed": not root.exists()}
+    return {"ok": True, "commands": 4, "skills": skills, "skill_files": len(seen),
+            "temporary_book_removed": not root.exists()}
 
 
 def sync(tag, output, prepare_only=False):
     version = version_from_tag(tag)
+    expected_name, _ = package_npm.package_identity(version)
+    if not prepare_only and expected_name != NAME:
+        raise ValueError("Historical package scope belongs to the previous owner; use --prepare-only to verify it, "
+                         "or publish a current suite release under the current owner")
     if os.environ.get("GITHUB_REPOSITORY", REPOSITORY).lower() != REPOSITORY.lower():
         raise ValueError("Publishing is restricted to the linked repository")
     token = os.environ.get("NODE_AUTH_TOKEN")
@@ -177,7 +210,7 @@ def sync(tag, output, prepare_only=False):
     output.mkdir(parents=True, exist_ok=True)
     release, archive, checksum = release_files(tag, output / "release", token)
     built = package_npm.build(archive, checksum, output / "build")
-    if built["name"] != NAME or built["version"] != version:
+    if built["name"] != expected_name or built["version"] != version:
         raise ValueError("Release payload and requested package version disagree")
     report = {"ok": False, "repository": REPOSITORY, "tag": tag, "release_url": release["html_url"],
               "package": built, "prepare_only": prepare_only}
@@ -186,7 +219,7 @@ def sync(tag, output, prepare_only=False):
         return report
     with tempfile.TemporaryDirectory(prefix="story-npm-auth-") as folder:
         config = Path(folder) / ".npmrc"
-        config.write_text("@cuinings:registry=https://npm.pkg.github.com\n"
+        config.write_text(NAME.split("/", 1)[0] + ":registry=https://npm.pkg.github.com\n"
                           "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}\n", encoding="utf-8")
         env = {**os.environ, "NPM_CONFIG_USERCONFIG": str(config),
                "NPM_CONFIG_CACHE": str(Path(folder) / "cache")}
@@ -215,7 +248,8 @@ def sync(tag, output, prepare_only=False):
         target, verified, integrity = verify_download(existing, built, archive, checksum, output, token)
         report.update(ok=True, downloaded_integrity=integrity, downloaded_package=verified,
                       runtime=runtime_smoke(target, version))
-        info = read_json("https://api.github.com/users/Cuinings/packages/npm/story-codex", token, "api.github.com")
+        info = read_json("https://api.github.com/users/" + REPOSITORY.split("/", 1)[0] +
+                         "/packages/npm/story-codex", token, "api.github.com")
         linked = info.get("repository", {}).get("full_name", "")
         if linked.lower() != REPOSITORY.lower():
             raise ValueError("Published package is not linked to the expected repository")

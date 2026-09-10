@@ -1,0 +1,21 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\before\\skills\\story-codex\\scripts\\story.py",
+    "commit",
+    "--chapter",
+    "1",
+    "--draft",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer\\.story\\drafts\\0001.md",
+    "--input",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer\\.story\\inputs\\delta-1.json",
+    "--book",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer"
+  ],
+  "exit_status": 2,
+  "stdout": "",
+  "stderr": "{\"error\":\"invalid_input\",\"message\":\"change.quote must be nonempty text, at most 1200 characters\",\"ok\":false}\n"
+}

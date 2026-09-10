@@ -13,7 +13,7 @@ import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOL = ROOT / ".agents/skills/story-codex/scripts/story.py"
+TOOL = ROOT / "skills/story-codex/scripts/story.py"
 spec = importlib.util.spec_from_file_location("migration_probe_story", TOOL)
 story = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(story)
@@ -37,7 +37,7 @@ def main():
     with tempfile.TemporaryDirectory(prefix="story-migration-probe-") as directory:
         temp = Path(directory)
         old_runtime = temp / "old.py"
-        with zipfile.ZipFile(ROOT / "dist/story-codex-0.2.0.zip") as archive:
+        with zipfile.ZipFile(ROOT / "tests/fixtures/story-codex-0.2.0.zip") as archive:
             old_runtime.write_bytes(archive.read("story-codex/scripts/story.py"))
         for name in ("渡口夜账", "留半寸", "留半寸_拆文"):
             origin = source / name
@@ -74,7 +74,7 @@ def main():
                 book.close()
     evidence["original_tree_unchanged"] = inventory(source) == initial
     evidence["ok"] = evidence["original_tree_unchanged"] and len(evidence["books"]) == 3
-    output = ROOT / "benchmarks/results/migration-v0.3.json"
+    output = ROOT / "benchmarks/results/v0.4.0/migration.json"
     output.write_text(json.dumps(evidence, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     print(story.dumps({"ok": evidence["ok"], "books": len(evidence["books"]), "report": str(output)}))
     return 0 if evidence["ok"] else 1

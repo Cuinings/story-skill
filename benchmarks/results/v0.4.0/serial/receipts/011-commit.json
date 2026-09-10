@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\before\\skills\\story-codex\\scripts\\story.py",
+    "commit",
+    "--help",
+    "--book",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer"
+  ],
+  "exit_status": 0,
+  "stdout": "usage: story.py commit [-h] --book BOOK [--integrity {strict,local}]\n                       --chapter CHAPTER --draft DRAFT --input INPUT\n                       [--replace-last]\n\noptions:\n  -h, --help            show this help message and exit\n  --book BOOK           Explicit, isolated book directory\n  --integrity {strict,local}\n                        strict hashes all exports; local verifies\n                        recent/queued files and reports unverified archives\n  --chapter CHAPTER\n  --draft DRAFT\n  --input INPUT\n  --replace-last\n",
+  "stderr": ""
+}

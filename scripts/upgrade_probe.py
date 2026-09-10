@@ -17,7 +17,7 @@ import time
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-SKILL = ROOT / ".agents/skills/story-codex"
+SKILL = ROOT / "skills/story-codex"
 INSTALLER = ROOT / "scripts/install.py"
 PYTHON = [sys.executable, "-B", "-X", "utf8"]
 
@@ -120,10 +120,11 @@ def probe(old_archive, timeout):
         archive_sha = sha256(old_archive.read_bytes())
         installer_bytes = INSTALLER.read_bytes()
         current_files = installer.inventory(SKILL)
+        current_suite = installer.suite_inventory(ROOT / "skills")
         current_version = package.current_version(SKILL / "scripts/story.py")
         report["initial_archive"] = {"path": str(old_archive), "sha256": archive_sha,
                                      "bytes": old_archive.stat().st_size}
-        report["current_source"] = {"version": current_version, "files": current_files}
+        report["current_source"] = {"version": current_version, "files": current_files, "suite": current_suite}
         report["installer"] = {"path": str(INSTALLER), "sha256": sha256(installer_bytes)}
         current_archive = ROOT / f"dist/story-codex-{current_version}.zip"
         if current_archive.is_file():
@@ -137,7 +138,11 @@ def probe(old_archive, timeout):
         with tempfile.TemporaryDirectory(prefix="story-upgrade-probe-") as directory:
             temporary = Path(directory)
             old_repository = temporary / "旧版安装源"
-            old_source, archive_files = unpack_old_archive(old_archive, old_repository / ".agents/skills")
+            old_source, archive_files = unpack_old_archive(old_archive, old_repository)
+            # The current CLI supports an explicit legacy source tree at its SOURCE root.
+            # Keep the copied installer bytes identical while supplying that old flat layout.
+            old_source.rename(old_repository / "skills")
+            old_source = old_repository / "skills"
             old_version = package.current_version(old_source / "scripts/story.py")
             package.validate_archive_name(old_archive, old_version)
             report["initial_archive"].update({"version": old_version, "files": archive_files})
@@ -155,6 +160,13 @@ def probe(old_archive, timeout):
             check("installer_copy_exact", copied_hash == report["installer"]["sha256"], copied_sha256=copied_hash)
             project = temporary / "升级验证项目"
             target = project / ".agents/skills/story-codex"
+            skills_target = target.parent
+            book = project / "books/原有小说/正文/第1章.md"
+            book.parent.mkdir(parents=True)
+            book.write_text("真实升级不能触碰的正文", encoding="utf-8")
+            other = skills_target / "other-skill/SKILL.md"
+            other.parent.mkdir(parents=True)
+            other.write_text("其他技能保持原样", encoding="utf-8")
             initial = json.loads(run("install_old_release", [old_installer, "--project", project]))
             report["initial_install"] = initial
             check("old_release_managed_install", initial.get("status") == "installed" and
@@ -170,10 +182,11 @@ def probe(old_archive, timeout):
             updated = json.loads(run("update_to_canonical", [INSTALLER, "--project", project, "--update"]))
             report["update"] = updated
             check("update_status", updated.get("status") == "updated" and bool(updated.get("backup")) and
-                  Path(updated["path"]).resolve() == target.resolve())
+                  Path(updated["path"]).resolve() == skills_target.resolve() and
+                  updated.get("skills") == list(installer.SKILL_NAMES))
             backup = Path(updated["backup"]).resolve()
             backup.relative_to((project / ".agents/.story-codex-backups").resolve())
-            preserved = read_tree(backup, installer)
+            preserved = read_tree(backup / "story-codex", installer)
             check("previous_release_backup_exact", preserved == original,
                   original_files_sha256=original_hashes, backup_files_sha256=hashes(preserved))
             installed = read_tree(target, installer)
@@ -183,6 +196,11 @@ def probe(old_archive, timeout):
                   manifest.get("files") == current_files and
                   {name: value for name, value in installed_hashes.items() if name != installer.MARKER} == current_files,
                   installed_files_sha256=installed_hashes)
+            installed_suite = {name: read_tree(skills_target / name, installer) for name in installer.SKILL_NAMES}
+            check("all_seven_skills_match_canonical", all(
+                installer.inventory(skills_target / name) == current_suite[name] and
+                installer.managed_snapshot(skills_target / name) is not None for name in installer.SKILL_NAMES),
+                skill_count=len(installed_suite), files=sum(len(files) for files in current_suite.values()))
             installed_version = run("updated_installed_version", [target / "scripts/story.py", "--version"]).strip()
             check("updated_installed_version", installed_version == current_version, actual=installed_version)
             help_text = run("updated_prepare_help", [target / "scripts/story.py", "prepare", "--help"])
@@ -193,12 +211,16 @@ def probe(old_archive, timeout):
             repeated = json.loads(run("repeat_update", [INSTALLER, "--project", project, "--update"]))
             report["repeat_update"] = repeated
             check("repeat_update_idempotent", repeated.get("status") == "unchanged" and
-                  Path(repeated["path"]).resolve() == target.resolve() and read_tree(target, installer) == installed and
-                  read_tree(backup, installer) == original and
+                  Path(repeated["path"]).resolve() == skills_target.resolve() and read_tree(target, installer) == installed and
+                  all(read_tree(skills_target / name, installer) == files for name, files in installed_suite.items()) and
+                  read_tree(backup / "story-codex", installer) == original and
                   sorted(path.name for path in backup.parent.iterdir()) == before_backups,
                   backup_count=len(before_backups))
             check("input_files_unchanged", installer.inventory(SKILL) == current_files and
+                  installer.suite_inventory(ROOT / "skills") == current_suite and
                   INSTALLER.read_bytes() == installer_bytes and sha256(old_archive.read_bytes()) == archive_sha)
+            check("book_and_other_skill_unchanged", book.read_text(encoding="utf-8") == "真实升级不能触碰的正文" and
+                  other.read_text(encoding="utf-8") == "其他技能保持原样")
             if report["current_archive"]["status"] == "passed":
                 check("current_archive_unchanged", sha256(current_archive.read_bytes()) == report["current_archive"]["sha256"])
         report["temporary_project_removed"] = True
@@ -212,8 +234,8 @@ def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--from-archive", default=str(ROOT / "dist/story-codex-0.1.2.zip"),
-                        help="Trusted local prior release ZIP; defaults to version 0.1.2")
+    parser.add_argument("--from-archive", default=str(ROOT / "dist/story-codex-0.3.0.zip"),
+                        help="Trusted local prior release ZIP; defaults to version 0.3.0")
     parser.add_argument("--output", default=str(ROOT / "benchmarks/results/upgrade.json"),
                         help="Evidence JSON; failed reruns preserve an existing report using a .failed sibling")
     parser.add_argument("--timeout", type=int, default=60, help="Maximum seconds for each CLI command")

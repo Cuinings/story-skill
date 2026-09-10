@@ -10,7 +10,7 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOL = ROOT / ".agents/skills/story-codex/scripts/story.py"
+TOOL = ROOT / "skills/story-codex/scripts/story.py"
 
 
 def sha(raw):
@@ -173,7 +173,7 @@ def replay(root, scenario_path, resume_prepared_first=False):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--workdir", help="New empty directory to retain actual book state; otherwise temporary")
-    p.add_argument("--output", default=str(ROOT / "benchmarks/results/chinese.json"))
+    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.4.0/chinese.json"))
     args = p.parse_args()
     ctx = nullcontext(args.workdir) if args.workdir else tempfile.TemporaryDirectory(prefix="story-chinese-")
     with ctx as name:

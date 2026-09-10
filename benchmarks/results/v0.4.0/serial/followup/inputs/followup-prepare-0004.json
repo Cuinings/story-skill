@@ -1,0 +1,33 @@
+{
+  "base_revision": 10,
+  "book_id": "9c2665f9-b0d3-4792-98ef-c78c30ac1fcc",
+  "changes": [],
+  "review": {
+    "checks": {
+      "causality": {
+        "note": "<填写审查观察>",
+        "quote": "<填写正文原句>"
+      },
+      "constraints": {
+        "note": "<填写审查观察>",
+        "quote": "<填写正文原句>"
+      },
+      "continuity": {
+        "note": "<填写审查观察>",
+        "quote": "<填写正文原句>"
+      },
+      "style": {
+        "note": "<填写审查观察>",
+        "quote": "<填写正文原句>"
+      }
+    },
+    "draft_sha256": "3bfe7e9bcf155180fe553f8b70a1721c96f110ab96726d478c8581f494c8e83d",
+    "issues": [
+      {
+        "issue": "尚未完成语义审查；填写观察与引文并处理实际问题后移除此占位项。",
+        "severity": "blocker"
+      }
+    ]
+  },
+  "summary": "<填写本章实际结果与下一章衔接>"
+}

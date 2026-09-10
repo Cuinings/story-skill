@@ -7,11 +7,23 @@ import json
 import os
 from pathlib import Path
 import re
+import stat
 import tempfile
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
-SOURCE = ROOT / ".agents/skills/story-codex"
+SKILLS = ROOT / "skills"
+SKILL = SKILLS / "story-codex"
+SOURCE = SKILLS
+SKILL_NAMES = ("story-codex", "story-codex-plan", "story-codex-write", "story-codex-analyze",
+               "story-codex-review", "story-codex-research", "story-codex-cover")
+SUITE_FILES = tuple(sorted(
+    [f"{name}/{relative}" for name in SKILL_NAMES for relative in ("LICENSE", "SKILL.md", "agents/openai.yaml")]
+    + ["story-codex/scripts/" + name for name in (
+        "story.py", "story_history.py", "story_search.py", "story_storage.py", "story_world.py")]
+    + ["story-codex/references/project-state.md", "story-codex-write/references/chapter.md",
+       "story-codex-write/references/long-form.md", "story-codex-write/references/drama.md",
+       "story-codex-review/references/history.md"]))
 
 
 def source_version(raw):
@@ -29,7 +41,7 @@ def source_version(raw):
 
 
 def current_version(runtime=None):
-    return source_version(Path(runtime or SOURCE / "scripts/story.py").read_bytes())
+    return source_version(Path(runtime or SKILL / "scripts/story.py").read_bytes())
 
 
 def validate_archive_name(output, version):
@@ -49,16 +61,40 @@ def validate_archive(path, entries):
                 raise RuntimeError(f"Archive content differs from the source snapshot: {name}")
 
 
+def linked(path):
+    attributes = path.lstat()
+    return stat.S_ISLNK(attributes.st_mode) or bool(
+        getattr(attributes, "st_file_attributes", 0) & getattr(stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400))
+
+
+def source_entries():
+    """Package only the reviewed suite manifest, rejecting new or missing skill files."""
+    if linked(SOURCE):
+        raise ValueError("Refusing linked source directory")
+    files = {}
+    for skill in SKILL_NAMES:
+        directory = SOURCE / skill
+        if not directory.is_dir() or linked(directory):
+            raise ValueError(f"Source suite is missing an ordinary skill directory: {skill}")
+        for path in sorted(directory.rglob("*")):
+            relative = path.relative_to(SOURCE)
+            if linked(path):
+                raise ValueError(f"Refusing linked package content: {relative}")
+            if "__pycache__" in relative.parts or path.suffix == ".pyc":
+                continue
+            if path.is_file():
+                files[relative.as_posix()] = path.read_bytes()
+            elif not path.is_dir():
+                raise ValueError(f"Refusing special package content: {relative}")
+    if set(files) != set(SUITE_FILES):
+        raise ValueError(f"Source suite differs from its reviewed file manifest; "
+                         f"missing={sorted(set(SUITE_FILES) - files.keys())}, "
+                         f"extra={sorted(files.keys() - set(SUITE_FILES))}")
+    return sorted(files.items())
+
+
 def package(output=None):
-    entries = []
-    for path in sorted(SOURCE.rglob("*")):
-        rel = path.relative_to(SOURCE)
-        if path.is_symlink() or getattr(path, "is_junction", lambda: False)():
-            raise ValueError(f"Refusing linked package content: {rel}")
-        if path.is_file() and "__pycache__" not in rel.parts and path.suffix != ".pyc":
-            entries.append((f"story-codex/{rel.as_posix()}", path.read_bytes()))
-    if not any(name == "story-codex/LICENSE" for name, _ in entries):
-        entries.append(("story-codex/LICENSE", (ROOT / "LICENSE").read_bytes()))
+    entries = source_entries()
     runtime = dict(entries).get("story-codex/scripts/story.py")
     if runtime is None:
         raise ValueError("Source package is missing scripts/story.py")

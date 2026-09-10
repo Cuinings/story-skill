@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\before\\skills\\story-codex\\scripts\\story.py",
+    "audit",
+    "--book",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer"
+  ],
+  "exit_status": 0,
+  "stdout": "{\"backups\":[],\"changed_export_count\":0,\"changed_exports\":[],\"export_error_count\":0,\"export_errors\":[],\"exported\":[],\"exports_complete\":true,\"integrity\":{\"full_book_verified\":true,\"last_full_audit_revision\":9,\"mode\":\"strict\",\"note\":\"Hash verification is a point-in-time observation; outside editors can save again.\",\"unverified_archive_count\":0,\"verified_file_count\":3},\"pending_export_count\":0,\"pending_exports\":[],\"safe_only\":true,\"scope_exports_complete\":true}\n",
+  "stderr": ""
+}

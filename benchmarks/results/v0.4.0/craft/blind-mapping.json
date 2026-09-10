@@ -1,0 +1,10 @@
+{
+  "workshop": {
+    "sample-1.md": "revised/workshop.md",
+    "sample-2.md": "baseline/workshop.md"
+  },
+  "quiet": {
+    "sample-1.md": "baseline/quiet.md",
+    "sample-2.md": "revised/quiet.md"
+  }
+}

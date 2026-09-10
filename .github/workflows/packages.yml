@@ -9,7 +9,7 @@ on:
       tag:
         description: Published stable Release tag to synchronize
         required: true
-        default: v0.3.0
+        default: v0.4.0
         type: string
 
 permissions:
@@ -22,7 +22,7 @@ concurrency:
 
 jobs:
   publish:
-    if: github.repository == 'Cuinings/story-skill'
+    if: github.repository == 'NingCui29/story-skill'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

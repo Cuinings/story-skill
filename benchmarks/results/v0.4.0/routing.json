@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "method": "Independent agent explicitly invoked the core skill for a synthetic read-only manuscript review; not automatic Codex UI discovery",
+  "scenario": "One unique key given away and then reused without a return; review only, no manuscript changes or project initialization",
+  "skill_files": {
+    "skills/story-codex/SKILL.md": "0d0995a5f0aa128373683ceffd8e96b39912b67be61febbf4d5246a35270e1cd",
+    "skills/story-codex-review/SKILL.md": "0f0294cbc70a296b6bb28fae6f3f973ada77417e429c17c77b7203c83505fe7c"
+  },
+  "input_sha256_before_and_after": {
+    "稿件.md": "5e2e1fb2ec83b68b3dab5505e2840a5a960cd23a27f700a6856d0ec8d76160d8",
+    "创作约定.md": "a6bd400127efe12c476a655558132fafb6961d5efb21230da42547308b7bf085"
+  },
+  "issues_found": 1,
+  "manuscripts_unchanged": true,
+  "book_initialized": false,
+  "final_pass_runtime_calls": 0,
+  "final_pass_extra_workflows_read": [],
+  "correction": "Shared instructions now reserve status for managed books; first pass unnecessarily queried status and got book_missing without writing",
+  "report": "routing-review.md",
+  "temporary_fixture_removed": true
+}

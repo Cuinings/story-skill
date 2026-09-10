@@ -1,103 +1,136 @@
-# GitHub 发布与 Codex 一行安装
+# 安装、升级与 GitHub 发布
 
-仓库为 [Cuinings/story-skill](https://github.com/Cuinings/story-skill)，默认分支为 `main`，技能源码在 `.agents/skills/story-codex`。不需要重排目录；`SKILL.md`、`scripts/`、`references/`、`agents/` 和 `LICENSE` 必须一起提交。只有源码推送到远端后，安装者才能获得新版本。
+仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)。**版本 0.4.0 包含 7 个技能入口、中文场景指导与运行时修复，安装默认固定到 `v0.4.0` 标签。** 发布附件、远端检查与 npm 同步是独立步骤，实际状态分别以 [Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0)、[Actions](https://github.com/NingCui29/story-skill/actions) 和 [Packages](https://github.com/users/NingCui29/packages?repo_name=story-skill) 为准。历史 v0.3.0 继续使用旧单入口目录。
 
-## 用户：在 Codex 对话框安装
+2026-09-10 本地验证记录：311 项测试、12 项整包检查通过，ZIP/npm 与源码的 31 个载荷文件一致，项目安装已核对。该记录不代替远端 CI、Release 下载或注册表验证。[完整修复与回执](全仓审查与优化.md) · [文档导航](README.md)
 
-发送这一行，由 Codex 的内置 skill-installer 完成下载和安装：
+## Codex 一行安装 0.4.0
 
-```text
-$skill-installer https://github.com/Cuinings/story-skill/tree/main/.agents/skills/story-codex
-```
-
-安装后下一条消息即可点名使用；未显示时重启 Codex。需要本机有 Python 3.10+，运行时没有额外 Python 包或 API Key 要求。这不包含 Codex 本身的账号和使用额度。[OpenAI 官方说明](https://learn.chatgpt.com/zh-Hans/docs/build-skills)
+首次安装，在 Codex 对话框发送下面这一行；固定版本可避免跟随 main 的后续开发改动：
 
 ```text
-$story-codex 在 D:\小说\新书 创建中文长篇项目，计划300万字，先确定题材、创作约定、分卷规划和前三章细纲，不要写正文。
+$skill-installer 从 NingCui29/story-skill 的 v0.4.0 标签安装以下全部路径：skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover
 ```
 
-想安装固定版本，先确认维护者已经发布对应 tag。例如 **v0.3.0 tag 推送成功后**：
-
-```text
-$skill-installer https://github.com/Cuinings/story-skill/tree/v0.3.0/.agents/skills/story-codex
-```
-
-main 只代表安装当时的代码，不会自动更新。已存在同名技能时，官方安装器会拒绝覆盖；先让 Codex 确认实际安装路径、保留旧版及本地修改，再安装新版。不要把官方安装的目录交给本项目的 `install.py --update`：两者的安装清单不同。
-
-只希望一个小说项目使用本技能，可以让 Codex 执行同一安装器并明确目标：
-
-```text
-$skill-installer 从 https://github.com/Cuinings/story-skill/tree/main/.agents/skills/story-codex 安装到 D:\小说\我的项目\.agents\skills，仅供这个项目使用。
-```
-
-安装器的 `--dest` 指向 **skills 父目录**，它会在其中创建 `story-codex`。如果本机同时保留项目和用户范围的同名技能，Codex 可能显示两份；选定实际要使用的一份，不将其当成自动合并或自动升级。
-
-## 维护者：发布当前代码
-
-本工作区已经有 origin，无需重新创建仓库。以下命令在 PowerShell 中逐条执行；先检查每条结果，失败时停止处理。它们会提交并推送本地代码，本文档本身不会执行这些操作。
+本机官方安装器支持一次 `--path` 接收多个路径。上面的请求对应以下参数；`<skill-installer目录>` 由 Codex 定位到本机实际路径：
 
 ```powershell
-Set-Location "D:\Developer\WorkSpace\story-skill"
+python "<skill-installer目录>/scripts/install-skill-from-github.py" --repo NingCui29/story-skill --ref v0.4.0 --path skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover
+```
+
+这份本机安装器默认安装到 `$CODEX_HOME/skills`，未设置时为 `~/.codex/skills`；其他 Codex 环境应核对其实际安装器与技能目录。只在一个项目使用时，可在同一请求中明确“安装到 `D:\小说\我的写作项目\.agents\skills`”；对应的 `--dest` 指向 **skills 父目录**，安装器创建 7 个子目录。它与下文项目安装脚本的 `--project` 参数含义不同。
+
+**官方安装器遇到已有同名目录会拒绝覆盖。** 已有 0.3.0 或部分 0.4.0 时，先按升级说明处理旧目录与本地修改；多路径安装中途失败也要核对已完成项，不能把部分成功当成整套安装成功。
+
+安装后核对 7 个目录都包含 `SKILL.md`，核心包含 `scripts/story.py` 和其余 4 个运行时模块，再在下一条消息使用 `$story-codex-plan` 或其他专用入口；未显示时重启 Codex。Python 要求为 3.10+，运行时仅用标准库；Codex 自身的账号和额度另计。
+
+[套件 ZIP](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip) · [SHA-256 校验文件](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip.sha256)。该附件按 7 个同级技能打包，共 31 个文件；Source code ZIP 是 GitHub 自动生成的完整源码仓库，不能将整个仓库当成一个技能目录。
+
+## 从源码安装到一个项目
+
+技能唯一源码位于仓库 `skills/`，共 7 个同级目录。仓库根 `scripts/install.py` 负责把它们安装到目标项目的 `.agents/skills/`；`--project` 指向项目根，不是 skills 父目录。[完整目录职责](目录结构.md)
+
+需要独立的固定版本源码时，先克隆到一个不存在的新目录：
+
+```powershell
+git clone --branch v0.4.0 --depth 1 https://github.com/NingCui29/story-skill.git story-skill-v0.4.0
+```
+
+在该 v0.4.0 源码仓库目录运行：
+
+```powershell
+python -B -X utf8 scripts/install.py --project "D:\小说\我的写作项目"
+```
+
+默认安装整套：`story-codex`、`story-codex-plan`、`story-codex-write`、`story-codex-analyze`、`story-codex-review`、`story-codex-research`、`story-codex-cover`。6 个专用技能读取同级核心的共同约束，使用核心的 `scripts/story.py`；不要分别复制不同版本。
+
+若在开发仓库本身试用，运行 `python -B -X utf8 scripts/install.py --project "."`。根 `.agents/skills/` 是安装副本，受 Git 忽略；它不会替代 `skills/` 源码，也不会随源码编辑自动更新。克隆新版仓库后仍需安装，再在 Codex 的下一条消息调用技能；未显示时重启 Codex。
+
+## 从 0.3.0 升级到 0.4.0
+
+在 Codex 对话框发送这一行：
+
+```text
+把已安装的 Story Codex 0.3.0 升级到 NingCui29/story-skill 的固定标签 v0.4.0：先定位原安装位置与安装方式；未修改的项目托管安装使用该版本 scripts/install.py --project 原项目路径 --update，其余安装先将旧技能目录连同本地修改移到技能扫描目录之外保留为完整备份，再从该标签安装 skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover 到原安装父目录；核对7个技能的版本与文件，保留备份并报告本地修改差异，不修改小说正文或书库。
+```
+
+所有安装均为文件副本，main 有新提交不会自动更新本机。先确认实际安装父目录和版本，再选择相同的安装方式；书目录无需搬动，技能安装也不会自动迁移书库。
+
+| 当前安装方式 | 更新处理 |
+|---|---|
+| 本仓库 `scripts/install.py` 管理且未修改的安装 | 由安装器核对 `.story-codex-install.json` 清单，使用 `--update` 更新整套并保留备份 |
+| 已有本地修改的托管安装 | 安装器停止覆盖；先完整保留旧目录与改动，再对照新版处理差异，不能删清单强行覆盖 |
+| 官方 `$skill-installer` 安装 | 同名目录存在会拒绝覆盖；把旧目录与本地修改备份并移出扫描目录，再安装整套固定版本 |
+| 手动复制或解压 | 不会自动获得项目安装器的托管清单；同样先在扫描目录之外保留完整副本，再按选定方式重新安装 |
+
+仅第一种情况，在 **v0.4.0 源码仓库**目录运行：
+
+```powershell
+python -B -X utf8 scripts/install.py --project "D:\小说\我的写作项目" --update
+```
+
+安装器会将旧版保存到项目 `.agents/.story-codex-backups/` 下，并补齐 6 个新专用入口；以命令回执中的实际备份路径为准。其他安装方式备份时也要位于技能扫描目录之外，不能只在 `skills/` 内改成 `story-codex-old` 后继续让 Codex 扫描。保留本地改动的原文件和差异，核对新版后再决定如何恢复定制内容。
+
+0.3.0 书库无需因这次技能拆分重新导入；更新操作只针对技能安装目录。新旧工具不要同时写同一本书，完成升级后再恢复写作。
+
+## 补齐依赖与历史回退
+
+核心缺失时，优先重新核对整套安装。若仅缺 `story-codex`，从**与其他 6 个技能相同的版本**补装 `skills/story-codex` 到同一 skills 父目录；不能把 v0.3.0 核心与新版专用技能配在一起。多路径安装未全部成功时先核对已存在的目录，官方安装器不会覆盖它们，不要把一条命令的部分输出当成整套完成。
+
+用户级与项目级若同时存在同名技能，先明确本次使用哪一份，避免不同版本混用。不要直接改安装副本后期待改动进入源码仓库；需维护的技能改动回到 `skills/`，核对后再更新安装副本。
+
+需要回退技能时，优先使用原安装备份；也可使用保留的旧单入口固定链接。先将当前整套技能移出扫描目录并完整保留，避免 0.4.0 专用入口继续搭配旧核心运行：
+
+```text
+$skill-installer https://github.com/NingCui29/story-skill/tree/v0.3.0/.agents/skills/story-codex
+```
+
+[v0.3.0 Release](https://github.com/NingCui29/story-skill/releases/tag/v0.3.0) 的 ZIP 内只有一个 `story-codex/`，共 13 个文件。旧版使用 `$story-codex`，没有 6 个新版独立入口。旧 `.agents/skills/story-codex` 源码路径只适用于该固定版本。技能回退不等于书库回退，恢复书籍状态应按 [恢复指南](recovery.md) 处理。
+
+## 维护者：验证并发布新布局
+
+本节说明可复用的发布顺序；具体执行结果以对应提交的 Actions、Release 和 Packages 回执为准。先核对 7 份入口和相对引用、整套安装/更新/恢复、ZIP 与 npm 白名单、新 token 输入清单及下载后的 CLI 验证。保留已发布版本的固定 tag、附件和历史测量，不覆盖已有版本。
+
+在 PowerShell 中逐条运行并检查结果：
+
+```powershell
 git status --short
 git remote -v
+python -B -X utf8 scripts/smoke.py
+python -B -X utf8 scripts/long_acceptance.py
 python -B -X utf8 scripts/package.py
-git add .agents/skills/story-codex scripts tests docs README.md benchmarks .gitignore .gitattributes LICENSE requirements-dev.txt
-git diff --cached --stat
-git commit -m "Release Story Codex v0.3.0"
-git push origin main
 ```
 
-检查暂存内容确实包含新增的 `story_storage.py`、`story_search.py`、`story_world.py`、`story_history.py` 和 `references/long-form.md`。不能只推入口文件，否则远端版本缺少运行依赖。上面的路径选择不包含本地环境、数据库或新增小说正文。推送成功后，main 的一行安装入口即能取得这次版本，不必先创建 Release。
+单元测试所需旧 ZIP 已随 [测试夹具](../tests/fixtures/README.md) 保存；历史实书迁移探针仍需另备旧数据库。`verify.py` 校验报告的当前哈希绑定。0.4.0 证据按版本保存到 `benchmarks/results/v0.4.0/`；当前 [token 重测](../benchmarks/results/v0.4.0/tokens.md) 已按 7 个入口统计。运行时迁移路径、流程拆分或文本变化后，不能只把 v0.3.0 通过数及 token 百分比改名为新版结果。
 
-## 发布固定版本和下载包
+提交前检查 `skills/` 全部 7 个技能和发布工具进入暂存，旧 `.agents/skills/` 源文件的删除也已暂存；不要把本地安装副本、虚拟环境、数据库或测试产物放入提交。先审查完整 diff，再提交和推送。只有推送完成，main 的多路径安装入口才具备远端源码。
 
-在已推送、通过验证的提交上创建 tag：
+准备发布固定版本时，在实际通过验证的提交上创建未使用的版本 tag。核对运行时版本、ZIP 文件名、Release tag 和 npm 版本全部一致后，再推送 tag；不要强制移动已经分发的 tag。
 
-```powershell
-git tag -a v0.3.0 -m "Story Codex v0.3.0"
-git push origin refs/tags/v0.3.0
-```
+在 [创建 GitHub Release](https://github.com/NingCui29/story-skill/releases/new) 选择新 tag，填写本版变化与真实验证范围，上传本次构建的 `story-codex-<版本>.zip` 和 `.zip.sha256`，再发布。`dist/` 被 Git 忽略，普通 push 不会上传附件。GitHub 自动生成的 Source code ZIP 包含整个仓库，与套件附件用途不同。
 
-若该 tag 已存在，先检查它指向哪个提交，不要强制移动已经分发的版本标签。
+发布后使用固定 tag 在独立临时目录真实安装整套，核对文件与 ZIP 的逐字节一致性、共享依赖和 CLI 启动结果，再记录验证回执和发布状态。技能在 Codex 中的发现和任务路由需要实际使用验证，文件复制和 CLI 测试不能代替这一层。
 
-打开 [创建 GitHub Release](https://github.com/Cuinings/story-skill/releases/new)，选择 `v0.3.0`，填写标题和说明，上传本地 `dist/story-codex-0.3.0.zip`，再发布。`dist/` 已被 Git 忽略，普通 push 不会上传 ZIP；Release 附件和 GitHub 自动生成的整仓库 Source code ZIP 是不同文件。[GitHub 官方发布步骤](https://docs.github.com/en/repositories/releasing-projects-on-github/managing-releases-in-a-repository)
+## GitHub Packages 同步
 
-可用下面的摘要作为这次 Release 说明，并以实际打包输出为准：
+[Packages](https://github.com/users/NingCui29/packages?repo_name=story-skill) 使用 GitHub npm 注册表，0.4.0 包名为 `@ningcui29/story-codex`，同步状态见 [工作流执行记录](https://github.com/NingCui29/story-skill/actions/workflows/packages.yml)。仓库归属已核对为 `NingCui29/story-skill`；旧 `Cuinings` API 地址重定向到同一仓库 ID。新版工作流、包作用域、repository 元数据与安装链接均使用当前归属。npm 包不使用安装钩子注册 Codex；下载后不能当成已安装技能。
 
-> Codex 专用中文小说技能 v0.3.0。新增分卷多线、人物认知、远期伏笔、规则与资源状态、中文索引和历史修订分支。提供显式旧库迁移与备份恢复。发布前本机 226 项测试通过，并完成百万／千万字合成容量验证。多线流程冷加载指令减少约 84%；不代表总账单降幅或长期文学质量证明。
+[同步工作流](../.github/workflows/packages.yml) 在正式 Release 发布时运行，也可在 [Actions](https://github.com/NingCui29/story-skill/actions/workflows/packages.yml) 手动选择已发布的新版本 tag 补同步。工作流从该 Release 的 ZIP 和 checksum 构建，使用仓库 `GITHUB_TOKEN` 的 `contents: read`、`packages: write` 权限。其他仓库触发会被拒绝。
 
-上传前读取包的校验值，便于下载者核对：
+历史 v0.3.0 的 13 文件布局、`@cuinings/story-codex` 身份及 npm 包装文件字节保持原样，可以构建校验；当前账号不会向旧作用域重新发布。2026-09-10 已从当前仓库的 v0.3.0 Release 实际下载、核对 ZIP/checksum、构建旧 npm 包并运行临时 CLI。此结果不代表旧作用域当前的注册表权限或可见性已验证，也不表示新版已发布。
 
-```powershell
-Get-FileHash -Algorithm SHA256 -LiteralPath "dist/story-codex-0.3.0.zip"
-```
+发布完成后回下载 npm tarball，核对 SHA-512、包身份、每个技能文件及共享依赖，再在临时工程运行核心的版本、帮助、初始化和状态检查。回执保存在 Actions artifact。重复同步先核对现有版本，内容不同则停止，不删除或覆盖。
 
-## 安装和验收范围
-
-普通用户只需要技能目录，不需要维护者的测试环境、benchmark、示例数据库或 dist。安装成功以后，在实际安装目录运行 `python -B -X utf8 scripts/story.py --help` 应能加载完整运行时；是否实际显示在技能列表还应在 Codex 中确认。
-
-维护者的完整历史验证依赖本地保留的旧版 ZIP 和三个旧示例数据库；这些文件受 `.gitignore` 保护。新 clone 不含它们，不能直接将新 clone 的完整验证等同于发布机器的历史验收。`scripts/smoke.py` 和 `scripts/long_acceptance.py` 会自行创建临时工程，可用于新 clone 的 CLI 检查；完整迁移复验需先准备明确的旧版测试材料。技能安装不会迁移任何书库，旧书迁移仍按 [恢复指南](recovery.md) 在独立副本进行。
-
-## 同步到 GitHub Packages
-
-[Packages 页面](https://github.com/users/Cuinings/packages?repo_name=story-skill) 与 Release 附件是两个分发渠道。本项目使用 GitHub npm 注册表，包名为 `@cuinings/story-codex`，版本与 Release 的技能版本一致。包内为 `story-codex/` 完整技能目录及两份 npm 元数据文件；没有依赖、安装钩子或自动注册 Codex 的脚本。
-
-[同步工作流](../.github/workflows/packages.yml) 在正式 Release 发布时执行；也可以打开 [Actions](https://github.com/Cuinings/story-skill/actions/workflows/packages.yml)，选择 **Run workflow**，填写已发布的 tag，例如 `v0.3.0`，补同步历史版本。工作流需存在于被触发的代码版本中；较早的 tag 使用 main 分支的手动运行入口。
-
-同步只读取对应 Release 的 `story-codex-<版本>.zip` 和 `.zip.sha256`，不会把当前 main 的其他改动装进旧版本包。使用仓库 `GITHUB_TOKEN`，权限限定为 `contents: read` 和 `packages: write`，不用创建或提交个人访问令牌。发布完成后，从 npm 注册表重新下载 tarball，检查 SHA-512、包身份和每个技能文件，并在临时工程执行版本、帮助、初始化和状态检查。回执保留为 Actions artifact。
-
-重复同步时先核对现有版本。内容一致则记为已同步，内容不同则停止，不删除或覆盖该版本。修改了技能文件清单时，也须更新构建器的显式白名单，避免新文件在分发中缺失。
-
-只在本地构建和验证，不发布：
+仅构建验证已发布旧版而不上传：
 
 ```powershell
 python -B -X utf8 scripts/sync_packages.py --tag v0.3.0 --prepare-only
 ```
 
-已经按 GitHub 的 npm 说明完成认证后，可以下载内容包：
+对应版本同步成功、并按 GitHub npm 要求认证后，可下载内容包：
 
 ```powershell
-npm pack @cuinings/story-codex@0.3.0 --registry=https://npm.pkg.github.com
+npm pack @ningcui29/story-codex@0.4.0 --registry=https://npm.pkg.github.com
 ```
 
-npm tarball 不是本项目 `install.py` 的托管安装。包的可见性与仓库可见性分别管理；以 Packages 页面实际设置为准。GitHub npm 即使公开也需要认证下载，普通 Codex 用户仍使用 GitHub 技能路径安装。[GitHub npm 官方说明](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)
+包可见性与仓库可见性分别管理。GitHub npm 即使公开也需要认证下载；在 Codex 中优先使用前述技能安装方式。[GitHub npm 官方说明](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-npm-registry)

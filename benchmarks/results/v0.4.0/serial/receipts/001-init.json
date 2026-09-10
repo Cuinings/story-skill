@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\before\\skills\\story-codex\\scripts\\story.py",
+    "init",
+    "--title",
+    "空船照夜",
+    "--kind",
+    "long",
+    "--book",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer"
+  ],
+  "exit_status": 0,
+  "stdout": "{\"created\":\"C:\\\\Users\\\\Work\\\\AppData\\\\Local\\\\Temp\\\\story-serial-eval-8wuy07z0\\\\writer\",\"id\":\"9c2665f9-b0d3-4792-98ef-c78c30ac1fcc\",\"imported_through\":0,\"kind\":\"long\",\"last_chapter\":0,\"revision\":0,\"schema\":2,\"title\":\"空船照夜\"}\n",
+  "stderr": ""
+}

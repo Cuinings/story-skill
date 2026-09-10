@@ -9,7 +9,7 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOL = ROOT / ".agents/skills/story-codex/scripts/story.py"
+TOOL = ROOT / "skills/story-codex/scripts/story.py"
 
 
 def smoke():
@@ -117,7 +117,7 @@ def smoke():
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--output", default=str(ROOT / "benchmarks/results/smoke.json"))
+    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.4.0/smoke.json"))
     args = p.parse_args()
     result = smoke()
     output = Path(args.output)

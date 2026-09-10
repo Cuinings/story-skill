@@ -17,16 +17,40 @@ import tarfile
 import tempfile
 import zipfile
 
-NAME = "@cuinings/story-codex"
+NAME = "@ningcui29/story-codex"
 REGISTRY = "https://npm.pkg.github.com"
-REPOSITORY = "https://github.com/Cuinings/story-skill.git"
+REPOSITORY = "https://github.com/NingCui29/story-skill.git"
+LEGACY_NAME = "@cuinings/story-codex"
+LEGACY_REPOSITORY = "https://github.com/Cuinings/story-skill.git"
 PAYLOAD_FILES = tuple("story-codex/" + name for name in (
     "LICENSE", "SKILL.md", "agents/openai.yaml", "references/analyze.md",
     "references/long-form.md", "references/research.md", "references/revise.md",
     "references/write.md", "scripts/story.py", "scripts/story_history.py",
     "scripts/story_search.py", "scripts/story_storage.py", "scripts/story_world.py",
 ))
+SKILL_NAMES = ("story-codex", "story-codex-plan", "story-codex-write", "story-codex-analyze",
+               "story-codex-review", "story-codex-research", "story-codex-cover")
+SUITE_FILES = tuple(sorted(
+    [f"{name}/{relative}" for name in SKILL_NAMES for relative in ("LICENSE", "SKILL.md", "agents/openai.yaml")]
+    + ["story-codex/scripts/" + name for name in (
+        "story.py", "story_history.py", "story_search.py", "story_storage.py", "story_world.py")]
+    + ["story-codex/references/project-state.md", "story-codex-write/references/chapter.md",
+       "story-codex-write/references/long-form.md", "story-codex-write/references/drama.md",
+       "story-codex-review/references/history.md"]))
 MAX_BYTES = 256 * 1024 * 1024
+
+
+def payload_files(version):
+    if version == "0.3.0":
+        return PAYLOAD_FILES
+    if re.fullmatch(r"0\.4\.(?:0|[1-9][0-9]*)", version):
+        return SUITE_FILES
+    raise ValueError(f"Release version has no reviewed payload layout: {version}")
+
+
+def package_identity(version):
+    payload_files(version)
+    return (LEGACY_NAME, LEGACY_REPOSITORY) if version == "0.3.0" else (NAME, REPOSITORY)
 
 
 def sha256(raw):
@@ -63,8 +87,8 @@ def read_release(archive, sha256_file):
     with zipfile.ZipFile(io.BytesIO(raw)) as bundle:
         members = bundle.infolist()
         names = [member.filename for member in members]
-        if len(names) != len(set(names)) or set(names) != set(PAYLOAD_FILES):
-            raise ValueError("Release ZIP must contain exactly the 13 expected skill files, without duplicates")
+        if len(names) != len(set(names)) or set(names) not in (set(PAYLOAD_FILES), set(SUITE_FILES)):
+            raise ValueError("Release ZIP must contain exactly a reviewed skill file list, without duplicates")
         if sum(member.file_size for member in members) > MAX_BYTES:
             raise ValueError("Release ZIP payload is too large")
         for member in members:
@@ -73,20 +97,24 @@ def read_release(archive, sha256_file):
                 raise ValueError(f"Release ZIP contains a linked or special member: {member.filename}")
         payload = {name: bundle.read(name) for name in sorted(names)}
     version = version_from_source(payload["story-codex/scripts/story.py"])
+    if set(payload) != set(payload_files(version)):
+        raise ValueError("Release ZIP file list does not match its version's reviewed layout")
     if archive.name != f"story-codex-{version}.zip":
         raise ValueError("Release ZIP filename differs from its runtime VERSION")
     return payload, version, sha256(raw)
 
 
 def wrapper_files(version):
+    files = payload_files(version)
+    name, repository = package_identity(version)
     manifest = {
-        "name": NAME, "version": version,
+        "name": name, "version": version,
         "description": "Complete Story Codex skill content for Chinese novel writing and review",
         "license": "MIT",
-        "repository": {"type": "git", "url": REPOSITORY},
-        "homepage": "https://github.com/Cuinings/story-skill#readme",
+        "repository": {"type": "git", "url": repository},
+        "homepage": repository.removesuffix(".git") + "#readme",
         "publishConfig": {"registry": REGISTRY},
-        "files": list(PAYLOAD_FILES),
+        "files": list(files),
     }
     readme = (
         f"# Story Codex {version}\n\n"
@@ -106,6 +134,26 @@ def wrapper_files(version):
         "See https://github.com/Cuinings/story-skill for setup and update instructions.\n\n"
         "License: MIT; the complete license is in `story-codex/LICENSE`.\n"
     )
+    if version != "0.3.0":
+        manifest["description"] = "Complete seven-skill Story Codex suite for Chinese novel writing and review"
+        readme = (
+            f"# Story Codex {version}\n\n"
+            "This npm package contains seven sibling skills: "
+            + ", ".join(f"`{name}/`" for name in SKILL_NAMES) + ". "
+            f"Its {len(files)} skill files preserve the exact bytes of the matching GitHub Release ZIP.\n\n"
+            "npm distributes content; it does not register skills with Codex. "
+            "Copy all seven complete skill directories into your project's `.agents/skills/`, "
+            "or follow the repository's managed suite installation instructions. "
+            "Do not copy only an individual task skill: its shared runtime is required.\n\n"
+            "In Codex, ask:\n\n```text\n"
+            f"使用 skill-installer 从 https://github.com/NingCui29/story-skill/tree/v{version}/skills "
+            "安装全部七个技能目录：" + "、".join(SKILL_NAMES) + "。\n```\n\n"
+            "The shared Python runtime is `story-codex/scripts/story.py`; npm does not install Python. "
+            "Project data and novels belong outside the skill installation directory.\n\n"
+            "GitHub Packages npm downloads require authentication. "
+            "See https://github.com/NingCui29/story-skill for setup and update instructions.\n\n"
+            "License: MIT; each skill contains its complete `LICENSE`.\n"
+        )
     return manifest, {
         "package.json": (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8"),
         "README.md": readme.encode("utf-8"),
@@ -138,7 +186,7 @@ def verify_tarball(archive, sha256_file, tarball, expected_manifest=None):
         if seen != set(expected_files):
             raise ValueError("npm tarball is missing expected files")
     result = {
-        "ok": True, "name": NAME, "version": version, "tarball": str(tarball),
+        "ok": True, "name": manifest["name"], "version": version, "tarball": str(tarball),
         "sha256": sha256(raw), "integrity": integrity(raw), "bytes": len(raw),
         "registry": REGISTRY, "archive_sha256": archive_sha,
         "payload_manifest": {name: sha256(content) for name, content in payload.items()},
@@ -188,10 +236,10 @@ def npm_pack(stage, destination):
 
 def build(archive, sha256_file, output_dir):
     payload, version, _ = read_release(archive, sha256_file)
-    _, wrapper = wrapper_files(version)
+    manifest, wrapper = wrapper_files(version)
     output_dir = Path(output_dir).expanduser().resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
-    filename = f"cuinings-story-codex-{version}.tgz"
+    filename = manifest["name"].removeprefix("@").replace("/", "-") + f"-{version}.tgz"
     with tempfile.TemporaryDirectory(prefix=".story-npm-stage-", dir=output_dir) as directory:
         stage = Path(directory)
         content, packed = stage / "content", stage / "packed"
@@ -202,7 +250,7 @@ def build(archive, sha256_file, output_dir):
             path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(raw)
         receipt = npm_pack(content, packed)
-        if receipt.get("filename") != filename or receipt.get("name") != NAME or receipt.get("version") != version:
+        if receipt.get("filename") != filename or receipt.get("name") != manifest["name"] or receipt.get("version") != version:
             raise ValueError("npm pack returned an unexpected filename or package identity")
         candidate = packed / filename
         if candidate.is_symlink() or not candidate.is_file():

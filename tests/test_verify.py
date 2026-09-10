@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import tempfile
 import unittest
+import zipfile
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -16,6 +17,38 @@ spec.loader.exec_module(verify)
 
 
 class VerificationEvidenceTests(unittest.TestCase):
+    def test_links_are_checked_in_specialized_skills(self):
+        with tempfile.TemporaryDirectory(prefix="story-suite-links-") as directory:
+            root = Path(directory)
+            skills = root / "skills"
+            core = skills / "story-codex"
+            review = skills / "story-codex-review"
+            core.mkdir(parents=True)
+            review.mkdir()
+            (core / "SKILL.md").write_text("# Core\n", encoding="utf-8")
+            (review / "SKILL.md").write_text(
+                "[shared](../story-codex/SKILL.md)\n[history](references/history.md)\n", encoding="utf-8")
+            with patch.object(verify, "ROOT", root), patch.object(verify, "SKILLS", skills):
+                result = verify.check_markdown_links()
+            self.assertEqual(result["status"], "failed")
+            self.assertEqual(result["links_checked"], 2)
+            self.assertEqual(result["missing"], [{"source": "skills/story-codex-review/SKILL.md",
+                                                 "target": "references/history.md", "exists": False}])
+
+    def test_archive_validation_covers_specialized_skill_bytes(self):
+        with tempfile.TemporaryDirectory(prefix="story-suite-archive-") as directory:
+            archive = Path(directory) / "story-codex-0.4.0.zip"
+            files = {"story-codex/SKILL.md": b"core", "story-codex-write/SKILL.md": b"writing"}
+            expected = {key: hashlib.sha256(raw).hexdigest() for key, raw in files.items()}
+            with zipfile.ZipFile(archive, "w") as bundle:
+                for name, raw in files.items():
+                    bundle.writestr(name, raw if name.startswith("story-codex/") else b"changed")
+            with patch.object(verify, "skill_files", return_value=expected), patch.object(verify, "package_module") as loader:
+                loader.return_value.current_version.return_value = "0.4.0"
+                result = verify.check_archive(archive)
+            self.assertEqual(result["status"], "failed")
+            self.assertEqual(result["changed"], ["story-codex-write/SKILL.md"])
+
     def test_counts_come_from_real_callbacks_including_failed_subtests(self):
         class Example(unittest.TestCase):
             def test_pass(self):

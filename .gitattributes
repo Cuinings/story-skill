@@ -2,5 +2,9 @@
 * text=auto
 
 # Preserve the exact bytes bound by release archives and evidence hashes.
-/.agents/skills/story-codex/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+/skills/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 /benchmarks/results/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
+
+# Reviewed example prose is hashed as LF bytes; Windows checkout must retain LF.
+/examples/**/*.md text eol=lf
+/examples/**/*.txt text eol=lf

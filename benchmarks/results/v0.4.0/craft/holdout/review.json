@@ -1,0 +1,216 @@
+{
+  "scope": {
+    "inputs": [
+      "holdout-brief.txt",
+      "holdout/scene.md"
+    ],
+    "single_version": true,
+    "blind": true,
+    "modified_source": false,
+    "compared_other_cases": false
+  },
+  "conclusion": {
+    "status": "scene_works_with_explicit_limits",
+    "trial_recommendation": "可继续试用；本例主体成立，单列义务属性未明确与给音风险未解决。",
+    "not_supported": [
+      "优于基线",
+      "流程稳定有效",
+      "模型整体能力判断",
+      "其他题材的表现判断"
+    ],
+    "rationale": "双方意愿与阻力可信，默认排班确实被撤回，有限协作通过动作确认，未靠新增资源消除代价。"
+  },
+  "length": {
+    "title_present": false,
+    "first_line_is_body": true,
+    "non_whitespace_visible_characters": 834,
+    "required_min": 700,
+    "required_max": 900,
+    "pass": true
+  },
+  "constraints": [
+    {
+      "item": "县文化馆排练后",
+      "status": "met",
+      "evidence": [
+        "县文化馆的排练室安静下来",
+        "沈老师合上琴盖"
+      ]
+    },
+    {
+      "item": "队长与钢琴伴奏商议下月安排",
+      "status": "substantively_met",
+      "evidence": [
+        "下个月还是四个周三",
+        "伴奏一栏都是她写好的“沈”"
+      ],
+      "note": "队长称谓未直说，但排班、曲目和报名协调职责充分支持。"
+    },
+    {
+      "item": "业余合唱队临近演出",
+      "status": "substantively_met_with_implicit_detail",
+      "evidence": [
+        "快演了",
+        "最后一回连服装走",
+        "那回唱完，队员不肯散"
+      ],
+      "note": "合唱与临近演出明确，业余性质主要由场景间接支持，没有相反设定。"
+    },
+    {
+      "item": "沈老师已决定不再每周到场",
+      "status": "met",
+      "evidence": [
+        "不再每周来。我想把周三晚上留给自己。",
+        "但不能一惦记，就得周周来。"
+      ]
+    },
+    {
+      "item": "既有伴奏为义务服务",
+      "status": "missing_explicit_evidence",
+      "evidence": [
+        "七年来这张表只换过日子，伴奏从没换过人。"
+      ],
+      "note": "长期固定到场不足以证明未取报酬。正文未明确义务属性。"
+    },
+    {
+      "item": "多年熟识并互相尊重",
+      "status": "met",
+      "evidence": [
+        "去年秋天，你也这么说。",
+        "那次是我没算数。",
+        "踏板垫我收了。"
+      ]
+    },
+    {
+      "item": "只写这一晚谈话与行动",
+      "status": "met",
+      "note": "简短回忆说明当下，没有另展开过去场景。"
+    },
+    {
+      "item": "不出现恶人、病危、争吵、突然帮手或免费新人",
+      "status": "met",
+      "note": "未出现禁项；边界协商未升级成争执。"
+    },
+    {
+      "item": "不得只用旁白总结谈妥",
+      "status": "met",
+      "evidence": [
+        "她划掉前三个“沈”，在最后一个旁边写了“待定”",
+        "沈老师从包里翻出记事本，查过才说"
+      ]
+    }
+  ],
+  "strengths": [
+    {
+      "quote": "压轴那首的副歌刚合齐，她在台前听了三个月，今晚才敢不打拍子，退下来听。",
+      "assessment": "赵宁不愿放弃新曲有具体投入与刚取得的成果作依据。"
+    },
+    {
+      "quote": "没有。还没想好干什么。",
+      "assessment": "沈老师不以另一项工作或危机为拒绝前提，个人时间本身就是可信的意愿。"
+    },
+    {
+      "quote": "今天那几个错音，我还会惦记。但不能一惦记，就得周周来。",
+      "assessment": "专业牵挂与自主边界同时存在，人物没有被写成冷淡，也没有因关心撤回决定。"
+    },
+    {
+      "quote": "去年秋天，你也这么说。",
+      "assessment": "多年关系带来实际信用问题，使再撑一个月的原方案失效。"
+    },
+    {
+      "quote": "这回写上停到——",
+      "assessment": "赵宁先重复旧办法，停笔与沈老师不看日期的动作使转变发生在现场。"
+    },
+    {
+      "quote": "她划掉前三个“沈”，在最后一个旁边写了“待定”",
+      "assessment": "谈话产生可核对的安排变化，不再默认占用对方时间。"
+    },
+    {
+      "quote": "别再替我答应加一场。",
+      "assessment": "一次合作保持明确边界，不抵消不再每周到场的决定。"
+    },
+    {
+      "quote": "新的撤掉，报名表已经报上去了。",
+      "assessment": "降低演出目标也有对外手续和承诺的阻力。"
+    },
+    {
+      "quote": "踏板垫我收了。",
+      "assessment": "熟人间的琐事分工保留温度，谈过拒绝后关系仍然可信。"
+    }
+  ],
+  "issues": [
+    {
+      "type": "constraint_evidence_gap",
+      "severity": "limited",
+      "brief_quote": "沈老师却已决定不再每周义务到场",
+      "closest_text_quote": "七年来这张表只换过日子，伴奏从没换过人。",
+      "assessment": "义务性质未明确；不能从固定多年到场推出无报酬。无需因此预设付钱解决，只记录正文事实缺项。"
+    },
+    {
+      "type": "unresolved_operational_risk",
+      "severity": "allowed_open_issue",
+      "evidence": [
+        "可你得有人给音。",
+        "我能听出大错。",
+        "所以先练那两首旧的。"
+      ],
+      "assessment": "旧曲降低难度，却未建立谁提供起音或如何组织准确排练；本题允许保留问题，不构成必须当晚解决的硬伤，但不能声称解法完整。"
+    },
+    {
+      "type": "minor_expression_limitation",
+      "severity": "minor",
+      "evidence": [
+        "琴盖上有一处白印，赵宁用指腹擦了擦，没擦掉。",
+        "试了两次，钥匙才对准锁孔。"
+      ],
+      "assessment": "迟疑与分神可信，但动作的特定关系信息较少，属于较通用的情绪表现；不影响场景成立。"
+    }
+  ],
+  "agency_and_consequences": {
+    "zhao_ning": {
+      "desire": "保住演出及练习三个月的新曲。",
+      "resistance": "沈老师已经决定退出每周服务，去年类似承诺失信，报名曲目又已提交。",
+      "choice": "撤销三次默认伴奏，保留一次待确认合练，准备申请换曲。",
+      "consequence": "需要独自承担部分排练与对外协调，接受新曲可能撤下及手续未获批的风险。"
+    },
+    "teacher_shen": {
+      "desire": "把周三晚上留给自己，同时仍关心合唱队。",
+      "resistance": "临近演出的现实困难以及多年合作形成的默认期待。",
+      "choice": "不恢复每周到场，只在查询日程后允许有限合作。",
+      "consequence": "仍可能提供一次合练，但不再接受赵宁默认增加场次。"
+    },
+    "actual_change": "前三个伴奏姓名被划掉；最后一次被改为待定并经询问日程；换曲需要赵宁次日申请。",
+    "not_resolved": [
+      "无人给音时的准确排练办法",
+      "换曲申请结果",
+      "最后一次合练的最终确认",
+      "演出效果"
+    ]
+  },
+  "solution_credibility": {
+    "assessment": "资源均来自现有条件且有上限，补救方向可信，执行闭环尚未完成。",
+    "existing_resources": [
+      "已经会唱的旧曲",
+      "赵宁能听出大错的带队能力",
+      "沈老师愿意考虑的一次有限合练",
+      "次日申请换曲的协调渠道"
+    ],
+    "no_unearned_helper": true,
+    "caution": "降低曲目难度不等于补齐给音能力，查到有空也不等于已完成合练。"
+  },
+  "dialogue_and_relationship": {
+    "assessment": "总体自然，尊重与边界并存，共同历史使劝说有具体阻力，收尾琐事使关系保持生活感。",
+    "evidence": [
+      "四次都不行？",
+      "您早就想好了？",
+      "那次是我没算数。",
+      "踏板垫我收了。",
+      "我又忘了。"
+    ]
+  },
+  "limitations": [
+    "仅一个题目一个版本，不能宣称优于基线或稳定有效。",
+    "未读取技能、过程、作者信息或其他版本。",
+    "仅作文本内因果与约束审查，没有验证真实音乐排练或演出执行。"
+  ]
+}

@@ -1,6 +1,0 @@
-interface:
-  display_name: "Story Codex"
-  short_description: "面向 Codex 的中文小说写作、拆解与修订，按需召回剧情并保存断点"
-  default_prompt: "使用 $story-codex 读取这本书的断点，按我的要求完成本次写作或分析。"
-policy:
-  allow_implicit_invocation: true

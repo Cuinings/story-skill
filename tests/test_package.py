@@ -13,6 +13,14 @@ package = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(package)
 
 
+def fixture_suite(source, version="2.4.6"):
+    for name in package.SUITE_FILES:
+        path = source / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(b"fixture content\n")
+    (source / "story-codex/scripts/story.py").write_bytes(f'VERSION = "{version}"\n'.encode())
+
+
 class PackageVersionTests(unittest.TestCase):
     def test_reads_literal_version_without_executing_runtime(self):
         source = b'VERSION = "2.4.6"\nraise RuntimeError("must not execute")\n'
@@ -26,11 +34,8 @@ class PackageVersionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="story-package-version-test-") as directory:
             root = Path(directory)
             source = root / "skill"
-            (source / "scripts").mkdir(parents=True)
+            fixture_suite(source)
             runtime = b'VERSION = "2.4.6"\n'
-            (source / "scripts/story.py").write_bytes(runtime)
-            (source / "SKILL.md").write_text("fixture", encoding="utf-8")
-            (root / "LICENSE").write_text("fixture license", encoding="utf-8")
             with patch.object(package, "ROOT", root), patch.object(package, "SOURCE", source):
                 result = package.package()
             archive_path = root / "dist/story-codex-2.4.6.zip"
@@ -43,9 +48,7 @@ class PackageVersionTests(unittest.TestCase):
         with tempfile.TemporaryDirectory(prefix="story-package-mismatch-test-") as directory:
             root = Path(directory)
             source = root / "skill"
-            (source / "scripts").mkdir(parents=True)
-            (source / "scripts/story.py").write_text('VERSION = "2.4.6"\n', encoding="utf-8")
-            (root / "LICENSE").write_text("fixture license", encoding="utf-8")
+            fixture_suite(source)
             output = root / "story-codex-2.4.5.zip"
             output.write_bytes(b"existing reviewed artifact")
             with patch.object(package, "ROOT", root), patch.object(package, "SOURCE", source):
@@ -60,11 +63,8 @@ class PackagePublicationTests(unittest.TestCase):
         self.addCleanup(self.temp.cleanup)
         self.root = Path(self.temp.name)
         self.source = self.root / "source"
-        (self.source / "scripts").mkdir(parents=True)
-        self.runtime = self.source / "scripts/story.py"
-        self.runtime.write_bytes(b'VERSION = "2.4.6"\n')
-        (self.source / "SKILL.md").write_bytes(b"skill fixture\n")
-        (self.root / "LICENSE").write_bytes(b"license fixture\n")
+        fixture_suite(self.source)
+        self.runtime = self.source / "story-codex/scripts/story.py"
         for name, value in (("ROOT", self.root), ("SOURCE", self.source)):
             patched = patch.object(package, name, value)
             patched.start()
@@ -80,7 +80,7 @@ class PackagePublicationTests(unittest.TestCase):
         self.assertEqual(self.output.read_bytes(), self.original)
         self.assertEqual(list(self.output.parent.glob(".story-codex-package-*.zip")), [])
         with zipfile.ZipFile(self.output) as archive:
-            self.assertEqual(len(archive.namelist()), 3)
+            self.assertEqual(len(archive.namelist()), len(package.SUITE_FILES))
             self.assertIsNone(archive.testzip())
 
     def test_partial_write_then_disk_full_preserves_previous_archive(self):
@@ -141,7 +141,7 @@ class PackagePublicationTests(unittest.TestCase):
             self.assertNotEqual(source, self.output)
             self.assertEqual(destination, self.output)
             with zipfile.ZipFile(source) as archive:
-                self.assertEqual(len(archive.namelist()), 3)
+                self.assertEqual(len(archive.namelist()), len(package.SUITE_FILES))
                 self.assertIsNone(archive.testzip())
             return real_replace(source, destination)
 
@@ -152,6 +152,25 @@ class PackagePublicationTests(unittest.TestCase):
         self.assertEqual(second["sha256"], hashlib.sha256(self.output.read_bytes()).hexdigest())
         self.assertEqual(second["bytes"], self.output.stat().st_size)
         self.assert_old_archive_preserved()
+
+    def test_unknown_payload_file_or_missing_dependency_preserves_previous_archive(self):
+        extra = self.source / "story-codex-write/private-draft.md"
+        extra.write_bytes(b"must never be shipped")
+        with self.assertRaisesRegex(ValueError, "reviewed file manifest"):
+            package.package()
+        self.assert_old_archive_preserved()
+        extra.unlink()
+        (self.source / "story-codex-cover/SKILL.md").unlink()
+        with self.assertRaisesRegex(ValueError, "reviewed file manifest"):
+            package.package()
+        self.assert_old_archive_preserved()
+
+    def test_sibling_project_material_is_never_packaged(self):
+        draft = self.source / "my-novel/draft.md"
+        draft.parent.mkdir()
+        draft.write_bytes(b"book manuscript")
+        result = package.package()
+        self.assertEqual(result["sha256"], self.first["sha256"])
 
 
 if __name__ == "__main__":

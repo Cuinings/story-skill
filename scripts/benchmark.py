@@ -45,7 +45,7 @@ def inventory(root, paths, enc):
 
 
 def synthetic_context(enc):
-    spec = importlib.util.spec_from_file_location("story_benchmark", ROOT / ".agents/skills/story-codex/scripts/story.py")
+    spec = importlib.util.spec_from_file_location("story_benchmark", ROOT / "skills/story-codex/scripts/story.py")
     story = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(story)
     with tempfile.TemporaryDirectory(prefix="story-context-benchmark-") as directory:
@@ -99,7 +99,7 @@ def benchmark(upstream, output):
                          "candidate_tokens": b, "reduction_percent": round((1 - b / a) * 100, 2),
                          "upstream_files": before, "candidate_files": after, "scope": item["scope"]})
     upstream_skills = sorted((upstream / "skills").glob("*/SKILL.md"))
-    candidate_skills = sorted((ROOT / ".agents/skills").glob("*/SKILL.md"))
+    candidate_skills = sorted((ROOT / "skills").glob("*/SKILL.md"))
     discovery = {"upstream_skills": len(upstream_skills), "candidate_skills": len(candidate_skills),
                  "upstream_name_description_tokens": sum(len(enc.encode(metadata(p), disallowed_special=())) for p in upstream_skills),
                  "candidate_name_description_tokens": sum(len(enc.encode(metadata(p), disallowed_special=())) for p in candidate_skills),
@@ -129,7 +129,7 @@ def benchmark(upstream, output):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--upstream", required=True)
-    p.add_argument("--output", default=str(ROOT / "benchmarks/results"))
+    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.4.0"))
     args = p.parse_args()
     print(json.dumps(benchmark(args.upstream, args.output), ensure_ascii=False))
 

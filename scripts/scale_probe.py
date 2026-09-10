@@ -21,9 +21,9 @@ from unittest.mock import patch
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TOOL = ROOT / ".agents/skills/story-codex/scripts/story.py"
+TOOL = ROOT / "skills/story-codex/scripts/story.py"
 BASELINE = ROOT / "benchmarks/results/scaling.json"
-DEFAULT_OUTPUT = ROOT / "benchmarks/results/scaling-v0.3.json"
+DEFAULT_OUTPUT = ROOT / "benchmarks/results/v0.4.0/scaling.json"
 
 
 def load_module(name, path):

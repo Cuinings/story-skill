@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Python314\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\before\\skills\\story-codex\\scripts\\story.py",
+    "lint",
+    "--chapter",
+    "2",
+    "--draft",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer\\.story\\drafts\\0002.md",
+    "--book",
+    "C:\\Users\\Work\\AppData\\Local\\Temp\\story-serial-eval-8wuy07z0\\writer"
+  ],
+  "exit_status": 0,
+  "stdout": "{\"count_method\":\"visible_nonspace_v1\",\"count_scope\":\"body_and_lead_without_first_h1\",\"counts\":{\"han_v1\":2019,\"letters_numbers_v1\":2019,\"visible_nonspace_v1\":2343},\"draft_sha256\":\"f5f61397a0c16530773b15bb7668c4a68997bb81ca618b2aea767c029c2de259\",\"errors\":[],\"length_count\":2343,\"ok\":true,\"unicode_version\":\"16.0.0\",\"visible_chars\":2343,\"warnings\":[]}\n",
+  "stderr": ""
+}
