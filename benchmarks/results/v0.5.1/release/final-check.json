@@ -1,0 +1,32 @@
+{
+  "ok": true,
+  "date": "2026-09-10T11:09:40.750550+00:00",
+  "release_commit": "4fd53f80e26efc0eadda50b62edaf34a046d363a",
+  "published_at": "2026-09-10T11:04:42Z",
+  "historical_results_checked": 696,
+  "historical_results_unchanged": true,
+  "candidate_code_and_tests_unchanged": true,
+  "current_global_skill_payload_matches_release": true,
+  "payload_files": 33,
+  "markdown_links": {
+    "status": "passed",
+    "files_scanned": 130,
+    "links_checked": 543,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "cleanup": {
+    "temporary_npm_shim_sha256": "a42a3d44f2df5c53cca2ee29222241ded4e72d548e9711b1fd75e2c114e95fe6",
+    "temporary_npm_shim_removed": true,
+    "ci_watch_log_sha256": "615379b08b3ba410f5633b3949462823090d567cfd080a48ca1f5a3e2a24d860",
+    "ci_watch_temporary_log_removed": true,
+    "full_ci_log_retained": "ci-log.txt"
+  },
+  "scope": "Post-publication document links, frozen code/test/skill bytes, historical evidence and successful download/install/package receipts. No repeat of unchanged runtime tests.",
+  "independent_current_document_review": {
+    "documents": 20,
+    "local_links_and_anchors": 345,
+    "issues": 0,
+    "scope": "Current guide and release documentation before adding final-check navigation and replacing the README capacity table with already-verified v0.5.1 results."
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "date": "2026-09-10T11:04:34.291176+00:00",
+  "release_commit": "4fd53f80e26efc0eadda50b62edaf34a046d363a",
+  "run_id": 34469193018,
+  "url": "https://github.com/NingCui29/story-skill/actions/runs/34469193018",
+  "workflow_conclusion": "failure",
+  "release_platform_scope": [
+    "macOS",
+    "Linux"
+  ],
+  "linux": {
+    "conclusion": "success",
+    "tests_run": 397,
+    "passed": 385,
+    "skipped": 12,
+    "failed": 0,
+    "all_job_steps_successful": true
+  },
+  "windows": {
+    "conclusion": "failure",
+    "tests_run": 8,
+    "passed": 7,
+    "failed": 1,
+    "stopped_at_first_failure": true,
+    "known_failure": "WinError 32 during analysis report export; Windows remains on v0.4.0."
+  },
+  "candidate_code_and_skill_files_match_commit": true,
+  "raw_run": "ci-run.json",
+  "raw_log": "ci-log.txt"
+}

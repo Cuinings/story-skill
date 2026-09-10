@@ -1,13 +1,13 @@
 {
   "version": "0.5.1",
-  "status": "preparing",
+  "status": "published_and_verified",
   "release_url": "https://github.com/NingCui29/story-skill/releases/tag/v0.5.1",
   "target_platforms": [
     "macOS",
     "Linux"
   ],
   "windows": "Known WinError32 export limitation remains; use v0.4.0.",
-  "tag_commit": null,
+  "tag_commit": "4fd53f80e26efc0eadda50b62edaf34a046d363a",
   "local_verification": {
     "status": "passed",
     "report": "../verification.json",
@@ -17,8 +17,60 @@
     "failed": 0,
     "errors": 0
   },
-  "remote_ci": "pending",
-  "release_assets": "pending",
-  "fixed_tag_install": "pending",
-  "packages": "pending"
+  "remote_ci": {
+    "date": "2026-09-10T11:04:34.291176+00:00",
+    "release_commit": "4fd53f80e26efc0eadda50b62edaf34a046d363a",
+    "run_id": 34469193018,
+    "url": "https://github.com/NingCui29/story-skill/actions/runs/34469193018",
+    "workflow_conclusion": "failure",
+    "release_platform_scope": [
+      "macOS",
+      "Linux"
+    ],
+    "linux": {
+      "conclusion": "success",
+      "tests_run": 397,
+      "passed": 385,
+      "skipped": 12,
+      "failed": 0,
+      "all_job_steps_successful": true
+    },
+    "windows": {
+      "conclusion": "failure",
+      "tests_run": 8,
+      "passed": 7,
+      "failed": 1,
+      "stopped_at_first_failure": true,
+      "known_failure": "WinError 32 during analysis report export; Windows remains on v0.4.0."
+    },
+    "candidate_code_and_skill_files_match_commit": true,
+    "raw_run": "ci-run.json",
+    "raw_log": "ci-log.txt"
+  },
+  "release_assets": {
+    "status": "passed",
+    "report": "release.json",
+    "files": 33,
+    "sha256": "419aa4277c609c5626862cdf5a78c6d6f7d67bbef17d018f53ad64dea225900c"
+  },
+  "fixed_tag_install": {
+    "status": "passed",
+    "report": "remote-install.json",
+    "skills": 7,
+    "files": 33,
+    "runtime_checks": 4
+  },
+  "packages": {
+    "status": "passed",
+    "report": "packages.json",
+    "independent_check": "package-check.json",
+    "workflow_run": 34469387622,
+    "visibility": "public",
+    "version": "0.5.1",
+    "sha256": "e6bd3e5a28f69accfd559892dd2ef9e19b4a3eebc2e79575c99761e3aeee2b7d"
+  },
+  "candidate_commit": "4fd53f80e26efc0eadda50b62edaf34a046d363a",
+  "published_at": "2026-09-10T11:04:42Z",
+  "updated_at": "2026-09-10T11:08:02.145301+00:00",
+  "completion_scope": "Published Release, fixed tag, public package, independent downloads and isolated installation; macOS/Linux validation. Windows CI retains the known failure."
 }

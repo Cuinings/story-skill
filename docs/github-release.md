@@ -4,17 +4,25 @@
 
 ## v0.5.1 发布验证记录
 
-当前正在准备发布。[逐项状态](../benchmarks/results/v0.5.1/release/state.json) 区分本地验证、固定标签、远端 CI、Release 附件、安装及 GitHub Packages；尚未完成的环节不记为通过。历史 v0.5.0 和更早回执保留在下文，不能替代本版结果。
+v0.5.1 已于 **2026-09-10 19:04:42（北京时间）** 发布。[逐项状态](../benchmarks/results/v0.5.1/release/state.json) 记录本地验证、固定标签、远端 CI、Release 附件、安装及 GitHub Packages。发布按 macOS／Linux 通过范围完成；Windows 保留已知失败，不将整个 CI 写成全平台通过。历史回执保留在下文。
 
-| 环节 | 当前证据 |
+| 环节 | 实际结果与证据 |
 |---|---|
-| 本地 ZIP | [打包回执](../benchmarks/results/v0.5.1/package.json)：7 个技能、33 个文件，SHA-256 `419aa4277c609c5626862cdf5a78c6d6f7d67bbef17d018f53ad64dea225900c` |
-| npm 构建 | [本地构建](../benchmarks/results/v0.5.1/npm-package.json)，发布和回下载独立记录 |
+| 本地工程与安装 | Intel macOS／Python 3.12：397 项测试中 390 项通过、7 项按条件跳过、零失败或错误；12 项整包检查通过。[完整回执](../benchmarks/results/v0.5.1/verification.json) |
+| 百万／千万字容量 | 400／4,000 章，2,000／20,000 张卡片，strict／local 四组合通过。[合成容量回执](../benchmarks/results/v0.5.1/scaling.json) |
 | v0.5.0→v0.5.1 升级 | [升级回执](../benchmarks/results/v0.5.1/upgrade.json)，保留完整旧版、小说与其他技能 |
 | schema 1 迁移 | [三类合成夹具](../benchmarks/results/v0.5.1/migration.json)，不冒充缺失历史实书重验 |
 | 指令成本 | [重新测量](../benchmarks/results/v0.5.1/tokens.md)：普通／多线写作 5,330／7,097 tokens，深读／含示范 4,518／6,527 tokens |
-| 完整工程与平台 | [本版验证导航](../benchmarks/results/v0.5.1/README.md)，本机与远端分别记录 |
+| 固定标签提交 | `v0.5.1` → `4fd53f80e26efc0eadda50b62edaf34a046d363a`，[标签解析回执](../benchmarks/results/v0.5.1/release/tag.json)。固定标签不随后续发布文档更新移动 |
+| 发布提交的 Linux／Windows CI | [CI 34469193018](https://github.com/NingCui29/story-skill/actions/runs/34469193018)：Linux 397 项中 385 通过、12 平台跳过，全部步骤成功；Windows 执行 8 项、7 通过、1 失败，在已知报告导出 WinError 32 处停止。[分项回执](../benchmarks/results/v0.5.1/release/ci.json) · [原始运行](../benchmarks/results/v0.5.1/release/ci-run.json) · [完整日志](../benchmarks/results/v0.5.1/release/ci-log.txt) |
+| GitHub Release 与附件 | [v0.5.1](https://github.com/NingCui29/story-skill/releases/tag/v0.5.1) 已发布；ZIP 及校验文件回下载通过，7 个技能、33 个文件与源码和本地包逐字节一致。[发布核验](../benchmarks/results/v0.5.1/release/release.json) · [本地构建](../benchmarks/results/v0.5.1/package.json) |
+| 官方固定标签安装 | 官方安装器固定 `v0.5.1`，隔离安装 7 个技能、33 个文件，与 Release 和源码一致；版本、帮助、初始化、状态四项 CLI 全通过，临时数据已清理。[安装回执](../benchmarks/results/v0.5.1/release/remote-install.json) |
+| GitHub Packages | [工作流 34469387622](https://github.com/NingCui29/story-skill/actions/runs/34469387622) 成功发布公开包 `@ningcui29/story-codex@0.5.1`，关联当前仓库；注册表回下载的 33 个技能文件及 2 个包装文件与预先构建包一致，四项 CLI 检查通过。[原始发布回执](../benchmarks/results/v0.5.1/release/packages.json) · [本地独立复核](../benchmarks/results/v0.5.1/release/package-check.json) |
 | 作品深读 | [专项评估与限制](作品深读与评估.md)，程序核验和独立模型评阅分开，不作大师认证 |
+
+ZIP SHA-256 为 `419aa4277c609c5626862cdf5a78c6d6f7d67bbef17d018f53ad64dea225900c`；npm 回下载 tarball 为 `e6bd3e5a28f69accfd559892dd2ef9e19b4a3eebc2e79575c99761e3aeee2b7d`，与本地构建字节一致。Actions 归档回执与 tarball 下载后又在本机独立核对了文件、SHA-512 及四项 CLI。[工作流记录](../benchmarks/results/v0.5.1/release/packages-workflow.json) · [归档信息](../benchmarks/results/v0.5.1/release/packages-artifacts.json)。GitHub npm 下载仍需认证，npm 本身不注册 Codex 技能。
+
+安装与回下载验证没有更改全局技能或用户小说。它们验证分发和运行时，不代表 Codex UI 自动发现、文学质量或 Windows 通过。[安装指引](../INSTALL.md) 已登记远端固定标签提交和校验摘要。标签内文档保留发布前快照，main 上的本页与验证回执记录随后完成的发布结果；技能和生产脚本与已验证发布提交保持一致。
 
 ## v0.5.0 发布验证记录
 
@@ -99,7 +107,7 @@ python3 "<skill-installer目录>/scripts/install-skill-from-github.py" --repo Ni
 
 macOS／Linux 需要独立源码时，先克隆到一个不存在的新目录。Windows 暂用 v0.4.0，将下面的标签与目录后缀一并改为 v0.4.0：
 
-```powershell
+```bash
 git clone --branch v0.5.1 --depth 1 https://github.com/NingCui29/story-skill.git story-skill-v0.5.1
 ```
 
@@ -111,7 +119,7 @@ python3 -B -X utf8 scripts/install.py --project "/Users/作者/小说/我的写�
 
 默认安装整套：`story-codex`、`story-codex-plan`、`story-codex-write`、`story-codex-analyze`、`story-codex-review`、`story-codex-research`、`story-codex-cover`。6 个专用技能读取同级核心的共同约束，使用核心的 `scripts/story.py`；不要分别复制不同版本。
 
-若在开发仓库本身试用，运行 `python -B -X utf8 scripts/install.py --project "."`。根 `.agents/skills/` 是安装副本，受 Git 忽略；它不会替代 `skills/` 源码，也不会随源码编辑自动更新。克隆新版仓库后仍需安装，再在 Codex 的下一条消息调用技能；未显示时重启 Codex。
+若在开发仓库本身试用，运行 `python3 -B -X utf8 scripts/install.py --project "."`。根 `.agents/skills/` 是安装副本，受 Git 忽略；它不会替代 `skills/` 源码，也不会随源码编辑自动更新。克隆新版仓库后仍需安装，再在 Codex 的下一条消息调用技能；未显示时重启 Codex。
 
 ## 手动复查：从 0.3.0／0.4.0 升级到 0.5.1
 
@@ -152,14 +160,14 @@ $skill-installer https://github.com/NingCui29/story-skill/tree/v0.3.0/.agents/sk
 
 本节说明可复用的发布顺序；具体执行结果以对应提交的 Actions、Release 和 Packages 回执为准。先核对 7 份入口和相对引用、整套安装/更新/恢复、ZIP 与 npm 白名单、新 token 输入清单及下载后的 CLI 验证。保留已发布版本的固定 tag、附件和历史测量，不覆盖已有版本。
 
-在 PowerShell 中逐条运行并检查结果：
+在 macOS／Linux 终端中逐条运行并检查结果：
 
-```powershell
+```bash
 git status --short
 git remote -v
-python -B -X utf8 scripts/smoke.py
-python -B -X utf8 scripts/long_acceptance.py
-python -B -X utf8 scripts/package.py
+python3 -B -X utf8 scripts/smoke.py
+python3 -B -X utf8 scripts/long_acceptance.py
+python3 -B -X utf8 scripts/package.py
 ```
 
 单元测试所需旧 ZIP 已随 [测试夹具](../tests/fixtures/README.md) 保存；`migrate_probe.py` 默认使用固定旧工具生成的三类 schema 1 合成夹具，用 `--source` 复查历史实书时需另备相应旧数据库。`verify.py` 校验报告的当前哈希绑定。v0.5.1 新证据保存到 `benchmarks/results/v0.5.1/`，包括本版 token 输入清单和百万／千万字 strict、local 容量结果。历史 [v0.4.0 token 测量](../benchmarks/results/v0.4.0/tokens.md) 与其他旧回执保持原样；运行时或技能文本变化后，不能将旧版测试数及 token 百分比改名为新版结果。
@@ -188,9 +196,9 @@ python -B -X utf8 scripts/package.py
 python3 -B -X utf8 scripts/sync_packages.py --tag v0.3.0 --prepare-only
 ```
 
-待本版发布状态确认同步和回下载完成后，可按 GitHub npm 要求认证并下载 0.5.1 内容包：
+本版已完成同步与回下载验证，可按 GitHub npm 要求认证并下载 0.5.1 内容包：
 
-```powershell
+```bash
 npm pack @ningcui29/story-codex@0.5.1 --registry=https://npm.pkg.github.com
 ```
 

@@ -4,7 +4,7 @@
 
 面向 **Codex 的中文小说技能套件**。按开书规划、正文写作、作品分析、审稿、资料研究和封面分工，共用一套断点、状态和证据工具。作者用自然语言提要求，Codex 维护稿件和进度。
 
-**v0.5.1：作品深读、分析示范与修订续跑。** 七个技能共 33 个文件，沿用具名分卷和固定章节文件名。新增前后文回读、竞争解释、人物情境核对及有适用条件的写法提炼，并明确已定稿分析的独立修订与恢复方式。[版本说明](docs/releases/v0.5.1.md) · [实际发布状态](docs/github-release.md)。Python 3.10+ · 标准库运行时 · MIT License。
+**v0.5.1 已发布：作品深读、分析示范与修订续跑。** 七个技能共 33 个文件，沿用具名分卷和固定章节文件名。新增前后文回读、竞争解释、人物情境核对及有适用条件的写法提炼，并明确已定稿分析的独立修订与恢复方式。[版本说明](docs/releases/v0.5.1.md) · [实际发布状态](docs/github-release.md)。Python 3.10+ · 标准库运行时 · MIT License。
 
 已完成两轮探索性评估、争议修订、迁移试用及《阿Q正傳》完整九章试用；程序核验与独立模型评阅分开记录，不宣称“大师级”认证或稳定质量提升。[作品深读与评估](docs/作品深读与评估.md)
 
@@ -57,7 +57,7 @@ Codex 先读取 [安装指引](INSTALL.md)，再调用官方安装脚本，自�
 
 本机官方安装器默认放到 `$CODEX_HOME/skills`（未设置时为 `~/.codex/skills`）；其他环境请以其安装器和实际技能目录为准。官方脚本仍会拒绝覆盖同名目录，升级处理由 Codex 按指引编排，**没有给官方脚本增加 `--update` 参数，也不修改系统 skill**。完成后下一条消息即可点名使用；未显示时重启 Codex。[手动安装参数与升级细节](docs/github-release.md)
 
-v0.5.1 套件附件名为 `story-codex-0.5.1.zip`，附独立 SHA-256 校验文件，共 7 个技能、33 个文件。[Release 与附件](https://github.com/NingCui29/story-skill/releases/tag/v0.5.1) 按 [安装指引](INSTALL.md) 核验，下载、安装与注册表结果分别见 [发布记录](docs/github-release.md)。发布准备期间不安装尚未完成的目标。GitHub 自动生成的 Source code ZIP 是整个源码仓库；历史版本附件保持原样。
+v0.5.1 套件附件名为 `story-codex-0.5.1.zip`，附独立 SHA-256 校验文件，共 7 个技能、33 个文件。[Release 与附件](https://github.com/NingCui29/story-skill/releases/tag/v0.5.1) 按 [安装指引](INSTALL.md) 核验，下载、安装与注册表结果分别见 [发布记录](docs/github-release.md)。Release 附件已回下载并与源码逐字节核对，官方固定标签隔离安装及四项运行时检查通过。GitHub 自动生成的 Source code ZIP 是整个源码仓库；历史版本附件保持原样。
 
 6 个专用技能依赖同级的 `story-codex`：共同约束和 `scripts/story.py` 只维护一份。优先整套安装，避免只下载一份 `SKILL.md`。缺少核心时，在同一安装父目录补装同一版本的 `story-codex`；已有同名技能先保留旧版与本地修改，不能混用新专用技能和 v0.3.0 核心。
 
@@ -145,14 +145,14 @@ v0.4.0 验收另完成《空船照夜》连续三章与新会话第4章续写，
 
 默认 `strict` 完整哈希核验历史导出，成本随全书增长。显式使用 `--integrity local` 时只核验当前和待导出文件，并报告未核验的历史数量；`exports_complete: null` 不表示全书通过。新会话、故障恢复、外部改稿与阶段交付运行完整 `audit`。
 
-**本节容量范围为百万／千万字合成夹具；本版结果见 [v0.5.1 验证记录](benchmarks/results/v0.5.1/README.md)。以下保留 v0.5.0 的已完成历史结果：**
+**本节容量范围为百万／千万字合成夹具，以下为 v0.5.1 重新执行的结果：**
 
-| 合成正文规模 | 章节数 | 状态卡数 | v0.5.0 结果 |
+| 合成正文规模 | 章节数 | 状态卡数 | v0.5.1 结果 |
 |---|---:|---:|---|
 | 100 万字 | 400 | 2,000 | strict / local 均通过 |
 | 1,000 万字 | 4,000 | 20,000 | strict / local 均通过 |
 
-这些是重复汉字与受控状态的容量夹具，四种规模／模式组合均通过，必需内容超预算时明确拒绝。它们不能等同于千万字小说的长期创作验证，也不提供吞吐保证。[v0.5.0 容量原始数据](benchmarks/results/v0.5.0/scaling.json) · [v0.4.0 历史容量](benchmarks/results/v0.4.0/scaling.json) · [验收边界](docs/超长篇验收.md)
+这些是重复汉字与受控状态的容量夹具，四种规模／模式组合均通过，必需内容超预算时明确拒绝。它们不能等同于千万字小说的长期创作验证，也不提供吞吐保证。[v0.5.1 容量原始数据](benchmarks/results/v0.5.1/scaling.json) · [v0.5.0 历史容量](benchmarks/results/v0.5.0/scaling.json) · [v0.4.0 历史容量](benchmarks/results/v0.4.0/scaling.json) · [验收边界](docs/超长篇验收.md)
 
 ## Token 与验证证据
 
@@ -172,7 +172,7 @@ v0.4.0 验收另完成《空船照夜》连续三章与新会话第4章续写，
 
 统计不含正文、推理、工具结果、宿主提示或实际小说上下文，不代表总账单降幅；也不能据此证明小说质量更高。旧技能仍启用时，它们的发现开销也仍然存在。[实际用量与质量评估方法](docs/evaluation.md)
 
-v0.5.1 已重新执行旧版套件升级、三类合成旧库迁移与指令测量；完整工程检查和远端分发状态见 [本版验证记录](benchmarks/results/v0.5.1/README.md)。分析专项覆盖合成材料、两篇真实短篇及《阿Q正傳》九章，独立模型评阅保留原稿、争议与限制。[分析证据](docs/作品深读与评估.md)
+v0.5.1 本地 397 项测试中 390 项通过、7 项按条件跳过，12 项整包检查通过；远端 Linux 397 项中 385 项通过、12 项按平台跳过，全部步骤成功。旧版套件升级、三类合成旧库迁移和四种容量组合通过；完整工程检查和远端分发状态见 [本版验证记录](benchmarks/results/v0.5.1/README.md)。分析专项覆盖合成材料、两篇真实短篇及《阿Q正傳》九章，独立模型评阅保留原稿、争议与限制。[分析证据](docs/作品深读与评估.md)
 
 历史 v0.5.0 已完成正式 v0.4.0 套件到 v0.5.0 的真实安装升级，18 项检查通过，覆盖完整旧版保留、七入口更新、重复升级不重复写入、书籍和其他技能不变。另用固定 v0.2.0 工具生成长篇、短篇导入和拆文三类 schema 1 中文夹具，验证迁移与回滚；本机缺少原有三本旧库，本次结果不能称为历史实书重验。[本版升级回执](benchmarks/results/v0.5.0/upgrade.json) · [合成旧库迁移](benchmarks/results/v0.5.0/migration.json)。修复后的本地 macOS／Python 3.12 回归完成 **379 项测试：372 项通过、7 项平台专用测试跳过、零失败或错误**。同一代码的 12 项整包检查和四组合容量复验全部通过。[最终验收回执](benchmarks/results/v0.5.0/verification.json)。[远端 CI](benchmarks/results/v0.5.0/release/ci.json) 的 Linux 检查通过；Windows 导出仍有已知失败。已用 v0.5.0 处理的书先完整备份，不盲目降级。[发布记录](docs/github-release.md)
 
@@ -194,14 +194,14 @@ v0.5.0 曾补齐 Windows 大小写等价路径检查、目录句柄权限和异�
 
 ```bash
 python3 -B -X utf8 scripts/smoke.py
-python -B -X utf8 scripts/long_acceptance.py
-python -B -X utf8 scripts/package.py
+python3 -B -X utf8 scripts/long_acceptance.py
+python3 -B -X utf8 scripts/package.py
 ```
 
-单元测试所需的旧版迁移 ZIP 已作为带 SHA-256 的 [固定夹具](tests/fixtures/README.md) 随仓库保存，新 clone 可直接运行 `python -B -X utf8 -m unittest discover -s tests`。[CI](.github/workflows/ci.yml) 配置了 Linux/Python 3.10 与 Windows/Python 3.12 的回归、打包和冒烟检查，远端执行结果以 Actions 为准。CI 还包含已审中文样稿与多线历史修订的 CLI 演练；样稿固定 LF 检出以保留原审稿哈希。`migrate_probe.py` 默认用固定旧工具生成长篇、短篇导入和拆文三类 schema 1 合成夹具，无需另备旧库；用 `--source` 复查历史实书时才需要提供保留的旧数据库。完整验证核对报告与当前文件的哈希绑定；复现 token 基准需要 `requirements-dev.txt` 中的可选依赖与固定上游副本。
+单元测试所需的旧版迁移 ZIP 已作为带 SHA-256 的 [固定夹具](tests/fixtures/README.md) 随仓库保存，新 clone 可直接运行 `python3 -B -X utf8 -m unittest discover -s tests`。[CI](.github/workflows/ci.yml) 配置了 Linux/Python 3.10 与 Windows/Python 3.12 的回归、打包和冒烟检查，远端执行结果以 Actions 为准。CI 还包含已审中文样稿与多线历史修订的 CLI 演练；样稿固定 LF 检出以保留原审稿哈希。`migrate_probe.py` 默认用固定旧工具生成长篇、短篇导入和拆文三类 schema 1 合成夹具，无需另备旧库；用 `--source` 复查历史实书时才需要提供保留的旧数据库。完整验证核对报告与当前文件的哈希绑定；复现 token 基准需要 `requirements-dev.txt` 中的可选依赖与固定上游副本。
 
 ## GitHub Packages 与许可
 
-当前仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)，v0.5.1 对应 npm 包 `@ningcui29/story-codex@0.5.1`。Release 发布、Packages 同步与注册表回下载分别核验，实际完成状态见 [发布记录](docs/github-release.md)。历史 v0.5.0 的公开包、31 个技能文件与四项 CLI 检查保留 [原回执](benchmarks/results/v0.5.0/release/package-check.json)，不能替代本版结果。Codex 安装优先使用固定 tag 或套件 ZIP；npm 不会自动注册技能，GitHub npm 下载仍需认证。
+当前仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)，v0.5.1 对应 npm 包 `@ningcui29/story-codex@0.5.1`。Release 与公开 Packages 均已发布，回下载 ZIP、npm 的 33 个技能文件与源码一致，npm 的 2 个包装文件也匹配，本地独立启动复核通过；实际完成状态见 [发布记录](docs/github-release.md)。历史 v0.5.0 的公开包、31 个技能文件与四项 CLI 检查保留 [原回执](benchmarks/results/v0.5.0/release/package-check.json)，不能替代本版结果。Codex 安装优先使用固定 tag 或套件 ZIP；npm 不会自动注册技能，GitHub npm 下载仍需认证。
 
 本项目分析 [oh-story-claudecode](https://github.com/zenstory-ai/oh-story-claudecode) 的公开流程后独立实现，未拷贝其小说 demo、参考教程或运行时代码。尚未通过同题盲评证明文笔优于原项目。[上游分析与设计取舍](docs/upstream-analysis.md) · [MIT License](LICENSE)
