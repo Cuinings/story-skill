@@ -1,0 +1,221 @@
+{
+  "conclusion": "failure",
+  "headSha": "e50065d4220a8a78b3a53f8ff94647388aa1e664",
+  "jobs": [
+    {
+      "completedAt": "2026-09-10T06:18:46Z",
+      "conclusion": "failure",
+      "databaseId": 102766619968,
+      "name": "test (windows-latest, 3.12)",
+      "startedAt": "2026-09-10T06:18:27Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-10T06:18:28Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-10T06:18:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:36Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-09-10T06:18:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:36Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 3,
+          "startedAt": "2026-09-10T06:18:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:43Z",
+          "conclusion": "failure",
+          "name": "Run regression tests including historical migration",
+          "number": 4,
+          "startedAt": "2026-09-10T06:18:36Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:43Z",
+          "conclusion": "skipped",
+          "name": "Build the complete skill ZIP",
+          "number": 5,
+          "startedAt": "2026-09-10T06:18:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:43Z",
+          "conclusion": "skipped",
+          "name": "Exercise the local CLI workflow",
+          "number": 6,
+          "startedAt": "2026-09-10T06:18:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:43Z",
+          "conclusion": "skipped",
+          "name": "Replay the reviewed Chinese manuscripts",
+          "number": 7,
+          "startedAt": "2026-09-10T06:18:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:43Z",
+          "conclusion": "skipped",
+          "name": "Exercise multi-line writing and historical revision",
+          "number": 8,
+          "startedAt": "2026-09-10T06:18:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:43Z",
+          "conclusion": "skipped",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 15,
+          "startedAt": "2026-09-10T06:18:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:45Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 16,
+          "startedAt": "2026-09-10T06:18:43Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:45Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-09-10T06:18:45Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/NingCui29/story-skill/actions/runs/34444622625/job/102766619968"
+    },
+    {
+      "completedAt": "2026-09-10T06:19:13Z",
+      "conclusion": "success",
+      "databaseId": 102766620137,
+      "name": "test (ubuntu-latest, 3.10)",
+      "startedAt": "2026-09-10T06:18:27Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-10T06:18:29Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-10T06:18:28Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:31Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-09-10T06:18:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:31Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 3,
+          "startedAt": "2026-09-10T06:18:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:57Z",
+          "conclusion": "success",
+          "name": "Run regression tests including historical migration",
+          "number": 4,
+          "startedAt": "2026-09-10T06:18:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:58Z",
+          "conclusion": "success",
+          "name": "Build the complete skill ZIP",
+          "number": 5,
+          "startedAt": "2026-09-10T06:18:57Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:18:59Z",
+          "conclusion": "success",
+          "name": "Exercise the local CLI workflow",
+          "number": 6,
+          "startedAt": "2026-09-10T06:18:58Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:19:05Z",
+          "conclusion": "success",
+          "name": "Replay the reviewed Chinese manuscripts",
+          "number": 7,
+          "startedAt": "2026-09-10T06:18:59Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:19:11Z",
+          "conclusion": "success",
+          "name": "Exercise multi-line writing and historical revision",
+          "number": 8,
+          "startedAt": "2026-09-10T06:19:05Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:19:12Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 15,
+          "startedAt": "2026-09-10T06:19:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:19:12Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 16,
+          "startedAt": "2026-09-10T06:19:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:19:12Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-09-10T06:19:12Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/NingCui29/story-skill/actions/runs/34444622625/job/102766620137"
+    }
+  ],
+  "status": "completed",
+  "url": "https://github.com/NingCui29/story-skill/actions/runs/34444622625",
+  "scope": "Unbuffered diagnostic attempt for the strengthened Windows directory pin. Linux passed; Windows completed with a failure after 8 tests. The report export remained pending because ordinary os.rename of the temporary file returned WinError 32 while its parent was pinned. No Release/tag was created.",
+  "previous_attempt": {
+    "run_id": 34444413670,
+    "head_sha": "e4905635f84fe4794474b183db468f02dfdf4806",
+    "windows_tests_run": 8,
+    "failure": "exports_complete was False; assertion did not yet include the receipt"
+  },
+  "windows_failure": {
+    "test": "test_analysis_recovery.AnalysisRecoveryTests.test_leading_blank_lines_complete_without_losing_source",
+    "tests_run": 8,
+    "failures": 1,
+    "winerror": 32,
+    "operation": "same-directory rename of .story-tmp-* to report.md",
+    "result": "exports_complete=False; retained recovery state"
+  }
+}
