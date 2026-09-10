@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "version": "0.5.0",
-  "date": "2026-09-10T05:32:41.929973+00:00",
+  "date": "2026-09-10T06:11:29.074493+00:00",
   "ok": true,
   "mode": "generated-schema1-fixtures",
   "scope": "Synthetic Chinese schema1 fixtures created by the fixed v0.2.0 runtime; not retained historical book databases",
@@ -14,7 +14,7 @@
     "sha256": "efdfd997ecac9564fc737b22df8969c7770858a354084132c7d1ce274486a37e"
   },
   "runtime": {
-    "story.py": "ee0307996b0a5b20276e74cd1885ddff3a856fafd4c977ad65a8459947886cab",
+    "story.py": "e75752fef5b0edaacf0edead35024e90149e0d659906d5153d30f4f2fb74c647",
     "story_world.py": "26ff12ff415753592aff933b4236095735706c9aac58a1c479312b66e4d3e74a",
     "story_search.py": "c6e42f53da29da1bea44e2b141a05400352a6fd064e3e79c28e6ccbd4bd19ff6",
     "story_history.py": "17c9ba82ab72f2d7b3a6679b6f7ca27bfe193ad8c9fa772ca19f6a93ff52739a",
@@ -24,7 +24,7 @@
     {
       "title": "合成迁移长篇",
       "kind": "long",
-      "book_id": "b1d3d467-2f3f-43dd-b834-98c82c5aa7f3",
+      "book_id": "2a2eb8f7-d64b-44dc-acad-95b97863694e",
       "revision": 2,
       "last_chapter": 1,
       "sources": 0,
@@ -37,7 +37,7 @@
     {
       "title": "合成迁移短篇",
       "kind": "short",
-      "book_id": "6958afd4-7727-4419-b854-964b0623564f",
+      "book_id": "b91c34e3-bb97-4b1e-89b7-c5c0be60aa79",
       "revision": 1,
       "last_chapter": 1,
       "sources": 0,
@@ -50,7 +50,7 @@
     {
       "title": "合成迁移拆文",
       "kind": "analysis",
-      "book_id": "2c5eb35b-6aa5-4afc-bbe0-032b80424990",
+      "book_id": "c49aa851-0fcb-454f-a964-f8ad135e00e8",
       "revision": 2,
       "last_chapter": 0,
       "sources": 1,
@@ -61,7 +61,7 @@
       "old_runtime_rollback_copy_verified": true
     }
   ],
-  "source_inventory_sha256": "6d01eb1a9b2c18e7e763eb2c4b1eb82137d0842d478d9b848e006dbf83bba515",
+  "source_inventory_sha256": "223bc551525a4079d406361aa7b35be75e7c1f41ce0c5c1c33404567e3cf4810",
   "original_tree_unchanged": true,
   "runtime_stable": true
 }

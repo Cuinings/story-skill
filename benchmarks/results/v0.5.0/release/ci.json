@@ -1,0 +1,250 @@
+{
+  "conclusion": "failure",
+  "createdAt": "2026-09-10T06:27:08Z",
+  "databaseId": 34445253308,
+  "event": "push",
+  "headSha": "908fde046fd51d65d4a99ebd549613aad783f97f",
+  "jobs": [
+    {
+      "completedAt": "2026-09-10T06:28:03Z",
+      "conclusion": "success",
+      "databaseId": 102768545116,
+      "name": "test (ubuntu-latest, 3.10)",
+      "startedAt": "2026-09-10T06:27:10Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-10T06:27:12Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-10T06:27:11Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:13Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-09-10T06:27:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:13Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 3,
+          "startedAt": "2026-09-10T06:27:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:13Z",
+          "conclusion": "skipped",
+          "name": "Diagnose Windows directory-bound publication",
+          "number": 4,
+          "startedAt": "2026-09-10T06:27:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:44Z",
+          "conclusion": "success",
+          "name": "Run regression tests including historical migration",
+          "number": 5,
+          "startedAt": "2026-09-10T06:27:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:44Z",
+          "conclusion": "success",
+          "name": "Build the complete skill ZIP",
+          "number": 6,
+          "startedAt": "2026-09-10T06:27:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:46Z",
+          "conclusion": "success",
+          "name": "Exercise the local CLI workflow",
+          "number": 7,
+          "startedAt": "2026-09-10T06:27:44Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:54Z",
+          "conclusion": "success",
+          "name": "Replay the reviewed Chinese manuscripts",
+          "number": 8,
+          "startedAt": "2026-09-10T06:27:46Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:28:01Z",
+          "conclusion": "success",
+          "name": "Exercise multi-line writing and historical revision",
+          "number": 9,
+          "startedAt": "2026-09-10T06:27:54Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:28:02Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 17,
+          "startedAt": "2026-09-10T06:28:01Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:28:02Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 18,
+          "startedAt": "2026-09-10T06:28:02Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:28:02Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-09-10T06:28:02Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/NingCui29/story-skill/actions/runs/34445253308/job/102768545116",
+      "unit_tests": {
+        "run": 379,
+        "passed": 367,
+        "skipped": 12,
+        "failures": 0,
+        "errors": 0
+      },
+      "package": {
+        "archive": "/home/runner/work/story-skill/story-skill/dist/story-codex-0.5.0.zip",
+        "version": "0.5.0",
+        "files": 31,
+        "sha256": "d65504d907110ad59fa465566f7374991a216c03cdd42edc81b19ddcc87810a8",
+        "bytes": 101293
+      }
+    },
+    {
+      "completedAt": "2026-09-10T06:27:30Z",
+      "conclusion": "failure",
+      "databaseId": 102768545220,
+      "name": "test (windows-latest, 3.12)",
+      "startedAt": "2026-09-10T06:27:11Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-10T06:27:13Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-10T06:27:12Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:20Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-09-10T06:27:13Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:20Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 3,
+          "startedAt": "2026-09-10T06:27:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:22Z",
+          "conclusion": "success",
+          "name": "Diagnose Windows directory-bound publication",
+          "number": 4,
+          "startedAt": "2026-09-10T06:27:20Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:27Z",
+          "conclusion": "failure",
+          "name": "Run regression tests including historical migration",
+          "number": 5,
+          "startedAt": "2026-09-10T06:27:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:27Z",
+          "conclusion": "skipped",
+          "name": "Build the complete skill ZIP",
+          "number": 6,
+          "startedAt": "2026-09-10T06:27:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:27Z",
+          "conclusion": "skipped",
+          "name": "Exercise the local CLI workflow",
+          "number": 7,
+          "startedAt": "2026-09-10T06:27:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:27Z",
+          "conclusion": "skipped",
+          "name": "Replay the reviewed Chinese manuscripts",
+          "number": 8,
+          "startedAt": "2026-09-10T06:27:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:27Z",
+          "conclusion": "skipped",
+          "name": "Exercise multi-line writing and historical revision",
+          "number": 9,
+          "startedAt": "2026-09-10T06:27:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:27Z",
+          "conclusion": "skipped",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 17,
+          "startedAt": "2026-09-10T06:27:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:29Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 18,
+          "startedAt": "2026-09-10T06:27:27Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-10T06:27:29Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 19,
+          "startedAt": "2026-09-10T06:27:29Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/NingCui29/story-skill/actions/runs/34445253308/job/102768545220",
+      "unit_tests": {
+        "run": 8,
+        "passed": 7,
+        "skipped": 0,
+        "failures": 1,
+        "errors": 0
+      }
+    }
+  ],
+  "status": "completed",
+  "updatedAt": "2026-09-10T06:28:04Z",
+  "url": "https://github.com/NingCui29/story-skill/actions/runs/34445253308",
+  "scope": "This CI verified the same 31 skill payload files distributed in v0.5.0. Linux passed; Windows failed and is a documented current limitation. This is not a successful cross-platform CI claim. The final publication commit also updates documentation/evidence and removes the temporary diagnostic script; no unverified Windows rewrite is included.",
+  "release_payload_sha256": "d65504d907110ad59fa465566f7374991a216c03cdd42edc81b19ddcc87810a8",
+  "log_sha256": "033483a3e0ba058946148f1f493fea36b41d189ef099aa6f6da4bfb91f9786a7"
+}

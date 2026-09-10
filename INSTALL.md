@@ -1,5 +1,7 @@
 # 一行安装或升级 Story Codex
 
+**平台选择：macOS／Linux 使用 v0.5.0。Windows 正文及报告导出存在 WinError 32，会保留待恢复状态；Windows 用户暂用已验证的 v0.4.0，不自动升级到 v0.5.0。** [现存限制与证据](docs/releases/v0.5.0.md#平台限制)
+
 把这一行发给 Codex，首次安装和后续升级都使用它：
 
 ```text
@@ -12,18 +14,21 @@ Codex 读取本页，定位安装位置，下载并核对完整套件：没有�
 
 ## 固定的发布来源
 
-本页为 **v0.5.0 发布准备指引**。本版尚待固定标签及 Release 附件核验；在下表补齐真实提交与 SHA-256、并将状态标记为已验证前，不执行 v0.5.0 的自动安装或升级，也不报告发布完成。历史已发布版见 [v0.4.0 验证记录](docs/github-release.md#历史-v040-发布验证记录)。一次安装过程中固定使用同一标签及其解析出的提交。用户指定版本时，以该版本的实际布局为准。已安装版本明确高于目标时，停止自动降级并说明情况。
+macOS／Linux 按下表安装或升级到 v0.5.0；先核验固定标签解析出的提交和实际下载附件，下载或摘要不符时保留原安装。Windows 保持或安装固定 v0.4.0，不自动升级至 v0.5.0。已经在 Windows 安装 0.5.0 时先保留技能备份和书籍状态，不自动降级或覆盖待恢复文件。[v0.4.0 验证记录](docs/github-release.md#历史-v040-发布验证记录)。一次安装过程中固定使用同一标签及其解析出的提交；已安装版本高于平台目标时，停止自动降级并说明情况。
 
 | 参数 | 值 |
 |---|---|
 | 仓库 | `NingCui29/story-skill` |
-| 目标标签 | `v0.5.0` |
-| 发布状态 | 准备中，待远端发布与下载核验 |
+| macOS／Linux 目标标签 | `v0.5.0` |
+| 发布状态 | [v0.5.0 Release](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0)，远端发布及下载回执待登记 |
 | 标签提交 | 待发布后核验并填写 |
 | Python | 3.10 或更高 |
 | 目标载荷 | 7 个同级技能目录，共 31 个文件；本地打包已核验 |
-| Release ZIP | `story-codex-0.5.0.zip`，待发布后核验下载地址 |
-| 本地构建 ZIP 的 SHA-256 | `9406c9808a88f3cb80b4c9de2bf787c15bdf63f9a8c6ec6e841ccfc931e6eca0`；待与远端下载核对 |
+| Release ZIP | [story-codex-0.5.0.zip](https://github.com/NingCui29/story-skill/releases/download/v0.5.0/story-codex-0.5.0.zip) · [校验文件](https://github.com/NingCui29/story-skill/releases/download/v0.5.0/story-codex-0.5.0.zip.sha256) |
+| 本地构建 ZIP 的 SHA-256 | `d65504d907110ad59fa465566f7374991a216c03cdd42edc81b19ddcc87810a8`；待与远端下载核对 |
+| Windows 固定标签／提交 | `v0.4.0`／`c1b3c3377573610a191e165ceb6866ae35afe5a8` |
+| Windows 套件／校验文件 | [story-codex-0.4.0.zip](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip) · [校验文件](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip.sha256) |
+| Windows 套件 SHA-256 | `087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a76ae20aff7d54b`；7 个技能、31 个文件 |
 
 完整路径清单由 Codex 使用，用户不用逐个填写：
 
@@ -41,7 +46,7 @@ skills/story-codex-cover
 
 1. **确定唯一目标。** 尊重用户指定的项目或 skills 父目录。升级已有安装时使用原位置；可检查当前项目及本机官方安装器默认的用户级 skills 目录，无需扫描所有磁盘。没有旧安装也没有指定位置时，采用该安装器的默认用户目录。若发现多份安装且无法确定用户所指，再询问具体位置。记录解析后的绝对路径，只处理上面七个名称，保留其他技能。
 
-2. **先准备完整新版。** 找到并读取本机 `skill-installer`，使用它的官方脚本，先安装到新建的隔离临时目录。展开全部七个 `--path`，固定 `--ref v0.5.0`；`--dest` 是临时 skills 父目录。下载本版 Release ZIP 及其同名 `.zip.sha256` 校验文件，核对上表的 SHA-256，再逐文件比较临时安装与 ZIP。ZIP 中的成员必须是这七个目录内的普通文件，拒绝绝对路径、路径越界及链接。核对七份 `SKILL.md`、共享运行时及全部 31 个文件后再操作目标。下载或验证失败时，保留原安装。
+2. **先准备完整新版。** 找到并读取本机 `skill-installer`，使用它的官方脚本，先安装到新建的隔离临时目录。展开全部七个 `--path`，macOS／Linux 固定 `--ref v0.5.0`，Windows 固定 `--ref v0.4.0`；`--dest` 是临时 skills 父目录。下载所选平台目标版本的 Release ZIP 及其同名 `.zip.sha256` 校验文件，核对上表的 SHA-256，再逐文件比较临时安装与 ZIP。ZIP 中的成员必须是这七个目录内的普通文件，检查原始成员名，拒绝路径规范化前就不安全的名字、绝对路径、路径越界及链接。核对七份 `SKILL.md`、共享运行时及全部 31 个文件后再操作目标。下载或验证失败时，保留原安装。
 
 3. **判断是否需要更新。** 比较七个目标目录与验证后的新版，包括文件集合及字节。比对时可忽略本项目安装器的 `.story-codex-install.json`、Python 的 `__pycache__` 和 `.pyc`；其他额外文件属于本地内容。七个目录都存在且载荷完全一致时，报告当前版本已安装并结束，不重复覆盖或制造备份。部分安装、旧版或本地修改则进入下一步。版本读取使用文本解析，先不要执行尚未核验的旧脚本。
 
@@ -55,13 +60,13 @@ skills/story-codex-cover
 
 5. **处理失败与并发保存。** 记录本次移动和新建的每个目录。移动旧版中途失败时，优先将已移动目录恢复到仍空缺的原位置。新版安装或核验失败时，只撤回内容仍等于本次输出的新目录，并保留到临时恢复位置，然后恢复备份；原位置已出现新文件或本次输出已被别人修改时，保留两份并报告具体路径，不覆盖或删除外部修改。不得把部分成功报告成整套成功。文档编排依赖执行者逐步核验，不承诺为官方脚本增加事务或并发锁。
 
-6. **核验并报告。** 再次比对目标的七个技能及 31 个载荷文件与已验证 ZIP。使用新核心的 `scripts/story.py` 在隔离临时书目录执行 `--version`、`--help`、`init` 和 `status`；只将版本 `0.5.0`、全部文件和四个命令都通过的结果报告为成功。汇报安装位置、版本、新装／升级／无需更新、备份位置及本地修改差异。告诉用户技能可在下一条消息使用；未显示时重启 Codex。
+6. **核验并报告。** 再次比对目标的七个技能及 31 个载荷文件与已验证 ZIP。使用新核心的 `scripts/story.py` 在隔离临时书目录执行 `--version`、`--help`、`init` 和 `status`；只将版本与本次平台目标一致（macOS／Linux 为 `0.5.0`，Windows 为 `0.4.0`）、全部文件和四个命令都通过的结果报告为成功。汇报安装位置、版本、新装／升级／无需更新、备份位置及本地修改差异。告诉用户技能可在下一条消息使用；未显示时重启 Codex。
 
-以上操作只更新技能文件。已有 0.3.0／0.4.0 书库无需重新导入，小说正文、书籍状态和创作约定保留在原位置；旧导出不会自动批量移动。新增正文按 `chapters/第一卷 雨夜/第1章 雨中来客.md` 这样的具名分卷路径保存，实际输出路径以工具回执为准。[本版变化与兼容说明](docs/releases/v0.5.0.md)
+以上操作只更新技能文件。已有 0.3.0／0.4.0 书库无需重新导入，小说正文、书籍状态和创作约定保留在原位置；旧导出不会自动批量移动。v0.5.0 新增正文按 `chapters/第一卷 雨夜/第1章 雨中来客.md` 这样的具名分卷路径保存，实际输出路径以工具回执为准。[本版变化与兼容说明](docs/releases/v0.5.0.md)
 
 ## 官方脚本参数示例
 
-本版发布核验完成后，下列参数用于第 2 步的隔离下载；Codex 应替换本机安装器位置与新建的临时目录：
+下列参数用于 macOS／Linux 的第 2 步隔离下载；Windows 将 `--ref v0.5.0` 改为 `--ref v0.4.0`，七个路径不变。Codex 应替换本机安装器位置与新建的临时目录：
 
 ```powershell
 python "<skill-installer目录>/scripts/install-skill-from-github.py" --repo NingCui29/story-skill --ref v0.5.0 --path skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover --dest "<隔离临时目录>/skills"

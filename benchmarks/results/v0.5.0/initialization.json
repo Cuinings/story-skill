@@ -1,0 +1,71 @@
+{
+  "environment": {
+    "platform": "macOS-15.7.9-x86_64-i386-64bit",
+    "python": "3.12.14",
+    "sqlite": "3.53.1"
+  },
+  "scope": "Eight local sequential initializations per version in independent temporary books; includes schema and metadata with SQLite default durability; not Windows timing",
+  "before": {
+    "seconds": [
+      0.1132514729979448,
+      0.10348594500101171,
+      0.108259309999994,
+      0.10608886599948164,
+      0.11269405300845392,
+      0.10256276800646447,
+      0.10773469400010072,
+      0.10673881899856497
+    ],
+    "median_seconds": 0.10723675649933284,
+    "schema_statements": 88,
+    "schema_statements_outside_transaction": 88,
+    "source_binding": {
+      "reference_commit": "8311b947d2d9dd46c2e0be0287786bc6c06e2076",
+      "path": "skills/story-codex/scripts/story.py",
+      "function": "Book.create",
+      "function_sha256": "509e050c52a84b8ca1f86be2a58f189f89349f2f2aabe629a8f1f33439b1e94a",
+      "hash_scope": "UTF-8 source bytes from @classmethod through the method return, including original line endings.",
+      "relationship": "The measured working-tree Book.create method before the edit matches this committed method; the measurement did not run a separately checked-out commit.",
+      "whole_runtime_sha256_at_measurement": null,
+      "whole_runtime_note": "A whole-file before hash was not captured during measurement; concurrent unrelated working-tree helper changes are not attributed to the reference commit."
+    }
+  },
+  "after": {
+    "seconds": [
+      0.01345884300826583,
+      0.01314186499803327,
+      0.013119018010911532,
+      0.012286930999835022,
+      0.01312480699562002,
+      0.01346073301101569,
+      0.012766074010869488,
+      0.012571213010232896
+    ],
+    "median_seconds": 0.013121912503265776,
+    "schema_statements": 88,
+    "schema_statements_outside_transaction": 0,
+    "explicit_commit_count": 1,
+    "source_binding": {
+      "path": "skills/story-codex/scripts/story.py",
+      "runtime_sha256": "e75752fef5b0edaacf0edead35024e90149e0d659906d5153d30f4f2fb74c647",
+      "runtime_hash_scope": "Current working-tree story.py bytes when this evidence binding was recorded.",
+      "function": "Book.create",
+      "function_sha256": "2fed4dcb2d88ee48fb538c93f30c9e19f962c66e184e783ab690903e6df170c7",
+      "hash_scope": "UTF-8 source bytes from @classmethod through the method return, including original line endings.",
+      "relationship": "The measured post-edit Book.create method is unchanged in the current working tree."
+    }
+  },
+  "median_speedup_local": 8.172341986935502,
+  "schema": 1,
+  "date": "2026-09-10T06:14:15.695482+00:00",
+  "date_scope": "Evidence binding recorded after the unchanged timing samples; measurements were taken on 2026-09-10.",
+  "method": {
+    "sample_count_per_phase": 8,
+    "processes": "Before and after were separate Python invocations loading the then-current working-tree story.py through importlib.util; no isolated git checkout was measured.",
+    "invocation": "For i in range(8): start = time.perf_counter(); story.Book.create(root / str(i), \"初始化合成夹具\", \"long\"); elapsed = time.perf_counter() - start",
+    "directories": "Each phase used its own TemporaryDirectory; each numbered book directory was previously absent. The temporary root was resolved before use.",
+    "trace": "Before timing, each phase created one additional untimed book with sqlite3.set_trace_callback. CREATE statement counts and in_transaction were observed there; after also counted the explicit COMMIT. Timed calls did not install a trace callback.",
+    "durability": "No synchronous or journal-mode setting was changed. The before method executes schema outside an explicit transaction; the after method runs schema plus initial metadata inside one BEGIN IMMEDIATE transaction.",
+    "limitations": "Eight sequential local samples per phase, with no cache flush, randomized interleaving, or Windows execution; not an account of total CI time or physical disk operations."
+  }
+}

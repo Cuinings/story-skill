@@ -1,6 +1,6 @@
 # 安装、升级与 GitHub 发布
 
-仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)。**v0.5.0 正在准备发布，新增正文具名分卷、固定章节文件名及相关恢复保护。** 保留 7 个技能入口和旧书兼容。安装目标为新的固定标签 `v0.5.0`，须完成下表核验后启用；历史标签和附件不移动、不替换。[本版变化](releases/v0.5.0.md) · [文档导航](README.md)
+仓库为 [NingCui29/story-skill](https://github.com/NingCui29/story-skill)。**v0.5.0 新增正文具名分卷、固定章节文件名及相关恢复保护，macOS／Linux 验证通过。Windows 正文与报告导出存在 WinError 32，会保留待恢复状态，Windows 用户暂缓升级、保留现有 v0.4.0。已用 v0.5.0 处理的书先完整备份，不盲目降级。** 保留 7 个技能入口和旧书兼容。macOS／Linux 安装固定标签 `v0.5.0`，Windows 安装固定标签 `v0.4.0`；历史标签和附件不移动、不替换。[本版变化](releases/v0.5.0.md) · [文档导航](README.md)
 
 ## v0.5.0 发布验证记录
 
@@ -8,20 +8,27 @@
 
 | 环节 | 当前状态 |
 |---|---|
-| 本地软件与 CLI 验证 | [macOS／Python 3.12 回执](../benchmarks/results/v0.5.0/verification.json)：375 项测试中 368 项通过、7 项平台专用测试跳过、零失败或错误；12 项整包检查全部通过，涵盖七入口元数据、隔离完整安装、三类 CLI 演练、包和报告哈希 |
-| 本地打包 | [打包回执](../benchmarks/results/v0.5.0/package.json) 已核验 7 个技能、31 个载荷文件；ZIP SHA-256 为 `9406c9808a88f3cb80b4c9de2bf787c15bdf63f9a8c6ec6e841ccfc931e6eca0` |
-| 百万／千万字合成容量 | [本版回执](../benchmarks/results/v0.5.0/scaling.json)：400／4,000 章、2,000／20,000 张卡片，两种规模的 strict／local 四组合均通过 |
+| 本地软件与 CLI 验证 | 修复后 macOS／Python 3.12 回归：379 项测试中 372 项通过、7 项平台专用测试跳过、零失败或错误；同一代码的 12 项整包检查全部通过，[最终回执](../benchmarks/results/v0.5.0/verification.json) 已刷新 |
+| 本地打包 | [打包回执](../benchmarks/results/v0.5.0/package.json) 已核验 7 个技能、31 个载荷文件；ZIP SHA-256 为 `d65504d907110ad59fa465566f7374991a216c03cdd42edc81b19ddcc87810a8` |
+| 百万／千万字合成容量 | 修复后的 [本版回执](../benchmarks/results/v0.5.0/scaling.json) 已通过百万／千万字的 strict、local 四组合 |
+| 开书初始化 | [单事务及本地测量](../benchmarks/results/v0.5.0/initialization.json)：88 条建表相关语句与初始元数据一次提交，保留持久化设置；测量仅含每阶段八次 macOS 样本 |
 | 旧版升级 | [v0.4.0→v0.5.0 回执](../benchmarks/results/v0.5.0/upgrade.json)：18 项检查通过，完整旧版保留、七入口更新、重复执行、书籍与其他技能不变 |
 | schema 1 迁移与回滚 | [合成迁移回执](../benchmarks/results/v0.5.0/migration.json)：固定 v0.2.0 生成长篇、短篇导入、拆文三类夹具；原三本历史书库缺失，未将合成结果称为实书重验 |
 | 本地 npm 包 | [构建回执](../benchmarks/results/v0.5.0/npm-package.json)：身份为 `@ningcui29/story-codex@0.5.0`，31 个技能文件与 ZIP 一致；尚未证明注册表发布与下载 |
 | 指令 token | [本版测量](../benchmarks/results/v0.5.0/tokens.md) 已生成，普通／多线写作为 5,324／7,091 tokens；输入文件哈希核验通过 |
 | 固定标签提交 | 待核验 `v0.5.0` 的实际提交 |
-| 发布提交的 Linux／Windows CI | 待推送后核验；本轮目录句柄保护尚未完成原生 Windows 验证 |
+| 发布提交的 Linux／Windows CI | [CI 回执](../benchmarks/results/v0.5.0/release/ci.json)：Linux 379 项中 367 通过、12 平台跳过，全部步骤成功；Windows 执行 8 项、7 通过、1 失败，导出 WinError 32。该 CI 与发布包的 31 个技能文件一致，未宣称最终标签全平台通过 |
 | GitHub Release 与附件 | 待发布 `story-codex-0.5.0.zip` 及 `.zip.sha256`，再核对实际下载内容 |
 | 公共固定标签安装 | 待在隔离目录下载整套并逐文件核对，再检查版本、帮助、初始化和状态 |
 | GitHub Packages | 待同步 `@ningcui29/story-codex@0.5.0`，并回下载核对包身份、摘要与载荷 |
 
 本地检查、远端 CI、Release 附件、实际安装和注册表下载分别验收；只完成其中一项，不将其他项标为通过。[统一安装指引](../INSTALL.md) 中的提交将在标签核验后填入；已登记的本地 ZIP 摘要还需与远端下载核对。
+
+首轮候选提交 `56cb3d109734b8b261fee25ca389494d1d7bc8cb` 的 [CI 34442222281](https://github.com/NingCui29/story-skill/actions/runs/34442222281) 中，Linux 完成，Windows 达到 20 分钟时限，未输出完整单测汇总；进度中的 6 个失败标记来自 4 个测试方法，不能算作 6 项完整测试结果。[首轮未完成回执](../benchmarks/results/v0.5.0/release/ci-first-incomplete.json)。随后 [诊断 CI 34443655732](https://github.com/NingCui29/story-skill/actions/runs/34443655732) 在 Windows 首个失败处停止，确认大小写等价路径错误分类不符。[诊断失败回执](../benchmarks/results/v0.5.0/release/ci-diagnostic-failed.json)。这些候选均未据此创建正式发布。
+
+修复保留三项具体变化：Windows 路径比较不再用自动忽略大小写的相等结果跳过别名检查；目录句柄补齐遍历权限以建立重命名保护；ZIP 检查原始成员名，防止路径规范化掩盖异常输入。另将开书的表结构与元数据初始化合并为一次事务，新增回滚与第二连接可见性回归；八次本地测量见 [初始化证据](../benchmarks/results/v0.5.0/initialization.json)，不将其作为 Windows 耗时或整场 CI 加速的证明。本地复验已完成；Windows 的最终现存限制见下段。
+
+Windows 后续 [CI 34444622625](https://github.com/NingCui29/story-skill/actions/runs/34444622625) 确认目录句柄会使普通文件重命名返回 WinError 32，报告导出保留为待恢复状态。[导出失败回执](../benchmarks/results/v0.5.0/release/ci-windows-export-failed.json)。[原生 API 诊断](../benchmarks/results/v0.5.0/release/windows-api-probe.json) 只用于定位限制，没有作为本版的新实现或通过验收依据。v0.5.0 按当前 macOS／Linux 通过范围发布，停止本轮 Windows 修复与验证循环；Windows 安装指引继续固定 v0.4.0。
 
 ## 历史 v0.4.0 发布验证记录
 
@@ -50,13 +57,13 @@ Release ZIP 的 SHA-256 为 `087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a7
 $skill-installer 按 https://github.com/NingCui29/story-skill/blob/main/INSTALL.md 安装或升级 Story Codex
 ```
 
-Codex 先读取仓库 [INSTALL.md](../INSTALL.md)，按照其中的固定版本与 7 个路径调用官方安装脚本，并处理已有目录、完整备份、文件核对和失败恢复。main 上维护的是安装指引，目标载荷固定到 `v0.5.0`，本版发布核验完成后启用；该 Markdown 文件不是可直接传给官方脚本的技能目录。
+Codex 先读取仓库 [INSTALL.md](../INSTALL.md)，按照其中的固定版本与 7 个路径调用官方安装脚本，并处理已有目录、完整备份、文件核对和失败恢复。main 上维护的是安装指引，macOS／Linux 载荷固定到 `v0.5.0`，Windows 暂用 `v0.4.0`；该 Markdown 文件不是可直接传给官方脚本的技能目录。
 
 官方脚本没有 `--update`，遇到同名目录仍拒绝覆盖。统一入口通过 Codex 编排安装与升级步骤，不修改用户的系统 skill；本仓库项目安装器的 `--update` 是另一项已有能力，适用条件见下文。
 
 ## 手动复查：固定版本与安装器参数
 
-本机官方安装器支持一次 `--path` 接收多个路径。需要手动安装到没有同名技能的目录时，本版发布核验完成后使用以下参数；`<skill-installer目录>` 由 Codex 定位到本机实际路径：
+本机官方安装器支持一次 `--path` 接收多个路径。需要手动安装到没有同名技能的目录时，macOS／Linux 使用以下参数；Windows 将 `--ref` 改为 `v0.4.0`；`<skill-installer目录>` 由 Codex 定位到本机实际路径：
 
 ```powershell
 python "<skill-installer目录>/scripts/install-skill-from-github.py" --repo NingCui29/story-skill --ref v0.5.0 --path skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover
@@ -68,13 +75,13 @@ python "<skill-installer目录>/scripts/install-skill-from-github.py" --repo Nin
 
 安装后核对 7 个目录都包含 `SKILL.md`，核心包含 `scripts/story.py` 和其余 4 个运行时模块，再在下一条消息使用 `$story-codex-plan` 或其他专用入口；未显示时重启 Codex。Python 要求为 3.10+，运行时仅用标准库；Codex 自身的账号和额度另计。
 
-本版套件 ZIP 名为 `story-codex-0.5.0.zip`，附同名 `.zip.sha256`；下载链接和摘要在发布后登记到 [安装指引](../INSTALL.md)。附件按 7 个同级技能打包，实际载荷数量由本版打包结果核验；Source code ZIP 是 GitHub 自动生成的完整源码仓库，不能将整个仓库当成一个技能目录。
+本版套件 ZIP 名为 `story-codex-0.5.0.zip`，附同名 `.zip.sha256`；[Release 下载](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0) 的附件按 [安装指引](../INSTALL.md) 核验。附件按 7 个同级技能打包，实际载荷数量由本版打包结果核验；Source code ZIP 是 GitHub 自动生成的完整源码仓库，不能将整个仓库当成一个技能目录。
 
 ## 从源码安装到一个项目
 
 技能唯一源码位于仓库 `skills/`，共 7 个同级目录。仓库根 `scripts/install.py` 负责把它们安装到目标项目的 `.agents/skills/`；`--project` 指向项目根，不是 skills 父目录。[完整目录职责](目录结构.md)
 
-本版发布核验完成后，需要独立的固定版本源码时，先克隆到一个不存在的新目录：
+macOS／Linux 需要独立源码时，先克隆到一个不存在的新目录。Windows 暂用 v0.4.0，将下面的标签与目录后缀一并改为 v0.4.0：
 
 ```powershell
 git clone --branch v0.5.0 --depth 1 https://github.com/NingCui29/story-skill.git story-skill-v0.5.0

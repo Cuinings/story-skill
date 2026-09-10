@@ -1,8 +1,10 @@
 # Story Codex
 
+**平台：macOS／Linux 验证通过。v0.5.0 在 Windows 导出正文或报告时存在 WinError 32，会保留待恢复状态；Windows 用户暂缓升级，保留现有 [v0.4.0](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0)。**
+
 面向 **Codex 的中文小说技能套件**。按开书规划、正文写作、拆文、审稿、资料研究和封面分工，共用一套断点、状态和证据工具。作者用自然语言提要求，Codex 维护稿件和进度。
 
-**v0.5.0 发布准备：正文按具名分卷存放，章节统一命名，补齐改名、外部改稿与导出恢复保护。** 保留 7 个技能入口及旧书兼容；本版验证与远端发布状态见 [v0.5.0 说明](docs/releases/v0.5.0.md)。[发布验证记录](docs/github-release.md) 将本版结果与历史 v0.4.0 证据分开记录。Python 3.10+ · 标准库运行时 · MIT License。
+**v0.5.0：正文按具名分卷存放，章节统一命名，补齐改名、外部改稿与导出恢复保护。** 保留 7 个技能入口及旧书兼容；本版验证与远端发布状态见 [v0.5.0 说明](docs/releases/v0.5.0.md)。[发布验证记录](docs/github-release.md) 将本版结果与历史 v0.4.0 证据分开记录。Python 3.10+ · 标准库运行时 · MIT License。
 
 [文档导航](docs/README.md) · [目录结构与职责](docs/目录结构.md) · [中文上手指南](docs/中文小说上手.md) · [超长篇实操](docs/超长篇实操.md) · [全仓审查与优化](docs/全仓审查与优化.md) · [安装与发布](docs/github-release.md) · [v0.5.0 版本说明](docs/releases/v0.5.0.md)
 
@@ -49,11 +51,11 @@ D:/小说/我的写作项目/
 $skill-installer 按 https://github.com/NingCui29/story-skill/blob/main/INSTALL.md 安装或升级 Story Codex
 ```
 
-Codex 先读取 [安装指引](INSTALL.md)，再调用官方安装脚本，自动展开完整 7 个技能路径、核对已有安装并保留升级备份与本地修改。指引位于 main，目标技能载荷固定为 `v0.5.0`，无需用户列出 7 个路径。本版正在准备发布，须等安装指引补齐已核验的标签提交及附件摘要后执行新版安装。
+Codex 先读取 [安装指引](INSTALL.md)，再调用官方安装脚本，自动展开完整 7 个技能路径、核对已有安装并保留升级备份与本地修改。指引位于 main，目标技能载荷固定为 `v0.5.0`，无需用户列出 7 个路径。macOS／Linux 使用 v0.5.0；Windows 暂用固定 v0.4.0，安装器按平台选择并核验附件。
 
 本机官方安装器默认放到 `$CODEX_HOME/skills`（未设置时为 `~/.codex/skills`）；其他环境请以其安装器和实际技能目录为准。官方脚本仍会拒绝覆盖同名目录，升级处理由 Codex 按指引编排，**没有给官方脚本增加 `--update` 参数，也不修改系统 skill**。完成后下一条消息即可点名使用；未显示时重启 Codex。[手动安装参数与升级细节](docs/github-release.md)
 
-v0.5.0 套件附件名为 `story-codex-0.5.0.zip`，附独立 SHA-256 校验文件；下载地址与摘要在发布后核验并登记到 [安装指引](INSTALL.md)。本地打包已核验 7 个同级技能、31 个载荷文件；GitHub 自动生成的 Source code ZIP 是整个源码仓库。历史 [v0.4.0 Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0) 保留原附件。
+v0.5.0 套件附件名为 `story-codex-0.5.0.zip`，附独立 SHA-256 校验文件；[Release 与附件](https://github.com/NingCui29/story-skill/releases/tag/v0.5.0) 的实际下载按 [安装指引](INSTALL.md) 核验。本地打包已核验 7 个同级技能、31 个载荷文件；GitHub 自动生成的 Source code ZIP 是整个源码仓库。历史 [v0.4.0 Release](https://github.com/NingCui29/story-skill/releases/tag/v0.4.0) 保留原附件。
 
 6 个专用技能依赖同级的 `story-codex`：共同约束和 `scripts/story.py` 只维护一份。优先整套安装，避免只下载一份 `SKILL.md`。缺少核心时，在同一安装父目录补装同一版本的 `story-codex`；已有同名技能先保留旧版与本地修改，不能混用新专用技能和 v0.3.0 核心。
 
@@ -61,7 +63,7 @@ v0.5.0 套件附件名为 `story-codex-0.5.0.zip`，附独立 SHA-256 校验文�
 
 ### 安装到指定写作项目
 
-本版发布并核验后，在 **v0.5.0 源码仓库**目录运行：
+macOS／Linux 在 **v0.5.0 源码仓库**目录运行以下安装命令；Windows 使用 v0.4.0 源码。
 
 ```powershell
 python -B -X utf8 scripts/install.py --project "D:\小说\我的写作项目"
@@ -141,7 +143,7 @@ v0.4.0 验收另完成《空船照夜》连续三章与新会话第4章续写，
 
 默认 `strict` 完整哈希核验历史导出，成本随全书增长。显式使用 `--integrity local` 时只核验当前和待导出文件，并报告未核验的历史数量；`exports_complete: null` 不表示全书通过。新会话、故障恢复、外部改稿与阶段交付运行完整 `audit`。
 
-**以下为本地 v0.5.0 当前运行时重新执行的合成容量复验：**
+**以下为修复后的 v0.5.0 合成容量复验，四组合均通过：**
 
 | 合成正文规模 | 章节数 | 状态卡数 | v0.5.0 结果 |
 |---|---:|---:|---|
@@ -167,7 +169,7 @@ v0.5.0 已按当前技能及共同依赖重新测量，包含具名分卷、路�
 
 统计不含正文、推理、工具结果、宿主提示或实际小说上下文，不代表总账单降幅；也不能据此证明小说质量更高。旧技能仍启用时，它们的发现开销也仍然存在。[实际用量与质量评估方法](docs/evaluation.md)
 
-本版已完成正式 v0.4.0 套件到 v0.5.0 的真实安装升级，18 项检查通过，覆盖完整旧版保留、七入口更新、重复升级不重复写入、书籍和其他技能不变。另用固定 v0.2.0 工具生成长篇、短篇导入和拆文三类 schema 1 中文夹具，验证迁移与回滚；本机缺少原有三本旧库，本次结果不能称为历史实书重验。[本版升级回执](benchmarks/results/v0.5.0/upgrade.json) · [合成旧库迁移](benchmarks/results/v0.5.0/migration.json)。本地 macOS／Python 3.12 验收完成 **375 项测试：368 项通过、7 项平台专用测试跳过、零失败或错误，12 项整包检查全部通过**，覆盖七入口元数据、隔离完整安装、三类 CLI 演练、包与报告哈希核对。[v0.5.0 验收回执](benchmarks/results/v0.5.0/verification.json)。原生 Windows 的新目录句柄保护仍等待远端 CI 验证。
+本版已完成正式 v0.4.0 套件到 v0.5.0 的真实安装升级，18 项检查通过，覆盖完整旧版保留、七入口更新、重复升级不重复写入、书籍和其他技能不变。另用固定 v0.2.0 工具生成长篇、短篇导入和拆文三类 schema 1 中文夹具，验证迁移与回滚；本机缺少原有三本旧库，本次结果不能称为历史实书重验。[本版升级回执](benchmarks/results/v0.5.0/upgrade.json) · [合成旧库迁移](benchmarks/results/v0.5.0/migration.json)。修复后的本地 macOS／Python 3.12 回归完成 **379 项测试：372 项通过、7 项平台专用测试跳过、零失败或错误**。同一代码的 12 项整包检查和四组合容量复验全部通过。[最终验收回执](benchmarks/results/v0.5.0/verification.json)。[远端 CI](benchmarks/results/v0.5.0/release/ci.json) 的 Linux 检查通过；Windows 导出仍有已知失败。已用 v0.5.0 处理的书先完整备份，不盲目降级。[发布记录](docs/github-release.md)
 
 **v0.3.0 发布前**完成 226 项测试、12 项整包检查，以及中文实稿重放、75 次 CLI 调用的多线修订演练、三个旧工程副本迁移和 GitHub 安装核对。旧版安装的 13 个文件与当时 Release ZIP 一致。这些数字只描述 v0.3.0 验收，不代表后续版本结果。
 
@@ -176,6 +178,8 @@ v0.5.0 已按当前技能及共同依赖重新测量，包含具名分卷、路�
 [历史中文实稿](docs/中文实测.md) · [多线演练记录](benchmarks/results/long-acceptance.json) · [v0.3 迁移证据](benchmarks/results/migration-v0.3.json)
 
 ## 保存、更新与开发
+
+本版补齐 Windows 大小写等价路径检查、目录句柄权限和异常 ZIP 路径拒绝。开书时将数据库表与初始元数据放入一次事务，失败则回滚数据库改动，保留原有持久化设置；新增初始化回滚与可见性回归。八次本地初始化测量仅描述 macOS 样本，不代表 Windows 或 CI 总耗时。[初始化证据](benchmarks/results/v0.5.0/initialization.json)
 
 每本书的 `.story/state.sqlite3` 保存正文、计划、状态和事件，`chapters/` 中的 Markdown 是可阅读的导出。备份时等待书籍工具退出，再复制完整书目录；只复制正文不能保留全部状态。正文已提交而导出失败时按回执运行 `export` 恢复。外部改稿先对账并保留版本。[恢复指南](docs/recovery.md)
 

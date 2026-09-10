@@ -1,6 +1,6 @@
 # Story Codex 文档导航
 
-文档版本：v0.5.0，更新日期：2026-09-10，当前处于发布准备阶段。本版采用 7 个技能入口，新增具名分卷与固定章节文件名，并改进改名、外部改稿和导出恢复。固定标签、Release 附件、远端 CI 与 Packages 回下载状态逐项登记在 [发布验证记录](github-release.md)，核验完成前不宣称本版已发布。[v0.5.0 版本说明](releases/v0.5.0.md) 汇总变化与兼容边界；v0.4.0 及更早证据保留原版本。
+文档版本：v0.5.0，更新日期：2026-09-10，macOS／Linux 验证通过；Windows 正文和报告导出仍有 WinError 32，Windows 用户暂用固定 v0.4.0。本版采用 7 个技能入口，新增具名分卷与固定章节文件名，并改进改名、外部改稿和导出恢复。固定标签、Release 附件、远端 CI 与 Packages 回下载状态逐项登记在 [发布验证记录](github-release.md)，发布及下载回执按实际结果登记。[v0.5.0 版本说明](releases/v0.5.0.md) 汇总变化与兼容边界；v0.4.0 及更早证据保留原版本。
 
 ## 开始使用
 
@@ -22,7 +22,9 @@ $skill-installer 按 https://github.com/NingCui29/story-skill/blob/main/INSTALL.
 
 ## 当前实现与证据
 
-本版 [macOS／Python 3.12 验收](../benchmarks/results/v0.5.0/verification.json) 完成 375 项测试，其中 368 项通过、7 项平台专用测试跳过、零失败或错误，12 项整包检查全部通过；原生 Windows 的新目录句柄保护仍等待远端 CI。百万／千万字 strict、local 四组合 [合成容量](../benchmarks/results/v0.5.0/scaling.json) 已通过；正式 v0.4.0 套件到 v0.5.0 的 [18 项升级检查](../benchmarks/results/v0.5.0/upgrade.json) 已通过。[旧库迁移](../benchmarks/results/v0.5.0/migration.json) 使用固定 v0.2.0 生成的三类 schema 1 合成夹具，未重新验证缺失的原三本历史书库。当前进度见 [v0.5.0 版本说明](releases/v0.5.0.md)。本版 [token 基准及输入哈希](../benchmarks/results/v0.5.0/tokens.md) 已刷新：普通／多线写作为 **5,324／7,091 tokens**，仍只统计冷加载指令。
+修复后的本地 macOS／Python 3.12 回归完成 379 项测试，其中 372 项通过、7 项平台专用测试跳过、零失败或错误；同一代码的 12 项 [整包检查](../benchmarks/results/v0.5.0/verification.json) 和四组合 [合成容量](../benchmarks/results/v0.5.0/scaling.json) 全部通过。Linux 远端检查通过；Windows 的现存导出错误及前序失败记录见 [发布记录](github-release.md)。[初始化证据](../benchmarks/results/v0.5.0/initialization.json) 记录单事务与八次 macOS 样本，不是 Windows 性能结果。
+
+正式 v0.4.0 套件到 v0.5.0 的 [18 项升级检查](../benchmarks/results/v0.5.0/upgrade.json) 已通过。[旧库迁移](../benchmarks/results/v0.5.0/migration.json) 使用固定 v0.2.0 生成的三类 schema 1 合成夹具，未重新验证缺失的原三本历史书库。当前进度见 [v0.5.0 版本说明](releases/v0.5.0.md)。本版 [token 基准及输入哈希](../benchmarks/results/v0.5.0/tokens.md) 已刷新：普通／多线写作为 **5,324／7,091 tokens**，仍只统计冷加载指令。
 
 实现与证据按下表的版本范围阅读；历史 v0.4.0 回执不作为本版自动通过的依据：
 
