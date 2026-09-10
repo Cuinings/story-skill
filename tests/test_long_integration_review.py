@@ -38,7 +38,7 @@ class LongIntegrationReviewTests(unittest.TestCase):
         return {"kind": "chapter", "chapter": chapter, "sha256": story.digest(text), "quote": text.splitlines()[1]}
 
     def prepare_input(self, chapter, text, at, changes):
-        plan = {"goal": "核对本次行动与代价", "stop": "行动完成后停笔", "beats": [{"choice": "作出具体选择", "change": "承担相应代价"}],
+        plan = {"volume_dir": "第一卷 雨夜", "title": "核对行动", "goal": "核对本次行动与代价", "stop": "行动完成后停笔", "beats": [{"choice": "作出具体选择", "change": "承担相应代价"}],
                 "requires": [], "tags": [], "constraints": [], "length": [5, 200],
                 "entities": ["jiang", "du"], "time": {"clock": "main", "start": at, "end": at}}
         self.book.save_plan(chapter, plan, self.rev())
@@ -57,7 +57,7 @@ class LongIntegrationReviewTests(unittest.TestCase):
     def assert_atomic_rejection(self, delta, expected_code):
         revision = self.rev()
         events = self.book.db.execute("SELECT count(*) FROM events").fetchone()[0]
-        before = (self.root / "chapters/0001.md").read_bytes()
+        before = (self.root / self.book.chapter_path(1)).read_bytes()
         with self.assertRaises(story.StoryError) as error:
             self.book.commit(2, self.draft, delta)
         self.assertEqual(error.exception.code, "world_constraint", error.exception.details)
@@ -66,10 +66,10 @@ class LongIntegrationReviewTests(unittest.TestCase):
         self.assertEqual(self.book.meta("last_chapter"), 1)
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM events").fetchone()[0], events)
         self.assertIsNone(self.book.db.execute("SELECT chapter FROM chapters WHERE chapter=2").fetchone())
-        self.assertIsNone(self.book.db.execute("SELECT path FROM artifact_state WHERE path='chapters/0002.md'").fetchone())
+        self.assertIsNone(self.book.db.execute("SELECT path FROM artifact_state WHERE path='chapters/第一卷 雨夜/第2章 核对行动.md'").fetchone())
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM world_evidence WHERE chapter=2").fetchone()[0], 0)
-        self.assertFalse((self.root / "chapters/0002.md").exists())
-        self.assertEqual((self.root / "chapters/0001.md").read_bytes(), before)
+        self.assertFalse((self.root / "chapters/第一卷 雨夜/第2章 核对行动.md").exists())
+        self.assertEqual((self.root / self.book.chapter_path(1)).read_bytes(), before)
 
     def test_observed_overdraft_is_rejected_even_without_prior_planned_transfer(self):
         self.seed()

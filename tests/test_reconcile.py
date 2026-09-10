@@ -42,7 +42,7 @@ class ReconcileTests(unittest.TestCase):
         self.temp.cleanup()
 
     def save_plan(self, chapter):
-        plan = {"goal": "选择是否交出钥匙", "stop": "确定入口选择后停笔",
+        plan = {"volume_dir": "第一卷 雨夜", "goal": "选择是否交出钥匙", "stop": "确定入口选择后停笔",
                 "beats": [{"choice": "沈禾决定钥匙的去向", "change": "与守门人的关系改变"}],
                 "constraints": [], "requires": ["hero"], "tags": ["沈禾"], "length": [20, 120]}
         self.book.save_plan(chapter, plan, self.book.meta("revision"))
@@ -55,7 +55,7 @@ class ReconcileTests(unittest.TestCase):
                     for check in story.CHECKS}, "issues": []}}
 
     def edited_chapter(self, chapter=1, text=REVISED):
-        target = self.root / f"chapters/{chapter:04d}.md"
+        target = self.root / self.book.chapter_path(chapter)
         target.write_bytes(text.encode("utf-8"))
         return target
 
@@ -70,7 +70,7 @@ class ReconcileTests(unittest.TestCase):
         database = {table: [tuple(row) for row in self.book.db.execute(f"SELECT * FROM {table} ORDER BY 1")]
                     for table in ("meta", "cards", "plans", "chapters", "events", "artifacts")}
         files = {str(path.relative_to(self.root)): path.read_bytes()
-                 for path in (self.root / "chapters").glob("*.md")}
+                 for path in (self.root / "chapters").rglob("*.md")}
         return database, files
 
     def assert_rejected_without_changes(self, function, expected_code=None):
@@ -156,7 +156,7 @@ class ReconcileTests(unittest.TestCase):
         self.edited_chapter(2)
         packet = self.book.reconcile(2)
         delta = self.reconcile_input(packet)
-        (self.root / "chapters/0001.md").unlink()
+        (self.root / self.book.chapter_path(1)).unlink()
         self.assertEqual(self.book.status()["pending_export_count"], 1)
         self.assert_rejected_without_changes(lambda: self.book.reconcile(2), "exports_unresolved")
         self.assert_rejected_without_changes(
@@ -172,8 +172,8 @@ class ReconcileTests(unittest.TestCase):
         story.Book.create(root, "已导入的书", "long")
         imported = story.Book(root)
         try:
-            imported.adopt(108, self.draft, "导入最后完整章", imported.meta("revision"))
-            target = root / "chapters/0108.md"
+            imported.adopt(108, self.draft, "导入最后完整章", imported.meta("revision"), volume_dir="第一卷 雨夜")
+            target = root / imported.chapter_path(108)
             target.write_bytes(REVISED.encode("utf-8"))
             revision = imported.meta("revision")
             with self.assertRaises(story.StoryError) as result:

@@ -16,7 +16,7 @@ import time
 
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "skills/story-codex/scripts/story.py"
-OUTPUT = ROOT / "benchmarks/results/v0.4.0/long-acceptance.json"
+OUTPUT = ROOT / "benchmarks/results/v0.5.0/long-acceptance.json"
 
 SCENES = {
     1: """# 第1章 蓝线钥匙
@@ -72,6 +72,7 @@ class Session:
         self.revision = 0
         self.serial = 0
         self.plans = {}
+        self.chapter_paths = {}
 
     def file(self, name, value):
         path = self.root / name if name == "创作约定.md" else self.root / ".acceptance-inputs" / name
@@ -129,7 +130,7 @@ def review(text, *, changes=None):
 
 
 def chapter_plan(chapter):
-    return {"goal": "当面交接钥匙并标明猜测" if chapter == 1 else "核对钥匙并开柜确认账本",
+    return {"volume_dir": "第一卷 两岸账本", "goal": "当面交接钥匙并标明猜测" if chapter == 1 else "核对钥匙并开柜确认账本",
             "stop": "留下两个未验证的猜测" if chapter == 1 else "账本找到，两个老邱的关系仍未知",
             "beats": [{"choice": "保留实物与信息来源", "change": "区分人物猜测和已见事实"}],
             "constraints": ["现实悬疑，不出现超自然；猜测必须标明"],
@@ -152,7 +153,8 @@ def native_commit(session, chapter, plan, text, summary, key_text=None, world_ch
     if world_changes:
         delta["world_changes"] = world_changes
     result = session.run(f"提交第{chapter}章", "commit", "--chapter", chapter, "--draft", draft, payload=delta)
-    published = session.root / f"chapters/{chapter:04d}.md"
+    published = Path(result["path"])
+    session.chapter_paths[chapter] = published
     session.check(f"第{chapter}章真实导出与审稿SHA一致", result.get("committed") and result.get("exports_complete")
                   and hashlib.sha256(published.read_bytes()).hexdigest() == sha(text), source_sha256=sha(text))
     return context
@@ -242,7 +244,7 @@ def acceptance(session):
     session.report["workflow_observations"] = [{"kind": "documented_boundary",
         "observation": "adopt refuses a nonempty book. To retain chapter-1 evidence and return at chapter 11 without SQL, this acceptance actually commits nine short south-line scenes; it does not claim unwritten chapters."}]
     for chapter in range(2, 11):
-        plan = {"goal": "南岸核对材料并保留信息来源", "stop": "仍等十一日北岸核验的答复",
+        plan = {"volume_dir": "第一卷 两岸账本", "goal": "南岸核对材料并保留信息来源", "stop": "仍等十一日北岸核验的答复",
                 "beats": [{"choice": "当面确认或保留未知", "change": "不把同名与转述写成已确认结论"}],
                 "constraints": ["这是一段短景功能夹具，不冒称完整长篇章节"], "requires": ["limits"],
                 "tags": ["south"], "length": [40, 800], "line": "south-line",
@@ -349,7 +351,7 @@ def historical_branch(session):
     session.run("保存两章候选、最终卡片决策及全部受影响领域证据", "history-update", "--branch", branch,
                 payload={"chapters": candidates, "state_changes": state_changes, "world_changes": world_changes}, expect_revision=True)
     session.check("候选尚未发布时原版正文仍有效", all(
-        hashlib.sha256((session.root / f"chapters/{chapter:04d}.md").read_bytes()).hexdigest() == sha(SCENES[chapter])
+        hashlib.sha256(session.chapter_paths[chapter].read_bytes()).hexdigest() == sha(SCENES[chapter])
         for chapter in affected))
     for candidate in candidates:
         details = session.run(f"读取第{candidate['chapter']}章前后对照与审查模板", "history-inspect",
@@ -369,8 +371,14 @@ def historical_branch(session):
     published = session.run("发布已审查历史分支", "history-publish", "--branch", branch, expect_revision=True)
     session.report["history_publication"] = published
     session.check("历史发布完成导出", published.get("exports_complete") is True, result=published)
+    for chapter in affected:
+        paths = [session.root / relative for relative in published["exported"]
+                 if Path(relative).name.startswith(f"第{chapter}章 ")]
+        if paths:
+            session.check(f"第{chapter}章只有一个发布路径", len(paths) == 1)
+            session.chapter_paths[chapter] = paths[0]
     session.check("两处钥匙同步为红线且九段南线原字节不变", all(
-        hashlib.sha256((session.root / f"chapters/{chapter:04d}.md").read_bytes()).hexdigest() == sha(text)
+        hashlib.sha256(session.chapter_paths[chapter].read_bytes()).hexdigest() == sha(text)
         for chapter, text in revised.items()))
     backup_hashes = [hashlib.sha256(Path(path).read_bytes()).hexdigest() for path in published.get("backups", [])]
     session.check("发布保留两章被替换的原始字节", {sha(SCENES[1]), sha(SCENES[11])}.issubset(backup_hashes),

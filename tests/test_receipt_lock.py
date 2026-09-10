@@ -28,7 +28,7 @@ class ReceiptLockTests(unittest.TestCase):
         self.book.db.execute("PRAGMA busy_timeout=50")
         self.book.save_notes([{"id": "hero", "kind": "character", "text": "沈禾持有钥匙。",
                                "source": "用户设定"}], 0)
-        self.plan = {"goal": "决定钥匙的去向", "stop": "选择入口后停笔", "constraints": [],
+        self.plan = {"volume_dir": "第一卷 雨夜", "goal": "决定钥匙的去向", "stop": "选择入口后停笔", "constraints": [],
                      "requires": ["hero"], "tags": [], "length": [20, 120],
                      "beats": [{"choice": "沈禾决定是否交出钥匙", "change": "失去或保留退路"}]}
         self.book.save_plan(1, self.plan, self.book.meta("revision"))
@@ -121,7 +121,7 @@ class ReceiptLockTests(unittest.TestCase):
         self.assertTrue(retried["exports_complete"])
         self.assertEqual(self.book.meta("revision"), revision)
         self.assertEqual(self.book.cards(), cards)
-        self.assertEqual((self.root / "chapters/0001.md").read_bytes(), DRAFT.encode("utf-8"))
+        self.assertEqual((self.root / self.book.chapter_path(1)).read_bytes(), DRAFT.encode("utf-8"))
 
     def test_reconcile_keeps_hash_and_cards_when_locked_after_commit(self):
         first = self.delta()
@@ -129,7 +129,7 @@ class ReceiptLockTests(unittest.TestCase):
                             {"id": "debt", "kind": "hook", "text": "天亮前带回账本。", "due": 1,
                              "quote": "她答应在天亮之前带回账本。"}]
         self.book.commit(1, self.draft, first)
-        target = self.root / "chapters/0001.md"
+        target = self.root / self.book.chapter_path(1)
         target.write_bytes(REVISED.encode("utf-8"))
         packet = self.book.reconcile(1)
         reviewed = REVISED + "她把钥匙藏进衣襟。\n"
@@ -159,7 +159,7 @@ class ReceiptLockTests(unittest.TestCase):
         before = self.book.meta("revision")
         cards = self.book.cards()
         result = self.after_commit_exclusive(
-            lambda: self.book.adopt(108, self.draft, "最后完整章的导入基线。", before))
+            lambda: self.book.adopt(108, self.draft, "最后完整章的导入基线。", before, volume_dir="第一卷 雨夜"))
 
         self.assertEqual(result["adopted_through"], 108)
         self.assertEqual(result["quality"], "imported_unverified")
@@ -170,7 +170,7 @@ class ReceiptLockTests(unittest.TestCase):
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM chapters").fetchone()[0], 1)
         self.assertTrue(self.book.export()["exports_complete"])
         self.assertEqual(self.book.meta("revision"), before + 1)
-        self.assertEqual((self.root / "chapters/0108.md").read_bytes(), DRAFT.encode("utf-8"))
+        self.assertEqual((self.root / self.book.chapter_path(108)).read_bytes(), DRAFT.encode("utf-8"))
 
     def test_other_write_receipts_do_not_read_sql_after_commit(self):
         source = self.root / "source.txt"
@@ -222,7 +222,7 @@ class ReceiptLockTests(unittest.TestCase):
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM events").fetchone()[0], before_events)
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM chapters").fetchone()[0], 0)
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM artifacts").fetchone()[0], 0)
-        self.assertFalse((self.root / "chapters/0001.md").exists())
+        self.assertFalse((self.root / "chapters/第一卷 雨夜/第1章 门后的雨.md").exists())
         self.book.db.execute("DROP TRIGGER fail_chapter")
         result = self.book.commit(1, self.draft, delta)
         self.assertTrue(result["committed"])

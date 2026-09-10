@@ -34,6 +34,7 @@ def replay(root, scenario_path, resume_prepared_first=False):
     base = scenario_path.parent
     book = root / scenario["title"]
     calls, chapters = [], []
+    chapter_paths = {}
 
     def call(command, *args, expected=0, target=None):
         proc = subprocess.run([sys.executable, "-B", "-X", "utf8", str(TOOL), command,
@@ -61,6 +62,7 @@ def replay(root, scenario_path, resume_prepared_first=False):
                 (book / name).write_bytes(source.read_bytes())
         call("notes", "--input", write_json(book / ".story/drafts/notes.json", scenario["notes"]), "--expect", 0)
         for number, plan in enumerate(scenario["plans"], 1):
+            plan = {"volume_dir": "第一卷 " + scenario["title"], **plan}
             revision = call("status")["revision"]
             call("plan", "--chapter", number, "--input", write_json(book / f".story/drafts/plan-{number}.json", plan),
                  "--expect", revision)
@@ -78,13 +80,14 @@ def replay(root, scenario_path, resume_prepared_first=False):
         else:
             draft.write_bytes(raw)
         if unit.get("plan"):
-            call("plan", "--chapter", number, "--input", write_json(book / f".story/drafts/plan-{index}-revision.json", unit["plan"]),
+            call("plan", "--chapter", number, "--input", write_json(book / f".story/drafts/plan-{index}-revision.json",
+                 {"volume_dir": "第一卷 " + scenario["title"], **unit["plan"]}),
                  "--expect", call("status")["revision"])
         if unit.get("external_recovery"):
             # Only files created by this run, under its new isolated book, are modified.
-            first = book / "chapters/0001.md"
+            first = chapter_paths[1]
             original_first = first.read_bytes()
-            last = book / f"chapters/{number:04d}.md"
+            last = chapter_paths[number]
             last.write_bytes(raw)
             first.unlink()
             blocked = call("reconcile", "--chapter", number, expected=2)
@@ -123,7 +126,8 @@ def replay(root, scenario_path, resume_prepared_first=False):
         saved = call(command, *arguments)
         repeated = call(command, *arguments)
         assert saved["exports_complete"] and repeated["idempotent"]
-        assert (book / f"chapters/{number:04d}.md").read_bytes() == raw
+        chapter_paths[number] = Path(saved["path"])
+        assert chapter_paths[number].read_bytes() == raw
         for cid, expected_text in unit.get("expected_cards", {}).items():
             recalled = call("recall", "--query", cid)
             card = next(c for c in recalled["matches"] if c.get("type") == "card" and c["id"] == cid)
@@ -173,7 +177,7 @@ def replay(root, scenario_path, resume_prepared_first=False):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--workdir", help="New empty directory to retain actual book state; otherwise temporary")
-    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.4.0/chinese.json"))
+    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.5.0/chinese.json"))
     args = p.parse_args()
     ctx = nullcontext(args.workdir) if args.workdir else tempfile.TemporaryDirectory(prefix="story-chinese-")
     with ctx as name:

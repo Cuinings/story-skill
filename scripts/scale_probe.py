@@ -23,7 +23,7 @@ from unittest.mock import patch
 ROOT = Path(__file__).resolve().parents[1]
 TOOL = ROOT / "skills/story-codex/scripts/story.py"
 BASELINE = ROOT / "benchmarks/results/scaling.json"
-DEFAULT_OUTPUT = ROOT / "benchmarks/results/v0.4.0/scaling.json"
+DEFAULT_OUTPUT = ROOT / "benchmarks/results/v0.5.0/scaling.json"
 
 
 def load_module(name, path):
@@ -59,7 +59,7 @@ def measure(book, story, operation, destination):
         data = original_read(path)
         reads["file_reads"] += 1
         reads["file_bytes_read"] += len(data)
-        if path.parent == book.root / "chapters":
+        if book.root / "chapters" in path.parents:
             reads["manuscript_file_reads"] += 1
             reads["manuscript_bytes_read"] += len(data)
         return data
@@ -116,17 +116,18 @@ def make_fixture(story, root, count, card_count):
     book = story.Book(root)
     body = "甲" * 2500
     sha = story.digest(body)
-    (root / "chapters").mkdir()
+    (root / "chapters/第一卷 容量夹具").mkdir(parents=True)
     (root / "load-draft.md").write_text(body, encoding="utf-8")
     try:
         with book.transaction():
             for number in range(1, count + 1):
-                relative = f"chapters/{number:04d}.md"
+                relative = f"chapters/第一卷 容量夹具/第{number}章 容量夹具.md"
                 (root / relative).write_text(body, encoding="utf-8")
                 summary = f"Synthetic chapter {number}; no semantic validation."
                 book.db.execute("INSERT INTO chapters VALUES (?,?,?,?,?,?,0)",
                                 (number, body, sha, summary, "{}", "fixture"))
                 book.db.execute("INSERT INTO artifacts VALUES (?,?,?,?)", (relative, body, sha, sha))
+                book.set_meta(f"chapter_path:{number}", relative)
                 book.index_chapter(number, body, summary)
             book.set_meta("last_chapter", count)
             for number in range(card_count):
@@ -135,7 +136,7 @@ def make_fixture(story, root, count, card_count):
                 book.put_card(story.valid_card({"id": f"c{number:05d}", "kind": "fact", "text": text,
                     "source": "synthetic, no semantic validation", "tags": [f"branch{number}"],
                     "critical": False}))
-        plan = {"goal": "容量探针", "stop": "一次结构提交", "constraints": [],
+        plan = {"volume_dir": "第一卷 容量夹具", "title": "容量探针", "goal": "容量探针", "stop": "一次结构提交", "constraints": [],
                 "requires": ["c00000"], "tags": ["current"], "length": [2500, 2500],
                 "beats": [{"choice": "生成重复字符夹具", "change": "测量读取放大"}]}
         saved = book.save_plan(count + 1, plan, book.meta("revision"))
@@ -207,7 +208,7 @@ def run_case(story, root, count, card_count, integrity, timeout):
         committed = run("commit_one_next_chapter", lambda: book.commit(count + 1, draft, delta))
         if not committed.get("committed") or not committed.get("scope_exports_complete", committed.get("exports_complete")):
             raise AssertionError("Synthetic commit or its scoped exports failed")
-        if file_sha(root / f"chapters/{count + 1:04d}.md") != delta["review"]["draft_sha256"]:
+        if file_sha(Path(committed["path"])) != delta["review"]["draft_sha256"]:
             raise AssertionError("Committed chapter bytes do not match the submitted fixture")
 
         critical_ids = [f"scale-critical-{number}" for number in range(100)]
@@ -255,7 +256,7 @@ def probe(chapters=(400, 4000), cards=None, integrities=("strict", "local"), tim
               "sqlite_version": sqlite3.sqlite_version, "platform": platform.platform(),
               "baseline": {"path": "benchmarks/results/scaling.json", "sha256": baseline_sha},
               "method": "Synthetic repeated 2500-character chapters and unrelated cards. Direct state/view and index fixture inserts, one measured warm run per operation, size and integrity mode. Each mode starts from a fresh copy of the same fixture. Not a complete event history, cold-disk benchmark, real ten-million-character novel, model test or literary-quality validation.",
-              "measurement_scope": {"reads": "Path.read_bytes application reads, not physical disk IO; database-native reads are not included",
+              "measurement_scope": {"reads": "Path.read_bytes application reads, not physical disk IO or total application reads; descriptor-bound export/backup reads and database-native reads are not included",
                                     "memory": "tracemalloc peak Python allocations during each operation; excludes SQLite native allocations, OS file cache and RSS",
                                     "sql": "SQLite trace callbacks, including repeated trigger callbacks; not VM step counts or decoded row counts",
                                     "decodes": "actual json.loads calls and input bytes; decoded_card_objects counts top-level card-shaped objects",

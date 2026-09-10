@@ -18,7 +18,7 @@ import uuid
 import importlib.util
 from types import SimpleNamespace
 
-VERSION = "0.4.0"
+VERSION = "0.5.0"
 SCHEMA_VERSION = 2
 CHECKS = ("causality", "continuity", "constraints", "style")
 KINDS = ("fact", "character", "world", "hook", "preference", "contract")
@@ -49,6 +49,43 @@ def text_field(value, name, maximum=2000):
     if "<填写" in value or value.strip() in ("TODO", "待补充", "REPLACE_ME"):
         fail("placeholder", f"Fill {name} before saving")
     return value
+
+
+def filename_component(value, name):
+    value = text_field(value, name, 100).strip()
+    if (value in (".", "..") or value.endswith(".") or
+            re.search(r'[<>:"/\\|?*]', value) or
+            any(unicodedata.category(char).startswith("C") for char in value) or
+            re.fullmatch(r"(?i:CON|PRN|AUX|NUL|COM[1-9]|LPT[1-9])(?:\..*)?", value) or
+            len(value.encode("utf-8")) > 180):
+        fail("invalid_input", f"{name} must be a portable filename component")
+    return value
+
+
+VOLUME_DIRECTORY = re.compile(r"(第[0-9０-９零〇一二三四五六七八九十百千万两]+卷)\s+(\S.*)")
+
+
+def volume_directory(value):
+    value = filename_component(value, "plan.volume_dir")
+    match = VOLUME_DIRECTORY.fullmatch(value)
+    if not match:
+        fail("invalid_input", "Volume directory must include its number and title, for example 第一卷 雨夜")
+    title = text_field(match[2], "volume title", 100)
+    return f"{match[1]} {title}"
+
+
+def chapter_filename(chapter, text, plan, imported=False):
+    title = plan.get("title")
+    if title is None:
+        lines = text.lstrip("\ufeff").splitlines()
+        heading = re.match(r"^#\s+(\S.*?)\s*$", lines[0]) if lines else None
+        title = re.sub(r"\s+#+$", "", heading[1]) if heading else ""
+        title = re.sub(r"^第[0-9０-９零〇一二三四五六七八九十百千万两]+章[\s　:：、.．-]*", "", title).strip()
+    if not title:
+        if not imported:
+            fail("chapter_title_missing", "Set plan.title or give the draft a Markdown H1 chapter title")
+        title = "正文"
+    return f"第{chapter}章 {filename_component(title, 'chapter title')}.md"
 
 
 def integer(value, name, minimum=0):
@@ -94,25 +131,246 @@ def safe_path(root, relative):
     return current
 
 
-def _publish_no_replace(source, target):
-    """Publish a complete same-directory stage without replacing an existing path."""
+@contextmanager
+def _windows_path_handle(path, directory=False):
+    """Pin Windows parents against rename/reparse replacement without hard links.
+
+    CreateFileW opens reparse points themselves so they can be rejected. Parent
+    handles share read access only: ordinary child-file operations still work,
+    while directory deletion/rename and writable reparse handles cannot race us.
+    https://learn.microsoft.com/windows/win32/api/fileapi/nf-fileapi-createfilew
+    """
+    import ctypes
+    from ctypes import wintypes
+
+    class FileInformation(ctypes.Structure):
+        _fields_ = [("attributes", wintypes.DWORD), ("created", wintypes.FILETIME),
+                    ("accessed", wintypes.FILETIME), ("written", wintypes.FILETIME),
+                    ("volume", wintypes.DWORD), ("size_high", wintypes.DWORD),
+                    ("size_low", wintypes.DWORD), ("links", wintypes.DWORD),
+                    ("index_high", wintypes.DWORD), ("index_low", wintypes.DWORD)]
+
+    kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+    kernel.CreateFileW.argtypes = [wintypes.LPCWSTR, wintypes.DWORD, wintypes.DWORD,
+                                  wintypes.LPVOID, wintypes.DWORD, wintypes.DWORD, wintypes.HANDLE]
+    kernel.CreateFileW.restype = wintypes.HANDLE
+    kernel.GetFileInformationByHandle.argtypes = [wintypes.HANDLE, ctypes.POINTER(FileInformation)]
+    kernel.GetFileInformationByHandle.restype = wintypes.BOOL
+    kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+    kernel.CloseHandle.restype = wintypes.BOOL
+    name = str(path)
+    if not name.startswith("\\\\?\\"):
+        name = "\\\\?\\UNC\\" + name[2:] if name.startswith("\\\\") else "\\\\?\\" + name
+    handle = kernel.CreateFileW(name, 0x80 if directory else 0x80000000,
+                                0x1 if directory else 0x7, None, 3,
+                                0x00200000 | (0x02000000 if directory else 0), None)
+    if handle == ctypes.c_void_p(-1).value:
+        raise ctypes.WinError(ctypes.get_last_error())
+    try:
+        info = FileInformation()
+        if not kernel.GetFileInformationByHandle(handle, ctypes.byref(info)):
+            raise ctypes.WinError(ctypes.get_last_error())
+        if info.attributes & 0x400:
+            fail("linked_path", "Managed paths cannot contain reparse points", path=str(path))
+        if bool(info.attributes & 0x10) != directory:
+            fail("export_conflict", "Managed path has the wrong file type", path=str(path))
+        yield handle
+    finally:
+        kernel.CloseHandle(handle)
+
+
+@contextmanager
+def _pinned_directory(path, create=False, exclusive=False):
+    """Traverse once without following links; keep every parent bound during I/O."""
+    from contextlib import ExitStack
+    path = Path(os.path.abspath(path))
     if os.name == "nt":
-        # Windows rename fails when target exists, including on exFAT where
-        # hard links are unavailable. POSIX rename would overwrite the target.
+        with ExitStack() as stack:
+            current = Path(path.anchor)
+            stack.enter_context(_windows_path_handle(current, directory=True))
+            for index, part in enumerate(path.parts[1:]):
+                current = current / part
+                if create:
+                    try:
+                        current.mkdir()
+                    except FileExistsError:
+                        if exclusive and index == len(path.parts) - 2:
+                            raise
+                stack.enter_context(_windows_path_handle(current, directory=True))
+            yield SimpleNamespace(path=path, fd=None)
+        return
+    if not all(hasattr(os, name) for name in ("O_DIRECTORY", "O_NOFOLLOW")) or os.open not in os.supports_dir_fd:
+        fail("safe_export_unavailable", "This platform cannot bind export directories safely; exports remain pending")
+    handles = []
+    try:
+        flags = os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
+        handles.append(os.open(path.anchor, flags))
+        for index, part in enumerate(path.parts[1:]):
+            if create:
+                try:
+                    os.mkdir(part, dir_fd=handles[-1])
+                except FileExistsError:
+                    if exclusive and index == len(path.parts) - 2:
+                        raise
+            handles.append(os.open(part, flags, dir_fd=handles[-1]))
+        yield SimpleNamespace(path=path, fd=handles[-1])
+    finally:
+        for handle in reversed(handles):
+            os.close(handle)
+
+
+class _BoundFile:
+    """A displayable path whose operations use its already-pinned parent."""
+    def __init__(self, directory, name):
+        self.directory, self.name = directory, name
+        self.path = directory.path / name
+
+    def __fspath__(self):
+        return str(self.path)
+
+    def __str__(self):
+        return str(self.path)
+
+
+def _owned_fdopen(fd, mode):
+    try:
+        return os.fdopen(fd, mode)
+    except BaseException:
+        try:
+            os.close(fd)
+        except OSError:
+            pass
+        raise
+
+
+@contextmanager
+def _bound_reader(file):
+    import stat
+    if os.name == "nt":
+        import ctypes
+        import msvcrt
+        from ctypes import wintypes
+        # Duplicate the verified non-reparse handle before giving ownership to
+        # Python's file object; the original remains owned by its context.
+        with _windows_path_handle(file.path) as handle:
+            kernel = ctypes.WinDLL("kernel32", use_last_error=True)
+            kernel.GetCurrentProcess.restype = wintypes.HANDLE
+            kernel.DuplicateHandle.argtypes = [wintypes.HANDLE, wintypes.HANDLE, wintypes.HANDLE,
+                                              ctypes.POINTER(wintypes.HANDLE), wintypes.DWORD,
+                                              wintypes.BOOL, wintypes.DWORD]
+            kernel.DuplicateHandle.restype = wintypes.BOOL
+            kernel.CloseHandle.argtypes = [wintypes.HANDLE]
+            kernel.CloseHandle.restype = wintypes.BOOL
+            process, duplicate = kernel.GetCurrentProcess(), wintypes.HANDLE()
+            if not kernel.DuplicateHandle(process, handle, process, ctypes.byref(duplicate), 0, False, 2):
+                raise ctypes.WinError(ctypes.get_last_error())
+            try:
+                fd = msvcrt.open_osfhandle(duplicate.value, os.O_RDONLY | os.O_BINARY)
+            except BaseException:
+                kernel.CloseHandle(duplicate)
+                raise
+            with _owned_fdopen(fd, "rb") as stream:
+                yield stream
+        return
+    fd = os.open(file.name, os.O_RDONLY | os.O_NOFOLLOW | getattr(os, "O_NONBLOCK", 0),
+                 dir_fd=file.directory.fd)
+    with _owned_fdopen(fd, "rb") as stream:
+        if not stat.S_ISREG(os.fstat(stream.fileno()).st_mode):
+            fail("export_conflict", "Export target is not a regular file", path=str(file))
+        yield stream
+
+
+def _bound_hash(file):
+    with _bound_reader(file) as stream:
+        value = hashlib.sha256()
+        for chunk in iter(lambda: stream.read(1024 * 1024), b""):
+            value.update(chunk)
+        return value.hexdigest()
+
+
+def _bound_exists(file):
+    try:
+        if os.name == "nt":
+            file.path.lstat()
+        else:
+            os.stat(file.name, dir_fd=file.directory.fd, follow_symlinks=False)
+        return True
+    except FileNotFoundError:
+        return False
+
+
+def _bound_unlink(file):
+    if os.name == "nt":
+        os.unlink(file.path)
+    else:
+        os.unlink(file.name, dir_fd=file.directory.fd)
+
+
+def _bound_stage(directory, prefix):
+    for _ in range(10):
+        file = _BoundFile(directory, prefix + uuid.uuid4().hex)
+        try:
+            fd = (os.open(file.path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | getattr(os, "O_BINARY", 0), 0o600)
+                  if os.name == "nt" else os.open(file.name, os.O_WRONLY | os.O_CREAT | os.O_EXCL,
+                                                  0o600, dir_fd=directory.fd))
+            return fd, file
+        except FileExistsError:
+            pass
+    fail("export_conflict", "Could not reserve an export staging file", path=str(directory.path))
+
+
+def _bound_replace(source, target):
+    if os.name == "nt":
+        os.replace(source.path, target.path)
+    else:
+        os.replace(source.name, target.name, src_dir_fd=source.directory.fd, dst_dir_fd=target.directory.fd)
+
+
+def _verify_bound_directory(directory):
+    if os.name != "nt":
+        with _pinned_directory(directory.path) as current:
+            if not os.path.samestat(os.fstat(current.fd), os.fstat(directory.fd)):
+                fail("export_conflict", "Managed directory moved during export; preserved versions remain pending",
+                     path=str(directory.path))
+
+
+def _publish_no_replace(source, target):
+    """Publish a complete stage without replacing a concurrent editor's path."""
+    if isinstance(source, _BoundFile) and isinstance(target, _BoundFile):
+        if os.name == "nt":
+            os.rename(source.path, target.path)
+        else:
+            os.link(source.name, target.name, src_dir_fd=source.directory.fd,
+                    dst_dir_fd=target.directory.fd, follow_symlinks=False)
+    elif os.name == "nt":
         os.rename(source, target)
     else:
         os.link(source, target)
 
 
 def _restore_displaced_file(backup, target):
+    if isinstance(backup, _BoundFile) and isinstance(target, _BoundFile):
+        if os.name != "nt":
+            _publish_no_replace(backup, target)
+            return
+        fd, staged = _bound_stage(target.directory, ".story-restore-")
+        try:
+            with _owned_fdopen(fd, "wb") as handle, _bound_reader(backup) as source:
+                for chunk in iter(lambda: source.read(1024 * 1024), b""):
+                    handle.write(chunk)
+                handle.flush()
+                os.fsync(handle.fileno())
+            _publish_no_replace(staged, target)
+        finally:
+            if _bound_exists(staged):
+                _bound_unlink(staged)
+        return
     if os.name != "nt":
         _publish_no_replace(backup, target)
         return
-    # Do not rename the backup itself: keep it available even after restoration
-    # and when an editor still has the displaced file open.
     fd, staged = tempfile.mkstemp(prefix=".story-restore-", dir=target.parent)
     try:
-        with os.fdopen(fd, "wb") as handle:
+        with _owned_fdopen(fd, "wb") as handle:
             handle.write(backup.read_bytes())
             handle.flush()
             os.fsync(handle.fileno())
@@ -123,46 +381,90 @@ def _restore_displaced_file(backup, target):
 
 
 def atomic_write(path, content, allowed_hashes, backup):
-    """Preserve the displaced inode and publish without clobbering a concurrent save.
+    """Publish through pinned parents; retain displaced versions for recovery.
 
-    Windows uses no-replace rename; POSIX uses a hard link. Failure leaves a
-    retryable export, never an unconditional replacement. Backups are retained
-    even after success so an editor holding the old inode keeps its later write.
+    POSIX operations use no-follow directory handles. Windows pins parents with
+    non-delete/non-write-sharing directory handles and uses no-replace rename,
+    which also works on exFAT. If a parent cannot be pinned, nothing is displaced.
     """
-    path.parent.mkdir(parents=True, exist_ok=True)
-    fd, tmp = tempfile.mkstemp(prefix=".story-tmp-", dir=path.parent)
-    displaced = False
-    try:
-        with os.fdopen(fd, "wb") as handle:
-            handle.write(content.encode("utf-8"))
-            handle.flush()
-            os.fsync(handle.fileno())
-        if path.exists():
-            # A fresh directory reserves this backup; existing backups are never reused.
-            backup.parent.mkdir(parents=True, exist_ok=False)
-            os.replace(path, backup)
-            displaced = True
-            if hashlib.sha256(backup.read_bytes()).hexdigest() not in allowed_hashes:
-                fail("export_conflict", "File changed during export; displaced version preserved",
-                     path=str(path), backup=str(backup))
-        _publish_no_replace(tmp, path)
-        if hashlib.sha256(path.read_bytes()).hexdigest() != digest(content):
-            fail("export_conflict", "File changed during publication; preserve it and reconcile", path=str(path))
-        return str(backup) if displaced else None
-    except (OSError, StoryError) as error:
-        if displaced:
+    from contextlib import ExitStack
+    path, backup = Path(path), Path(backup)
+    with ExitStack() as stack:
+        parent = stack.enter_context(_pinned_directory(path.parent, create=True))
+        target = _BoundFile(parent, path.name)
+        fd, tmp = _bound_stage(parent, ".story-tmp-")
+        displaced, saved = False, None
+        try:
+            with _owned_fdopen(fd, "wb") as handle:
+                handle.write(content.encode("utf-8"))
+                handle.flush()
+                os.fsync(handle.fileno())
+            if _bound_exists(target):
+                backup_parent = stack.enter_context(_pinned_directory(backup.parent, create=True, exclusive=True))
+                saved = _BoundFile(backup_parent, backup.name)
+                _bound_replace(target, saved)
+                displaced = True
+                if _bound_hash(saved) not in allowed_hashes:
+                    fail("export_conflict", "File changed during export; displaced version preserved",
+                         path=str(path), backup=str(backup))
+            _publish_no_replace(tmp, target)
+            if _bound_hash(target) != digest(content):
+                fail("export_conflict", "File changed during publication; preserve it and reconcile", path=str(path))
+            _verify_bound_directory(parent)
+            if saved is not None:
+                _verify_bound_directory(saved.directory)
+            return str(backup) if displaced else None
+        except (OSError, StoryError) as error:
+            if displaced:
+                try:
+                    _restore_displaced_file(saved, target)
+                except (OSError, StoryError):
+                    pass
+                if isinstance(error, StoryError):
+                    error.details.setdefault("backup", str(backup))
+                else:
+                    fail("export_io", str(error), path=str(path), backup=str(backup))
+            raise
+        finally:
+            if _bound_exists(tmp):
+                _bound_unlink(tmp)
+
+
+def _retire_bound_file(target, backup, allowed_hashes):
+    """Move a retired chapter without following a swapped source/backup parent."""
+    from contextlib import ExitStack
+    with ExitStack() as stack:
+        try:
+            source_parent = stack.enter_context(_pinned_directory(target.parent))
+        except FileNotFoundError:
+            # A genuinely absent parent contains no remaining export. A link
+            # substituted at that path fails no-follow traversal instead.
+            return None
+        source = _BoundFile(source_parent, target.name)
+        if not _bound_exists(source):
+            _verify_bound_directory(source_parent)
+            return None
+        with _pinned_directory(backup.parent, create=True, exclusive=True) as backup_parent:
+            saved = _BoundFile(backup_parent, backup.name)
+            _bound_replace(source, saved)
             try:
-                _restore_displaced_file(backup, path)
-            except OSError:
-                pass  # A newer file may exist. Never overwrite it to restore a backup.
-            if isinstance(error, StoryError):
-                error.details.setdefault("backup", str(backup))
-            else:
-                fail("export_io", str(error), path=str(path), backup=str(backup))
-        raise
-    finally:
-        if os.path.exists(tmp):
-            os.unlink(tmp)
+                if _bound_hash(saved) not in allowed_hashes:
+                    fail("export_conflict", "Old chapter changed during rename; preserve it and reconcile",
+                         path=str(target), backup=str(backup))
+                if _bound_exists(source):
+                    fail("export_conflict", "Old chapter path was recreated during rename", path=str(target), backup=str(backup))
+                _verify_bound_directory(source_parent)
+                _verify_bound_directory(backup_parent)
+            except (OSError, StoryError) as error:
+                try:
+                    _restore_displaced_file(saved, source)
+                except (OSError, StoryError):
+                    pass
+                if isinstance(error, StoryError):
+                    error.details.setdefault("backup", str(backup))
+                    raise
+                fail("export_io", str(error), path=str(target), backup=str(backup))
+            return str(backup)
 
 
 def bounded_packet(packet, limit):
@@ -236,6 +538,10 @@ def valid_plan(raw):
     if type(include_title) is not bool:
         fail("invalid_input", "plan.count_title must be boolean")
     result.update(count_method=method, count_title=include_title)
+    if "title" in raw:
+        result["title"] = filename_component(raw["title"], "plan.title")
+    if "volume_dir" in raw:
+        result["volume_dir"] = volume_directory(raw["volume_dir"])
     for key in ("volume", "arc", "line"):
         if key in raw:
             result[key] = text_field(raw[key], "plan." + key, 80)
@@ -519,11 +825,147 @@ class Book:
             # Persist the reviewed disk version for post-commit export retries.
             self.db.execute("UPDATE artifacts SET written_sha=? WHERE path=?", (accepted_sha, relative))
 
+    def chapter_path(self, chapter):
+        row = self.db.execute("SELECT value FROM meta WHERE key=?", (f"chapter_path:{chapter}",)).fetchone()
+        return json.loads(row[0]) if row else f"chapters/{chapter:04d}.md"
+
+    def chapter_volume(self, plan, current_directory=None):
+        volume = plan.get("volume_dir")
+        vid = plan.get("volume")
+        stored = self.db.execute("SELECT value FROM meta WHERE key=?", ("volume_dir:" + vid,)).fetchone() if vid else None
+        assigned = json.loads(stored[0]) if stored else None
+        if volume is None and vid:
+            record = self.db.execute("SELECT title FROM world_volumes WHERE id=?", (vid,)).fetchone()
+            volume = assigned if assigned is not None else (record[0] if record else None)
+        if volume is None and not vid:
+            volume = current_directory
+        if volume is None or ("volume_dir" not in plan and not VOLUME_DIRECTORY.fullmatch(volume)):
+            fail("volume_title_missing", "Set a named volume directory before saving prose, for example plan.volume_dir = 第一卷 雨夜")
+        volume = volume_directory(volume)
+        if assigned and VOLUME_DIRECTORY.fullmatch(assigned) and volume != assigned:
+            fail("volume_directory_conflict", "This volume already has a directory; keep its assigned name",
+                 volume=vid, expected=assigned, requested=volume)
+        parent = safe_path(self.root, "chapters")
+        target = safe_path(self.root, Path("chapters") / volume)
+        if parent.exists() and not parent.is_dir():
+            fail("export_conflict", "The prose directory is occupied by a file", path=str(parent))
+        if target.exists():
+            if not target.is_dir():
+                fail("export_conflict", "The volume directory is occupied by a file", path=str(target))
+            # Case/Unicode aliases on an insensitive filesystem must not give
+            # different chapter records different names for the same directory.
+            known = self.db.execute("SELECT 1 FROM meta WHERE key=?", ("volume_path:" + volume,)).fetchone()
+            if not known:
+                for registered in self.db.execute("SELECT value FROM meta WHERE key GLOB 'volume_path:*'"):
+                    name = json.loads(registered[0])
+                    existing = safe_path(self.root, Path("chapters") / name)
+                    if name != volume and existing.exists() and existing.samefile(target):
+                        fail("export_path_alias", "This directory already belongs to a registered volume path",
+                             expected=name, requested=volume)
+                if not any(entry.name == volume for entry in parent.iterdir()):
+                    fail("export_path_alias", "Use the existing spelling of this volume directory", requested=volume)
+        return volume
+
+    def chapter_destination(self, chapter, text, plan, imported=False):
+        previous = self.chapter_path(chapter)
+        old = self.db.execute("SELECT 1 FROM artifact_state WHERE path=?", (previous,)).fetchone()
+        # Read-only resolution is shared by review preparation and publication.
+        if old and previous == f"chapters/{chapter:04d}.md":
+            return previous
+        volume = self.chapter_volume(plan, Path(previous).parent.name if old else None)
+        return f"chapters/{volume}/{chapter_filename(chapter, text, plan, imported)}"
+
+    def _chapter_target(self, chapter, text, plan=None, accepted_sha=None, imported=False, external=None):
+        plan = plan or {}
+        previous = self.chapter_path(chapter)
+        old = self.db.execute("SELECT sha,written_sha FROM artifact_state WHERE path=?", (previous,)).fetchone()
+        external_relative = Path(external["path"]).relative_to(self.root).as_posix() if external else None
+        if external_relative == previous:
+            accepted_sha = external["sha256"]
+        relative = self.chapter_destination(chapter, text, plan, imported)
+        if old and previous != relative:
+            source, target = Path(), Path()
+            for old_part, new_part in zip(Path(previous).parts, Path(relative).parts):
+                source, target = source / old_part, target / new_part
+                old_path, new_path = safe_path(self.root, source), safe_path(self.root, target)
+                if source != target and old_path.exists() and new_path.exists() and old_path.samefile(new_path):
+                    fail("export_path_alias", "These names refer to the same file or directory; rename through a distinct intermediate name",
+                         previous=previous, requested=relative)
+        reused_row = self.db.execute("SELECT value FROM meta WHERE key=?", ("chapter_retired:" + relative,)).fetchone()
+        reused = json.loads(reused_row[0]) if reused_row else None
+        target = safe_path(self.root, relative)
+        if relative != previous and not reused and target.is_file() and target.stat().st_nlink > 1:
+            fail("export_path_alias", "A new chapter target must not share an inode with another file", path=str(target))
+        target_sha = accepted_sha if relative == previous else None
+        if reused and reused["destination"] == previous:
+            target_sha = reused["written_sha"] or reused["sha"]
+        if reused and reused["destination"] == previous and external_relative == relative:
+            target_sha = external["sha256"]
+        return previous, old, relative, reused, target_sha, accepted_sha
+
+    def queue_chapter(self, chapter, text, plan=None, accepted_sha=None, imported=False):
+        plan = plan or {}
+        previous, old, relative, reused, target_sha, accepted_sha = self._chapter_target(
+            chapter, text, plan, accepted_sha, imported)
+        self.queue_artifact(relative, text, accepted_sha=target_sha)
+        if reused and reused["destination"] == previous:
+            # A failed rename can be reconciled back to its old name. It is now
+            # the live export again, so its pending retirement must be cancelled.
+            self.db.execute("DELETE FROM meta WHERE key=?", ("chapter_retired:" + relative,))
+        if old and relative != previous:
+            self._check_artifact(previous, old["sha"], accepted_sha or old["written_sha"])
+            self.set_meta("chapter_retired:" + previous,
+                          {"path": previous, "sha": old["sha"], "written_sha": accepted_sha or old["written_sha"],
+                           "destination": relative})
+            self.db.execute("DELETE FROM artifact_state WHERE path=?", (previous,))
+        for retired in self._retired_chapters():
+            if retired["destination"] == previous and previous != relative:
+                retired["destination"] = relative
+                self.set_meta("chapter_retired:" + retired["path"], retired)
+        self.set_meta(f"chapter_path:{chapter}", relative)
+        if len(Path(relative).parts) == 3:
+            volume = Path(relative).parent.name
+            self.set_meta("volume_path:" + volume, volume)
+            if plan.get("volume"):
+                self.set_meta("volume_dir:" + plan["volume"], volume)
+        return relative
+
+    def _retired_chapters(self):
+        return [json.loads(row[0]) for row in self.db.execute(
+            "SELECT value FROM meta WHERE key GLOB 'chapter_retired:*' ORDER BY key")]
+
+    def _retire_chapter(self, row):
+        # Publish the new name before moving the old inode into retained backups.
+        destination = self.db.execute("SELECT sha FROM artifact_state WHERE path=?", (row["destination"],)).fetchone()
+        if not destination:
+            fail("state_corrupt", "Missing renamed chapter destination", path=row["destination"])
+        self._check_artifact(row["destination"], destination["sha"], None)
+        if self._last_artifact_check[1] != destination["sha"]:
+            fail("export_pending", "Recover the renamed chapter before retiring its old path", path=row["destination"])
+        if row["path"] == row["destination"]:
+            # Recover self-retirement records left by an interrupted older runtime.
+            with self.transaction():
+                self.db.execute("DELETE FROM meta WHERE key=?", ("chapter_retired:" + row["path"],))
+            return None
+        target = self._check_artifact(row["path"], row["sha"], row["written_sha"])
+        backup = safe_path(self.root, f".story/export-backups/{uuid.uuid4().hex}/{row['path']}")
+        saved = _retire_bound_file(target, backup, {row["sha"], row["written_sha"]})
+        with self.transaction():
+            self.db.execute("DELETE FROM meta WHERE key=?", ("chapter_retired:" + row["path"],))
+        return saved
+
+    def _artifact_has_alias(self, relative):
+        target = safe_path(self.root, relative)
+        try:
+            return target.stat().st_nlink > 1
+        except FileNotFoundError:
+            return False
+
     def _artifact_rows(self):
         if self.integrity == "strict":
             return self.db.execute("SELECT path,sha,written_sha FROM artifact_state ORDER BY path").fetchall()
         paths = set(getattr(self, "_local_artifacts", []))
-        paths.add(f"chapters/{self.meta('last_chapter'):04d}.md")
+        paths.add(self.chapter_path(self.meta("last_chapter")))
         marks = ",".join("?" for _ in paths)
         return self.db.execute("SELECT path,sha,written_sha FROM artifact_state WHERE "
             f"path IN ({marks}) UNION SELECT path,sha,written_sha FROM artifact_state "
@@ -550,6 +992,16 @@ class Book:
         with storage.operation_lock(self):
             rows = self._artifact_rows()
             snapshots = {}
+            retired = self._retired_chapters()
+            for row in retired:
+                if row["path"] == row["destination"]:
+                    continue
+                try:
+                    self._check_artifact(row["path"], row["sha"], row["written_sha"])
+                except (OSError, StoryError) as error:
+                    if not safe_only:
+                        raise
+                    remember(row["path"], error)
             for row in rows:
                 try:
                     self._check_artifact(row["path"], row["sha"], row["written_sha"])
@@ -563,7 +1015,7 @@ class Book:
                 if relative in errors:
                     continue
                 try:
-                    if snapshots[relative] != row["sha"]:
+                    if snapshots[relative] != row["sha"] or self._artifact_has_alias(relative):
                         target = self._check_artifact(relative, row["sha"], row["written_sha"])
                         content = self.db.execute("SELECT text FROM core_objects WHERE sha=?", (row["sha"],)).fetchone()[0]
                         backup = safe_path(self.root, f".story/export-backups/{uuid.uuid4().hex}/{relative}")
@@ -581,18 +1033,34 @@ class Book:
                     if not safe_only:
                         raise
                     remember(relative, error)
+            for row in retired:
+                if row["path"] in errors or row["destination"] in errors:
+                    continue
+                try:
+                    saved = self._retire_chapter(row)
+                    if saved:
+                        backups.append(saved)
+                except (OSError, StoryError) as error:
+                    if not safe_only:
+                        raise
+                    remember(row["path"], error)
             # A second pass catches edits of an early file while later files were processed.
             pending, changed = [], []
             for row in rows:
                 try:
                     self._check_artifact(row["path"], row["sha"], row["written_sha"])
-                    if self._last_artifact_check[1] != row["sha"]:
+                    if self._last_artifact_check[1] != row["sha"] or self._artifact_has_alias(row["path"]):
                         pending.append(row["path"])
                 except (OSError, StoryError) as error:
                     changed.append(row["path"])
                     remember(row["path"], error)
                     if not safe_only:
                         raise
+            for row in self._retired_chapters():
+                if row["path"] in errors and errors[row["path"]]["code"] != "export_pending":
+                    changed.append(row["path"])
+                else:
+                    pending.append(row["path"])
             self._verified_paths = len(rows)
             clean = not pending and not changed
             self._health_clean = clean
@@ -630,8 +1098,15 @@ class Book:
         for row in rows:
             try:
                 self._check_artifact(row["path"], row["sha"], row["written_sha"])
-                if self._last_artifact_check[1] != row["sha"] or row["written_sha"] != row["sha"]:
+                if (self._last_artifact_check[1] != row["sha"] or row["written_sha"] != row["sha"] or
+                        self._artifact_has_alias(row["path"])):
                     pending.append(row["path"])
+            except StoryError:
+                drift.append(row["path"])
+        for row in self._retired_chapters():
+            try:
+                self._check_artifact(row["path"], row["sha"], row["written_sha"])
+                pending.append(row["path"])
             except StoryError:
                 drift.append(row["path"])
         self._verified_paths = len(rows)
@@ -651,12 +1126,31 @@ class Book:
                 "sources": sources["total"], "recent_sources": sources["results"],
                 "more_sources": sources["next_offset"] < sources["total"], "integrity": self._integrity_report()}
 
+    def chapter_external_path(self, chapter):
+        relative = self.chapter_path(chapter)
+        for retired in self._retired_chapters():
+            if retired["destination"] != relative:
+                continue
+            old_target = safe_path(self.root, retired["path"])
+            if old_target.is_file() and hashlib.sha256(old_target.read_bytes()).hexdigest() not in {
+                    retired["sha"], retired["written_sha"]}:
+                relative = retired["path"]
+                break
+        return relative
+
+    def accept_chapter_external(self, chapter, relative, sha):
+        if relative != self.chapter_path(chapter):
+            retired = self.meta("chapter_retired:" + relative)
+            retired["written_sha"] = sha
+            self.set_meta("chapter_retired:" + relative, retired)
+            return None
+        return sha
+
     def _external_snapshot(self, chapter):
         existing = self.db.execute("SELECT imported FROM chapters WHERE chapter=?", (chapter,)).fetchone()
         if chapter != self.meta("last_chapter") or not existing or existing["imported"]:
             fail("chapter_order", "Only the latest native chapter can be reconciled")
-        relative = f"chapters/{chapter:04d}.md"
-        target = safe_path(self.root, relative)
+        target = safe_path(self.root, self.chapter_external_path(chapter))
         if not target.is_file():
             fail("external_missing", "Recover the missing export before reconciling", path=str(target))
         return {"path": str(target), "sha256": hashlib.sha256(target.read_bytes()).hexdigest()}
@@ -677,7 +1171,10 @@ class Book:
             external = self._external_snapshot(chapter) if _reconcile else None
             pending, drift = self._export_health()
             if external:
-                drift = [p for p in drift if p != f"chapters/{chapter:04d}.md"]
+                external_relative = Path(external["path"]).relative_to(self.root).as_posix()
+                drift = [p for p in drift if p != external_relative]
+                if external_relative != self.chapter_path(chapter):
+                    pending = [p for p in pending if p != external_relative]
             if pending or drift:
                 fail("exports_unresolved", "Recover exports or reconcile outside edits before writing",
                      pending=pending[:10], changed=drift[:10])
@@ -763,14 +1260,14 @@ class Book:
         with self.read_snapshot():
             result = search.query(self.db, query, limit=128)
             cards = self.cards(item["key"] for item in result["matches"] if item["kind"] == "card")
-        found = []
-        for item in result["matches"]:
-            if item["kind"] == "card" and item["key"] in cards:
-                found.append({"type": "card", **cards[item["key"]]})
-            else:
-                found.append({"type": item["kind"], "chapter": item["metadata"].get("chapter"),
-                              "snippet": item["snippet"], "source_sha256": item["source_sha256"],
-                              "path": f"chapters/{int(item['key']):04d}.md" if item["kind"] in ("chapter", "chapter_summary") else None})
+            found = []
+            for item in result["matches"]:
+                if item["kind"] == "card" and item["key"] in cards:
+                    found.append({"type": "card", **cards[item["key"]]})
+                else:
+                    found.append({"type": item["kind"], "chapter": item["metadata"].get("chapter"),
+                                  "snippet": item["snippet"], "source_sha256": item["source_sha256"],
+                                  "path": self.chapter_path(int(item["key"])) if item["kind"] in ("chapter", "chapter_summary") else None})
         packet = {"query": query, "matches": [], "total": len(found), "omitted": len(found),
                   "complete": False if found else result["complete"], "no_match_confirmed": result["no_match_confirmed"],
                   # Reserve truncation metadata before packing, so marking an
@@ -792,8 +1289,32 @@ class Book:
             packet["truncated_reasons"] = result["truncated_reasons"]
         return bounded_packet(packet, budget)
 
+    def _chapter_lint(self, chapter, text, plan, external=None):
+        result = lint_text(text, plan)
+        row = self.db.execute("SELECT imported FROM chapter_state WHERE chapter=?", (chapter,)).fetchone()
+        previous, old, relative, reused, target_sha, source_sha = self._chapter_target(
+            chapter, text, plan, imported=bool(row and row[0]), external=external)
+        queued = self.db.execute("SELECT written_sha FROM artifact_state WHERE path=?", (relative,)).fetchone()
+        self._check_artifact(relative, digest(text), target_sha or (queued[0] if queued else None))
+        if old and relative != previous:
+            self._check_artifact(previous, old["sha"], source_sha or old["written_sha"])
+        result["path"] = str(self.root / relative)
+        return result
+
     def lint(self, chapter, draft):
-        return lint_text(read_text(draft), self.get_plan(chapter))
+        integer(chapter, "chapter", 1)
+        text = read_text(draft)
+        with self.read_snapshot():
+            # Lint remains usable while reviewing an existing outside edit. This
+            # observation is read-only; commit/reconcile still enforce their own
+            # external SHA and revision fences before accepting any replacement.
+            external = history._external(self, chapter)
+            if external:
+                external = {**external, "path": str(self.root / external["path"])}
+            result = self._chapter_lint(chapter, text, self.get_plan(chapter), external)
+            if external:
+                result["external_edit"] = external
+            return result
 
     def chapter_read(self, chapter, sha=None, start=0, end=None, budget=12000):
         integer(chapter, "chapter", 1)
@@ -877,21 +1398,24 @@ class Book:
         # boundaries. Later changes are rejected by commit's existing fences.
         packet = self.context(chapter, budget, _reconcile=reconcile)
         text = read_text(draft)
-        lint = lint_text(text, packet["plan"])
-        delta = {"book_id": packet["book_id"], "base_revision": packet["revision"],
-                 "summary": "<填写本章实际结果与下一章衔接>", "changes": [],
-                 "review": {"draft_sha256": lint["draft_sha256"],
-                            "checks": {key: {"note": "<填写审查观察>", "quote": "<填写正文原句>"}
-                                       for key in CHECKS},
-                            "issues": [{"severity": "blocker", "issue": "尚未完成语义审查；填写观察与引文并处理实际问题后移除此占位项。"}]}}
-        if reconcile:
-            delta["external_sha256"] = packet["external_edit"]["sha256"]
-        result = {"mode": packet["mode"], "lint": lint, "delta": delta,
-                "ready_to_commit": False,
-                "next": "Complete the summary, evidence-based review and state changes; do not change identity or hash fields."}
-        if "world" in packet:
-            result["world_check"] = world.check(self, {**packet["plan"], "chapter": chapter})
-        return bounded_packet(result, budget)
+        with self.read_snapshot():
+            if self.meta("revision") != packet["revision"]:
+                fail("stale_revision", "State changed during preparation; reload context and review again")
+            lint = self._chapter_lint(chapter, text, packet["plan"], packet.get("external_edit"))
+            delta = {"book_id": packet["book_id"], "base_revision": packet["revision"],
+                     "summary": "<填写本章实际结果与下一章衔接>", "changes": [],
+                     "review": {"draft_sha256": lint["draft_sha256"],
+                                "checks": {key: {"note": "<填写审查观察>", "quote": "<填写正文原句>"}
+                                           for key in CHECKS},
+                                "issues": [{"severity": "blocker", "issue": "尚未完成语义审查；填写观察与引文并处理实际问题后移除此占位项。"}]}}
+            if reconcile:
+                delta["external_sha256"] = packet["external_edit"]["sha256"]
+            result = {"mode": packet["mode"], "lint": lint, "delta": delta,
+                    "ready_to_commit": False,
+                    "next": "Complete the summary, evidence-based review and state changes; do not change identity or hash fields."}
+            if "world" in packet:
+                result["world_check"] = world.check(self, {**packet["plan"], "chapter": chapter})
+            return bounded_packet(result, budget)
 
     def validate_delta(self, text, raw):
         raw = object_value(raw, "delta")
@@ -956,7 +1480,10 @@ class Book:
                              path=external["path"], expected=raw["external_sha256"], actual=external["sha256"])
                 pending, drift = self._export_health()
                 if accept_external:
-                    drift = [p for p in drift if p != f"chapters/{chapter:04d}.md"]
+                    external_relative = Path(external["path"]).relative_to(self.root).as_posix()
+                    drift = [p for p in drift if p != external_relative]
+                    if external_relative != self.chapter_path(chapter):
+                        pending = [p for p in pending if p != external_relative]
                 if pending or drift:
                     fail("exports_unresolved", "Resolve previous exports before committing another change",
                          pending=pending[:10], changed=drift[:10])
@@ -1002,8 +1529,10 @@ class Book:
                     after[cid] = card
                 receipt = {"input": raw, "before": before, "after": after, "lint": check}
                 receipt.update(dependency_metadata)
-                self.queue_artifact(f"chapters/{chapter:04d}.md", text,
-                                    accepted_sha=raw["external_sha256"] if accept_external else None)
+                accepted_sha = raw["external_sha256"] if accept_external else None
+                if accept_external:
+                    accepted_sha = self.accept_chapter_external(chapter, external_relative, accepted_sha)
+                self.queue_chapter(chapter, text, plan, accepted_sha=accepted_sha)
                 self.db.execute("INSERT INTO chapters VALUES (?,?,?,?,?,?,0)",
                                 (chapter, text, digest(text), raw["summary"], dumps(receipt), input_hash))
                 if raw.get("world_changes"):
@@ -1023,10 +1552,11 @@ class Book:
             # Construct the durable receipt from this transaction, before another
             # writer can acquire an exclusive lock and block post-commit reads.
             revision = self.meta("revision")
+            relative = self.chapter_path(chapter)
         return self.delivery({"committed": True, "idempotent": idempotent, "chapter": chapter,
-                              "revision": revision, "path": str(self.root / f"chapters/{chapter:04d}.md")})
+                              "revision": revision, "path": str(self.root / relative)})
 
-    def adopt(self, chapter, draft, summary, expected):
+    def adopt(self, chapter, draft, summary, expected, volume_dir=None):
         integer(chapter, "chapter", 1)
         summary = text_field(summary, "summary", 800)
         text = read_text(draft)
@@ -1038,7 +1568,11 @@ class Book:
             if self.meta("last_chapter") != 0:
                 fail("adopt_nonempty", "Adoption only initializes a fresh book baseline")
             receipt = {"source_path": str(Path(draft).resolve()), "quality": "imported_unverified"}
-            self.queue_artifact(f"chapters/{chapter:04d}.md", text)
+            plan_row = self.db.execute("SELECT data FROM plans WHERE chapter=?", (chapter,)).fetchone()
+            plan = json.loads(plan_row[0]) if plan_row else {}
+            if volume_dir is not None:
+                plan["volume_dir"] = volume_directory(volume_dir)
+            relative = self.queue_chapter(chapter, text, plan, imported=True)
             self.db.execute("INSERT INTO chapters VALUES (?,?,?,?,?,?,1)",
                             (chapter, text, digest(text), summary, dumps(receipt), digest(dumps(receipt))))
             self.index_chapter(chapter, text, summary)
@@ -1047,7 +1581,7 @@ class Book:
             self.event("adopt", {"chapter": chapter, "receipt": receipt, "summary": summary})
             history.on_commit(self, chapter, {}, receipt, text, digest(text))
             revision = self.meta("revision")
-        return self.delivery({"adopted_through": chapter, "revision": revision,
+        return self.delivery({"adopted_through": chapter, "revision": revision, "path": str(self.root / relative),
                               "quality": "imported_unverified"})
 
     def source(self, sid):
@@ -1291,7 +1825,8 @@ TEMPLATES = {
     "notes": [{"id": "hero", "kind": "character", "text": "<填写人物当前状态>",
                "tags": ["主角"], "source": "<填写用户要求或原文位置>", "critical": False,
                "status": "active", "due": None}],
-    "plan": {"goal": "<填写本章推进目标>", "beats": [{"choice": "<填写人物选择>", "change": "<填写后果与变化>"}],
+    "plan": {"title": "<填写章节名称，不含章号>", "volume_dir": "第一卷 <填写卷名>",
+             "goal": "<填写本章推进目标>", "beats": [{"choice": "<填写人物选择>", "change": "<填写后果与变化>"}],
              "stop": "<填写停笔点>", "constraints": ["<填写用户原始硬要求>"], "length": [2200, 2800],
              "requires": ["hero"], "tags": ["主角"], "count_method": "visible_nonspace_v1", "count_title": False},
     "delta": {"book_id": "<填写context返回的book_id>", "base_revision": 0, "summary": "<填写本章结果与下章衔接>", "changes": [],
@@ -1369,6 +1904,7 @@ def parser():
             s.add_argument("--input", required=True)
             s.add_argument("--replace-last", action="store_true")
         if name == "adopt":
+            s.add_argument("--volume-dir", help="Named volume directory, for example 第一卷 雨夜; otherwise use the saved chapter plan")
             s.add_argument("--summary", required=True)
             s.add_argument("--expect", type=int, required=True)
     s = command("ingest", "Snapshot source text and split without losing bonus chapters")
@@ -1445,7 +1981,7 @@ def run(args):
         if cmd == "commit":
             return book.commit(args.chapter, args.draft, read_json(args.input), args.replace_last)
         if cmd == "adopt":
-            return book.adopt(args.chapter, args.draft, args.summary, args.expect)
+            return book.adopt(args.chapter, args.draft, args.summary, args.expect, args.volume_dir)
         if cmd == "ingest":
             return book.ingest(args.file, args.coverage, args.encoding, args.chunk_chars)
         if cmd == "coverage":

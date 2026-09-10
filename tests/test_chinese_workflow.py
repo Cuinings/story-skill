@@ -70,7 +70,7 @@ class ChineseWorkflowTests(unittest.TestCase):
 
     def test_prepare_reconciliation_binds_external_bytes(self):
         self.book.commit(1, self.draft, self.delta())
-        outside = self.root / "chapters/0001.md"
+        outside = self.root / self.book.chapter_path(1)
         outside.write_bytes((DRAFT + "她停住。\r\n").encode("utf-8"))
         prepared = self.book.prepare(1, outside, reconcile=True)
         self.assertEqual(prepared["mode"], "reconcile_last")
@@ -80,7 +80,7 @@ class ChineseWorkflowTests(unittest.TestCase):
     def test_maximum_valid_quote_commits_without_late_source_limit_failure(self):
         text = "甲" * 1200
         self.draft.write_text(text, encoding="utf-8")
-        self.book.save_plan(1, plan(length=[1200, 1200], count_method="han_v1"), 2)
+        self.book.save_plan(1, plan(title="字段上限", length=[1200, 1200], count_method="han_v1"), 2)
         delta = self.delta(text)
         delta["review"]["checks"] = {key: {"note": "上限字段的事务回归夹具。", "quote": text} for key in story.CHECKS}
         delta["changes"] = [{"id": "hero", "text": "字段上限夹具", "quote": text}]

@@ -25,7 +25,9 @@ description: 中文小说审稿、修改、去 AI 味及已提交章节修订，
 
 工具托管的新稿先改 `.story/drafts/` 副本，使用 `prepare --chapter N --draft "<草稿>"` 的 delta 骨架填写四项带引文的审查、摘要和完整状态 changes。仅最新原生章、不含结构化世界变化且未合并历史分支时，用 `commit --replace-last`；原版正文和增量留在 events，卡片描述修订后的状态。其他情况先按下文进入历史分支。
 
-若用户已在 `chapters/NNNN.md` 改稿，最新原生章先 `reconcile --chapter N` 取得修订上下文和 `external_edit`，读取该路径并另存草稿。用 `prepare --reconcile --chapter N --draft "<草稿>"` 生成带 `external_sha256` 的骨架，核对外部版本仍与已读一致后审查；执行 `reconcile --chapter N --draft "<草稿>" --input "<delta.json>"`。外部稿再变则重新读取和审查；不要只更新哈希跳过复核。其余文件缺失或待导出且有外改阻断时先 `export --safe-only`，按回执处理剩余路径；它只恢复安全路径，不代表外改已审查。导出保留被替换版本于 `.story/export-backups/`，失败查看回执，不手改数据库。
+若用户已在 `chapters/第X卷 卷名/第N章 章节名称.md`（或已有工程的旧导出路径）改稿，最新原生章先 `reconcile --chapter N` 取得修订上下文和 `external_edit`，读取该路径并另存草稿。用 `prepare --reconcile --chapter N --draft "<草稿>"` 生成带 `external_sha256` 的骨架，核对外部版本仍与已读一致后审查；执行 `reconcile --chapter N --draft "<草稿>" --input "<delta.json>"`。外部稿再变则重新读取和审查；不要只更新哈希跳过复核。其余文件缺失或待导出且有外改阻断时先 `export --safe-only`，按回执处理剩余路径；它只恢复安全路径，不代表外改已审查。导出保留被替换版本于 `.story/export-backups/`，失败查看回执，不手改数据库。
+
+重命名期间新旧路径都被外部保存时，先把全部外部版本分别保留到 `.story/drafts/`，再合并审查。若当前托管路径也阻断对账，先从 `chapter-read` 取回完整已提交正文并核对后恢复该路径；外部副本继续保留，旧路径外改仍待处理。然后 `export --safe-only`，重新获取对账或历史分支回执中的路径与哈希，不把任一外改静默覆盖。
 
 更早章节、含结构化世界变化或已合并过历史分支的章节，使用 [历史分支流程](references/history.md)：先建立候选，核对依赖范围、后文、状态和原文证据，再正式发布。候选未发布时旧版仍可用；缺少依赖声明不能证明后文无关。普通未托管文件按用户授权修改并保留可审查的 diff。
 

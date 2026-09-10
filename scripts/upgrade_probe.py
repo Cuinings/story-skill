@@ -14,6 +14,7 @@ import subprocess
 import sys
 import tempfile
 import time
+import unicodedata
 import zipfile
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -49,44 +50,68 @@ def hashes(files):
 
 
 def unpack_old_archive(archive_path, skill_parent):
-    """Extract only ordinary files/directories below the archive's story-codex root."""
-    skill_parent.mkdir(parents=True, exist_ok=True)
-    boundary = skill_parent.resolve()
-    seen, extracted = set(), {}
+    """Validate a legacy core ZIP or seven-skill ZIP before writing any members."""
+    allowed = set(load_script("install").SKILL_NAMES)
+    entries, canonical, extracted, roots = [], {}, {}, set()
     with zipfile.ZipFile(archive_path) as archive:
         if archive.testzip() is not None:
             raise ValueError("Old archive failed its CRC check")
+        seen = set()
         for entry in archive.infolist():
             if "\\" in entry.filename:
                 raise ValueError(f"Non-portable archive path: {entry.filename}")
             parts = entry.filename.split("/")
             if entry.is_dir():
                 parts = parts[:-1]
-            if not parts or parts[0] != "story-codex" or any(
-                    part in ("", ".", "..") or ":" in part or part.rstrip(" .") != part for part in parts):
-                raise ValueError(f"Archive path is outside its skill root: {entry.filename}")
-            normalized = "/".join(parts).casefold()
+            if not parts or parts[0] not in allowed or any(
+                    part in ("", ".", "..") or any(char in '<>:"|?*' for char in part) or part.rstrip(" .") != part or
+                    any(ord(char) < 32 for char in part) or
+                    part.split(".", 1)[0].upper() in {"CON", "PRN", "AUX", "NUL", *(
+                        f"{prefix}{n}" for prefix in ("COM", "LPT") for n in range(1, 10))}
+                    for part in parts):
+                raise ValueError(f"Archive path is outside its skill roots or non-portable: {entry.filename}")
+            for i in range(1, len(parts) + 1):
+                prefix = "/".join(parts[:i])
+                key = unicodedata.normalize("NFC", prefix).casefold()
+                if key in canonical and canonical[key] != prefix:
+                    raise ValueError(f"Aliased archive path: {entry.filename}")
+                canonical[key] = prefix
+            normalized = unicodedata.normalize("NFC", "/".join(parts)).casefold()
             if normalized in seen:
                 raise ValueError(f"Duplicate archive path: {entry.filename}")
             seen.add(normalized)
             kind = stat.S_IFMT(entry.external_attr >> 16)
-            if kind not in (0, stat.S_IFREG, stat.S_IFDIR) or (kind == stat.S_IFDIR and not entry.is_dir()):
+            if (kind not in (0, stat.S_IFREG, stat.S_IFDIR) or
+                    (kind == stat.S_IFDIR and not entry.is_dir()) or (kind == stat.S_IFREG and entry.is_dir())):
                 raise ValueError(f"Linked or special archive member: {entry.filename}")
+            if not entry.is_dir() and len(parts) < 2:
+                raise ValueError("An archive skill root must be a directory")
+            roots.add(parts[0])
+            entries.append((entry, parts))
+        if roots != {"story-codex"} and roots != allowed:
+            raise ValueError("Archive must contain the legacy core or all seven skills")
+        names = {"/".join(parts) for entry, parts in entries if not entry.is_dir()}
+        required = {root + "/SKILL.md" for root in roots} | {"story-codex/scripts/story.py"}
+        if not required <= names:
+            raise ValueError("Old archive is missing skill entries or the runtime")
+        if any("/".join(parts[:i]) in names for _, parts in entries for i in range(1, len(parts))):
+            raise ValueError("Archive file is also used as a parent directory")
+        skill_parent.mkdir(parents=True, exist_ok=True)
+        boundary = skill_parent.resolve()
+        for entry, parts in entries:
             destination = skill_parent.joinpath(*parts)
             destination.resolve().relative_to(boundary)
             if entry.is_dir():
                 destination.mkdir(parents=True, exist_ok=True)
                 continue
-            if len(parts) < 2:
-                raise ValueError("The archive skill root must be a directory")
             destination.parent.mkdir(parents=True, exist_ok=True)
             raw = archive.read(entry)
             with destination.open("xb") as stream:
                 stream.write(raw)
-            extracted["/".join(parts[1:])] = sha256(raw)
-    if "SKILL.md" not in extracted or "scripts/story.py" not in extracted:
-        raise ValueError("Old archive is missing the skill entry or runtime")
-    return skill_parent / "story-codex", extracted
+            extracted["/".join(parts)] = sha256(raw)
+    if roots == {"story-codex"}:
+        return skill_parent / "story-codex", {name.split("/", 1)[1]: value for name, value in extracted.items()}
+    return skill_parent, extracted
 
 
 def probe(old_archive, timeout):
@@ -136,20 +161,25 @@ def probe(old_archive, timeout):
                                          "scope": "This run verifies canonical source; no current release ZIP was provided"}
 
         with tempfile.TemporaryDirectory(prefix="story-upgrade-probe-") as directory:
-            temporary = Path(directory)
+            temporary = Path(directory).resolve()
             old_repository = temporary / "旧版安装源"
-            old_source, archive_files = unpack_old_archive(old_archive, old_repository)
-            # The current CLI supports an explicit legacy source tree at its SOURCE root.
-            # Keep the copied installer bytes identical while supplying that old flat layout.
+            old_source, archive_files = unpack_old_archive(old_archive, old_repository / "unpacked")
+            # The unchanged installer derives SOURCE from this temporary repository.
+            # Preserve a legacy flat source or all seven sibling roots as packaged.
             old_source.rename(old_repository / "skills")
             old_source = old_repository / "skills"
-            old_version = package.current_version(old_source / "scripts/story.py")
+            legacy = (old_source / "SKILL.md").is_file()
+            old_core = old_source if legacy else old_source / "story-codex"
+            old_version = package.current_version(old_core / "scripts/story.py")
             package.validate_archive_name(old_archive, old_version)
             report["initial_archive"].update({"version": old_version, "files": archive_files})
             check("version_advances", tuple(map(int, old_version.split("."))) < tuple(map(int, current_version.split("."))),
                   old_version=old_version, new_version=current_version)
-            old_files = installer.inventory(old_source)
-            check("archive_extraction_exact", old_files == archive_files)
+            old_suite = {"story-codex": installer.inventory(old_core)} if legacy else installer.suite_inventory(old_source)
+            old_files = old_suite["story-codex"]
+            extracted_files = old_files if legacy else {
+                name + "/" + relative: value for name, files in old_suite.items() for relative, value in files.items()}
+            check("archive_extraction_exact", extracted_files == archive_files, skill_count=len(old_suite))
 
             # install.py has --project and --update, but no --source option. Its
             # unchanged bytes derive SOURCE from this temporary repository layout.
@@ -170,8 +200,12 @@ def probe(old_archive, timeout):
             initial = json.loads(run("install_old_release", [old_installer, "--project", project]))
             report["initial_install"] = initial
             check("old_release_managed_install", initial.get("status") == "installed" and
-                  Path(initial["path"]).resolve() == target.resolve())
-            original = read_tree(target, installer)
+                  Path(initial["path"]).resolve() == (target if legacy else skills_target).resolve() and
+                  (legacy or initial.get("skills") == list(installer.SKILL_NAMES)))
+            originals = {name: read_tree(skills_target / name, installer) for name in old_suite}
+            check("all_prior_skills_managed", all(installer.managed_snapshot(skills_target / name)["files"] == files
+                                                  for name, files in old_suite.items()), skill_count=len(old_suite))
+            original = originals["story-codex"]
             original_hashes = hashes(original)
             manifest = json.loads(original[installer.MARKER].decode("utf-8"))
             check("old_manifest_matches_archive", manifest.get("schema") == 1 and manifest.get("files") == old_files and
@@ -186,9 +220,13 @@ def probe(old_archive, timeout):
                   updated.get("skills") == list(installer.SKILL_NAMES))
             backup = Path(updated["backup"]).resolve()
             backup.relative_to((project / ".agents/.story-codex-backups").resolve())
-            preserved = read_tree(backup / "story-codex", installer)
-            check("previous_release_backup_exact", preserved == original,
-                  original_files_sha256=original_hashes, backup_files_sha256=hashes(preserved))
+            changed = {name for name in old_suite if old_suite[name] != current_suite[name]}
+            backup_originals = {name: read_tree(backup / name, installer) for name in changed}
+            check("previous_release_backup_exact", all(backup_originals[name] == originals[name] for name in changed) and
+                  all(read_tree(skills_target / name, installer) == originals[name] for name in old_suite if name not in changed),
+                  changed_skills=sorted(changed), prior_skill_count=len(originals),
+                  original_files_sha256={name: hashes(files) for name, files in originals.items()},
+                  backup_files_sha256={name: hashes(files) for name, files in backup_originals.items()})
             installed = read_tree(target, installer)
             installed_hashes = hashes(installed)
             manifest = json.loads(installed[installer.MARKER].decode("utf-8"))
@@ -213,7 +251,7 @@ def probe(old_archive, timeout):
             check("repeat_update_idempotent", repeated.get("status") == "unchanged" and
                   Path(repeated["path"]).resolve() == skills_target.resolve() and read_tree(target, installer) == installed and
                   all(read_tree(skills_target / name, installer) == files for name, files in installed_suite.items()) and
-                  read_tree(backup / "story-codex", installer) == original and
+                  all(read_tree(backup / name, installer) == files for name, files in backup_originals.items()) and
                   sorted(path.name for path in backup.parent.iterdir()) == before_backups,
                   backup_count=len(before_backups))
             check("input_files_unchanged", installer.inventory(SKILL) == current_files and
@@ -234,9 +272,9 @@ def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--from-archive", default=str(ROOT / "dist/story-codex-0.3.0.zip"),
-                        help="Trusted local prior release ZIP; defaults to version 0.3.0")
-    parser.add_argument("--output", default=str(ROOT / "benchmarks/results/upgrade.json"),
+    parser.add_argument("--from-archive", default=str(ROOT / "dist/story-codex-0.4.0.zip"),
+                        help="Trusted local prior release ZIP; defaults to version 0.4.0")
+    parser.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.5.0/upgrade.json"),
                         help="Evidence JSON; failed reruns preserve an existing report using a .failed sibling")
     parser.add_argument("--timeout", type=int, default=60, help="Maximum seconds for each CLI command")
     args = parser.parse_args()

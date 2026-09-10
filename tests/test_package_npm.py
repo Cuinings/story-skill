@@ -253,6 +253,20 @@ class NpmPackageTests(unittest.TestCase):
         self.assertNotIn("shell", run.call_args.kwargs)
 
 
+    def test_npm_12_keyed_receipt_is_checked_against_its_package_name(self):
+        receipt = {"name": "@ningcui29/story-codex", "version": "0.5.0"}
+        def invoke(value):
+            with patch.object(npm, "npm_command", return_value=["npm"]), patch.object(
+                    npm.subprocess, "run", return_value=types.SimpleNamespace(
+                        returncode=0, stdout=json.dumps(value), stderr="")):
+                return npm.npm_pack(self.root, self.root / "packed")
+        self.assertEqual(invoke({receipt["name"]: receipt}), receipt)
+        for invalid in ({"different": receipt}, {"error": {"message": "failed"}},
+                        {receipt["name"]: receipt, "extra": receipt}):
+            with self.subTest(value=invalid), self.assertRaises(ValueError):
+                invoke(invalid)
+
+
 class NpmSuiteTests(NpmPackageTests):
     def setUp(self):
         super().setUp()
@@ -284,6 +298,22 @@ class NpmSuiteTests(NpmPackageTests):
         self.write_zip()
         with self.assertRaisesRegex(ValueError, "reviewed layout"):
             npm.read_release(self.archive, self.checksum)
+
+    def test_v050_release_roundtrip_uses_suite_and_unified_install_request(self):
+        self.version = "0.5.0"
+        self.archive = self.root / "story-codex-0.5.0.zip"
+        self.payload["story-codex/scripts/story.py"] = b'VERSION = "0.5.0"\n'
+        self.write_zip()
+        with patch.object(npm, "npm_pack", side_effect=self.fake_pack):
+            result = npm.build(self.archive, self.checksum, self.root / "v050")
+        self.assertEqual(result["version"], "0.5.0")
+        self.assertEqual(result["name"], "@ningcui29/story-codex")
+        self.assertEqual(set(result["payload_manifest"]), set(npm.SUITE_FILES))
+        _, wrapper = npm.wrapper_files(self.version)
+        self.assertIn("blob/main/INSTALL.md", wrapper["README.md"].decode())
+        self.assertIn("固定使用 v0.5.0", wrapper["README.md"].decode())
+        with self.assertRaisesRegex(ValueError, "no reviewed payload layout"):
+            npm.payload_files("0.6.0")
 
     def test_zip_and_npm_share_the_same_explicit_suite_manifest(self):
         spec = importlib.util.spec_from_file_location("zip_suite_manifest", ROOT / "scripts/package.py")

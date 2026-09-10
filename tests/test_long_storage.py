@@ -15,7 +15,7 @@ SPEC = importlib.util.spec_from_file_location("story_storage_test_runtime", ROOT
 story = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(story)
 TEXT = "# 第1章 交钥匙\n江棠把旧钥匙交给杜承安。雨停之前，他必须回来。\n"
-PLAN = {"goal": "交出旧钥匙", "stop": "等待杜承安返回", "beats": [{"choice": "交出钥匙", "change": "承担失物风险"}],
+PLAN = {"volume_dir": "第一卷 雨夜", "goal": "交出旧钥匙", "stop": "等待杜承安返回", "beats": [{"choice": "交出钥匙", "change": "承担失物风险"}],
         "requires": ["key"], "tags": ["江棠"], "length": [10, 100]}
 
 
@@ -117,7 +117,7 @@ class LongStorageTests(unittest.TestCase):
         self.book.commit(1, self.draft, self.delta())
         self.book.save_plan(2, PLAN, self.book.meta("revision"))
         self.book.commit(2, self.draft, self.delta())
-        archive = self.root / "chapters/0001.md"
+        archive = self.root / self.book.chapter_path(1)
         stat = archive.stat()
         archive.write_bytes(archive.read_bytes().replace("江棠".encode(), "江糖".encode()))
         os.utime(archive, ns=(stat.st_atime_ns, stat.st_mtime_ns))
@@ -150,7 +150,7 @@ class LongStorageTests(unittest.TestCase):
         self.assertEqual(self.book.meta("revision"), 2)
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM chapters").fetchone()[0], 0)
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM world_entities").fetchone()[0], 0)
-        self.assertFalse((self.root / "chapters/0001.md").exists())
+        self.assertFalse((self.root / "chapters/第一卷 雨夜/第1章 交钥匙.md").exists())
         changes["facts"][0]["evidence"]["sha256"] = story.digest(TEXT)
         self.assertTrue(self.book.commit(1, self.draft, delta)["exports_complete"])
         self.assertEqual(self.book.meta("revision"), 3)

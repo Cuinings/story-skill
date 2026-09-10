@@ -469,9 +469,11 @@ def candidate_fingerprint(value):
 
 
 def _external(book, chapter):
-    relative = f"chapters/{int(chapter):04d}.md"
+    relative = book.chapter_external_path(int(chapter))
     path = api.safe_path(book.root, relative)
     row = book.db.execute("SELECT sha,written_sha FROM artifacts WHERE path=?", (relative,)).fetchone()
+    if not row and relative != book.chapter_path(int(chapter)):
+        row = book.meta("chapter_retired:" + relative)
     if not row or not path.is_file():
         return None
     sha = hashlib.sha256(path.read_bytes()).hexdigest()
@@ -647,7 +649,8 @@ def _inspection(book, bid, target, revision, data, state_offset=0, state_limit=5
     return {"branch": bid, "chapter": target, "revision": revision, "snapshot": data["snapshot"],
             "baseline_state_sha256": data["baseline_state_sha"], "baseline_publication_revision": data["baseline_revision"],
             "baseline_replayed_events": data["baseline_replayed_events"],
-            "affected": [{"chapter": int(c), "reason": data["reasons"][c], "base_sha256": data["base_shas"][c],
+            "affected": [{"chapter": int(c), "path": book.chapter_path(int(c)),
+                          "reason": data["reasons"][c], "base_sha256": data["base_shas"][c],
                           "candidate_sha256": candidate_fingerprint(candidates[c]) if c in candidates else None,
                           "draft_sha256": candidates[c]["sha"] if c in candidates else None,
                           "external_edit": _external(book, c),
@@ -672,6 +675,13 @@ def _inspection(book, bid, target, revision, data, state_offset=0, state_limit=5
 
 def branch_inspect(book, branch_id, chapter=None, state_offset=0, state_limit=50,
                    affected_offset=0, world_offset=0, hints_offset=0, limit=25, budget=DEFAULT_BUDGET):
+    with book.read_snapshot():
+        return _branch_inspect(book, branch_id, chapter, state_offset, state_limit,
+                               affected_offset, world_offset, hints_offset, limit, budget)
+
+
+def _branch_inspect(book, branch_id, chapter=None, state_offset=0, state_limit=50,
+                    affected_offset=0, world_offset=0, hints_offset=0, limit=25, budget=DEFAULT_BUDGET):
     row, data = _branch(book, branch_id)
     if chapter is not None:
         c = str(api.integer(chapter, "chapter", 1))
@@ -739,14 +749,16 @@ def branch_publish(book, branch_id, expected):
                 pending, drift = book._export_health()
             finally:
                 book.integrity = integrity
-            accepted_external = {}
+            accepted_external, external_paths = {}, {}
             for c, candidate in data["candidates"].items():
                 if candidate.get("external_sha256"):
                     current = _external(book, c)
                     if not current or current["sha256"] != candidate["external_sha256"]:
                         api.fail("stale_external", "Reviewed outside edit changed before publication", chapter=int(c))
                     accepted_external[current["path"]] = current["sha256"]
+                    external_paths[c] = current["path"]
             drift = [path for path in drift if path not in accepted_external]
+            pending = [path for path in pending if path not in accepted_external]
             if pending or drift:
                 api.fail("exports_unresolved", "Resolve exports/outside edits before historical publication", pending=pending[:10], changed=drift[:10])
             if set(data["candidates"]) != set(data["base_heads"]) or any(not c.get("review") for c in data["candidates"].values()):
@@ -785,7 +797,12 @@ def branch_publish(book, branch_id, expected):
                 receipt["history_state_ids"] = sorted(set(previous.get("before", {})) | set(previous.get("after", {})) |
                                                      set(previous.get("history_state_ids", [])) |
                                                      {d["id"] for d in decisions if d["chapter"] == chapter})
-                book.queue_artifact(f"chapters/{chapter:04d}.md", text, accepted_sha=candidate.get("external_sha256"))
+                accepted_sha = candidate.get("external_sha256")
+                if accepted_sha:
+                    accepted_sha = book.accept_chapter_external(chapter, external_paths[c], accepted_sha)
+                imported = book.db.execute("SELECT imported FROM chapter_state WHERE chapter=?", (chapter,)).fetchone()[0]
+                book.queue_chapter(chapter, text, plan=book.get_plan(chapter),
+                                   accepted_sha=accepted_sha, imported=bool(imported))
                 book.db.execute("UPDATE chapters SET text=?,sha=?,summary=?,receipt=?,input_hash=? WHERE chapter=?",
                                 (text, candidate["sha"], candidate["summary"], api.dumps(receipt),
                                  _hash({"branch": branch_id, "candidate": candidate_fingerprint(candidate)}), chapter))

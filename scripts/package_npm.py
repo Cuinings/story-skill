@@ -43,7 +43,7 @@ MAX_BYTES = 256 * 1024 * 1024
 def payload_files(version):
     if version == "0.3.0":
         return PAYLOAD_FILES
-    if re.fullmatch(r"0\.4\.(?:0|[1-9][0-9]*)", version):
+    if re.fullmatch(r"0\.(?:4|5)\.(?:0|[1-9][0-9]*)", version):
         return SUITE_FILES
     raise ValueError(f"Release version has no reviewed payload layout: {version}")
 
@@ -154,6 +154,12 @@ def wrapper_files(version):
             "See https://github.com/NingCui29/story-skill for setup and update instructions.\n\n"
             "License: MIT; each skill contains its complete `LICENSE`.\n"
         )
+    if version.startswith("0.5."):
+        previous_request = (f"使用 skill-installer 从 https://github.com/NingCui29/story-skill/tree/v{version}/skills "
+                            "安装全部七个技能目录：" + "、".join(SKILL_NAMES) + "。")
+        readme = readme.replace(previous_request,
+            "$skill-installer 按 https://github.com/NingCui29/story-skill/blob/main/INSTALL.md "
+            f"安装或升级 Story Codex，固定使用 v{version}。")
     return manifest, {
         "package.json": (json.dumps(manifest, ensure_ascii=False, indent=2) + "\n").encode("utf-8"),
         "README.md": readme.encode("utf-8"),
@@ -229,6 +235,11 @@ def npm_pack(stage, destination):
     if process.returncode:
         raise RuntimeError(f"npm pack failed (exit {process.returncode}): {process.stderr.strip()}")
     rows = json.loads(process.stdout)
+    # npm 12 keys JSON pack receipts by package name; older versions use a list.
+    if isinstance(rows, dict) and len(rows) == 1:
+        name, receipt = next(iter(rows.items()))
+        if isinstance(receipt, dict) and receipt.get("name") == name:
+            rows = [receipt]
     if not isinstance(rows, list) or len(rows) != 1 or not isinstance(rows[0], dict):
         raise ValueError("npm pack did not return exactly one package result")
     return rows[0]

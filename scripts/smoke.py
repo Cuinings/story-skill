@@ -30,7 +30,7 @@ def smoke():
         call("init", "--title", "门后的雨", "--kind", "short")
         notes = [{"id": "hero", "kind": "character", "text": "沈禾手中只有一把钥匙。", "source": "示例初始设定", "tags": ["沈禾"]}]
         call("notes", "--input", write_json("notes.json", notes), "--expect", 0)
-        plan = {"goal": "让沈禾用唯一钥匙换取线索", "stop": "进门，不揭开失踪者身份",
+        plan = {"volume_dir": "第一卷 雨夜", "goal": "让沈禾用唯一钥匙换取线索", "stop": "进门，不揭开失踪者身份",
                 "constraints": ["保留拿不到账本的停笔点"], "requires": ["hero"], "tags": ["沈禾"],
                 "length": [150, 350], "beats": [{"choice": "交出唯一钥匙", "change": "进门但失去退路"}]}
         call("plan", "--chapter", 1, "--input", write_json("plan.json", plan), "--expect", 1)
@@ -57,9 +57,9 @@ def smoke():
         retry = call("commit", "--chapter", 1, "--draft", draft, "--input", delta_file)
         if not committed["exports_complete"] or not retry["idempotent"]:
             raise AssertionError("Commit/export/idempotency contract failed")
-        if (root / "chapters/0001.md").read_bytes() != draft.read_bytes():
+        if Path(committed["path"]).read_bytes() != draft.read_bytes():
             raise AssertionError("Export differs from reviewed draft")
-        export_path = root / "chapters/0001.md"
+        export_path = Path(committed["path"])
         external_bytes = (draft_text + "沈禾在门内站稳，等楼上的脚步停下。\n").encode("utf-8")
         export_path.write_bytes(external_bytes)
         inspected = call("reconcile", "--chapter", 1)
@@ -117,7 +117,7 @@ def smoke():
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.4.0/smoke.json"))
+    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.5.0/smoke.json"))
     args = p.parse_args()
     result = smoke()
     output = Path(args.output)

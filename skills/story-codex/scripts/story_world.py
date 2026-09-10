@@ -762,7 +762,7 @@ def template(kind=None):
                          {"id": "north", "name": "北库", "kind": "place", "description": "待交接库房"},
                          {"id": "coin", "name": "备用金", "kind": "resource", "description": "统一以元为单位的指定资金"}],
             "aliases": [{"alias": "小江", "entity": "jiang", "scope": "north-line"}],
-            "volumes": [{"id": "v1", **structure}], "arcs": [{"id": "a1", "volume": "v1", **structure}],
+            "volumes": [{"id": "v1", **structure, "title": "第一卷 停航交接"}], "arcs": [{"id": "a1", "volume": "v1", **structure}],
             "lines": [{"id": "north-entry", "line": "north-line", "clock": "main", "at": 10, "place": "north", "summary": "准备在库门前核对", "unfinished": "等待当事人解释缺项", "entities": ["jiang"], "evidence": evidence}],
             "facts": [{"id": "f-key", "subject": "jiang", "predicate": "持有物", "value": "北库钥匙", "clock": "main", "start": 10, "end": None, "hard": True, "evidence": evidence}],
             "knowledge": [{"id": "k-key", "actor": "jiang", "fact": "f-key", "state": "unknown", "clock": "main", "at": 0, "channel": "计划在开篇交代尚未获知钥匙去处", "evidence": evidence}],

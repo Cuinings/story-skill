@@ -27,7 +27,7 @@ def card(cid="hero", **extra):
 
 
 def plan(**extra):
-    return {"goal": "用钥匙换取入口", "stop": "进入门内，不拿到账本",
+    return {"volume_dir": "第一卷 雨夜", "goal": "用钥匙换取入口", "stop": "进入门内，不拿到账本",
             "beats": [{"choice": "沈禾交出钥匙", "change": "得到入口并失去退路"}],
             "constraints": ["天亮前返回"], "requires": ["hero"], "tags": ["沈禾"], "length": [20, 120], **extra}
 
@@ -118,7 +118,7 @@ class StoryTests(unittest.TestCase):
         self.assertTrue(first["exports_complete"])
         self.assertTrue(second["idempotent"])
         self.assertEqual(first["revision"], second["revision"])
-        self.assertEqual((self.root / "chapters/0001.md").read_text(encoding="utf-8"), DRAFT)
+        self.assertEqual((self.root / self.book.chapter_path(1)).read_text(encoding="utf-8"), DRAFT)
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM chapters").fetchone()[0], 1)
 
     def test_cross_book_delta_rejected(self):
@@ -187,8 +187,8 @@ class StoryTests(unittest.TestCase):
         self.assertTrue(recovered["exports_complete"])
 
     def test_outside_edits_are_never_overwritten(self):
-        target = self.root / "chapters/0001.md"
-        target.parent.mkdir()
+        target = self.root / "chapters/第一卷 雨夜/第1章 门后的雨.md"
+        target.parent.mkdir(parents=True)
         target.write_text("用户原稿", encoding="utf-8")
         self.assert_error("export_conflict", self.book.commit, 1, self.draft, self.delta())
         self.assertEqual(target.read_text(encoding="utf-8"), "用户原稿")
@@ -196,7 +196,7 @@ class StoryTests(unittest.TestCase):
 
     def test_outside_edits_after_commit_are_visible_and_block_continuation(self):
         self.book.commit(1, self.draft, self.delta())
-        target = self.root / "chapters/0001.md"
+        target = self.root / self.book.chapter_path(1)
         target.write_text("用户后改稿", encoding="utf-8")
         self.assertEqual(self.book.status()["changed_export_count"], 1)
         self.assert_error("exports_unresolved", self.book.context, 1)
@@ -232,7 +232,7 @@ class StoryTests(unittest.TestCase):
 
     def test_adopt_preserves_source_and_does_not_fabricate_history(self):
         original = self.draft.read_bytes()
-        result = self.book.adopt(108, self.draft, "末章有明确交接，钥匙已经交出", 2)
+        result = self.book.adopt(108, self.draft, "末章有明确交接，钥匙已经交出", 2, volume_dir="第一卷 雨夜")
         self.assertEqual(result["adopted_through"], 108)
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM chapters").fetchone()[0], 1)
         self.assertEqual(self.book.status()["next_chapter"], 109)
@@ -247,7 +247,7 @@ class StoryTests(unittest.TestCase):
         with patch.object(story, "atomic_write", side_effect=OSError("temporary failure")):
             result = self.book.commit(1, self.draft, delta, True)
         self.assertFalse(result["exports_complete"])
-        self.assertEqual((self.root / "chapters/0001.md").read_text(encoding="utf-8"), DRAFT)
+        self.assertEqual((self.root / self.book.chapter_path(1)).read_text(encoding="utf-8"), DRAFT)
         self.assertTrue(self.book.commit(1, self.draft, delta, True)["exports_complete"])
 
     def test_parallel_identical_submissions_only_commit_once(self):
@@ -404,7 +404,7 @@ class StoryTests(unittest.TestCase):
         delta = self.delta(text)
         self.assertEqual(self.book.lint(1, self.draft)["draft_sha256"], delta["review"]["draft_sha256"])
         self.book.commit(1, self.draft, delta)
-        self.assertEqual((self.root / "chapters/0001.md").read_bytes(), self.draft.read_bytes())
+        self.assertEqual((self.root / self.book.chapter_path(1)).read_bytes(), self.draft.read_bytes())
 
 
 if __name__ == "__main__":

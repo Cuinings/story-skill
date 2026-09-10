@@ -4,7 +4,7 @@
 
 需要理解或重绑定世界记录的字段与证据时，按需读 [世界状态说明](../../story-codex-write/references/long-form.md)；先 `world-read --kind facts --id ID`（可换其他类别）取回真实旧记录，不凭 ID 猜字段。分支所用依赖须来自实际复核；`dependencies --chapter N` 只给候选，不能直接宣称完整。`chapter-read --chapter N --sha256 SHA --start A --end B` 可定点读取当前或归档正文。
 
-含世界增量的章及更早章用历史分支，不直接 replace-last 撤销局部卡片。`history-start --chapter N --expect R` 创建候选；按返回的影响范围、状态要求和 review_template 准备修订，用 `history-update` 保存，`history-inspect` 继续取断点。每个受影响章须刷新正文/摘要/依赖及审查，整个候选包另做状态和覆盖审查；`history-publish` 才发布。正文证据变化后的世界记录须在分支 world_changes 中重绑定，或用 retirements 明确撤销，并处理仍引用它的认知/规则。分支未发布时原版继续有效。
+含世界增量的章及更早章用历史分支，不直接 replace-last 撤销局部卡片。`history-start --chapter N --expect R` 创建候选；按返回的影响范围、状态要求和 review_template 准备修订，用 `history-update` 保存，`history-inspect` 继续取断点。每个受影响章须刷新正文/摘要/依赖及审查，整个候选包另做状态和覆盖审查；`history-publish` 才发布。正文证据变化后的世界记录须在分支 world_changes 中重绑定，或用 retirements 明确撤销，并处理仍引用它的认知/规则。分支未发布时原版继续有效。发布后用 `history-inspect` 分页条目的 `affected[].path` 定位当前托管正文（相对于书目录），即使重复发布时 `exported` 为空也可查到。该路径指向当前导出，基线与候选版本仍按各自 SHA 定点读取。不能按章号猜文件名；旧工程仍识别原导出路径，不借历史修订批量搬动文件。
 
 `history-inspect --branch B --chapter N` 返回该章基线/候选正文及空白 chapter_review_template；先读稿，再填观察和原句。一般 inspection 还给 state_review_template 的精确 before_sha/before，after 不预填：须明确填完整卡片以保持/修改，或 null 删除，并补候选章号、原句和理由。默认50张，可用 --state-offset/--state-limit 分页，单页最多200张。
 

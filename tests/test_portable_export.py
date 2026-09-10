@@ -30,14 +30,14 @@ class PortableWindowsExportTests(unittest.TestCase):
         story.Book.create(self.root, "门后的雨", "long")
         self.book = story.Book(self.root)
         self.addCleanup(self.book.close)
-        plan = {"goal": "决定钥匙的去向", "stop": "选择入口后停笔", "constraints": [],
+        plan = {"volume_dir": "第一卷 雨夜", "goal": "决定钥匙的去向", "stop": "选择入口后停笔", "constraints": [],
                 "requires": [], "tags": [], "length": [20, 120],
                 "beats": [{"choice": "沈禾决定是否交出钥匙", "change": "失去或保留退路"}]}
         self.book.save_plan(1, plan, self.book.meta("revision"))
         self.draft = self.root / ".story/drafts/chapter.md"
         self.draft.parent.mkdir(parents=True)
         self.draft.write_bytes(DRAFT.encode("utf-8"))
-        self.target = self.root / "chapters/0001.md"
+        self.target = self.root / "chapters/第一卷 雨夜/第1章 门后的雨.md"
 
     def delta(self, text=DRAFT):
         return {"book_id": self.book.meta("id"), "base_revision": self.book.meta("revision"),
@@ -75,11 +75,11 @@ class PortableWindowsExportTests(unittest.TestCase):
         external = b"Editor recreated the target before publication"
         publish = story._publish_no_replace
 
-        def editor_saves_before_publication(source, target):
+        def editor_saves_before_publication(source, target, *args, **kwargs):
             if Path(source).name.startswith(".story-tmp-"):
                 self.assertFalse(self.target.exists())
                 self.target.write_bytes(external)
-            return publish(source, target)
+            return publish(source, target, *args, **kwargs)
 
         with patch.object(story, "_publish_no_replace", side_effect=editor_saves_before_publication):
             result = self.book.commit(1, self.draft, self.delta(REVISED), replace_last=True)
@@ -95,10 +95,10 @@ class PortableWindowsExportTests(unittest.TestCase):
         delta = self.delta(REVISED)
         publish = story._publish_no_replace
 
-        def fail_new_stage(source, target):
+        def fail_new_stage(source, target, *args, **kwargs):
             if Path(source).name.startswith(".story-tmp-"):
                 raise OSError("publication interrupted")
-            return publish(source, target)
+            return publish(source, target, *args, **kwargs)
 
         with patch.object(story, "_publish_no_replace", side_effect=fail_new_stage):
             result = self.book.commit(1, self.draft, delta, replace_last=True)
@@ -123,13 +123,13 @@ class PortableWindowsExportTests(unittest.TestCase):
         external = b"Editor saved while the old file was being restored"
         publish = story._publish_no_replace
 
-        def fail_publish_then_race_restore(source, target):
+        def fail_publish_then_race_restore(source, target, *args, **kwargs):
             if Path(source).name.startswith(".story-tmp-"):
                 raise OSError("publication interrupted")
             if Path(source).name.startswith(".story-restore-"):
                 self.assertFalse(self.target.exists())
                 self.target.write_bytes(external)
-            return publish(source, target)
+            return publish(source, target, *args, **kwargs)
 
         with patch.object(story, "_publish_no_replace", side_effect=fail_publish_then_race_restore):
             result = self.book.commit(1, self.draft, self.delta(REVISED), replace_last=True)

@@ -32,7 +32,7 @@ class RecoveryRegressionTests(unittest.TestCase):
         self.temp.cleanup()
 
     def save_plan(self, chapter):
-        plan = {"goal": "用钥匙换取入口", "stop": "交出钥匙后停笔",
+        plan = {"volume_dir": "第一卷 雨夜", "goal": "用钥匙换取入口", "stop": "交出钥匙后停笔",
                 "beats": [{"choice": "沈禾交出钥匙", "change": "失去退路"}],
                 "constraints": [], "requires": [], "tags": [], "length": [20, 120]}
         self.book.save_plan(chapter, plan, self.book.meta("revision"))
@@ -50,7 +50,7 @@ class RecoveryRegressionTests(unittest.TestCase):
         second_delta = self.delta()
         self.book.commit(2, self.draft, second_delta)
         revision = self.book.meta("revision")
-        first_path = self.root / "chapters/0001.md"
+        first_path = self.root / self.book.chapter_path(1)
         user_edit = "用户刚刚保存的新稿，必须保留。\n".encode("utf-8")
         original_check = self.book._check_artifact
         edited = False
@@ -59,7 +59,7 @@ class RecoveryRegressionTests(unittest.TestCase):
             nonlocal edited
             target = original_check(relative, *args, **kwargs)
             # The second file's preflight occurs after the first file was checked.
-            if relative == "chapters/0002.md" and not edited:
+            if relative == self.book.chapter_path(2) and not edited:
                 first_path.write_bytes(user_edit)
                 edited = True
             return target
@@ -85,8 +85,8 @@ class RecoveryRegressionTests(unittest.TestCase):
         second_delta = self.delta()
         self.book.commit(2, self.draft, second_delta)
         revision = self.book.meta("revision")
-        first_path = self.root / "chapters/0001.md"
-        second_path = self.root / "chapters/0002.md"
+        first_path = self.root / self.book.chapter_path(1)
+        second_path = self.root / self.book.chapter_path(2)
         second_path.unlink()
         user_edit = "导出第二章期间，用户保存了第一章修订。\n".encode("utf-8")
         original_write = story.atomic_write
@@ -181,20 +181,23 @@ class RecoveryRegressionTests(unittest.TestCase):
         self.assertTrue(recovered["idempotent"])
         self.assertTrue(recovered["exports_complete"])
         self.assertEqual(self.book.meta("revision"), revision + 1)
-        self.assertEqual((self.root / "chapters/0001.md").read_bytes(), DRAFT.encode("utf-8"))
+        self.assertEqual((self.root / self.book.chapter_path(1)).read_bytes(), DRAFT.encode("utf-8"))
 
     def test_edit_at_displacement_is_restored_and_backed_up(self):
         self.book.commit(1, self.draft, self.delta())
-        target = self.root / "chapters/0001.md"
+        target = self.root / self.book.chapter_path(1)
         revised = DRAFT + "她没有回头。\n"
         self.draft.write_bytes(revised.encode("utf-8"))
         external = b"editor saved at the final write boundary\n"
         original_replace = story.os.replace
 
-        def editor_save_then_replace(source, destination):
-            if Path(source) == target:
+        def editor_save_then_replace(source, destination, *args, **kwargs):
+            source_matches = Path(source) == target or (
+                Path(source) == Path(target.name) and kwargs.get("src_dir_fd") is not None and
+                story.os.path.samestat(target.parent.stat(), story.os.fstat(kwargs["src_dir_fd"])))
+            if source_matches:
                 target.write_bytes(external)
-            return original_replace(source, destination)
+            return original_replace(source, destination, *args, **kwargs)
 
         with patch.object(story.os, "replace", side_effect=editor_save_then_replace):
             result = self.book.commit(1, self.draft, self.delta(revised), replace_last=True)
@@ -206,17 +209,17 @@ class RecoveryRegressionTests(unittest.TestCase):
 
     def test_editor_recreates_path_during_publication_is_not_overwritten(self):
         self.book.commit(1, self.draft, self.delta())
-        target = self.root / "chapters/0001.md"
+        target = self.root / self.book.chapter_path(1)
         revised = DRAFT + "她没有回头。\n"
         self.draft.write_bytes(revised.encode("utf-8"))
         external = b"a later editor save must win\n"
         original_publish = story._publish_no_replace
 
-        def editor_save_then_link(source, destination):
+        def editor_save_then_link(source, destination, *args, **kwargs):
             if Path(source).name.startswith(".story-tmp-"):
                 self.assertFalse(target.exists())
                 target.write_bytes(external)
-            return original_publish(source, destination)
+            return original_publish(source, destination, *args, **kwargs)
 
         with patch.object(story, "_publish_no_replace", side_effect=editor_save_then_link):
             result = self.book.commit(1, self.draft, self.delta(revised), replace_last=True)
@@ -227,16 +230,16 @@ class RecoveryRegressionTests(unittest.TestCase):
 
     def test_publication_failure_restores_previous_file_and_allows_retry(self):
         self.book.commit(1, self.draft, self.delta())
-        target = self.root / "chapters/0001.md"
+        target = self.root / self.book.chapter_path(1)
         revised = DRAFT + "她没有回头。\n"
         self.draft.write_bytes(revised.encode("utf-8"))
         delta = self.delta(revised)
         original_publish = story._publish_no_replace
 
-        def publication_fails(source, destination):
+        def publication_fails(source, destination, *args, **kwargs):
             if Path(source).name.startswith(".story-tmp-"):
                 raise OSError("publication interrupted")
-            return original_publish(source, destination)
+            return original_publish(source, destination, *args, **kwargs)
 
         with patch.object(story, "_publish_no_replace", side_effect=publication_fails):
             result = self.book.commit(1, self.draft, delta, replace_last=True)
@@ -251,7 +254,7 @@ class RecoveryRegressionTests(unittest.TestCase):
 
     def test_atomic_replace_failure_keeps_committed_revision_recoverable(self):
         self.book.commit(1, self.draft, self.delta())
-        target = self.root / "chapters/0001.md"
+        target = self.root / self.book.chapter_path(1)
         original_bytes = target.read_bytes()
         revised = DRAFT + "她没有回头。\n"
         self.draft.write_bytes(revised.encode("utf-8"))

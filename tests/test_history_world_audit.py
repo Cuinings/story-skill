@@ -44,7 +44,7 @@ class HistoryWorldAuditTests(unittest.TestCase):
                 "evidence": self.evidence(chapter) if chapter else {"kind": "author_plan", "note": "拟写的收支动作"}}
 
     def prepare(self, chapter, transfers=(), time=None, requires=()):
-        plan = {"goal": "核对交接", "stop": "留下收据", "requires": list(requires), "tags": [],
+        plan = {"volume_dir": "第一卷 雨夜", "title": "核对交接", "goal": "核对交接", "stop": "留下收据", "requires": list(requires), "tags": [],
                 "constraints": [], "beats": [{"choice": "核对账本", "change": "留下收据"}], "length": [10, 200]}
         if time is not None:
             plan["time"] = {"clock": "main", "start": time[0], "end": time[1]}
@@ -122,7 +122,7 @@ class HistoryWorldAuditTests(unittest.TestCase):
         self.assertEqual(self.rev(), revision)
         self.assertIsNone(self.book.db.execute("SELECT chapter FROM chapters WHERE chapter=2").fetchone())
         self.assertEqual(self.book.db.execute("SELECT count(*) FROM world_evidence WHERE chapter=2").fetchone()[0], 0)
-        self.assertFalse((self.root / "chapters/0002.md").exists())
+        self.assertFalse((self.root / "chapters/第一卷 雨夜/第2章 核对交接.md").exists())
 
     def test_explicit_action_time_checks_overdraft_without_plan_time(self):
         self.publish(1, transfers=[self.transfer("opening", "3", 0, 1, opening=True)])

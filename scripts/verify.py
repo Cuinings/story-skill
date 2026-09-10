@@ -344,7 +344,7 @@ def verify(archive=None, validator=None, validator_python=None, timeout=300):
 
     baseline = check("skill_input_snapshot", lambda: {"status": "passed", "files": skill_files()})
     with tempfile.TemporaryDirectory(prefix="story-release-verify-") as directory:
-        temp = Path(directory)
+        temp = Path(directory).resolve()
         check("unit_tests", lambda: check_unittest(temp / "unittest.json", timeout))
         check("cli_smoke", lambda: check_smoke(temp / "smoke.json", timeout))
         check("chinese_manuscript_replay", lambda: check_chinese(temp / "chinese.json", timeout))
@@ -388,7 +388,7 @@ def check_recorded_probes():
     current = {p.name: digest(p) for p in (SKILL / "scripts").glob("*.py")}
     results = []
     for filename, key in (("scaling.json", "runtime_files"), ("migration.json", "runtime")):
-        path = ROOT / "benchmarks/results/v0.4.0" / filename
+        path = ROOT / "benchmarks/results/v0.5.0" / filename
         evidence = json.loads(path.read_text(encoding="utf-8"))
         valid = evidence.get("ok") is True and evidence.get(key) == current
         if filename.startswith("scaling"):
@@ -407,7 +407,7 @@ def main():
     if hasattr(sys.stdout, "reconfigure"):
         sys.stdout.reconfigure(encoding="utf-8")
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.4.0/verification.json"),
+    parser.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.5.0/verification.json"),
                         help="Report path; a failed rerun uses a .failed sibling if this file exists")
     parser.add_argument("--archive", help="Archive to compare; defaults to the canonical runtime VERSION")
     parser.add_argument("--skill-validator", help="Optional bundled quick_validate.py path")

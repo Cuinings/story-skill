@@ -26,14 +26,14 @@ class ExportRecoveryTests(unittest.TestCase):
         self.draft = self.root / ".story/drafts/chapter.md"
         self.draft.parent.mkdir(parents=True)
         self.draft.write_bytes(DRAFT.encode("utf-8"))
-        plan = {"goal": "决定钥匙的去向", "stop": "选择入口后停笔", "constraints": [],
+        plan = {"volume_dir": "第一卷 雨夜", "goal": "决定钥匙的去向", "stop": "选择入口后停笔", "constraints": [],
                 "requires": [], "tags": [], "length": [20, 120],
                 "beats": [{"choice": "沈禾决定是否交出钥匙", "change": "失去或保留退路"}]}
         for chapter in (1, 2):
             self.book.save_plan(chapter, plan, self.book.meta("revision"))
             self.book.commit(chapter, self.draft, self.delta())
-        self.first = self.root / "chapters/0001.md"
-        self.second = self.root / "chapters/0002.md"
+        self.first = self.root / self.book.chapter_path(1)
+        self.second = self.root / self.book.chapter_path(2)
 
     def tearDown(self):
         self.book.close()
@@ -63,10 +63,10 @@ class ExportRecoveryTests(unittest.TestCase):
                                   "--safe-only"], capture_output=True)
         self.assertEqual(process.returncode, 2, process.stderr)
         result = json.loads(process.stdout)
-        self.assertEqual(result["exported"], ["chapters/0001.md"])
+        self.assertEqual(result["exported"], [self.book.chapter_path(1)])
         self.assertFalse(result["exports_complete"])
         self.assertEqual(result["pending_export_count"], 0)
-        self.assertEqual(result["changed_exports"], ["chapters/0002.md"])
+        self.assertEqual(result["changed_exports"], [self.book.chapter_path(2)])
         self.assertEqual(result["changed_export_count"], 1)
         self.assertEqual(self.first.read_bytes(), DRAFT.encode("utf-8"))
         self.assertEqual(self.second.read_bytes(), REVISED.encode("utf-8"))
@@ -105,10 +105,10 @@ class ExportRecoveryTests(unittest.TestCase):
         revision = self.book.meta("revision")
 
         recovered = self.book.export(safe_only=True)
-        self.assertEqual(recovered["exported"], ["chapters/0002.md"])
+        self.assertEqual(recovered["exported"], [self.book.chapter_path(2)])
         self.assertFalse(recovered["exports_complete"])
         self.assertEqual(recovered["pending_export_count"], 0)
-        self.assertEqual(recovered["changed_exports"], ["chapters/0001.md"])
+        self.assertEqual(recovered["changed_exports"], [self.book.chapter_path(1)])
         self.assertEqual(self.first.read_bytes(), outside)
         self.assertEqual(self.second.read_bytes(), REVISED.encode("utf-8"))
         self.assertEqual(self.book.meta("revision"), revision)
@@ -123,9 +123,9 @@ class ExportRecoveryTests(unittest.TestCase):
         marker.write_bytes(b"User-owned directory contents")
 
         result = self.book.export(safe_only=True)
-        self.assertEqual(result["exported"], ["chapters/0001.md"])
+        self.assertEqual(result["exported"], [self.book.chapter_path(1)])
         self.assertFalse(result["exports_complete"])
-        self.assertEqual(result["changed_exports"], ["chapters/0002.md"])
+        self.assertEqual(result["changed_exports"], [self.book.chapter_path(2)])
         self.assertEqual(result["export_errors"][0]["code"], "export_conflict")
         self.assertEqual(self.first.read_bytes(), DRAFT.encode("utf-8"))
         self.assertTrue(self.second.is_dir())
@@ -148,7 +148,7 @@ class ExportRecoveryTests(unittest.TestCase):
             result = self.book.export(safe_only=True)
         self.assertTrue(recreated)
         self.assertFalse(result["exports_complete"])
-        self.assertEqual(result["changed_exports"], ["chapters/0001.md"])
+        self.assertEqual(result["changed_exports"], [self.book.chapter_path(1)])
         self.assertEqual(result["pending_export_count"], 0)
         self.assertEqual(self.first.read_bytes(), outside)
         self.assertEqual(self.second.read_bytes(), DRAFT.encode("utf-8"))
@@ -165,7 +165,10 @@ class ExportRecoveryTests(unittest.TestCase):
 
         def editor_saves_before_displacement(source, target, *args, **kwargs):
             nonlocal edited
-            if Path(source) == self.second and not edited:
+            source_matches = Path(source) == self.second or (
+                Path(source) == Path(self.second.name) and kwargs.get("src_dir_fd") is not None and
+                story.os.path.samestat(self.second.parent.stat(), story.os.fstat(kwargs["src_dir_fd"])))
+            if source_matches and not edited:
                 self.second.write_bytes(outside)
                 edited = True
             return original_replace(source, target, *args, **kwargs)
@@ -174,7 +177,7 @@ class ExportRecoveryTests(unittest.TestCase):
             result = self.book.export(safe_only=True)
         self.assertTrue(edited)
         self.assertFalse(result["exports_complete"])
-        self.assertEqual(result["changed_exports"], ["chapters/0002.md"])
+        self.assertEqual(result["changed_exports"], [self.book.chapter_path(2)])
         self.assertEqual(self.second.read_bytes(), outside)
         self.assertEqual(result["export_error_count"], 1)
         error = result["export_errors"][0]
@@ -205,9 +208,9 @@ class ExportRecoveryTests(unittest.TestCase):
                 self.skipTest("Neither symlink nor Windows junction creation is available")
 
         result = self.book.export(safe_only=True)
-        self.assertEqual(result["exported"], ["chapters/0001.md"])
+        self.assertEqual(result["exported"], [self.book.chapter_path(1)])
         self.assertFalse(result["exports_complete"])
-        self.assertEqual(result["changed_exports"], ["chapters/0002.md"])
+        self.assertEqual(result["changed_exports"], [self.book.chapter_path(2)])
         self.assertIn(result["export_errors"][0]["code"], ("linked_path", "path_escape"))
         self.assertEqual(self.first.read_bytes(), DRAFT.encode("utf-8"))
         self.assertEqual(marker.read_bytes(), b"External directory contents")
@@ -225,9 +228,9 @@ class ExportRecoveryTests(unittest.TestCase):
 
         with patch.object(story, "atomic_write", side_effect=fail_one_path):
             result = self.book.export(safe_only=True)
-        self.assertEqual(result["exported"], ["chapters/0002.md"])
+        self.assertEqual(result["exported"], [self.book.chapter_path(2)])
         self.assertFalse(result["exports_complete"])
-        self.assertEqual(result["pending_exports"], ["chapters/0001.md"])
+        self.assertEqual(result["pending_exports"], [self.book.chapter_path(1)])
         self.assertEqual(result["pending_export_count"], 1)
         self.assertEqual(result["changed_export_count"], 0)
         self.assertEqual(result["export_error_count"], 1)
@@ -235,7 +238,7 @@ class ExportRecoveryTests(unittest.TestCase):
         self.assertEqual(self.second.read_bytes(), DRAFT.encode("utf-8"))
         retry = self.book.export(safe_only=True)
         self.assertTrue(retry["exports_complete"])
-        self.assertEqual(retry["exported"], ["chapters/0001.md"])
+        self.assertEqual(retry["exported"], [self.book.chapter_path(1)])
         self.assertEqual(retry["pending_export_count"], 0)
         self.assertEqual(retry["changed_export_count"], 0)
 

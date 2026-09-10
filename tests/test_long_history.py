@@ -41,7 +41,7 @@ class LongHistoryTests(unittest.TestCase):
 
     def add(self, chapter, change=False, dependency_fields=None):
         text = f"# 第{chapter}章\n沈禾在渡口核对第{chapter}册账本。她交出钥匙，留下一张收据。灯还亮着。\n"
-        plan = {"goal": "核对交接", "stop": "留在渡口", "requires": [], "tags": [],
+        plan = {"volume_dir": "第一卷 雨夜", "title": "核对交接", "goal": "核对交接", "stop": "留在渡口", "requires": [], "tags": [],
                 "constraints": ["不离开渡口"], "beats": [{"choice": "交出钥匙", "change": "保留收据"}], "length": [10, 200]}
         self.book.save_plan(chapter, plan, self.rev())
         self.draft.write_bytes(text.encode("utf-8"))
@@ -119,7 +119,7 @@ class LongHistoryTests(unittest.TestCase):
         history.branch_update(self.book, packet["branch"], {"chapters": [candidate]}, self.rev())
         self.assertEqual(self.book.db.execute("SELECT text FROM chapters").fetchone()[0], self.texts[1])
         self.assert_code("review_incomplete", history.branch_publish, self.book, packet["branch"], self.rev())
-        self.assertEqual((self.root / "chapters/0001.md").read_text(encoding="utf-8"), self.texts[1])
+        self.assertEqual((self.root / self.book.chapter_path(1)).read_text(encoding="utf-8"), self.texts[1])
 
     def test_state_requires_explicit_keep_or_update_and_is_atomic_with_text(self):
         self.add(1, change=True)
@@ -225,7 +225,7 @@ class LongHistoryTests(unittest.TestCase):
         self.add(1)
         self.dep(1)
         staged = self.stage(self.start())
-        path = self.root / "chapters/0001.md"
+        path = self.root / self.book.chapter_path(1)
         path.write_text("用户刚增加的结尾。", encoding="utf-8")
         revision = self.rev()
         self.assert_code("exports_unresolved", history.branch_publish, self.book, staged["branch"], revision)
@@ -261,7 +261,7 @@ class LongHistoryTests(unittest.TestCase):
     def test_imported_baseline_can_only_publish_after_plan_and_full_reviews(self):
         text = "# 旧稿\n沈禾留在渡口。灯还亮着。\n"
         self.draft.write_bytes(text.encode("utf-8"))
-        self.book.adopt(20, self.draft, "旧稿停在渡口。", self.rev())
+        self.book.adopt(20, self.draft, "旧稿停在渡口。", self.rev(), volume_dir="第一卷 雨夜")
         self.texts[20] = text
         packet = self.start(20)
         self.assert_code("plan_missing", history.branch_update, self.book, packet["branch"], {"chapters": [self.candidate(20)]}, self.rev())
@@ -315,7 +315,7 @@ class LongHistoryTests(unittest.TestCase):
         self.add(1)
         self.dep(1)
         outside = self.texts[1].replace("一张收据", "两张收据")
-        path = self.root / "chapters/0001.md"
+        path = self.root / self.book.chapter_path(1)
         path.write_bytes(outside.encode("utf-8"))
         packet = self.start()
         sha = packet["affected"][0]["external_edit"]["sha256"]
@@ -343,7 +343,7 @@ class LongHistoryTests(unittest.TestCase):
         self.add(2)
         self.dep(1)
         self.dep(2)
-        path = self.root / "chapters/0001.md"
+        path = self.root / self.book.chapter_path(1)
         outside = self.texts[1].replace("一张收据", "两张收据")
         path.write_bytes(outside.encode("utf-8"))
         packet = self.start()
@@ -353,7 +353,7 @@ class LongHistoryTests(unittest.TestCase):
         staged = history.branch_update(self.book, packet["branch"], {"chapters": [candidate]}, self.rev())
         semantic = {**staged["review_template"], "note": "外改已经核查。", "state_review": "状态保持。", "coverage_review": "影响范围已核查。"}
         history.branch_update(self.book, packet["branch"], {"semantic_review": semantic}, self.rev())
-        other = self.root / "chapters/0002.md"
+        other = self.root / self.book.chapter_path(2)
         other.write_bytes(b"another outside save")
         self.assert_code("exports_unresolved", history.branch_publish, self.book, packet["branch"], self.rev())
         other.write_bytes(self.texts[2].encode("utf-8"))
@@ -652,7 +652,7 @@ class LongHistoryTests(unittest.TestCase):
         text = "# 大篇幅旧稿\n" + "这一句仅验证读取预算。" * 7000
         self.assertGreater(len(text.encode("utf-8")), 200000)
         self.draft.write_bytes(text.encode("utf-8"))
-        self.book.adopt(1, self.draft, "大篇幅导入，只验证输出上限。", self.rev())
+        self.book.adopt(1, self.draft, "大篇幅导入，只验证输出上限。", self.rev(), volume_dir="第一卷 雨夜")
         packet = self.start()
         self.assert_code("budget_exceeded", history.branch_inspect, self.book, packet["branch"], chapter=1)
         result = history.branch_inspect(self.book, packet["branch"], chapter=1, budget=300000)

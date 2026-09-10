@@ -129,7 +129,7 @@ def benchmark(upstream, output):
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--upstream", required=True)
-    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.4.0"))
+    p.add_argument("--output", default=str(ROOT / "benchmarks/results/v0.5.0"))
     args = p.parse_args()
     print(json.dumps(benchmark(args.upstream, args.output), ensure_ascii=False))
 
