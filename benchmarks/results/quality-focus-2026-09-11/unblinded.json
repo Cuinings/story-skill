@@ -1,0 +1,20 @@
+[
+  {
+    "task": "01-plan",
+    "preference": "tie",
+    "strength": null,
+    "scope": "initial frozen candidate; no final-version blind rerun"
+  },
+  {
+    "task": "02-revision",
+    "preference": "after",
+    "strength": "slight",
+    "scope": "initial frozen candidate; no final-version blind rerun"
+  },
+  {
+    "task": "03-serial-review",
+    "preference": "before",
+    "strength": "slight",
+    "scope": "initial frozen candidate; no final-version blind rerun"
+  }
+]

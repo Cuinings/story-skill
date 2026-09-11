@@ -1,0 +1,26 @@
+{
+  "encoding": "o200k_base",
+  "tiktoken_version": "0.14.0",
+  "scope": "Only the three changed skill instruction files, LF-normalized; not billed usage, complete loading profiles, or quality evidence",
+  "files": [
+    {
+      "path": "skills/story-codex-plan/SKILL.md",
+      "before_tokens": 1300,
+      "after_tokens": 1400,
+      "added_tokens": 100
+    },
+    {
+      "path": "skills/story-codex-review/SKILL.md",
+      "before_tokens": 1543,
+      "after_tokens": 1691,
+      "added_tokens": 148
+    },
+    {
+      "path": "skills/story-codex-write/references/drama.md",
+      "before_tokens": 1330,
+      "after_tokens": 1465,
+      "added_tokens": 135
+    }
+  ],
+  "added_tokens": 383
+}

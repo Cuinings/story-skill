@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "verifier_sha256": "bb87c95377c128395edff170d7d1c42bf24f9b6c943a247d1e76c2f0fa4a7d96",
+  "checks": [
+    {
+      "case": "matching committed payload",
+      "passed": true
+    },
+    {
+      "case": "changed bytes",
+      "rejected": true
+    },
+    {
+      "case": "missing member",
+      "rejected": true
+    }
+  ],
+  "scope": "Local fixed-commit byte binding checks; actual remote tag recheck will execute during release download"
+}

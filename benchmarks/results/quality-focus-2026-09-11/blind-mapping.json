@@ -1,0 +1,14 @@
+{
+  "01-plan": {
+    "X": "after",
+    "Y": "before"
+  },
+  "02-revision": {
+    "X": "before",
+    "Y": "after"
+  },
+  "03-serial-review": {
+    "X": "after",
+    "Y": "before"
+  }
+}

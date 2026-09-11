@@ -1,0 +1,37 @@
+{
+  "kind": "original synthetic development probes",
+  "date": "2026-09-11",
+  "conditions": {
+    "before": "frozen clean HEAD skills",
+    "after": "frozen candidate skills; skill.patch reconstructs changes"
+  },
+  "generation": {
+    "sessions": "separate fresh subagent context per condition; three tasks sequenced within each session",
+    "model": "inherited parent configuration; exact model revision not exposed in receipts",
+    "reasoning_effort": "inherited parent configuration",
+    "runs_per_task_per_condition": 1,
+    "feedback_rounds": 0,
+    "self_check": "permitted in same generation",
+    "provider_usage": null,
+    "actual_read_paths": [
+      "story-codex/SKILL.md",
+      "story-codex-plan/SKILL.md",
+      "story-codex-review/SKILL.md",
+      "story-codex-write/references/drama.md"
+    ],
+    "workers": {
+      "before": "quality_probe_a",
+      "after": "quality_probe_b"
+    }
+  },
+  "scope": "plan review, constrained manuscript revision, three-chapter reading review; no new-chapter runtime execution",
+  "limitations": [
+    "Designed with known development aims, not independent held-out tasks",
+    "One generation per task per condition",
+    "Tasks share a session within each condition",
+    "No human readers or actual provider usage measurements",
+    "Not evidence of stable quality superiority or long-form retention"
+  ],
+  "technical_note": "Initial validator attempt lacked PyYAML; rerun after isolated temporary dependency install. technical-check.json preserves original environment failure; skill-validation.json records successful rerun.",
+  "protocol_record_timing": "Input requests and allowed output scope fixed before generation; this protocol record assembled after baseline generation and before candidate completion. No preregistration claim."
+}

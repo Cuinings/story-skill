@@ -1,0 +1,55 @@
+[
+  {
+    "skill": "story-codex",
+    "exit_code": 1,
+    "output": "",
+    "error": "Traceback (most recent call last):\n  File \"/Users/cuining/.codex/skills/.system/skill-creator/scripts/quick_validate.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'"
+  },
+  {
+    "skill": "story-codex-analyze",
+    "exit_code": 1,
+    "output": "",
+    "error": "Traceback (most recent call last):\n  File \"/Users/cuining/.codex/skills/.system/skill-creator/scripts/quick_validate.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'"
+  },
+  {
+    "skill": "story-codex-cover",
+    "exit_code": 1,
+    "output": "",
+    "error": "Traceback (most recent call last):\n  File \"/Users/cuining/.codex/skills/.system/skill-creator/scripts/quick_validate.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'"
+  },
+  {
+    "skill": "story-codex-plan",
+    "exit_code": 1,
+    "output": "",
+    "error": "Traceback (most recent call last):\n  File \"/Users/cuining/.codex/skills/.system/skill-creator/scripts/quick_validate.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'"
+  },
+  {
+    "skill": "story-codex-research",
+    "exit_code": 1,
+    "output": "",
+    "error": "Traceback (most recent call last):\n  File \"/Users/cuining/.codex/skills/.system/skill-creator/scripts/quick_validate.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'"
+  },
+  {
+    "skill": "story-codex-review",
+    "exit_code": 1,
+    "output": "",
+    "error": "Traceback (most recent call last):\n  File \"/Users/cuining/.codex/skills/.system/skill-creator/scripts/quick_validate.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'"
+  },
+  {
+    "skill": "story-codex-write",
+    "exit_code": 1,
+    "output": "",
+    "error": "Traceback (most recent call last):\n  File \"/Users/cuining/.codex/skills/.system/skill-creator/scripts/quick_validate.py\", line 10, in <module>\n    import yaml\nModuleNotFoundError: No module named 'yaml'"
+  },
+  {
+    "package_exit_code": 0,
+    "output": "{\"archive\": \"/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-skill-quality-p3pgo6zn/candidate.zip\", \"version\": \"0.5.3\", \"files\": 33, \"sha256\": \"31e3594cc1f3a4b8ee9a9b52576f6f3fcac65b6e5b04d7b96147e54207678d98\", \"bytes\": 119679}",
+    "error": ""
+  },
+  {
+    "broken_local_links": []
+  },
+  {
+    "runtime_unchanged": true
+  }
+]

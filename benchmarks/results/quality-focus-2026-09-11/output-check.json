@@ -1,0 +1,26 @@
+[
+  {
+    "condition": "before",
+    "body_visible_nonspace_including_punctuation": 727,
+    "within_650_850": true,
+    "manuscript_matches_revision": true,
+    "files": {
+      "03-serial-review.md": "a3bd8fbcfb45414633d4371ca1df7000e54ad9f2daef20629a0ff38dce745ef8",
+      "01-plan.md": "d6480e1884ed3f3f319d0a9d06f9d1273d2f5ae060fcf623b6be457cc4f4e94d",
+      "02-revision.md": "b36b8c0bbf9d16eae92390cab4b852ff743a55c5ae19b7978361313ce947370b",
+      "02-manuscript.md": "cc7078cb6dc14a2e61f2737f4d51d104a701f183fcd5261139c07aa6efc76e10"
+    }
+  },
+  {
+    "condition": "after",
+    "body_visible_nonspace_including_punctuation": 683,
+    "within_650_850": true,
+    "manuscript_matches_revision": true,
+    "files": {
+      "03-serial-review.md": "6b584164bfffeef83883dab0498f0098604515adf517c8b46c2c82d213fcad20",
+      "01-plan.md": "4a8fd64456489ef42890384d5cfda076aaef2b172ea410975991abfd2d6c41da",
+      "02-revision.md": "8739e94abc6d92a20ca90f4f2fa930d37dca2fcd0c11b5fbc1ed876ff1802f14",
+      "02-manuscript.md": "27316a202c43d36d66a94954275dff3fc45f72d78986dead897827371014d798"
+    }
+  }
+]

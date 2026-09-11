@@ -1,0 +1,33 @@
+{
+  "task": "02-revision",
+  "scope": "仅核对新增两份完整答复中的修改说明；不重新评阅正文。",
+  "sources": [
+    "02-revision/X-full-response.md",
+    "02-revision/Y-full-response.md"
+  ],
+  "delivery_completeness": {
+    "X": {
+      "brief_revision_note_present": true,
+      "requirement_met": true,
+      "evidence": "修改说明：压缩重复的库存与减法解释，将核秤、退差额写成连续动作"
+    },
+    "Y": {
+      "brief_revision_note_present": true,
+      "requirement_met": true,
+      "evidence": "修改说明：压缩了开头和结尾重复验算"
+    }
+  },
+  "correction": {
+    "previous_issue": "X、Y均缺少简短修改说明。",
+    "status": "withdrawn_for_both",
+    "reason": "原评阅包仅提供纯正文；新增原始完整答复证实两稿均附修改说明。"
+  },
+  "body_preference": {
+    "value": "Y",
+    "strength": "slight",
+    "reassessed": false,
+    "changed": false
+  },
+  "original_review_files_modified": false,
+  "other_evaluation_items_reassessed": false
+}

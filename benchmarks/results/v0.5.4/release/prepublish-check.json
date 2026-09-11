@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "staged_skill_files_match_zip": 33,
+  "historical_files_unchanged": 830,
+  "whitespace_check": "Passed for authored changes; original evidence files below intentionally preserve source whitespace and final blank lines",
+  "preserved_raw_files": [
+    "benchmarks/results/quality-focus-2026-09-11/before/02-manuscript.md",
+    "benchmarks/results/quality-focus-2026-09-11/before/02-revision.md",
+    "benchmarks/results/quality-focus-2026-09-11/before/03-serial-review.md",
+    "benchmarks/results/quality-focus-2026-09-11/skill.patch",
+    "benchmarks/results/quality-focus-2026-09-11/final-skill.patch"
+  ]
+}

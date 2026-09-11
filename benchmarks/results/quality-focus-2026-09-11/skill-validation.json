@@ -1,0 +1,44 @@
+[
+  {
+    "skill": "story-codex",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "story-codex-analyze",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "story-codex-cover",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "story-codex-plan",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "story-codex-research",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "story-codex-review",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  },
+  {
+    "skill": "story-codex-write",
+    "exit_code": 0,
+    "output": "Skill is valid!",
+    "error": ""
+  }
+]

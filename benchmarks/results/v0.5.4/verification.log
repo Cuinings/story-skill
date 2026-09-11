@@ -1,0 +1,13 @@
+verify: skill_input_snapshot
+verify: unit_tests
+verify: cli_smoke
+verify: chinese_manuscript_replay
+verify: long_form_cli_replay
+verify: skill_frontmatter
+verify: actual_package_install
+verify: benchmark_candidate_file_hashes
+verify: scale_and_migration_evidence
+verify: local_markdown_links
+verify: package
+verify: skill_input_stability
+{"ok": true, "report": "/Users/cuining/Documents/GitHub/story-skill/benchmarks/results/v0.5.4/verification.json", "failed_checks": []}

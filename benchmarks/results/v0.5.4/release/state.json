@@ -1,0 +1,32 @@
+{
+  "version": "0.5.4",
+  "status": "locally_verified",
+  "updated_at": "2026-09-11T13:16:52.814859+00:00",
+  "target_platforms": [
+    "macOS",
+    "Linux"
+  ],
+  "windows": "Known WinError 32 remains; Windows users retain v0.4.0",
+  "local_verification": {
+    "status": "passed",
+    "report": "../verification.json",
+    "tests_run": 443,
+    "tests_passed": 436,
+    "tests_skipped": 7,
+    "failed": 0,
+    "errors": 0,
+    "checks": 12
+  },
+  "release_assets": {
+    "status": "pending"
+  },
+  "fixed_tag_install": {
+    "status": "pending"
+  },
+  "packages": {
+    "status": "pending"
+  },
+  "local_install": {
+    "status": "pending"
+  }
+}
