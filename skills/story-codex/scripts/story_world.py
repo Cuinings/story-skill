@@ -130,8 +130,8 @@ def _value(value, typ, field):
             number = Decimal(value)
         except InvalidOperation:
             fail("invalid_input", "Invalid exact amount", field=field)
-        if number <= 0:
-            fail("invalid_input", "Transfer amount must be positive", field=field)
+        if number < 0:
+            fail("invalid_input", "Amount must be nonnegative", field=field)
         return format(number, "f")
     value = _core.text_field(value, field, 1600 if typ == "text" else 120)
     if typ in ("id", "clock") and not re.fullmatch(r"[\w.-]+", value):
@@ -206,6 +206,8 @@ def _normal(book, kind, raw):
         if row.get(start) is not None and row.get(end) is not None and row[start] > row[end]:
             fail("invalid_input", "Narrative range is reversed", kind=kind, start=start, end=end)
     if kind == "transfers":
+        if not row["opening"] and row["amount"] is not None and Decimal(row["amount"]) == 0:
+            fail("invalid_input", "Ordinary transfers must be positive; only an opening balance may be zero", field="transfers.amount")
         if row["sender"] == row["receiver"]:
             fail("invalid_input", "Transfers need different endpoints and at least one named holder")
         if row["opening"] and (row["sender"] is not None or row["receiver"] is None):
@@ -295,8 +297,19 @@ def apply_in_transaction(book, payload, repair=False):
                 if evidence["mode"] != "chapter":
                     fail("world_evidence", "A repaired observation needs reviewed chapter evidence")
             if kind == "hooks" and evidence["mode"] == "chapter":
-                previous = _hook_predecessor(book, row, evidence)
-                if row["state"] != "seeded" and previous is None:
+                peers = [] if row["at"] is None else [r[0] for r in book.db.execute(
+                    "SELECT h.id FROM world_hooks h JOIN world_evidence e ON e.kind='hooks' AND e.record_id=h.id "
+                    "WHERE h.hook=? AND h.clock=? AND h.at=? AND e.chapter=? AND e.mode='chapter' "
+                    "AND e.retired=0 AND h.id<>? ORDER BY h.id",
+                    (row["hook"], row["clock"], row["at"], evidence["chapter"], row["id"]))]
+                legacy_tie = (peers and repair and old and old[1]["mode"] == "chapter"
+                              and old[1]["chapter"] == evidence["chapter"]
+                              and all(old[0][field] == row[field] for field in ("hook", "clock", "at")))
+                if peers and not legacy_tie:
+                    fail("world_time_ambiguous", "Same-chapter hook transitions need distinct, evidenced story times; IDs do not establish event order",
+                         hook=row["hook"], chapter=evidence["chapter"], at=row["at"], records=peers + [row["id"]])
+                previous = None if legacy_tie else _hook_predecessor(book, row, evidence)
+                if row["state"] != "seeded" and previous is None and not legacy_tie:
                     fail("world_lifecycle", "A hook transition needs its earlier published seed", hook=row["hook"])
                 if previous and previous["state"] in ("fulfilled", "breached", "abandoned") and row["state"] not in ("reopened", "fulfilled", "breached", "abandoned"):
                     fail("world_lifecycle", "Reopening a closed promise must be explicit", hook=row["hook"])
@@ -443,19 +456,33 @@ def _eligible(row, clock, at):
     return row.get("clock", clock) == clock and (at is None or row.get("at", row.get("start")) is None or row.get("at", row.get("start")) <= at) and (at is None or row.get("end") is None or at < row["end"])
 
 
-def _latest(rows, keys):
-    chosen = {}
+def _latest(rows, keys, preserve_ties=False):
+    """Keep untimed evidence unordered instead of treating NULL as ancient."""
+    chosen, undated = {}, {}
     for row in rows:
         key = tuple(row[k] for k in keys) + (row["evidence"]["mode"],)
-        rank = (row.get("at", row.get("start")) if row.get("at", row.get("start")) is not None else -2**54,
-                row.get("version", 0), row["evidence"]["chapter"] or 0, row["id"])
+        coordinate = row.get("at", row.get("start"))
+        if coordinate is None:
+            undated.setdefault(key, []).append(row)
+            continue
+        rank = (coordinate, row.get("version", 0), row["evidence"]["chapter"] or 0)
+        if not preserve_ties:
+            rank += (row["id"],)
         if key not in chosen or rank > chosen[key][0]:
-            chosen[key] = (rank, row)
-    return [item[1] for _, item in sorted(chosen.items())]
+            chosen[key] = (rank, [row])
+        elif rank == chosen[key][0]:
+            chosen[key][1].append(row)
+    result = []
+    for key in sorted(chosen.keys() | undated.keys()):
+        dated = chosen.get(key, (None, []))[1]
+        for row in dated + undated.get(key, []):
+            result.append({**row, **({"time_uncertain": True} if key in undated else {}),
+                           **({"order_uncertain": True} if preserve_ties and len(dated) > 1 else {})})
+    return result
 
 
 def _current_rows(book, kind, ids, keys, chapter, clock, at):
-    """Filter time and current versions in SQL before materializing text columns."""
+    """Fetch dated winners plus undated evidence; preserve legacy hook ties."""
     ids = sorted(set(ids))
     selected = []
     time_field = "at" if "at" in FIELDS[kind] else "start"
@@ -464,15 +491,38 @@ def _current_rows(book, kind, ids, keys, chapter, clock, at):
     end_sql = " AND (r.end IS NULL OR ? IS NULL OR r.end>?)" if "end" in FIELDS[kind] else ""
     for offset in range(0, len(ids), 300):
         chunk = ids[offset:offset + 300]
-        sql = f"""SELECT id FROM (SELECT r.id,ROW_NUMBER() OVER
-          (PARTITION BY {partition} ORDER BY r.{time_field} DESC{version},e.chapter DESC,r.id DESC) AS rank
+        sql = f"""SELECT id FROM (SELECT r.id,r.{time_field} AS coordinate,DENSE_RANK() OVER
+          (PARTITION BY {partition} ORDER BY r.{time_field} DESC{version},e.chapter DESC) AS rank
           FROM world_{kind} r JOIN world_evidence e ON e.kind=? AND e.record_id=r.id
           WHERE r.id IN ({','.join('?' for _ in chunk)}) AND r.clock=?
           AND e.retired=0 AND (e.mode='author_plan' OR e.chapter<?)
-          AND (? IS NULL OR r.{time_field} IS NULL OR r.{time_field}<=?){end_sql}) WHERE rank=1"""
+          AND (? IS NULL OR r.{time_field} IS NULL OR r.{time_field}<=?){end_sql}) WHERE rank=1 OR coordinate IS NULL"""
         args = [kind, *chunk, clock, chapter, at, at] + ([at, at] if end_sql else [])
         selected.extend(r[0] for r in book.db.execute(sql, args))
-    return _latest(_rows(book, kind, selected, chapter), keys)
+    return _latest(_rows(book, kind, selected, chapter), keys, preserve_ties=kind == "hooks")
+
+
+def _applicable_rule_ids(book, actor, line, rule=None):
+    """Filter actor/line scope before choosing versions, including global rules."""
+    sql = """SELECT r.id FROM world_rules r WHERE (r.line IS NULL OR r.line=?)
+      AND (NOT EXISTS (SELECT 1 FROM world_links l WHERE l.kind='rules' AND l.record_id=r.id)
+           OR EXISTS (SELECT 1 FROM world_links l WHERE l.kind='rules' AND l.record_id=r.id AND l.entity=?))"""
+    args = [line, actor]
+    if rule is not None:
+        sql += " AND r.rule=?"
+        args.append(rule)
+    return [r[0] for r in book.db.execute(sql, args)]
+
+
+def _observed_uses(book, actor, rule, clock, at, chapter):
+    ids = [r[0] for r in book.db.execute(
+        "SELECT u.id FROM world_uses u JOIN world_evidence e ON e.kind='uses' AND e.record_id=u.id "
+        "WHERE u.actor=? AND u.rule=? AND u.clock=? AND e.mode='chapter' AND e.retired=0 AND e.chapter<?",
+        (actor, rule, clock, chapter))]
+    rows = _current_rows(book, "uses", ids, ("actor", "rule"), chapter, clock, at)
+    for row in rows:
+        _verify_current(book, "uses", row)
+    return rows
 
 
 def _observed_transfers(book, holder, clock, at, chapter):
@@ -546,7 +596,14 @@ def context(book, plan, chapter, budget=None):
         ids = [r[0] for r in book.db.execute("SELECT id FROM world_lines WHERE line=? AND clock=? AND (? IS NULL OR at<=? OR at IS NULL)", (plan["line"], clock, at, at))]
         rows = _current_rows(book, "lines", ids, ("line",), chapter, clock, at)
         actual = [r for r in rows if r["evidence"]["mode"] == "chapter"]
-        packet["line"] = actual[-1] if actual else None
+        uncertain = any(r.get("time_uncertain") for r in actual)
+        packet["line"] = actual[-1] if actual and not uncertain else None
+        if uncertain:
+            packet["line_candidates"] = actual
+            packet["warnings"].append({"code": "world_time_unknown", "kind": "lines", "records": [r["id"] for r in actual],
+                                       "message": "Undated checkpoints do not establish a unique current scene."})
+            for record in actual:
+                _verify_current(book, "lines", record)
         packet["planned"]["lines"] = [r for r in rows if r["evidence"]["mode"] == "author_plan"]
         if not actual:
             packet["warnings"].append({"code": "line_checkpoint_unknown", "line": plan["line"]})
@@ -565,11 +622,21 @@ def context(book, plan, chapter, budget=None):
             for hook in hook_ids:
                 ids.update(r[0] for r in book.db.execute("SELECT id FROM world_hooks WHERE hook=? AND clock=?", (hook, clock)))
         if kind == "rules":
-            ids.update(r[0] for r in book.db.execute("SELECT id FROM world_rules WHERE line=?", (plan.get("line"),)))
-            ids.update(r[0] for r in book.db.execute("SELECT r.id FROM world_rules r WHERE r.line IS NULL AND NOT EXISTS (SELECT 1 FROM world_links l WHERE l.kind='rules' AND l.record_id=r.id)"))
-        rows = _current_rows(book, kind, ids, keys, chapter, clock, at)
+            selected = {}
+            for actor in entities or [None]:
+                for record in _current_rows(book, kind, _applicable_rule_ids(book, actor, plan.get("line")), keys, chapter, clock, at):
+                    old = selected.get(record["id"], {})
+                    selected[record["id"]] = {**record, **({"time_uncertain": True} if old.get("time_uncertain") else {})}
+            rows = [selected[rid] for rid in sorted(selected)]
+        else:
+            rows = _current_rows(book, kind, ids, keys, chapter, clock, at)
         packet[kind] = [r for r in rows if r["evidence"]["mode"] == "chapter"]
         packet["planned"][kind] = [r for r in rows if r["evidence"]["mode"] == "author_plan"]
+        for flag, code in (("time_uncertain", "world_time_unknown"), ("order_uncertain", "world_order_ambiguous")):
+            affected = [r["id"] for r in rows if r.get(flag)]
+            if affected:
+                packet["warnings"].append({"code": code, "kind": kind, "records": affected,
+                                           "message": "These records do not establish a unique state; review their evidenced story times."})
     # Knowledge references the original proposition, even if the world changed.
     required_facts = {r["fact"] for r in packet["knowledge"]}
     required_facts.update(f for r in packet["rules"] + packet["planned"]["rules"] for f in r["requires"])
@@ -579,11 +646,13 @@ def context(book, plan, chapter, budget=None):
     packet["planned"]["uses"] = []
     for entity in entities:
         for rule in {r["rule"] for r in packet["rules"] + packet["planned"]["rules"]}:
-            row = book.db.execute("SELECT u.id FROM world_uses u JOIN world_evidence e ON e.kind='uses' AND e.record_id=u.id WHERE actor=? AND rule=? AND clock=? AND e.mode='chapter' AND e.retired=0 AND e.chapter<? AND (? IS NULL OR at<=? OR at IS NULL) ORDER BY at DESC,e.chapter DESC LIMIT 1", (entity, rule, clock, chapter, at, at)).fetchone()
-            if row:
-                packet["uses"].extend(_rows(book, "uses", [row[0]], chapter))
+            packet["uses"].extend(_observed_uses(book, entity, rule, clock, at, chapter))
         ids = [r[0] for r in book.db.execute("SELECT u.id FROM world_uses u JOIN world_evidence e ON e.kind='uses' AND e.record_id=u.id WHERE actor=? AND clock=? AND e.mode='author_plan' AND e.retired=0 AND (? IS NULL OR at>=? OR at IS NULL) AND (? IS NULL OR at<=? OR at IS NULL)", (entity, clock, at, at, end, end))]
         packet["planned"]["uses"].extend(_rows(book, "uses", ids, chapter))
+    untimed_uses = [r["id"] for r in packet["uses"] if r["at"] is None]
+    if untimed_uses:
+        packet["warnings"].append({"code": "world_time_unknown", "kind": "uses", "records": untimed_uses,
+                                   "message": "Recorded uses with unknown times cannot be discarded when reviewing cooldown."})
     packet["planned"]["transfers"] = []
     transfer_ids = set()
     for entity in entities:
@@ -656,6 +725,8 @@ def _evaluate(book, plan, chapter, packet, rule_horizon):
             blockers.append(warning)
             warnings.remove(warning)
     for hook in packet["hooks"]:
+        if hook.get("time_uncertain") or hook.get("order_uncertain"):
+            continue
         if hook["state"] not in ("fulfilled", "breached", "abandoned"):
             if at is not None and hook["hard_deadline"] is not None and at > hook["hard_deadline"]:
                 warnings.append({"code": "hard_promise_overdue", "hook": hook["hook"], "deadline": hook["hard_deadline"], "evidence": hook["evidence"], "message": "A character may break a promise; review the consequences and record breached rather than pretending fulfillment."})
@@ -669,23 +740,22 @@ def _evaluate(book, plan, chapter, packet, rule_horizon):
         if use["at"] is None:
             warnings.append({"code": "ability_state_unknown", "id": use["id"]})
             continue
-        rule_ids = [r[0] for r in book.db.execute("SELECT id FROM world_rules WHERE rule=? AND clock=?", (use["rule"], clock))]
+        rule_ids = _applicable_rule_ids(book, use["actor"], plan.get("line"), use["rule"])
         choices = _current_rows(book, "rules", rule_ids, ("rule",), rule_horizon, clock, use["at"])
-        relevant_ids = {r["id"] for r in packet["rules"] + packet["planned"]["rules"]}
-        choices = [r for r in choices if r["id"] in relevant_ids or use["actor"] in r["entities"] or not r["entities"] and r["line"] in (None, plan.get("line"))]
         # A proposed weaker version cannot silently replace a published rule.
         choices.sort(key=lambda r: r["evidence"]["mode"] == "chapter", reverse=True)
         rule = choices[0] if choices else None
-        if rule is None or rule["start"] is None:
+        if rule is None or rule["start"] is None or rule.get("time_uncertain"):
             warnings.append({"code": "ability_state_unknown", "id": use["id"]})
             continue
         _verify_current(book, "rules", rule)
         issues = blockers if rule["hard"] and not use["exception"] else warnings
         prior = previous.get((use["actor"], use["rule"]))
-        prior_id = book.db.execute("SELECT u.id FROM world_uses u JOIN world_evidence e ON e.kind='uses' AND e.record_id=u.id WHERE actor=? AND rule=? AND clock=? AND e.mode='chapter' AND e.retired=0 AND e.chapter<? AND (at<=? OR at IS NULL) ORDER BY at DESC,e.chapter DESC LIMIT 1", (use["actor"], use["rule"], clock, chapter, use["at"])).fetchone()
-        if prior_id:
-            observed = _rows(book, "uses", [prior_id[0]], chapter)[0]
-            _verify_current(book, "uses", observed)
+        observed_uses = _observed_uses(book, use["actor"], use["rule"], clock, use["at"], chapter)
+        unknown_uses = [r["id"] for r in observed_uses if r["at"] is None]
+        if unknown_uses and rule["cooldown"] is not None:
+            warnings.append({"code": "cooldown_time_unknown", "id": use["id"], "records": unknown_uses})
+        for observed in (r for r in observed_uses if r["at"] is not None):
             if prior is None or observed["at"] is not None and (prior["at"] is None or observed["at"] > prior["at"]):
                 prior = observed
         if prior and rule["cooldown"] is not None:
@@ -700,7 +770,7 @@ def _evaluate(book, plan, chapter, packet, rule_horizon):
             if proposition and proposition["evidence"]["mode"] == "chapter":
                 _verify_current(book, "facts", proposition)
                 ids = [r[0] for r in book.db.execute("SELECT id FROM world_facts WHERE subject=? AND predicate=? AND clock=?", (proposition["subject"], proposition["predicate"], clock))]
-                active = [r for r in _current_rows(book, "facts", ids, ("subject", "predicate"), rule_horizon, clock, use["at"]) if r["evidence"]["mode"] == "chapter"]
+                active = [r for r in _current_rows(book, "facts", ids, ("subject", "predicate"), rule_horizon, clock, use["at"]) if r["evidence"]["mode"] == "chapter" and not r.get("time_uncertain")]
             if fact not in {r["id"] for r in active}:
                 warnings.append({"code": "rule_prerequisite_unverified", "id": use["id"], "fact": fact})
         if use["exception"]:
@@ -760,11 +830,12 @@ def template(kind=None):
     structure = {"title": "停航交接", "goal": "核实旧机去处", "entry_condition": "清册存在缺项", "exit_condition": "找到实物及接收证据", "cost": "整理费可能延后", "evidence": evidence}
     values = {"entities": [{"id": "jiang", "name": "江棠", "kind": "character", "description": "渡口资料整理人"},
                          {"id": "north", "name": "北库", "kind": "place", "description": "待交接库房"},
+                         {"id": "key", "name": "北库钥匙", "kind": "item", "description": "按物品记录其唯一当前持有人"},
                          {"id": "coin", "name": "备用金", "kind": "resource", "description": "统一以元为单位的指定资金"}],
             "aliases": [{"alias": "小江", "entity": "jiang", "scope": "north-line"}],
             "volumes": [{"id": "v1", **structure, "title": "第一卷 停航交接"}], "arcs": [{"id": "a1", "volume": "v1", **structure}],
             "lines": [{"id": "north-entry", "line": "north-line", "clock": "main", "at": 10, "place": "north", "summary": "准备在库门前核对", "unfinished": "等待当事人解释缺项", "entities": ["jiang"], "evidence": evidence}],
-            "facts": [{"id": "f-key", "subject": "jiang", "predicate": "持有物", "value": "北库钥匙", "clock": "main", "start": 10, "end": None, "hard": True, "evidence": evidence}],
+            "facts": [{"id": "f-key", "subject": "key", "predicate": "持有人", "value": "江棠", "entities": ["jiang"], "clock": "main", "start": 10, "end": None, "hard": True, "evidence": evidence}],
             "knowledge": [{"id": "k-key", "actor": "jiang", "fact": "f-key", "state": "unknown", "clock": "main", "at": 0, "channel": "计划在开篇交代尚未获知钥匙去处", "evidence": evidence}],
             "hooks": [{"id": "h-seed", "hook": "return-key", "state": "seeded", "description": "准备写下归还钥匙的承诺", "clock": "main", "at": 10, "hard_deadline": 40, "window_start": 2, "window_end": 5, "trigger_line": "north-line", "entities": ["jiang"], "evidence": evidence}],
             "rules": [{"id": "r1", "rule": "joint-check", "version": 1, "clock": "main", "start": 0, "end": None, "cooldown": None, "description": "当事人到齐才能共同核对", "hard": True, "line": "north-line", "requires": [], "entities": ["jiang"], "evidence": evidence}],

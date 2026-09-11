@@ -44,7 +44,7 @@ CREATE TRIGGER history_edges_no_delete BEFORE DELETE ON history_edges BEGIN
 END;
 """
 
-COMMANDS = {"history-deps", "history-snapshot", "history-start", "history-inspect",
+COMMANDS = {"history-deps", "history-dependencies", "history-snapshot", "history-start", "history-inspect",
             "history-update", "history-refresh", "history-publish", "history-state", "cache-get", "cache-put"}
 DEFAULT_BUDGET = 64000
 INSPECTION_COMMANDS = {"history-start", "history-inspect", "history-update", "history-refresh"}
@@ -411,6 +411,11 @@ def branch_start(book, chapter, expected, label="", budget=DEFAULT_BUDGET, limit
     with book.transaction(expected):
         _ensure_history(book)
         heads, reasons, state_ids, fences, hints = _impact(book, chapter)
+        missing_plans = sorted(c for c in reasons if fences["plan:" + str(c)] is None)
+        if missing_plans:
+            api.fail("plan_missing", "Save reviewed plans for the affected chapters before starting this history branch; then reload status and retry history-start",
+                     chapter=missing_plans[0], chapters=missing_plans[:25], missing_plan_count=len(missing_plans),
+                     recovery_command="plan")
         baseline_revision = heads[chapter]["publication_revision"] - 1
         baseline, snap, replayed = _state_at_revision(book, baseline_revision)
         baseline_sha = book.intern_body(api.dumps({cid: book.intern_body(api.dumps(card)) for cid, card in baseline.items()}))
@@ -462,6 +467,51 @@ def _editable(book, row, data):
     _check_fences(book, data)
 
 
+def branch_dependencies(book, branch_id, chapter, budget=DEFAULT_BUDGET):
+    """Resolve review candidates without entering the latest-chapter write context."""
+    chapter = api.integer(chapter, "chapter", 1)
+    with book.read_snapshot():
+        row, data = _branch(book, branch_id)
+        _editable(book, row, data)
+        c = str(chapter)
+        if c not in data["base_heads"]:
+            api.fail("chapter_missing", "Chapter is outside this branch's affected scope", chapter=chapter)
+        plan = book.get_plan(chapter)
+        keys = {(dep["kind"], dep["ref"]) for dep in _edges(book, data["base_heads"][c])}
+        keys.update((dep["kind"], dep["ref"]) for dep in data["candidates"].get(c, {}).get("dependencies", []))
+        keys.update(("card", cid) for cid in plan["requires"])
+        scopes = {"global"} | {f"{key}:{plan[key]}" for key in ("volume", "arc", "line") if key in plan}
+        scopes.update("entity:" + eid for eid in api.world.resolve(book, plan.get("entities", []), plan.get("line")))
+        keys.update(("card", r[0]) for r in book.db.execute(
+            f"SELECT id FROM card_index WHERE scope IN ({','.join('?' for _ in scopes)}) AND status='active' "
+            "AND (critical=1 OR (kind='hook' AND due<=?))", (*sorted(scopes), chapter)))
+        world = api.world.context(book, plan, chapter)
+        for field, kind in (("entities", "entities"), ("facts", "facts"), ("propositions", "facts"),
+                            ("knowledge", "knowledge"), ("hooks", "hooks"), ("rules", "rules"),
+                            ("uses", "uses"), ("arc_steps", "arc_steps"),
+                            ("volume", "volumes"), ("arc", "arcs"), ("line", "lines"), ("line_candidates", "lines")):
+            records = world.get(field) or []
+            if isinstance(records, dict):
+                records = [records]
+            keys.update(("world." + kind, record["id"]) for record in records)
+        previous = book.db.execute("SELECT chapter FROM chapters WHERE chapter<? ORDER BY chapter DESC LIMIT 1", (chapter,)).fetchone()
+        if previous:
+            keys.add(("chapter", str(previous[0])))
+        candidates, unavailable = [], []
+        for kind, ref in sorted(keys - {("chapter", c)}):
+            sha = data["candidates"].get(ref, {}).get("sha") if kind == "chapter" else None
+            sha = sha or _resolve(book, kind, ref)
+            target = {"kind": kind, "ref": ref}
+            if sha is None:
+                unavailable.append(target)
+            else:
+                candidates.append({**target, "sha": sha})
+        return api.bounded_packet({"book_id": book.meta("id"), "branch": branch_id, "revision": row["revision"],
+            "chapter": chapter, "candidates": candidates, "unavailable": unavailable, "world_warnings": world.get("warnings", []),
+            "scope": "Current record hashes and this branch's saved chapter candidates; not a reconstruction of chapter-before card state.",
+            "review_required": "Read actual evidence, select dependencies, and resolve unavailable or omitted sources before declaring completeness. This list is not a complete semantic review."}, budget)
+
+
 def candidate_fingerprint(value):
     """Public helper: review binds summary and dependencies as well as the body."""
     return _hash({**{key: value[key] for key in ("sha", "summary", "dependencies", "complete")},
@@ -501,8 +551,8 @@ def _review(text, candidate, review):
         api.fail("invalid_input", "review.issues must be an array")
     for issue in issues:
         api.object_value(issue, "review issue")
-        if issue.get("severity") not in ("minor", "major", "blocker"):
-            api.fail("invalid_input", "issue severity must be minor/major/blocker")
+        if issue.get("severity") not in ("advice", "minor", "major", "blocker"):
+            api.fail("invalid_input", "issue severity must be advice/blocker (legacy minor/major are also accepted)")
         if issue["severity"] in ("major", "blocker"):
             api.fail("review_blocked", "Resolve major/blocker issues before publication")
     return review
@@ -903,17 +953,17 @@ def cache_get(book, chapter, kind, budget=DEFAULT_BUDGET):
 def register_parser(sub, command):
     for name in sorted(COMMANDS):
         parser = command(name, "Versioned dependencies, reviewed historical branches, and evidence-bound caches",
-                         DEFAULT_BUDGET if name in INSPECTION_COMMANDS or name in ("history-state", "cache-get") else None)
+                         DEFAULT_BUDGET if name in INSPECTION_COMMANDS or name in ("history-dependencies", "history-state", "cache-get") else None)
         if name in INSPECTION_COMMANDS:
             parser.add_argument("--limit", type=int, default=25, help="Entries per affected/world/hints page, at most 200")
             parser.add_argument("--state-limit", type=int, default=50)
         if name in ("history-deps", "history-update", "cache-put"):
             parser.add_argument("--input", required=True)
-        if name in ("history-start", "history-state", "cache-get", "cache-put"):
+        if name in ("history-start", "history-dependencies", "history-state", "cache-get", "cache-put"):
             parser.add_argument("--chapter", type=int, required=True)
         if name in ("history-start", "history-snapshot"):
             parser.add_argument("--label", default="manual")
-        if name in ("history-inspect", "history-update", "history-refresh", "history-publish"):
+        if name in ("history-inspect", "history-dependencies", "history-update", "history-refresh", "history-publish"):
             parser.add_argument("--branch", required=True)
         if name == "history-inspect":
             parser.add_argument("--chapter", type=int)
@@ -921,7 +971,7 @@ def register_parser(sub, command):
             parser.add_argument("--affected-offset", type=int, default=0)
             parser.add_argument("--world-offset", type=int, default=0)
             parser.add_argument("--hints-offset", type=int, default=0)
-        if name not in ("history-inspect", "history-state", "cache-get"):
+        if name not in ("history-inspect", "history-dependencies", "history-state", "cache-get"):
             parser.add_argument("--expect", type=int, required=True)
         if name.startswith("cache-"):
             parser.add_argument("--kind", required=True)
@@ -935,6 +985,8 @@ def run(book, args):
     cmd = args.command
     if cmd == "history-deps":
         return save_dependencies(book, api.read_json(args.input), args.expect)
+    if cmd == "history-dependencies":
+        return branch_dependencies(book, args.branch, args.chapter, args.budget_bytes)
     if cmd == "history-snapshot":
         return snapshot(book, args.label, args.expect)
     if cmd == "history-start":

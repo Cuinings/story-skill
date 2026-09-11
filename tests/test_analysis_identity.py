@@ -46,9 +46,9 @@ class AnalysisIdentityTests(unittest.TestCase):
                 "analyses": [self.saved(ordinal) for ordinal in range(1, 4)],
                 "events": [tuple(row) for row in self.book.db.execute("SELECT * FROM events ORDER BY seq")]}
 
-    def legacy_record(self, ordinal, embedded_chunk):
+    def legacy_record(self, ordinal, embedded_chunk, **extra):
         # v0.1.1 accepted additional fields without checking this redundant ID.
-        payload = self.payload(ordinal, chunk=embedded_chunk)
+        payload = self.payload(ordinal, chunk=embedded_chunk, **extra)
         with self.book.transaction():
             self.book.db.execute("UPDATE chunks SET analysis=? WHERE source=? AND ordinal=?",
                                  (story.dumps(payload), self.sid, ordinal))
@@ -114,6 +114,91 @@ class AnalysisIdentityTests(unittest.TestCase):
         result = self.book.record(self.sid, 1, copied)
         self.assertTrue(result["idempotent"])
         self.assertEqual(result["recorded"], 1)
+        self.assertEqual(self.state(), before)
+
+    def test_completed_source_resumes_with_paginated_unicode_ranges_without_original_file(self):
+        original = ("第1章 来信\r\n她收到一封信📨。\r\n"
+                    "第2章 回信\r\n她在信中写下 cafe\u0301，然后决定回信。\r\n"
+                    "第3章 送信\r\n信终于送到了。\r\n")
+        source = self.root / "Unicode原文.txt"
+        source.write_bytes(original.encode("utf-8"))
+        sid = self.book.ingest(source, "partial")["source"]
+        for chunk in self.book.next_chunks(sid, limit=10)["chunks"]:
+            self.book.record(sid, chunk["ordinal"], {
+                "chunk_sha256": chunk["sha"], "summary": "本块记述信件往来中的人物行动。",
+                "findings": [{"kind": "文本事实", "claim": "人物行动可由原文定位。",
+                              "quote": chunk["text"].strip().splitlines()[-1]}],
+            })
+        self.book.close()
+        source.unlink()
+        self.book = story.Book(self.root)
+        resumed = next(item for item in self.book.list_sources()["results"]
+                       if item["name"] == source.name)
+        self.assertEqual(resumed["pending"], 0)
+        self.assertEqual(self.book.next_chunks(resumed["source"])["chunks"], [])
+        offset, parts = 0, []
+        while True:
+            page = self.book.findings(resumed["source"], offset=offset, limit=1)
+            self.assertGreater(page["next_offset"], offset)
+            for item in page["results"]:
+                reread = self.book.source_read(resumed["source"], item["start"], item["end"], 12000)
+                self.assertEqual(reread["text"], original[item["start"]:item["end"]])
+                self.assertIn(item["findings"][0]["quote"], reread["text"])
+                parts.append(reread["text"])
+            offset = page["next_offset"]
+            if offset == page["total"]:
+                break
+        self.assertEqual("".join(parts), original)
+        self.assertEqual(item["end"], len(original), "Offsets count Unicode characters, not encoded bytes")
+
+    def test_readonly_ranges_are_not_saved_as_analysis_content(self):
+        payload = self.payload(1, start=-500, end="not a source offset")
+        caller_input = copy.deepcopy(payload)
+        self.book.record(self.sid, 1, payload)
+        self.assertEqual(payload, caller_input)
+        saved = json.loads(self.saved(1))
+        self.assertNotIn("start", saved)
+        self.assertNotIn("end", saved)
+        copied = self.book.findings(self.sid)["results"][0]
+        self.assertEqual((copied["start"], copied["end"]),
+                         (self.chunks[0]["start"], self.chunks[0]["end"]))
+        before = self.state()
+        self.assertTrue(self.book.record(self.sid, 1, copied)["idempotent"])
+        self.assertEqual(self.state(), before)
+
+    def test_legacy_ranges_cannot_override_saved_source_or_create_a_new_revision(self):
+        self.legacy_record(1, 999, start=999999, end=-1)
+        before = self.state()
+        copied = self.book.findings(self.sid)["results"][0]
+        self.assertEqual((copied["start"], copied["end"]),
+                         (self.chunks[0]["start"], self.chunks[0]["end"]))
+        reread = self.book.source_read(self.sid, copied["start"], copied["end"], 12000)
+        self.assertEqual(reread["text"], self.chunks[0]["text"])
+        self.assertTrue(self.book.record(self.sid, 1, copied)["idempotent"])
+        self.assertEqual(self.state(), before, "Reading or retrying must preserve the legacy record")
+
+    def test_findings_ranges_respect_byte_budget_and_resume_without_skipping(self):
+        for ordinal in (1, 2, 3):
+            self.book.record(self.sid, ordinal, self.payload(ordinal))
+        one = self.book.findings(self.sid, limit=1)
+        budget = one["budget"]["used"] + 32
+        offset, seen = 0, []
+        while True:
+            page = self.book.findings(self.sid, offset=offset, limit=10, budget=budget)
+            self.assertLessEqual(len(story.dumps(page).encode("utf-8")), budget)
+            self.assertGreater(page["next_offset"], offset)
+            for item in page["results"]:
+                chunk = self.chunks[item["chunk"] - 1]
+                self.assertEqual((item["start"], item["end"]), (chunk["start"], chunk["end"]))
+                seen.append(item["chunk"])
+            offset = page["next_offset"]
+            if offset == page["total"]:
+                break
+        self.assertEqual(seen, [1, 2, 3])
+        before = self.state()
+        with self.assertRaises(story.StoryError) as result:
+            self.book.findings(self.sid, budget=256)
+        self.assertEqual(result.exception.code, "budget_exceeded")
         self.assertEqual(self.state(), before)
 
     def test_conflicting_chunk_rejects_both_new_records_and_replacements_without_changes(self):

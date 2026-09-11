@@ -151,7 +151,17 @@ class HistoryWorldAuditTests(unittest.TestCase):
         revised_text = self.text(1).replace("逐笔记录", "再次逐笔记录")
         with patch.object(self, "text", side_effect=lambda c: revised_text if c == 1 else original_text(c)):
             raw = self.prepare(1)
-            self.book.commit(1, self.draft, raw, replace_last=True)
+            revision = self.rev()
+            self.assert_code("history_revision_required", lambda: self.book.commit(1, self.draft, raw, replace_last=True))
+        self.assertEqual(self.rev(), revision)
+        self.assertEqual(self.book.chapter_read(1)["text"], original_text(1))
+        self.assertIsNotNone(story.world.resolve_dependency(self.book, "hooks", "seed"))
+        # Preserve coverage of stale evidence left by older runtimes. Only this
+        # isolated fixture bypasses publication to reproduce that legacy state.
+        with self.book.transaction():
+            self.book.db.execute("UPDATE chapters SET text=?,sha=? WHERE chapter=1", (revised_text, story.digest(revised_text)))
+            self.book.queue_artifact(self.book.chapter_path(1), revised_text)
+        self.book.export()
         self.publish(2)
         revision = self.rev()
         payoff = {**seed, "id": "payoff", "state": "fulfilled", "at": 5, "evidence": self.evidence(2)}

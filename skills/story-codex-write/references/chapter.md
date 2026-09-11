@@ -2,7 +2,7 @@
 
 起草前读取 [冲突、看点与中文场景](drama.md)，同版已在上下文中则复用。使用共享 `<tool>`；下列所有书籍命令均附加 `--book "<书目录绝对路径>"`。本章计划和授权范围已确定后执行。
 
-1. `context --book "<目录>" --chapter N --budget-bytes 16000`。它完整保留本章计划、critical 卡、requires 卡、到期承诺和上章摘要/末尾。预算是 UTF-8 字节，不是假称的模型 token；仅不相关的可选卡可被省略。过期/已完成伏笔也可按 requires 显式召回。查历史原因用 `recall --query "<人名或线索>"`，必要时读取精确原文。
+1. `context --book "<目录>" --chapter N --budget-bytes 16000`。它完整保留本章工具计划、匹配范围的 critical 卡和到期承诺、requires 卡及上章摘要/末尾，不读取可读细纲。定点读取本章已有细纲及采用依据，与返回计划核对；不一致时按 [项目状态](../../story-codex/references/project-state.md) 同步已采用内容，再重新取得 context，不用候选覆盖现行计划。核对本章所需硬限制卡已在 required_cards 中；`volume_dir` 不建立 scope 关联，缺卡先修正对应稳定 ID 或 requires。预算是 UTF-8 字节，不是假称的模型 token；仅不相关的可选卡可被省略。过期/已完成伏笔也可按 requires 显式召回。查历史原因用 `recall --query "<人名或线索>"`，必要时读取精确原文。
 2. 在 `.story/drafts/` 按已读场景指导展开章计划，保留本书声线与有功能的安静，不提前用尽终局底牌。衔接不清时定点补读原文。核对章名及所属卷的完整 `第X卷 卷名` 目录；草稿使用 `# 第N章 章节名称` 标题，章计划 `title` / `volume_dir` 的取值规则见 [项目状态](../../story-codex/references/project-state.md)。
 3. `lint --chapter N --draft "<草稿>"` 核对章名、带卷名的导出目录、长度、损坏字符和重复段落；`prepare` 也会预先检查名称，缺失时先补齐。`plan.length` 指定范围，`count_method` 默认 `visible_nonspace_v1`（含标点的可见字符）；`letters_numbers_v1` 只计 Unicode 字母与数字，中文/英文均逐字符；`han_v1` 只计 Unicode 已命名汉字及〇。默认排除首行 Markdown H1 标题、空白及控制/格式字符；`count_title: true` 计入标题文字但不计 H1 标记。导语算正文，正文文件不混入作者说明或审稿意见。报告所选口径及实测数，不能冒称平台后台字数。欠字补足已授权场景过程，超字压缩冗余，不增造新剧情凑数。
 4. `prepare --chapter N --draft "<草稿>"` 返回 lint 及绑定当前书籍、状态版本、稿件哈希的 delta 骨架；把其中 `delta` 另存文件，由 Codex 填写摘要、changes 和因果/连续性/用户约束/文风四项观察与原句，并处理问题清单。在因果与文风观察中具体核对阻力是否有效、关键应对是否展开、阅读期待是否获得回报；用原句说明得失，不新增机器评分或“冲突数量”门槛。骨架含待审阻断项，不能直接提交；工具不代替审稿。changes 仅记正文实际发生的变化，引文必须在草稿中；`blocker` 未解决不能提交，普通建议可注明取舍。

@@ -108,6 +108,9 @@ class NpmPackageTests(unittest.TestCase):
             "0.5.0": {
                 "package.json": "9576eee516a3ef82edf6d17e69fb18b0dadd53beb0044cf0a299372bcfd08550",
                 "README.md": "8ea0b2ab04033a20e5386c6cad96e02ad21f53b03a59439d885609d14ea5d46c"},
+            "0.5.1": {
+                "package.json": "c39405263e796825fbdefd084003f95dcb8dce295e099853798ba236d8b033cb",
+                "README.md": "4c9a1783ba9c3d515cf22601227352637f276b928e9336d06103b1b7ae61e1af"},
         }
         for version, hashes in expected.items():
             with self.subTest(version=version):
@@ -330,7 +333,7 @@ class NpmSuiteTests(NpmPackageTests):
             npm.payload_files("0.6.0")
 
     def test_new_analysis_references_roundtrip_in_current_patch_only(self):
-        for version in ("0.5.1", "0.5.12"):
+        for version in ("0.5.1", "0.5.2", "0.5.12"):
             with self.subTest(version=version):
                 self.version = version
                 self.archive = self.root / f"story-codex-{version}.zip"
@@ -343,9 +346,22 @@ class NpmSuiteTests(NpmPackageTests):
                 self.assertEqual(set(result["payload_manifest"]), set(npm.SUITE_FILES))
                 self.assertIn(f"固定使用 v{version}", npm.wrapper_files(version)[1]["README.md"].decode())
 
+    def test_v052_wrapper_preserves_the_reviewed_platform_scope(self):
+        manifest, files = npm.wrapper_files("0.5.2")
+        readme = files["README.md"].decode("utf-8")
+        self.assertEqual(manifest["version"], "0.5.2")
+        self.assertEqual(manifest["files"], list(npm.SUITE_FILES))
+        self.assertIn("For macOS/Linux, in Codex, ask:", readme)
+        self.assertIn("Platform scope: v0.5.2 is released for macOS/Linux.", readme)
+        self.assertIn("WinError 32", readme)
+        self.assertIn("Windows users should retain the verified v0.4.0 suite.", readme)
+        self.assertIn("preserve the complete book and skill backup first", readme)
+        self.assertIn("固定使用 v0.5.2", readme)
+
     def test_release_version_cannot_accept_another_reviewed_layout(self):
         for version, files in (("0.4.0", npm.SUITE_FILES), ("0.4.9", npm.SUITE_FILES),
                                ("0.5.0", npm.SUITE_FILES), ("0.5.1", npm.LEGACY_SUITE_FILES),
+                               ("0.5.2", npm.LEGACY_SUITE_FILES),
                                ("0.5.12", npm.LEGACY_SUITE_FILES)):
             with self.subTest(version=version):
                 self.archive = self.root / f"story-codex-{version}.zip"
@@ -368,7 +384,7 @@ class NpmSuiteTests(NpmPackageTests):
         self.assertEqual(npm.LEGACY_SUITE_FILES, zip_package.LEGACY_SUITE_FILES)
         self.assertEqual(len(npm.SUITE_FILES), 33)
         self.assertEqual(len(npm.LEGACY_SUITE_FILES), 31)
-        for version in ("0.4.0", "0.4.12", "0.5.0", "0.5.1", "0.5.12"):
+        for version in ("0.4.0", "0.4.12", "0.5.0", "0.5.1", "0.5.2", "0.5.12"):
             self.assertEqual(npm.payload_files(version), zip_package.suite_files(version))
         self.assertEqual({name.split("/", 1)[0] for name in npm.SUITE_FILES}, set(npm.SKILL_NAMES))
         self.assertIn("all seven", npm.wrapper_files(self.version)[1]["README.md"].decode())

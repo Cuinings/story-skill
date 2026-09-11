@@ -211,6 +211,44 @@ class ReconcileTests(unittest.TestCase):
         self.assert_rejected_without_changes(
             lambda: self.book.reconcile(1, self.draft, delta), "stale_revision")
 
+    def test_later_card_edit_routes_revision_and_external_edit_to_history(self):
+        self.book.save_notes([{**self.hero, "text": "沈禾收回钥匙，自行选择入口。", "source": "作者修订"}],
+                             self.book.meta("revision"))
+        current_hero = self.book.cards(["hero"])["hero"]
+        for operation in (lambda: self.book.context(1), lambda: self.book.prepare(1, self.draft),
+                          lambda: self.book.commit(1, self.draft, self.delta(DRAFT, ORIGINAL_QUOTE), replace_last=True)):
+            error = self.assert_rejected_without_changes(operation, "revised_state_conflict")
+            self.assertEqual(error.details, {"card": "hero", "chapter": 1, "recovery_command": "history-start"})
+
+        target = self.edited_chapter()
+        error = self.assert_rejected_without_changes(lambda: self.book.reconcile(1), "revised_state_conflict")
+        self.assertEqual(error.details["recovery_command"], "history-start")
+        packet = story.history.branch_start(self.book, error.details["chapter"], self.book.meta("revision"))
+        self.assertEqual(set(packet["required_state_ids"]), {"hero", "debt"})
+        candidate = {"sha": story.digest(REVISED), "summary": "沈禾收回钥匙，决定另找入口。",
+                     "dependencies": [{"kind": "card", "ref": "hero", "sha": story.digest(story.dumps(current_hero))}],
+                     "complete": True, "external_sha256": packet["affected"][0]["external_edit"]["sha256"]}
+        review = {"draft_sha256": candidate["sha"], "candidate_sha256": story.history.candidate_fingerprint(candidate),
+                  "checks": {name: {"note": "新稿收回钥匙，与作者修订的状态一致。", "quote": REVISED_QUOTE}
+                             for name in story.CHECKS}, "issues": []}
+        decisions = [{"id": item["id"], "before_sha": item["before_sha"],
+                      "after": current_hero if item["id"] == "hero" else None,
+                      "chapter": 1, "quote": REVISED_QUOTE,
+                      "note": "保留作者修订后的钥匙状态，并撤回旧稿中已删除的取账本承诺。"}
+                     for item in packet["state_review_template"]]
+        staged = story.history.branch_update(self.book, packet["branch"], {
+            "chapters": [{"chapter": 1, "text": REVISED, **candidate, "review": review}],
+            "state_changes": decisions}, self.book.meta("revision"))
+        semantic = {**staged["review_template"], "note": "新旧稿及作者修订均已核对。",
+                    "state_review": "保留作者的钥匙状态，撤回已从正文删除的承诺。",
+                    "coverage_review": "本书只有本章；全部相关卡片与外部稿都已复核。"}
+        story.history.branch_update(self.book, packet["branch"], {"semantic_review": semantic}, self.book.meta("revision"))
+        result = story.history.branch_publish(self.book, packet["branch"], self.book.meta("revision"))
+        self.assertTrue(result["exports_complete"], result)
+        self.assertEqual(target.read_text(encoding="utf-8"), REVISED)
+        self.assertEqual(self.book.cards(["hero"])["hero"], current_hero)
+        self.assertNotIn("debt", self.book.cards())
+
 
 if __name__ == "__main__":
     unittest.main()

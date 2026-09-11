@@ -18,7 +18,7 @@ import uuid
 import importlib.util
 from types import SimpleNamespace
 
-VERSION = "0.5.1"
+VERSION = "0.5.2"
 SCHEMA_VERSION = 2
 CHECKS = ("causality", "continuity", "constraints", "style")
 KINDS = ("fact", "character", "world", "hook", "preference", "contract")
@@ -783,11 +783,13 @@ class Book:
     def save_notes(self, payload, expected):
         if not isinstance(payload, list) or len(payload) > 200:
             fail("invalid_input", "notes input must be an array of at most 200 cards")
-        cards = [valid_card(card) for card in payload]
-        if len({card["id"] for card in cards}) != len(cards):
+        raw_cards = [object_value(card, "card") for card in payload]
+        ids = [text_field(card.get("id"), "card.id", 80) for card in raw_cards]
+        if len(set(ids)) != len(ids):
             fail("duplicate_id", "Duplicate card ids in the same batch")
         with self.transaction(expected):
-            old = self.cards(c["id"] for c in cards)
+            old = self.cards(ids)
+            cards = [valid_card({**old.get(cid, {}), **raw}) for cid, raw in zip(ids, raw_cards)]
             changes = [card for card in cards if old.get(card["id"]) != card]
             if changes:
                 for card in changes:
@@ -1202,8 +1204,10 @@ class Book:
             replacing = self.db.execute("SELECT receipt FROM chapters WHERE chapter=?", (chapter,)).fetchone()
             if replacing:
                 receipt = json.loads(replacing[0])
-                if receipt.get("history_branch") or receipt.get("world_changes"):
-                    fail("history_revision_required", "Use a history branch to revise a chapter published with a global state correction")
+                if (receipt.get("history_branch") or receipt.get("world_changes") or self.db.execute(
+                        "SELECT 1 FROM world_evidence WHERE mode='chapter' AND chapter=? AND retired=0 LIMIT 1", (chapter,)).fetchone()):
+                    fail("history_revision_required", "Use a history branch to revise a chapter with published world evidence or a global state correction",
+                         chapter=chapter, recovery_command="history-start")
                 selected.update(receipt.get("before", {}))
             cards = self.cards(selected)
             last = self.meta("last_chapter")
@@ -1215,7 +1219,8 @@ class Book:
                 receipt = json.loads(replacing[0])
                 for cid, value in receipt.get("before", {}).items():
                     if cards.get(cid) != receipt.get("after", {}).get(cid):
-                        fail("revised_state_conflict", "A card changed after this chapter; reconcile before replacing", card=cid)
+                        fail("revised_state_conflict", "A card changed after this chapter; use history-start to review subsequent state",
+                             card=cid, chapter=chapter, recovery_command="history-start")
                     if value is None:
                         cards.pop(cid, None)
                     else:
@@ -1330,8 +1335,11 @@ class Book:
         else:
             if not re.fullmatch(r"[0-9a-f]{64}", sha):
                 fail("invalid_input", "sha256 must be a SHA-256 digest")
+            candidate_path = f'$.candidates."{chapter}".sha'
             row = self.db.execute("SELECT sha FROM chapter_state WHERE chapter=? AND sha=? UNION "
-                "SELECT sha FROM history_versions WHERE chapter=? AND sha=? LIMIT 1", (chapter, sha, chapter, sha)).fetchone()
+                "SELECT sha FROM history_versions WHERE chapter=? AND sha=? UNION "
+                "SELECT json_extract(data,?) FROM history_branches WHERE json_extract(data,?)=? LIMIT 1",
+                (chapter, sha, chapter, sha, candidate_path, candidate_path, sha)).fetchone()
         if not row:
             fail("chapter_missing", "No matching immutable chapter version in this book", chapter=chapter)
         sha = row[0]
@@ -1507,14 +1515,17 @@ class Book:
                 if not check["ok"]:
                     fail("lint_failed", "Draft fails deterministic checks", lint=check)
                 previous = json.loads(existing["receipt"]) if replace_last else {}
-                if previous.get("history_branch") or previous.get("world_changes"):
-                    fail("history_revision_required", "Use a history branch for this revision")
+                if (previous.get("history_branch") or previous.get("world_changes") or (replace_last and self.db.execute(
+                        "SELECT 1 FROM world_evidence WHERE mode='chapter' AND chapter=? AND retired=0 LIMIT 1", (chapter,)).fetchone())):
+                    fail("history_revision_required", "Use a history branch to review this chapter and its published world evidence",
+                         chapter=chapter, recovery_command="history-start")
                 touched = set(plan["requires"]) | {c["id"] for c in raw["changes"]} | set(previous.get("before", {}))
                 before_state = self.cards(touched)
                 if replace_last:
                     for cid, value in previous["before"].items():
                         if before_state.get(cid) != previous["after"].get(cid):
-                            fail("revised_state_conflict", "Card changed since last chapter; reconcile first", card=cid)
+                            fail("revised_state_conflict", "A card changed after this chapter; use history-start to review subsequent state",
+                                 card=cid, chapter=chapter, recovery_command="history-start")
                         if value is None:
                             self.delete_card(cid)
                         else:
@@ -1722,9 +1733,31 @@ class Book:
             fail("invalid_range", "Use Unicode character offsets: 0 <= start < end <= source length")
         return bounded_packet({"source": sid, "start": start, "end": end, "text": self._source_slice(sid, start, end)}, budget)
 
+    @staticmethod
+    def _analysis_content(payload):
+        return {k: v for k, v in payload.items() if k not in ("chunk", "start", "end", "analysis_sha256")}
+
+    def _analysis_record_sha(self, sid, row):
+        content = self._analysis_content(json.loads(row["analysis"])) if row["analysis"] is not None else None
+        return digest(dumps({"source": sid, "chunk": row["ordinal"], "start": row["start"], "end": row["end"],
+                             "chunk_sha256": row["sha"], "analysis": content}))
+
+    def _analysis_snapshot_sha(self, sid):
+        # Call within the same transaction as the read packet or finalization.
+        # Stream all chunks, including pending ones, without returning their text.
+        source = self.source_info(sid)
+        value = hashlib.sha256(dumps({k: source[k] for k in ("id", "coverage", "encoding", "characters")}).encode("utf-8"))
+        for row in self.db.execute("SELECT ordinal,start,end,sha,analysis FROM chunks WHERE source=? ORDER BY ordinal", (sid,)):
+            value.update(("\n" + self._analysis_record_sha(sid, row)).encode("ascii"))
+        return value.hexdigest()
+
     def record(self, sid, ordinal, payload, replace=False):
         integer(ordinal, "chunk", 1)
         payload = dict(object_value(payload, "analysis"))
+        # Query ranges are read-only metadata, not user-authored analysis.
+        payload.pop("start", None)
+        payload.pop("end", None)
+        expected_analysis = payload.pop("analysis_sha256", None)
         if "chunk" in payload:
             embedded = integer(payload.pop("chunk"), "analysis.chunk", 1)
             if embedded != ordinal:
@@ -1750,15 +1783,23 @@ class Book:
                     fail("invalid_evidence", "Finding quote is absent from this chunk")
             encoded = dumps(payload)
             previous = json.loads(row["analysis"]) if row["analysis"] else None
-            # Older records may contain a redundant, even incorrect, chunk field.
-            # Ignore it for equality; identity belongs to the database key.
-            if previous is not None and dumps({k: v for k, v in previous.items() if k != "chunk"}) == encoded:
+            # Older records may contain redundant or incorrect query metadata.
+            # Identity and ranges belong to the database, not the analysis.
+            if previous is not None and dumps(self._analysis_content(previous)) == encoded:
                 return {"recorded": ordinal, "idempotent": True, **self.coverage(sid)}
             if row["analysis"] and not replace:
                 fail("analysis_exists", "Completed chunks are preserved; explicit --replace revises the analysis")
             report_path = f".story/analysis/{sid}/report.md"
             if replace and self.db.execute("SELECT 1 FROM artifacts WHERE path=?", (report_path,)).fetchone():
                 fail("report_already_final", "This analysis has a final report; create a separately reviewed revision")
+            if row["analysis"] is not None and replace:
+                actual_analysis = self._analysis_record_sha(sid, row)
+                if expected_analysis is None:
+                    fail("analysis_baseline_required", "Read findings and retain the record analysis_sha256 before replacing",
+                         source=sid, chunk=ordinal)
+                if expected_analysis != actual_analysis:
+                    fail("stale_analysis", "Analysis changed; reread and review the current record before replacing",
+                         source=sid, chunk=ordinal, expected=expected_analysis, actual=actual_analysis)
             self.db.execute("UPDATE chunks SET analysis=? WHERE source=? AND ordinal=?", (encoded, sid, ordinal))
             self.event("analysis", {"source": sid, "chunk": ordinal,
                                     "before": json.loads(row["analysis"]) if row["analysis"] else None, "after": payload})
@@ -1766,15 +1807,22 @@ class Book:
         return result
 
     def findings(self, sid, offset=0, limit=10, budget=20000):
+        # The page and the full-analysis fingerprint must describe one snapshot.
+        with self.read_snapshot():
+            return self._findings(sid, offset, limit, budget)
+
+    def _findings(self, sid, offset, limit, budget):
         self.source_info(sid)
         integer(offset, "offset")
         integer(limit, "limit", 1)
-        rows = self.db.execute("SELECT ordinal,analysis FROM chunks WHERE source=? AND analysis IS NOT NULL ORDER BY ordinal LIMIT ? OFFSET ?",
+        rows = self.db.execute("SELECT ordinal,analysis,start,end,sha FROM chunks WHERE source=? AND analysis IS NOT NULL ORDER BY ordinal LIMIT ? OFFSET ?",
                                (sid, min(limit, 100), offset)).fetchall()
         total = self.coverage(sid)["analyzed"]
-        packet = {"source": sid, "offset": offset, "next_offset": offset, "total": total, "results": []}
+        packet = {"source": sid, "offset": offset, "next_offset": offset, "total": total,
+                  "analysis_sha256": self._analysis_snapshot_sha(sid), "results": []}
         for row in rows:
-            packet["results"].append({**json.loads(row[1]), "chunk": row[0]})
+            packet["results"].append({**json.loads(row[1]), "chunk": row[0], "start": row[2], "end": row[3],
+                                      "analysis_sha256": self._analysis_record_sha(sid, row)})
             packet["next_offset"] += 1
             try:
                 bounded_packet(packet, budget)
@@ -1786,7 +1834,7 @@ class Book:
                 break
         return bounded_packet(packet, budget)
 
-    def report(self, sid, file):
+    def report(self, sid, file, expected_analysis=None):
         report = read_text(file)
         if visible_count(report) < 40:
             fail("empty_report", "Final report needs substantive content")
@@ -1802,8 +1850,16 @@ class Book:
             if old and old[0] != digest(content):
                 fail("report_exists", "Final report is preserved; save a separately reviewed revision")
             if not old:
+                if expected_analysis is None:
+                    fail("analysis_baseline_required", "Retain findings.analysis_sha256 while aggregating and pass --expect-analysis",
+                         source=sid)
+                actual_analysis = self._analysis_snapshot_sha(sid)
+                if expected_analysis != actual_analysis:
+                    fail("stale_analysis", "Analysis changed after aggregation; reread changed records and review the report",
+                         source=sid, expected=expected_analysis, actual=actual_analysis)
                 self.queue_artifact(path, content)
-                self.event("report", {"source": sid, "path": path, "sha": digest(content)})
+                self.event("report", {"source": sid, "path": path, "sha": digest(content),
+                                      "analysis_sha256": actual_analysis})
             status["report_path"] = path
         return self.delivery({"finalized": True, "report": str(self.root / path), **status})
 
@@ -1935,6 +1991,7 @@ def parser():
             s.add_argument("--replace", action="store_true")
         if name == "report":
             s.add_argument("--file", required=True)
+            s.add_argument("--expect-analysis", help="findings.analysis_sha256 captured while aggregating; required for a new final report")
     return p
 
 
@@ -2001,7 +2058,7 @@ def run(args):
         if cmd == "source-read":
             return book.source_read(args.source, args.start, args.end, args.budget_bytes)
         if cmd == "report":
-            return book.report(args.source, args.file)
+            return book.report(args.source, args.file, args.expect_analysis)
         raise AssertionError(cmd)
     finally:
         book.close()

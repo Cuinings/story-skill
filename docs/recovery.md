@@ -1,16 +1,18 @@
-# v0.5.1 恢复流程（schema 2）
+# 恢复流程（schema 2）
 
-**Windows 正文和报告导出的 WinError 32 尚未修复，会保留待恢复状态。Windows 用户继续使用 v0.4.0；已经使用 v0.5.0 或 v0.5.1 的书先完整备份，不盲目降级或覆盖待恢复内容。** [CI 范围](../benchmarks/results/v0.5.0/release/ci.json) · [导出失败](../benchmarks/results/v0.5.0/release/ci-windows-export-failed.json)
+**Windows 正文和报告导出的 WinError 32 尚未修复，会保留待恢复状态。Windows 用户继续使用 v0.4.0；已经使用 v0.5.x 的书先完整备份，不盲目降级或覆盖待恢复内容。** [CI 范围](../benchmarks/results/v0.5.0/release/ci.json) · [导出失败](../benchmarks/results/v0.5.0/release/ci-windows-export-failed.json)
 
-以下 CLI 示例均需 `python "<核心技能目录>/scripts/story.py"` 前缀；书籍命令另附 `--book "<书目录绝对路径>"`，`template` 与帮助命令不附 `--book`。本页对应 [v0.5.1](releases/v0.5.1.md)，本版实际验证与发布状态见 [发布记录](github-release.md)，平台限制见上方；共享核心为 `story-codex`；数据库继续使用 schema 2，v0.3.0、v0.4.0、v0.5.0 书库无需重新导入。分卷正文命名只应用到新保存的目标，已有旧章路径继续识别。
+以下 CLI 示例均需 `python "<核心技能目录>/scripts/story.py"` 前缀；书籍命令另附 `--book "<书目录绝对路径>"`，`template` 与帮助命令不附 `--book`。本页对应 [v0.5.2](releases/v0.5.2.md)，本版实际验证与发布状态见 [发布记录](github-release.md)，平台限制见上方；共享核心为 `story-codex`；数据库继续使用 schema 2，v0.3.0、v0.4.0、v0.5.0、v0.5.1 书库无需重新导入。分卷正文命名只应用到新保存的目标，已有旧章路径继续识别。
 
 schema 1 书库先停止写入，保留原书并复制到独立目录，再 `migrate --book "<副本>"`。迁移前用 SQLite backup 生成一致备份并检查完整性；所有结构变更在同一事务中进行，失败回滚。迁移备份位于 `.story/migration-backups/`。回退时停止相关进程，在另一个独立书目录恢复备份并使用 v0.2.0；备份之后的新修改不会自动出现在旧版中。无须重新初始化或修改书籍身份。
+
+v0.5.2 增加历史审查级别兼容、卡片与后补世界证据的修订保护、历史候选与依赖读取，以及分析定位、版本校验和导出恢复。发布状态与本版验证见 [v0.5.2 记录](../benchmarks/results/v0.5.2/README.md)，不将历史通过结果当成本版已通过。
 
 ## 检索和历史复核不能确认完整
 
 召回结果出现 `complete: false` 或 `truncated_reasons` 包含 `budget_limit`，表示候选或输出未完整返回。缩小查询范围或按需增加该次预算，再核对原文；空的 `matches` 不能单独证明事实不存在，需同时检查 `no_match_confirmed`。预算单位是 UTF-8 字节，不是 tokens。
 
-历史依赖补录、候选更新或发布出现 `missing_required_dependencies` 时，先定位对应计划的 `requires`，实际读取缺失卡片及其来源，再保存真实依赖哈希和复核说明。当前读取的卡片是现态证据，不能冒充旧章起草时的快照。只把 `complete` 改成 true、删掉 `requires` 或替换哈希不能代替复核；处理路径见 [历史修订实操](超长篇实操.md)。
+历史依赖补录、候选更新或发布出现 `missing_required_dependencies` 时，先定位对应计划的 `requires`，实际读取缺失卡片及其来源，再保存真实依赖哈希和复核说明。分支中用 `history-dependencies --branch B --chapter N` 读取候选证据，不对早期章运行普通写作 `context`。当前读取的卡片是现态证据，不能冒充旧章起草时的快照。只把 `complete` 改成 true、删掉 `requires` 或替换哈希不能代替复核；处理路径见 [历史修订实操](超长篇实操.md)。
 
 世界记录提示正文证据失效时，回到对应章节与历史修订分支处理；新写一条伏笔兑现记录不能修复旧铺垫的失效证据。导入文本因 NUL 被拒绝时，在独立文本副本中定位控制字符并核对清理结果后再导入；已有数据库不会因此自动清洗或重建。
 
@@ -38,7 +40,9 @@ schema 1 书库先停止写入，保留原书并复制到独立目录，再 `mig
 
 若重命名期间新旧两个路径都被外部保存，先把所有外部版本分别另存 `.story/drafts/`，核对文件内容与哈希后再处理。合并修改时从这些保留副本起草，不用一个版本覆盖另一个。若当前托管路径也有外改阻断，用 `chapter-read --chapter N` 分段取出数据库已提交正文，后续各段固定使用首段返回的 `source_sha256`，直到 `next_start` 为 null；完整拼接并核对哈希后恢复该托管路径。外部副本继续保留，旧路径的外改仍待对账。再按 `export --safe-only` 的回执恢复缺失文件，重新读取 `reconcile` 或历史分支检查得到的路径与哈希，以合并后的草稿完成审查。
 
-更早章节及含结构化世界变化的章节使用 [历史分支](../skills/story-codex-review/references/history.md)。候选、旧版、证据及审核状态分别保存；复核没有完成不能发布。导入基线和已完成分析报告仍不允许无条件覆盖。
+更早章节、含结构化世界变化或已合并历史分支的章节，以及该章产生的状态卡在提交后又有更新的情况，使用 [历史分支](../skills/story-codex-review/references/history.md)。通过 `world-save` 后补的正文证据也受保护，不能因原提交回执没有世界增量就普通替换。遇到 `revised_state_conflict` 时保留当前卡片和正文，按回执的 `chapter` 运行 `history-start --chapter N --expect R`（R 取最新 status），在分支中复核后续状态；反复 `reconcile` 不能解决这类冲突，不回写旧卡绕过保护。导入基线若缺少章计划，先依据采用的细纲为受影响章保存计划，再创建分支。候选、旧版、证据及审核状态分别保存；复核没有完成不能发布。导入基线和已完成分析报告仍不允许无条件覆盖。
+
+v0.5.2 的历史审查接受 `advice`；旧 `minor` 同样表示可选建议，`major` 和 `blocker` 仍阻止发布。普通审稿继续使用 `blocker/advice`，不靠改级别跳过未解决的问题。
 
 ## 拆文停在空白块
 
@@ -46,19 +50,23 @@ schema 1 书库先停止写入，保留原书并复制到独立目录，再 `mig
 
 ## 分析证据块号
 
-`findings` 始终返回数据库中的真实块号，包括旧记录里带有错误 `chunk` 字段的情况。从查询结果复制 JSON 进行修订可以保留正确的 `chunk`；如果与 `record --chunk N` 不一致，会报 `chunk_mismatch` 且不保存。块号仍须与 `chunk_sha256`、精确引文共同核对，不要只改数字来迁就错误引用。此前已生成的报告不会自动重写，存在可疑引用时需另行复核。
+`findings` 始终返回数据库中的真实块号，包括旧记录里带有错误 `chunk` 字段的情况。v0.5.2 还返回真实 `start/end`，可直接用于 `source-read --source ID --start A --end B`，范围按 Unicode 字符计，起点包含、终点不包含；分页沿用 `next_offset`。查询范围是只读元数据，复制回 `record` 时忽略它们，不改变分析内容或同内容重交的幂等性。从查询结果复制 JSON 进行修订可以保留正确的 `chunk`；如果与 `record --chunk N` 不一致，会报 `chunk_mismatch` 且不保存。块号仍须与 `chunk_sha256`、精确引文共同核对，不要只改数字来迁就错误引用。此前已生成的报告不会自动重写，存在可疑引用时需另行复核。
 
 ## 分析稿修订与续跑
 
-先区分已有产物。通过 `status.recent_sources` 查看 source、next_chunk 和 report_path，更多来源使用 `sources` 分页。已有来源直接 `next --source ID`，全部块完成但还没有报告时继续聚合，不重新导入。需要确认人物变化、伏笔或主题时，用 `source-read` 回读相关原文并核对反例；`findings` 中的摘要用于定位，不能代替证据。
+先区分已有产物。通过 `status.recent_sources` 查看 source、next_chunk 和 report_path，更多来源使用 `sources` 分页；同时检查 `pending_exports`、`changed_exports` 和导出错误。`report_path` 表示已登记报告，不能证明文件已经交付。已定稿但尚未导出时，排除路径或磁盘问题后 `export`；与外部改稿并存时用 `export --safe-only` 恢复可安全导出的项目，核对报告存在且哈希与登记内容一致，保留冲突文件。
+
+已有来源直接 `next --source ID`，全部块完成但还没有报告时继续聚合，不重新导入。需要确认人物变化、伏笔或主题时，从 `findings` 取得相关块的 `start/end`，用 `source-read` 回读原文并按需扩展邻文、核对反例；摘要不能代替证据。已完成块仍可定位回读，不需重新导入。
 
 | 当前状态 | 恢复或修订方式 |
 |---|---|
-| 逐块记录未定稿 | 修订已有记录时使用 `record --source ID --chunk N --input "<修订记录.json>" --replace`，保留旧版本事件，再继续未完成块与聚合 |
+| 逐块记录未定稿 | 先读取 `findings`，保留该条的 `analysis_sha256` 后修改内容，用 `record --source ID --chunk N --input "<修订记录.json>" --replace` 保存；旧版本事件保留，再继续未完成块与聚合 |
 | 已有工具定稿 | 保留原记录和报告，在分析目录内、`.story/` 外另存修订稿，回读原文并联动修改受影响的判断和建议 |
 | 只有外部分析文档 | 直接修订文档，沿用实际页码、段落或短引文定位，不必初始化书库或重新导入 |
 
-定稿后的修改会被 `report_already_final` 或 `report_exists` 拒绝；不能删除报告、改数据库或重建书库绕过保护。若只是重试相同报告的保存，`report --source ID --file "<原提交报告.md>"` 使用原来的输入文件；工具导出稿带来源头，不能再次当作原输入提交。
+聚合报告时保留 `findings` 顶层的 `analysis_sha256`，各页须来自同一指纹；首次定稿用 `report --source ID --file "<报告.md>" --expect-analysis SHA`。该指纹覆盖来源和全部块的分析状态，与逐条记录的同名指纹用途不同。基线不匹配时重新读取变化内容并复核报告，不只替换 SHA 强行提交。
+
+定稿后的修改会被 `report_already_final` 或 `report_exists` 拒绝；不能删除报告、改数据库或重建书库绕过保护。若只是重试相同报告的保存，`report --source ID --file "<原提交报告.md>"` 使用原来的输入文件；同内容重试可恢复导出，无需刷新旧基线。工具导出稿带来源头，不能再次当作原输入提交。
 
 独立修订需要跨轮处理时，在新稿旁记录原文、旧稿和当前稿的路径及哈希、已处理与待核对的问题、下一步。恢复时先读进度与当前稿，核对文件变化，再接未完成问题。`status` 里的 report_path 仍指向旧定稿，不能说明独立新稿已完成。缺少原文时注明哪些判断无法核验；新稿继承原分析范围，不把局部修订扩大称为全书分析。
 
@@ -74,13 +82,13 @@ schema 1 书库先停止写入，保留原书并复制到独立目录，再 `mig
 
 ## 已有验证范围与平台限制
 
-回归测试包含实际 SQLite 第二连接锁定、提交失败回滚、旧分析记录兼容，以及导出和安装各阶段的并发保存、目录重建、安装进程强退。Windows 在同目录写完整暂存文件并同步后，用拒覆盖重命名发布；原有不依赖硬链接的发布方式已通过历史 exFAT 实测。v0.5.0 补齐 Windows 目录句柄的遍历权限，以建立重命名保护；后续原生 Windows 验证确认该保护同时阻断普通导出重命名，出现 WinError 32，v0.5.1 仍未解决。失败恢复使用另一个完整暂存副本，保留原备份，拒绝覆盖已重新出现的目标。POSIX 发布仍使用硬链接，缺少支持时保留待恢复状态。没有全局锁住外部编辑器，后续保存会成为新的外部修改，由 `status` 检出。
+回归测试包含实际 SQLite 第二连接锁定、提交失败回滚、旧分析记录兼容，以及导出和安装各阶段的并发保存、目录重建、安装进程强退。Windows 在同目录写完整暂存文件并同步后，用拒覆盖重命名发布；原有不依赖硬链接的发布方式已通过历史 exFAT 实测。v0.5.0 补齐 Windows 目录句柄的遍历权限，以建立重命名保护；后续原生 Windows 验证确认该保护同时阻断普通导出重命名，出现 WinError 32，v0.5.2 仍未解决。失败恢复使用另一个完整暂存副本，保留原备份，拒绝覆盖已重新出现的目标。POSIX 发布仍使用硬链接，缺少支持时保留待恢复状态。没有全局锁住外部编辑器，后续保存会成为新的外部修改，由 `status` 检出。
 
 中文实测曾在 D 盘 exFAT 触发硬链接 WinError 1：第1章已经提交为 revision 5，正文待导出。修复后用同一书 ID 和原 delta 重试成功，并继续写作、修订到 revision 10；没有重新初始化或丢弃旧状态。见 [中文实测](中文实测.md)。
 
 v0.5.0 首次 Windows CI 达到时限，诊断轮又确认大小写等价路径分类不符；记录分别保留为 [首轮未完成](../benchmarks/results/v0.5.0/release/ci-first-incomplete.json) 和 [诊断失败](../benchmarks/results/v0.5.0/release/ci-diagnostic-failed.json)。后续调整了等价路径比较、目录句柄权限和 ZIP 原始成员名校验；macOS／Linux 复验通过，Windows 普通导出重命名仍失败。[API 诊断](../benchmarks/results/v0.5.0/release/windows-api-probe.json) 用于定位限制，不代表已集成修复。开书的表结构与初始元数据改为一次事务提交，失败时回滚数据库改动；持久化设置不变，新增回滚及可见性回归。[初始化证据](../benchmarks/results/v0.5.0/initialization.json) 只包含本地 macOS 样本。
 
-上述 NTFS/exFAT 说明来自已保留的历史本机实测，不代表 v0.5.0 的目录绑定实现通过 Windows 验证；该版实际 Windows 结果为已知导出失败，v0.5.1 未修复这一路径。本地 v0.4.0 另完成 311 项单测和 12 项整包检查，包含历史依赖、并发快照、安装与恢复相关路径。发布提交 `c1b3c3377573610a191e165ceb6866ae35afe5a8` 的 [远端 CI](https://github.com/NingCui29/story-skill/actions/runs/34431400166) 也已通过：Windows/Python 3.12 为 311 项通过、零跳过，Linux/Python 3.10 为 305 项通过、6 项 Windows 专用测试跳过。远端 runner 的成功不代表覆盖所有 POSIX 文件系统，也不替代本机 exFAT 实测。[发布验证与边界](github-release.md) · [v0.4.0 发布前本地审查](全仓审查与优化.md)
+上述 NTFS/exFAT 说明来自已保留的历史本机实测，不代表 v0.5.0 的目录绑定实现通过 Windows 验证；该版实际 Windows 结果为已知导出失败，v0.5.2 未修复这一路径。本地 v0.4.0 另完成 311 项单测和 12 项整包检查，包含历史依赖、并发快照、安装与恢复相关路径。发布提交 `c1b3c3377573610a191e165ceb6866ae35afe5a8` 的 [远端 CI](https://github.com/NingCui29/story-skill/actions/runs/34431400166) 也已通过：Windows/Python 3.12 为 311 项通过、零跳过，Linux/Python 3.10 为 305 项通过、6 项 Windows 专用测试跳过。远端 runner 的成功不代表覆盖所有 POSIX 文件系统，也不替代本机 exFAT 实测。[发布验证与边界](github-release.md) · [v0.4.0 发布前本地审查](全仓审查与优化.md)
 
 ## 完整核验与局部运行
 

@@ -367,9 +367,10 @@ class StoryTests(unittest.TestCase):
         while self.book.coverage(sid)["pending"]:
             for chunk in self.book.next_chunks(sid)["chunks"]:
                 self.book.record(sid, chunk["ordinal"], self.analysis_for(chunk))
+        analysis_baseline = self.book.findings(sid)["analysis_sha256"]
         report = self.root / "reviewed-report.md"
         report.write_text("这份报告只讨论导入的片段。门、钥匙与天亮构成可见的限制，角色以交出资源换取行动机会。番外保留了守门人的另一侧信息。", encoding="utf-8")
-        result = self.book.report(sid, report)
+        result = self.book.report(sid, report, analysis_baseline)
         content = Path(result["report"]).read_text(encoding="utf-8")
         self.assertIn("source_coverage: partial", content)
         self.assertTrue(result["complete_for_imported_text"])

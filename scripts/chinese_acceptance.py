@@ -163,7 +163,11 @@ def replay(root, scenario_path, resume_prepared_first=False):
             ac("record", "--source", sid, "--chunk", chunk["ordinal"], "--input",
                write_json(separate / f"chunk-{chunk['ordinal']}.json", payload))
         assert not ac("next", "--source", sid)["chunks"]
-        saved_report = ac("report", "--source", sid, "--file", fixture(base, spec["report"]))
+        # This fixture's report was reviewed against the recorded analyses above.
+        analysis_baseline = ac("findings", "--source", sid)["analysis_sha256"]
+        reviewed_report = fixture(base, spec["report"])
+        saved_report = ac("report", "--source", sid, "--file", reviewed_report,
+                          "--expect-analysis", analysis_baseline)
         coverage = ac("coverage", "--source", sid)
         assert saved_report["exports_complete"] and coverage["complete_for_imported_text"]
         analysis = {"coverage": coverage, "resumed_ordinals": resumed_ordinals,

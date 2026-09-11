@@ -97,7 +97,8 @@ def smoke():
         findings = call("findings", "--source", source)
         report = root / "analysis-report.md"
         report.write_text("这是合成样本的程序通路验证。正文用唯一钥匙交换入门资格，末尾铁盒声延续资源转移的结果；番外保留钥匙的去向。本报告只覆盖导入片段。", encoding="utf-8")
-        final = call("report", "--source", source, "--file", report)
+        final = call("report", "--source", source, "--file", report,
+                     "--expect-analysis", findings["analysis_sha256"])
         if final["report_path"] is None:
             raise AssertionError("Final report receipt lost its saved checkpoint path")
         if "source_coverage: partial" not in Path(final["report"]).read_text(encoding="utf-8"):

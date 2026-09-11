@@ -211,6 +211,42 @@ class LongHistoryTests(unittest.TestCase):
         candidate["summary"] = "她没有交出钥匙。"
         self.assert_code("stale_review", history.branch_update, self.book, packet["branch"], {"chapters": [candidate]}, self.rev())
 
+    def test_advice_and_legacy_minor_survive_historical_publication(self):
+        self.add(1)
+        self.dep(1)
+        for severity in ("advice", "minor"):
+            with self.subTest(severity=severity):
+                packet = self.start()
+                candidate = self.candidate(1)
+                issues = [{"severity": severity, "issue": "灯光描写可精简，但不影响本章成立。"}]
+                candidate["review"]["issues"] = issues
+                staged = history.branch_update(self.book, packet["branch"], {"chapters": [candidate]}, self.rev())
+                semantic = {**staged["review_template"], "note": "复核全文，保留局部语气建议。",
+                            "state_review": "本次修订未改变交接状态。",
+                            "coverage_review": "已检查本章及未声明的关联，没有遗漏受影响的后文。"}
+                history.branch_update(self.book, packet["branch"], {"semantic_review": semantic}, self.rev())
+                result = history.branch_publish(self.book, packet["branch"], self.rev())
+                self.assertTrue(result["exports_complete"], result)
+                receipt = json.loads(self.book.db.execute("SELECT receipt FROM chapters WHERE chapter=1").fetchone()[0])
+                self.assertEqual(receipt["review"]["issues"], issues)
+
+    def test_major_and_blocker_still_block_history_and_unknown_severity_is_rejected(self):
+        self.add(1)
+        self.dep(1)
+        packet = self.start()
+        revision = self.rev()
+        original = tuple(self.book.db.execute("SELECT text,receipt FROM chapters WHERE chapter=1").fetchone())
+        for severity, code in (("major", "review_blocked"), ("blocker", "review_blocked"), ("suggestion", "invalid_input")):
+            with self.subTest(severity=severity):
+                candidate = self.candidate(1)
+                candidate["review"]["issues"] = [{"severity": severity, "issue": "交接事实与本章选择仍矛盾。"}]
+                self.assert_code(code, history.branch_update, self.book, packet["branch"], {"chapters": [candidate]}, self.rev())
+                self.assertEqual(self.rev(), revision)
+                self.assertEqual(tuple(self.book.db.execute("SELECT text,receipt FROM chapters WHERE chapter=1").fetchone()), original)
+        self.assertIsNone(history.branch_inspect(self.book, packet["branch"], chapter=1)["candidate"])
+        staged = self.stage(packet)
+        self.assertTrue(history.branch_publish(self.book, staged["branch"], self.rev())["committed"])
+
     def test_second_branch_cannot_publish_after_first_changes_same_history(self):
         self.add(1)
         self.dep(1)
@@ -261,12 +297,94 @@ class LongHistoryTests(unittest.TestCase):
     def test_imported_baseline_can_only_publish_after_plan_and_full_reviews(self):
         text = "# 旧稿\n沈禾留在渡口。灯还亮着。\n"
         self.draft.write_bytes(text.encode("utf-8"))
-        self.book.adopt(20, self.draft, "旧稿停在渡口。", self.rev(), volume_dir="第一卷 雨夜")
+        # Simulate a legacy import that has not materialized history versions yet.
+        with patch.object(history, "on_commit", return_value=None):
+            self.book.adopt(20, self.draft, "旧稿停在渡口。", self.rev(), volume_dir="第一卷 雨夜")
         self.texts[20] = text
+        revision = self.rev()
+        tables = ("history_versions", "history_heads", "history_edges", "history_branches", "core_objects", "events")
+        counts = {table: self.book.db.execute(f"SELECT count(*) FROM {table}").fetchone()[0] for table in tables}
+        error = self.assert_code("plan_missing", self.start, 20)
+        self.assertEqual(error.details["chapters"], [20])
+        self.assertEqual(error.details["recovery_command"], "plan")
+        self.assertEqual(self.rev(), revision)
+        self.assertEqual({table: self.book.db.execute(f"SELECT count(*) FROM {table}").fetchone()[0] for table in tables}, counts)
+        self.assertEqual(counts["history_heads"], 0)
+        self.book.save_plan(20, {"volume_dir": "第一卷 雨夜", "goal": "继续等候", "stop": "留在渡口",
+                               "beats": [{"choice": "留下等候", "change": "继续守灯"}], "length": [10, 200]}, self.rev())
         packet = self.start(20)
-        self.assert_code("plan_missing", history.branch_update, self.book, packet["branch"], {"chapters": [self.candidate(20)]}, self.rev())
+        self.assert_code("review_incomplete", history.branch_publish, self.book, packet["branch"], self.rev())
+        staged = self.stage(packet, {20: text + "她决定继续等候。\n"})
+        self.assertTrue(history.branch_publish(self.book, staged["branch"], self.rev())["exports_complete"])
         self.assertEqual(self.book.meta("imported_through"), 20)
         self.assertEqual(self.book.db.execute("SELECT imported FROM chapters").fetchone()[0], 1)
+
+    def test_history_dependencies_use_branch_candidates_and_current_records(self):
+        self.add(1)
+        self.add_fact()
+        self.add(2)
+        self.add(3)
+        self.book.save_plan(2, {**self.book.get_plan(2), "requires": ["key"], "entities": ["shen"]}, self.rev())
+        packet = self.start(1)
+        changed = self.texts[1].replace("一张收据", "两张收据")
+        history.branch_update(self.book, packet["branch"], {"chapters": [self.candidate(1, changed)]}, self.rev())
+        revision = self.rev()
+        arguments = story.parser().parse_args(["history-dependencies", "--book", str(self.root),
+                                               "--branch", packet["branch"], "--chapter", "2"])
+        with patch.object(self.book, "context", side_effect=AssertionError("Historical review must not enter write context")):
+            result = history.run(self.book, arguments)
+        candidates = {(v["kind"], v["ref"]): v["sha"] for v in result["candidates"]}
+        self.assertEqual(candidates[("chapter", "1")], story.digest(changed))
+        self.assertEqual(candidates[("card", "key")], story.digest(story.dumps(self.book.cards(["key"])["key"])))
+        self.assertEqual(candidates[("world.facts", "gave-key")], story.world.resolve_dependency(self.book, "facts", "gave-key"))
+        self.assertEqual(self.rev(), revision)
+        self.assertEqual(self.book.chapter_read(1)["text"], self.texts[1])
+        self.assert_code("chapter_missing", history.branch_dependencies, self.book, packet["branch"], 4)
+        self.assert_code("budget_exceeded", history.branch_dependencies, self.book, packet["branch"], 2, budget=256)
+        self.book.save_notes([{**self.book.cards(["key"])["key"], "text": "作者调整了钥匙状态。"}], self.rev())
+        self.assert_code("stale_branch", history.branch_dependencies, self.book, packet["branch"], 2)
+
+    def test_saved_candidate_can_be_read_in_bounded_pieces_without_publishing(self):
+        self.add(1)
+        self.book.save_plan(1, {**self.book.get_plan(1), "length": [10, 50000]}, self.rev())
+        packet = self.start()
+        changed = self.texts[1] + "窗外雨声。" * 6000
+        staged = history.branch_update(self.book, packet["branch"], {"chapters": [self.candidate(1, changed)]}, self.rev())
+        sha = staged["affected"][0]["draft_sha256"]
+        self.assert_code("budget_exceeded", history.branch_inspect, self.book, packet["branch"], chapter=1)
+        chunks, start = [], 0
+        while start is not None:
+            part = self.book.chapter_read(1, sha, start=start, budget=12000)
+            chunks.append(part["text"])
+            start = part["next_start"]
+        self.assertEqual("".join(chunks), changed)
+        self.assertEqual(self.book.chapter_read(1)["text"], self.texts[1])
+        self.assertEqual((self.root / self.book.chapter_path(1)).read_text(encoding="utf-8"), self.texts[1])
+        self.assert_code("chapter_missing", self.book.chapter_read, 2, sha)
+        self.assert_code("chapter_missing", self.book.chapter_read, 1, packet["baseline_state_sha256"])
+
+    def test_later_world_baseline_blocks_replace_until_history_rebinds_evidence(self):
+        self.add(1)
+        self.add_fact()
+        changed = self.texts[1] + "她抬头看雨。\n"
+        self.draft.write_text(changed, encoding="utf-8")
+        raw = {"book_id": self.book.meta("id"), "base_revision": self.rev(), "summary": "她交出钥匙，留在渡口。", "changes": [],
+               "review": {"draft_sha256": story.digest(changed), "checks": {
+                   key: {"note": "新增景物描写未改变交接。", "quote": "灯还亮着。"} for key in story.CHECKS}, "issues": []}}
+        revision = self.rev()
+        for operation in (lambda: self.book.context(1), lambda: self.book.prepare(1, self.draft),
+                          lambda: self.book.reconcile(1), lambda: self.book.commit(1, self.draft, raw, replace_last=True)):
+            error = self.assert_code("history_revision_required", operation)
+            self.assertEqual(error.details["recovery_command"], "history-start")
+        self.assertEqual(self.rev(), revision)
+        self.assertEqual(self.book.chapter_read(1)["text"], self.texts[1])
+        self.assertIsNotNone(story.world.resolve_dependency(self.book, "facts", "gave-key"))
+        staged = self.stage(self.start(), {1: changed})
+        self.semantic_after(staged, {"world_changes": {"facts": [self.fact(changed)]}})
+        self.assertTrue(history.branch_publish(self.book, staged["branch"], self.rev())["exports_complete"])
+        self.book.save_plan(2, {**self.book.get_plan(1), "entities": ["shen"]}, self.rev())
+        self.assertIsNotNone(story.world.resolve_dependency(self.book, "facts", "gave-key"))
+        self.assertEqual(self.book.context(2)["world"]["facts"][0]["evidence"]["sha"], story.digest(changed))
 
     def test_historical_state_replays_notes_and_published_card_changes_after_snapshot(self):
         self.add(1, change=True)
@@ -553,6 +671,8 @@ class LongHistoryTests(unittest.TestCase):
         """Lightweight real SQLite fixture; shared short body, no novel/export load."""
         text = "# 范围夹具\n这一段仅用于验证分页范围与版本，不作小说质量验收。\n"
         cards = [story.valid_card({"id": f"scope{i:04d}", "text": f"第{i}项状态", "source": "范围夹具"}) for i in range(1, count + 1)]
+        plan = story.valid_plan({"volume_dir": "第一卷 范围夹具", "goal": "核对范围", "stop": "结束范围核对",
+                                 "beats": [{"choice": "核对范围", "change": "保留版本证据"}], "length": [1, 200]})
         with self.book.transaction():
             sha = self.book.intern_body(text)
             self.book.db.executemany("INSERT INTO cards VALUES (?,?)", [(c["id"], story.dumps(c)) for c in cards])
@@ -561,6 +681,7 @@ class LongHistoryTests(unittest.TestCase):
             self.book.db.execute("INSERT INTO world_entities VALUES ('scope-entity','范围人物','character','分页测试的具名实体')")
             for chapter, card in enumerate(cards, 1):
                 receipt = {"before": {card["id"]: None}, "after": {card["id"]: card}}
+                self.book.db.execute("INSERT INTO plans VALUES (?,?)", (chapter, story.dumps(plan)))
                 self.book.db.execute("INSERT INTO chapters VALUES (?,?,?,?,?,?,0)",
                                      (chapter, text, sha, "分页测试摘要", story.dumps(receipt), story.digest(str(chapter))))
                 self.book.db.execute("INSERT INTO artifacts(path,content,sha) VALUES (?,?,?)", (f"chapters/{chapter:04d}.md", text, sha))
@@ -653,6 +774,8 @@ class LongHistoryTests(unittest.TestCase):
         self.assertGreater(len(text.encode("utf-8")), 200000)
         self.draft.write_bytes(text.encode("utf-8"))
         self.book.adopt(1, self.draft, "大篇幅导入，只验证输出上限。", self.rev(), volume_dir="第一卷 雨夜")
+        self.book.save_plan(1, {"volume_dir": "第一卷 雨夜", "goal": "核对读取范围", "stop": "读完旧稿",
+                              "beats": [{"choice": "分段核对", "change": "确认完整范围"}], "length": [1, 200000]}, self.rev())
         packet = self.start()
         self.assert_code("budget_exceeded", history.branch_inspect, self.book, packet["branch"], chapter=1)
         result = history.branch_inspect(self.book, packet["branch"], chapter=1, budget=300000)

@@ -61,13 +61,14 @@ class AnalysisRecoveryTests(unittest.TestCase):
         self.assertEqual(coverage["pending"], 0)
         self.assertEqual(coverage["analyzed"], total)
         self.assertTrue(coverage["complete_for_imported_text"])
+        analysis_baseline = self.book.findings(sid)["analysis_sha256"]
         report = self.root / "报告草稿.md"
         report.write_text(
             "本报告仅覆盖实际导入的文字。人物推门与发现信件构成可见的信息变化；"
             "空白范围作为排版信息保留，不被描述成故事事件，也不代替正文片段的人工分析。",
             encoding="utf-8",
         )
-        result = self.book.report(sid, report)
+        result = self.book.report(sid, report, analysis_baseline)
         self.assertTrue(result["exports_complete"], result)
         self.assertTrue(Path(result["report"]).is_file())
 

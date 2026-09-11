@@ -3,6 +3,7 @@ import importlib.util
 import io
 import json
 from pathlib import Path
+import shutil
 import stat
 import sys
 import tempfile
@@ -196,8 +197,23 @@ class ReleaseProbeTests(unittest.TestCase):
                 self.assertFalse((root / "unpacked").exists())
 
     def test_legacy_single_skill_upgrade_still_preserves_backup(self):
-        report = upgrade.probe(ROOT / "tests/fixtures/story-codex-0.2.0.zip", 60)
+        # A retained release ZIP may legitimately differ from this working tree.
+        # Build and verify the current source in an isolated repository instead
+        # of depending on, replacing, or bypassing the real dist archive.
+        with tempfile.TemporaryDirectory(prefix="story-upgrade-current-") as directory:
+            repository = Path(directory).resolve()
+            shutil.copytree(ROOT / "skills", repository / "skills", ignore=shutil.ignore_patterns("__pycache__", "*.pyc"))
+            (repository / "scripts").mkdir()
+            for name in ("install", "package", "verify"):
+                shutil.copyfile(ROOT / "scripts" / f"{name}.py", repository / "scripts" / f"{name}.py")
+            with patch.object(upgrade, "ROOT", repository), patch.object(upgrade, "SKILL", repository / "skills/story-codex"), \
+                    patch.object(upgrade, "INSTALLER", repository / "scripts/install.py"):
+                packaged = upgrade.load_script("package").package()
+                report = upgrade.probe(ROOT / "tests/fixtures/story-codex-0.2.0.zip", 60)
         self.assertTrue(report["ok"], report.get("error"))
+        self.assertEqual(report["checks"]["current_archive_matches_canonical"]["status"], "passed")
+        self.assertEqual(report["current_archive"]["archive"], packaged["archive"])
+        self.assertEqual(report["current_archive"]["sha256"], packaged["sha256"])
         self.assertEqual(report["initial_archive"]["version"], "0.2.0")
         self.assertEqual(report["checks"]["archive_extraction_exact"]["skill_count"], 1)
         self.assertEqual(report["checks"]["previous_release_backup_exact"]["status"], "passed")
