@@ -1,0 +1,32 @@
+{
+  "root": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-plan-opening-trial-s8znofu0",
+  "human_markdown_count": 3,
+  "markdown_characters": {
+    "写作项目/固定书根/创作约定.md": 261,
+    "写作项目/雾港来信/创作约定.md": 275,
+    "写作项目/雾港来信/01_大纲细纲/全书总纲.md": 294
+  },
+  "checks": {
+    "new_book_at_title_directory": true,
+    "existing_custom_root_retained": true,
+    "no_nested_book_directories": true,
+    "parent_not_initialized": true,
+    "no_prose": true,
+    "request_2_preserved_request_1_artifacts": true
+  },
+  "tree": [
+    "receipts.json",
+    "setup_contract.txt",
+    "写作项目/",
+    "写作项目/固定书根/",
+    "写作项目/固定书根/.story/",
+    "写作项目/固定书根/.story/state.sqlite3",
+    "写作项目/固定书根/创作约定.md",
+    "写作项目/雾港来信/",
+    "写作项目/雾港来信/.story/",
+    "写作项目/雾港来信/.story/state.sqlite3",
+    "写作项目/雾港来信/01_大纲细纲/",
+    "写作项目/雾港来信/01_大纲细纲/全书总纲.md",
+    "写作项目/雾港来信/创作约定.md"
+  ]
+}

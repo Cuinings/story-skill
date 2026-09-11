@@ -1,0 +1,18 @@
+{
+  "scope": "Independent model trial completed while runtime still reported 0.5.2, before the 0.5.3 version bump. The three changed instruction files are byte-identical to current 0.5.3 sources. Not a new literary evaluation or a fresh fixed-tag installation.",
+  "ok": true,
+  "cases": [
+    "new book under a title directory",
+    "continue existing custom book root without nesting"
+  ],
+  "instruction_manifest": {
+    "story-codex/SKILL.md": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd",
+    "story-codex/references/project-state.md": "eaa1b09d246ea95508e0354f72294add5cdf82ef47c466cea3a321af8b8f70c4",
+    "story-codex-plan/SKILL.md": "b2d213473a8f4b3988eace9aebce24ffe9409489d9ffc193494c7f21d97b63da"
+  },
+  "original_verification": "opening-trial/verification.json",
+  "commands_and_artifacts": "opening-trial/receipts.json",
+  "temporary_source_removed": true,
+  "root_rechecked_artifacts_and_db": true,
+  "published_artifacts": "Original command receipts, verification report and three Markdown artifacts; synthetic SQLite databases are excluded from distribution. Receipt paths describe the original temporary trial."
+}
