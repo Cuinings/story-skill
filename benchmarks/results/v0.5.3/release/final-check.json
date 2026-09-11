@@ -1,0 +1,272 @@
+{
+  "package": {
+    "status": "passed",
+    "archive": "/Users/cuining/Documents/GitHub/story-skill/dist/story-codex-0.5.3.zip",
+    "version": "0.5.3",
+    "sha256": "6d5acf81f9d7d21dfa0719fad2dd50bf8ae0c2bed0c21fa85485924084768044",
+    "bytes": 118923,
+    "files": 33,
+    "contents_match_current_skill": true,
+    "missing": [],
+    "extra": [],
+    "changed": [],
+    "duplicate_entries": [],
+    "corrupt_entry": null
+  },
+  "benchmark_candidate_file_hashes": {
+    "status": "passed",
+    "report_sha256": "27e9ba9b5702380ee3ba6b2b7d206e745aaad9d1fd5891c19a232fcb54053e25",
+    "scope": "Candidate file hashes, both input lists, profile configuration and arithmetic; tokenizer not rerun and upstream file contents not revalidated",
+    "files": [
+      {
+        "profile": "long_chapter_required_minimum",
+        "path": "skills/story-codex/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd",
+        "current_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd"
+      },
+      {
+        "profile": "long_chapter_required_minimum",
+        "path": "skills/story-codex-write/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "601c0725290971448ad0c26c3df82d1af2479b2b66ed1f02de393ab607e464f4",
+        "current_sha256": "601c0725290971448ad0c26c3df82d1af2479b2b66ed1f02de393ab607e464f4"
+      },
+      {
+        "profile": "long_chapter_required_minimum",
+        "path": "skills/story-codex/references/project-state.md",
+        "matches": true,
+        "recorded_sha256": "eaa1b09d246ea95508e0354f72294add5cdf82ef47c466cea3a321af8b8f70c4",
+        "current_sha256": "eaa1b09d246ea95508e0354f72294add5cdf82ef47c466cea3a321af8b8f70c4"
+      },
+      {
+        "profile": "long_chapter_required_minimum",
+        "path": "skills/story-codex-write/references/chapter.md",
+        "matches": true,
+        "recorded_sha256": "082070b91b1a6b15d8c889500894441c12cd00ba856c61503632d7f6dac1c2e2",
+        "current_sha256": "082070b91b1a6b15d8c889500894441c12cd00ba856c61503632d7f6dac1c2e2"
+      },
+      {
+        "profile": "long_chapter_required_minimum",
+        "path": "skills/story-codex-write/references/drama.md",
+        "matches": true,
+        "recorded_sha256": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+        "current_sha256": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f"
+      },
+      {
+        "profile": "long_multi_line",
+        "path": "skills/story-codex/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd",
+        "current_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd"
+      },
+      {
+        "profile": "long_multi_line",
+        "path": "skills/story-codex-write/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "601c0725290971448ad0c26c3df82d1af2479b2b66ed1f02de393ab607e464f4",
+        "current_sha256": "601c0725290971448ad0c26c3df82d1af2479b2b66ed1f02de393ab607e464f4"
+      },
+      {
+        "profile": "long_multi_line",
+        "path": "skills/story-codex/references/project-state.md",
+        "matches": true,
+        "recorded_sha256": "eaa1b09d246ea95508e0354f72294add5cdf82ef47c466cea3a321af8b8f70c4",
+        "current_sha256": "eaa1b09d246ea95508e0354f72294add5cdf82ef47c466cea3a321af8b8f70c4"
+      },
+      {
+        "profile": "long_multi_line",
+        "path": "skills/story-codex-write/references/chapter.md",
+        "matches": true,
+        "recorded_sha256": "082070b91b1a6b15d8c889500894441c12cd00ba856c61503632d7f6dac1c2e2",
+        "current_sha256": "082070b91b1a6b15d8c889500894441c12cd00ba856c61503632d7f6dac1c2e2"
+      },
+      {
+        "profile": "long_multi_line",
+        "path": "skills/story-codex-write/references/drama.md",
+        "matches": true,
+        "recorded_sha256": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+        "current_sha256": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f"
+      },
+      {
+        "profile": "long_multi_line",
+        "path": "skills/story-codex-write/references/long-form.md",
+        "matches": true,
+        "recorded_sha256": "290c5ba915cb32f745417a135198f0e2eabc77f10967d0074be1e8752532ae63",
+        "current_sha256": "290c5ba915cb32f745417a135198f0e2eabc77f10967d0074be1e8752532ae63"
+      },
+      {
+        "profile": "short_write_conservative",
+        "path": "skills/story-codex/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd",
+        "current_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd"
+      },
+      {
+        "profile": "short_write_conservative",
+        "path": "skills/story-codex-write/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "601c0725290971448ad0c26c3df82d1af2479b2b66ed1f02de393ab607e464f4",
+        "current_sha256": "601c0725290971448ad0c26c3df82d1af2479b2b66ed1f02de393ab607e464f4"
+      },
+      {
+        "profile": "short_write_conservative",
+        "path": "skills/story-codex/references/project-state.md",
+        "matches": true,
+        "recorded_sha256": "eaa1b09d246ea95508e0354f72294add5cdf82ef47c466cea3a321af8b8f70c4",
+        "current_sha256": "eaa1b09d246ea95508e0354f72294add5cdf82ef47c466cea3a321af8b8f70c4"
+      },
+      {
+        "profile": "short_write_conservative",
+        "path": "skills/story-codex-write/references/chapter.md",
+        "matches": true,
+        "recorded_sha256": "082070b91b1a6b15d8c889500894441c12cd00ba856c61503632d7f6dac1c2e2",
+        "current_sha256": "082070b91b1a6b15d8c889500894441c12cd00ba856c61503632d7f6dac1c2e2"
+      },
+      {
+        "profile": "short_write_conservative",
+        "path": "skills/story-codex-write/references/drama.md",
+        "matches": true,
+        "recorded_sha256": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+        "current_sha256": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f"
+      },
+      {
+        "profile": "long_analysis_conservative",
+        "path": "skills/story-codex/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd",
+        "current_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd"
+      },
+      {
+        "profile": "long_analysis_conservative",
+        "path": "skills/story-codex-analyze/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "4e6dc7abf84371911f498a0d67c58bbf57ac036bfee9c5c8cb3744fa3d31b912",
+        "current_sha256": "4e6dc7abf84371911f498a0d67c58bbf57ac036bfee9c5c8cb3744fa3d31b912"
+      },
+      {
+        "profile": "long_analysis_conservative",
+        "path": "skills/story-codex-analyze/references/deep-reading.md",
+        "matches": true,
+        "recorded_sha256": "d53c46833e871126fc23401f32d1a069e8869980479a66574d16273454399e8d",
+        "current_sha256": "d53c46833e871126fc23401f32d1a069e8869980479a66574d16273454399e8d"
+      },
+      {
+        "profile": "analysis_with_examples",
+        "path": "skills/story-codex/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd",
+        "current_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd"
+      },
+      {
+        "profile": "analysis_with_examples",
+        "path": "skills/story-codex-analyze/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "4e6dc7abf84371911f498a0d67c58bbf57ac036bfee9c5c8cb3744fa3d31b912",
+        "current_sha256": "4e6dc7abf84371911f498a0d67c58bbf57ac036bfee9c5c8cb3744fa3d31b912"
+      },
+      {
+        "profile": "analysis_with_examples",
+        "path": "skills/story-codex-analyze/references/deep-reading.md",
+        "matches": true,
+        "recorded_sha256": "d53c46833e871126fc23401f32d1a069e8869980479a66574d16273454399e8d",
+        "current_sha256": "d53c46833e871126fc23401f32d1a069e8869980479a66574d16273454399e8d"
+      },
+      {
+        "profile": "analysis_with_examples",
+        "path": "skills/story-codex-analyze/references/examples.md",
+        "matches": true,
+        "recorded_sha256": "dc8d82c391e1eed941d6d80680368229ef86b6b894840402381c6df8185fa1c2",
+        "current_sha256": "dc8d82c391e1eed941d6d80680368229ef86b6b894840402381c6df8185fa1c2"
+      },
+      {
+        "profile": "review_conservative",
+        "path": "skills/story-codex/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd",
+        "current_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd"
+      },
+      {
+        "profile": "review_conservative",
+        "path": "skills/story-codex-review/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "88404348abf68da3917ee3e0b114e67a08a5d7ef6e52e55c498178c40da1d005",
+        "current_sha256": "88404348abf68da3917ee3e0b114e67a08a5d7ef6e52e55c498178c40da1d005"
+      },
+      {
+        "profile": "review_conflict",
+        "path": "skills/story-codex/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd",
+        "current_sha256": "309be26778024bea0efbffaa6459922bdf73db0cf1739ba8163dbd26a628bdbd"
+      },
+      {
+        "profile": "review_conflict",
+        "path": "skills/story-codex-review/SKILL.md",
+        "matches": true,
+        "recorded_sha256": "88404348abf68da3917ee3e0b114e67a08a5d7ef6e52e55c498178c40da1d005",
+        "current_sha256": "88404348abf68da3917ee3e0b114e67a08a5d7ef6e52e55c498178c40da1d005"
+      },
+      {
+        "profile": "review_conflict",
+        "path": "skills/story-codex-write/references/drama.md",
+        "matches": true,
+        "recorded_sha256": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f",
+        "current_sha256": "0e03e711c4f73f0d89dccd2cb0b39e90e526d61ff373e1a7ef2fe6afa5dd854f"
+      }
+    ],
+    "problems": []
+  },
+  "local_markdown_links": {
+    "status": "passed",
+    "files_scanned": 141,
+    "links_checked": 659,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "ok": true,
+  "status": "passed",
+  "date": "2026-09-11T09:25:18.735533+00:00",
+  "tag": "v0.5.3",
+  "tag_commit": "ccb186b94f121103b09f88cb4067f692bfc2a381",
+  "skill_files": 33,
+  "source_matches_fixed_tag_release_and_global_install": true,
+  "runtime_and_tests_unchanged_from_fixed_tag": true,
+  "prior_result_files_checked": 763,
+  "prior_result_files_unchanged": true,
+  "remote_tag_commits": {
+    "v0.4.0": "c1b3c3377573610a191e165ceb6866ae35afe5a8",
+    "v0.5.0": "549e5c98b3f79e61d702cbdd8ddbbebf1619f41a",
+    "v0.5.1": "4fd53f80e26efc0eadda50b62edaf34a046d363a",
+    "v0.5.2": "c50bd28b14b128e287dc18f7cf12a692c4da82be",
+    "v0.5.3": "ccb186b94f121103b09f88cb4067f692bfc2a381"
+  },
+  "scope": "Release payload, historical evidence, tag identity, final documentation file links and receipt consistency. No new literary or Windows success claim.",
+  "final_document_manifest": {
+    "INSTALL.md": "c4dccc6c064e25fa6ffabed88e9e79ed4bc27727d014b011191a4686e1b1ffe9",
+    "README.md": "ae47094da48b1ba0770f9567182f8c39594bd4c79d5ce8aa94dddf13eefb9c2f",
+    "benchmarks/results/v0.5.3/README.md": "f8260b06cba36924ab25a2160ce0bd8f0999abae5d11c8b34ac0f32408e54126",
+    "benchmarks/results/v0.5.3/release/release-notes.md": "3c8d5d11b08eb0cf729a3085e5b2b7391043905c1694b03565b98fc0142d07b3",
+    "docs/README.md": "b0c0eff0b63def4dc1f199c384f24bb50dd6395da39770b9d79ea0a47f366758",
+    "docs/github-release.md": "473f6900f7e6d905c5c4fe44ac55319b02b6e96b9fef653c5ee2d31ff43aa5a1",
+    "docs/releases/v0.5.3.md": "9c6b24d73719fcd69a0628ba60485246624433cfe513db01d2ca022e6ddc0c80",
+    "docs/中文小说上手.md": "665ddab71204dde7336a65daf15c69bcc3e6ec55426e4a9118ca1c15aa5cea8e",
+    "docs/目录结构.md": "aab22cd5181f152f253c4e7e1f3694cfebb67ac3a66a07a21700fdb4b65774eb",
+    "docs/超长篇验收.md": "056bc17fc733dc57716fe01df349ef6ea08badf489485e3ec02f8dedce162999"
+  },
+  "release_receipts": {
+    "ci-run.json": "c36d520995e7d5486d95de0b304a2554716e02abdd75941949ca0e83e38e9576",
+    "ci.json": "f8f7a9985260288642b48148b7fd77860a63dfc3a318b9d66651c0225cc4db0b",
+    "local-install.json": "59100a5065298874982f5f657084549c520aba7b4feca9d97e95346f7d36c739",
+    "package-check.json": "bdde3acf3e0036e8f51ec08e24694700aeedbb55de6cc3e9eaabf61bbb4083c5",
+    "packages-artifacts.json": "687cbbd7955f9b383a7e22ce205d27d30f5f9d577f3318bad3b909ac6b861537",
+    "packages-workflow.json": "5bc6e6767aaf25cf214e9fa0f8b2bb9a88285c6cf069e0cb107e2d42b97584f9",
+    "packages.json": "fe4b33d6a28f845873f98af313ac1afbb188fa5c02ba41028fdc1ad8c401f193",
+    "release-final-metadata.json": "7bd8a4de4edfbc937ae27137ab88101ea617103848299f2ee85722cb51c191af",
+    "release.json": "ef303f0c3d15335a52fdc786b2dd670f1da924930eafcd7dde110bb91e4c565e",
+    "remote-install.json": "b3d38c0dd7f86a5434009482b9eab889529202bf7ba45f78c68ae11832369d9b",
+    "repository.json": "ed478bdf3fda08d939f9235a41df4c912e8144a31c7ed3400b7330332b5212b1",
+    "state.json": "c4d3da6bac601cfb098e60c58179e4be6c4c40aa745224ab8d00fe437af67722",
+    "tag.json": "273703fa809d232dfc9b17a31a227f35e1dbdcf6afea62da47895d1bae475e34"
+  }
+}

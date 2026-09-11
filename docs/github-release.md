@@ -1,10 +1,10 @@
 # 安装、升级与 GitHub 发布
 
-当前准备发布 v0.5.3，补齐新书书名目录规则和从拆书到原创规划的使用说明，完整套件为七个技能、33 个文件。[版本说明](releases/v0.5.3.md) · [统一安装指引](../INSTALL.md)。本版面向 macOS／Linux；Windows 导出的已知 WinError 32 未修，Windows 继续使用 v0.4.0，已用新版写入的书先完整备份，不盲目降级。
+当前版本 v0.5.3，补齐新书书名目录规则和从拆书到原创规划的使用说明，完整套件为七个技能、33 个文件。[版本说明](releases/v0.5.3.md) · [统一安装指引](../INSTALL.md)。本版面向 macOS／Linux；Windows 导出的已知 WinError 32 未修，Windows 继续使用 v0.4.0，已用新版写入的书先完整备份，不盲目降级。
 
 ## v0.5.3 发布验证记录
 
-v0.5.3 正在准备发布，固定标签、远端 CI、Release 附件与 Packages 待核验。新书默认保存到 `写作父目录/书名/`，用户已指定最终书根或继续旧书时沿用原位置；运行时仅更新版本标识，CLI 的 `--title` 不自动创建书名目录。[本版验证目录](../benchmarks/results/v0.5.3/README.md) 保存独立结果，v0.5.2 及更早版本的标签、附件和数字保留原样。
+v0.5.3 已于 **2026-09-11 17:18:19（北京时间）** 发布。固定标签、Release 附件回下载、官方隔离安装及 GitHub Packages 回下载均已核验；远端 Linux 检查通过，Windows 在已知 WinError 32 处失败，整体 CI 为失败。新书默认保存到 `写作父目录/书名/`，用户已指定最终书根或继续旧书时沿用原位置；运行时仅更新版本标识，CLI 的 `--title` 不自动创建书名目录。[本版验证目录](../benchmarks/results/v0.5.3/README.md) 与 [逐项状态](../benchmarks/results/v0.5.3/release/state.json) 保存独立结果，v0.5.2 及更早版本的标签、附件和数字保留原样。
 
 | 环节 | 实际结果与证据 |
 |---|---|
@@ -12,15 +12,15 @@ v0.5.3 正在准备发布，固定标签、远端 CI、Release 附件与 Package
 | 新书与旧书选根试用 | [独立模型的两项选根试用](../benchmarks/results/v0.5.3/opening-trial.json) 通过：新建书名目录、沿用明确书根，均停留规划；执行时运行时尚报 0.5.2，三份指令与本版逐字节相同，不冒充固定标签新试用 |
 | 指令成本 | [本版重新测量](../benchmarks/results/v0.5.3/tokens.md)：普通／多线写作 6,821／9,008 tokens，深读／含示范 5,010／7,019 tokens |
 | 容量、升级及迁移 | [四种合成容量组合](../benchmarks/results/v0.5.3/scaling.json)、[v0.5.2→v0.5.3 升级 18 项](../benchmarks/results/v0.5.3/upgrade.json)及[三类合成旧库迁移](../benchmarks/results/v0.5.3/migration.json)通过 |
-| 固定标签提交 | `v0.5.3` 待创建与解析 |
-| 发布提交的 Linux／Windows CI | 待远端运行；Windows 既有 WinError 32 未纳入修复，结果分平台登记 |
-| GitHub Release 与附件 | 待发布并回下载 ZIP 与校验文件 |
-| 官方固定标签安装 | 待从远端 `v0.5.3` 在临时目录安装七个技能并核对文件与运行结果 |
-| GitHub Packages | `@ningcui29/story-codex@0.5.3` 待同步及注册表回下载核验 |
+| 固定标签提交 | `v0.5.3` → `ccb186b94f121103b09f88cb4067f692bfc2a381`；[标签解析](../benchmarks/results/v0.5.3/release/tag.json)，不随后续发布文档更新移动 |
+| 发布提交的 Linux／Windows CI | [CI 34583076198](https://github.com/NingCui29/story-skill/actions/runs/34583076198)：Linux 443 项中 431 项通过、12 项按平台跳过，全部步骤成功；Windows 首项报告导出因已知 WinError 32 失败后停止，整体 CI 为失败。[分项回执](../benchmarks/results/v0.5.3/release/ci.json) |
+| GitHub Release 与附件 | [v0.5.3](https://github.com/NingCui29/story-skill/releases/tag/v0.5.3) 已发布；ZIP 与校验文件回下载通过，GitHub 服务端摘要、33 个技能文件与固定提交、源码及本地构建一致。[发布核验](../benchmarks/results/v0.5.3/release/release.json) |
+| 官方固定标签安装 | 从远端 `v0.5.3` 隔离安装 7 个技能、33 个文件，与 Release 和源码一致；版本、帮助、初始化、状态四项 CLI 通过，临时数据已清理。[安装核验](../benchmarks/results/v0.5.3/release/remote-install.json) |
+| GitHub Packages | [工作流 34583518477](https://github.com/NingCui29/story-skill/actions/runs/34583518477) 成功发布 `@ningcui29/story-codex@0.5.3`；注册表回下载后在本机独立核对归档摘要、33 个技能文件、2 个包装文件、SHA-512 和四项 CLI，均通过。[工作流回执](../benchmarks/results/v0.5.3/release/packages.json) · [独立复核](../benchmarks/results/v0.5.3/release/package-check.json) |
 
 本版保留 schema 2，已有书不需重新导入，安装升级不自动搬动书目录。README 新增 [从拆书开始，新起一本书](../README.md#从拆书开始新起一本书)；拆书、方法提炼与原创规划按既有技能顺序推进，没有新增文学质量认证，也没有开展新一轮文学对照实验。
 
-本地 [ZIP](../benchmarks/results/v0.5.3/package.json) 含 33 个载荷文件、118,923 字节，SHA-256 为 `6d5acf81f9d7d21dfa0719fad2dd50bf8ae0c2bed0c21fa85485924084768044`；[npm 构建](../benchmarks/results/v0.5.3/npm-package.json) 的 tarball SHA-256 为 `cd27f60476a8bb764c795192c0d9094f37840dc2371eb8913f63e491251e1d8b`。这两项目前说明本地构建，远端分发另行核验。
+本地 [ZIP](../benchmarks/results/v0.5.3/package.json) 含 33 个载荷文件、118,923 字节，SHA-256 为 `6d5acf81f9d7d21dfa0719fad2dd50bf8ae0c2bed0c21fa85485924084768044`；[npm 构建](../benchmarks/results/v0.5.3/npm-package.json) 的 tarball SHA-256 为 `cd27f60476a8bb764c795192c0d9094f37840dc2371eb8913f63e491251e1d8b`。Release ZIP 和注册表回下载 tarball 均与本地构建逐字节一致。[本机安装](../benchmarks/results/v0.5.3/release/local-install.json) 已在保留完整旧版后更新到 0.5.3，33 个文件和四项 CLI 通过；它与官方固定标签隔离安装分别记录。固定标签保留发布前文档快照，main 记录后续完成的分发状态，不移动标签或替换附件。
 
 ## v0.5.2 发布验证记录
 
@@ -120,13 +120,13 @@ Release ZIP 的 SHA-256 为 `087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a7
 $skill-installer 按 https://github.com/NingCui29/story-skill/blob/main/INSTALL.md 安装或升级 Story Codex
 ```
 
-Codex 先读取仓库 [INSTALL.md](../INSTALL.md)，按照其中的固定版本与 7 个路径调用官方安装脚本，并处理已有目录、完整备份、文件核对和失败恢复。main 上维护的是安装指引；v0.5.3 发布完成前，macOS／Linux 仍按其中已核验版本安装，完成后载荷固定到 `v0.5.3`，Windows 暂用 `v0.4.0`；该 Markdown 文件不是可直接传给官方脚本的技能目录。
+Codex 先读取仓库 [INSTALL.md](../INSTALL.md)，按照其中的固定版本与 7 个路径调用官方安装脚本，并处理已有目录、完整备份、文件核对和失败恢复。main 上维护的是安装指引，macOS／Linux 载荷固定到 `v0.5.3`，Windows 暂用 `v0.4.0`；该 Markdown 文件不是可直接传给官方脚本的技能目录。
 
 官方脚本没有 `--update`，遇到同名目录仍拒绝覆盖。统一入口通过 Codex 编排安装与升级步骤，不修改用户的系统 skill；本仓库项目安装器的 `--update` 是另一项已有能力，适用条件见下文。
 
 ## 手动复查：固定版本与安装器参数
 
-下列 v0.5.3 固定版本命令在发布完成后使用，实际状态见本页顶部。本机官方安装器支持一次 `--path` 接收多个路径。需要手动安装到没有同名技能的目录时，macOS／Linux 使用以下参数；Windows 将 `--ref` 改为 `v0.4.0`；`<skill-installer目录>` 由 Codex 定位到本机实际路径：
+下列命令使用已核验的固定版本 v0.5.3，实际范围见本页顶部。本机官方安装器支持一次 `--path` 接收多个路径。需要手动安装到没有同名技能的目录时，macOS／Linux 使用以下参数；Windows 将 `--ref` 改为 `v0.4.0`；`<skill-installer目录>` 由 Codex 定位到本机实际路径：
 
 ```bash
 python3 "<skill-installer目录>/scripts/install-skill-from-github.py" --repo NingCui29/story-skill --ref v0.5.3 --path skills/story-codex skills/story-codex-plan skills/story-codex-write skills/story-codex-analyze skills/story-codex-review skills/story-codex-research skills/story-codex-cover
@@ -235,7 +235,7 @@ python3 -B -X utf8 scripts/package.py
 python3 -B -X utf8 scripts/sync_packages.py --tag v0.3.0 --prepare-only
 ```
 
-本版包发布、注册表回下载和独立运行核验完成后，可按 GitHub npm 要求认证并下载：
+本版包已完成发布、注册表回下载和独立运行核验，可按 GitHub npm 要求认证并下载：
 
 ```bash
 npm pack @ningcui29/story-codex@0.5.3 --registry=https://npm.pkg.github.com

@@ -1,0 +1,49 @@
+{
+  "tag": "v0.5.3",
+  "ok": true,
+  "local_commit": "ccb186b94f121103b09f88cb4067f692bfc2a381",
+  "remote_commit": "ccb186b94f121103b09f88cb4067f692bfc2a381",
+  "tag_object": "5a1c6e6aba1f5bf55de756ae4debcbfb217d3734",
+  "remote_ref": {
+    "ref": "refs/tags/v0.5.3",
+    "node_id": "REF_kwDOUR8APLByZWZzL3RhZ3MvdjAuNS4z",
+    "url": "https://api.github.com/repos/NingCui29/story-skill/git/refs/tags/v0.5.3",
+    "object": {
+      "sha": "5a1c6e6aba1f5bf55de756ae4debcbfb217d3734",
+      "type": "tag",
+      "url": "https://api.github.com/repos/NingCui29/story-skill/git/tags/5a1c6e6aba1f5bf55de756ae4debcbfb217d3734"
+    }
+  },
+  "remote_tag": {
+    "node_id": "TA_kwDOUR8APNoAKDVhMWM2ZTZhYmExZjViZjU1ZGU3NTZhZTRkZWJjYmZiMjE3ZDM3MzQ",
+    "sha": "5a1c6e6aba1f5bf55de756ae4debcbfb217d3734",
+    "url": "https://api.github.com/repos/NingCui29/story-skill/git/tags/5a1c6e6aba1f5bf55de756ae4debcbfb217d3734",
+    "tagger": {
+      "name": "Blue",
+      "email": "19723046+NingCui29@users.noreply.github.com",
+      "date": "2026-09-11T09:18:03Z"
+    },
+    "object": {
+      "sha": "ccb186b94f121103b09f88cb4067f692bfc2a381",
+      "type": "commit",
+      "url": "https://api.github.com/repos/NingCui29/story-skill/git/commits/ccb186b94f121103b09f88cb4067f692bfc2a381"
+    },
+    "tag": "v0.5.3",
+    "message": "Story Codex v0.5.3\n",
+    "verification": {
+      "verified": false,
+      "reason": "unsigned",
+      "signature": null,
+      "payload": null,
+      "verified_at": null
+    }
+  },
+  "verified_at": "2026-09-11T09:22:02.140329+00:00",
+  "preserves_previous_tags": true,
+  "previous_tag_commits": {
+    "v0.4.0": "c1b3c3377573610a191e165ceb6866ae35afe5a8",
+    "v0.5.0": "549e5c98b3f79e61d702cbdd8ddbbebf1619f41a",
+    "v0.5.1": "4fd53f80e26efc0eadda50b62edaf34a046d363a",
+    "v0.5.2": "c50bd28b14b128e287dc18f7cf12a692c4da82be"
+  }
+}
