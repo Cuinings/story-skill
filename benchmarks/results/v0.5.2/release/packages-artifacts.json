@@ -1,0 +1,25 @@
+{
+  "total_count": 1,
+  "artifacts": [
+    {
+      "id": 10190238163,
+      "node_id": "MDg6QXJ0aWZhY3QxMDE5MDIzODE2Mw==",
+      "name": "packages-sync-v0.5.2",
+      "size_in_bytes": 104088,
+      "url": "https://api.github.com/repos/NingCui29/story-skill/actions/artifacts/10190238163",
+      "archive_download_url": "https://api.github.com/repos/NingCui29/story-skill/actions/artifacts/10190238163/zip",
+      "expired": false,
+      "digest": "sha256:2dbecc2d300acd5b00613460b34ba424bc4c8c656a649fffe3e64c767f029ec0",
+      "created_at": "2026-09-11T08:06:45Z",
+      "updated_at": "2026-09-11T08:06:45Z",
+      "expires_at": "2026-09-25T08:06:44Z",
+      "workflow_run": {
+        "id": 34577548793,
+        "repository_id": 1360986172,
+        "head_repository_id": 1360986172,
+        "head_branch": "v0.5.2",
+        "head_sha": "c50bd28b14b128e287dc18f7cf12a692c4da82be"
+      }
+    }
+  ]
+}

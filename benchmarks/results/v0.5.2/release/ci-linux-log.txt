@@ -1,0 +1,734 @@
+﻿2026-09-11T08:01:33.9613336Z Current runner version: '2.337.0'
+2026-09-11T08:01:33.9639918Z ##[group]Runner Image Provisioner
+2026-09-11T08:01:33.9640853Z Hosted Compute Agent
+2026-09-11T08:01:33.9641558Z Version: 20260828.587
+2026-09-11T08:01:33.9642204Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-11T08:01:33.9642975Z Build Date: 2026-08-28T16:44:25Z
+2026-09-11T08:01:33.9643683Z Worker ID: {c50fec35-d8c3-4b0d-b990-84cdf72d3f86}
+2026-09-11T08:01:33.9644441Z Azure Region: westus
+2026-09-11T08:01:33.9645060Z ##[endgroup]
+2026-09-11T08:01:33.9646730Z ##[group]Operating System
+2026-09-11T08:01:33.9647461Z Ubuntu
+2026-09-11T08:01:33.9648365Z 24.04.5
+2026-09-11T08:01:33.9648900Z LTS
+2026-09-11T08:01:33.9649490Z ##[endgroup]
+2026-09-11T08:01:33.9650058Z ##[group]Runner Image
+2026-09-11T08:01:33.9650654Z Image: ubuntu-24.04
+2026-09-11T08:01:33.9651318Z Version: 20260907.300.1
+2026-09-11T08:01:33.9652572Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+2026-09-11T08:01:33.9654214Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+2026-09-11T08:01:33.9655526Z ##[endgroup]
+2026-09-11T08:01:33.9656863Z ##[group]GITHUB_TOKEN Permissions
+2026-09-11T08:01:33.9659202Z Contents: read
+2026-09-11T08:01:33.9659946Z Metadata: read
+2026-09-11T08:01:33.9660543Z ##[endgroup]
+2026-09-11T08:01:33.9662857Z Secret source: Actions
+2026-09-11T08:01:33.9663815Z Cache mode: write
+2026-09-11T08:01:33.9664582Z Prepare workflow directory
+2026-09-11T08:01:34.0020827Z Prepare all required actions
+2026-09-11T08:01:34.0077896Z Getting action download info
+2026-09-11T08:01:34.3876531Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-11T08:01:34.4983138Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-09-11T08:01:34.6915012Z Complete job name: test (ubuntu-latest, 3.10)
+2026-09-11T08:01:34.7730099Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T08:01:34.7739409Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-09-11T08:01:34.7740355Z with:
+2026-09-11T08:01:34.7740814Z   persist-credentials: false
+2026-09-11T08:01:34.7741365Z   repository: NingCui29/story-skill
+2026-09-11T08:01:34.7745099Z   token: ***
+2026-09-11T08:01:34.7745545Z   ssh-strict: true
+2026-09-11T08:01:34.7745999Z   ssh-user: git
+2026-09-11T08:01:34.7746495Z   clean: true
+2026-09-11T08:01:34.7746970Z   sparse-checkout-cone-mode: true
+2026-09-11T08:01:34.7747503Z   fetch-depth: 1
+2026-09-11T08:01:34.7748148Z   fetch-tags: false
+2026-09-11T08:01:34.7748598Z   show-progress: true
+2026-09-11T08:01:34.7749103Z   lfs: false
+2026-09-11T08:01:34.7749546Z   submodules: false
+2026-09-11T08:01:34.7750007Z   set-safe-directory: true
+2026-09-11T08:01:34.7750557Z   allow-unsafe-pr-checkout: false
+2026-09-11T08:01:34.7751371Z ##[endgroup]
+2026-09-11T08:01:34.8776533Z Syncing repository: NingCui29/story-skill
+2026-09-11T08:01:34.8779678Z ##[group]Getting Git version info
+2026-09-11T08:01:34.8781060Z Working directory is '/home/runner/work/story-skill/story-skill'
+2026-09-11T08:01:34.8782765Z [command]/usr/bin/git version
+2026-09-11T08:01:34.8857038Z git version 2.55.0
+2026-09-11T08:01:34.8890995Z ##[endgroup]
+2026-09-11T08:01:34.8907488Z Temporarily overriding HOME='/home/runner/work/_temp/5120f6ad-ee26-4adc-9f0d-bba8a6cfc53b' before making global git config changes
+2026-09-11T08:01:34.8910729Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-11T08:01:34.8914896Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/story-skill/story-skill
+2026-09-11T08:01:34.8972390Z Deleting the contents of '/home/runner/work/story-skill/story-skill'
+2026-09-11T08:01:34.8976764Z ##[group]Initializing the repository
+2026-09-11T08:01:34.8982359Z [command]/usr/bin/git init /home/runner/work/story-skill/story-skill
+2026-09-11T08:01:34.9112882Z hint: Using 'master' as the name for the initial branch. This default branch name
+2026-09-11T08:01:34.9114938Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+2026-09-11T08:01:34.9116949Z hint: to use in all of your new repositories, which will suppress this warning,
+2026-09-11T08:01:34.9118648Z hint: call:
+2026-09-11T08:01:34.9119470Z hint:
+2026-09-11T08:01:34.9120627Z hint: 	git config --global init.defaultBranch <name>
+2026-09-11T08:01:34.9122074Z hint:
+2026-09-11T08:01:34.9123382Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2026-09-11T08:01:34.9125215Z hint: 'development'. The just-created branch can be renamed via this command:
+2026-09-11T08:01:34.9126699Z hint:
+2026-09-11T08:01:34.9127948Z hint: 	git branch -m <name>
+2026-09-11T08:01:34.9129277Z hint:
+2026-09-11T08:01:34.9130558Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2026-09-11T08:01:34.9132489Z Initialized empty Git repository in /home/runner/work/story-skill/story-skill/.git/
+2026-09-11T08:01:34.9136408Z [command]/usr/bin/git remote add origin https://github.com/NingCui29/story-skill
+2026-09-11T08:01:34.9185173Z ##[endgroup]
+2026-09-11T08:01:34.9186539Z ##[group]Disabling automatic garbage collection
+2026-09-11T08:01:34.9190675Z [command]/usr/bin/git config --local gc.auto 0
+2026-09-11T08:01:34.9226254Z ##[endgroup]
+2026-09-11T08:01:34.9227999Z ##[group]Setting up auth
+2026-09-11T08:01:34.9235853Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T08:01:34.9288725Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-11T08:01:34.9726546Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T08:01:34.9781405Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-11T08:01:35.0006290Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T08:01:35.0045217Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-11T08:01:35.0290517Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2026-09-11T08:01:35.0339335Z ##[endgroup]
+2026-09-11T08:01:35.0341117Z ##[group]Fetching the repository
+2026-09-11T08:01:35.0352638Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +c50bd28b14b128e287dc18f7cf12a692c4da82be:refs/remotes/origin/main
+2026-09-11T08:01:35.7589411Z From https://github.com/NingCui29/story-skill
+2026-09-11T08:01:35.7591538Z  * [new ref]         c50bd28b14b128e287dc18f7cf12a692c4da82be -> origin/main
+2026-09-11T08:01:35.7649680Z ##[endgroup]
+2026-09-11T08:01:35.7669741Z ##[group]Determining the checkout info
+2026-09-11T08:01:35.7671688Z ##[endgroup]
+2026-09-11T08:01:35.7672613Z [command]/usr/bin/git sparse-checkout disable
+2026-09-11T08:01:35.7674758Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2026-09-11T08:01:35.7708026Z ##[group]Checking out the ref
+2026-09-11T08:01:35.7713362Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2026-09-11T08:01:35.8443758Z Switched to a new branch 'main'
+2026-09-11T08:01:35.8449750Z branch 'main' set up to track 'origin/main'.
+2026-09-11T08:01:35.8461240Z ##[endgroup]
+2026-09-11T08:01:35.8508993Z [command]/usr/bin/git log -1 --format=%H
+2026-09-11T08:01:35.8536302Z c50bd28b14b128e287dc18f7cf12a692c4da82be
+2026-09-11T08:01:35.8546296Z ##[group]Removing auth
+2026-09-11T08:01:35.8551016Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T08:01:35.8586108Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-11T08:01:35.8818349Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T08:01:35.8848304Z http.https://github.com/.extraheader
+2026-09-11T08:01:35.8855593Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2026-09-11T08:01:35.8894223Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-11T08:01:35.9121822Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T08:01:35.9154105Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-11T08:01:35.9383390Z ##[endgroup]
+2026-09-11T08:01:35.9770857Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T08:01:35.9777320Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-09-11T08:01:35.9779383Z with:
+2026-09-11T08:01:35.9780299Z   python-version: 3.10
+2026-09-11T08:01:35.9781343Z   check-latest: false
+2026-09-11T08:01:35.9791411Z   token: ***
+2026-09-11T08:01:35.9792409Z   update-environment: true
+2026-09-11T08:01:35.9793515Z   allow-prereleases: false
+2026-09-11T08:01:35.9794637Z   freethreaded: false
+2026-09-11T08:01:35.9795598Z ##[endgroup]
+2026-09-11T08:01:36.1224608Z ##[group]Installed versions
+2026-09-11T08:01:36.1322697Z (node:2250) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-11T08:01:36.1327178Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-11T08:01:36.1330304Z Successfully set up CPython (3.10.21)
+2026-09-11T08:01:36.1333466Z ##[endgroup]
+2026-09-11T08:01:36.1697446Z ##[group]Run python -u -B -X utf8 -m unittest discover -s tests -v -f
+2026-09-11T08:01:36.1700920Z python -u -B -X utf8 -m unittest discover -s tests -v -f
+2026-09-11T08:01:36.1781507Z shell: /usr/bin/bash -e {0}
+2026-09-11T08:01:36.1783461Z env:
+2026-09-11T08:01:36.1785392Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:01:36.1788665Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+2026-09-11T08:01:36.1791737Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:01:36.1794551Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:01:36.1797324Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:01:36.1799950Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+2026-09-11T08:01:36.1801467Z ##[endgroup]
+2026-09-11T08:01:37.9265829Z test_cli_report_uses_captured_fingerprint_and_rejects_stale_input (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:37.9518742Z test_failed_export_resumes_without_regenerating_or_refinalizing_report (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:37.9709147Z test_findings_keeps_page_and_fingerprint_in_one_concurrent_read_snapshot (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:37.9902589Z test_findings_preserves_the_callers_transaction_and_rollback (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.0061772Z test_missing_record_baseline_is_rejected_but_exact_retry_keeps_working (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.0224119Z test_new_report_requires_the_baseline_used_for_aggregation (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.0388660Z test_pending_snapshot_cannot_finalize_after_new_records_complete (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.0544631Z test_record_fingerprint_cannot_be_borrowed_from_another_chunk (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.0757871Z test_retry_uses_old_baseline_only_while_same_content_is_still_current (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.0944087Z test_snapshot_covers_pending_completion_and_records_outside_requested_page (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.1126076Z test_stale_record_cannot_overwrite_another_connections_correction (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.1436534Z test_stale_report_is_not_finalized_and_records_remain_editable (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.1616052Z test_unrelated_source_does_not_invalidate_the_analysis_snapshot (test_analysis_baselines.AnalysisBaselineTests) ... ok
+2026-09-11T08:01:38.5822078Z test_cli_record_uses_actual_chunk_number_across_finding_pages (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.6026004Z test_completed_source_resumes_with_paginated_unicode_ranges_without_original_file (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.6178343Z test_conflicting_chunk_rejects_both_new_records_and_replacements_without_changes (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.6350846Z test_copied_findings_can_be_revised_and_retried_idempotently (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.6525507Z test_correctly_read_legacy_record_can_be_retried_without_a_new_revision (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.6659937Z test_embedded_chunk_requires_a_positive_integer_without_mutating_state (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.6834951Z test_findings_ranges_respect_byte_budget_and_resume_without_skipping (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.6973017Z test_legacy_ranges_cannot_override_saved_source_or_create_a_new_revision (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.7114197Z test_legacy_wrong_chunk_is_displayed_with_database_identity_without_rewriting (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.7268189Z test_readonly_ranges_are_not_saved_as_analysis_content (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.7432514Z test_record_receipt_reports_its_committed_snapshot_when_another_writer_follows (test_analysis_identity.AnalysisIdentityTests) ... ok
+2026-09-11T08:01:38.7655800Z test_leading_blank_lines_complete_without_losing_source (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.7895323Z test_legacy_pending_blanks_resume_without_rebuilding_or_losing_analysis (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.8139251Z test_middle_whitespace_chunks_preserve_later_chapter (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.8258732Z test_nonempty_text_is_not_automatically_completed (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.8373958Z test_repeated_ingest_and_next_leave_noncontent_evidence_unchanged (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.8577938Z test_trailing_whitespace_chunks_complete_without_losing_source (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.8805394Z test_unheaded_source_with_blank_chunks_completes (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.9203048Z test_whitespace_longer_than_maximum_chunk_size_completes (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.9295100Z test_whitespace_only_source_still_rejects_empty_input (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+2026-09-11T08:01:38.9353871Z test_initial_metadata_failure_rolls_back_schema_and_partial_identity (test_book_initialization.BookInitializationTests) ... ok
+2026-09-11T08:01:38.9413625Z test_late_schema_failure_rolls_back_preceding_tables_and_views (test_book_initialization.BookInitializationTests) ... ok
+2026-09-11T08:01:38.9519787Z test_new_schema_is_invisible_until_complete_identity_is_committed (test_book_initialization.BookInitializationTests) ... ok
+2026-09-11T08:01:38.9625064Z test_bare_volume_number_title_and_identifier_are_rejected (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:38.9824193Z test_case_insensitive_title_alias_is_rejected_before_chapter_commit (test_chapter_layout.ChapterLayoutTests) ... skipped 'Filesystem distinguishes names that differ only in letter case'
+2026-09-11T08:01:39.0121058Z test_chapters_use_volume_directories_and_exact_number_title_names (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.0317247Z test_chinese_heading_prefix_is_removed_and_path_survives_retry_and_reopen (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.0662599Z test_failed_move_keeps_old_export_until_new_export_succeeds (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.1389321Z test_historical_revision_recovers_edited_retired_path_of_older_chapter (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.1760216Z test_legacy_flat_export_path_remains_resolvable_after_reopen (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.1974821Z test_missing_nested_export_is_recovered_at_persisted_path (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.2168889Z test_native_title_is_required_but_explicit_plan_title_allows_plain_body (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.2280562Z test_new_commit_and_adopt_require_named_volume_without_changing_state (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.2480388Z test_new_title_collision_preserves_both_files_and_original_chapter_state (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.2955247Z test_reconcile_recovers_edited_retired_path_and_retargets_further_rename (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.3281975Z test_reconcile_uses_current_nested_path_and_can_publish_new_title (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.3579058Z test_replacing_title_and_volume_moves_export_and_preserves_backup (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.4020077Z test_titleless_import_keeps_body_filename_during_history_publication (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.4165780Z test_unregistered_volume_identifier_cannot_supply_a_directory_name (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.4442269Z test_unreviewed_edit_to_retired_path_is_preserved_during_recovery (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.4539403Z test_unsafe_volume_and_title_components_are_rejected_without_state_changes (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.4702563Z test_untitled_import_uses_body_fallback_in_named_volume (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.5216598Z test_volume_without_directory_uses_named_world_title_and_persisted_mapping (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.5371721Z test_world_volume_requires_both_number_and_name_for_directory_fallback (test_chapter_layout.ChapterLayoutTests) ... ok
+2026-09-11T08:01:39.5373256Z test_ambiguous_or_invalid_count_configuration_is_rejected (test_chinese_workflow.ChineseCountTests) ... ok
+2026-09-11T08:01:39.5374634Z test_counts_are_characters_with_explicit_scope (test_chinese_workflow.ChineseCountTests) ... ok
+2026-09-11T08:01:39.5376995Z test_selected_count_controls_gate_and_legacy_plan_is_compatible (test_chinese_workflow.ChineseCountTests) ... ok
+2026-09-11T08:01:39.5622391Z test_maximum_valid_quote_commits_without_late_source_limit_failure (test_chinese_workflow.ChineseWorkflowTests) ... ok
+2026-09-11T08:01:39.5815230Z test_prepare_applies_budget_to_its_own_returned_packet (test_chinese_workflow.ChineseWorkflowTests) ... ok
+2026-09-11T08:01:39.6896986Z test_prepare_cli_and_stale_draft_review (test_chinese_workflow.ChineseWorkflowTests) ... ok
+2026-09-11T08:01:39.7035733Z test_prepare_is_read_only_and_cannot_be_mistaken_for_completed_review (test_chinese_workflow.ChineseWorkflowTests) ... ok
+2026-09-11T08:01:39.7263955Z test_prepare_reconciliation_binds_external_bytes (test_chinese_workflow.ChineseWorkflowTests) ... ok
+2026-09-11T08:01:39.7375340Z test_composite_readers_preserve_the_callers_transaction (test_core_audit_regressions.CoreAuditRegressions) ... ok
+2026-09-11T08:01:39.7483614Z test_nul_adoption_is_rejected_before_exporting_a_broken_baseline (test_core_audit_regressions.CoreAuditRegressions) ... ok
+2026-09-11T08:01:39.8180626Z test_nul_source_is_rejected_before_creating_truncated_chunks (test_core_audit_regressions.CoreAuditRegressions) ... ok
+2026-09-11T08:01:39.8297099Z test_recall_byte_omissions_are_incomplete_even_when_search_finished (test_core_audit_regressions.CoreAuditRegressions) ... ok
+2026-09-11T08:01:39.8460901Z test_recall_card_and_match_share_a_snapshot_during_concurrent_update (test_core_audit_regressions.CoreAuditRegressions) ... ok
+2026-09-11T08:01:39.9474887Z test_sqlite_integer_overflow_is_a_structured_cli_error (test_core_audit_regressions.CoreAuditRegressions) ... ok
+2026-09-11T08:01:39.9612704Z test_world_read_payload_and_digest_share_a_snapshot_during_update (test_core_audit_regressions.CoreAuditRegressions) ... ok
+2026-09-11T08:01:39.9849487Z test_known_linked_export_is_pending_until_safely_detached (test_export_alias_recovery.ExportAliasRecoveryTests) ... ok
+2026-09-11T08:01:40.0079183Z test_link_recreated_after_publication_is_reported_and_can_be_recovered (test_export_alias_recovery.ExportAliasRecoveryTests) ... ok
+2026-09-11T08:01:40.0362852Z test_same_body_rename_detaches_hard_link_inserted_before_export (test_export_alias_recovery.ExportAliasRecoveryTests) ... ok
+2026-09-11T08:01:40.1691950Z test_cli_safe_export_then_reconcile_resolves_missing_and_external_edit (test_export_recovery.ExportRecoveryTests) ... ok
+2026-09-11T08:01:40.1967351Z test_file_recreated_during_safe_publication_is_not_overwritten (test_export_recovery.ExportRecoveryTests) ... ok
+2026-09-11T08:01:40.2272135Z test_io_failure_preserves_partial_progress_and_reports_remaining_pending (test_export_recovery.ExportRecoveryTests) ... ok
+2026-09-11T08:01:40.2539188Z test_linked_path_is_skipped_without_touching_its_external_target (test_export_recovery.ExportRecoveryTests) ... ok
+2026-09-11T08:01:40.2812949Z test_path_conflict_does_not_block_an_independent_missing_export (test_export_recovery.ExportRecoveryTests) ... ok
+2026-09-11T08:01:40.3162791Z test_publication_conflict_retains_backup_details_after_global_health_check (test_export_recovery.ExportRecoveryTests) ... ok
+2026-09-11T08:01:40.3500637Z test_safe_export_recovers_known_pending_version_beside_outside_edit (test_export_recovery.ExportRecoveryTests) ... ok
+2026-09-11T08:01:40.3777128Z test_cache_read_has_one_snapshot_when_dependency_review_changes (test_history_world_audit.HistoryWorldAuditTests) ... ok
+2026-09-11T08:01:40.4023825Z test_complete_history_candidate_cannot_omit_current_required_card (test_history_world_audit.HistoryWorldAuditTests) ... ok
+2026-09-11T08:01:40.4257887Z test_complete_history_dependencies_cannot_omit_required_card (test_history_world_audit.HistoryWorldAuditTests) ... ok
+2026-09-11T08:01:40.4513394Z test_explicit_action_time_checks_overdraft_without_plan_time (test_history_world_audit.HistoryWorldAuditTests) ... ok
+2026-09-11T08:01:40.4904488Z test_hook_payoff_cannot_hide_a_stale_seed_after_body_replacement (test_history_world_audit.HistoryWorldAuditTests) ... ok
+2026-09-11T08:01:40.5163106Z test_later_plan_start_cannot_lend_future_income_to_earlier_action (test_history_world_audit.HistoryWorldAuditTests) ... ok
+2026-09-11T08:01:40.5395404Z test_observed_income_inside_scene_is_available_to_later_planned_action (test_history_world_audit.HistoryWorldAuditTests) ... ok
+2026-09-11T08:01:40.5636085Z test_successive_actions_share_balance_and_cannot_reset_to_observed_baseline (test_history_world_audit.HistoryWorldAuditTests) ... ok
+2026-09-11T08:01:40.5748790Z test_failed_swap_restores_previous_installation (test_install.InstallTests) ... ok
+2026-09-11T08:01:40.5811066Z test_local_modifications_are_preserved (test_install.InstallTests) ... ok
+2026-09-11T08:01:40.5867623Z test_malicious_manifest_path_is_rejected (test_install.InstallTests) ... ok
+2026-09-11T08:01:40.5928188Z test_only_adds_skill_and_repeat_is_noop (test_install.InstallTests) ... ok
+2026-09-11T08:01:40.5948287Z test_unmanaged_existing_skill_not_overwritten (test_install.InstallTests) ... ok
+2026-09-11T08:01:40.6062606Z test_update_preserves_backup (test_install.InstallTests) ... ok
+2026-09-11T08:01:40.6183268Z test_concurrent_installer_is_rejected_and_first_completes (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.6278696Z test_edit_to_moved_backup_is_verified_and_restored (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.6380852Z test_new_target_before_publication_is_preserved_with_old_backup (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.6932679Z test_process_exit_releases_lock_without_deleting_lock_file (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.7012994Z test_source_new_file_after_copy_is_detected_before_publication (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.7147127Z test_source_save_during_copy_is_rejected_without_bad_manifest (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.7260282Z test_stage_edit_inside_publication_is_detected_and_both_versions_survive (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.7359808Z test_staged_bytes_changed_after_initial_validation_restore_original (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.7453543Z test_target_edit_at_backup_move_is_verified_and_restored (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.7560104Z test_target_recreated_during_recovery_is_not_replaced (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.7649335Z test_target_save_during_staging_remains_active (test_install_races.InstallationRaceTests) ... ok
+2026-09-11T08:01:40.7651921Z test_windows_publication_refuses_an_empty_target_created_inside_rename (test_install_races.InstallationRaceTests) ... skipped 'Windows rename provides the no-replace guarantee tested here'
+2026-09-11T08:01:40.7786915Z test_analysis_reference_layout_cannot_be_mislabeled_as_an_old_release (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:40.9778874Z test_edit_to_published_member_is_preserved_and_previous_version_kept (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:41.3268340Z test_historical_suite_installs_then_upgrades_with_new_analysis_references (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:41.4624270Z test_install_all_dependencies_preserves_book_and_other_skills (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:41.4698081Z test_install_and_archive_share_same_reviewed_manifest (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:41.6008088Z test_legacy_managed_core_upgrades_with_backup_and_requires_update (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:41.6075546Z test_missing_dependency_stops_before_any_target_is_written (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:41.6161933Z test_missing_reference_or_private_draft_cannot_be_installed (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:41.8176413Z test_modification_at_rollback_move_is_preserved_in_stage (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:41.9595040Z test_one_modified_or_unmanaged_member_prevents_all_changes (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:42.0343253Z test_partial_first_install_rolls_back_only_suite_and_keeps_other_content (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:42.2486601Z test_partial_publication_rolls_back_whole_suite (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:42.2630354Z test_pre_03_legacy_sources_remain_installable (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:42.3855099Z test_single_new_core_redirects_to_complete_suite (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:42.4099134Z test_source_save_during_staging_prevents_suite_publication (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:42.4165669Z test_unknown_suite_version_is_rejected_before_writing_targets (test_install_suite.SuiteInstallTests) ... ok
+2026-09-11T08:01:42.4342466Z test_case_alias_rename_is_rejected_before_review (test_layout_preflight.LayoutPreflightTests) ... skipped 'Filesystem distinguishes names that differ only in letter case'
+2026-09-11T08:01:42.4472664Z test_hard_link_destination_is_rejected_before_review (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.4680895Z test_lint_and_prepare_reject_conflicting_directory_for_established_volume (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.4793600Z test_lint_and_prepare_reject_missing_chapter_title_before_review_scaffold (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.4899065Z test_lint_and_prepare_reject_missing_volume_before_review_scaffold (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.5033876Z test_occupied_destination_is_rejected_before_review (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.5314373Z test_reconcile_preparation_accepts_further_revised_current_export (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.5731859Z test_reconcile_preparation_accepts_further_revised_retired_name (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.5863474Z test_symbolic_link_destination_is_rejected_before_review (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.6066356Z test_world_volume_path_preview_is_pure_and_matches_later_commit (test_layout_preflight.LayoutPreflightTests) ... ok
+2026-09-11T08:01:42.6824015Z test_export_clears_legacy_self_retirement_without_moving_current_body (test_layout_recovery_edges.LayoutRecoveryEdgeTests) ... ok
+2026-09-11T08:01:42.7650341Z test_reusing_retired_name_accepts_reviewed_old_path_hash_for_revised_body (test_layout_recovery_edges.LayoutRecoveryEdgeTests) ... ok
+2026-09-11T08:01:42.8986842Z test_reusing_retired_name_keeps_current_export_present_after_reconcile (test_layout_recovery_edges.LayoutRecoveryEdgeTests) ... ok
+2026-09-11T08:01:42.9920515Z test_200kb_imported_chapter_comparison_requires_a_larger_explicit_budget (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.4585419Z test_4000_chapter_inspection_pages_all_scopes_without_hashing_omitted_exports (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.5109632Z test_actual_world_patch_is_checked_even_without_time_or_entities_in_plan (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.5485807Z test_advice_and_legacy_minor_survive_historical_publication (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.5856341Z test_bound_outside_edit_does_not_accept_later_save_or_other_drift (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.6119120Z test_cache_requires_complete_evidence_and_misses_after_dependency_change (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.6426416Z test_changed_evidence_and_plan_prevent_refresh_of_old_reviews (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.6645955Z test_changed_summary_cannot_reuse_body_only_review (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.6963128Z test_cli_state_review_template_supplies_exact_preimage_but_requires_explicit_decision (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.7356359Z test_commit_dependency_declaration_is_preserved_without_extra_history_command (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.7562389Z test_commit_dependency_validation_rejects_missing_fields_self_and_stale_sha (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.7803642Z test_draft_stays_candidate_and_unreviewed_publish_cannot_change_canonical (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:01:59.8059449Z test_external_edit_blocks_publication_and_preserves_user_bytes (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.3132364Z test_far_dependency_transitive_closure_excludes_reviewed_side_story (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.3425282Z test_historical_state_rejects_unknown_events_instead_of_guessing (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.3785195Z test_historical_state_replays_notes_and_published_card_changes_after_snapshot (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.4215580Z test_historical_state_replays_replacement_rollback_and_history_final_state (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.4608620Z test_history_cannot_bypass_known_world_rule_conflicts (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.5249503Z test_history_dependencies_use_branch_candidates_and_current_records (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.5569387Z test_imported_baseline_can_only_publish_after_plan_and_full_reviews (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.5983421Z test_incomplete_dependencies_require_semantic_scope_including_later_chapters (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.6242042Z test_inspection_budget_failure_rolls_back_start_update_and_refresh (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.6458398Z test_inspection_provides_exact_candidate_review_scaffold_without_passing_it (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.6680475Z test_large_cache_can_be_saved_but_read_requires_an_explicit_sufficient_budget (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.7192110Z test_later_world_baseline_blocks_replace_until_history_rebinds_evidence (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.7515067Z test_legacy_seed_does_not_guess_required_card_history_from_current_state (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.7841192Z test_major_and_blocker_still_block_history_and_unknown_severity_is_rejected (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.8172750Z test_new_dependent_chapter_cannot_hide_behind_refresh (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.8554396Z test_outside_edit_can_be_explicitly_bound_and_export_retry_keeps_hash (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.8912577Z test_publication_queue_failure_rolls_back_all_candidate_state (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.9277585Z test_published_retry_recovers_export_without_repeating_state_or_events (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.9482093Z test_replace_dependency_validation_uses_recorded_preimage_not_postchapter_card (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:00.9985199Z test_saved_candidate_can_be_read_in_bounded_pieces_without_publishing (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.0367231Z test_second_branch_cannot_publish_after_first_changes_same_history (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.0630398Z test_single_chapter_inspection_has_budget_and_never_truncates_review_evidence (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.0948501Z test_snapshot_uses_body_and_card_pointers_and_nearest_predecessor (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.1353717Z test_state_requires_explicit_keep_or_update_and_is_atomic_with_text (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.1829282Z test_typed_cognition_reference_expands_history_scope_before_retirement (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.2189217Z test_unrelated_revision_needs_explicit_refresh_and_keeps_review (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.2635304Z test_world_evidence_creates_far_dependency_without_duplicate_chapter_edge (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.3077400Z test_world_evidence_requires_atomic_rebind_and_keeps_old_state_on_failure (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.3570380Z test_world_record_can_be_retired_with_evidence_and_remains_retired_on_next_revision (test_long_history.LongHistoryTests) ... ok
+2026-09-11T08:02:01.3921942Z test_abandoned_author_plan_does_not_double_count_observed_action (test_long_integration_review.LongIntegrationReviewTests) ... ok
+2026-09-11T08:02:01.4179133Z test_future_same_chapter_rule_does_not_legalize_earlier_use (test_long_integration_review.LongIntegrationReviewTests) ... ok
+2026-09-11T08:02:01.4394280Z test_new_chapter_opening_and_payment_are_applied_once (test_long_integration_review.LongIntegrationReviewTests) ... ok
+2026-09-11T08:02:01.4654322Z test_observed_cooldown_is_rejected_even_without_prior_planned_use (test_long_integration_review.LongIntegrationReviewTests) ... ok
+2026-09-11T08:02:01.4913911Z test_observed_overdraft_is_rejected_even_without_prior_planned_transfer (test_long_integration_review.LongIntegrationReviewTests) ... ok
+2026-09-11T08:02:01.4922460Z test_bigram_presence_is_not_an_exact_match (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:01.4935430Z test_candidate_cutoff_never_claims_no_match_and_kind_filter_uses_index (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:01.4947460Z test_failed_update_restores_old_postings_source_and_metadata (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:01.4996370Z test_identical_hash_keeps_distinct_sources_and_reads_object_once (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:01.5005114Z test_injected_helpers_and_caller_transaction_rollback (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:01.5018669Z test_literal_punctuation_english_spaces_and_unicode_offsets (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:01.5029905Z test_removing_one_shared_source_preserves_other_identity_and_object (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:01.5041264Z test_result_and_character_limits_are_explicit_and_results_stable (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:04.7609796Z test_twenty_thousand_unrelated_cards_do_not_scan_source_texts (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:04.7621624Z test_two_character_and_long_names_and_single_character_title (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:04.7635773Z test_update_remove_and_metadata_only_updates_preserve_identity (test_long_search.SearchTests) ... ok
+2026-09-11T08:02:04.7813489Z test_analyzed_source_daily_reads_do_not_load_whole_text_into_python (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:04.8088835Z test_archived_prose_remains_readable_by_version_under_a_byte_budget (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:04.8286488Z test_body_dedup_and_incremental_cards_and_no_write_transaction_during_io (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:04.8471991Z test_dependency_candidates_can_be_reviewed_in_the_same_chapter_commit (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:04.8888412Z test_explicit_migration_preserves_export_identity_and_rollback_backup (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:04.9296517Z test_failed_migration_rolls_back_all_ddl (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:04.9607202Z test_local_mode_does_not_claim_archival_integrity (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:04.9767931Z test_scoped_hard_constraints_dont_accumulate_across_volumes (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:04.9990032Z test_world_delta_is_atomic_and_latest_rewrite_requires_history (test_long_storage.LongStorageTests) ... ok
+2026-09-11T08:02:05.0022344Z test_allowed_decimal_quantities_remain_exact_above_default_precision (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0060243Z test_author_plan_is_separate_and_can_promote_without_double_event (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0095710Z test_belief_does_not_overwrite_world_truth (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0119258Z test_chapter_and_world_changes_share_one_transaction (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0155667Z test_character_can_break_a_promise_with_explicit_consequences (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0178984Z test_chinese_names_and_scoped_aliases_never_guess (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0231596Z test_complete_template_is_valid_planned_data_only (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0262970Z test_each_story_line_resumes_its_own_checkpoint (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0284731Z test_evidence_failure_rolls_back_whole_batch_and_revision (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0327546Z test_exact_resource_flow_and_unknown_quantities (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0366997Z test_flashback_knowledge_excludes_future_acquisition (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0403463Z test_future_observed_use_does_not_break_earlier_planned_scene (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0438574Z test_hard_promise_due_even_without_related_entity_and_payoff_has_evidence (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0816378Z test_historical_versions_are_filtered_before_text_materialization (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0853561Z test_history_can_rebind_or_retire_without_leaving_stale_live_state (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0878771Z test_history_invalidation_is_transactional_and_non_destructive (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0918053Z test_history_rebinds_seed_before_payoff_without_false_reopening (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0958411Z test_later_published_flashback_does_not_inherit_future_payoff (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.0992041Z test_latest_text_edit_stales_bound_facts_and_dependency (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1020708Z test_normal_reinforcement_after_fulfillment_still_requires_reopening (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1054661Z test_payoff_reached_through_seed_without_repeating_entity_tags (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1082623Z test_planned_income_cannot_be_reported_as_actual_balance (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1116512Z test_repeated_arc_pattern_is_advice_with_comparable_evidence (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1144839Z test_retired_fact_requires_live_knowledge_dependency_to_be_repaired (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1178658Z test_rolling_arc_replanning_does_not_change_published_facts (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1227259Z test_rules_are_versioned_and_cooldown_is_per_actor_and_clock (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1249138Z test_schema_and_boolean_input_validation (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1278623Z test_selected_hard_state_is_never_silently_truncated (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1312505Z test_simulated_chapter_300_recalls_seed_and_separates_soft_schedule (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1344174Z test_stale_checkpoint_and_balance_cannot_bypass_evidence_check (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1372534Z test_unknown_opening_time_never_claims_exact_scene_balance (test_long_world.LongWorldTests) ... ok
+2026-09-11T08:02:05.1522041Z test_explicit_release_clears_constraint_without_erasing_other_fields (test_notes_updates.NotesUpdateTests) ... ok
+2026-09-11T08:02:05.1640703Z test_invalid_new_card_rolls_back_entire_update (test_notes_updates.NotesUpdateTests) ... ok
+2026-09-11T08:02:05.1792246Z test_stale_update_cannot_restore_an_old_constraint (test_notes_updates.NotesUpdateTests) ... ok
+2026-09-11T08:02:05.1936998Z test_text_update_keeps_hard_constraint_in_context_and_retry_is_noop (test_notes_updates.NotesUpdateTests) ... ok
+2026-09-11T08:02:05.2120532Z test_atomic_replace_failure_preserves_previous_archive (test_package.PackagePublicationTests) ... ok
+2026-09-11T08:02:05.2285798Z test_crc_validation_failure_preserves_previous_archive (test_package.PackagePublicationTests) ... ok
+2026-09-11T08:02:05.2429679Z test_partial_write_then_disk_full_preserves_previous_archive (test_package.PackagePublicationTests) ... ok
+2026-09-11T08:02:05.2589919Z test_sibling_project_material_is_never_packaged (test_package.PackagePublicationTests) ... ok
+2026-09-11T08:02:05.2774812Z test_success_uses_same_directory_stage_and_reproduces_hash (test_package.PackagePublicationTests) ... ok
+2026-09-11T08:02:05.2952386Z test_unknown_payload_file_or_missing_dependency_preserves_previous_archive (test_package.PackagePublicationTests) ... ok
+2026-09-11T08:02:05.3133059Z test_valid_crc_but_wrong_member_content_is_rejected (test_package.PackagePublicationTests) ... ok
+2026-09-11T08:02:05.3240212Z test_default_archive_name_tracks_the_actual_packaged_runtime (test_package.PackageVersionTests) ... ok
+2026-09-11T08:02:05.3448183Z test_historical_and_current_manifests_cannot_be_interchanged (test_package.PackageVersionTests) ... ok
+2026-09-11T08:02:05.4018159Z test_manifest_is_bound_to_version_and_unknown_families_are_rejected (test_package.PackageVersionTests) ... ok
+2026-09-11T08:02:05.4090944Z test_mismatched_filename_cannot_replace_an_existing_archive (test_package.PackageVersionTests) ... ok
+2026-09-11T08:02:05.4094198Z test_reads_literal_version_without_executing_runtime (test_package.PackageVersionTests) ... ok
+2026-09-11T08:02:05.4205971Z test_build_publishes_only_after_verification (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4223559Z test_checksum_binds_exact_filename_and_archive_bytes (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4289145Z test_equivalent_remote_gzip_returns_actual_integrity_without_requiring_local_container_hash (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4480572Z test_expected_build_manifest_binds_identity_payload_and_wrapper (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4521730Z test_failed_pack_preserves_existing_tarball (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4608157Z test_failed_replace_preserves_existing_tarball (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4687603Z test_failed_tar_validation_preserves_existing_tarball (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4698352Z test_legacy_wrapper_preserves_the_original_published_bytes (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4729532Z test_npm_12_keyed_receipt_is_checked_against_its_package_name (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4744206Z test_npm_pack_disables_scripts_and_uses_structured_arguments (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4757369Z test_published_suite_wrappers_preserve_the_original_bytes (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4773970Z test_read_release_preserves_crlf_without_executing_payload (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4818275Z test_tarball_cannot_inject_install_hook_into_wrapper (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.4877308Z test_tarball_rejects_changed_bytes_and_newline_normalization (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.5046662Z test_tarball_rejects_missing_extra_duplicate_and_links (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.5089909Z test_tarball_verification_returns_payload_and_wrapper_evidence (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.5133939Z test_version_must_be_single_literal_and_match_archive_name (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.5180077Z test_zip_rejects_extra_missing_duplicate_and_linked_members (test_package_npm.NpmPackageTests) ... ok
+2026-09-11T08:02:05.5381308Z test_build_publishes_only_after_verification (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.5411063Z test_checksum_binds_exact_filename_and_archive_bytes (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.5578880Z test_current_package_identity_matches_current_repository_owner (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.5702773Z test_equivalent_remote_gzip_returns_actual_integrity_without_requiring_local_container_hash (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.6051491Z test_expected_build_manifest_binds_identity_payload_and_wrapper (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.6132180Z test_failed_pack_preserves_existing_tarball (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.6309173Z test_failed_replace_preserves_existing_tarball (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.6467070Z test_failed_tar_validation_preserves_existing_tarball (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.6488386Z test_legacy_wrapper_preserves_the_original_published_bytes (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7008784Z test_new_analysis_references_roundtrip_in_current_patch_only (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7042590Z test_new_version_rejects_old_single_skill_layout (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7083761Z test_npm_12_keyed_receipt_is_checked_against_its_package_name (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7109686Z test_npm_pack_disables_scripts_and_uses_structured_arguments (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7149083Z test_old_version_rejects_new_layout (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7172387Z test_published_suite_wrappers_preserve_the_original_bytes (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7202429Z test_read_release_preserves_crlf_without_executing_payload (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7347463Z test_release_version_cannot_accept_another_reviewed_layout (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7429281Z test_tarball_cannot_inject_install_hook_into_wrapper (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7559885Z test_tarball_rejects_changed_bytes_and_newline_normalization (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7885548Z test_tarball_rejects_missing_extra_duplicate_and_links (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7968722Z test_tarball_verification_returns_payload_and_wrapper_evidence (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.7992538Z test_unknown_or_noncanonical_versions_have_no_layout (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.8189362Z test_v050_release_roundtrip_uses_suite_and_unified_install_request (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.8211226Z test_v052_wrapper_preserves_the_reviewed_platform_scope (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.8289523Z test_version_must_be_single_literal_and_match_archive_name (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.8327534Z test_zip_and_npm_share_the_same_explicit_suite_manifest (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.8407048Z test_zip_rejects_extra_missing_duplicate_and_linked_members (test_package_npm.NpmSuiteTests) ... ok
+2026-09-11T08:02:05.8751833Z test_history_inspection_keeps_snapshot_during_a_completed_concurrent_rename (test_path_snapshot.PathSnapshotTests) ... ok
+2026-09-11T08:02:05.9234577Z test_published_history_retry_exposes_current_paths_in_bounded_inspection_pages (test_path_snapshot.PathSnapshotTests) ... ok
+2026-09-11T08:02:05.9517886Z test_recall_keeps_original_path_when_another_writer_renames_after_snapshot (test_path_snapshot.PathSnapshotTests) ... ok
+2026-09-11T08:02:05.9519843Z test_editor_save_during_restore_is_preserved_with_backup (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+2026-09-11T08:02:05.9522289Z test_failed_publication_restores_a_copy_and_retains_backup_for_retry (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+2026-09-11T08:02:05.9524350Z test_first_export_succeeds_without_hard_links (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+2026-09-11T08:02:05.9526308Z test_recreated_target_wins_over_publication_and_restore (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+2026-09-11T08:02:05.9528581Z test_revision_preserves_old_backup_without_hard_links (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+2026-09-11T08:02:05.9530909Z test_posix_keeps_no_replace_link_publication (test_portable_export.PublicationSelectionTests) ... ok
+2026-09-11T08:02:06.0275185Z test_adopt_returns_baseline_receipt_when_locked_after_commit (test_receipt_lock.ReceiptLockTests) ... ok
+2026-09-11T08:02:06.1020915Z test_commit_returns_durable_receipt_when_locked_immediately_after_commit (test_receipt_lock.ReceiptLockTests) ... ok
+2026-09-11T08:02:06.1289593Z test_other_write_receipts_do_not_read_sql_after_commit (test_receipt_lock.ReceiptLockTests) ... ok
+2026-09-11T08:02:06.2154415Z test_reconcile_keeps_hash_and_cards_when_locked_after_commit (test_receipt_lock.ReceiptLockTests) ... ok
+2026-09-11T08:02:06.2400928Z test_sql_failure_rolls_back_without_returning_a_durable_receipt (test_receipt_lock.ReceiptLockTests) ... ok
+2026-09-11T08:02:06.2633888Z test_editor_save_after_packet_rejects_stale_external_hash (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.3067579Z test_later_card_edit_routes_revision_and_external_edit_to_history (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.3313034Z test_missing_or_wrong_external_hash_cannot_authorize_overwrite (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.3682169Z test_other_chapter_drift_blocks_reconcile_packet_and_submission (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.4029170Z test_pending_export_blocks_reconcile_packet_and_submission (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.4386971Z test_reconcile_cannot_replace_imported_latest_chapter (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.4729560Z test_reconcile_cannot_replace_older_chapter (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.5096002Z test_reconcile_packet_commit_card_rollback_and_idempotent_retry (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.5359372Z test_reconcile_rejects_state_revision_changed_after_packet (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.5616815Z test_reconcile_still_enforces_lint_and_exact_draft_review (test_reconcile.ReconcileTests) ... ok
+2026-09-11T08:02:06.5913841Z test_atomic_replace_failure_keeps_committed_revision_recoverable (test_recovery_regressions.RecoveryRegressionTests) ... ok
+2026-09-11T08:02:06.6186419Z test_edit_after_export_preflight_is_preserved_and_reported (test_recovery_regressions.RecoveryRegressionTests) ... ok
+2026-09-11T08:02:06.6424454Z test_edit_at_displacement_is_restored_and_backed_up (test_recovery_regressions.RecoveryRegressionTests) ... ok
+2026-09-11T08:02:06.6706897Z test_edit_of_previous_chapter_during_later_export_is_reported (test_recovery_regressions.RecoveryRegressionTests) ... ok
+2026-09-11T08:02:06.6956030Z test_editor_recreates_path_during_publication_is_not_overwritten (test_recovery_regressions.RecoveryRegressionTests) ... ok
+2026-09-11T08:02:06.7062881Z test_existing_backup_is_never_overwritten_or_displaces_target (test_recovery_regressions.RecoveryRegressionTests) ... ok
+2026-09-11T08:02:06.7331953Z test_publication_failure_restores_previous_file_and_allows_retry (test_recovery_regressions.RecoveryRegressionTests) ... ok
+2026-09-11T08:02:06.8034484Z test_sqlite_lock_after_commit_returns_durable_receipt_and_recovers (test_recovery_regressions.RecoveryRegressionTests) ... ok
+2026-09-11T08:02:06.8284333Z test_defaults_follow_current_version_and_preserve_previous_release (test_release_probes.ProbeOutputTests) ... ok
+2026-09-11T08:02:06.8405993Z test_explicit_output_is_honored_without_creating_version_directory (test_release_probes.ProbeOutputTests) ... ok
+2026-09-11T08:02:06.8604775Z test_failed_default_run_preserves_current_success (test_release_probes.ProbeOutputTests) ... ok
+2026-09-11T08:02:06.8694957Z test_archive_link_or_partial_suite_is_rejected (test_release_probes.ReleaseProbeTests) ... ok
+2026-09-11T08:02:06.8700842Z test_changed_legacy_runtime_archive_is_rejected_before_execution (test_release_probes.ReleaseProbeTests) ... ok
+2026-09-11T08:02:07.1869787Z test_generated_schema1_books_cover_native_baseline_and_analysis_rollback (test_release_probes.ReleaseProbeTests) ... ok
+2026-09-11T08:02:07.2490893Z test_invalid_archive_paths_are_rejected_before_extraction (test_release_probes.ReleaseProbeTests) ... ok
+2026-09-11T08:02:08.4358575Z test_legacy_single_skill_upgrade_still_preserves_backup (test_release_probes.ReleaseProbeTests) ... ok
+2026-09-11T08:02:08.4497209Z test_missing_retained_database_is_not_reported_as_synthetic_or_success (test_release_probes.ReleaseProbeTests) ... ok
+2026-09-11T08:02:08.4543113Z test_reader_normalized_archive_path_is_rejected_before_extraction (test_release_probes.ReleaseProbeTests) ... ok
+2026-09-11T08:02:08.4643493Z test_seven_skill_archive_keeps_all_sibling_roots (test_release_probes.ReleaseProbeTests) ... ok
+2026-09-11T08:02:08.4883812Z test_atomic_displacement_source_parent_swap_preserves_outside_inode (test_retirement_path_race.RetirementPathRaceTests) ... ok
+2026-09-11T08:02:08.5131757Z test_empty_outside_parent_cannot_hide_a_retired_chapter_after_preflight (test_retirement_path_race.RetirementPathRaceTests) ... ok
+2026-09-11T08:02:08.5285611Z test_first_publication_parent_swap_cannot_create_outside_chapter (test_retirement_path_race.RetirementPathRaceTests) ... ok
+2026-09-11T08:02:08.5545056Z test_retirement_backup_parent_swap_cannot_write_into_outside_directory (test_retirement_path_race.RetirementPathRaceTests) ... ok
+2026-09-11T08:02:08.5827988Z test_retirement_source_parent_swap_cannot_displace_identical_outside_file (test_retirement_path_race.RetirementPathRaceTests) ... ok
+2026-09-11T08:02:08.6035105Z test_unsupported_directory_binding_keeps_original_untouched (test_retirement_path_race.RetirementPathRaceTests) ... ok
+2026-09-11T08:02:08.6036857Z test_windows_parent_pin_blocks_rename_but_allows_child_publication (test_retirement_path_race.RetirementPathRaceTests) ... skipped 'Requires native Windows directory share locks'
+2026-09-11T08:02:08.6220678Z test_adopt_preserves_source_and_does_not_fabricate_history (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.6355312Z test_analysis_budget_fails_without_skipping_pending_chunk (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.6628543Z test_atomic_export_failure_after_replace_can_retry (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.6761522Z test_blockers_and_length_fail_before_state_mutation (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.7053908Z test_cannot_skip_chapter_or_replace_earlier_history (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.7199339Z test_card_change_and_chapter_commit_are_atomic (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.7333437Z test_chunking_preserves_every_character_and_bonus_titles (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.9240109Z test_cli_unicode_input_and_template_array (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.9449012Z test_commit_retry_is_idempotent_and_exported (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.9714129Z test_completed_partial_source_is_not_reported_as_whole_book (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.9831528Z test_context_fails_instead_of_truncating_required_constraints (test_story.StoryTests) ... ok
+2026-09-11T08:02:08.9999174Z test_context_pins_critical_explicit_and_due_cards (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.0198285Z test_crlf_draft_hash_matches_lint_and_export_bytes (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.0418731Z test_cross_book_delta_rejected (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.0640057Z test_export_failure_preserves_commit_and_can_recover (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.0802908Z test_ingest_and_record_resume_idempotently (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.0915575Z test_input_placeholders_and_invalid_range (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.1027590Z test_missing_book_read_does_not_create_files (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.1167184Z test_missing_required_card_is_not_silently_skipped (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.1329015Z test_new_session_can_discover_source_id_and_resume_without_chat_history (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.1445246Z test_no_heading_and_long_single_line_are_lossless (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.2147455Z test_optional_context_stays_bounded_and_deterministic (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.2356754Z test_outside_edits_after_commit_are_visible_and_block_continuation (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.2492495Z test_outside_edits_are_never_overwritten (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.2924382Z test_parallel_identical_submissions_only_commit_once (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.3054197Z test_path_escape_and_linked_managed_directory (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.3377110Z test_recall_output_is_bounded (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.3491399Z test_reinitialization_never_overwrites (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.3732647Z test_replace_detects_intervening_card_edit (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.4054512Z test_replace_last_restores_removed_changes_and_keeps_history (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.4193060Z test_source_read_uses_exact_offsets_and_budget (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.4313138Z test_stale_review_and_fabricated_evidence_rejected (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.4466126Z test_stale_state_requires_rechecking (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.4578338Z test_unicode_length_contract (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.4737915Z test_wrong_analysis_hash_quote_and_incomplete_report (test_story.StoryTests) ... ok
+2026-09-11T08:02:09.4756833Z test_current_download_rejects_old_scope_or_repository_before_fetching_tarball (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.4791339Z test_existing_different_payload_is_never_overwritten (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.4820978Z test_existing_matching_version_is_verified_without_republishing (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.4851104Z test_failed_authentication_never_treats_package_as_absent (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.4869552Z test_foreign_repository_stops_before_network_or_publication (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.5628363Z test_historical_runtime_smoke_does_not_require_new_analysis_references (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.5640797Z test_invalid_tag_stops_before_network_or_build (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.5680177Z test_legacy_prepare_only_preserves_identity_without_publication (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.5780943Z test_prepare_only_never_reads_or_writes_registry (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.5795123Z test_previous_owner_package_is_never_republished (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.5826329Z test_publish_timeout_also_reads_back_without_a_second_publish (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.5843293Z test_redirect_removes_registry_credential_from_signed_asset_host (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.5854899Z test_registry_query_uses_current_scope_and_host_bound_credential (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.6343299Z test_runtime_smoke_installs_all_suite_dependencies_before_execution (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.6762547Z test_runtime_smoke_rejects_broken_sibling_link_before_execution (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.7061183Z test_runtime_smoke_rejects_partial_suite_before_execution (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.7092520Z test_uncertain_publish_reads_back_without_a_second_publish (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.7124280Z test_wrong_built_identity_stops_before_registry_access (test_sync_packages.PackageSyncTests) ... ok
+2026-09-11T08:02:09.7134852Z test_changed_candidate_inputs_are_rejected (test_verify.BenchmarkContractTests) ... ok
+2026-09-11T08:02:09.7173319Z test_changed_configuration_metadata_is_rejected (test_verify.BenchmarkContractTests) ... ok
+2026-09-11T08:02:09.7192052Z test_changed_upstream_inputs_cannot_validate_an_old_report (test_verify.BenchmarkContractTests) ... ok
+2026-09-11T08:02:09.7214436Z test_duplicate_input_paths_and_reordered_profiles_are_rejected (test_verify.BenchmarkContractTests) ... ok
+2026-09-11T08:02:09.7236944Z test_inconsistent_totals_and_reduction_cannot_be_reported_as_passed (test_verify.BenchmarkContractTests) ... ok
+2026-09-11T08:02:09.7247157Z test_matching_lists_metadata_hashes_and_arithmetic_pass (test_verify.BenchmarkContractTests) ... ok
+2026-09-11T08:02:09.7250803Z test_all_skipped_tests_cannot_be_reported_as_passed (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7271883Z test_archive_validation_covers_specialized_skill_bytes (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7279166Z test_counts_come_from_real_callbacks_including_failed_subtests (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7290816Z test_default_archive_matches_canonical_version_even_if_other_versions_exist (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7292259Z test_empty_suite_cannot_be_reported_as_passed (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7314785Z test_failure_report_preserves_existing_success_evidence (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7321921Z test_linked_parent_cannot_redirect_report_outside_requested_directory (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7339545Z test_links_are_checked_in_specialized_skills (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7344392Z test_reparse_point_output_is_rejected_before_writing (test_verify.VerificationEvidenceTests) ... ok
+2026-09-11T08:02:09.7421563Z test_default_output_uses_runtime_version_without_overwriting_other_releases (test_verify.VersionedEvidenceTests) ... ok
+2026-09-11T08:02:09.7460418Z test_explicit_output_is_honored_without_creating_default_directory (test_verify.VersionedEvidenceTests) ... ok
+2026-09-11T08:02:09.7492506Z test_missing_current_probes_do_not_fall_back_to_a_previous_release (test_verify.VersionedEvidenceTests) ... ok
+2026-09-11T08:02:09.7554622Z test_probes_follow_runtime_version_and_keep_exact_hash_binding (test_verify.VersionedEvidenceTests) ... ok
+2026-09-11T08:02:09.7730538Z test_external_case_only_folder_rename_cannot_register_a_second_volume_spelling (test_volume_consistency.VolumeConsistencyTests) ... skipped 'Filesystem keeps these directory names distinct'
+2026-09-11T08:02:09.7961181Z test_latest_revision_cannot_rebind_existing_volume_identity (test_volume_consistency.VolumeConsistencyTests) ... ok
+2026-09-11T08:02:09.8454608Z test_legacy_historical_plan_cannot_reset_current_volume_binding (test_volume_consistency.VolumeConsistencyTests) ... ok
+2026-09-11T08:02:09.8756329Z test_new_chapter_cannot_adopt_a_hard_link_to_another_chapter (test_volume_consistency.VolumeConsistencyTests) ... ok
+2026-09-11T08:02:09.8922763Z test_new_chapter_rejects_case_alias_of_registered_volume_directory (test_volume_consistency.VolumeConsistencyTests) ... skipped 'Filesystem keeps these directory names distinct'
+2026-09-11T08:02:09.9091757Z test_new_chapter_rejects_unicode_alias_of_registered_volume_directory (test_volume_consistency.VolumeConsistencyTests) ... skipped 'Filesystem keeps these directory names distinct'
+2026-09-11T08:02:09.9399451Z test_same_volume_id_cannot_split_new_chapters_across_directories (test_volume_consistency.VolumeConsistencyTests) ... ok
+2026-09-11T08:02:09.9733531Z test_another_actors_upgrade_does_not_allow_committed_cooldown_violation (test_world_rules_regressions.WorldRulesCommitRegressions) ... ok
+2026-09-11T08:02:09.9972777Z test_zero_opening_is_committed_and_overdraft_rolls_back_next_chapter (test_world_rules_regressions.WorldRulesCommitRegressions) ... ok
+2026-09-11T08:02:10.0030059Z test_actor_specific_rule_update_keeps_other_actors_old_cooldown (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0063056Z test_distinct_items_keep_their_concurrent_holders (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0097069Z test_evidenced_zero_opening_blocks_positive_spending (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0135325Z test_history_cannot_create_a_new_same_tick_hook_ambiguity (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0204864Z test_legacy_hook_rebind_preserves_ambiguity_and_idempotence (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0263244Z test_legacy_same_tick_hooks_report_ambiguity_after_vacuum (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0289270Z test_new_same_tick_hook_events_are_rejected_atomically (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0327127Z test_resolved_hook_timing_clears_legacy_ambiguity (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0368892Z test_rule_line_restriction_does_not_apply_to_other_lines (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0404154Z test_undated_author_plan_does_not_erase_observed_cognition (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0442155Z test_undated_cognition_is_retained_without_claiming_latest_state (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0474016Z test_undated_line_checkpoint_is_a_candidate_not_current_scene (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0513687Z test_undated_rule_change_is_not_silently_older_than_dated_rule (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0548077Z test_unknown_record_evidence_must_still_be_current (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0598275Z test_unknown_use_survives_known_prior_time_and_requests_review (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0621380Z test_zero_ordinary_transfer_still_rejected_atomically (test_world_rules_regressions.WorldRulesRegressions) ... ok
+2026-09-11T08:02:10.0622187Z 
+2026-09-11T08:02:10.0622464Z ----------------------------------------------------------------------
+2026-09-11T08:02:10.0623077Z Ran 443 tests in 32.516s
+2026-09-11T08:02:10.0623327Z 
+2026-09-11T08:02:10.0623450Z OK (skipped=12)
+2026-09-11T08:02:10.1037046Z ##[group]Run python -B -X utf8 scripts/package.py
+2026-09-11T08:02:10.1037475Z python -B -X utf8 scripts/package.py
+2026-09-11T08:02:10.1077250Z shell: /usr/bin/bash -e {0}
+2026-09-11T08:02:10.1077499Z env:
+2026-09-11T08:02:10.1077996Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:10.1078443Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+2026-09-11T08:02:10.1078886Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:10.1079276Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:10.1079656Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:10.1080236Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+2026-09-11T08:02:10.1080568Z ##[endgroup]
+2026-09-11T08:02:10.2300664Z {"archive": "/home/runner/work/story-skill/story-skill/dist/story-codex-0.5.2.zip", "version": "0.5.2", "files": 33, "sha256": "eef07ccff5de52c73c86c1f60682535b6f49203331a3e4c04a37187884188c8a", "bytes": 117913}
+2026-09-11T08:02:10.2405028Z ##[group]Run python -B -X utf8 scripts/smoke.py --output dist/ci-smoke.json
+2026-09-11T08:02:10.2405582Z python -B -X utf8 scripts/smoke.py --output dist/ci-smoke.json
+2026-09-11T08:02:10.2444535Z shell: /usr/bin/bash -e {0}
+2026-09-11T08:02:10.2444789Z env:
+2026-09-11T08:02:10.2445063Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:10.2445503Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+2026-09-11T08:02:10.2445938Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:10.2446318Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:10.2446719Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:10.2447127Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+2026-09-11T08:02:10.2447452Z ##[endgroup]
+2026-09-11T08:02:12.1891867Z {"ok": true, "method": "Synthetic fixture via real CLI subprocesses; no model or API calls", "commands_executed": ["init", "notes", "plan", "context", "lint", "commit", "commit", "reconcile", "lint", "reconcile", "reconcile", "ingest", "next", "record", "record", "next", "coverage", "findings", "report", "coverage"], "visible_chars": 213, "draft_sha256": "850c68d3d529515d70fdfc502ffb292bc5fc7f94403b7399adfdc7020dbf1d38", "reconciled_draft_sha256": "17826832bfce7015ed7ad76723f49b2fe00fa587dceb02251419424b428a5725", "context_bytes": 767, "context_budget_bytes": 4000, "chapter_commit_idempotent": true, "export_bytes_verified": true, "reconcile_idempotent": true, "external_backup_verified": true, "non_content_chunks_completed": 1, "analysis_coverage": {"analyzed": 3, "chunks_total": 3, "complete_for_imported_text": true, "next_chunk": null, "pending": 0, "report_path": ".story/analysis/8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe/report.md", "source": "8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe", "source_coverage": "partial", "text_coverage_contiguous": true}, "finding_pages_returned": 3, "final_report_exported": true, "literary_quality_tested": false}
+2026-09-11T08:02:12.1981961Z ##[group]Run python -B -X utf8 scripts/chinese_acceptance.py --output dist/ci-chinese.json
+2026-09-11T08:02:12.1982643Z python -B -X utf8 scripts/chinese_acceptance.py --output dist/ci-chinese.json
+2026-09-11T08:02:12.2020365Z shell: /usr/bin/bash -e {0}
+2026-09-11T08:02:12.2020627Z env:
+2026-09-11T08:02:12.2020903Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:12.2021358Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+2026-09-11T08:02:12.2021793Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:12.2022187Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:12.2022574Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:12.2022959Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+2026-09-11T08:02:12.2023283Z ##[endgroup]
+2026-09-11T08:02:20.9922372Z {"ok": true, "books": ["渡口夜账", "留半寸"], "retained_workdir": null}
+2026-09-11T08:02:21.0016549Z ##[group]Run python -B -X utf8 scripts/long_acceptance.py --output dist/ci-long.json
+2026-09-11T08:02:21.0017170Z python -B -X utf8 scripts/long_acceptance.py --output dist/ci-long.json
+2026-09-11T08:02:21.0054904Z shell: /usr/bin/bash -e {0}
+2026-09-11T08:02:21.0055154Z env:
+2026-09-11T08:02:21.0055422Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:21.0055873Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+2026-09-11T08:02:21.0056315Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:21.0056886Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:21.0057282Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+2026-09-11T08:02:21.0057930Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+2026-09-11T08:02:21.0058263Z ##[endgroup]
+2026-09-11T08:02:21.1494284Z {"step": "创建独立中文书", "ok": true, "revision": 0}
+2026-09-11T08:02:21.2504917Z {"step": "保存创作限制与物件卡", "ok": true, "revision": 1}
+2026-09-11T08:02:21.3463156Z {"step": "建立人物身份、分线化名及待证命题", "ok": true, "revision": 2}
+2026-09-11T08:02:21.4371908Z {"step": "保存第1章计划", "ok": true, "revision": 3}
+2026-09-11T08:02:21.5280849Z {"step": "读取第1章上下文", "ok": true, "revision": 3}
+2026-09-11T08:02:21.6217019Z {"step": "准备第1章审查", "ok": true, "revision": 3}
+2026-09-11T08:02:21.7286031Z {"step": "提交第1章", "ok": true, "revision": 4}
+2026-09-11T08:02:21.8180760Z {"step": "确认已有工程不能靠adopt静默跳号", "ok": true, "revision": 4}
+2026-09-11T08:02:21.9086689Z {"step": "保存第2章计划", "ok": true, "revision": 5}
+2026-09-11T08:02:22.0010323Z {"step": "读取第2章上下文", "ok": true, "revision": 5}
+2026-09-11T08:02:22.0954249Z {"step": "准备第2章审查", "ok": true, "revision": 5}
+2026-09-11T08:02:22.1996065Z {"step": "提交第2章", "ok": true, "revision": 6}
+2026-09-11T08:02:22.2899726Z {"step": "保存第3章计划", "ok": true, "revision": 7}
+2026-09-11T08:02:22.3808697Z {"step": "读取第3章上下文", "ok": true, "revision": 7}
+2026-09-11T08:02:22.4745906Z {"step": "准备第3章审查", "ok": true, "revision": 7}
+2026-09-11T08:02:22.5799223Z {"step": "提交第3章", "ok": true, "revision": 8}
+2026-09-11T08:02:22.6723431Z {"step": "保存第4章计划", "ok": true, "revision": 9}
+2026-09-11T08:02:22.7656442Z {"step": "读取第4章上下文", "ok": true, "revision": 9}
+2026-09-11T08:02:22.8587520Z {"step": "准备第4章审查", "ok": true, "revision": 9}
+2026-09-11T08:02:22.9629179Z {"step": "提交第4章", "ok": true, "revision": 10}
+2026-09-11T08:02:23.0533414Z {"step": "保存第5章计划", "ok": true, "revision": 11}
+2026-09-11T08:02:23.1487063Z {"step": "读取第5章上下文", "ok": true, "revision": 11}
+2026-09-11T08:02:23.2447208Z {"step": "准备第5章审查", "ok": true, "revision": 11}
+2026-09-11T08:02:23.3532139Z {"step": "提交第5章", "ok": true, "revision": 12}
+2026-09-11T08:02:23.4455599Z {"step": "保存第6章计划", "ok": true, "revision": 13}
+2026-09-11T08:02:23.5386347Z {"step": "读取第6章上下文", "ok": true, "revision": 13}
+2026-09-11T08:02:23.6347015Z {"step": "准备第6章审查", "ok": true, "revision": 13}
+2026-09-11T08:02:23.7424429Z {"step": "提交第6章", "ok": true, "revision": 14}
+2026-09-11T08:02:23.8362140Z {"step": "保存第7章计划", "ok": true, "revision": 15}
+2026-09-11T08:02:23.9281874Z {"step": "读取第7章上下文", "ok": true, "revision": 15}
+2026-09-11T08:02:24.0232070Z {"step": "准备第7章审查", "ok": true, "revision": 15}
+2026-09-11T08:02:24.1294827Z {"step": "提交第7章", "ok": true, "revision": 16}
+2026-09-11T08:02:24.2219038Z {"step": "保存第8章计划", "ok": true, "revision": 17}
+2026-09-11T08:02:24.3130975Z {"step": "读取第8章上下文", "ok": true, "revision": 17}
+2026-09-11T08:02:24.4079270Z {"step": "准备第8章审查", "ok": true, "revision": 17}
+2026-09-11T08:02:24.5163719Z {"step": "提交第8章", "ok": true, "revision": 18}
+2026-09-11T08:02:24.6073517Z {"step": "保存第9章计划", "ok": true, "revision": 19}
+2026-09-11T08:02:24.7016238Z {"step": "读取第9章上下文", "ok": true, "revision": 19}
+2026-09-11T08:02:24.7981302Z {"step": "准备第9章审查", "ok": true, "revision": 19}
+2026-09-11T08:02:24.9071342Z {"step": "提交第9章", "ok": true, "revision": 20}
+2026-09-11T08:02:24.9991154Z {"step": "保存第10章计划", "ok": true, "revision": 21}
+2026-09-11T08:02:25.0922656Z {"step": "读取第10章上下文", "ok": true, "revision": 21}
+2026-09-11T08:02:25.1930647Z {"step": "准备第10章审查", "ok": true, "revision": 21}
+2026-09-11T08:02:25.3049166Z {"step": "提交第10章", "ok": true, "revision": 22}
+2026-09-11T08:02:25.3975050Z {"step": "保存第11章计划", "ok": true, "revision": 23}
+2026-09-11T08:02:25.4923613Z {"step": "读取第11章上下文", "ok": true, "revision": 23}
+2026-09-11T08:02:25.5907251Z {"step": "准备第11章审查", "ok": true, "revision": 23}
+2026-09-11T08:02:25.7078521Z {"step": "提交第11章", "ok": true, "revision": 24}
+2026-09-11T08:02:25.7998550Z {"step": "检验已提交双线与伏笔状态", "ok": true, "revision": 24}
+2026-09-11T08:02:25.8896824Z {"step": "检索早期物件的精确原文", "ok": true, "revision": 24}
+2026-09-11T08:02:25.9801076Z {"step": "保存历史复核所需的下一章取材计划", "ok": true, "revision": 25}
+2026-09-11T08:02:26.0764820Z {"step": "读取历史复核实际使用的现态卡片", "ok": true, "revision": 25}
+2026-09-11T08:02:26.1682044Z {"step": "记录第1章实际复核的依赖", "ok": true, "revision": 26}
+2026-09-11T08:02:26.2606862Z {"step": "记录第2章实际复核的依赖", "ok": true, "revision": 27}
+2026-09-11T08:02:26.3537061Z {"step": "记录第3章实际复核的依赖", "ok": true, "revision": 28}
+2026-09-11T08:02:26.4461652Z {"step": "记录第4章实际复核的依赖", "ok": true, "revision": 29}
+2026-09-11T08:02:26.5383592Z {"step": "记录第5章实际复核的依赖", "ok": true, "revision": 30}
+2026-09-11T08:02:26.6300758Z {"step": "记录第6章实际复核的依赖", "ok": true, "revision": 31}
+2026-09-11T08:02:26.7211772Z {"step": "记录第7章实际复核的依赖", "ok": true, "revision": 32}
+2026-09-11T08:02:26.8123935Z {"step": "记录第8章实际复核的依赖", "ok": true, "revision": 33}
+2026-09-11T08:02:26.9035273Z {"step": "记录第9章实际复核的依赖", "ok": true, "revision": 34}
+2026-09-11T08:02:26.9964602Z {"step": "记录第10章实际复核的依赖", "ok": true, "revision": 35}
+2026-09-11T08:02:27.0894768Z {"step": "记录第11章实际复核的依赖", "ok": true, "revision": 36}
+2026-09-11T08:02:27.1811853Z {"step": "保存修订前状态快照", "ok": true, "revision": 37}
+2026-09-11T08:02:27.2791869Z {"step": "创建钥匙颜色修正的历史分支", "ok": true, "revision": 38}
+2026-09-11T08:02:27.3702106Z {"step": "读取候选范围与状态修订要求", "ok": true, "revision": 38}
+2026-09-11T08:02:27.4659183Z {"step": "保存两章候选、最终卡片决策及全部受影响领域证据", "ok": true, "revision": 39}
+2026-09-11T08:02:27.5582247Z {"step": "读取第1章前后对照与审查模板", "ok": true, "revision": 39}
+2026-09-11T08:02:27.6501563Z {"step": "读取第11章前后对照与审查模板", "ok": true, "revision": 39}
+2026-09-11T08:02:27.7455301Z {"step": "保存逐章对读后的四项审查", "ok": true, "revision": 40}
+2026-09-11T08:02:27.8349486Z {"step": "读取最新整包审查指纹", "ok": true, "revision": 40}
+2026-09-11T08:02:27.9318184Z {"step": "保存整个历史分支的真实覆盖与状态审查", "ok": true, "revision": 41}
+2026-09-11T08:02:28.0624553Z {"step": "发布已审查历史分支", "ok": true, "revision": 42}
+2026-09-11T08:02:28.1545540Z {"step": "保存发布后的下一章计划", "ok": true, "revision": 42}
+2026-09-11T08:02:28.2488896Z {"step": "读取历史修订后的相关资料", "ok": true, "revision": 42}
+2026-09-11T08:02:28.3359646Z {"step": "检查已撤回颜色不再作为当前正文命中", "ok": true, "revision": 42}
+2026-09-11T08:02:28.4290359Z {"step": "复核分支发布后的领域一致性", "ok": true, "revision": 42}
+2026-09-11T08:02:28.4821893Z {"ok": true, "report": "/home/runner/work/story-skill/story-skill/dist/ci-long.json"}
+2026-09-11T08:02:28.5010046Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T08:02:28.5011316Z Post job cleanup.
+2026-09-11T08:02:28.6261674Z (node:2504) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-11T08:02:28.6262918Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-11T08:02:28.6528970Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T08:02:28.6531183Z Post job cleanup.
+2026-09-11T08:02:28.7483076Z [command]/usr/bin/git version
+2026-09-11T08:02:28.7532678Z git version 2.55.0
+2026-09-11T08:02:28.7579394Z Temporarily overriding HOME='/home/runner/work/_temp/3ca7a03a-e6f2-4b52-b905-06ca20cab400' before making global git config changes
+2026-09-11T08:02:28.7580968Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-11T08:02:28.7585938Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/story-skill/story-skill
+2026-09-11T08:02:28.7628614Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T08:02:28.7668283Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2026-09-11T08:02:28.7932892Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T08:02:28.7979124Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2026-09-11T08:02:28.8263407Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T08:02:28.8304148Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+2026-09-11T08:02:28.8733531Z Cleaning up orphan processes
+2026-09-11T08:02:28.9020787Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -10,6 +10,10 @@
 
 本机 Intel macOS／Python 3.12：443项测试中436通过、7项按条件跳过、零失败；12项整包检查、18项整套升级检查、三类合成旧库迁移和四组百万／千万字容量检查通过。这些工程检查不代表文学质量认证。
 
+发布后核验：Release ZIP 与校验文件回下载通过；官方固定标签隔离安装的7个技能、33个文件与源码逐字节一致。GitHub Packages `@ningcui29/story-codex@0.5.2` 已公开发布，注册表回下载的33个技能文件及2个包装文件一致，四项运行检查通过。[Packages 工作流](https://github.com/NingCui29/story-skill/actions/runs/34577548793)
+
+固定发布提交的 [CI](https://github.com/NingCui29/story-skill/actions/runs/34577137667)：Linux 443项中431通过、12项平台跳过，全部步骤成功；Windows 在首项报告导出测试以已有 WinError 32 停止，整体 CI 为失败，未宣称全平台通过。
+
 **兼容说明：** 本版面向 macOS/Linux。Windows 正文和报告导出的已知 WinError 32 未修复，Windows 用户继续使用固定 v0.4.0；已有新版书库先完整备份，不盲目降级。自编分析脚本须为逐块替换提供 analysis_sha256，为首次 report 提供 --expect-analysis；同内容重试仍可恢复。
 
 [安装或升级指引](https://github.com/NingCui29/story-skill/blob/main/INSTALL.md) · [完整版本说明](https://github.com/NingCui29/story-skill/blob/main/docs/releases/v0.5.2.md) · [逐项发布验证](https://github.com/NingCui29/story-skill/blob/main/docs/github-release.md)

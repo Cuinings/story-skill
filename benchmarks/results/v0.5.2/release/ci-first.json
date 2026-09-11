@@ -1,0 +1,8 @@
+{
+  "run_id": 34576879200,
+  "url": "https://github.com/NingCui29/story-skill/actions/runs/34576879200",
+  "head_sha": "6e7987f02a5ddaa783bdb6a9216a2cf45ed6be25",
+  "conclusion": "failure",
+  "linux": "all steps passed; 443 tests, 431 passed and 12 skipped",
+  "windows": "Stopped after one failed report CLI test. The assertion only displayed stderr, while delivery errors are in stdout; underlying error not yet exposed. Next commit only adds stdout to the assertion message."
+}

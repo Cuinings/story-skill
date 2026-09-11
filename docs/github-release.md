@@ -4,20 +4,22 @@
 
 ## v0.5.2 发布验证记录
 
-v0.5.2 正在准备发布。本版的源码、固定标签、附件、安装与注册表下载分别验收；远端步骤尚未完成前保留待核，不以本地测试代替 GitHub 结果。[本版验证目录](../benchmarks/results/v0.5.2/README.md) 保存当次回执，历史版本的数字、附件和标签不变。
+v0.5.2 已于 **2026-09-11 16:06:25（北京时间）** 发布。本版按 macOS／Linux 通过范围发布；Windows 在已知 WinError 32 处失败，整体 CI 为失败，不宣称全平台通过。源码、固定标签、附件、安装与注册表下载分别核验。[本版验证目录](../benchmarks/results/v0.5.2/README.md) 与 [逐项状态](../benchmarks/results/v0.5.2/release/state.json) 保存当次回执，历史版本的数字、附件和标签不变。
 
-| 环节 | 当前状态 |
+| 环节 | 实际结果与证据 |
 |---|---|
-| 本地工程、打包与隔离安装 | Intel macOS／Python 3.12：443项中436项通过、7项按条件跳过、零失败；12项整包检查通过。[完整回执](../benchmarks/results/v0.5.2/verification.json) |
+| 本地工程、打包与隔离安装 | Intel macOS／Python 3.12：443 项中 436 项通过、7 项按条件跳过、零失败；12 项整包检查通过。[完整回执](../benchmarks/results/v0.5.2/verification.json) |
 | 指令成本 | [v0.5.2 重新测量](../benchmarks/results/v0.5.2/tokens.md)：普通／多线写作 6,324／8,511 tokens，深读／含示范 4,959／6,968 tokens |
-| 容量、升级及迁移 | [四种容量组合](../benchmarks/results/v0.5.2/scaling.json)、[v0.5.1→v0.5.2 升级18项](../benchmarks/results/v0.5.2/upgrade.json)及[三类合成旧库迁移](../benchmarks/results/v0.5.2/migration.json)全部通过 |
-| 固定标签提交 | 待创建并核对 `v0.5.2` 指向的提交 |
-| 发布提交的 Linux／Windows CI | 待远端执行；Windows 已知 WinError 32 不在本版修复范围 |
-| GitHub Release 与附件 | 待发布 `story-codex-0.5.2.zip` 与校验文件，再回下载逐字节核对 |
-| 官方固定标签安装 | 待从远端 `v0.5.2` 隔离安装并核对 7 个技能、33 个文件和运行时 |
-| GitHub Packages | 待同步 `@ningcui29/story-codex@0.5.2`，回下载核对包身份、技能文件和运行时 |
+| 容量、升级及迁移 | [四种容量组合](../benchmarks/results/v0.5.2/scaling.json)、[v0.5.1→v0.5.2 升级 18 项](../benchmarks/results/v0.5.2/upgrade.json)及[三类合成旧库迁移](../benchmarks/results/v0.5.2/migration.json)全部通过 |
+| 固定标签提交 | `v0.5.2` → `c50bd28b14b128e287dc18f7cf12a692c4da82be`；[标签解析](../benchmarks/results/v0.5.2/release/tag.json)，不随后续发布文档更新移动 |
+| 发布提交的 Linux／Windows CI | [最终 CI 34577137667](https://github.com/NingCui29/story-skill/actions/runs/34577137667)：Linux 443 项中 431 项通过、12 项按平台跳过，全部步骤成功；Windows 执行 1 项、1 项失败，在已知报告导出 WinError 32 处停止，整体 CI 为失败。[分项结果](../benchmarks/results/v0.5.2/release/ci.json) |
+| GitHub Release 与附件 | [v0.5.2](https://github.com/NingCui29/story-skill/releases/tag/v0.5.2) 已发布；ZIP 和校验文件回下载通过，7 个技能、33 个文件与固定提交、源码及本地包逐字节一致。[发布核验](../benchmarks/results/v0.5.2/release/release.json) |
+| 官方固定标签安装 | 从远端 `v0.5.2` 真实隔离安装 7 个技能、33 个文件，与 Release 和源码一致；版本、帮助、初始化、状态四项 CLI 通过，临时数据已清理。[安装核验](../benchmarks/results/v0.5.2/release/remote-install.json) |
+| GitHub Packages | [工作流 34577548793](https://github.com/NingCui29/story-skill/actions/runs/34577548793) 成功发布公开包 `@ningcui29/story-codex@0.5.2`；注册表回下载的 33 个技能文件和 2 个包装文件与本地构建一致，SHA-512 与四项 CLI 核验通过。[工作流回执](../benchmarks/results/v0.5.2/release/packages.json) · [本机独立复核](../benchmarks/results/v0.5.2/release/package-check.json) |
 
-本版不改变 schema 2，也不自动搬动已有正文或重新导入书库。分析逐块替换和首次报告定稿新增分析基线校验；自编脚本须采用新版指纹参数，步骤见 [恢复指南](recovery.md#分析稿修订与续跑)。验证分发和运行时不等于 Codex UI 自动发现或文学质量验证。
+ZIP SHA-256 为 `eef07ccff5de52c73c86c1f60682535b6f49203331a3e4c04a37187884188c8a`；npm 回下载 tarball 为 `f58e3186b4d153295d4de2b0ef8e18dd04fb6f79dbd46444e62ebe2cd9891d66`，均与本地构建一致。公开包页面无需登录即可查看 0.5.2，GitHub npm 下载仍需认证。[Packages 工作流](../benchmarks/results/v0.5.2/release/packages-workflow.json) · [归档记录](../benchmarks/results/v0.5.2/release/packages-artifacts.json)。
+
+固定标签中的文档保留发布前快照，main 上的本页与 [最终核对](../benchmarks/results/v0.5.2/release/final-check.json) 记录后续完成的分发状态；不移动标签或替换附件。本版不改变 schema 2，也不自动搬动已有正文或重新导入书库。分析逐块替换和首次报告定稿新增分析基线校验；自编脚本须采用新版指纹参数，步骤见 [恢复指南](recovery.md#分析稿修订与续跑)。验证分发和运行时不等于 Codex UI 自动发现或文学质量验证。
 
 ## v0.5.1 发布验证记录
 
@@ -213,7 +215,7 @@ python3 -B -X utf8 scripts/package.py
 python3 -B -X utf8 scripts/sync_packages.py --tag v0.3.0 --prepare-only
 ```
 
-本版包的发布和回下载仍待核；确认本页 v0.5.2 记录完成后，可按 GitHub npm 要求认证并下载：
+本版包已完成发布、注册表回下载和独立运行核验，可按 GitHub npm 要求认证并下载：
 
 ```bash
 npm pack @ningcui29/story-codex@0.5.2 --registry=https://npm.pkg.github.com

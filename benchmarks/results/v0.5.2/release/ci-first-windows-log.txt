@@ -1,0 +1,158 @@
+﻿2026-09-11T07:58:18.2232183Z Current runner version: '2.337.0'
+2026-09-11T07:58:18.2249406Z ##[group]Runner Image Provisioner
+2026-09-11T07:58:18.2249952Z Hosted Compute Agent
+2026-09-11T07:58:18.2250293Z Version: 20260828.587
+2026-09-11T07:58:18.2250625Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+2026-09-11T07:58:18.2251044Z Build Date: 2026-08-28T16:44:25Z
+2026-09-11T07:58:18.2251405Z Worker ID: {573fdee2-d4f9-454a-a4a2-c53fe18f3ceb}
+2026-09-11T07:58:18.2251843Z Azure Region: westus3
+2026-09-11T07:58:18.2252182Z ##[endgroup]
+2026-09-11T07:58:18.2252925Z ##[group]Operating System
+2026-09-11T07:58:18.2253288Z Microsoft Windows Server 2025
+2026-09-11T07:58:18.2253907Z 10.0.26100
+2026-09-11T07:58:18.2254265Z Datacenter
+2026-09-11T07:58:18.2254552Z ##[endgroup]
+2026-09-11T07:58:18.2254844Z ##[group]Runner Image
+2026-09-11T07:58:18.2255193Z Image: windows-2025-vs2026
+2026-09-11T07:58:18.2255517Z Version: 20260907.229.1
+2026-09-11T07:58:18.2256393Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260907.229/images/windows/Windows2025-VS2026-Readme.md
+2026-09-11T07:58:18.2257293Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260907.229
+2026-09-11T07:58:18.2257823Z ##[endgroup]
+2026-09-11T07:58:18.2258424Z ##[group]GITHUB_TOKEN Permissions
+2026-09-11T07:58:18.2259537Z Contents: read
+2026-09-11T07:58:18.2259835Z Metadata: read
+2026-09-11T07:58:18.2260118Z ##[endgroup]
+2026-09-11T07:58:18.2261366Z Secret source: Actions
+2026-09-11T07:58:18.2261835Z Cache mode: write
+2026-09-11T07:58:18.2262257Z Prepare workflow directory
+2026-09-11T07:58:18.2472287Z Prepare all required actions
+2026-09-11T07:58:18.2504765Z Getting action download info
+2026-09-11T07:58:18.5213067Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+2026-09-11T07:58:18.5973022Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+2026-09-11T07:58:20.1464087Z Complete job name: test (windows-latest, 3.12)
+2026-09-11T07:58:22.5329926Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T07:58:22.5341187Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+2026-09-11T07:58:22.5342484Z with:
+2026-09-11T07:58:22.5343170Z   persist-credentials: false
+2026-09-11T07:58:22.5344047Z   repository: NingCui29/story-skill
+2026-09-11T07:58:22.5351646Z   token: ***
+2026-09-11T07:58:22.5352310Z   ssh-strict: true
+2026-09-11T07:58:22.5353072Z   ssh-user: git
+2026-09-11T07:58:22.5353747Z   clean: true
+2026-09-11T07:58:22.5354465Z   sparse-checkout-cone-mode: true
+2026-09-11T07:58:22.5355475Z   fetch-depth: 1
+2026-09-11T07:58:22.5356192Z   fetch-tags: false
+2026-09-11T07:58:22.5356893Z   show-progress: true
+2026-09-11T07:58:22.5357658Z   lfs: false
+2026-09-11T07:58:22.5358333Z   submodules: false
+2026-09-11T07:58:22.5359048Z   set-safe-directory: true
+2026-09-11T07:58:22.5359893Z   allow-unsafe-pr-checkout: false
+2026-09-11T07:58:22.5360889Z ##[endgroup]
+2026-09-11T07:58:22.6395913Z Syncing repository: NingCui29/story-skill
+2026-09-11T07:58:22.6397545Z ##[group]Getting Git version info
+2026-09-11T07:58:22.6398283Z Working directory is 'D:\a\story-skill\story-skill'
+2026-09-11T07:58:22.8834122Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-09-11T07:58:26.5500042Z git version 2.55.0.windows.5
+2026-09-11T07:58:26.5528603Z ##[endgroup]
+2026-09-11T07:58:26.5541636Z Temporarily overriding HOME='D:\a\_temp\2208eff4-8ae9-494e-900d-29bdb0db61cb' before making global git config changes
+2026-09-11T07:58:26.5542052Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-11T07:58:26.5548555Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\story-skill\story-skill
+2026-09-11T07:58:26.6380062Z Deleting the contents of 'D:\a\story-skill\story-skill'
+2026-09-11T07:58:26.6383959Z ##[group]Initializing the repository
+2026-09-11T07:58:26.6389634Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\story-skill\story-skill
+2026-09-11T07:58:26.8169298Z Initialized empty Git repository in D:/a/story-skill/story-skill/.git/
+2026-09-11T07:58:26.8203933Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/NingCui29/story-skill
+2026-09-11T07:58:26.9628980Z ##[endgroup]
+2026-09-11T07:58:26.9629256Z ##[group]Disabling automatic garbage collection
+2026-09-11T07:58:26.9636497Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+2026-09-11T07:58:26.9829947Z ##[endgroup]
+2026-09-11T07:58:26.9830250Z ##[group]Setting up auth
+2026-09-11T07:58:26.9838687Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T07:58:27.0032137Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-09-11T07:58:29.4574083Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T07:58:29.4764061Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-09-11T07:58:29.8222663Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T07:58:29.8407087Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-09-11T07:58:30.2026305Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+2026-09-11T07:58:30.2217891Z ##[endgroup]
+2026-09-11T07:58:30.2218166Z ##[group]Fetching the repository
+2026-09-11T07:58:30.2226401Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +6e7987f02a5ddaa783bdb6a9216a2cf45ed6be25:refs/remotes/origin/main
+2026-09-11T07:58:31.9925355Z From https://github.com/NingCui29/story-skill
+2026-09-11T07:58:31.9927775Z  * [new ref]         6e7987f02a5ddaa783bdb6a9216a2cf45ed6be25 -> origin/main
+2026-09-11T07:58:31.9954960Z ##[endgroup]
+2026-09-11T07:58:31.9955518Z ##[group]Determining the checkout info
+2026-09-11T07:58:31.9957195Z ##[endgroup]
+2026-09-11T07:58:31.9966783Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+2026-09-11T07:58:32.0340693Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+2026-09-11T07:58:32.0523017Z ##[group]Checking out the ref
+2026-09-11T07:58:32.0529784Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+2026-09-11T07:58:32.2244779Z Switched to a new branch 'main'
+2026-09-11T07:58:32.2298164Z branch 'main' set up to track 'origin/main'.
+2026-09-11T07:58:32.2339203Z ##[endgroup]
+2026-09-11T07:58:32.2628892Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+2026-09-11T07:58:32.2820253Z 6e7987f02a5ddaa783bdb6a9216a2cf45ed6be25
+2026-09-11T07:58:32.2859721Z ##[group]Removing auth
+2026-09-11T07:58:32.2868244Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T07:58:32.3077767Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-09-11T07:58:32.6660512Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T07:58:32.6816503Z http.https://github.com/.extraheader
+2026-09-11T07:58:32.6840360Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+2026-09-11T07:58:32.7029581Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-09-11T07:58:33.0616762Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T07:58:33.0810690Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-09-11T07:58:33.4555408Z ##[endgroup]
+2026-09-11T07:58:33.4848836Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T07:58:33.4849973Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+2026-09-11T07:58:33.4850185Z with:
+2026-09-11T07:58:33.4850294Z   python-version: 3.12
+2026-09-11T07:58:33.4850413Z   check-latest: false
+2026-09-11T07:58:33.4851694Z   token: ***
+2026-09-11T07:58:33.4851803Z   update-environment: true
+2026-09-11T07:58:33.4851962Z   allow-prereleases: false
+2026-09-11T07:58:33.4852080Z   freethreaded: false
+2026-09-11T07:58:33.4852190Z ##[endgroup]
+2026-09-11T07:58:33.5853545Z ##[group]Installed versions
+2026-09-11T07:58:33.6332111Z (node:4060) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+2026-09-11T07:58:33.6332738Z (Use `node --trace-deprecation ...` to show where the warning was created)
+2026-09-11T07:58:33.6333099Z Successfully set up CPython (3.12.10)
+2026-09-11T07:58:33.6333487Z ##[endgroup]
+2026-09-11T07:58:33.6598800Z ##[group]Run python -u -B -X utf8 -m unittest discover -s tests -v -f
+2026-09-11T07:58:33.6599168Z python -u -B -X utf8 -m unittest discover -s tests -v -f
+2026-09-11T07:58:33.7206909Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+2026-09-11T07:58:33.7207110Z env:
+2026-09-11T07:58:33.7207265Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-09-11T07:58:33.7207517Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+2026-09-11T07:58:33.7207764Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-09-11T07:58:33.7207981Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-09-11T07:58:33.7208193Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+2026-09-11T07:58:33.7208377Z ##[endgroup]
+2026-09-11T07:58:48.3067092Z test_cli_report_uses_captured_fingerprint_and_rejects_stale_input (test_analysis_baselines.AnalysisBaselineTests.test_cli_report_uses_captured_fingerprint_and_rejects_stale_input) ... FAIL
+2026-09-11T07:58:48.3080443Z 
+2026-09-11T07:58:48.3080709Z ======================================================================
+2026-09-11T07:58:48.3081416Z FAIL: test_cli_report_uses_captured_fingerprint_and_rejects_stale_input (test_analysis_baselines.AnalysisBaselineTests.test_cli_report_uses_captured_fingerprint_and_rejects_stale_input)
+2026-09-11T07:58:48.3082174Z ----------------------------------------------------------------------
+2026-09-11T07:58:48.3082518Z Traceback (most recent call last):
+2026-09-11T07:58:48.3087684Z   File "D:\a\story-skill\story-skill\tests\test_analysis_baselines.py", line 239, in test_cli_report_uses_captured_fingerprint_and_rejects_stale_input
+2026-09-11T07:58:48.3088338Z     self.assertEqual(result.returncode, 0, result.stderr)
+2026-09-11T07:58:48.3088885Z AssertionError: 2 != 0 : 
+2026-09-11T07:58:48.3089011Z 
+2026-09-11T07:58:48.3089141Z ----------------------------------------------------------------------
+2026-09-11T07:58:48.3089426Z Ran 1 test in 1.577s
+2026-09-11T07:58:48.3089545Z 
+2026-09-11T07:58:48.3089610Z FAILED (failures=1)
+2026-09-11T07:58:48.3969592Z ##[error]Process completed with exit code 1.
+2026-09-11T07:58:48.4163697Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+2026-09-11T07:58:48.4164401Z Post job cleanup.
+2026-09-11T07:58:48.5192828Z [command]"C:\Program Files\Git\bin\git.exe" version
+2026-09-11T07:58:48.5383191Z git version 2.55.0.windows.5
+2026-09-11T07:58:48.5432298Z Temporarily overriding HOME='D:\a\_temp\21e45e63-5d10-4181-bd65-e731b94384c8' before making global git config changes
+2026-09-11T07:58:48.5432959Z Adding repository directory to the temporary git global config as a safe directory
+2026-09-11T07:58:48.5439484Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\story-skill\story-skill
+2026-09-11T07:58:48.5641509Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+2026-09-11T07:58:48.5831111Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+2026-09-11T07:58:48.9597386Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2026-09-11T07:58:48.9776547Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+2026-09-11T07:58:49.3140083Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+2026-09-11T07:58:49.3322641Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+2026-09-11T07:58:49.6470590Z Cleaning up orphan processes
+2026-09-11T07:58:49.6496510Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
