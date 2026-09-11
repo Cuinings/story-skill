@@ -1,0 +1,72 @@
+{
+  "ok": true,
+  "status": "passed",
+  "date": "2026-09-11T13:30:48.564471+00:00",
+  "tag": "v0.5.4",
+  "tag_commit": "89945075e0917acff8f23b9fa356c3a8cbba658e",
+  "skill_files": 33,
+  "source_matches_fixed_tag_release_packages_and_global_install": true,
+  "runtime_and_tests_unchanged_from_fixed_tag": true,
+  "prior_result_files_checked": 830,
+  "prior_result_files_unchanged": true,
+  "remote_refs_before_final_document_commit": [
+    "89945075e0917acff8f23b9fa356c3a8cbba658e\trefs/heads/main",
+    "9174f6031a551a395d41a18f99ee06c77f41d596\trefs/tags/v0.5.4",
+    "89945075e0917acff8f23b9fa356c3a8cbba658e\trefs/tags/v0.5.4^{}"
+  ],
+  "local_markdown_links": {
+    "status": "passed",
+    "files_scanned": 159,
+    "links_checked": 740,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "final_document_manifest": {
+    "INSTALL.md": "4e83ed10fc0047934ecff47c2f75759f75d01332c6abf58f705afb300753ee5d",
+    "README.md": "84f1db6d9658e1efe242061ffb271efc2b5aa2480874457c1415509d24e4c0c3",
+    "benchmarks/results/v0.5.4/README.md": "89f31259f2322ab86ebacc8aea8c6dab115f2a7191dd5dbf368fd52fa85910aa",
+    "benchmarks/results/v0.5.4/release/release-notes.md": "74e1d7712bf8672bc1e907e5ee88cda35cd1799b602dc4e59d8a6071df3657f1",
+    "docs/README.md": "5d39587b6ff87b31edb0aeb8e21718eeb38e579406c7dda094492c64c51b2ac3",
+    "docs/evaluation.md": "b39818f65c52812d397b003acc5590bdd40696051aa6fa57d81d3414e1cd5623",
+    "docs/github-release.md": "3988f4b134de34da9b14324eade7958dd378560c1f2857b26fe0a10f7947e296",
+    "docs/recovery.md": "142e66b14bdb89bdbb4a0e60ffc26ec631010bbb0aa6cce65feffa05a5dcf9ff",
+    "docs/releases/v0.5.4.md": "6c740f5ab5100825546a9e32dea2e51cf5d5cb7e74f4839fc88d8772e54d83f5",
+    "docs/中文小说上手.md": "8087c0d08511590de6a99e1137d30fbb81183c477a6c54d9745bbb6a38141b8e",
+    "docs/作品深读与评估.md": "0e3a652c2530277139f41af03cdcc92ff92b0989a06443830c21ee81f081b8ee",
+    "docs/目录结构.md": "04a7280382a5ad922b5f508db1bc4a436f9494d2d99aef7eb5491fe08eea43c0",
+    "docs/超长篇实操.md": "71dae3b87e5599afc76164441e93daadbd40908691da423f009c86983c8e4f3f",
+    "docs/超长篇验收.md": "7446cdea643b343d791af359f7a1333d6eb36adfd45ad9f98d2e7598c88dd440"
+  },
+  "release_receipts": {
+    "ci-run.json": "07d558def2c4393749626700e8d8fd8741e3df43fa0a67fb6eb0b7dd978086c0",
+    "ci.json": "80f9ee50aedb05bb75490ccebe6b0408780726346b4fd61ff9997f3eab34bf45",
+    "local-install.json": "586168cf44bf7a453e1b7d4e5c670b22a4d1da2d8a578678d839d95c4319f472",
+    "package-check.json": "ba984373b0f350b7cf2025e54c6246af0c0cae607f8734c1097493f0d22abb45",
+    "packages-artifacts.json": "5504611456cf29513ba34be940d44a610c68e02388adf0c4f319d24293c622d3",
+    "packages-workflow.json": "0a6e3deaeb25fb67fa02c853b79a06613e892768d8061458eb3e86af114e2fce",
+    "packages.json": "2c2da8af5393586dd7cec12af494f04b6eb0063b62ebdab9512fede8594d82f6",
+    "prepublish-check.json": "1ee4b61d30885d91148827df1d32fb879498199904d9370bfe8a01216b094009",
+    "release-final-metadata.json": "a6bcb49bd5b052cb59500a6b2a6d276d2c8f4271cd80ae039feeaa738d61ceef",
+    "release.json": "b707f3bdb30559944c6c7b8ac732a51cd58505fc0af36426f8fd922bed1e6e50",
+    "remote-install.json": "c74827e2f56f2d7e7cfe22bf63e3d0f40f9764fd46748711b555fb1ab87d56f6",
+    "state.json": "1ef2a2231365a723946a3784cd22fbcb998d32cb87e80f538d264579dd12589c",
+    "tag.json": "626844dda7c3966f1af57bcbabc1a00ad4a34d6a3e7fb10a42d8a15da2964028",
+    "verifier-check.json": "9affe2b1808903febf930d0a852c646e51bac4af72fc3808153e1afb934103dc",
+    "workspace.json": "9d93b71856a24e7c9b055a413a989b1d61b69d9ede68f57d2db6761582fcb618"
+  },
+  "scope": "Final documentation, receipt consistency, fixed published payload and historical evidence; preserves the known Windows failure and mixed literary development results.",
+  "staged_whitespace_check": {
+    "authored_changes": "passed",
+    "raw_evidence_preserved": {
+      "benchmarks/results/v0.5.4/release/ci-log.txt": "d1f50aac6327baeb62940273196ca6048e498b96d2c93b2e2c7a7938cb901bfd",
+      "benchmarks/results/v0.5.4/release/ci-watch.log": "bed04ddfc39564eb828925ee4d3591ff922c64c2e97fa86911b9dbf04b646d28"
+    },
+    "reason": "Raw GitHub CI output retains its original blank log fields and final newline."
+  },
+  "independent_release_audit": {
+    "status": "passed",
+    "scope": "Read-only cross-check of live GitHub Release, public package page, downloaded workflow artifact, commit blobs, seven payload manifests and original CI logs",
+    "rest_package_metadata": "Unavailable to current PAT; public page and verified publication workflow supplied package evidence",
+    "all_platforms_passed": false
+  }
+}

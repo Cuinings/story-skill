@@ -1,0 +1,893 @@
+test (ubuntu-latest, 3.10)	Set up job	﻿2026-09-11T13:18:25.9643125Z Current runner version: '2.337.0'
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9665341Z ##[group]Runner Image Provisioner
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9666099Z Hosted Compute Agent
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9666701Z Version: 20260828.587
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9667295Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9667908Z Build Date: 2026-08-28T16:44:25Z
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9668498Z Worker ID: {45ad38d5-a084-4e43-84aa-8688120da0e1}
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9669059Z Azure Region: westus3
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9669576Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9670743Z ##[group]Operating System
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9671245Z Ubuntu
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9671687Z 24.04.5
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9672113Z LTS
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9672568Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9673018Z ##[group]Runner Image
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9673533Z Image: ubuntu-24.04
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9673993Z Version: 20260907.300.1
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9674957Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9676388Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9677441Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9678393Z ##[group]GITHUB_TOKEN Permissions
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9680337Z Contents: read
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9680881Z Metadata: read
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9681378Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9683061Z Secret source: Actions
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9683816Z Cache mode: write
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:25.9684405Z Prepare workflow directory
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:26.0553987Z Prepare all required actions
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:26.0595601Z Getting action download info
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:26.3467326Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:26.7178526Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+test (ubuntu-latest, 3.10)	Set up job	2026-09-11T13:18:26.9950841Z Complete job name: test (ubuntu-latest, 3.10)
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T13:18:27.0542367Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0549851Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0550706Z with:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0551130Z   persist-credentials: false
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0551697Z   repository: NingCui29/story-skill
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0555041Z   token: ***
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0555498Z   ssh-strict: true
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0555973Z   ssh-user: git
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0556374Z   clean: true
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0556865Z   sparse-checkout-cone-mode: true
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0557369Z   fetch-depth: 1
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0557788Z   fetch-tags: false
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0558226Z   show-progress: true
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0558652Z   lfs: false
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0559264Z   submodules: false
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0559706Z   set-safe-directory: true
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0560201Z   allow-unsafe-pr-checkout: false
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0560900Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.1443361Z Syncing repository: NingCui29/story-skill
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.1446135Z ##[group]Getting Git version info
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.1447229Z Working directory is '/home/runner/work/story-skill/story-skill'
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.1448713Z [command]/usr/bin/git version
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.2747858Z git version 2.55.0
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.2764642Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.2777429Z Temporarily overriding HOME='/home/runner/work/_temp/e1fd61e6-3a95-4ccc-8e4b-85169d2063dd' before making global git config changes
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.2779274Z Adding repository directory to the temporary git global config as a safe directory
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.2781908Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/story-skill/story-skill
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.3218878Z Deleting the contents of '/home/runner/work/story-skill/story-skill'
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.3223278Z ##[group]Initializing the repository
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.3227282Z [command]/usr/bin/git init /home/runner/work/story-skill/story-skill
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4029373Z hint: Using 'master' as the name for the initial branch. This default branch name
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4031611Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4032989Z hint: to use in all of your new repositories, which will suppress this warning,
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4034260Z hint: call:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4035178Z hint:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4036267Z hint: 	git config --global init.defaultBranch <name>
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4037191Z hint:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4038365Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4039572Z hint: 'development'. The just-created branch can be renamed via this command:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4040437Z hint:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4041097Z hint: 	git branch -m <name>
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4041840Z hint:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4042442Z hint: Disable this message with "git config set advice.defaultBranchName false"
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4043345Z Initialized empty Git repository in /home/runner/work/story-skill/story-skill/.git/
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4045575Z [command]/usr/bin/git remote add origin https://github.com/NingCui29/story-skill
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4084164Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4085206Z ##[group]Disabling automatic garbage collection
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4088521Z [command]/usr/bin/git config --local gc.auto 0
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4114528Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4115591Z ##[group]Setting up auth
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4119705Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.4144286Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5267913Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5300514Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5467342Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5488153Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5648528Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5675354Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5676993Z ##[group]Fetching the repository
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5684361Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +89945075e0917acff8f23b9fa356c3a8cbba658e:refs/remotes/origin/main
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1409377Z From https://github.com/NingCui29/story-skill
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1410437Z  * [new ref]         89945075e0917acff8f23b9fa356c3a8cbba658e -> origin/main
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1412285Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1412845Z ##[group]Determining the checkout info
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1415088Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1420480Z [command]/usr/bin/git sparse-checkout disable
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1463004Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1486987Z ##[group]Checking out the ref
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.1490197Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.2068323Z Switched to a new branch 'main'
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3585075Z branch 'main' set up to track 'origin/main'.
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3592112Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3636288Z [command]/usr/bin/git log -1 --format=%H
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3657632Z 89945075e0917acff8f23b9fa356c3a8cbba658e
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3667240Z ##[group]Removing auth
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3670188Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3695027Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3857820Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3876687Z http.https://github.com/.extraheader
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3881546Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.3905405Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.4059260Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.4081100Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test (ubuntu-latest, 3.10)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.4233986Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T13:18:29.4439546Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4441294Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4441718Z with:
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4441981Z   python-version: 3.10
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4442278Z   check-latest: false
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4444396Z   token: ***
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4444857Z   update-environment: true
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4445280Z   allow-prereleases: false
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4445676Z   freethreaded: false
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.4445958Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.5522966Z ##[group]Installed versions
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.5942374Z (node:2115) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.5943872Z (Use `node --trace-deprecation ...` to show where the warning was created)
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.5944495Z Successfully set up CPython (3.10.21)
+test (ubuntu-latest, 3.10)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:29.5945668Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	﻿2026-09-11T13:18:29.6075636Z ##[group]Run python -u -B -X utf8 -m unittest discover -s tests -v -f
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6076584Z ^[[36;1mpython -u -B -X utf8 -m unittest discover -s tests -v -f^[[0m
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6230314Z shell: /usr/bin/bash -e {0}
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6230811Z env:
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6231237Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6231885Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6232457Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6232920Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6233320Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6233715Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:29.6234100Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.6127310Z test_cli_report_uses_captured_fingerprint_and_rejects_stale_input (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.6325703Z test_failed_export_resumes_without_regenerating_or_refinalizing_report (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.6497060Z test_findings_keeps_page_and_fingerprint_in_one_concurrent_read_snapshot (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.6723944Z test_findings_preserves_the_callers_transaction_and_rollback (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.6840418Z test_missing_record_baseline_is_rejected_but_exact_retry_keeps_working (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.7041975Z test_new_report_requires_the_baseline_used_for_aggregation (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.7179802Z test_pending_snapshot_cannot_finalize_after_new_records_complete (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.7295830Z test_record_fingerprint_cannot_be_borrowed_from_another_chunk (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.7446155Z test_retry_uses_old_baseline_only_while_same_content_is_still_current (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.7578531Z test_snapshot_covers_pending_completion_and_records_outside_requested_page (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.7714884Z test_stale_record_cannot_overwrite_another_connections_correction (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.7974985Z test_stale_report_is_not_finalized_and_records_remain_editable (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:33.8106626Z test_unrelated_source_does_not_invalidate_the_analysis_snapshot (test_analysis_baselines.AnalysisBaselineTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.1066204Z test_cli_record_uses_actual_chunk_number_across_finding_pages (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.1229116Z test_completed_source_resumes_with_paginated_unicode_ranges_without_original_file (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.1324639Z test_conflicting_chunk_rejects_both_new_records_and_replacements_without_changes (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.1459793Z test_copied_findings_can_be_revised_and_retried_idempotently (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.1559207Z test_correctly_read_legacy_record_can_be_retried_without_a_new_revision (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.1659575Z test_embedded_chunk_requires_a_positive_integer_without_mutating_state (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.1857411Z test_findings_ranges_respect_byte_budget_and_resume_without_skipping (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.1960444Z test_legacy_ranges_cannot_override_saved_source_or_create_a_new_revision (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.2073437Z test_legacy_wrong_chunk_is_displayed_with_database_identity_without_rewriting (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.2188693Z test_readonly_ranges_are_not_saved_as_analysis_content (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.2338203Z test_record_receipt_reports_its_committed_snapshot_when_another_writer_follows (test_analysis_identity.AnalysisIdentityTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.2530235Z test_leading_blank_lines_complete_without_losing_source (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.2931633Z test_legacy_pending_blanks_resume_without_rebuilding_or_losing_analysis (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.3117878Z test_middle_whitespace_chunks_preserve_later_chapter (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.3203386Z test_nonempty_text_is_not_automatically_completed (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.3294265Z test_repeated_ingest_and_next_leave_noncontent_evidence_unchanged (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.3509412Z test_trailing_whitespace_chunks_complete_without_losing_source (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.3727904Z test_unheaded_source_with_blank_chunks_completes (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.4050646Z test_whitespace_longer_than_maximum_chunk_size_completes (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.4214597Z test_whitespace_only_source_still_rejects_empty_input (test_analysis_recovery.AnalysisRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.4253572Z test_initial_metadata_failure_rolls_back_schema_and_partial_identity (test_book_initialization.BookInitializationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.4291442Z test_late_schema_failure_rolls_back_preceding_tables_and_views (test_book_initialization.BookInitializationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.4365509Z test_new_schema_is_invisible_until_complete_identity_is_committed (test_book_initialization.BookInitializationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.4445795Z test_bare_volume_number_title_and_identifier_are_rejected (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.5362777Z test_case_insensitive_title_alias_is_rejected_before_chapter_commit (test_chapter_layout.ChapterLayoutTests) ... skipped 'Filesystem distinguishes names that differ only in letter case'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.7259834Z test_chapters_use_volume_directories_and_exact_number_title_names (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.7432455Z test_chinese_heading_prefix_is_removed_and_path_survives_retry_and_reopen (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.7727946Z test_failed_move_keeps_old_export_until_new_export_succeeds (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.8569912Z test_historical_revision_recovers_edited_retired_path_of_older_chapter (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.8869515Z test_legacy_flat_export_path_remains_resolvable_after_reopen (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.9036120Z test_missing_nested_export_is_recovered_at_persisted_path (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.9200581Z test_native_title_is_required_but_explicit_plan_title_allows_plain_body (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.9287155Z test_new_commit_and_adopt_require_named_volume_without_changing_state (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.9459307Z test_new_title_collision_preserves_both_files_and_original_chapter_state (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:34.9819448Z test_reconcile_recovers_edited_retired_path_and_retargets_further_rename (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.0315941Z test_reconcile_uses_current_nested_path_and_can_publish_new_title (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.1007562Z test_replacing_title_and_volume_moves_export_and_preserves_backup (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.1534637Z test_titleless_import_keeps_body_filename_during_history_publication (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.1634014Z test_unregistered_volume_identifier_cannot_supply_a_directory_name (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.1854037Z test_unreviewed_edit_to_retired_path_is_preserved_during_recovery (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.1915961Z test_unsafe_volume_and_title_components_are_rejected_without_state_changes (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.2024927Z test_untitled_import_uses_body_fallback_in_named_volume (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.2765980Z test_volume_without_directory_uses_named_world_title_and_persisted_mapping (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.2885868Z test_world_volume_requires_both_number_and_name_for_directory_fallback (test_chapter_layout.ChapterLayoutTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.2887086Z test_ambiguous_or_invalid_count_configuration_is_rejected (test_chinese_workflow.ChineseCountTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.2888025Z test_counts_are_characters_with_explicit_scope (test_chinese_workflow.ChineseCountTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.2889364Z test_selected_count_controls_gate_and_legacy_plan_is_compatible (test_chinese_workflow.ChineseCountTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.3143974Z test_maximum_valid_quote_commits_without_late_source_limit_failure (test_chinese_workflow.ChineseWorkflowTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.3279722Z test_prepare_applies_budget_to_its_own_returned_packet (test_chinese_workflow.ChineseWorkflowTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.4020514Z test_prepare_cli_and_stale_draft_review (test_chinese_workflow.ChineseWorkflowTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.4123814Z test_prepare_is_read_only_and_cannot_be_mistaken_for_completed_review (test_chinese_workflow.ChineseWorkflowTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.4291816Z test_prepare_reconciliation_binds_external_bytes (test_chinese_workflow.ChineseWorkflowTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.4369061Z test_composite_readers_preserve_the_callers_transaction (test_core_audit_regressions.CoreAuditRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.4427271Z test_nul_adoption_is_rejected_before_exporting_a_broken_baseline (test_core_audit_regressions.CoreAuditRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.4484419Z test_nul_source_is_rejected_before_creating_truncated_chunks (test_core_audit_regressions.CoreAuditRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.4565132Z test_recall_byte_omissions_are_incomplete_even_when_search_finished (test_core_audit_regressions.CoreAuditRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.5198432Z test_recall_card_and_match_share_a_snapshot_during_concurrent_update (test_core_audit_regressions.CoreAuditRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.5917161Z test_sqlite_integer_overflow_is_a_structured_cli_error (test_core_audit_regressions.CoreAuditRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.6026937Z test_world_read_payload_and_digest_share_a_snapshot_during_update (test_core_audit_regressions.CoreAuditRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.6255351Z test_known_linked_export_is_pending_until_safely_detached (test_export_alias_recovery.ExportAliasRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.6463661Z test_link_recreated_after_publication_is_reported_and_can_be_recovered (test_export_alias_recovery.ExportAliasRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.6860959Z test_same_body_rename_detaches_hard_link_inserted_before_export (test_export_alias_recovery.ExportAliasRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.8653328Z test_cli_safe_export_then_reconcile_resolves_missing_and_external_edit (test_export_recovery.ExportRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.8866453Z test_file_recreated_during_safe_publication_is_not_overwritten (test_export_recovery.ExportRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.9099377Z test_io_failure_preserves_partial_progress_and_reports_remaining_pending (test_export_recovery.ExportRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.9302631Z test_linked_path_is_skipped_without_touching_its_external_target (test_export_recovery.ExportRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.9556536Z test_path_conflict_does_not_block_an_independent_missing_export (test_export_recovery.ExportRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:35.9798289Z test_publication_conflict_retains_backup_details_after_global_health_check (test_export_recovery.ExportRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.0413312Z test_safe_export_recovers_known_pending_version_beside_outside_edit (test_export_recovery.ExportRecoveryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.0836573Z test_cache_read_has_one_snapshot_when_dependency_review_changes (test_history_world_audit.HistoryWorldAuditTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.1035693Z test_complete_history_candidate_cannot_omit_current_required_card (test_history_world_audit.HistoryWorldAuditTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.1501264Z test_complete_history_dependencies_cannot_omit_required_card (test_history_world_audit.HistoryWorldAuditTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.1768446Z test_explicit_action_time_checks_overdraft_without_plan_time (test_history_world_audit.HistoryWorldAuditTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.2842001Z test_hook_payoff_cannot_hide_a_stale_seed_after_body_replacement (test_history_world_audit.HistoryWorldAuditTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.3042702Z test_later_plan_start_cannot_lend_future_income_to_earlier_action (test_history_world_audit.HistoryWorldAuditTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.3445718Z test_observed_income_inside_scene_is_available_to_later_planned_action (test_history_world_audit.HistoryWorldAuditTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.3863505Z test_successive_actions_share_balance_and_cannot_reset_to_observed_baseline (test_history_world_audit.HistoryWorldAuditTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.3920881Z test_failed_swap_restores_previous_installation (test_install.InstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.3952061Z test_local_modifications_are_preserved (test_install.InstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.3980469Z test_malicious_manifest_path_is_rejected (test_install.InstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.4010828Z test_only_adds_skill_and_repeat_is_noop (test_install.InstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.4021326Z test_unmanaged_existing_skill_not_overwritten (test_install.InstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.4079320Z test_update_preserves_backup (test_install.InstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.4145826Z test_concurrent_installer_is_rejected_and_first_completes (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.4196912Z test_edit_to_moved_backup_is_verified_and_restored (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.4249909Z test_new_target_before_publication_is_preserved_with_old_backup (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.4631409Z test_process_exit_releases_lock_without_deleting_lock_file (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.5737869Z test_source_new_file_after_copy_is_detected_before_publication (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.5836670Z test_source_save_during_copy_is_rejected_without_bad_manifest (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.5897033Z test_stage_edit_inside_publication_is_detected_and_both_versions_survive (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.5949085Z test_staged_bytes_changed_after_initial_validation_restore_original (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.5999162Z test_target_edit_at_backup_move_is_verified_and_restored (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.6055727Z test_target_recreated_during_recovery_is_not_replaced (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.6103961Z test_target_save_during_staging_remains_active (test_install_races.InstallationRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.6105452Z test_windows_publication_refuses_an_empty_target_created_inside_rename (test_install_races.InstallationRaceTests) ... skipped 'Windows rename provides the no-replace guarantee tested here'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.6166891Z test_analysis_reference_layout_cannot_be_mislabeled_as_an_old_release (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.7165233Z test_edit_to_published_member_is_preserved_and_previous_version_kept (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.9078035Z test_historical_suite_installs_then_upgrades_with_new_analysis_references (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.9740623Z test_install_all_dependencies_preserves_book_and_other_skills (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:36.9776411Z test_install_and_archive_share_same_reviewed_manifest (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.0531413Z test_legacy_managed_core_upgrades_with_backup_and_requires_update (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.0563053Z test_missing_dependency_stops_before_any_target_is_written (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.0612141Z test_missing_reference_or_private_draft_cannot_be_installed (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.1739793Z test_modification_at_rollback_move_is_preserved_in_stage (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.2434836Z test_one_modified_or_unmanaged_member_prevents_all_changes (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.2791205Z test_partial_first_install_rolls_back_only_suite_and_keeps_other_content (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.3846133Z test_partial_publication_rolls_back_whole_suite (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.3905459Z test_pre_03_legacy_sources_remain_installable (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.4492741Z test_single_new_core_redirects_to_complete_suite (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.4719607Z test_source_save_during_staging_prevents_suite_publication (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.4747028Z test_unknown_suite_version_is_rejected_before_writing_targets (test_install_suite.SuiteInstallTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.4912846Z test_case_alias_rename_is_rejected_before_review (test_layout_preflight.LayoutPreflightTests) ... skipped 'Filesystem distinguishes names that differ only in letter case'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.5013326Z test_hard_link_destination_is_rejected_before_review (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.5479265Z test_lint_and_prepare_reject_conflicting_directory_for_established_volume (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.5589546Z test_lint_and_prepare_reject_missing_chapter_title_before_review_scaffold (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.5671480Z test_lint_and_prepare_reject_missing_volume_before_review_scaffold (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.5772769Z test_occupied_destination_is_rejected_before_review (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.6581622Z test_reconcile_preparation_accepts_further_revised_current_export (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.6921777Z test_reconcile_preparation_accepts_further_revised_retired_name (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.7018971Z test_symbolic_link_destination_is_rejected_before_review (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.7233985Z test_world_volume_path_preview_is_pure_and_matches_later_commit (test_layout_preflight.LayoutPreflightTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.8185351Z test_export_clears_legacy_self_retirement_without_moving_current_body (test_layout_recovery_edges.LayoutRecoveryEdgeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:37.8938301Z test_reusing_retired_name_accepts_reviewed_old_path_hash_for_revised_body (test_layout_recovery_edges.LayoutRecoveryEdgeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:38.0266534Z test_reusing_retired_name_keeps_current_export_present_after_reconcile (test_layout_recovery_edges.LayoutRecoveryEdgeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:38.1342835Z test_200kb_imported_chapter_comparison_requires_a_larger_explicit_budget (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.5763020Z test_4000_chapter_inspection_pages_all_scopes_without_hashing_omitted_exports (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.6196032Z test_actual_world_patch_is_checked_even_without_time_or_entities_in_plan (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.7002632Z test_advice_and_legacy_minor_survive_historical_publication (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.7312282Z test_bound_outside_edit_does_not_accept_later_save_or_other_drift (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.7535162Z test_cache_requires_complete_evidence_and_misses_after_dependency_change (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.7861392Z test_changed_evidence_and_plan_prevent_refresh_of_old_reviews (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.8073844Z test_changed_summary_cannot_reuse_body_only_review (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.8420360Z test_cli_state_review_template_supplies_exact_preimage_but_requires_explicit_decision (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:49.8760418Z test_commit_dependency_declaration_is_preserved_without_extra_history_command (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:50.0553398Z test_commit_dependency_validation_rejects_missing_fields_self_and_stale_sha (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:50.0789281Z test_draft_stays_candidate_and_unreviewed_publish_cannot_change_canonical (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:50.2180274Z test_external_edit_blocks_publication_and_preserves_user_bytes (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:50.9711554Z test_far_dependency_transitive_closure_excludes_reviewed_side_story (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.0184016Z test_historical_state_rejects_unknown_events_instead_of_guessing (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.0813161Z test_historical_state_replays_notes_and_published_card_changes_after_snapshot (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.1190645Z test_historical_state_replays_replacement_rollback_and_history_final_state (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.1708259Z test_history_cannot_bypass_known_world_rule_conflicts (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.2339395Z test_history_dependencies_use_branch_candidates_and_current_records (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.2699936Z test_imported_baseline_can_only_publish_after_plan_and_full_reviews (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.4084983Z test_incomplete_dependencies_require_semantic_scope_including_later_chapters (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.4448601Z test_inspection_budget_failure_rolls_back_start_update_and_refresh (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.4663137Z test_inspection_provides_exact_candidate_review_scaffold_without_passing_it (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.4859793Z test_large_cache_can_be_saved_but_read_requires_an_explicit_sufficient_budget (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.5750843Z test_later_world_baseline_blocks_replace_until_history_rebinds_evidence (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.6032916Z test_legacy_seed_does_not_guess_required_card_history_from_current_state (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.6999491Z test_major_and_blocker_still_block_history_and_unknown_severity_is_rejected (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:51.8135727Z test_new_dependent_chapter_cannot_hide_behind_refresh (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.0274854Z test_outside_edit_can_be_explicitly_bound_and_export_retry_keeps_hash (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.0590043Z test_publication_queue_failure_rolls_back_all_candidate_state (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.3013888Z test_published_retry_recovers_export_without_repeating_state_or_events (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.3222830Z test_replace_dependency_validation_uses_recorded_preimage_not_postchapter_card (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.3688795Z test_saved_candidate_can_be_read_in_bounded_pieces_without_publishing (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.4120077Z test_second_branch_cannot_publish_after_first_changes_same_history (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.6171018Z test_single_chapter_inspection_has_budget_and_never_truncates_review_evidence (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.7472096Z test_snapshot_uses_body_and_card_pointers_and_nearest_predecessor (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:52.7822828Z test_state_requires_explicit_keep_or_update_and_is_atomic_with_text (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:53.0680273Z test_typed_cognition_reference_expands_history_scope_before_retirement (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:53.3731149Z test_unrelated_revision_needs_explicit_refresh_and_keeps_review (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:53.7933341Z test_world_evidence_creates_far_dependency_without_duplicate_chapter_edge (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.0425386Z test_world_evidence_requires_atomic_rebind_and_keeps_old_state_on_failure (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.2692610Z test_world_record_can_be_retired_with_evidence_and_remains_retired_on_next_revision (test_long_history.LongHistoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.3217925Z test_abandoned_author_plan_does_not_double_count_observed_action (test_long_integration_review.LongIntegrationReviewTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.5741418Z test_future_same_chapter_rule_does_not_legalize_earlier_use (test_long_integration_review.LongIntegrationReviewTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.5940698Z test_new_chapter_opening_and_payment_are_applied_once (test_long_integration_review.LongIntegrationReviewTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6173615Z test_observed_cooldown_is_rejected_even_without_prior_planned_use (test_long_integration_review.LongIntegrationReviewTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6409544Z test_observed_overdraft_is_rejected_even_without_prior_planned_transfer (test_long_integration_review.LongIntegrationReviewTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6416525Z test_bigram_presence_is_not_an_exact_match (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6425353Z test_candidate_cutoff_never_claims_no_match_and_kind_filter_uses_index (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6433811Z test_failed_update_restores_old_postings_source_and_metadata (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6469999Z test_identical_hash_keeps_distinct_sources_and_reads_object_once (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6475984Z test_injected_helpers_and_caller_transaction_rollback (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6485195Z test_literal_punctuation_english_spaces_and_unicode_offsets (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6493007Z test_removing_one_shared_source_preserves_other_identity_and_object (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:54.6500965Z test_result_and_character_limits_are_explicit_and_results_stable (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:56.8752065Z test_twenty_thousand_unrelated_cards_do_not_scan_source_texts (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:56.8763080Z test_two_character_and_long_names_and_single_character_title (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:56.8774426Z test_update_remove_and_metadata_only_updates_preserve_identity (test_long_search.SearchTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:56.8933654Z test_analyzed_source_daily_reads_do_not_load_whole_text_into_python (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:56.9167444Z test_archived_prose_remains_readable_by_version_under_a_byte_budget (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:56.9372574Z test_body_dedup_and_incremental_cards_and_no_write_transaction_during_io (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:56.9683917Z test_dependency_candidates_can_be_reviewed_in_the_same_chapter_commit (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.1051530Z test_explicit_migration_preserves_export_identity_and_rollback_backup (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.2495832Z test_failed_migration_rolls_back_all_ddl (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3473597Z test_local_mode_does_not_claim_archival_integrity (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3620196Z test_scoped_hard_constraints_dont_accumulate_across_volumes (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3803614Z test_world_delta_is_atomic_and_latest_rewrite_requires_history (test_long_storage.LongStorageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3826450Z test_allowed_decimal_quantities_remain_exact_above_default_precision (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3850352Z test_author_plan_is_separate_and_can_promote_without_double_event (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3873877Z test_belief_does_not_overwrite_world_truth (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3889494Z test_chapter_and_world_changes_share_one_transaction (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3914363Z test_character_can_break_a_promise_with_explicit_consequences (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3929986Z test_chinese_names_and_scoped_aliases_never_guess (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3965614Z test_complete_template_is_valid_planned_data_only (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.3987145Z test_each_story_line_resumes_its_own_checkpoint (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4001504Z test_evidence_failure_rolls_back_whole_batch_and_revision (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4030280Z test_exact_resource_flow_and_unknown_quantities (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4057023Z test_flashback_knowledge_excludes_future_acquisition (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4081863Z test_future_observed_use_does_not_break_earlier_planned_scene (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4105790Z test_hard_promise_due_even_without_related_entity_and_payoff_has_evidence (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4348274Z test_historical_versions_are_filtered_before_text_materialization (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4372145Z test_history_can_rebind_or_retire_without_leaving_stale_live_state (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4390202Z test_history_invalidation_is_transactional_and_non_destructive (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4415544Z test_history_rebinds_seed_before_payoff_without_false_reopening (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4441792Z test_later_published_flashback_does_not_inherit_future_payoff (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4463294Z test_latest_text_edit_stales_bound_facts_and_dependency (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4482642Z test_normal_reinforcement_after_fulfillment_still_requires_reopening (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4505479Z test_payoff_reached_through_seed_without_repeating_entity_tags (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4524313Z test_planned_income_cannot_be_reported_as_actual_balance (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4547482Z test_repeated_arc_pattern_is_advice_with_comparable_evidence (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4566048Z test_retired_fact_requires_live_knowledge_dependency_to_be_repaired (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4588698Z test_rolling_arc_replanning_does_not_change_published_facts (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4622217Z test_rules_are_versioned_and_cooldown_is_per_actor_and_clock (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4636861Z test_schema_and_boolean_input_validation (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4657316Z test_selected_hard_state_is_never_silently_truncated (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4680282Z test_simulated_chapter_300_recalls_seed_and_separates_soft_schedule (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4702297Z test_stale_checkpoint_and_balance_cannot_bypass_evidence_check (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4721056Z test_unknown_opening_time_never_claims_exact_scene_balance (test_long_world.LongWorldTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.4882689Z test_explicit_release_clears_constraint_without_erasing_other_fields (test_notes_updates.NotesUpdateTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5024080Z test_invalid_new_card_rolls_back_entire_update (test_notes_updates.NotesUpdateTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5167321Z test_stale_update_cannot_restore_an_old_constraint (test_notes_updates.NotesUpdateTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5297218Z test_text_update_keeps_hard_constraint_in_context_and_retry_is_noop (test_notes_updates.NotesUpdateTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5394667Z test_atomic_replace_failure_preserves_previous_archive (test_package.PackagePublicationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5483939Z test_crc_validation_failure_preserves_previous_archive (test_package.PackagePublicationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5563542Z test_partial_write_then_disk_full_preserves_previous_archive (test_package.PackagePublicationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5645405Z test_sibling_project_material_is_never_packaged (test_package.PackagePublicationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5740294Z test_success_uses_same_directory_stage_and_reproduces_hash (test_package.PackagePublicationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5828398Z test_unknown_payload_file_or_missing_dependency_preserves_previous_archive (test_package.PackagePublicationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5912751Z test_valid_crc_but_wrong_member_content_is_rejected (test_package.PackagePublicationTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.5961796Z test_default_archive_name_tracks_the_actual_packaged_runtime (test_package.PackageVersionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6045750Z test_historical_and_current_manifests_cannot_be_interchanged (test_package.PackageVersionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6277705Z test_manifest_is_bound_to_version_and_unknown_families_are_rejected (test_package.PackageVersionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6308000Z test_mismatched_filename_cannot_replace_an_existing_archive (test_package.PackageVersionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6309777Z test_reads_literal_version_without_executing_runtime (test_package.PackageVersionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6376955Z test_build_publishes_only_after_verification (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6407104Z test_checksum_binds_exact_filename_and_archive_bytes (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6453285Z test_equivalent_remote_gzip_returns_actual_integrity_without_requiring_local_container_hash (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6579056Z test_expected_build_manifest_binds_identity_payload_and_wrapper (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6599828Z test_failed_pack_preserves_existing_tarball (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6650495Z test_failed_replace_preserves_existing_tarball (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6697653Z test_failed_tar_validation_preserves_existing_tarball (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6703173Z test_legacy_wrapper_preserves_the_original_published_bytes (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6725297Z test_npm_12_keyed_receipt_is_checked_against_its_package_name (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6734356Z test_npm_pack_disables_scripts_and_uses_structured_arguments (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6742478Z test_published_suite_wrappers_preserve_the_original_bytes (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6751884Z test_read_release_preserves_crlf_without_executing_payload (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6781383Z test_tarball_cannot_inject_install_hook_into_wrapper (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6822072Z test_tarball_rejects_changed_bytes_and_newline_normalization (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6941950Z test_tarball_rejects_missing_extra_duplicate_and_links (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6969823Z test_tarball_verification_returns_payload_and_wrapper_evidence (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.6995750Z test_version_must_be_single_literal_and_match_archive_name (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7020781Z test_zip_rejects_extra_missing_duplicate_and_linked_members (test_package_npm.NpmPackageTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7133344Z test_build_publishes_only_after_verification (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7150153Z test_checksum_binds_exact_filename_and_archive_bytes (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7243185Z test_current_package_identity_matches_current_repository_owner (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7258885Z test_current_patch_wrappers_preserve_the_reviewed_platform_scope (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7340764Z test_equivalent_remote_gzip_returns_actual_integrity_without_requiring_local_container_hash (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7562488Z test_expected_build_manifest_binds_identity_payload_and_wrapper (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7599463Z test_failed_pack_preserves_existing_tarball (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7691346Z test_failed_replace_preserves_existing_tarball (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7774239Z test_failed_tar_validation_preserves_existing_tarball (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.7786611Z test_legacy_wrapper_preserves_the_original_published_bytes (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8390441Z test_new_analysis_references_roundtrip_in_current_patch_only (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8409473Z test_new_version_rejects_old_single_skill_layout (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8438579Z test_npm_12_keyed_receipt_is_checked_against_its_package_name (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8454784Z test_npm_pack_disables_scripts_and_uses_structured_arguments (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8477542Z test_old_version_rejects_new_layout (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8491280Z test_published_suite_wrappers_preserve_the_original_bytes (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8509371Z test_read_release_preserves_crlf_without_executing_payload (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8614116Z test_release_version_cannot_accept_another_reviewed_layout (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8666392Z test_tarball_cannot_inject_install_hook_into_wrapper (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8752898Z test_tarball_rejects_changed_bytes_and_newline_normalization (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.8969311Z test_tarball_rejects_missing_extra_duplicate_and_links (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.9022707Z test_tarball_verification_returns_payload_and_wrapper_evidence (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.9035724Z test_unknown_or_noncanonical_versions_have_no_layout (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.9133167Z test_v050_release_roundtrip_uses_suite_and_unified_install_request (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.9178934Z test_version_must_be_single_literal_and_match_archive_name (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.9204316Z test_zip_and_npm_share_the_same_explicit_suite_manifest (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.9249020Z test_zip_rejects_extra_missing_duplicate_and_linked_members (test_package_npm.NpmSuiteTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:57.9559015Z test_history_inspection_keeps_snapshot_during_a_completed_concurrent_rename (test_path_snapshot.PathSnapshotTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0050348Z test_published_history_retry_exposes_current_paths_in_bounded_inspection_pages (test_path_snapshot.PathSnapshotTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0277573Z test_recall_keeps_original_path_when_another_writer_renames_after_snapshot (test_path_snapshot.PathSnapshotTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0278818Z test_editor_save_during_restore_is_preserved_with_backup (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0280276Z test_failed_publication_restores_a_copy_and_retains_backup_for_retry (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0281268Z test_first_export_succeeds_without_hard_links (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0282174Z test_recreated_target_wins_over_publication_and_restore (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0283083Z test_revision_preserves_old_backup_without_hard_links (test_portable_export.PortableWindowsExportTests) ... skipped 'Windows publication without hard links'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0286162Z test_posix_keeps_no_replace_link_publication (test_portable_export.PublicationSelectionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.0978514Z test_adopt_returns_baseline_receipt_when_locked_after_commit (test_receipt_lock.ReceiptLockTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.1691675Z test_commit_returns_durable_receipt_when_locked_immediately_after_commit (test_receipt_lock.ReceiptLockTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.1880164Z test_other_write_receipts_do_not_read_sql_after_commit (test_receipt_lock.ReceiptLockTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.2859844Z test_reconcile_keeps_hash_and_cards_when_locked_after_commit (test_receipt_lock.ReceiptLockTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.3247005Z test_sql_failure_rolls_back_without_returning_a_durable_receipt (test_receipt_lock.ReceiptLockTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.3450628Z test_editor_save_after_packet_rejects_stale_external_hash (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.3794534Z test_later_card_edit_routes_revision_and_external_edit_to_history (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.4606806Z test_missing_or_wrong_external_hash_cannot_authorize_overwrite (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.5384093Z test_other_chapter_drift_blocks_reconcile_packet_and_submission (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.5894850Z test_pending_export_blocks_reconcile_packet_and_submission (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.6182647Z test_reconcile_cannot_replace_imported_latest_chapter (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.6438806Z test_reconcile_cannot_replace_older_chapter (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.6789501Z test_reconcile_packet_commit_card_rollback_and_idempotent_retry (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.7013408Z test_reconcile_rejects_state_revision_changed_after_packet (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.7239662Z test_reconcile_still_enforces_lint_and_exact_draft_review (test_reconcile.ReconcileTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.7722862Z test_atomic_replace_failure_keeps_committed_revision_recoverable (test_recovery_regressions.RecoveryRegressionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.7996346Z test_edit_after_export_preflight_is_preserved_and_reported (test_recovery_regressions.RecoveryRegressionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.8180064Z test_edit_at_displacement_is_restored_and_backed_up (test_recovery_regressions.RecoveryRegressionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.8405259Z test_edit_of_previous_chapter_during_later_export_is_reported (test_recovery_regressions.RecoveryRegressionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.8591283Z test_editor_recreates_path_during_publication_is_not_overwritten (test_recovery_regressions.RecoveryRegressionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.8668708Z test_existing_backup_is_never_overwritten_or_displaces_target (test_recovery_regressions.RecoveryRegressionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.8901674Z test_publication_failure_restores_previous_file_and_allows_retry (test_recovery_regressions.RecoveryRegressionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.9554377Z test_sqlite_lock_after_commit_returns_durable_receipt_and_recovers (test_recovery_regressions.RecoveryRegressionTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.9728501Z test_defaults_follow_current_version_and_preserve_previous_release (test_release_probes.ProbeOutputTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.9821076Z test_explicit_output_is_honored_without_creating_version_directory (test_release_probes.ProbeOutputTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:58.9946076Z test_failed_default_run_preserves_current_success (test_release_probes.ProbeOutputTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:59.0008826Z test_archive_link_or_partial_suite_is_rejected (test_release_probes.ReleaseProbeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:59.0012398Z test_changed_legacy_runtime_archive_is_rejected_before_execution (test_release_probes.ReleaseProbeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:59.2843915Z test_generated_schema1_books_cover_native_baseline_and_analysis_rollback (test_release_probes.ReleaseProbeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:18:59.3262959Z test_invalid_archive_paths_are_rejected_before_extraction (test_release_probes.ReleaseProbeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.1367624Z test_legacy_single_skill_upgrade_still_preserves_backup (test_release_probes.ReleaseProbeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.1469418Z test_missing_retained_database_is_not_reported_as_synthetic_or_success (test_release_probes.ReleaseProbeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.1505258Z test_reader_normalized_archive_path_is_rejected_before_extraction (test_release_probes.ReleaseProbeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.1573383Z test_seven_skill_archive_keeps_all_sibling_roots (test_release_probes.ReleaseProbeTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.1793300Z test_atomic_displacement_source_parent_swap_preserves_outside_inode (test_retirement_path_race.RetirementPathRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.2024593Z test_empty_outside_parent_cannot_hide_a_retired_chapter_after_preflight (test_retirement_path_race.RetirementPathRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.2138305Z test_first_publication_parent_swap_cannot_create_outside_chapter (test_retirement_path_race.RetirementPathRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.2968926Z test_retirement_backup_parent_swap_cannot_write_into_outside_directory (test_retirement_path_race.RetirementPathRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.3179607Z test_retirement_source_parent_swap_cannot_displace_identical_outside_file (test_retirement_path_race.RetirementPathRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.3389719Z test_unsupported_directory_binding_keeps_original_untouched (test_retirement_path_race.RetirementPathRaceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.3391070Z test_windows_parent_pin_blocks_rename_but_allows_child_publication (test_retirement_path_race.RetirementPathRaceTests) ... skipped 'Requires native Windows directory share locks'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.3548292Z test_adopt_preserves_source_and_does_not_fabricate_history (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.3651712Z test_analysis_budget_fails_without_skipping_pending_chunk (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.3870897Z test_atomic_export_failure_after_replace_can_retry (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.4077011Z test_blockers_and_length_fail_before_state_mutation (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.4299938Z test_cannot_skip_chapter_or_replace_earlier_history (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.4414453Z test_card_change_and_chapter_commit_are_atomic (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.4542981Z test_chunking_preserves_every_character_and_bonus_titles (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.5914763Z test_cli_unicode_input_and_template_array (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.6597448Z test_commit_retry_is_idempotent_and_exported (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.6849403Z test_completed_partial_source_is_not_reported_as_whole_book (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.6942172Z test_context_fails_instead_of_truncating_required_constraints (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.7102289Z test_context_pins_critical_explicit_and_due_cards (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.7277784Z test_crlf_draft_hash_matches_lint_and_export_bytes (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.7755393Z test_cross_book_delta_rejected (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.7925769Z test_export_failure_preserves_commit_and_can_recover (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.8052709Z test_ingest_and_record_resume_idempotently (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.8169789Z test_input_placeholders_and_invalid_range (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.8261131Z test_missing_book_read_does_not_create_files (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.8392656Z test_missing_required_card_is_not_silently_skipped (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.8537539Z test_new_session_can_discover_source_id_and_resume_without_chat_history (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:00.9519373Z test_no_heading_and_long_single_line_are_lossless (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.0053725Z test_optional_context_stays_bounded_and_deterministic (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.0405030Z test_outside_edits_after_commit_are_visible_and_block_continuation (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.0509089Z test_outside_edits_are_never_overwritten (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.0911011Z test_parallel_identical_submissions_only_commit_once (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.1412668Z test_path_escape_and_linked_managed_directory (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.2382190Z test_recall_output_is_bounded (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.2472866Z test_reinitialization_never_overwrites (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.2716719Z test_replace_detects_intervening_card_edit (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.7673239Z test_replace_last_restores_removed_changes_and_keeps_history (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.7805516Z test_source_read_uses_exact_offsets_and_budget (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.7892994Z test_stale_review_and_fabricated_evidence_rejected (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.8207097Z test_stale_state_requires_rechecking (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.8289883Z test_unicode_length_contract (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.8589639Z test_wrong_analysis_hash_quote_and_incomplete_report (test_story.StoryTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.8603214Z test_current_download_rejects_old_scope_or_repository_before_fetching_tarball (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.8627668Z test_existing_different_payload_is_never_overwritten (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.8649638Z test_existing_matching_version_is_verified_without_republishing (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.8671779Z test_failed_authentication_never_treats_package_as_absent (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.8685684Z test_foreign_repository_stops_before_network_or_publication (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9311233Z test_historical_runtime_smoke_does_not_require_new_analysis_references (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9319688Z test_invalid_tag_stops_before_network_or_build (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9418765Z test_legacy_prepare_only_preserves_identity_without_publication (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9442338Z test_prepare_only_never_reads_or_writes_registry (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9454183Z test_previous_owner_package_is_never_republished (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9477086Z test_publish_timeout_also_reads_back_without_a_second_publish (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9489400Z test_redirect_removes_registry_credential_from_signed_asset_host (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9498086Z test_registry_query_uses_current_scope_and_host_bound_credential (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:01.9855287Z test_runtime_smoke_installs_all_suite_dependencies_before_execution (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.0176248Z test_runtime_smoke_rejects_broken_sibling_link_before_execution (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.0426557Z test_runtime_smoke_rejects_partial_suite_before_execution (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.0448307Z test_uncertain_publish_reads_back_without_a_second_publish (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.0472197Z test_wrong_built_identity_stops_before_registry_access (test_sync_packages.PackageSyncTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.0478662Z test_changed_candidate_inputs_are_rejected (test_verify.BenchmarkContractTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1174963Z test_changed_configuration_metadata_is_rejected (test_verify.BenchmarkContractTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1185038Z test_changed_upstream_inputs_cannot_validate_an_old_report (test_verify.BenchmarkContractTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1197655Z test_duplicate_input_paths_and_reordered_profiles_are_rejected (test_verify.BenchmarkContractTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1210371Z test_inconsistent_totals_and_reduction_cannot_be_reported_as_passed (test_verify.BenchmarkContractTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1216802Z test_matching_lists_metadata_hashes_and_arithmetic_pass (test_verify.BenchmarkContractTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1220109Z test_all_skipped_tests_cannot_be_reported_as_passed (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1246230Z test_archive_validation_covers_specialized_skill_bytes (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1252289Z test_counts_come_from_real_callbacks_including_failed_subtests (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1262630Z test_default_archive_matches_canonical_version_even_if_other_versions_exist (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1263902Z test_empty_suite_cannot_be_reported_as_passed (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1270766Z test_failure_report_preserves_existing_success_evidence (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1275242Z test_linked_parent_cannot_redirect_report_outside_requested_directory (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1287870Z test_links_are_checked_in_specialized_skills (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1291325Z test_reparse_point_output_is_rejected_before_writing (test_verify.VerificationEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1344017Z test_default_output_uses_runtime_version_without_overwriting_other_releases (test_verify.VersionedEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1371180Z test_explicit_output_is_honored_without_creating_default_directory (test_verify.VersionedEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1392579Z test_missing_current_probes_do_not_fall_back_to_a_previous_release (test_verify.VersionedEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.1542525Z test_probes_follow_runtime_version_and_keep_exact_hash_binding (test_verify.VersionedEvidenceTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.3448350Z test_external_case_only_folder_rename_cannot_register_a_second_volume_spelling (test_volume_consistency.VolumeConsistencyTests) ... skipped 'Filesystem keeps these directory names distinct'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.3988560Z test_latest_revision_cannot_rebind_existing_volume_identity (test_volume_consistency.VolumeConsistencyTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.5700023Z test_legacy_historical_plan_cannot_reset_current_volume_binding (test_volume_consistency.VolumeConsistencyTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.5928506Z test_new_chapter_cannot_adopt_a_hard_link_to_another_chapter (test_volume_consistency.VolumeConsistencyTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.6051767Z test_new_chapter_rejects_case_alias_of_registered_volume_directory (test_volume_consistency.VolumeConsistencyTests) ... skipped 'Filesystem keeps these directory names distinct'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.6849081Z test_new_chapter_rejects_unicode_alias_of_registered_volume_directory (test_volume_consistency.VolumeConsistencyTests) ... skipped 'Filesystem keeps these directory names distinct'
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.7495335Z test_same_volume_id_cannot_split_new_chapters_across_directories (test_volume_consistency.VolumeConsistencyTests) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.7949882Z test_another_actors_upgrade_does_not_allow_committed_cooldown_violation (test_world_rules_regressions.WorldRulesCommitRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8432215Z test_zero_opening_is_committed_and_overdraft_rolls_back_next_chapter (test_world_rules_regressions.WorldRulesCommitRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8471956Z test_actor_specific_rule_update_keeps_other_actors_old_cooldown (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8495239Z test_distinct_items_keep_their_concurrent_holders (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8518888Z test_evidenced_zero_opening_blocks_positive_spending (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8545973Z test_history_cannot_create_a_new_same_tick_hook_ambiguity (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8597512Z test_legacy_hook_rebind_preserves_ambiguity_and_idempotence (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8640223Z test_legacy_same_tick_hooks_report_ambiguity_after_vacuum (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8658363Z test_new_same_tick_hook_events_are_rejected_atomically (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8684610Z test_resolved_hook_timing_clears_legacy_ambiguity (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8712643Z test_rule_line_restriction_does_not_apply_to_other_lines (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8737748Z test_undated_author_plan_does_not_erase_observed_cognition (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8764542Z test_undated_cognition_is_retained_without_claiming_latest_state (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8787452Z test_undated_line_checkpoint_is_a_candidate_not_current_scene (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8815001Z test_undated_rule_change_is_not_silently_older_than_dated_rule (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8839534Z test_unknown_record_evidence_must_still_be_current (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8874634Z test_unknown_use_survives_known_prior_time_and_requests_review (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8890384Z test_zero_ordinary_transfer_still_rejected_atomically (test_world_rules_regressions.WorldRulesRegressions) ... ok
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8891105Z 
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8891366Z ----------------------------------------------------------------------
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8892205Z Ran 443 tests in 29.506s
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8892489Z 
+test (ubuntu-latest, 3.10)	Run regression tests including historical migration	2026-09-11T13:19:02.8892715Z OK (skipped=12)
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	﻿2026-09-11T13:19:02.9175999Z ##[group]Run python -B -X utf8 scripts/package.py
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9176439Z ^[[36;1mpython -B -X utf8 scripts/package.py^[[0m
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9198217Z shell: /usr/bin/bash -e {0}
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9198656Z env:
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9198980Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9199419Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9199892Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9200314Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9200712Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9201243Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:02.9201597Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Build the complete skill ZIP	2026-09-11T13:19:03.0100646Z {"archive": "/home/runner/work/story-skill/story-skill/dist/story-codex-0.5.4.zip", "version": "0.5.4", "files": 33, "sha256": "5f66a93a47178cf15a8f6ca4a8390885e7f1dd2dba0fe12dd4951fcd48d4a9af", "bytes": 119657}
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	﻿2026-09-11T13:19:03.0183349Z ##[group]Run python -B -X utf8 scripts/smoke.py --output dist/ci-smoke.json
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0183862Z ^[[36;1mpython -B -X utf8 scripts/smoke.py --output dist/ci-smoke.json^[[0m
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0204858Z shell: /usr/bin/bash -e {0}
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0205225Z env:
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0205539Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0205964Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0206420Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0206816Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0207295Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0207690Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:03.0208027Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Exercise the local CLI workflow	2026-09-11T13:19:04.7924249Z {"ok": true, "method": "Synthetic fixture via real CLI subprocesses; no model or API calls", "commands_executed": ["init", "notes", "plan", "context", "lint", "commit", "commit", "reconcile", "lint", "reconcile", "reconcile", "ingest", "next", "record", "record", "next", "coverage", "findings", "report", "coverage"], "visible_chars": 213, "draft_sha256": "850c68d3d529515d70fdfc502ffb292bc5fc7f94403b7399adfdc7020dbf1d38", "reconciled_draft_sha256": "17826832bfce7015ed7ad76723f49b2fe00fa587dceb02251419424b428a5725", "context_bytes": 767, "context_budget_bytes": 4000, "chapter_commit_idempotent": true, "export_bytes_verified": true, "reconcile_idempotent": true, "external_backup_verified": true, "non_content_chunks_completed": 1, "analysis_coverage": {"analyzed": 3, "chunks_total": 3, "complete_for_imported_text": true, "next_chunk": null, "pending": 0, "report_path": ".story/analysis/8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe/report.md", "source": "8bf8a8fb48529fd37ea941e83eedf202a0a83ac39e61f85c9735557d441e98fe", "source_coverage": "partial", "text_coverage_contiguous": true}, "finding_pages_returned": 3, "final_report_exported": true, "literary_quality_tested": false}
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	﻿2026-09-11T13:19:04.8009514Z ##[group]Run python -B -X utf8 scripts/chinese_acceptance.py --output dist/ci-chinese.json
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8010114Z ^[[36;1mpython -B -X utf8 scripts/chinese_acceptance.py --output dist/ci-chinese.json^[[0m
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8030872Z shell: /usr/bin/bash -e {0}
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8031194Z env:
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8031514Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8031950Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8032814Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8033235Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8033668Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8034076Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:04.8034416Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Replay the reviewed Chinese manuscripts	2026-09-11T13:19:11.6733783Z {"ok": true, "books": ["渡口夜账", "留半寸"], "retained_workdir": null}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	﻿2026-09-11T13:19:11.6815974Z ##[group]Run python -B -X utf8 scripts/long_acceptance.py --output dist/ci-long.json
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6816557Z ^[[36;1mpython -B -X utf8 scripts/long_acceptance.py --output dist/ci-long.json^[[0m
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6837368Z shell: /usr/bin/bash -e {0}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6837750Z env:
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6838074Z   pythonLocation: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6838563Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib/pkgconfig
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6839016Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6839536Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6839918Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.10.21/x64
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6840340Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.10.21/x64/lib
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.6840738Z ##[endgroup]
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.8611555Z {"step": "创建独立中文书", "ok": true, "revision": 0}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.9278842Z {"step": "保存创作限制与物件卡", "ok": true, "revision": 1}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:11.9934223Z {"step": "建立人物身份、分线化名及待证命题", "ok": true, "revision": 2}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.0583133Z {"step": "保存第1章计划", "ok": true, "revision": 3}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.1250384Z {"step": "读取第1章上下文", "ok": true, "revision": 3}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.1942486Z {"step": "准备第1章审查", "ok": true, "revision": 3}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.2933553Z {"step": "提交第1章", "ok": true, "revision": 4}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.3615063Z {"step": "确认已有工程不能靠adopt静默跳号", "ok": true, "revision": 4}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.5347000Z {"step": "保存第2章计划", "ok": true, "revision": 5}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.5999874Z {"step": "读取第2章上下文", "ok": true, "revision": 5}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.6680622Z {"step": "准备第2章审查", "ok": true, "revision": 5}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.7522394Z {"step": "提交第2章", "ok": true, "revision": 6}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.8179187Z {"step": "保存第3章计划", "ok": true, "revision": 7}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.8840679Z {"step": "读取第3章上下文", "ok": true, "revision": 7}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:12.9518973Z {"step": "准备第3章审查", "ok": true, "revision": 7}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.0275705Z {"step": "提交第3章", "ok": true, "revision": 8}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.0998936Z {"step": "保存第4章计划", "ok": true, "revision": 9}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.1643992Z {"step": "读取第4章上下文", "ok": true, "revision": 9}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.2324510Z {"step": "准备第4章审查", "ok": true, "revision": 9}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.3071487Z {"step": "提交第4章", "ok": true, "revision": 10}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.3733791Z {"step": "保存第5章计划", "ok": true, "revision": 11}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.4400076Z {"step": "读取第5章上下文", "ok": true, "revision": 11}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.5078190Z {"step": "准备第5章审查", "ok": true, "revision": 11}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.6110888Z {"step": "提交第5章", "ok": true, "revision": 12}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.6776782Z {"step": "保存第6章计划", "ok": true, "revision": 13}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.7447588Z {"step": "读取第6章上下文", "ok": true, "revision": 13}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.8115820Z {"step": "准备第6章审查", "ok": true, "revision": 13}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.9122250Z {"step": "提交第6章", "ok": true, "revision": 14}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:13.9796851Z {"step": "保存第7章计划", "ok": true, "revision": 15}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.0457539Z {"step": "读取第7章上下文", "ok": true, "revision": 15}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.1147326Z {"step": "准备第7章审查", "ok": true, "revision": 15}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.2215698Z {"step": "提交第7章", "ok": true, "revision": 16}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.4474356Z {"step": "保存第8章计划", "ok": true, "revision": 17}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.5134653Z {"step": "读取第8章上下文", "ok": true, "revision": 17}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.5822169Z {"step": "准备第8章审查", "ok": true, "revision": 17}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.6591957Z {"step": "提交第8章", "ok": true, "revision": 18}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.7440482Z {"step": "保存第9章计划", "ok": true, "revision": 19}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.8095574Z {"step": "读取第9章上下文", "ok": true, "revision": 19}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:14.8772751Z {"step": "准备第9章审查", "ok": true, "revision": 19}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.1565795Z {"step": "提交第9章", "ok": true, "revision": 20}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.3260715Z {"step": "保存第10章计划", "ok": true, "revision": 21}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.3928987Z {"step": "读取第10章上下文", "ok": true, "revision": 21}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.4608368Z {"step": "准备第10章审查", "ok": true, "revision": 21}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.6333483Z {"step": "提交第10章", "ok": true, "revision": 22}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.6984092Z {"step": "保存第11章计划", "ok": true, "revision": 23}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.7673258Z {"step": "读取第11章上下文", "ok": true, "revision": 23}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.8370949Z {"step": "准备第11章审查", "ok": true, "revision": 23}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.9187617Z {"step": "提交第11章", "ok": true, "revision": 24}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:15.9831114Z {"step": "检验已提交双线与伏笔状态", "ok": true, "revision": 24}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:16.0479618Z {"step": "检索早期物件的精确原文", "ok": true, "revision": 24}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:16.1437098Z {"step": "保存历史复核所需的下一章取材计划", "ok": true, "revision": 25}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:16.2118134Z {"step": "读取历史复核实际使用的现态卡片", "ok": true, "revision": 25}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:16.3519793Z {"step": "记录第1章实际复核的依赖", "ok": true, "revision": 26}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:16.4295867Z {"step": "记录第2章实际复核的依赖", "ok": true, "revision": 27}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:16.6862008Z {"step": "记录第3章实际复核的依赖", "ok": true, "revision": 28}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:16.9104830Z {"step": "记录第4章实际复核的依赖", "ok": true, "revision": 29}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.0947927Z {"step": "记录第5章实际复核的依赖", "ok": true, "revision": 30}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.2557997Z {"step": "记录第6章实际复核的依赖", "ok": true, "revision": 31}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.4165891Z {"step": "记录第7章实际复核的依赖", "ok": true, "revision": 32}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.4846443Z {"step": "记录第8章实际复核的依赖", "ok": true, "revision": 33}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.5518703Z {"step": "记录第9章实际复核的依赖", "ok": true, "revision": 34}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.7066432Z {"step": "记录第10章实际复核的依赖", "ok": true, "revision": 35}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.7823785Z {"step": "记录第11章实际复核的依赖", "ok": true, "revision": 36}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.8496550Z {"step": "保存修订前状态快照", "ok": true, "revision": 37}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.9185324Z {"step": "创建钥匙颜色修正的历史分支", "ok": true, "revision": 38}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:17.9827607Z {"step": "读取候选范围与状态修订要求", "ok": true, "revision": 38}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.0519881Z {"step": "保存两章候选、最终卡片决策及全部受影响领域证据", "ok": true, "revision": 39}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.1178411Z {"step": "读取第1章前后对照与审查模板", "ok": true, "revision": 39}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.1910146Z {"step": "读取第11章前后对照与审查模板", "ok": true, "revision": 39}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.2720234Z {"step": "保存逐章对读后的四项审查", "ok": true, "revision": 40}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.3385466Z {"step": "读取最新整包审查指纹", "ok": true, "revision": 40}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.4597790Z {"step": "保存整个历史分支的真实覆盖与状态审查", "ok": true, "revision": 41}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.6804959Z {"step": "发布已审查历史分支", "ok": true, "revision": 42}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.7452490Z {"step": "保存发布后的下一章计划", "ok": true, "revision": 42}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.8130848Z {"step": "读取历史修订后的相关资料", "ok": true, "revision": 42}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.8777778Z {"step": "检查已撤回颜色不再作为当前正文命中", "ok": true, "revision": 42}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.9422439Z {"step": "复核分支发布后的领域一致性", "ok": true, "revision": 42}
+test (ubuntu-latest, 3.10)	Exercise multi-line writing and historical revision	2026-09-11T13:19:18.9820692Z {"ok": true, "report": "/home/runner/work/story-skill/story-skill/dist/ci-long.json"}
+test (ubuntu-latest, 3.10)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T13:19:18.9981595Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (ubuntu-latest, 3.10)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:19:18.9982669Z Post job cleanup.
+test (ubuntu-latest, 3.10)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:19:19.0975667Z (node:2366) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+test (ubuntu-latest, 3.10)	Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:19:19.0976370Z (Use `node --trace-deprecation ...` to show where the warning was created)
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T13:19:19.1141691Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.1142745Z Post job cleanup.
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.1863617Z [command]/usr/bin/git version
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.1895530Z git version 2.55.0
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.1923329Z Temporarily overriding HOME='/home/runner/work/_temp/2f3917d5-009d-4ec3-b36b-9c11ab20dc9b' before making global git config changes
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.1924507Z Adding repository directory to the temporary git global config as a safe directory
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.1927197Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/story-skill/story-skill
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.1958552Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.1985424Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.2162652Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.2186674Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.2360329Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+test (ubuntu-latest, 3.10)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:19:19.2395988Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+test (ubuntu-latest, 3.10)	Complete job	﻿2026-09-11T13:19:19.2694066Z Cleaning up orphan processes
+test (ubuntu-latest, 3.10)	Complete job	2026-09-11T13:19:19.2899559Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (windows-latest, 3.12)	Set up job	﻿2026-09-11T13:18:25.9784735Z Current runner version: '2.337.0'
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9833269Z ##[group]Runner Image Provisioner
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9834256Z Hosted Compute Agent
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9834808Z Version: 20260828.587
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9835551Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9836581Z Build Date: 2026-08-28T16:44:25Z
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9837243Z Worker ID: {63b66666-81f8-4c77-bb37-e3742d15b796}
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9837955Z Azure Region: eastus
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9838507Z ##[endgroup]
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9839922Z ##[group]Operating System
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9840638Z Microsoft Windows Server 2025
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9841243Z 10.0.26100
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9841761Z Datacenter
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9842301Z ##[endgroup]
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9842871Z ##[group]Runner Image
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9843534Z Image: windows-2025-vs2026
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9844141Z Version: 20260907.229.1
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9845240Z Included Software: https://github.com/actions/runner-images/blob/win25-vs2026/20260907.229/images/windows/Windows2025-VS2026-Readme.md
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9847175Z Image Release: https://github.com/actions/runner-images/releases/tag/win25-vs2026%2F20260907.229
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9848125Z ##[endgroup]
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9849388Z ##[group]GITHUB_TOKEN Permissions
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9851313Z Contents: read
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9851896Z Metadata: read
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9852450Z ##[endgroup]
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9854505Z Secret source: Actions
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9855471Z Cache mode: write
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:25.9856143Z Prepare workflow directory
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:26.0183597Z Prepare all required actions
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:26.0232885Z Getting action download info
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:26.1937115Z Download action repository 'actions/checkout@11d5960a326750d5838078e36cf38b85af677262' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:26.3410097Z Download action repository 'actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065' (SHA:a26af69be951a213d495a4c3e4e4022e16d87065)
+test (windows-latest, 3.12)	Set up job	2026-09-11T13:18:26.6235362Z Complete job name: test (windows-latest, 3.12)
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T13:18:26.7800761Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7812077Z ##[group]Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7813318Z with:
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7814321Z   persist-credentials: false
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7814845Z   repository: NingCui29/story-skill
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7818842Z   token: ***
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7819238Z   ssh-strict: true
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7819634Z   ssh-user: git
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7820012Z   clean: true
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7820413Z   sparse-checkout-cone-mode: true
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7820896Z   fetch-depth: 1
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7821286Z   fetch-tags: false
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7821714Z   show-progress: true
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7822110Z   lfs: false
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7822514Z   submodules: false
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7822916Z   set-safe-directory: true
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7823381Z   allow-unsafe-pr-checkout: false
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.7824153Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.9272070Z Syncing repository: NingCui29/story-skill
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.9273825Z ##[group]Getting Git version info
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:26.9274461Z Working directory is 'D:\a\story-skill\story-skill'
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.0627529Z [command]"C:\Program Files\Git\bin\git.exe" version
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5213155Z git version 2.55.0.windows.5
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5276979Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5300927Z Temporarily overriding HOME='D:\a\_temp\b01a60a3-c0bd-497a-96f8-befecf79640f' before making global git config changes
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5303415Z Adding repository directory to the temporary git global config as a safe directory
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.5313666Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\story-skill\story-skill
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.6047282Z Deleting the contents of 'D:\a\story-skill\story-skill'
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.6052767Z ##[group]Initializing the repository
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.6061625Z [command]"C:\Program Files\Git\bin\git.exe" init D:\a\story-skill\story-skill
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.7052490Z Initialized empty Git repository in D:/a/story-skill/story-skill/.git/
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.7094163Z [command]"C:\Program Files\Git\bin\git.exe" remote add origin https://github.com/NingCui29/story-skill
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.7986338Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.7988525Z ##[group]Disabling automatic garbage collection
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.7996644Z [command]"C:\Program Files\Git\bin\git.exe" config --local gc.auto 0
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.8311735Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.8313107Z ##[group]Setting up auth
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.8314814Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:27.8609224Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.4974999Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:29.5274738Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:30.0461352Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:30.0764104Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:30.6095245Z [command]"C:\Program Files\Git\bin\git.exe" config --local http.https://github.com/.extraheader "AUTHORIZATION: basic ***"
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:30.6432126Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:30.6433079Z ##[group]Fetching the repository
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:30.6446245Z [command]"C:\Program Files\Git\bin\git.exe" -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +89945075e0917acff8f23b9fa356c3a8cbba658e:refs/remotes/origin/main
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1023097Z From https://github.com/NingCui29/story-skill
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1024009Z  * [new ref]         89945075e0917acff8f23b9fa356c3a8cbba658e -> origin/main
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1064887Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1065586Z ##[group]Determining the checkout info
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1069308Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1078604Z [command]"C:\Program Files\Git\bin\git.exe" sparse-checkout disable
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1615006Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all extensions.worktreeConfig
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1960609Z ##[group]Checking out the ref
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.1971786Z [command]"C:\Program Files\Git\bin\git.exe" checkout --progress --force -B main refs/remotes/origin/main
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.5604561Z Switched to a new branch 'main'
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.5687707Z branch 'main' set up to track 'origin/main'.
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.6123664Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.6130444Z [command]"C:\Program Files\Git\bin\git.exe" log -1 --format=%H
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.6403614Z 89945075e0917acff8f23b9fa356c3a8cbba658e
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.6441466Z ##[group]Removing auth
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.6449754Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:32.6744723Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:33.2447529Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:33.2754400Z http.https://github.com/.extraheader
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:33.2799219Z [command]"C:\Program Files\Git\bin\git.exe" config --local --unset-all http.https://github.com/.extraheader
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:33.3104167Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:33.8447475Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:33.8735317Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+test (windows-latest, 3.12)	Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:34.3910809Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	﻿2026-09-11T13:18:34.4342708Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4344895Z ##[group]Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4345272Z with:
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4345451Z   python-version: 3.12
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4345657Z   check-latest: false
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4348894Z   token: ***
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4349104Z   update-environment: true
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4349336Z   allow-prereleases: false
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4349542Z   freethreaded: false
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.4349735Z ##[endgroup]
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.5950940Z ##[group]Installed versions
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.6266063Z (node:3864) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.6267969Z (Use `node --trace-deprecation ...` to show where the warning was created)
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.6268791Z Successfully set up CPython (3.12.10)
+test (windows-latest, 3.12)	Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065	2026-09-11T13:18:34.6269454Z ##[endgroup]
+test (windows-latest, 3.12)	Run regression tests including historical migration	﻿2026-09-11T13:18:34.6679997Z ##[group]Run python -u -B -X utf8 -m unittest discover -s tests -v -f
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.6680682Z ^[[36;1mpython -u -B -X utf8 -m unittest discover -s tests -v -f^[[0m
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.7704316Z shell: C:\Program Files\PowerShell\7\pwsh.EXE -command ". '{0}'"
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.7704807Z env:
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.7705129Z   pythonLocation: C:\hostedtoolcache\windows\Python\3.12.10\x64
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.7705711Z   PKG_CONFIG_PATH: C:\hostedtoolcache\windows\Python\3.12.10\x64/lib/pkgconfig
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.7706256Z   Python_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.7706739Z   Python2_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.7707226Z   Python3_ROOT_DIR: C:\hostedtoolcache\windows\Python\3.12.10\x64
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:34.7707630Z ##[endgroup]
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8734308Z test_cli_report_uses_captured_fingerprint_and_rejects_stale_input (test_analysis_baselines.AnalysisBaselineTests.test_cli_report_uses_captured_fingerprint_and_rejects_stale_input) ... FAIL
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8760901Z 
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8761322Z ======================================================================
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8762828Z FAIL: test_cli_report_uses_captured_fingerprint_and_rejects_stale_input (test_analysis_baselines.AnalysisBaselineTests.test_cli_report_uses_captured_fingerprint_and_rejects_stale_input)
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8764331Z ----------------------------------------------------------------------
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8764901Z Traceback (most recent call last):
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8773371Z   File "D:\a\story-skill\story-skill\tests\test_analysis_baselines.py", line 239, in test_cli_report_uses_captured_fingerprint_and_rejects_stale_input
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8774755Z     self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8785339Z AssertionError: 2 != 0 : {"analyzed":2,"chunks_total":2,"complete_for_imported_text":true,"export_details":{"code":"io_error"},"export_error":"[WinError 32] The process cannot access the file because it is being used by another process: 'C:\\\\Users\\\\runneradmin\\\\AppData\\\\Local\\\\Temp\\\\story-analysis-baseline-yj_04urh\\\\分析基线\\\\.story\\\\analysis\\\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\\\.story-tmp-a48c6ca360ae40e8bd796055f22c55f7' -> 'C:\\\\Users\\\\runneradmin\\\\AppData\\\\Local\\\\Temp\\\\story-analysis-baseline-yj_04urh\\\\分析基线\\\\.story\\\\analysis\\\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\\\report.md'","exports_complete":false,"finalized":true,"next_chunk":null,"pending":0,"recovery":"Retry export after IO/lock recovery; use reconcile for an externally edited latest chapter. Preserved versions: .story/export-backups/","report":"C:\\Users\\runneradmin\\AppData\\Local\\Temp\\story-analysis-baseline-yj_04urh\\分析基线\\.story\\analysis\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\report.md","report_path":".story/analysis/284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be/report.md","source":"284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be","source_coverage":"partial","text_coverage_contiguous":true}
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8794572Z 
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8794584Z 
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8794821Z ----------------------------------------------------------------------
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8795368Z Ran 1 test in 0.847s
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8795582Z 
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:39.8795709Z FAILED (failures=1)
+test (windows-latest, 3.12)	Run regression tests including historical migration	2026-09-11T13:18:40.0329196Z ##[error]Process completed with exit code 1.
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	﻿2026-09-11T13:18:40.0707913Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.0709317Z Post job cleanup.
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.2771200Z [command]"C:\Program Files\Git\bin\git.exe" version
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.3047332Z git version 2.55.0.windows.5
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.3114403Z Temporarily overriding HOME='D:\a\_temp\3bcd49f8-b1db-4ce9-a3c4-7cce995931e9' before making global git config changes
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.3115836Z Adding repository directory to the temporary git global config as a safe directory
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.3125766Z [command]"C:\Program Files\Git\bin\git.exe" config --global --add safe.directory D:\a\story-skill\story-skill
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.3435964Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp core\.sshCommand
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.3744887Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :\""
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.9521637Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:40.9842393Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "sh -c \"git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :\""
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:41.5129165Z [command]"C:\Program Files\Git\bin\git.exe" config --local --name-only --get-regexp ^includeIf\.gitdir:
+test (windows-latest, 3.12)	Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262	2026-09-11T13:18:41.5439497Z [command]"C:\Program Files\Git\bin\git.exe" submodule foreach --recursive "git config --local --show-origin --name-only --get-regexp remote.origin.url"
+test (windows-latest, 3.12)	Complete job	﻿2026-09-11T13:18:42.0980191Z Cleaning up orphan processes
+test (windows-latest, 3.12)	Complete job	2026-09-11T13:18:42.1015185Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

@@ -1,7 +1,7 @@
 {
   "version": "0.5.4",
-  "status": "locally_verified",
-  "updated_at": "2026-09-11T13:16:52.814859+00:00",
+  "status": "published_and_verified",
+  "updated_at": "2026-09-11T13:29:33.574506+00:00",
   "target_platforms": [
     "macOS",
     "Linux"
@@ -18,15 +18,62 @@
     "checks": 12
   },
   "release_assets": {
-    "status": "pending"
+    "status": "passed",
+    "report": "release.json",
+    "files": 33,
+    "sha256": "5f66a93a47178cf15a8f6ca4a8390885e7f1dd2dba0fe12dd4951fcd48d4a9af",
+    "bytes": 119657,
+    "download_matches_local_and_commit": true
   },
   "fixed_tag_install": {
-    "status": "pending"
+    "status": "passed",
+    "report": "remote-install.json",
+    "skills": 7,
+    "files": 33,
+    "runtime_checks": 4
   },
   "packages": {
-    "status": "pending"
+    "status": "passed",
+    "report": "packages.json",
+    "independent_check": "package-check.json",
+    "version": "0.5.4",
+    "visibility": "public",
+    "workflow_run": 34603844944,
+    "files": 33,
+    "runtime_checks": 4,
+    "sha256": "b006102ab73e0a5469faad3855f6aac2ef93a4a68bc207296ad6af7f472356f1"
   },
   "local_install": {
-    "status": "pending"
+    "status": "passed",
+    "report": "local-install.json",
+    "previous_version": "0.5.3",
+    "version": "0.5.4",
+    "target": "/Users/cuining/.codex/skills",
+    "backup": "/Users/cuining/.codex/story-codex-v054-backup-63iiwnfg",
+    "files": 33,
+    "runtime_checks": 4,
+    "local_modifications": [],
+    "next_message_or_restart_for_discovery": true
+  },
+  "tag": "v0.5.4",
+  "tag_commit": "89945075e0917acff8f23b9fa356c3a8cbba658e",
+  "release_url": "https://github.com/NingCui29/story-skill/releases/tag/v0.5.4",
+  "published_at": "2026-09-11T13:21:30Z",
+  "remote_ci": {
+    "report": "ci.json",
+    "run_id": 34603548095,
+    "conclusion": "failure",
+    "linux": {
+      "status": "passed",
+      "tests_run": 443,
+      "tests_passed": 431,
+      "tests_skipped": 12
+    },
+    "windows": {
+      "status": "failed",
+      "tests_run": 1,
+      "known_issue": "WinError 32 during report export; later checks skipped"
+    },
+    "all_platforms_passed": false
   }
 }

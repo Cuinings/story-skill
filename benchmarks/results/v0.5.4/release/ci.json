@@ -1,0 +1,41 @@
+{
+  "repo": "NingCui29/story-skill",
+  "run_id": 34603548095,
+  "url": "https://github.com/NingCui29/story-skill/actions/runs/34603548095",
+  "head_sha": "89945075e0917acff8f23b9fa356c3a8cbba658e",
+  "status": "completed",
+  "conclusion": "failure",
+  "supported_platform_check_passed": true,
+  "all_platforms_passed": false,
+  "jobs": [
+    {
+      "platform": "linux",
+      "id": 103276423251,
+      "url": "https://github.com/NingCui29/story-skill/actions/runs/34603548095/job/103276423251",
+      "conclusion": "success",
+      "tests_run": 443,
+      "skipped": 12,
+      "passed": 431,
+      "known_windows_export_error": false,
+      "summary_lines": [
+        "test (ubuntu-latest, 3.10)\tRun regression tests including historical migration\t2026-09-11T13:19:02.8892205Z Ran 443 tests in 29.506s",
+        "test (ubuntu-latest, 3.10)\tRun regression tests including historical migration\t2026-09-11T13:19:02.8892715Z OK (skipped=12)"
+      ]
+    },
+    {
+      "platform": "windows",
+      "id": 103276423510,
+      "url": "https://github.com/NingCui29/story-skill/actions/runs/34603548095/job/103276423510",
+      "conclusion": "failure",
+      "tests_run": 1,
+      "skipped": 0,
+      "passed": null,
+      "known_windows_export_error": true,
+      "summary_lines": [
+        "test (windows-latest, 3.12)\tRun regression tests including historical migration\t2026-09-11T13:18:39.8785339Z AssertionError: 2 != 0 : {\"analyzed\":2,\"chunks_total\":2,\"complete_for_imported_text\":true,\"export_details\":{\"code\":\"io_error\"},\"export_error\":\"[WinError 32] The process cannot access the file because it is being used by another process: 'C:\\\\\\\\Users\\\\\\\\runneradmin\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\story-analysis-baseline-yj_04urh\\\\\\\\分析基线\\\\\\\\.story\\\\\\\\analysis\\\\\\\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\\\\\\\.story-tmp-a48c6ca360ae40e8bd796055f22c55f7' -> 'C:\\\\\\\\Users\\\\\\\\runneradmin\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\story-analysis-baseline-yj_04urh\\\\\\\\分析基线\\\\\\\\.story\\\\\\\\analysis\\\\\\\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\\\\\\\report.md'\",\"exports_complete\":false,\"finalized\":true,\"next_chunk\":null,\"pending\":0,\"recovery\":\"Retry export after IO/lock recovery; use reconcile for an externally edited latest chapter. Preserved versions: .story/export-backups/\",\"report\":\"C:\\\\Users\\\\runneradmin\\\\AppData\\\\Local\\\\Temp\\\\story-analysis-baseline-yj_04urh\\\\分析基线\\\\.story\\\\analysis\\\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\\\report.md\",\"report_path\":\".story/analysis/284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be/report.md\",\"source\":\"284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\",\"source_coverage\":\"partial\",\"text_coverage_contiguous\":true}",
+        "test (windows-latest, 3.12)\tRun regression tests including historical migration\t2026-09-11T13:18:39.8795368Z Ran 1 test in 0.847s",
+        "test (windows-latest, 3.12)\tRun regression tests including historical migration\t2026-09-11T13:18:39.8795709Z FAILED (failures=1)"
+      ]
+    }
+  ]
+}

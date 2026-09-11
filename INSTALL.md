@@ -1,6 +1,6 @@
 # 一行安装或升级 Story Codex
 
-**平台选择：macOS／Linux 目标为 v0.5.4，当前正在准备发布，须在固定标签与附件核验完成后安装。Windows 正文及报告导出存在 WinError 32，会保留待恢复状态；Windows 用户暂用已验证的 v0.4.0，不自动升级到 v0.5.4。** [现存限制与证据](docs/releases/v0.5.4.md#验证与兼容范围)
+**平台选择：macOS／Linux 安装 v0.5.4，固定标签、Release 附件与官方隔离安装已核验。Windows 正文及报告导出存在 WinError 32，会保留待恢复状态；Windows 用户暂用已验证的 v0.4.0，不自动升级到 v0.5.4。** [现存限制与证据](docs/releases/v0.5.4.md#验证与兼容范围)
 
 把这一行发给 Codex，首次安装和后续升级都使用它：
 
@@ -14,18 +14,18 @@ Codex 读取本页，定位安装位置，下载并核对完整套件：没有�
 
 ## 固定的发布来源
 
-macOS／Linux 按下表安装或升级到 v0.5.4。发布完成前、固定提交或摘要尚未登记时，保留原安装；完成后先核验固定标签解析出的提交和实际下载附件，下载或摘要不符时也保留原安装。Windows 保持或安装固定 v0.4.0，不自动升级至 v0.5.4。已经在 Windows 安装 0.5.x 时先保留技能备份和书籍状态，不自动降级或覆盖待恢复文件。[v0.4.0 验证记录](docs/github-release.md#历史-v040-发布验证记录)。一次安装过程中固定使用同一标签及其解析出的提交；已安装版本高于平台目标时，停止自动降级并说明情况。
+macOS／Linux 按下表安装或升级到 v0.5.4。先核验固定标签解析出的提交和实际下载附件，下载或摘要不符时保留原安装。Windows 保持或安装固定 v0.4.0，不自动升级至 v0.5.4。已经在 Windows 安装 0.5.x 时先保留技能备份和书籍状态，不自动降级或覆盖待恢复文件。[v0.4.0 验证记录](docs/github-release.md#历史-v040-发布验证记录)。一次安装过程中固定使用同一标签及其解析出的提交；已安装版本高于平台目标时，停止自动降级并说明情况。
 
 | 参数 | 值 |
 |---|---|
 | 仓库 | `NingCui29/story-skill` |
 | macOS／Linux 目标标签 | `v0.5.4` |
-| 发布状态 | 准备发布，固定标签、回下载与隔离安装均待核验；[本版验证目录](benchmarks/results/v0.5.4/README.md) |
-| 标签提交 | 待发布提交确定后登记；以[本版验证记录](benchmarks/results/v0.5.4/README.md)为准 |
+| 发布状态 | 已发布，固定标签、附件回下载与官方隔离安装均已核验；[本版验证目录](benchmarks/results/v0.5.4/README.md) |
+| 标签提交 | `89945075e0917acff8f23b9fa356c3a8cbba658e`；[标签与发布核验](benchmarks/results/v0.5.4/release/release.json) |
 | Python | 3.10 或更高 |
-| 目标载荷 | 7 个同级技能目录，共 33 个文件；待核对源码、Release ZIP 与官方固定标签安装的一致性 |
+| 目标载荷 | 7 个同级技能目录，共 33 个文件；已核对固定提交源码、Release ZIP 与官方固定标签安装的一致性 |
 | Release ZIP | [story-codex-0.5.4.zip](https://github.com/NingCui29/story-skill/releases/download/v0.5.4/story-codex-0.5.4.zip) · [校验文件](https://github.com/NingCui29/story-skill/releases/download/v0.5.4/story-codex-0.5.4.zip.sha256) |
-| ZIP SHA-256 | 本地构建为 `5f66a93a47178cf15a8f6ca4a8390885e7f1dd2dba0fe12dd4951fcd48d4a9af`；远端回下载尚待核验，[构建记录](benchmarks/results/v0.5.4/package.json) |
+| ZIP SHA-256 | `5f66a93a47178cf15a8f6ca4a8390885e7f1dd2dba0fe12dd4951fcd48d4a9af`；本地构建、远端回下载与 GitHub 服务端摘要一致，[发布核验](benchmarks/results/v0.5.4/release/release.json) |
 | Windows 固定标签／提交 | `v0.4.0`／`c1b3c3377573610a191e165ceb6866ae35afe5a8` |
 | Windows 套件／校验文件 | [story-codex-0.4.0.zip](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip) · [校验文件](https://github.com/NingCui29/story-skill/releases/download/v0.4.0/story-codex-0.4.0.zip.sha256) |
 | Windows 套件 SHA-256 | `087ad76fe32714ea776853cab579c3b6087ed092ef0857c55a76ae20aff7d54b`；7 个技能、31 个文件 |

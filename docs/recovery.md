@@ -2,7 +2,7 @@
 
 **Windows 正文和报告导出的 WinError 32 尚未修复，会保留待恢复状态。Windows 用户继续使用 v0.4.0；已经使用 v0.5.x 的书先完整备份，不盲目降级或覆盖待恢复内容。** [CI 范围](../benchmarks/results/v0.5.0/release/ci.json) · [导出失败](../benchmarks/results/v0.5.0/release/ci-windows-export-failed.json)
 
-以下 CLI 示例均需 `python "<核心技能目录>/scripts/story.py"` 前缀；书籍命令另附 `--book "<书目录绝对路径>"`，`template` 与帮助命令不附 `--book`。本页对应准备发布的 [v0.5.4](releases/v0.5.4.md)，本版实际验证与发布状态见 [发布记录](github-release.md)，平台限制见上方；共享核心为 `story-codex`；数据库继续使用 schema 2，v0.3.0、v0.4.0、v0.5.0、v0.5.1、v0.5.2、v0.5.3 书库无需重新导入。分卷正文命名只应用到新保存的目标，已有旧章路径继续识别。
+以下 CLI 示例均需 `python "<核心技能目录>/scripts/story.py"` 前缀；书籍命令另附 `--book "<书目录绝对路径>"`，`template` 与帮助命令不附 `--book`。本页对应 [v0.5.4](releases/v0.5.4.md)，本版实际验证与发布状态见 [发布记录](github-release.md)，平台限制见上方；共享核心为 `story-codex`；数据库继续使用 schema 2，v0.3.0、v0.4.0、v0.5.0、v0.5.1、v0.5.2、v0.5.3 书库无需重新导入。分卷正文命名只应用到新保存的目标，已有旧章路径继续识别。
 
 schema 1 书库先停止写入，保留原书并复制到独立目录，再 `migrate --book "<副本>"`。迁移前用 SQLite backup 生成一致备份并检查完整性；所有结构变更在同一事务中进行，失败回滚。迁移备份位于 `.story/migration-backups/`。回退时停止相关进程，在另一个独立书目录恢复备份并使用 v0.2.0；备份之后的新修改不会自动出现在旧版中。无须重新初始化或修改书籍身份。
 

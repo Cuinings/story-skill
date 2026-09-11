@@ -14,3 +14,5 @@ v0.5.4 补充规划承诺、正文详略和跨章审稿的具体判断方式。
 ZIP SHA-256：`5f66a93a47178cf15a8f6ca4a8390885e7f1dd2dba0fe12dd4951fcd48d4a9af`
 
 [安装与升级](https://github.com/NingCui29/story-skill/blob/main/INSTALL.md) · [版本说明](https://github.com/NingCui29/story-skill/blob/main/docs/releases/v0.5.4.md) · [验证记录](https://github.com/NingCui29/story-skill/tree/main/benchmarks/results/v0.5.4)
+
+远端 [CI 34603548095](https://github.com/NingCui29/story-skill/actions/runs/34603548095)：Linux 443项中431通过、12按平台跳过，全部步骤成功；Windows 首项报告导出触发已知 WinError 32，整体CI为失败，未宣称全平台通过。

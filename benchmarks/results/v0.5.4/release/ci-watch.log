@@ -1,0 +1,73 @@
+Refreshing run status every 30 seconds. Press Ctrl+C to quit.
+
+* main Verify source and package · 34603548095
+Triggered via push less than a minute ago
+
+JOBS
+* test (ubuntu-latest, 3.10) (ID 103276423251)
+  ✓ Set up job
+  ✓ Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+  ✓ Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+  ✓ Run regression tests including historical migration
+  ✓ Build the complete skill ZIP
+  ✓ Exercise the local CLI workflow
+  ✓ Replay the reviewed Chinese manuscripts
+  * Exercise multi-line writing and historical revision
+  * Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+  * Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+X test (windows-latest, 3.12) in 18s (ID 103276423510)
+  ✓ Set up job
+  ✓ Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+  ✓ Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+  X Run regression tests including historical migration
+  - Build the complete skill ZIP
+  - Exercise the local CLI workflow
+  - Replay the reviewed Chinese manuscripts
+  - Exercise multi-line writing and historical revision
+  - Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+  ✓ Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (windows-latest, 3.12): .github#2
+
+X Process completed with exit code 1.
+test (windows-latest, 3.12): .github#26
+
+X main Verify source and package · 34603548095
+Triggered via push about 1 minute ago
+
+JOBS
+✓ test (ubuntu-latest, 3.10) in 56s (ID 103276423251)
+  ✓ Set up job
+  ✓ Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+  ✓ Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+  ✓ Run regression tests including historical migration
+  ✓ Build the complete skill ZIP
+  ✓ Exercise the local CLI workflow
+  ✓ Replay the reviewed Chinese manuscripts
+  ✓ Exercise multi-line writing and historical revision
+  ✓ Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+  ✓ Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+  ✓ Complete job
+X test (windows-latest, 3.12) in 18s (ID 103276423510)
+  ✓ Set up job
+  ✓ Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+  ✓ Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+  X Run regression tests including historical migration
+  - Build the complete skill ZIP
+  - Exercise the local CLI workflow
+  - Replay the reviewed Chinese manuscripts
+  - Exercise multi-line writing and historical revision
+  - Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+  ✓ Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+  ✓ Complete job
+
+ANNOTATIONS
+! Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@11d5960a326750d5838078e36cf38b85af677262, actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+test (windows-latest, 3.12): .github#2
+
+X Process completed with exit code 1.
+test (windows-latest, 3.12): .github#26
+
