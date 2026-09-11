@@ -236,7 +236,7 @@ class AnalysisBaselineTests(unittest.TestCase):
         reviewed = self.book.findings(self.sid)
         self.write_report("此稿已按照另一连接保存的分析重新核对。")
         result = subprocess.run(args + [reviewed["analysis_sha256"]], capture_output=True, text=True)
-        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
         self.assertTrue(json.loads(result.stdout)["exports_complete"])
 
 
