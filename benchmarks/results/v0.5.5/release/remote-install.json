@@ -1,0 +1,169 @@
+{
+  "schema": 1,
+  "checked_at_utc": "2026-09-12T11:56:33.419099+00:00",
+  "reviewer": "independent /root/forward_skill_check",
+  "repository": "NingCui29/story-skill",
+  "tag": "v0.5.5",
+  "commit": "c53703bb57f42504022edb1c5d5011943e53cdf1",
+  "ok": true,
+  "scope": "Remote distribution and isolated CLI verification; not literary quality, UI discovery, platform matrix or actual user installation.",
+  "environment": {
+    "platform": "macOS-15.7.9-x86_64-i386-64bit",
+    "python": "3.12.14",
+    "python_executable": "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3"
+  },
+  "installer": {
+    "script": "/Users/cuining/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py",
+    "sha256": "38f311b75664bb063808f982c600271ebc4b560830f491705190f88a94e3e781",
+    "command": [
+      "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+      "-B",
+      "/Users/cuining/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py",
+      "--repo",
+      "NingCui29/story-skill",
+      "--ref",
+      "v0.5.5",
+      "--path",
+      "skills/story-codex",
+      "skills/story-codex-plan",
+      "skills/story-codex-write",
+      "skills/story-codex-analyze",
+      "skills/story-codex-review",
+      "skills/story-codex-research",
+      "skills/story-codex-cover",
+      "--dest",
+      "/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-remote-055-independent-p9e7b3ve/skills"
+    ],
+    "exit_code": 0,
+    "destination_was_new": true,
+    "installed_skills": [
+      "story-codex",
+      "story-codex-plan",
+      "story-codex-write",
+      "story-codex-analyze",
+      "story-codex-review",
+      "story-codex-research",
+      "story-codex-cover"
+    ]
+  },
+  "file_verification": {
+    "files": 33,
+    "skills": 7,
+    "matches_fixed_commit": true,
+    "matches_release_zip": true,
+    "matches_fixed_source_manifest": true,
+    "unchanged_after_cli_checks": true,
+    "manifest_receipt": "release.json",
+    "manifest_field": "file_sha256"
+  },
+  "cli": [
+    {
+      "name": "version",
+      "args": [
+        "--version"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout_sha256": "ac3bf208eb88be6542e3fc750b511b112cf25bc40e46dca2a50819e43cf59096",
+      "stdout": "0.5.5"
+    },
+    {
+      "name": "help",
+      "args": [
+        "--help"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout_sha256": "326bd2cee91c274c6be134b33d2a16fff4bd3cacf2ca3dceaf24897d85391b28",
+      "help_bytes": 5376,
+      "contains_expected_commands": true
+    },
+    {
+      "name": "init",
+      "args": [
+        "init",
+        "--book",
+        "/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-remote-055-independent-p9e7b3ve/synthetic-book-verified",
+        "--title",
+        "v0.5.5 独立远端隔离验收",
+        "--kind",
+        "long"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout_sha256": "48830e0a417f45096efe27b01c1b232d4643b33a672dc1cceff3ac25f987fddb",
+      "result": {
+        "created": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-remote-055-independent-p9e7b3ve/synthetic-book-verified",
+        "id": "e745b0f2-3d5e-445f-99f4-6f6529283e30",
+        "imported_through": 0,
+        "kind": "long",
+        "last_chapter": 0,
+        "revision": 0,
+        "schema": 2,
+        "title": "v0.5.5 独立远端隔离验收"
+      }
+    },
+    {
+      "name": "status",
+      "args": [
+        "status",
+        "--book",
+        "/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-remote-055-independent-p9e7b3ve/synthetic-book-verified"
+      ],
+      "exit_code": 0,
+      "stderr": "",
+      "stdout_sha256": "ea71af9af0137b56c181dd1c3b027488a04c46a3009c709e0ac5396006961462",
+      "result": {
+        "book": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-remote-055-independent-p9e7b3ve/synthetic-book-verified",
+        "cards": 0,
+        "changed_export_count": 0,
+        "changed_exports": [],
+        "id": "e745b0f2-3d5e-445f-99f4-6f6529283e30",
+        "imported_through": 0,
+        "integrity": {
+          "full_book_verified": true,
+          "last_full_audit_revision": null,
+          "mode": "strict",
+          "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+          "unverified_archive_count": 0,
+          "verified_file_count": 0
+        },
+        "kind": "long",
+        "last_chapter": 0,
+        "more_sources": false,
+        "next_chapter": 1,
+        "pending_export_count": 0,
+        "pending_exports": [],
+        "recent_sources": [],
+        "revision": 0,
+        "sources": 0,
+        "title": "v0.5.5 独立远端隔离验收"
+      }
+    }
+  ],
+  "cli_validation": {
+    "version": "0.5.5",
+    "four_required_checks_passed": true,
+    "same_book_id_init_status": true,
+    "schema_from_init": 2,
+    "revision_init_status": [
+      0,
+      0
+    ],
+    "pending_or_changed_exports": 0
+  },
+  "validation_script_notes": [
+    "Initial verifier output-format assumptions were corrected after observing successful CLI responses: --version is bare 0.5.5, init has no ok key, and status has no schema key. No product command failed; schema was verified from init and status from its actual fields.",
+    "An initial additional synthetic book was created before correcting the verifier; both synthetic books are included in cleanup."
+  ],
+  "actual_user_skills_updated": false,
+  "real_novels_touched": false,
+  "new_prose_written": false,
+  "cleanup": {
+    "temporary_root": "/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-remote-055-independent-p9e7b3ve",
+    "removed": true,
+    "downloaded_assets_removed": true,
+    "isolated_skills_removed": true,
+    "synthetic_books_removed": true
+  }
+}

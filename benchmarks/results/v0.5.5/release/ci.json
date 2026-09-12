@@ -1,0 +1,219 @@
+{
+  "conclusion": "failure",
+  "createdAt": "2026-09-12T11:51:31Z",
+  "headSha": "c53703bb57f42504022edb1c5d5011943e53cdf1",
+  "jobs": [
+    {
+      "completedAt": "2026-09-12T11:52:48Z",
+      "conclusion": "success",
+      "databaseId": 103549136966,
+      "name": "test (ubuntu-latest, 3.10)",
+      "startedAt": "2026-09-12T11:51:34Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-12T11:51:35Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-12T11:51:34Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:51:37Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-09-12T11:51:35Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:51:37Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 3,
+          "startedAt": "2026-09-12T11:51:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:29Z",
+          "conclusion": "success",
+          "name": "Run regression tests including historical migration",
+          "number": 4,
+          "startedAt": "2026-09-12T11:51:37Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:29Z",
+          "conclusion": "success",
+          "name": "Build the complete skill ZIP",
+          "number": 5,
+          "startedAt": "2026-09-12T11:52:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:31Z",
+          "conclusion": "success",
+          "name": "Exercise the local CLI workflow",
+          "number": 6,
+          "startedAt": "2026-09-12T11:52:29Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:38Z",
+          "conclusion": "success",
+          "name": "Replay the reviewed Chinese manuscripts",
+          "number": 7,
+          "startedAt": "2026-09-12T11:52:31Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:45Z",
+          "conclusion": "success",
+          "name": "Exercise multi-line writing and historical revision",
+          "number": 8,
+          "startedAt": "2026-09-12T11:52:38Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:45Z",
+          "conclusion": "success",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 15,
+          "startedAt": "2026-09-12T11:52:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:45Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 16,
+          "startedAt": "2026-09-12T11:52:45Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:45Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-09-12T11:52:45Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/NingCui29/story-skill/actions/runs/34692130624/job/103549136966"
+    },
+    {
+      "completedAt": "2026-09-12T11:52:25Z",
+      "conclusion": "failure",
+      "databaseId": 103549137058,
+      "name": "test (windows-latest, 3.12)",
+      "startedAt": "2026-09-12T11:52:06Z",
+      "status": "completed",
+      "steps": [
+        {
+          "completedAt": "2026-09-12T11:52:07Z",
+          "conclusion": "success",
+          "name": "Set up job",
+          "number": 1,
+          "startedAt": "2026-09-12T11:52:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:15Z",
+          "conclusion": "success",
+          "name": "Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 2,
+          "startedAt": "2026-09-12T11:52:07Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:15Z",
+          "conclusion": "success",
+          "name": "Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 3,
+          "startedAt": "2026-09-12T11:52:15Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:22Z",
+          "conclusion": "failure",
+          "name": "Run regression tests including historical migration",
+          "number": 4,
+          "startedAt": "2026-09-12T11:52:15Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:22Z",
+          "conclusion": "skipped",
+          "name": "Build the complete skill ZIP",
+          "number": 5,
+          "startedAt": "2026-09-12T11:52:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:22Z",
+          "conclusion": "skipped",
+          "name": "Exercise the local CLI workflow",
+          "number": 6,
+          "startedAt": "2026-09-12T11:52:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:22Z",
+          "conclusion": "skipped",
+          "name": "Replay the reviewed Chinese manuscripts",
+          "number": 7,
+          "startedAt": "2026-09-12T11:52:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:22Z",
+          "conclusion": "skipped",
+          "name": "Exercise multi-line writing and historical revision",
+          "number": 8,
+          "startedAt": "2026-09-12T11:52:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:22Z",
+          "conclusion": "skipped",
+          "name": "Post Run actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065",
+          "number": 15,
+          "startedAt": "2026-09-12T11:52:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:24Z",
+          "conclusion": "success",
+          "name": "Post Run actions/checkout@11d5960a326750d5838078e36cf38b85af677262",
+          "number": 16,
+          "startedAt": "2026-09-12T11:52:22Z",
+          "status": "completed"
+        },
+        {
+          "completedAt": "2026-09-12T11:52:24Z",
+          "conclusion": "success",
+          "name": "Complete job",
+          "number": 17,
+          "startedAt": "2026-09-12T11:52:24Z",
+          "status": "completed"
+        }
+      ],
+      "url": "https://github.com/NingCui29/story-skill/actions/runs/34692130624/job/103549137058"
+    }
+  ],
+  "status": "completed",
+  "updatedAt": "2026-09-12T11:52:48Z",
+  "url": "https://github.com/NingCui29/story-skill/actions/runs/34692130624",
+  "windows_failure_evidence": {
+    "known_issue": "WinError 32 during report export",
+    "first_test_only": true,
+    "failed_log_excerpt": [
+      "test (windows-latest, 3.12)\tRun regression tests including historical migration\t2026-09-12T11:52:22.5326777Z FAIL: test_cli_report_uses_captured_fingerprint_and_rejects_stale_input (test_analysis_baselines.AnalysisBaselineTests.test_cli_report_uses_captured_fingerprint_and_rejects_stale_input)",
+      "test (windows-latest, 3.12)\tRun regression tests including historical migration\t2026-09-12T11:52:22.5343708Z AssertionError: 2 != 0 : {\"analyzed\":2,\"chunks_total\":2,\"complete_for_imported_text\":true,\"export_details\":{\"code\":\"io_error\"},\"export_error\":\"[WinError 32] The process cannot access the file because it is being used by another process: 'C:\\\\\\\\Users\\\\\\\\runneradmin\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\story-analysis-baseline-naua9q36\\\\\\\\分析基线\\\\\\\\.story\\\\\\\\analysis\\\\\\\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\\\\\\\.story-tmp-c9632b5a447a41539bf29962c2cec843' -> 'C:\\\\\\\\Users\\\\\\\\runneradmin\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\story-analysis-baseline-naua9q36\\\\\\\\分析基线\\\\\\\\.story\\\\\\\\analysis\\\\\\\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\\\\\\\report.md'\",\"exports_complete\":false,\"finalized\":true,\"next_chunk\":null,\"pending\":0,\"recovery\":\"Retry export after IO/lock recovery; use reconcile for an externally edited latest chapter. Preserved versions: .story/export-backups/\",\"report\":\"C:\\\\Users\\\\runneradmin\\\\AppData\\\\Local\\\\Temp\\\\story-analysis-baseline-naua9q36\\\\分析基线\\\\.story\\\\analysis\\\\284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\\\\report.md\",\"report_path\":\".story/analysis/284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be/report.md\",\"source\":\"284c5cb81b60feb465dead21ff005142b7abbb9cef71f24ad1c04fd46da6e6be\",\"source_coverage\":\"partial\",\"text_coverage_contiguous\":true}",
+      "test (windows-latest, 3.12)\tRun regression tests including historical migration\t2026-09-12T11:52:22.5349132Z Ran 1 test in 0.766s",
+      "test (windows-latest, 3.12)\tRun regression tests including historical migration\t2026-09-12T11:52:22.5349333Z FAILED (failures=1)"
+    ]
+  },
+  "scope": "Release commit: Linux success, Windows failure on known report export lock issue; no claim of all-platform success."
+}

@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "checked_at_utc": "2026-09-12T11:58:53.775168+00:00",
+  "ok": true,
+  "scope": "Final local documentation and evidence consistency for the already published macOS/Linux release; this is not all-platform CI success or an actual user installation.",
+  "tag": "v0.5.5",
+  "release_commit": "c53703bb57f42504022edb1c5d5011943e53cdf1",
+  "tag_stays_fixed": true,
+  "final_documentation_follows_on_main": true,
+  "release_receipts": {
+    "release.json": "438d40eb1a367ba5fcbb37e59baabd9ae2419b2db5b692fd77bbde55af6253ba",
+    "remote-install.json": "18d016a6afef4dd92f203861353e46a0449a8ad492d541337ee34814a3f8c086",
+    "packages.json": "84a83868f07c9cc9c500acd596ab0b883a7434a95bbe8c7536e3b18dc48eef85",
+    "packages-independent.json": "ddec7bded3951b6571d136623c643b00f7ec07ddb1bfff85e7ccca680a0ecce0",
+    "packages-workflow.json": "c7f9ecd0f07f173365831cae9b79e15f0cd98ae54d425d9c19b9a896835e73bf",
+    "ci.json": "1b45e115ca53ae7dbeb63fa2f34ae232f9c2322480c3e1df8e4cd64dcdcce42c"
+  },
+  "historical_evidence": {
+    "base_commit": "f2f5aa14712e9a2de273187266e27eb5346dc8c2",
+    "files": 865,
+    "changed": [],
+    "github_release_history_unchanged": true
+  },
+  "source_and_release_tooling_unchanged_since_tag": true,
+  "skills_match_verified_manifest": 33,
+  "local_tests": {
+    "run": 543,
+    "passed": 536,
+    "skipped": 7,
+    "full_checks_passed": 12
+  },
+  "platforms": {
+    "macos_local": "passed",
+    "linux_release_ci": "success",
+    "windows_release_ci": "failure: known WinError 32",
+    "windows_install_target": "v0.4.0"
+  },
+  "packages_verification_source": "successful workflow registry download plus independent verification of its artifact; local direct registry request returned HTTP 403",
+  "installation_document_target": "v0.5.5",
+  "actual_user_skills_updated": false,
+  "real_novels_touched": false,
+  "local_markdown_links": {
+    "status": "passed",
+    "files_scanned": 162,
+    "links_checked": 840,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "documentation_sha256": {
+    "INSTALL.md": "0a31013f9bb31cfc9d0f916ad4a0d7be51a689cf2d694ec0560ebeedde34b74a",
+    "README.md": "0d79fc75aaac107cef3b1dfe7722a8ded54699da1ac60b8758b4250268e18042",
+    "benchmarks/results/v0.5.5/README.md": "2f0f182df6320a7b7a31f78b50476405692a8ea78295d9774739cf9686b16c62",
+    "docs/github-release.md": "c98e29fcaaad996c14c0aebf1f1c01474b979a7261d6ad02420ec86db0b114a0",
+    "docs/releases/v0.5.5.md": "4e287204bb3a8b7aeef956d63104e07b4c2f98b14f89d5bac07ed5531467f758"
+  }
+}

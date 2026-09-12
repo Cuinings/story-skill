@@ -6,7 +6,7 @@ Story Codex 是面向 Codex 的中文小说技能套件，覆盖开书策划、�
 
 [安装指引](INSTALL.md) · [使用指南](docs/中文小说上手.md) · [完整文档](docs/README.md) · [v0.5.5 发布进度](docs/github-release.md#v055-发布验证记录)
 
-**v0.5.5 准备发布**，汇总历史修订恢复、世界状态衔接和日常用法修正；完整套件沿用 7 个技能、33 个文件与独立书名目录。运行时需要 Python 3.10+，使用标准库；联网调研和封面生成使用 Codex 环境中可用的工具。分发与安装尚待本版核验。[本版变化](docs/releases/v0.5.5.md)
+**v0.5.5 已发布**，汇总历史修订恢复、世界状态衔接和日常用法修正；完整套件沿用 7 个技能、33 个文件与独立书名目录。运行时需要 Python 3.10+，使用标准库；联网调研和封面生成使用 Codex 环境中可用的工具。Release 附件与官方固定标签隔离安装已核验，本机安装未更新。[本版变化](docs/releases/v0.5.5.md)
 
 ## 安装与升级
 
@@ -20,7 +20,7 @@ Codex 会核对完整套件与已有安装，保留旧版和本地修改，再�
 
 | 平台 | 安装版本 |
 |---|---|
-| macOS／Linux | v0.5.5 准备中；此前已核验版本为 v0.5.4，安装以 [当前指引](INSTALL.md) 为准 |
+| macOS／Linux | v0.5.5，固定标签、Release 附件与官方隔离安装已核验；按 [当前指引](INSTALL.md) 安装 |
 | Windows | 暂用 v0.4.0；新版正文和报告导出仍存在 WinError 32 |
 
 已用新版处理的书先完整备份，不直接降级。升级技能不会自动搬动小说文件或重新导入书库。手动安装、备份位置和升级方式见 [INSTALL.md](INSTALL.md)。
@@ -172,7 +172,7 @@ v0.5.4 在既有写作指导上补充三处实际用法：
 
 ## 版本与验证
 
-### v0.5.5 准备发布
+### v0.5.5 已发布
 
 本版集中修正长篇状态与历史修订中的可复现问题，并收紧默认操作范围：
 
@@ -190,9 +190,10 @@ v0.5.4 在既有写作指导上补充三处实际用法：
 | 构建 | ZIP 33 文件、126,882 字节；npm 载荷与 ZIP 一致。[本版构建回执](benchmarks/results/v0.5.5/README.md) |
 | 指令计数 | 普通／多线写作 7,023／9,610 tokens；[完整计数](benchmarks/results/v0.5.5/tokens.md)，只计固定指令 |
 | 容量、升级与迁移 | 四组合合成容量通过；v0.5.4→v0.5.5 含 ZIP 升级 18 项、三类合成迁移通过 |
-| 固定标签、Release 与附件核对 | pending，尚未完成发布 |
-| Linux／Windows CI | pending；Windows 既有 WinError 32 未修复 |
-| Packages、官方隔离安装 | pending，分别核验后更新 |
+| 固定标签、Release 与附件核对 | [v0.5.5](https://github.com/NingCui29/story-skill/releases/tag/v0.5.5) 于 2026-09-12 发布；33 文件、摘要与固定提交一致，[回下载核验](benchmarks/results/v0.5.5/release/release.json)通过 |
+| Linux／Windows CI | [发布提交 CI](benchmarks/results/v0.5.5/release/ci.json)：Linux 全步骤成功；Windows 首项报告导出复现 WinError 32，整体 CI 失败 |
+| 官方隔离安装 | [固定标签安装](benchmarks/results/v0.5.5/release/remote-install.json) 7 技能、33 文件及 4 项命令检查通过 |
+| GitHub Packages | 已公开发布；工作流回下载后，归档产物的[独立复核](benchmarks/results/v0.5.5/release/packages-independent.json)通过；本机直连注册表返回 HTTP 403 |
 | 本机安装 | 未更新；本次未请求安装，不作为发布验收阻塞项 |
 
 本版继续使用 schema 2，安装不自动迁移小说。程序正确性和合成演练不等于文学质量提升；[本版验证目录](benchmarks/results/v0.5.5/README.md)按实际结果更新，历史数据保留。
