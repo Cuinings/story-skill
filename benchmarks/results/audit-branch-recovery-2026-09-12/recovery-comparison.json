@@ -1,0 +1,18 @@
+{
+  "ok": true,
+  "method": "Compare independent CLI readback with expected decisions saved by root before implementation and not shared with evaluator.",
+  "checks": {
+    "state_changes": true,
+    "world_changes": true,
+    "semantic_review": true,
+    "candidate_sha_matches_text": true,
+    "unchanged_revision": true,
+    "same_branch": true,
+    "independent_checks": true
+  },
+  "before": "recovery-before.json",
+  "after": "recovery-after.json",
+  "expected": "recovery-expected.json",
+  "temporary_fixture_cleaned": true,
+  "no_real_novel_modified": true
+}

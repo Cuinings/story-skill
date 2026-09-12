@@ -1,0 +1,84 @@
+{
+  "schema": 1,
+  "scope": "Follow-up local skill improvements; not release acceptance",
+  "created_at": "2026-09-12T07:20:17.090613+00:00",
+  "base_commit": "f2f5aa14712e9a2de273187266e27eb5346dc8c2",
+  "runtime_version": "0.5.4",
+  "environment": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "x86_64",
+    "python": "3.12.14"
+  },
+  "ok": true,
+  "previous_validation": "../audit-fixes-2026-09-12/validation.json",
+  "improvements": [
+    {
+      "name": "same_tick_income_and_spending",
+      "behavior": "Aggregate per holder and resource at each story tick; block unavoidable shortfalls, warn about required same-tick funding order, retain net balance for following ticks."
+    },
+    {
+      "name": "world_check_snapshot",
+      "behavior": "Read plan and evidence in one snapshot and bind returned book_id, chapter and revision."
+    },
+    {
+      "name": "read_only_history_dependencies",
+      "behavior": "history-deps --chapter reads the complete published declaration without a plan, branch or mutation; preserves original hashes and keeps reviewed --input/--expect writes compatible."
+    }
+  ],
+  "new_regression_test_cases": 21,
+  "total_regression_cases_added_since_base": 40,
+  "unit_tests": {
+    "ok": true,
+    "status": "passed",
+    "run": 483,
+    "passed": 476,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "counting": "Successful test cases use addSuccess; failure/error/skip counts may include subtests"
+  },
+  "skill_validation": {
+    "passed": 7,
+    "report": "skill-checks.json"
+  },
+  "local_links": {
+    "status": "passed",
+    "files_scanned": 159,
+    "links_checked": 743,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "cli_smoke": {
+    "ok": true,
+    "commands": 20,
+    "report": "smoke.json"
+  },
+  "independent_skill_exercises": {
+    "cases": 2,
+    "ok": true,
+    "report": "forward-checks.json",
+    "method": "Separate agent read relevant skill instructions and used real CLI, without diff, tests or implementation; synthetic books were cleaned."
+  },
+  "source_sha256": {
+    "README.md": "bceeea977f509291a56e424fd1ac7134abea37fbc9af807dd300117c0d8d926a",
+    "docs/github-release.md": "e06820b36aab5888e95c5007ec01c2a25f3576e0bada2ea9b09a22e6a0337585",
+    "docs/超长篇实操.md": "8f81256e22c4f30fc8c32b7069ca9c5b8dd0d470168841f0bfc1757935eb8a0a",
+    "skills/story-codex-review/references/history.md": "1dd533ef12c1074245b980320f1e836dc60f1b455b4d01fc39f1443323d8c14e",
+    "skills/story-codex-write/references/chapter.md": "69156986948bf01bc11312f14603b09d6ff0fd27e7d5de68b9e4813574e67da6",
+    "skills/story-codex-write/references/long-form.md": "124ef03e8cc17290b36ef231942e78f1f53b5142646b7e911d739768acae4db1",
+    "skills/story-codex/scripts/story.py": "aecf6307f247435735197740dfef554b36a2a8f064064e2ee147b7800f95de9d",
+    "skills/story-codex/scripts/story_history.py": "81e8300edb4f4f7cf8430a583667c8d3b81bd6cc46609b3f6eb7df81cfd30fe6",
+    "skills/story-codex/scripts/story_world.py": "de9d772423908a0ae363fe9ae32169e31d8e481590f288f1ec4a55df0ff52e9b",
+    "tests/test_history_dependency_read.py": "72900015b447ca283c527499e0d1145cd0dd59207228c7faee6279c960cf8287",
+    "tests/test_skill_audit_fixes.py": "1a6e7de74407a2cedc03278e951eb6557d2e05773a300d7f6790c0da8a25bdf1",
+    "tests/test_world_audit_fixes.py": "7ed42cdea7cbf51aaa5927d6feba5aaacaf9525baea808d4c8b2e7ca818244ad"
+  },
+  "limits": [
+    "Executed on Intel macOS only; conditional skips are not passes.",
+    "No GitHub push, release, package publication or update of the real installed skills.",
+    "No new token, capacity, migration or literary quality benchmark. Previous validation artifacts are preserved as their original point-in-time records."
+  ]
+}

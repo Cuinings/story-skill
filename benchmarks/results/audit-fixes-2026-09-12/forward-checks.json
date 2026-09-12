@@ -1,0 +1,39 @@
+{
+  "ok": true,
+  "method": "Independent agent followed repository skill instructions and real CLI with synthetic books; no diff, tests or prior audit findings supplied",
+  "cases": [
+    {
+      "name": "continuation_with_ambiguous_evidence",
+      "context_bytes": 7576,
+      "budget_bytes": 16000,
+      "omitted_optional_count": 0,
+      "knowledge_candidates": 2,
+      "line_candidates": 2,
+      "line": null,
+      "resource_known": false,
+      "resource_amount": null,
+      "warnings": [
+        "world_order_ambiguous",
+        "rule_prerequisite_unverified",
+        "resource_baseline_unknown"
+      ],
+      "world_check_ok": true,
+      "writing_ready": false,
+      "reason": "Order within the hour, timing of the expense, and possession of the key require evidence review."
+    },
+    {
+      "name": "ordinary_plan_with_global_rule",
+      "optional_world_selectors": false,
+      "planned_global_rule_recalled": true,
+      "context_bytes": 1572,
+      "budget_bytes": 16000,
+      "prepare_world_check_present": true,
+      "ready_to_commit": false,
+      "last_chapter": 0,
+      "revision": 2,
+      "new_prose_written": false
+    }
+  ],
+  "temporary_books_removed": true,
+  "real_installation_and_novels_unchanged": true
+}

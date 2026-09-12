@@ -1,0 +1,22 @@
+{
+  "method": "Separate agents used isolated fixtures and reported their observations; no real novel modified.",
+  "history_paths": {
+    "new_defect_found": false,
+    "checks": [
+      "Strict and local history publication update chapter title and volume directory, preserve previous prose, and rebind dependent chapter SHA.",
+      "Reconcile of an externally edited history-published latest chapter requires a history branch without mutation; that branch can publish and retain the external draft.",
+      "Interrupted renamed export, external edit of the old path, safe export, and later reuse of the old filename preserve external and intermediate drafts; retirement records clear and old SHAs remain readable."
+    ]
+  },
+  "resource_boundaries": {
+    "new_defect_found": false,
+    "isolated_variants": 21,
+    "checks": [
+      "12 invalid amount or endpoint cases reject atomically.",
+      "4 cross-tick transfer combinations preserve holder balances and transfer direction.",
+      "4 unknown-date and clock controls keep uncertain balances unverified and other clocks isolated.",
+      "Minimum supported negative tick opening and spending retain the overdraft blocker."
+    ]
+  },
+  "temporary_books_removed": true
+}

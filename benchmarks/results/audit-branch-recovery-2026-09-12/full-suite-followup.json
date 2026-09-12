@@ -1,0 +1,26 @@
+{
+  "first_run": {
+    "report": "unit-tests-first.json",
+    "inputs": "inputs-first.json",
+    "failure": "test_long_history.LongHistoryTests.test_4000_chapter_inspection_pages_all_scopes_without_hashing_omitted_exports",
+    "observed": "pages.hints.total was 8000 instead of 4000 after source-evidenced world records were repeated as search hints",
+    "status": "failure_reproduced_and_corrected"
+  },
+  "final_run": {
+    "status": "passed",
+    "report": "unit-tests.json",
+    "inputs": "inputs.json",
+    "run": 543,
+    "passed": 536,
+    "skipped": 7,
+    "failures": 0,
+    "errors": 0
+  },
+  "correction": "Do not add source-evidenced records to search hints solely because traversal reaches them; keep full impact traversal and fences, preserve existing declared hints and new plan/entity hints.",
+  "focused_recheck": {
+    "original_4000_chapter_test": "passed with original assertions",
+    "new_world_tests": 17,
+    "passed": 17,
+    "evidence": "world-scope-review.json"
+  }
+}

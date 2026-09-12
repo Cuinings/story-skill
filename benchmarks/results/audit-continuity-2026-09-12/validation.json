@@ -1,0 +1,87 @@
+{
+  "schema": 1,
+  "scope": "Local continuity and evidence improvements; not release acceptance",
+  "created_at": "2026-09-12T07:28:35.497232+00:00",
+  "base_commit": "f2f5aa14712e9a2de273187266e27eb5346dc8c2",
+  "runtime_version": "0.5.4",
+  "environment": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "x86_64",
+    "python": "3.12.14"
+  },
+  "ok": true,
+  "previous_validation": "../audit-followup-2026-09-12/validation.json",
+  "improvements": [
+    {
+      "name": "context_dependency_evidence",
+      "behavior": "Writing dependency candidates retain selected volume/arc and ambiguous line records with current hashes; accompanying world warnings are preserved. Saving a dependency does not resolve a state ambiguity."
+    },
+    {
+      "name": "minimum_known_spending",
+      "behavior": "An unknown additional same-tick expense cannot cancel a shortfall already proved by known spending; required_is_minimum distinguishes the lower bound. Unknown income or baseline remains unverified."
+    }
+  ],
+  "new_regression_test_cases": 8,
+  "total_regression_cases_added_since_base": 48,
+  "unit_tests": {
+    "ok": true,
+    "status": "passed",
+    "run": 491,
+    "passed": 484,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "counting": "Successful test cases use addSuccess; failure/error/skip counts may include subtests"
+  },
+  "test_input_stability": {
+    "unchanged": true,
+    "files": 86,
+    "report": "inputs.json"
+  },
+  "local_links": {
+    "status": "passed",
+    "files_scanned": 159,
+    "links_checked": 743,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "cli_smoke": {
+    "ok": true,
+    "commands": 20,
+    "report": "smoke.json"
+  },
+  "independent_skill_exercises": {
+    "cases": 2,
+    "additional_direction_control": true,
+    "ok": true,
+    "report": "forward-checks.json",
+    "method": "Separate agent used relevant skills and real CLI without reading implementation, diff, tests or prior findings; temporary books removed."
+  },
+  "history_boundary_review": {
+    "new_defect_found": false,
+    "checks": [
+      "Two successive history publications followed by dependency re-declarations preserve current SHA, completeness and note.",
+      "External unpublished prose changes remain untouched and separate from the recorded chapter.",
+      "Missing history heads fail explicitly without lazy state creation.",
+      "Read-only queries preserve revision, SQL contents and database bytes."
+    ],
+    "method": "Separate agent using isolated temporary books; no new files or tests needed."
+  },
+  "documentation_sha256": {
+    "README.md": "b6f437a86f25d9d2658679ee573585c464b55334abe078b3cc704b0cc0e87439",
+    "docs/github-release.md": "e06820b36aab5888e95c5007ec01c2a25f3576e0bada2ea9b09a22e6a0337585",
+    "docs/超长篇实操.md": "8f81256e22c4f30fc8c32b7069ca9c5b8dd0d470168841f0bfc1757935eb8a0a",
+    "skills/story-codex-review/references/history.md": "1dd533ef12c1074245b980320f1e836dc60f1b455b4d01fc39f1443323d8c14e",
+    "skills/story-codex-write/references/chapter.md": "69156986948bf01bc11312f14603b09d6ff0fd27e7d5de68b9e4813574e67da6",
+    "skills/story-codex-write/references/long-form.md": "2c06aea9840c5bb15ff7af78ff822cadeda04a89b388ed423d0535b541bbb7c3"
+  },
+  "limits": [
+    "Executed on Intel macOS only; seven conditional skips are not passes.",
+    "No GitHub push, release, package publication or replacement of the real installed skills.",
+    "Dependency candidates still require actual selection and completion; a hash does not establish that an uncertain state is true.",
+    "No new token, capacity, migration or literary quality benchmark; prior validation records remain unchanged."
+  ]
+}

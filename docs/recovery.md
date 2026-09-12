@@ -2,7 +2,7 @@
 
 **Windows 正文和报告导出的 WinError 32 尚未修复，会保留待恢复状态。Windows 用户继续使用 v0.4.0；已经使用 v0.5.x 的书先完整备份，不盲目降级或覆盖待恢复内容。** [CI 范围](../benchmarks/results/v0.5.0/release/ci.json) · [导出失败](../benchmarks/results/v0.5.0/release/ci-windows-export-failed.json)
 
-以下 CLI 示例均需 `python "<核心技能目录>/scripts/story.py"` 前缀；书籍命令另附 `--book "<书目录绝对路径>"`，`template` 与帮助命令不附 `--book`。本页对应 [v0.5.4](releases/v0.5.4.md)，本版实际验证与发布状态见 [发布记录](github-release.md)，平台限制见上方；共享核心为 `story-codex`；数据库继续使用 schema 2，v0.3.0、v0.4.0、v0.5.0、v0.5.1、v0.5.2、v0.5.3 书库无需重新导入。分卷正文命名只应用到新保存的目标，已有旧章路径继续识别。
+以下 CLI 示例均需 `python "<核心技能目录>/scripts/story.py"` 前缀；书籍命令另附 `--book "<书目录绝对路径>"`，`template` 与帮助命令不附 `--book`。本页用法对应准备中的 [v0.5.5](releases/v0.5.5.md)，新验收与分发待核，见 [发布记录](github-release.md#v055-发布验证记录)；实际默认安装仍按 [INSTALL.md](../INSTALL.md)，现阶段 macOS／Linux 为 v0.5.4。本次发布准备未更新本机安装。平台限制见上方；共享核心为 `story-codex`；数据库继续使用 schema 2，v0.3.0、v0.4.0、v0.5.0、v0.5.1、v0.5.2、v0.5.3 书库无需重新导入。分卷正文命名只应用到新保存的目标，已有旧章路径继续识别。
 
 schema 1 书库先停止写入，保留原书并复制到独立目录，再 `migrate --book "<副本>"`。迁移前用 SQLite backup 生成一致备份并检查完整性；所有结构变更在同一事务中进行，失败回滚。迁移备份位于 `.story/migration-backups/`。回退时停止相关进程，在另一个独立书目录恢复备份并使用 v0.2.0；备份之后的新修改不会自动出现在旧版中。无须重新初始化或修改书籍身份。
 
@@ -15,6 +15,12 @@ v0.5.2 增加历史审查级别兼容、卡片与后补世界证据的修订保�
 历史依赖补录、候选更新或发布出现 `missing_required_dependencies` 时，先定位对应计划的 `requires`，实际读取缺失卡片及其来源，再保存真实依赖哈希和复核说明。分支中用 `history-dependencies --branch B --chapter N` 读取候选证据，不对早期章运行普通写作 `context`。当前读取的卡片是现态证据，不能冒充旧章起草时的快照。只把 `complete` 改成 true、删掉 `requires` 或替换哈希不能代替复核；处理路径见 [历史修订实操](超长篇实操.md)。
 
 世界记录提示正文证据失效时，回到对应章节与历史修订分支处理；新写一条伏笔兑现记录不能修复旧铺垫的失效证据。导入文本因 NUL 被拒绝时，在独立文本副本中定位控制字符并核对清理结果后再导入；已有数据库不会因此自动清洗或重建。
+
+## 历史候选已保存，但原输入文件丢失
+
+v0.5.5 新增的 `history-saved --branch B` 只读返回分支已保存的卡片决定、世界修补与整体审查；不需要原 input 文件或 --expect。正文和逐章审查用 `history-inspect --branch B --chapter N` 取回。检查分支 revision 一致，保留原引文、说明、hash 和删除用的 null；空白模板不是已保存决定。过期分支仍可读，但续改前仍须核对变化并按回执刷新或重建。完整返回超预算时增大 --budget-bytes，不手工截断。
+
+继续编辑时，state_changes 数组、world_changes 对象各自整段替换；保留同段中其他有效决定，未传的段不动。整体审查为 null 时不要直接重交，修改后按新回执完成审查。详见 [历史分支流程](../skills/story-codex-review/references/history.md)。该读取入口属于准备中的 v0.5.5，固定发布包的能力以对应版本为准；[本版核验状态](../benchmarks/results/v0.5.5/README.md)不会将尚未安装的能力算作本机已具备。
 
 ## 已提交，但尚未导出
 

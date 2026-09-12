@@ -44,7 +44,7 @@ CREATE TRIGGER history_edges_no_delete BEFORE DELETE ON history_edges BEGIN
 END;
 """
 
-COMMANDS = {"history-deps", "history-dependencies", "history-snapshot", "history-start", "history-inspect",
+COMMANDS = {"history-deps", "history-dependencies", "history-snapshot", "history-start", "history-inspect", "history-saved",
             "history-update", "history-refresh", "history-publish", "history-state", "cache-get", "cache-put"}
 DEFAULT_BUDGET = 64000
 INSPECTION_COMMANDS = {"history-start", "history-inspect", "history-update", "history-refresh"}
@@ -236,6 +236,36 @@ def _ensure_history(book):
                   receipt, row["text"], row["sha"], published)
 
 
+def read_dependencies(book, chapter, budget=DEFAULT_BUDGET):
+    """Read the published declaration without resolving or changing its evidence."""
+    chapter = api.integer(chapter, "chapter", 1)
+    with book.read_snapshot():
+        current = book.db.execute("SELECT sha FROM chapter_state WHERE chapter=?", (chapter,)).fetchone()
+        if not current:
+            api.fail("chapter_missing", "No published chapter to inspect", chapter=chapter)
+        head = _head(book, chapter)
+        if head["sha"] != current["sha"]:
+            api.fail("history_unavailable", "Published chapter and recorded history head differ", chapter=chapter)
+        dependencies = _edges(book, head["id"])
+        receipt = json.loads(head["receipt"])
+        note = (receipt.get("dependency_review") or {}).get("note")
+        event = book.db.execute(
+            "SELECT data FROM events WHERE revision=? AND kind='history_dependencies' ORDER BY seq DESC LIMIT 1",
+            (head["revision"],)).fetchone()
+        if event:
+            declaration = json.loads(event["data"])
+            if declaration.get("chapter") == chapter:
+                note = declaration.get("note")
+        payload = {"chapter": chapter, "chapter_sha": head["sha"], "dependencies": dependencies,
+                   "complete": bool(head["complete"]), "note": note if note is not None else ""}
+        return api.bounded_packet({"book_id": book.meta("id"), "chapter": chapter,
+            "revision": book.meta("revision"), "version": head["id"], "chapter_sha": head["sha"],
+            "dependencies": dependencies, "complete": bool(head["complete"]), "note": note,
+            "payload": payload,
+            "scope": "Published declaration with its original evidence hashes, not current dependency candidates or branch drafts. "
+                     "A missing note is null; fill the payload note after review before saving."}, budget)
+
+
 def save_dependencies(book, payload, expected):
     api.object_value(payload, "dependencies payload")
     chapter = api.integer(payload.get("chapter"), "chapter", 1)
@@ -351,45 +381,66 @@ def history_state(book, chapter, before=False, offset=0, limit=50, budget=DEFAUL
     return api.bounded_packet(result, budget)
 
 
-def _impact(book, target):
+def _dependency_kind(kind):
+    return {"entity": "world.entities", "rule": "world.rules"}.get(kind, kind)
+
+
+def _world_refs(values):
+    return sorted({(_dependency_kind(value["kind"]), value["ref"]) for value in values})
+
+
+def _impact(book, target, impact_cards=(), impact_world=()):
     heads = {r["chapter"]: dict(r) for r in book.db.execute("SELECT v.* FROM history_heads h JOIN history_versions v ON v.id=h.version")}
     if target not in heads:
         api.fail("chapter_missing", "Historical chapter is not recorded", chapter=target)
-    reverse, produced, hints = {}, {}, set()
+    reverse, produced, produced_world, hints = {}, {}, {}, set()
+    record_links, evidenced_world = {}, {}
     for chapter, row in heads.items():
         receipt = json.loads(row["receipt"])
         produced[chapter] = set(receipt.get("after", {})) | set(receipt.get("before", {})) | set(receipt.get("history_state_ids", []))
+        produced_world[chapter] = _world_refs(receipt.get("history_world_ids", []))
     for row in book.db.execute("SELECT h.chapter,e.kind,e.ref FROM history_edges e JOIN history_heads h ON h.version=e.version"):
-        reverse.setdefault((row["kind"], row["ref"]), set()).add(row["chapter"])
-        # Typed world records carry concrete chapter evidence. Its body changing
-        # affects a consumer even when the consumer did not duplicate that edge.
-        if row["kind"] in ("entity", "rule") or row["kind"].startswith("world."):
-            kind = {"entity": "entities", "rule": "rules"}.get(row["kind"], row["kind"].removeprefix("world."))
-            evidence = book.db.execute("SELECT chapter FROM world_evidence WHERE kind=? AND record_id=? AND mode='chapter'", (kind, row["ref"])).fetchone()
-            if evidence:
-                reverse.setdefault(("chapter", str(evidence[0])), set()).add(row["chapter"])
+        reverse.setdefault((_dependency_kind(row["kind"]), row["ref"]), set()).add(row["chapter"])
+    # A changed source body reaches its observed records; a changed record also
+    # requires review of its source body. Plans have no evidence chapter to add.
+    for ev in book.db.execute("SELECT kind,record_id,chapter FROM world_evidence WHERE mode='chapter' AND retired=0"):
+        if ev["chapter"] in heads:
+            key = ("world." + ev["kind"], ev["record_id"])
+            evidenced_world.setdefault(ev["chapter"], set()).add(key)
+            reverse.setdefault(key, set()).add(ev["chapter"])
     # These are recorded foreign-key dependencies, not inferred story semantics.
-    for query in (
-        "SELECT s.chapter,t.chapter FROM world_knowledge k JOIN world_evidence s ON s.kind='facts' AND s.record_id=k.fact JOIN world_evidence t ON t.kind='knowledge' AND t.record_id=k.id WHERE s.mode='chapter' AND t.mode='chapter' AND s.retired=0 AND t.retired=0",
-        "SELECT s.chapter,t.chapter FROM world_rule_requires r JOIN world_evidence s ON s.kind='facts' AND s.record_id=r.fact JOIN world_evidence t ON t.kind='rules' AND t.record_id=r.rule_id WHERE s.mode='chapter' AND t.mode='chapter' AND s.retired=0 AND t.retired=0"):
+    for kind, query in (
+        ("knowledge", "SELECT k.fact,k.id FROM world_knowledge k JOIN world_evidence s ON s.kind='facts' AND s.record_id=k.fact JOIN world_evidence t ON t.kind='knowledge' AND t.record_id=k.id WHERE s.retired=0 AND t.retired=0"),
+        ("rules", "SELECT r.fact,r.rule_id FROM world_rule_requires r JOIN world_evidence s ON s.kind='facts' AND s.record_id=r.fact JOIN world_evidence t ON t.kind='rules' AND t.record_id=r.rule_id WHERE s.retired=0 AND t.retired=0")):
         for source, consumer in book.db.execute(query):
-            if source != consumer and consumer in heads:
-                reverse.setdefault(("chapter", str(source)), set()).add(consumer)
-    reasons, pending = {target: "changed_body"}, deque([target])
+            record_links.setdefault(("world.facts", source), set()).add(("world." + kind, consumer))
+    reasons, pending = {target: "changed_body"}, deque([("chapter", str(target))])
     # Missing declarations cannot prove a later chapter independent.
     for chapter, row in heads.items():
         if chapter > target and not row["complete"]:
             reasons[chapter] = "semantic_dependencies_incomplete"
-            pending.append(chapter)
+            pending.append(("chapter", str(chapter)))
+    pending.extend(("card", cid) for cid in impact_cards)
+    pending.extend(_world_refs(impact_world))
+    visited, world_keys = set(), set()
     while pending:
-        chapter = pending.popleft()
-        keys = [("chapter", str(chapter))] + [("card", cid) for cid in produced[chapter]]
-        for key in keys:
-            for affected in reverse.get(key, ()):
-                if affected not in reasons:
-                    reasons[affected] = "dependency:" + key[0] + ":" + key[1]
-                    pending.append(affected)
-    state_ids = set()
+        key = pending.popleft()
+        if key in visited:
+            continue
+        visited.add(key)
+        if key[0] == "chapter":
+            chapter = int(key[1])
+            pending.extend(("card", cid) for cid in produced[chapter])
+            pending.extend(produced_world[chapter])
+            pending.extend(evidenced_world.get(chapter, ()))
+        elif key[0].startswith("world."):
+            world_keys.add(key)
+            pending.extend(record_links.get(key, ()))
+        for affected in reverse.get(key, ()):
+            if affected not in reasons:
+                reasons[affected] = "dependency:" + key[0] + ":" + key[1]
+                pending.append(("chapter", str(affected)))
+    state_ids = set(impact_cards)
     fences = {}
     for chapter in reasons:
         state_ids.update(produced[chapter])
@@ -401,7 +452,110 @@ def _impact(book, target):
                 hints.add(key)
     for cid in state_ids:
         fences["card:" + cid] = _resolve(book, "card", cid)
+    required_world = {key for chapter in reasons for key in evidenced_world.get(chapter, ())}
+    for kind, ref in world_keys:
+        fences[kind + ":" + ref] = _resolve(book, kind, ref)
+        # Source observations already have their own paged world-review list.
+        # Keep existing declared hints, but do not duplicate every source record
+        # solely because typed traversal now visits it on the way to consumers.
+        if (kind, ref) not in required_world:
+            hints.add(kind + ":" + ref)
     return heads, reasons, sorted(state_ids), fences, sorted(hints)
+
+
+def _review_scope(book, target, impact_cards=(), impact_world=()):
+    heads, reasons, state_ids, fences, hints = _impact(book, target, impact_cards, impact_world)
+    required = []
+    for chapter in reasons:
+        for ev in book.db.execute("SELECT kind,record_id,sha FROM world_evidence WHERE chapter=? AND mode='chapter' AND retired=0", (chapter,)):
+            required.append({"kind": ev["kind"], "id": ev["record_id"], "chapter": chapter, "sha": ev["sha"]})
+            fences["world." + ev["kind"] + ":" + ev["record_id"]] = _resolve(book, "world." + ev["kind"], ev["record_id"])
+    return heads, reasons, state_ids, fences, hints, sorted(required, key=lambda e: (e["kind"], e["id"]))
+
+
+def _state_impact_cards(data):
+    # Keep an expanded branch's scope stable even if a later edit restores a card.
+    cards = set(data.get("impact_cards", []))
+    cards.update(change["id"] for change in data["state_changes"]
+                 if (_hash(change["after"]) if change["after"] is not None else None) != change["before_sha"])
+    return sorted(cards)
+
+
+def _world_change_value(book, kind, raw):
+    """Compare digest fields without treating candidate evidence as published.
+
+    Normalization uses the world's schema and scalar/list validators. References,
+    exact body evidence and batch constraints remain checked at publication, so
+    a patch can still cite its pending body or an entity created in that batch.
+    """
+    world = api.world
+    fields = world.FIELDS[kind]
+    row = {key: world._value(raw.get(key, world.DEFAULTS.get(key)), typ, kind + "." + key)
+           for key, typ in fields.items()}
+    evidence, entities, requires = None, [], []
+    if kind != "entities":
+        ev = api.object_value(raw.get("evidence"), "world evidence")
+        if ev.get("kind") == "chapter":
+            evidence = {"mode": "chapter", "chapter": world._value(ev.get("chapter"), "positive", "evidence.chapter"),
+                        "sha": _sha(ev.get("sha256")), "quote": api.text_field(ev.get("quote"), "evidence.quote", 1400), "note": None}
+        else:
+            evidence = world._evidence(book, ev)
+        entities = world._list_ids(raw.get("entities", []), kind + ".entities")
+    for key in ("actor", "subject", "place", "sender", "receiver", "resource", "entity"):
+        if row.get(key) is not None:
+            entities.append(row[key])
+    if kind == "rules":
+        requires = world._list_ids(raw.get("requires", []), "rules.requires")
+    return row, evidence, sorted(set(entities)), requires
+
+
+def _changed_world_refs(book, data):
+    changed = set()
+    for kind, values in data.get("world_changes", {}).items():
+        if kind not in api.world.FIELDS and kind != "retirements":
+            api.fail("invalid_input", "Unknown world change kind", kind=kind)
+        if not isinstance(values, list):
+            api.fail("invalid_input", "World changes require named record arrays")
+        for raw in values:
+            api.object_value(raw, "world change")
+            if kind == "aliases":
+                continue  # Alias names do not change an ID-bound record digest.
+            actual_kind = raw.get("kind") if kind == "retirements" else kind
+            if actual_kind not in api.world.FIELDS or actual_kind == "aliases":
+                api.fail("invalid_input", "Unknown world record kind", kind=actual_kind)
+            rid = api.world._value(raw.get("id"), "id", "world record id")
+            old = api.world._stored(book, actual_kind, rid)
+            if kind == "retirements" or old != _world_change_value(book, actual_kind, raw):
+                changed.add(("world." + actual_kind, rid))
+    return [{"kind": kind, "ref": ref} for kind, ref in sorted(changed)]
+
+
+def _state_impact_world(book, data):
+    keys = _world_refs(data.get("impact_world", []) + _changed_world_refs(book, data))
+    return [{"kind": kind, "ref": ref} for kind, ref in keys]
+
+
+def _expand_state_scope(book, target, data):
+    cards = _state_impact_cards(data)
+    world = _state_impact_world(book, data)
+    heads, reasons, state_ids, fences, hints, required = _review_scope(book, target, cards, world)
+    added = sorted(set(map(str, reasons)) - set(data["base_heads"]), key=int)
+    missing = sorted(chapter for chapter in reasons if fences["plan:" + str(chapter)] is None)
+    if missing:
+        api.fail("plan_missing", "Save the missing reviewed plans, refresh this branch, then resubmit the same history-update payload; its state/world changes still need scope expansion",
+                 chapter=missing[0], chapters=missing[:25], missing_plan_count=len(missing), recovery_command="plan")
+    updated = {"impact_cards": cards, "impact_world": world,
+               "base_heads": {str(c): heads[c]["id"] for c in reasons},
+               "base_shas": {str(c): heads[c]["sha"] for c in reasons},
+               "reasons": {str(c): why for c, why in reasons.items()},
+               "required_state_ids": state_ids, "fences": fences,
+               "entity_search_hints": hints, "world_review_required": required}
+    changed = any(data.get(key, [] if key in ("impact_cards", "impact_world") else None) != value for key, value in updated.items())
+    data.update(updated)
+    if added:
+        for candidate in data["candidates"].values():
+            candidate["review"] = None
+    return len(added), changed
 
 
 def branch_start(book, chapter, expected, label="", budget=DEFAULT_BUDGET, limit=25, state_limit=50):
@@ -410,7 +564,7 @@ def branch_start(book, chapter, expected, label="", budget=DEFAULT_BUDGET, limit
         api.text_field(label, "branch label", 200)
     with book.transaction(expected):
         _ensure_history(book)
-        heads, reasons, state_ids, fences, hints = _impact(book, chapter)
+        heads, reasons, state_ids, fences, hints, world_required = _review_scope(book, chapter)
         missing_plans = sorted(c for c in reasons if fences["plan:" + str(c)] is None)
         if missing_plans:
             api.fail("plan_missing", "Save reviewed plans for the affected chapters before starting this history branch; then reload status and retry history-start",
@@ -419,18 +573,13 @@ def branch_start(book, chapter, expected, label="", budget=DEFAULT_BUDGET, limit
         baseline_revision = heads[chapter]["publication_revision"] - 1
         baseline, snap, replayed = _state_at_revision(book, baseline_revision)
         baseline_sha = book.intern_body(api.dumps({cid: book.intern_body(api.dumps(card)) for cid, card in baseline.items()}))
-        world_required = []
-        for c in reasons:
-            for ev in book.db.execute("SELECT kind,record_id,sha FROM world_evidence WHERE chapter=? AND mode='chapter' AND retired=0", (c,)):
-                world_required.append({"kind": ev["kind"], "id": ev["record_id"], "chapter": c, "sha": ev["sha"]})
-                fences["world." + ev["kind"] + ":" + ev["record_id"]] = _resolve(book, "world." + ev["kind"], ev["record_id"])
         data = {"label": label, "snapshot": snap, "baseline_state_sha": baseline_sha,
                 "baseline_revision": baseline_revision, "baseline_replayed_events": replayed,
                 "base_heads": {str(c): heads[c]["id"] for c in reasons},
                 "base_shas": {str(c): heads[c]["sha"] for c in reasons},
                 "reasons": {str(c): why for c, why in reasons.items()},
                 "required_state_ids": state_ids, "fences": fences, "entity_search_hints": hints,
-                "world_review_required": sorted(world_required, key=lambda e: (e["kind"], e["id"])),
+                "world_review_required": world_required, "impact_cards": [], "impact_world": [],
                 "candidates": {}, "state_changes": [], "world_changes": {}, "semantic_review": None}
         bid = uuid.uuid4().hex
         revision = book.event("history_branch_start", {"branch": bid, "chapter": chapter, "affected": sorted(reasons)})
@@ -652,6 +801,8 @@ def branch_update(book, branch_id, payload, expected, budget=DEFAULT_BUDGET, lim
             changes = api.object_value(payload["world_changes"], "world_changes")
             changed |= changes != data.get("world_changes", {})
             data["world_changes"] = changes
+        added, scope_changed = _expand_state_scope(book, row["target"], data)
+        changed |= scope_changed
         if changed:
             data["semantic_review"] = None
         if "semantic_review" in payload:
@@ -670,7 +821,8 @@ def branch_update(book, branch_id, payload, expected, budget=DEFAULT_BUDGET, lim
             data["semantic_review"] = review
         revision = book.event("history_branch_update", {"branch": branch_id, "chapters": sorted(int(c) for c in prepared)})
         book.db.execute("UPDATE history_branches SET data=?,revision=? WHERE id=?", (api.dumps(data), revision, branch_id))
-        result = api.bounded_packet(_inspection(book, branch_id, row["target"], revision, data, state_limit=state_limit, limit=limit), budget)
+        result = api.bounded_packet({**_inspection(book, branch_id, row["target"], revision, data, state_limit=state_limit, limit=limit),
+                                     "scope_expanded": bool(added), "added_chapter_count": added}, budget)
     return result
 
 
@@ -723,6 +875,24 @@ def _inspection(book, bid, target, revision, data, state_offset=0, state_limit=5
                                 "note": "", "state_review": "", "coverage_review": "", "issues": []}}
 
 
+def branch_saved(book, branch_id, budget=DEFAULT_BUDGET):
+    """Read persisted decisions verbatim, even when a branch cannot be edited."""
+    with book.read_snapshot():
+        row, data = _branch(book, branch_id)
+        return api.bounded_packet({
+            "branch": branch_id, "chapter": row["target"], "status": row["status"],
+            "revision": row["revision"], "current_revision": book.meta("revision"),
+            "manifest_sha256": _manifest(data),
+            "candidate_chapters": sorted(map(int, data["candidates"])),
+            "saved": {"state_changes": data["state_changes"], "world_changes": data["world_changes"],
+                      "semantic_review": data["semantic_review"]},
+            "note": "Saved branch decisions, not current canonical state or renewed approval. "
+                    "Read candidate prose and chapter reviews with history-inspect --chapter. "
+                    "Null semantic_review means no current saved overall review. "
+                    "State/world updates replace the supplied section; preserve its other valid entries."
+        }, budget)
+
+
 def branch_inspect(book, branch_id, chapter=None, state_offset=0, state_limit=50,
                    affected_offset=0, world_offset=0, hints_offset=0, limit=25, budget=DEFAULT_BUDGET):
     with book.read_snapshot():
@@ -767,14 +937,13 @@ def branch_refresh(book, branch_id, expected, budget=DEFAULT_BUDGET, limit=25, s
         if row["status"] != "candidate":
             api.fail("branch_published", "Published branches cannot be refreshed")
         _check_fences(book, data)
-        _, reasons, state_ids, fences, _ = _impact(book, row["target"])
-        required = []
-        for c in reasons:
-            for ev in book.db.execute("SELECT kind,record_id,sha FROM world_evidence WHERE chapter=? AND mode='chapter' AND retired=0", (c,)):
-                required.append({"kind": ev["kind"], "id": ev["record_id"], "chapter": c, "sha": ev["sha"]})
-                fences["world." + ev["kind"] + ":" + ev["record_id"]] = _resolve(book, "world." + ev["kind"], ev["record_id"])
+        # Validate the recorded scope first. Legacy saved decisions may still
+        # need update to expand it after missing plans are supplied; publish
+        # separately fences those decisions until that migration is reviewed.
+        _, reasons, state_ids, fences, _, required = _review_scope(
+            book, row["target"], data.get("impact_cards", []), data.get("impact_world", []))
         if (set(map(str, reasons)) != set(data["base_heads"]) or state_ids != data["required_state_ids"] or fences != data["fences"] or
-                sorted(required, key=lambda e: (e["kind"], e["id"])) != data.get("world_review_required", [])):
+                required != data.get("world_review_required", [])):
             api.fail("stale_branch", "New dependent material appeared; start a fresh branch with its expanded review scope")
         revision = book.event("history_branch_refresh", {"branch": branch_id})
         book.db.execute("UPDATE history_branches SET revision=? WHERE id=?", (revision, branch_id))
@@ -791,6 +960,14 @@ def branch_publish(book, branch_id, expected):
             if api.integer(expected, "expected revision") != book.meta("revision"):
                 api.fail("stale_revision", "State changed before historical publication")
             _editable(book, row, data)
+            # Older candidates could save an extra state/world correction without
+            # recording the consumers that now require fresh chapter reviews.
+            changed_world = _changed_world_refs(book, data)
+            _, reasons, _, _, _, _ = _review_scope(book, row["target"], _state_impact_cards(data), _state_impact_world(book, data))
+            uncovered = sorted(set(reasons) - set(map(int, data["base_heads"])))
+            if uncovered:
+                api.fail("history_scope_changed", "Saved state/world changes affect unreviewed chapters; run history-update with an empty object or the preserved changes to expand this branch, then review its full scope",
+                         chapters=uncovered[:25], missing_chapter_count=len(uncovered), recovery_command="history-update")
             integrity = book.integrity
             try:
                 # Historical publication is infrequent and rewrites the shared
@@ -847,6 +1024,9 @@ def branch_publish(book, branch_id, expected):
                 receipt["history_state_ids"] = sorted(set(previous.get("before", {})) | set(previous.get("after", {})) |
                                                      set(previous.get("history_state_ids", [])) |
                                                      {d["id"] for d in decisions if d["chapter"] == chapter})
+                world_ids = _world_refs(previous.get("history_world_ids", []) + (changed_world if chapter == row["target"] else []))
+                if world_ids:
+                    receipt["history_world_ids"] = [{"kind": kind, "ref": ref} for kind, ref in world_ids]
                 accepted_sha = candidate.get("external_sha256")
                 if accepted_sha:
                     accepted_sha = book.accept_chapter_external(chapter, external_paths[c], accepted_sha)
@@ -953,17 +1133,23 @@ def cache_get(book, chapter, kind, budget=DEFAULT_BUDGET):
 def register_parser(sub, command):
     for name in sorted(COMMANDS):
         parser = command(name, "Versioned dependencies, reviewed historical branches, and evidence-bound caches",
-                         DEFAULT_BUDGET if name in INSPECTION_COMMANDS or name in ("history-dependencies", "history-state", "cache-get") else None)
+                         DEFAULT_BUDGET if name in INSPECTION_COMMANDS or name in ("history-deps", "history-dependencies", "history-state", "history-saved", "cache-get") else None)
+        if name == "history-deps":
+            mode = parser.add_mutually_exclusive_group(required=True)
+            mode.add_argument("--chapter", type=int, help="Read the published dependency declaration without changing state")
+            mode.add_argument("--input", help="Replace the declaration with a reviewed payload; requires --expect")
+            parser.add_argument("--expect", type=int, help="Required for --input; not accepted with --chapter")
+            continue
         if name in INSPECTION_COMMANDS:
             parser.add_argument("--limit", type=int, default=25, help="Entries per affected/world/hints page, at most 200")
             parser.add_argument("--state-limit", type=int, default=50)
-        if name in ("history-deps", "history-update", "cache-put"):
+        if name in ("history-update", "cache-put"):
             parser.add_argument("--input", required=True)
         if name in ("history-start", "history-dependencies", "history-state", "cache-get", "cache-put"):
             parser.add_argument("--chapter", type=int, required=True)
         if name in ("history-start", "history-snapshot"):
             parser.add_argument("--label", default="manual")
-        if name in ("history-inspect", "history-dependencies", "history-update", "history-refresh", "history-publish"):
+        if name in ("history-inspect", "history-saved", "history-dependencies", "history-update", "history-refresh", "history-publish"):
             parser.add_argument("--branch", required=True)
         if name == "history-inspect":
             parser.add_argument("--chapter", type=int)
@@ -971,7 +1157,7 @@ def register_parser(sub, command):
             parser.add_argument("--affected-offset", type=int, default=0)
             parser.add_argument("--world-offset", type=int, default=0)
             parser.add_argument("--hints-offset", type=int, default=0)
-        if name not in ("history-inspect", "history-dependencies", "history-state", "cache-get"):
+        if name not in ("history-inspect", "history-saved", "history-dependencies", "history-state", "cache-get"):
             parser.add_argument("--expect", type=int, required=True)
         if name.startswith("cache-"):
             parser.add_argument("--kind", required=True)
@@ -984,6 +1170,12 @@ def register_parser(sub, command):
 def run(book, args):
     cmd = args.command
     if cmd == "history-deps":
+        if args.chapter is not None:
+            if args.expect is not None:
+                api.fail("invalid_input", "history-deps --chapter is read-only; omit --input and --expect")
+            return read_dependencies(book, args.chapter, args.budget_bytes)
+        if args.expect is None:
+            api.fail("invalid_input", "history-deps --input requires --expect for a reviewed replacement")
         return save_dependencies(book, api.read_json(args.input), args.expect)
     if cmd == "history-dependencies":
         return branch_dependencies(book, args.branch, args.chapter, args.budget_bytes)
@@ -996,6 +1188,8 @@ def run(book, args):
     if cmd == "history-inspect":
         return branch_inspect(book, args.branch, args.chapter, args.state_offset, args.state_limit,
                               args.affected_offset, args.world_offset, args.hints_offset, args.limit, args.budget_bytes)
+    if cmd == "history-saved":
+        return branch_saved(book, args.branch, args.budget_bytes)
     if cmd == "history-update":
         return branch_update(book, args.branch, api.read_json(args.input), args.expect, args.budget_bytes, args.limit, args.state_limit)
     if cmd == "history-refresh":

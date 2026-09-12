@@ -1,0 +1,296 @@
+{
+  "created_at": "2026-09-12T07:41:51.330353+00:00",
+  "scope": "read-only knowledge slot expansion audit",
+  "source_sha256": "d3d61a81b8bfcb50d845a4fd8077444e182c9237eacef5584e6dab626a07cf51",
+  "checks": [
+    {
+      "name": "actor_fact_clock_publication_story_time",
+      "results": {
+        "at20_ch4": [
+          "forgotten"
+        ],
+        "at5_ch4": [
+          "known"
+        ],
+        "at20_ch3": [
+          "known"
+        ],
+        "at20_ch5": [
+          "future-publication"
+        ]
+      },
+      "ok": true
+    },
+    {
+      "name": "retired_latest_excluded",
+      "result": [
+        "forgotten"
+      ],
+      "ok": true
+    },
+    {
+      "name": "retired_seed_excluded",
+      "result": [],
+      "ok": true
+    },
+    {
+      "name": "unpublished_seed_excluded",
+      "result": [],
+      "ok": true
+    },
+    {
+      "name": "linear_work_first_only",
+      "vm_work_ratio_2000_to_1000": 1.9907312049433574,
+      "all_expansions_one": true,
+      "ok": true
+    },
+    {
+      "name": "linear_work_all",
+      "vm_work_ratio_2000_to_1000": 1.9946605644546147,
+      "all_expansions_one": true,
+      "ok": true
+    }
+  ],
+  "performance": [
+    {
+      "linked_records": "first_only",
+      "records": 1000,
+      "selected": [
+        "k-0999"
+      ],
+      "runs": [
+        {
+          "vm_steps_approx": 96300,
+          "sql_statements": 48,
+          "slot_expansions": 1,
+          "elapsed_ms": 9.167
+        },
+        {
+          "vm_steps_approx": 97100,
+          "sql_statements": 48,
+          "slot_expansions": 1,
+          "elapsed_ms": 7.215
+        },
+        {
+          "vm_steps_approx": 96900,
+          "sql_statements": 48,
+          "slot_expansions": 1,
+          "elapsed_ms": 7.149
+        }
+      ]
+    },
+    {
+      "linked_records": "first_only",
+      "records": 2000,
+      "selected": [
+        "k-1999"
+      ],
+      "runs": [
+        {
+          "vm_steps_approx": 192800,
+          "sql_statements": 63,
+          "slot_expansions": 1,
+          "elapsed_ms": 15.913
+        },
+        {
+          "vm_steps_approx": 193300,
+          "sql_statements": 63,
+          "slot_expansions": 1,
+          "elapsed_ms": 13.87
+        },
+        {
+          "vm_steps_approx": 193400,
+          "sql_statements": 63,
+          "slot_expansions": 1,
+          "elapsed_ms": 13.846
+        }
+      ]
+    },
+    {
+      "linked_records": "all",
+      "records": 1000,
+      "selected": [
+        "k-0999"
+      ],
+      "runs": [
+        {
+          "vm_steps_approx": 130400,
+          "sql_statements": 51,
+          "slot_expansions": 1,
+          "elapsed_ms": 12.888
+        },
+        {
+          "vm_steps_approx": 131100,
+          "sql_statements": 51,
+          "slot_expansions": 1,
+          "elapsed_ms": 10.792
+        },
+        {
+          "vm_steps_approx": 131000,
+          "sql_statements": 51,
+          "slot_expansions": 1,
+          "elapsed_ms": 10.586
+        }
+      ]
+    },
+    {
+      "linked_records": "all",
+      "records": 2000,
+      "selected": [
+        "k-1999"
+      ],
+      "runs": [
+        {
+          "vm_steps_approx": 260900,
+          "sql_statements": 69,
+          "slot_expansions": 1,
+          "elapsed_ms": 23.852
+        },
+        {
+          "vm_steps_approx": 261500,
+          "sql_statements": 69,
+          "slot_expansions": 1,
+          "elapsed_ms": 21.269
+        },
+        {
+          "vm_steps_approx": 261600,
+          "sql_statements": 69,
+          "slot_expansions": 1,
+          "elapsed_ms": 20.956
+        }
+      ]
+    }
+  ],
+  "dependency_receipt": {
+    "before": {
+      "book_id": "2cd50f6d-f3f2-4529-9887-130747261ca7",
+      "revision": 3,
+      "chapter": 2,
+      "candidates": [
+        {
+          "kind": "chapter",
+          "ref": "1",
+          "sha": "e61132bb20ba8cf73705340accb443efbd202b5c0a4606b222a866343218f62f"
+        },
+        {
+          "kind": "world.entities",
+          "ref": "key",
+          "sha": "bc15b64a21e6611a4215c464d010d4e002322a29bd997dbbab80abc0e1646572"
+        },
+        {
+          "kind": "world.facts",
+          "ref": "where",
+          "sha": "77ec718ae902691369ea48ee9a4f0d6c526b793d3d3eed3da91f5afb4a237bef"
+        },
+        {
+          "kind": "world.knowledge",
+          "ref": "known",
+          "sha": "32c32b026af6c67e6be1da83c432ba6c2d9bc3f8ed533af93923e19611a3bf2f"
+        }
+      ],
+      "world_warnings": [],
+      "review_required": "Select actual dependencies, add missing sources, then declare completeness with a concrete review note. Candidate hashes do not resolve the accompanying world-state warnings.",
+      "budget": {
+        "unit": "utf8_bytes",
+        "limit": 16000,
+        "used": 798
+      }
+    },
+    "after": {
+      "book_id": "2cd50f6d-f3f2-4529-9887-130747261ca7",
+      "revision": 4,
+      "chapter": 2,
+      "candidates": [
+        {
+          "kind": "chapter",
+          "ref": "1",
+          "sha": "e61132bb20ba8cf73705340accb443efbd202b5c0a4606b222a866343218f62f"
+        },
+        {
+          "kind": "world.entities",
+          "ref": "key",
+          "sha": "bc15b64a21e6611a4215c464d010d4e002322a29bd997dbbab80abc0e1646572"
+        },
+        {
+          "kind": "world.facts",
+          "ref": "where",
+          "sha": "77ec718ae902691369ea48ee9a4f0d6c526b793d3d3eed3da91f5afb4a237bef"
+        },
+        {
+          "kind": "world.knowledge",
+          "ref": "forgotten",
+          "sha": "b0de33f665cf150673050b75d3ce2e9a2677d0b78df675a5b01a3839355b40c7"
+        }
+      ],
+      "world_warnings": [],
+      "review_required": "Select actual dependencies, add missing sources, then declare completeness with a concrete review note. Candidate hashes do not resolve the accompanying world-state warnings.",
+      "budget": {
+        "unit": "utf8_bytes",
+        "limit": 16000,
+        "used": 802
+      }
+    },
+    "expected_forgotten_sha": "b0de33f665cf150673050b75d3ce2e9a2677d0b78df675a5b01a3839355b40c7",
+    "context_knowledge": [
+      {
+        "id": "forgotten",
+        "actor": "a",
+        "fact": "where",
+        "state": "unknown",
+        "clock": "main",
+        "at": 10,
+        "channel": "正文认知变化",
+        "evidence": {
+          "mode": "chapter",
+          "chapter": 1,
+          "sha": "e61132bb20ba8cf73705340accb443efbd202b5c0a4606b222a866343218f62f",
+          "quote": "甲受伤后忘了钥匙藏处。",
+          "note": null
+        },
+        "entities": [
+          "a"
+        ]
+      }
+    ],
+    "ok": true,
+    "cli": {
+      "book_id": "2cd50f6d-f3f2-4529-9887-130747261ca7",
+      "budget": {
+        "limit": 16000,
+        "unit": "utf8_bytes",
+        "used": 802
+      },
+      "candidates": [
+        {
+          "kind": "chapter",
+          "ref": "1",
+          "sha": "e61132bb20ba8cf73705340accb443efbd202b5c0a4606b222a866343218f62f"
+        },
+        {
+          "kind": "world.entities",
+          "ref": "key",
+          "sha": "bc15b64a21e6611a4215c464d010d4e002322a29bd997dbbab80abc0e1646572"
+        },
+        {
+          "kind": "world.facts",
+          "ref": "where",
+          "sha": "77ec718ae902691369ea48ee9a4f0d6c526b793d3d3eed3da91f5afb4a237bef"
+        },
+        {
+          "kind": "world.knowledge",
+          "ref": "forgotten",
+          "sha": "b0de33f665cf150673050b75d3ce2e9a2677d0b78df675a5b01a3839355b40c7"
+        }
+      ],
+      "chapter": 2,
+      "review_required": "Select actual dependencies, add missing sources, then declare completeness with a concrete review note. Candidate hashes do not resolve the accompanying world-state warnings.",
+      "revision": 4,
+      "world_warnings": []
+    }
+  },
+  "ok": true,
+  "reviewed_file_sha256": {
+    "skills/story-codex/scripts/story.py": "e03602bd66ac8b1399e65903dfe4a1bd0ed9af7f50cd8744413167f66450e5a5",
+    "tests/test_world_knowledge_recall.py": "b97ef2acc09a277c0e00fc9da8d2046cf90166bde0d78841d478a9e135cc0a5e"
+  }
+}

@@ -15,6 +15,8 @@ description: 中文小说开篇点评、长短篇深读、全量证据分析、�
 
 ## 建立可恢复语料
 
+单次局部点评默认直接依据可见文本回答，不初始化语料工程；需要可恢复记录的全量分析、跨轮处理，或用户要求建立分析工程时，进入下述语料、记录与聚合流程，已有来源沿用断点。
+
 续跑先看 `status` 的 `pending_exports`、`changed_exports`，再看 `recent_sources` 的 source、next_chunk 和 report_path；更多来源用 `sources` 分页查找。报告可能已在数据库定稿但尚未落盘，不能只凭 `report_path` 判断交付完成。有待导出项先用 `export --safe-only` 恢复；冲突文件先保留并核对外部修改，不用正文的 `reconcile` 接管分析报告，也不覆盖冲突稿。已有来源直接 next，不重新 ingest。全部块完成且还没有 report_path 时从聚合继续。
 
 `init --book "<独立分析目录>" --title "<作品>" --kind analysis`。

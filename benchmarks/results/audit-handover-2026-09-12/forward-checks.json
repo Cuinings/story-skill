@@ -1,0 +1,312 @@
+{
+  "method": "Independent use of repository story-codex-write instructions and real CLI; ordinary fact cards chosen for this small single-thread story. No implementation, diff, tests, or historical review conclusions read. Created and committed only two minimal synthetic chapters; no chapter 3 prose.",
+  "runtime": "/Users/cuining/Documents/GitHub/story-skill/skills/story-codex/scripts/story.py",
+  "python": "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "setup": {
+    "commit1": {
+      "backups": [],
+      "chapter": 1,
+      "committed": true,
+      "exported": [
+        "chapters/第一卷 西院/第1章 门钉.md"
+      ],
+      "exports_complete": true,
+      "idempotent": false,
+      "integrity": {
+        "full_book_verified": true,
+        "last_full_audit_revision": 2,
+        "mode": "strict",
+        "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+        "unverified_archive_count": 0,
+        "verified_file_count": 1
+      },
+      "path": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-wound-context-ec6dezca/西院旧伤/chapters/第一卷 西院/第1章 门钉.md",
+      "revision": 2,
+      "scope_exports_complete": true
+    },
+    "commit2": {
+      "backups": [],
+      "chapter": 2,
+      "committed": true,
+      "exported": [
+        "chapters/第一卷 西院/第2章 换屋.md"
+      ],
+      "exports_complete": true,
+      "idempotent": false,
+      "integrity": {
+        "full_book_verified": true,
+        "last_full_audit_revision": 4,
+        "mode": "strict",
+        "note": "Hash verification is a point-in-time observation; outside editors can save again.",
+        "unverified_archive_count": 0,
+        "verified_file_count": 2
+      },
+      "path": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-wound-context-ec6dezca/西院旧伤/chapters/第一卷 西院/第2章 换屋.md",
+      "revision": 4,
+      "scope_exports_complete": true
+    },
+    "chapter1_lint": {
+      "count_method": "visible_nonspace_v1",
+      "count_scope": "body_and_lead_without_first_h1",
+      "counts": {
+        "han_v1": 43,
+        "letters_numbers_v1": 43,
+        "visible_nonspace_v1": 48
+      },
+      "draft_sha256": "868a240414ec1273307419c5687a60a2e53d3dfa24dc029a125fb57e26f5b601",
+      "errors": [],
+      "length_count": 48,
+      "ok": true,
+      "path": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-wound-context-ec6dezca/西院旧伤/chapters/第一卷 西院/第1章 门钉.md",
+      "unicode_version": "15.0.0",
+      "visible_chars": 48,
+      "warnings": []
+    },
+    "chapter2_lint": {
+      "count_method": "visible_nonspace_v1",
+      "count_scope": "body_and_lead_without_first_h1",
+      "counts": {
+        "han_v1": 35,
+        "letters_numbers_v1": 35,
+        "visible_nonspace_v1": 40
+      },
+      "draft_sha256": "fbbbcb927d56ffe2b8318ce34a1a5cf1e032937b65c674ea7572286a590657ed",
+      "errors": [],
+      "length_count": 40,
+      "ok": true,
+      "path": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-wound-context-ec6dezca/西院旧伤/chapters/第一卷 西院/第2章 换屋.md",
+      "unicode_version": "15.0.0",
+      "visible_chars": 40,
+      "warnings": []
+    }
+  },
+  "chapter3_context": {
+    "book_id": "3043438d-7c8a-4508-97ea-6b36611063ac",
+    "budget": {
+      "limit": 16000,
+      "unit": "utf8_bytes",
+      "used": 1749
+    },
+    "chapter": 3,
+    "mode": "next",
+    "omitted_optional_count": 0,
+    "optional_cards": [],
+    "plan": {
+      "beats": [
+        {
+          "change": "后续选择须由伤口实际状况及当前住处条件支持。",
+          "choice": "检查左臂伤处。"
+        }
+      ],
+      "constraints": [
+        "本轮只准备第3章，不写正文。",
+        "未记载的痊愈、伤口深度、治疗者及药物保持未知。"
+      ],
+      "count_method": "visible_nonspace_v1",
+      "count_title": false,
+      "goal": "在西院北房核对左臂伤处，依据实际状况决定下一步。",
+      "length": [
+        1,
+        200
+      ],
+      "requires": [
+        "injury",
+        "residence"
+      ],
+      "stop": "本轮停在状态与依赖证据核对。",
+      "tags": [
+        "林青",
+        "左臂",
+        "住处"
+      ],
+      "title": "旧伤",
+      "volume_dir": "第一卷 西院"
+    },
+    "previous": {
+      "chapter": 2,
+      "summary": "第二日林青退掉东院的房，搬入西院北房住下。",
+      "tail": "# 第2章 换屋\n\n第二日，林青退了东院的房，搬进西院北房。\n他把唯一的铺盖搁在窗下，从此在这里住下。\n"
+    },
+    "required_cards": [
+      {
+        "critical": false,
+        "due": null,
+        "id": "injury",
+        "kind": "fact",
+        "scope": "global",
+        "source": "chapter:1 quote:林青回东院住处时，左臂被门框上的铁钉划开，血顺着手腕往下淌。\n他撕下一条布缠住伤口，改用右手推门。",
+        "status": "active",
+        "tags": [
+          "林青"
+        ],
+        "text": "林青左臂被门框上的铁钉划伤，已用布缠住伤口。"
+      },
+      {
+        "critical": false,
+        "due": null,
+        "id": "residence",
+        "kind": "fact",
+        "scope": "global",
+        "source": "chapter:2 quote:第二日，林青退了东院的房，搬进西院北房。\n他把唯一的铺盖搁在窗下，从此在这里住下。",
+        "status": "active",
+        "tags": [
+          "林青"
+        ],
+        "text": "林青已退掉东院的房，现在住在西院北房。"
+      }
+    ],
+    "revision": 5
+  },
+  "chapter3_dependency_candidates": {
+    "book_id": "3043438d-7c8a-4508-97ea-6b36611063ac",
+    "budget": {
+      "limit": 16000,
+      "unit": "utf8_bytes",
+      "used": 674
+    },
+    "candidates": [
+      {
+        "kind": "card",
+        "ref": "injury",
+        "sha": "e4ce68b157b62e87eeb7c5d5c8fa8dc724b275b7c15fdabde8ec7064210aef54"
+      },
+      {
+        "kind": "card",
+        "ref": "residence",
+        "sha": "282d2e0a8bf03ebc750bf810c8acec438dd8d169b66e7ce90efb3236565e28cd"
+      },
+      {
+        "kind": "chapter",
+        "ref": "2",
+        "sha": "fbbbcb927d56ffe2b8318ce34a1a5cf1e032937b65c674ea7572286a590657ed"
+      }
+    ],
+    "chapter": 3,
+    "review_required": "Select actual dependencies, add missing sources, then declare completeness with a concrete review note. Candidate hashes do not resolve the accompanying world-state warnings.",
+    "revision": 5,
+    "world_warnings": []
+  },
+  "injury_recall": {
+    "budget": {
+      "limit": 16000,
+      "unit": "utf8_bytes",
+      "used": 1290
+    },
+    "complete": true,
+    "matches": [
+      {
+        "critical": false,
+        "due": null,
+        "id": "injury",
+        "kind": "fact",
+        "scope": "global",
+        "source": "chapter:1 quote:林青回东院住处时，左臂被门框上的铁钉划开，血顺着手腕往下淌。\n他撕下一条布缠住伤口，改用右手推门。",
+        "status": "active",
+        "tags": [
+          "林青"
+        ],
+        "text": "林青左臂被门框上的铁钉划伤，已用布缠住伤口。",
+        "type": "card"
+      },
+      {
+        "chapter": 1,
+        "path": "chapters/第一卷 西院/第1章 门钉.md",
+        "snippet": "# 第1章 门钉\n\n林青回东院住处时，左臂被门框上的铁钉划开，血顺着手腕往下淌。\n他撕下一条布缠住伤口，改用右手推门。\n",
+        "source_sha256": "868a240414ec1273307419c5687a60a2e53d3dfa24dc029a125fb57e26f5b601",
+        "type": "chapter"
+      },
+      {
+        "chapter": 1,
+        "path": "chapters/第一卷 西院/第1章 门钉.md",
+        "snippet": "林青在东院住处被门框铁钉划伤左臂，临时缠布并改用右手推门；伤情留下后续连续性依据。",
+        "source_sha256": "abca1094400c4597f5d981482d0a604b6773e9e97e1b37c892d0427aec01d97c",
+        "type": "chapter_summary"
+      }
+    ],
+    "no_match_confirmed": false,
+    "omitted": 0,
+    "query": "左臂",
+    "total": 3,
+    "total_semantics": "bounded verified matches; use a narrower query if incomplete",
+    "truncated_reasons": []
+  },
+  "chapter_evidence": [
+    {
+      "budget": {
+        "limit": 12000,
+        "unit": "utf8_bytes",
+        "used": 383
+      },
+      "chapter": 1,
+      "characters": 60,
+      "end": 60,
+      "next_start": null,
+      "source_sha256": "868a240414ec1273307419c5687a60a2e53d3dfa24dc029a125fb57e26f5b601",
+      "start": 0,
+      "text": "# 第1章 门钉\n\n林青回东院住处时，左臂被门框上的铁钉划开，血顺着手腕往下淌。\n他撕下一条布缠住伤口，改用右手推门。\n"
+    },
+    {
+      "budget": {
+        "limit": 12000,
+        "unit": "utf8_bytes",
+        "used": 359
+      },
+      "chapter": 2,
+      "characters": 52,
+      "end": 52,
+      "next_start": null,
+      "source_sha256": "fbbbcb927d56ffe2b8318ce34a1a5cf1e032937b65c674ea7572286a590657ed",
+      "start": 0,
+      "text": "# 第2章 换屋\n\n第二日，林青退了东院的房，搬进西院北房。\n他把唯一的铺盖搁在窗下，从此在这里住下。\n"
+    }
+  ],
+  "selected_dependencies_for_chapter3": [
+    {
+      "kind": "card",
+      "ref": "injury",
+      "sha": "e4ce68b157b62e87eeb7c5d5c8fa8dc724b275b7c15fdabde8ec7064210aef54"
+    },
+    {
+      "kind": "card",
+      "ref": "residence",
+      "sha": "282d2e0a8bf03ebc750bf810c8acec438dd8d169b66e7ce90efb3236565e28cd"
+    },
+    {
+      "kind": "chapter",
+      "ref": "2",
+      "sha": "fbbbcb927d56ffe2b8318ce34a1a5cf1e032937b65c674ea7572286a590657ed"
+    },
+    {
+      "kind": "chapter",
+      "ref": "1",
+      "sha": "868a240414ec1273307419c5687a60a2e53d3dfa24dc029a125fb57e26f5b601"
+    }
+  ],
+  "checks": {
+    "injury_card_hash_unchanged_after_residence_update": true,
+    "evidence_hashes_match_readback_text": true,
+    "revision_before_read": 5,
+    "revision_after_read": 5,
+    "last_chapter": 2,
+    "next_chapter": 3,
+    "chapter3_draft_present": false,
+    "chapter3_committed": false,
+    "managed_exports_verified": 2,
+    "changed_export_count": 0
+  },
+  "observations": {
+    "current_saved_facts": [
+      "住处为西院北房；第2章已退掉东院的房并在新住处住下。",
+      "第1章发生左臂被铁钉划伤与当场缠布；第2章未记录伤势变化，伤势卡保留原文来源和原卡哈希。"
+    ],
+    "unknown": [
+      "第3章时伤口恢复程度、是否已止血或结痂、当前活动能力未有新证据。",
+      "第3章距受伤的确切时长未在计划中确定；第2章仅明确为第二日。",
+      "医生、药物与新房内治疗条件尚无正文依据。"
+    ],
+    "workflow": "context contains both required cards and their chapter/quote sources. dependencies returns two card hashes and the immediately preceding chapter 2 hash, but not chapter 1. Following the documented add-missing-sources step, recall located chapter 1 and chapter-read returned the original text and SHA; chapter 1 was added to the selected review list. No completeness declaration or chapter 3 commit was made.",
+    "recall_hash_note": "recall returned both type=chapter and type=chapter_summary with separate source_sha256 values. The selected chapter dependency uses the type=chapter hash, confirmed by chapter-read, not the summary hash.",
+    "usability": "流程实际可走通。上下文足以定位伤势与住处来源；仅靠初始依赖候选不能声称历史正文依赖已收齐，须按文档定点补读。未观测到执行错误或无法取回证据的阻断。"
+  },
+  "temporary_book_removed": true
+}

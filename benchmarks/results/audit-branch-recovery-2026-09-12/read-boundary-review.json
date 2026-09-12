@@ -1,0 +1,280 @@
+{
+  "report_type": "independent_read_boundary_review",
+  "recorded_at": "2026-09-12T11:03:08.035525+00:00",
+  "repository": "/Users/cuining/Documents/GitHub/story-skill",
+  "scope": [
+    "history-inspect/history-state/cache snapshot and pagination boundaries",
+    "history-saved persisted-decision readback, branch status, recovery notes, and budget behavior",
+    "Additional world-scope helper code review and one author_plan fact -> chapter-evidenced rule -> published dependent chapter reproduction and post-fix rerun"
+  ],
+  "excluded": [
+    "Real novel libraries",
+    "Literary quality",
+    "Repository source/test modifications",
+    "Additional case expansion beyond the one confirmed world-scope defect"
+  ],
+  "result": "Read/recovery interfaces: no actionable defect found in the focused checks. The additional world-scope review found one author-plan fact foreign-key propagation defect; the same minimal case now passes after correction, with affected chapters [1,2,3], invalidated prior reviews, and unchanged canonical content.",
+  "actual_executions": [
+    {
+      "group": "prior_same_session_snapshot_pagination_review",
+      "execution_timing": "Executed before the history-saved follow-up in this same agent session; not rerun solely for this report.",
+      "method": "Temporary fixtures with concurrent second-connection WAL writes and canonical-state comparisons.",
+      "raw_trace_availability": "Prior temporary fixtures and raw output were cleaned; these are the recorded observed results from the completed review, not newly generated raw receipts.",
+      "checks": [
+        {
+          "id": "inspection_pagination",
+          "status": "passed",
+          "observed": "Two-page affected/state reads returned next_offset=null at the final page but complete=false for nonzero offsets; review_template.reviewed_chapters stayed null when the whole affected scope was absent."
+        },
+        {
+          "id": "inspection_candidate_snapshot",
+          "status": "passed",
+          "observed": "A second WAL connection changed the candidate during the reader cards call; one inspection kept the original candidate and branch revision together, with no mixed result."
+        },
+        {
+          "id": "inspection_canonical_snapshot",
+          "status": "passed",
+          "observed": "A second WAL connection changed the canonical key card during inspection; the response kept the original before state and current_revision from one snapshot."
+        },
+        {
+          "id": "historical_state_pagination",
+          "status": "passed",
+          "observed": "Paged history-state results reconstructed the selected publication revision and ignored later canonical card changes."
+        },
+        {
+          "id": "cache_snapshot",
+          "status": "passed",
+          "observed": "A concurrent dependency completeness change during cache-get preserved the old hit/complete result in that read; the following read returned a miss."
+        },
+        {
+          "id": "inspection_tiny_budget",
+          "status": "passed",
+          "observed": "A tiny inspection budget returned budget_exceeded without changing the canonical state."
+        }
+      ],
+      "temporary_libraries_cleaned": true
+    },
+    {
+      "group": "history_saved_targeted_regression",
+      "command": "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 -B -m unittest discover -s tests -p test_history_saved_read.py",
+      "exit_code": 0,
+      "tests_run": 10,
+      "failures": 0,
+      "errors": 0,
+      "captured_final_output": "Ran 10 tests in 1.120s\n\nOK",
+      "test_names": [
+        "test_budget_failure_does_not_truncate_saved_decisions_or_change_state",
+        "test_cli_reads_without_expect_or_input_and_rejects_mutation_flags",
+        "test_empty_and_invalidated_reviews_are_distinct_from_saved_review_text",
+        "test_explicit_deletion_survives_readback_as_null",
+        "test_missing_branch_and_invalid_budget_never_create_or_modify_data",
+        "test_partial_edit_retains_other_recovered_decisions_and_requires_new_review",
+        "test_published_branch_remains_readable_after_later_canonical_changes",
+        "test_read_is_one_snapshot_during_concurrent_candidate_update",
+        "test_reopened_branch_recovers_exact_decisions_and_review_without_input_files",
+        "test_stale_branch_still_returns_saved_values_without_refreshing_hashes"
+      ],
+      "observed_coverage": [
+        "Exact saved state/world/review recovery after input deletion and Book reopen",
+        "Explicit deletion remains null",
+        "Unstaged and invalidated semantic reviews remain null",
+        "Stale branch remains readable without hash refresh or publication approval",
+        "Published branch remains readable after later canonical changes",
+        "Concurrent candidate updates do not mix snapshots",
+        "Budget failure returns no truncated decisions and causes no mutation",
+        "Missing branch and invalid budget cause no mutation",
+        "Real CLI reads without input/expect and rejects mutation flags",
+        "Partial section replacement preserves omitted sections and invalidates old review"
+      ]
+    },
+    {
+      "group": "independent_caller_owned_transaction_control",
+      "method": "Seeded a temporary branch with the current fixture, opened caller transaction, created/injected a temporary marker, then read successfully and retried with budget 256 before caller rollback.",
+      "status": "passed",
+      "success_read_kept_caller_transaction": true,
+      "budget_failure_kept_caller_transaction": true,
+      "caller_rollback_removed_temp_probe": true,
+      "canonical_snapshot_unchanged": true,
+      "temporary_library_cleaned": true
+    }
+  ],
+  "code_and_document_reading": [
+    {
+      "file": "skills/story-codex/scripts/story_history.py",
+      "lines": "799-814",
+      "function_sha256": "437c9af535b8c999940cf45e0abe874de38292d9b14ba0e47f7480fe620b8ab0",
+      "conclusion": "Saved decisions are decoded directly from one persisted branch row inside read_snapshot; no editable/publication check, hash refresh, review generation, or database write is performed."
+    },
+    {
+      "file": "skills/story-codex/scripts/story_history.py",
+      "lines": "1050-1108",
+      "conclusion": "history-saved uses the shared 64000-byte default budget, requires branch, accepts neither input nor expect, and dispatches directly to branch_saved."
+    },
+    {
+      "file": "skills/story-codex/scripts/story.py",
+      "lines": "473-484,683-693",
+      "conclusion": "bounded_packet measures UTF-8 and errors rather than dropping fields; read_snapshot keeps a consistent read and does not finish a caller-owned transaction."
+    },
+    {
+      "file": "skills/story-codex-review/references/history.md",
+      "lines": "13-15,33-35",
+      "conclusion": "Recovery instructions distinguish saved decisions from current canonical state or renewed approval, explain null reviews and whole-section replacement, and require full-budget readback rather than pagination or truncation."
+    },
+    {
+      "file": "docs/超长篇实操.md",
+      "lines": "172",
+      "conclusion": "The user workflow explicitly requires increased budget for complete saved decisions and warns against treating stale or published review records as renewed validation."
+    }
+  ],
+  "limitations": [
+    "Focused behavioral checks do not establish correctness outside the specified read/recovery interfaces.",
+    "No source or test file was edited, and the unfinished scope-helper work was not reviewed."
+  ],
+  "files_written_by_this_review": [
+    "benchmarks/results/audit-branch-recovery-2026-09-12/read-boundary-review.json"
+  ],
+  "world_scope_review": {
+    "status": "confirmed_defect_fixed_same_case_reverified",
+    "actual_executions": [
+      {
+        "name": "author_plan_fact_to_chapter_rule_foreign_key_scope",
+        "result": {
+          "initial_affected": [
+            1
+          ],
+          "after_fact_change_affected": [
+            1
+          ],
+          "scope_expanded": false,
+          "rule_requires": [
+            {
+              "rule_id": "handoff-v1",
+              "fact": "key-rule"
+            }
+          ],
+          "chapter3_dependencies": [
+            {
+              "kind": "world.rules",
+              "ref": "handoff-v1",
+              "sha": "3e3b708dacb3292c42acd62d448233a76f55099b544b17da25552212ecb5c150"
+            }
+          ],
+          "evidence": [
+            {
+              "kind": "facts",
+              "record_id": "key-rule",
+              "mode": "author_plan",
+              "chapter": null
+            },
+            {
+              "kind": "rules",
+              "record_id": "handoff-v1",
+              "mode": "chapter",
+              "chapter": 2
+            }
+          ],
+          "fact_change": {
+            "old": {
+              "id": "key-rule",
+              "subject": "shen",
+              "predicate": "保管要求",
+              "value": "交出钥匙后留下收据。",
+              "evidence": {
+                "kind": "author_plan",
+                "note": "作者采用的保管条件。"
+              }
+            },
+            "new": {
+              "id": "key-rule",
+              "subject": "shen",
+              "predicate": "保管要求",
+              "value": "交出钥匙后不得保留收据。",
+              "evidence": {
+                "kind": "author_plan",
+                "note": "作者采用的保管条件。"
+              }
+            }
+          }
+        },
+        "temporary_library_cleaned_after_execution": true
+      }
+    ],
+    "code_reading": [
+      {
+        "file": "skills/story-codex/scripts/story_history.py",
+        "lines": "410-416",
+        "observation": "Typed fact foreign-key propagation is represented only as a chapter-to-chapter edge and requires both evidence records to use mode=chapter. A mutable author_plan fact therefore has no corresponding typed record-to-record edge."
+      },
+      {
+        "file": "skills/story-codex/scripts/story_history.py",
+        "lines": "384-389,397-409,423-451",
+        "observation": "The entity/rule shorthand is normalized to world.entities/world.rules for reverse matching; declared chapter and produced-record edges are traversed, and current resolved hashes are kept in fences. This was code reading, not an additional execution."
+      },
+      {
+        "file": "skills/story-codex/scripts/story_history.py",
+        "lines": "474-525",
+        "observation": "Unchanged record comparison uses the same scalar/default/list normalization and stored tuple shape as world._normal/_stored; chapter evidence is structurally normalized without requiring the not-yet-published body. Explicitly retired records count as changes; stable impact_world entries preserve a previously expanded scope. This was code reading."
+      },
+      {
+        "file": "skills/story-codex/scripts/story_history.py",
+        "lines": "924-959,1013-1019",
+        "observation": "Refresh validates recorded scope; publication rederives the saved world changes and blocks uncovered consumers. Published receipts retain prior history_world_ids and attribute this branch actual changed-world IDs to its target for subsequent impact analysis. The confirmed missing typed foreign-key edge affects both update and publication rederivation."
+      }
+    ],
+    "finding": {
+      "priority": "P2",
+      "title": "Author-plan facts do not propagate through recorded rule prerequisites into the historical review scope",
+      "source": "skills/story-codex/scripts/story_history.py",
+      "lines": "410-416",
+      "expected_affected": [
+        1,
+        2,
+        3
+      ],
+      "actual_affected": [
+        1
+      ],
+      "consequence": "The branch can retain an unreviewed rule-evidence chapter and a later chapter with a complete explicit dependency on that rule after its prerequisite fact changes.",
+      "minimum_fix_direction": "Propagate changed typed fact IDs through recorded knowledge.fact and rule_requires references before consuming chapter dependencies, including author_plan source facts; preserve retired and same-value boundaries.",
+      "reported_to": [
+        "/root",
+        "/root/quality_probe_b"
+      ],
+      "resolution_status": "same_minimal_case_passed_after_typed_relation_fix"
+    },
+    "additional_notes": [
+      "No other must-fix issue identified during the limited code reading.",
+      "The world-scope regression suite was not run as part of this independent review; its owner and the root agent handle broader validation.",
+      "The original actual_executions entry preserves the pre-correction failure; post_fix_verification records the same-case rerun after correction.",
+      "Canonical content and published heads stayed unchanged during staging; only the temporary branch was expanded and its old reviews invalidated."
+    ],
+    "post_fix_verification": {
+      "status": "passed",
+      "executed_at": "2026-09-12T11:03:08.031804+00:00",
+      "initial_affected": [
+        1
+      ],
+      "after_fact_change_affected": [
+        1,
+        2,
+        3
+      ],
+      "scope_expanded": true,
+      "added_chapter_count": 2,
+      "semantic_reviewed": false,
+      "saved_semantic_review": null,
+      "existing_candidate_review": null,
+      "canonical_chapters_unchanged": true,
+      "published_heads_unchanged": true,
+      "markdown_bytes_unchanged": true,
+      "canonical_fact_and_rule_unchanged": true,
+      "rule_requires": [
+        {
+          "rule_id": "handoff-v1",
+          "fact": "key-rule"
+        }
+      ],
+      "temporary_library_cleaned": true
+    }
+  }
+}

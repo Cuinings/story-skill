@@ -1,0 +1,160 @@
+{
+  "method": "Independent CLI behavior exercise of two temporary synthetic books; no implementation/diff/tests read, no new prose, repository or installed-skill edits.",
+  "runtime": "/Users/cuining/Documents/GitHub/story-skill/skills/story-codex/scripts/story.py",
+  "python": "/Users/cuining/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+  "case1": {
+    "original_sha256": "b3d3ee277c0045b0e151e6bfe72532ec51cd5ea736ceed5c68c1b35accf4be33",
+    "read_receipt": {
+      "book_id": "5c2a5016-47bd-48fe-b42c-c582d98eef7a",
+      "budget": {
+        "limit": 64000,
+        "unit": "utf8_bytes",
+        "used": 649
+      },
+      "chapter": 12,
+      "chapter_sha": "b3d3ee277c0045b0e151e6bfe72532ec51cd5ea736ceed5c68c1b35accf4be33",
+      "complete": false,
+      "dependencies": [],
+      "note": null,
+      "payload": {
+        "chapter": 12,
+        "chapter_sha": "b3d3ee277c0045b0e151e6bfe72532ec51cd5ea736ceed5c68c1b35accf4be33",
+        "complete": false,
+        "dependencies": [],
+        "note": ""
+      },
+      "revision": 1,
+      "scope": "Published declaration with its original evidence hashes, not current dependency candidates or branch drafts. A missing note is null; fill the payload note after review before saving.",
+      "version": "056fde7d7e2a4f608fc8cb937211fb41"
+    },
+    "before_revision": 1,
+    "after_revision": 1,
+    "same_files": true,
+    "changed_paths": [],
+    "commands_during_request": [
+      "history-deps --chapter 12",
+      "chapter-read --chapter 12 --sha256 <read_receipt.chapter_sha>",
+      "status"
+    ],
+    "plan_created": false,
+    "branch_created": false,
+    "read_sha_matches_original": true
+  },
+  "case2": {
+    "original_sha256": "1b113eca61d8803a05fd6c82324e92757d1bbff084cf39892756217ae86986c9",
+    "before_ids": {
+      "income": "a-entry",
+      "expense": "z-entry"
+    },
+    "after_ids": {
+      "income": "z-entry",
+      "expense": "a-entry"
+    },
+    "before_check": {
+      "blockers": [],
+      "book_id": "c5534c07-3a53-4f1c-aaee-5eabbd4be3f3",
+      "budget": {
+        "limit": 16000,
+        "unit": "utf8_bytes",
+        "used": 644
+      },
+      "chapter": 2,
+      "limits": "Checks apply only to recorded evidence and explicit numeric rules; missing evidence and literary quality need review.",
+      "ok": true,
+      "revision": 3,
+      "scope": {
+        "clock": "main",
+        "end": 10,
+        "entities": [
+          "coin",
+          "jia"
+        ],
+        "start": 10
+      },
+      "warnings": [
+        {
+          "at": 10,
+          "available": "10",
+          "code": "resource_order_ambiguous",
+          "holder": "jia",
+          "id": "z-entry",
+          "message": "Spending needs income recorded at the same tick; establish their order before treating funds as available.",
+          "records": [
+            "a-entry",
+            "z-entry"
+          ],
+          "required": "10",
+          "resource": "coin"
+        }
+      ]
+    },
+    "after_check": {
+      "blockers": [],
+      "book_id": "c5534c07-3a53-4f1c-aaee-5eabbd4be3f3",
+      "budget": {
+        "limit": 16000,
+        "unit": "utf8_bytes",
+        "used": 644
+      },
+      "chapter": 2,
+      "limits": "Checks apply only to recorded evidence and explicit numeric rules; missing evidence and literary quality need review.",
+      "ok": true,
+      "revision": 4,
+      "scope": {
+        "clock": "main",
+        "end": 10,
+        "entities": [
+          "coin",
+          "jia"
+        ],
+        "start": 10
+      },
+      "warnings": [
+        {
+          "at": 10,
+          "available": "10",
+          "code": "resource_order_ambiguous",
+          "holder": "jia",
+          "id": "a-entry",
+          "message": "Spending needs income recorded at the same tick; establish their order before treating funds as available.",
+          "records": [
+            "a-entry",
+            "z-entry"
+          ],
+          "required": "10",
+          "resource": "coin"
+        }
+      ]
+    },
+    "only_ids_changed": true,
+    "same_check_meaning": true,
+    "same_actual_resources": true,
+    "same_plan": true,
+    "same_chapter_sha": true,
+    "actual_resources": [
+      {
+        "amount": "0",
+        "basis": [
+          "opening-zero"
+        ],
+        "event_count": 1,
+        "holder": "jia",
+        "known": true,
+        "resource": "coin"
+      }
+    ],
+    "context_budget_before": {
+      "limit": 16000,
+      "unit": "utf8_bytes",
+      "used": 2214
+    },
+    "context_budget_after": {
+      "limit": 16000,
+      "unit": "utf8_bytes",
+      "used": 2214
+    },
+    "omitted_optional_count": 0,
+    "judgment": "付款尚无充分依据；目前正式余额为0，计划收入尚未发生，须明确同刻收入先到账才能付款。两次检查语义一致。"
+  },
+  "temporary_books_removed": true
+}

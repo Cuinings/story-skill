@@ -1,0 +1,16 @@
+{
+  "old_scope": [
+    1
+  ],
+  "new_scope": [
+    1,
+    2
+  ],
+  "refresh_error": "stale_branch",
+  "preserved_existing_card_dependency": true,
+  "current_text_unchanged_before_publish": true,
+  "published": true,
+  "exports_complete": true,
+  "cli_flow_passed": true,
+  "scope": "Isolated synthetic project and book; real user installation and novels unchanged"
+}

@@ -1,0 +1,304 @@
+{
+  "request": "Recover the saved historical branch without the lost input file; read only, no publishing, reconstruction, rewriting, or original-book cleanup.",
+  "book": "/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-history-2z94rt2b/book",
+  "branch": "6e1c4b13f90e4cdcaef5fe9974e598b8",
+  "runtime": "/Users/cuining/Documents/GitHub/story-skill/skills/story-codex/scripts/story.py",
+  "inspection": {
+    "affected": [
+      {
+        "base_sha256": "23cf7e0cfe0f399d56c7aa11018ce0f6da89fa9f78ce70807ac5b74c12a2eba0",
+        "candidate_sha256": "2dbe89f0bc4ef2db0b59e9672630786ffd823bcfaac0bffb4c7025d936fe831e",
+        "chapter": 1,
+        "draft_sha256": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+        "external_edit": null,
+        "path": "chapters/第一卷 雨夜/第1章 核对交接.md",
+        "reason": "changed_body",
+        "reviewed": true
+      }
+    ],
+    "base": {
+      "complete": false,
+      "dependencies": [],
+      "summary": "她交出钥匙，保留收据。",
+      "text": "# 第1章\n沈禾在渡口核对第1册账本。她交出钥匙，留下一张收据。灯还亮着。\n"
+    },
+    "baseline_publication_revision": 2,
+    "baseline_replayed_events": 2,
+    "baseline_state_sha256": "71353466cd65bec3326df90a45f72c7e7daf45aa2bbbcf0b3de886a5d5cca49e",
+    "branch": "6e1c4b13f90e4cdcaef5fe9974e598b8",
+    "budget": {
+      "limit": 64000,
+      "unit": "utf8_bytes",
+      "used": 4075
+    },
+    "candidate": {
+      "complete": true,
+      "dependencies": [],
+      "review": {
+        "candidate_sha256": "2dbe89f0bc4ef2db0b59e9672630786ffd823bcfaac0bffb4c7025d936fe831e",
+        "checks": {
+          "causality": {
+            "note": "核对版本后复查选择、连续性与代价。",
+            "quote": "灯还亮着。"
+          },
+          "constraints": {
+            "note": "核对版本后复查选择、连续性与代价。",
+            "quote": "灯还亮着。"
+          },
+          "continuity": {
+            "note": "核对版本后复查选择、连续性与代价。",
+            "quote": "灯还亮着。"
+          },
+          "style": {
+            "note": "核对版本后复查选择、连续性与代价。",
+            "quote": "灯还亮着。"
+          }
+        },
+        "draft_sha256": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+        "issues": []
+      },
+      "sha": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+      "summary": "她核清账本，并留下交接凭据。",
+      "text": "# 第1章\n沈禾在渡口核对第1册账本。她交出钥匙，留下一张收据。灯还亮着。\n她拆开信封，把钥匙放进信封。\n"
+    },
+    "chapter": 1,
+    "chapter_review_template": {
+      "candidate_sha256": "2dbe89f0bc4ef2db0b59e9672630786ffd823bcfaac0bffb4c7025d936fe831e",
+      "checks": {
+        "causality": {
+          "note": "",
+          "quote": ""
+        },
+        "constraints": {
+          "note": "",
+          "quote": ""
+        },
+        "continuity": {
+          "note": "",
+          "quote": ""
+        },
+        "style": {
+          "note": "",
+          "quote": ""
+        }
+      },
+      "draft_sha256": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+      "issues": []
+    },
+    "complete": true,
+    "current_revision": 7,
+    "entity_search_hints": [],
+    "manifest_sha256": "ce53f3d4d449eba87c1111527f707ba9fa2ee3c4ee9d81014fb765b34f634179",
+    "pages": {
+      "affected": {
+        "complete": true,
+        "limit": 25,
+        "next_offset": null,
+        "offset": 0,
+        "total": 1
+      },
+      "hints": {
+        "complete": true,
+        "limit": 25,
+        "next_offset": null,
+        "offset": 0,
+        "total": 0
+      },
+      "state": {
+        "complete": true,
+        "limit": 50,
+        "next_offset": null,
+        "offset": 0,
+        "total": 1
+      },
+      "world": {
+        "complete": true,
+        "limit": 25,
+        "next_offset": null,
+        "offset": 0,
+        "total": 0
+      }
+    },
+    "pagination_note": "Each complete flag means this response includes that entire section. A final page with a nonzero offset is not the whole review scope. Read all pages before declaring full coverage.",
+    "receipt": null,
+    "required_state_ids": [
+      "key"
+    ],
+    "review_scope": {
+      "chapter_ids_page": [
+        1
+      ],
+      "complete": true,
+      "sha256": "080a9ed428559ef602668b4c00f114f1a11c3f6b02a435f0bdc154578e4d7f22",
+      "total_chapters": 1
+    },
+    "review_template": {
+      "coverage_review": "",
+      "issues": [],
+      "manifest_sha256": "ce53f3d4d449eba87c1111527f707ba9fa2ee3c4ee9d81014fb765b34f634179",
+      "note": "",
+      "reviewed_chapters": [
+        1
+      ],
+      "state_review": ""
+    },
+    "revision": 7,
+    "semantic_reviewed": true,
+    "semantic_warning": "Dependency declarations are author evidence. Recheck unstated entity/rule effects and final state; no old delta is replayed.",
+    "snapshot": null,
+    "state_review_instruction": "For each decision explicitly add after: a complete card object to keep/update, or null for a reviewed deletion. Cite a candidate chapter and exact quote; fill the decision note.",
+    "state_review_next_offset": null,
+    "state_review_offset": 0,
+    "state_review_template": [
+      {
+        "before": {
+          "critical": false,
+          "due": null,
+          "id": "key",
+          "kind": "fact",
+          "source": "chapter:1 quote:她交出钥匙",
+          "status": "active",
+          "tags": [],
+          "text": "钥匙已经交出。"
+        },
+        "before_sha": "ef8cf026761fc468cbabac33c8f6b63f8d36ecb4fd5d4faa2592f29721166a53",
+        "chapter": null,
+        "id": "key",
+        "note": "",
+        "quote": ""
+      }
+    ],
+    "state_review_total": 1,
+    "status": "candidate",
+    "world_review_required": []
+  },
+  "candidate_readback": {
+    "budget": {
+      "limit": 12000,
+      "unit": "utf8_bytes",
+      "used": 363
+    },
+    "chapter": 1,
+    "characters": 53,
+    "end": 53,
+    "next_start": null,
+    "source_sha256": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+    "start": 0,
+    "text": "# 第1章\n沈禾在渡口核对第1册账本。她交出钥匙，留下一张收据。灯还亮着。\n她拆开信封，把钥匙放进信封。\n"
+  },
+  "published_state_readback": {
+    "before_publication": false,
+    "budget": {
+      "limit": 64000,
+      "unit": "utf8_bytes",
+      "used": 543
+    },
+    "cards": [
+      {
+        "critical": false,
+        "due": null,
+        "id": "key",
+        "kind": "fact",
+        "source": "chapter:1 quote:她交出钥匙",
+        "status": "active",
+        "tags": [],
+        "text": "钥匙已经交出。"
+      }
+    ],
+    "chapter": 1,
+    "offset": 0,
+    "publication_revision": 3,
+    "replayed_events": 3,
+    "scope": "Database card state at this publication revision, not the in-story chronology; no revised semantic delta is replayed.",
+    "snapshot": null,
+    "state_revision": 3,
+    "total_cards": 1,
+    "version": "3c071bec693646d4ab761e772bdf0015"
+  },
+  "history_dependencies": {
+    "book_id": "374473b0-e6ef-4985-beee-e4f6e92558f9",
+    "branch": "6e1c4b13f90e4cdcaef5fe9974e598b8",
+    "budget": {
+      "limit": 64000,
+      "unit": "utf8_bytes",
+      "used": 537
+    },
+    "candidates": [],
+    "chapter": 1,
+    "review_required": "Read actual evidence, select dependencies, and resolve unavailable or omitted sources before declaring completeness. This list is not a complete semantic review.",
+    "revision": 7,
+    "scope": "Current record hashes and this branch's saved chapter candidates; not a reconstruction of chapter-before card state.",
+    "unavailable": [],
+    "world_warnings": []
+  },
+  "retrievable": {
+    "candidate_text": true,
+    "candidate_summary": true,
+    "candidate_complete_and_dependencies": true,
+    "saved_chapter_review": true,
+    "base_text_and_summary": true,
+    "base_state_before_and_before_sha": true,
+    "publication_status": true
+  },
+  "not_retrievable_from_observed_documented_cli": {
+    "saved_state_changes": "Only state_review_template with before/before_sha and blank note/quote/chapter is returned. No saved after value, deletion decision, supporting quote or decision note is exposed.",
+    "saved_world_changes_and_retirements": "No saved world_changes or retirements payload is returned. world_review_required is empty; this only shows the required-world-review list and cannot prove no repair was saved.",
+    "saved_semantic_review": "semantic_reviewed is true, but only a blank review_template is returned. The saved state_review, coverage_review, note, reviewed scope and issues body cannot be recovered here."
+  },
+  "unfinished_and_unknown": {
+    "definitely_unpublished": true,
+    "saved_flags": {
+      "chapter_reviewed": true,
+      "candidate_dependency_complete": true,
+      "semantic_reviewed": true
+    },
+    "cannot_conclude_missing_from_blank_templates": true,
+    "cannot_confirm_final_card_world_and_overall_review_content": true,
+    "next_step": "需要能够读回该分支已存state_changes/world_changes/semantic_review的只读入口，或原始保存输入；本轮不从候选正文反推或重建这些内容，也不尝试发布。"
+  },
+  "verification": {
+    "initial_observed_revision": 7,
+    "revision_before": 7,
+    "revision_after": 7,
+    "all_inspection_pages_complete": true,
+    "candidate_sha_matches_text": true,
+    "candidate_readback_equals_saved_text": true,
+    "only_read_commands_called": true,
+    "original_book_not_cleaned": true,
+    "book_agreement_file": "创作约定.md was absent; direct user task authorization was sufficient for read-only recovery."
+  },
+  "commands": [
+    [
+      "status"
+    ],
+    [
+      "history-inspect",
+      "--branch",
+      "6e1c4b13f90e4cdcaef5fe9974e598b8",
+      "--chapter",
+      "1"
+    ],
+    [
+      "chapter-read",
+      "--chapter",
+      "1",
+      "--sha256",
+      "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7"
+    ],
+    [
+      "history-dependencies",
+      "--branch",
+      "6e1c4b13f90e4cdcaef5fe9974e598b8",
+      "--chapter",
+      "1"
+    ],
+    [
+      "history-state",
+      "--chapter",
+      "1"
+    ],
+    [
+      "status"
+    ]
+  ]
+}

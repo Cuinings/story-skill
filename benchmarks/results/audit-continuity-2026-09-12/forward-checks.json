@@ -1,0 +1,269 @@
+{
+  "method": "Two independent temporary-book CLI behavior exercises. Read skill instructions and CLI output only; no runtime implementation, diff, tests, or other agent conclusions read; no new prose or repository/installation edits.",
+  "runtime": "/Users/cuining/Documents/GitHub/story-skill/skills/story-codex/scripts/story.py",
+  "case1": {
+    "chapter_sha256": "3f5a5e0da1ffe91a38cd3846659e36dbb1cb43160198f85b4e748f7d4600255d",
+    "original_quote": "甲先在东屋等候，后来移到西屋拆信。",
+    "context_budget": {
+      "limit": 16000,
+      "unit": "utf8_bytes",
+      "used": 4118
+    },
+    "context_omitted_optional_count": 0,
+    "context_revision": 3,
+    "context_world_summary": {
+      "volume": "night-volume",
+      "arc": "letter-arc",
+      "line": null,
+      "line_candidates": [
+        {
+          "id": "home-east",
+          "order_uncertain": true
+        },
+        {
+          "id": "home-west",
+          "order_uncertain": true
+        }
+      ],
+      "facts": [
+        {
+          "id": "where-east",
+          "value": "东屋",
+          "order_uncertain": true
+        },
+        {
+          "id": "where-west",
+          "value": "西屋",
+          "order_uncertain": true
+        }
+      ]
+    },
+    "dependencies_receipt": {
+      "book_id": "9c12afd1-745b-483a-a650-cb82b969c062",
+      "budget": {
+        "limit": 16000,
+        "unit": "utf8_bytes",
+        "used": 1603
+      },
+      "candidates": [
+        {
+          "kind": "chapter",
+          "ref": "1",
+          "sha": "3f5a5e0da1ffe91a38cd3846659e36dbb1cb43160198f85b4e748f7d4600255d"
+        },
+        {
+          "kind": "world.arcs",
+          "ref": "letter-arc",
+          "sha": "be2286d936a6130f6eb702b745c23f0735516e3e67a96e102cec5c63e314f667"
+        },
+        {
+          "kind": "world.entities",
+          "ref": "actor",
+          "sha": "2768a58ca594714f8f7d56109a13a7a637c64d4c074d30185f15252f4f7051cd"
+        },
+        {
+          "kind": "world.facts",
+          "ref": "where-east",
+          "sha": "da122fba189c4b46e15f5f40ee50af4f5ecc1079de753c61c7bd972cf233c975"
+        },
+        {
+          "kind": "world.facts",
+          "ref": "where-west",
+          "sha": "5bdc25ad7fefa7c13e4bc605f0ce31969438cda26f68c9df6717a4823a27d875"
+        },
+        {
+          "kind": "world.lines",
+          "ref": "home-east",
+          "sha": "eed337181ed749b5cc10f87a6fdf9287bfb7a4b655b68b02b16e25bd163b70a6"
+        },
+        {
+          "kind": "world.lines",
+          "ref": "home-west",
+          "sha": "25e0ea9f537a567046ce91794ed7c265eed560d061a71382f62c438ffeee2670"
+        },
+        {
+          "kind": "world.volumes",
+          "ref": "night-volume",
+          "sha": "0ee212366ba1a91e4923d68c1c64a3babb53e5fe9c48b8a4a7f41df6e1c70bc4"
+        }
+      ],
+      "chapter": 2,
+      "review_required": "Select actual dependencies, add missing sources, then declare completeness with a concrete review note. Candidate hashes do not resolve the accompanying world-state warnings.",
+      "revision": 3,
+      "world_warnings": [
+        {
+          "code": "world_order_ambiguous",
+          "kind": "lines",
+          "message": "These checkpoints do not establish a unique current scene.",
+          "records": [
+            "home-east",
+            "home-west"
+          ]
+        },
+        {
+          "code": "world_order_ambiguous",
+          "kind": "facts",
+          "message": "These records do not establish a unique state; review their evidenced story times.",
+          "records": [
+            "where-east",
+            "where-west"
+          ]
+        }
+      ]
+    },
+    "selected_for_review": [
+      {
+        "kind": "chapter",
+        "ref": "1",
+        "sha": "3f5a5e0da1ffe91a38cd3846659e36dbb1cb43160198f85b4e748f7d4600255d"
+      },
+      {
+        "kind": "world.arcs",
+        "ref": "letter-arc",
+        "sha": "be2286d936a6130f6eb702b745c23f0735516e3e67a96e102cec5c63e314f667"
+      },
+      {
+        "kind": "world.entities",
+        "ref": "actor",
+        "sha": "2768a58ca594714f8f7d56109a13a7a637c64d4c074d30185f15252f4f7051cd"
+      },
+      {
+        "kind": "world.facts",
+        "ref": "where-east",
+        "sha": "da122fba189c4b46e15f5f40ee50af4f5ecc1079de753c61c7bd972cf233c975"
+      },
+      {
+        "kind": "world.facts",
+        "ref": "where-west",
+        "sha": "5bdc25ad7fefa7c13e4bc605f0ce31969438cda26f68c9df6717a4823a27d875"
+      },
+      {
+        "kind": "world.lines",
+        "ref": "home-east",
+        "sha": "eed337181ed749b5cc10f87a6fdf9287bfb7a4b655b68b02b16e25bd163b70a6"
+      },
+      {
+        "kind": "world.lines",
+        "ref": "home-west",
+        "sha": "25e0ea9f537a567046ce91794ed7c265eed560d061a71382f62c438ffeee2670"
+      },
+      {
+        "kind": "world.volumes",
+        "ref": "night-volume",
+        "sha": "0ee212366ba1a91e4923d68c1c64a3babb53e5fe9c48b8a4a7f41df6e1c70bc4"
+      }
+    ],
+    "all_candidate_hashes_match_readback": true,
+    "read_records_evidence_current": true,
+    "selection_explanation": "本次范围包括前章原文、人物、已采用卷段，以及两处地点与两个home断点；并列记录均保留参与顺序复核。原文先/后来支持叙事上的东屋到西屋，结构化刻度仍有歧义。卷段是author_plan，不据此宣称目标已发生。候选哈希不代表已经选定唯一状态或已声明依赖完整；本轮没有正文与完整声明提交。",
+    "revision_before": 3,
+    "revision_after": 3
+  },
+  "case2": {
+    "chapter_sha256": "90434ce5c50406bd6892e458899a8c7182b04ad02d5f14f95a80fdb11aad2fdf",
+    "original_quote": "甲开账时有五枚铜钱。",
+    "actual_resources": [
+      {
+        "amount": "5",
+        "basis": [
+          "opening-five"
+        ],
+        "event_count": 1,
+        "holder": "actor",
+        "known": true,
+        "resource": "coin"
+      }
+    ],
+    "expense_check": {
+      "blockers": [
+        {
+          "at": 10,
+          "available": "5",
+          "code": "resource_overdraft",
+          "holder": "actor",
+          "records": [
+            "amount-unknown",
+            "pay-six"
+          ],
+          "required": "6",
+          "required_is_minimum": true,
+          "resource": "coin"
+        }
+      ],
+      "book_id": "f6221138-5dae-4d69-9c41-727e35527ac3",
+      "budget": {
+        "limit": 16000,
+        "unit": "utf8_bytes",
+        "used": 667
+      },
+      "chapter": 2,
+      "limits": "Checks apply only to recorded evidence and explicit numeric rules; missing evidence and literary quality need review.",
+      "ok": false,
+      "revision": 3,
+      "scope": {
+        "clock": "main",
+        "end": 10,
+        "entities": [
+          "actor",
+          "coin"
+        ],
+        "start": 10
+      },
+      "warnings": [
+        {
+          "code": "quantity_or_time_unknown",
+          "id": "amount-unknown"
+        },
+        {
+          "code": "resource_baseline_unknown",
+          "holder": "actor",
+          "id": "pay-six"
+        }
+      ]
+    },
+    "income_check": {
+      "blockers": [],
+      "book_id": "f6221138-5dae-4d69-9c41-727e35527ac3",
+      "budget": {
+        "limit": 16000,
+        "unit": "utf8_bytes",
+        "used": 497
+      },
+      "chapter": 2,
+      "limits": "Checks apply only to recorded evidence and explicit numeric rules; missing evidence and literary quality need review.",
+      "ok": true,
+      "revision": 4,
+      "scope": {
+        "clock": "main",
+        "end": 10,
+        "entities": [
+          "actor",
+          "coin"
+        ],
+        "start": 10
+      },
+      "warnings": [
+        {
+          "code": "quantity_or_time_unknown",
+          "id": "amount-unknown"
+        },
+        {
+          "code": "resource_baseline_unknown",
+          "holder": "actor",
+          "id": "pay-six"
+        }
+      ]
+    },
+    "changed_unknown_fields": [
+      "receiver",
+      "sender"
+    ],
+    "same_plan": true,
+    "same_actual_resources": true,
+    "same_chapter_sha": true,
+    "same_other_transfer_hashes": true,
+    "expense_judgment": "不能照写为资金足够的支付。现有5枚，已知支出6枚已经必然超额，额外未知支出不能消除这个阻断。required=6只是最低支出，不推算该批交易的精确最终余额。",
+    "income_judgment": "付款尚无充分依据。未知收入有可能补足差额，但金额与付款前到账顺序未证实，且仍只是作者计划；ok=true只表示未发现确定性阻断。"
+  },
+  "temporary_books_removed": true
+}

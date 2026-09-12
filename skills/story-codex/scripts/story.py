@@ -18,7 +18,7 @@ import uuid
 import importlib.util
 from types import SimpleNamespace
 
-VERSION = "0.5.4"
+VERSION = "0.5.5"
 SCHEMA_VERSION = 2
 CHECKS = ("causality", "continuity", "constraints", "style")
 KINDS = ("fact", "character", "world", "hook", "preference", "contract")
@@ -568,7 +568,8 @@ def manuscript_counts(text, include_title=False):
     lines = text.splitlines()
     title = re.match(r"^#\s+(\S.*)$", lines[0].lstrip("\ufeff")) if lines else None
     if title:
-        lines = ([title[1]] if include_title else []) + lines[1:]
+        title_text = re.sub(r"(?:^|[ \t]+)#+[ \t]*$", "", title[1])
+        lines = ([title_text] if include_title else []) + lines[1:]
     chars = [c for c in "\n".join(lines)
              if not c.isspace() and unicodedata.category(c) not in ("Cc", "Cf")]
     return {"visible_nonspace_v1": len(chars),
@@ -1122,17 +1123,19 @@ class Book:
         return pending, drift
 
     def status(self):
-        pending, drift = self._export_health()
-        sources = self.list_sources(0, 3, 6000)
-        return {"book": str(self.root), "id": self.meta("id"), "title": self.meta("title"),
-                "kind": self.meta("kind"), "revision": self.meta("revision"),
-                "last_chapter": self.meta("last_chapter"), "next_chapter": self.meta("last_chapter") + 1,
-                "imported_through": self.meta("imported_through"),
-                "cards": self.db.execute("SELECT count(*) FROM cards").fetchone()[0],
-                "pending_exports": pending[:20], "pending_export_count": len(pending),
-                "changed_exports": drift[:20], "changed_export_count": len(drift),
-                "sources": sources["total"], "recent_sources": sources["results"],
-                "more_sources": sources["next_offset"] < sources["total"], "integrity": self._integrity_report()}
+        # Bind export health, progress and counts to the same database version.
+        with self.read_snapshot():
+            pending, drift = self._export_health()
+            sources = self.list_sources(0, 3, 6000)
+            return {"book": str(self.root), "id": self.meta("id"), "title": self.meta("title"),
+                    "kind": self.meta("kind"), "revision": self.meta("revision"),
+                    "last_chapter": self.meta("last_chapter"), "next_chapter": self.meta("last_chapter") + 1,
+                    "imported_through": self.meta("imported_through"),
+                    "cards": self.db.execute("SELECT count(*) FROM cards").fetchone()[0],
+                    "pending_exports": pending[:20], "pending_export_count": len(pending),
+                    "changed_exports": drift[:20], "changed_export_count": len(drift),
+                    "sources": sources["total"], "recent_sources": sources["results"],
+                    "more_sources": sources["next_offset"] < sources["total"], "integrity": self._integrity_report()}
 
     def chapter_external_path(self, chapter):
         relative = self.chapter_path(chapter)
@@ -1239,8 +1242,11 @@ class Book:
                       "omitted_optional_count": 0}
             if external:
                 packet.update(mode="reconcile_last", external_edit=external)
-            if any(key in plan for key in ("volume", "arc", "line", "entities", "time")):
-                packet["world"] = world.context(self, plan, chapter)
+            # Global rules apply even when the plan has no optional world selectors.
+            world_packet = world.context(self, plan, chapter)
+            if (any(key in plan for key in ("volume", "arc", "line", "entities", "time")) or
+                    world_packet["rules"] or world_packet["planned"]["rules"]):
+                packet["world"] = world_packet
             if self.integrity != "strict":
                 packet["integrity"] = self._integrity_report()
             tags = set(plan["tags"])
@@ -1358,7 +1364,8 @@ class Book:
         world_packet = packet.get("world", {})
         for field, kind in (("entities", "entities"), ("facts", "facts"), ("propositions", "facts"),
                             ("knowledge", "knowledge"), ("hooks", "hooks"), ("rules", "rules"),
-                            ("uses", "uses"), ("arc_steps", "arc_steps"), ("line", "lines")):
+                            ("uses", "uses"), ("arc_steps", "arc_steps"),
+                            ("volume", "volumes"), ("arc", "arcs"), ("line", "lines"), ("line_candidates", "lines")):
             values = world_packet.get(field, [])
             if values is None:
                 continue
@@ -1377,8 +1384,16 @@ class Book:
         if packet["revision"] != self.meta("revision"):
             fail("stale_revision", "State changed while resolving dependency candidates; retry")
         return bounded_packet({"book_id": packet["book_id"], "revision": packet["revision"], "chapter": chapter,
-            "candidates": [found[k] for k in sorted(found)],
-            "review_required": "Select actual dependencies, add missing sources, then declare completeness with a concrete review note."}, budget)
+            "candidates": [found[k] for k in sorted(found)], "world_warnings": world_packet.get("warnings", []),
+            "review_required": "Select actual dependencies, add missing sources, then declare completeness with a concrete review note. "
+                               "Candidate hashes do not resolve the accompanying world-state warnings."}, budget)
+
+    def world_check(self, chapter, budget=16000):
+        integer(chapter, "chapter", 1)
+        with self.read_snapshot():
+            result = world.check(self, {**self.get_plan(chapter), "chapter": chapter})
+            return bounded_packet({**result, "book_id": self.meta("id"),
+                                   "revision": self.meta("revision"), "chapter": chapter}, budget)
 
     def world_read(self, kind, rid, budget=12000):
         with self.read_snapshot():
@@ -2010,7 +2025,7 @@ def run(args):
         if cmd == "world-save":
             return world.save(book, read_json(args.input), args.expect)
         if cmd == "world-check":
-            return bounded_packet(world.check(book, {**book.get_plan(args.chapter), "chapter": args.chapter}), args.budget_bytes)
+            return book.world_check(args.chapter, args.budget_bytes)
         if cmd == "world-read":
             return book.world_read(args.kind, args.id, args.budget_bytes)
         if cmd == "audit":

@@ -1,0 +1,40 @@
+{
+  "from": "v0.5.3",
+  "to": "v0.5.4",
+  "changed_skills": [
+    "story-codex",
+    "story-codex-plan",
+    "story-codex-write",
+    "story-codex-review"
+  ],
+  "backup_directories": 4,
+  "verified_unchanged_directories": [
+    "story-codex-analyze",
+    "story-codex-research",
+    "story-codex-cover"
+  ],
+  "restored_skills": 7,
+  "prepared_checks": [
+    "seven_skill_entries",
+    "five_runtime_modules",
+    "old_version_file_sets",
+    "all_payload_sha256",
+    "seven_managed_manifests",
+    "version_help_isolated_init_status",
+    "retained_backup_current_suite_other_files"
+  ],
+  "restored_checks": [
+    "seven_skill_entries",
+    "five_runtime_modules",
+    "old_version_file_sets",
+    "all_payload_sha256",
+    "seven_managed_manifests",
+    "version_help_isolated_init_status",
+    "retained_backup_current_suite_other_files"
+  ],
+  "old_installer_after_restore": "unchanged",
+  "fixed_tag_alternative_complete": true,
+  "payload_files": 33,
+  "local_reference_files_checked": 30,
+  "scope": "Isolated synthetic project and book; real user installation and novels unchanged"
+}

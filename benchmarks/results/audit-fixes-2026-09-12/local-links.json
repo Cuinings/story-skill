@@ -1,0 +1,7 @@
+{
+  "status": "passed",
+  "files_scanned": 159,
+  "links_checked": 742,
+  "missing": [],
+  "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+}

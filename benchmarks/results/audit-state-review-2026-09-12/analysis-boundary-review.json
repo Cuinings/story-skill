@@ -1,0 +1,14 @@
+{
+  "method": "Separate agent examined analysis instructions and runtime, then used isolated temporary Book fixtures.",
+  "new_defect_found": false,
+  "existing_analysis_tests_passed": 33,
+  "checks": [
+    "Resumed low-budget next calls after closing/reopening the book; saved each of four content chunks exactly once.",
+    "Recovered 106 source characters across findings pages after deleting the original input file; CRLF, Unicode and emoji content preserved.",
+    "Budget rejection did not advance cursor; aggregation fingerprint stayed stable between unmodified pages.",
+    "Replacing the last chunk made the old report fingerprint stale and did not finalize a report.",
+    "Rechecked fingerprint could finalize and export; partial source coverage remained partial."
+  ],
+  "temporary_books_removed": true,
+  "literary_quality_tested": false
+}

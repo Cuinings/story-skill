@@ -1,0 +1,290 @@
+{
+  "method": "Independent rerun using updated history.md and docs/recovery.md plus documented read-only CLI; no implementation/tests/diff/expected file read.",
+  "book": "/private/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-history-2z94rt2b/book",
+  "branch": "6e1c4b13f90e4cdcaef5fe9974e598b8",
+  "saved": {
+    "semantic_review": {
+      "coverage_review": "此例仅一章，关联范围已核对。",
+      "issues": [],
+      "manifest_sha256": "ce53f3d4d449eba87c1111527f707ba9fa2ee3c4ee9d81014fb765b34f634179",
+      "note": "已核对信封与钥匙的候选修订。",
+      "reviewed_chapters": [
+        1
+      ],
+      "state_review": "钥匙去向与拆封状态相符。"
+    },
+    "state_changes": [
+      {
+        "after": {
+          "critical": false,
+          "due": null,
+          "id": "key",
+          "kind": "fact",
+          "source": "chapter:1 quote:她交出钥匙",
+          "status": "active",
+          "tags": [],
+          "text": "钥匙放进拆开的信封。"
+        },
+        "before_sha": "ef8cf026761fc468cbabac33c8f6b63f8d36ecb4fd5d4faa2592f29721166a53",
+        "chapter": 1,
+        "id": "key",
+        "note": "候选稿中的最终去向，以本次检查为准。",
+        "quote": "把钥匙放进信封"
+      }
+    ],
+    "world_changes": {
+      "entities": [
+        {
+          "description": "封口已拆开",
+          "id": "envelope",
+          "kind": "item",
+          "name": "信封"
+        }
+      ]
+    }
+  },
+  "history_saved_receipt": {
+    "branch": "6e1c4b13f90e4cdcaef5fe9974e598b8",
+    "budget": {
+      "limit": 64000,
+      "unit": "utf8_bytes",
+      "used": 1402
+    },
+    "candidate_chapters": [
+      1
+    ],
+    "chapter": 1,
+    "current_revision": 7,
+    "manifest_sha256": "ce53f3d4d449eba87c1111527f707ba9fa2ee3c4ee9d81014fb765b34f634179",
+    "note": "Saved branch decisions, not current canonical state or renewed approval. Read candidate prose and chapter reviews with history-inspect --chapter. Null semantic_review means no current saved overall review. State/world updates replace the supplied section; preserve its other valid entries.",
+    "revision": 7,
+    "saved": {
+      "semantic_review": {
+        "coverage_review": "此例仅一章，关联范围已核对。",
+        "issues": [],
+        "manifest_sha256": "ce53f3d4d449eba87c1111527f707ba9fa2ee3c4ee9d81014fb765b34f634179",
+        "note": "已核对信封与钥匙的候选修订。",
+        "reviewed_chapters": [
+          1
+        ],
+        "state_review": "钥匙去向与拆封状态相符。"
+      },
+      "state_changes": [
+        {
+          "after": {
+            "critical": false,
+            "due": null,
+            "id": "key",
+            "kind": "fact",
+            "source": "chapter:1 quote:她交出钥匙",
+            "status": "active",
+            "tags": [],
+            "text": "钥匙放进拆开的信封。"
+          },
+          "before_sha": "ef8cf026761fc468cbabac33c8f6b63f8d36ecb4fd5d4faa2592f29721166a53",
+          "chapter": 1,
+          "id": "key",
+          "note": "候选稿中的最终去向，以本次检查为准。",
+          "quote": "把钥匙放进信封"
+        }
+      ],
+      "world_changes": {
+        "entities": [
+          {
+            "description": "封口已拆开",
+            "id": "envelope",
+            "kind": "item",
+            "name": "信封"
+          }
+        ]
+      }
+    },
+    "status": "candidate"
+  },
+  "candidate": {
+    "complete": true,
+    "dependencies": [],
+    "review": {
+      "candidate_sha256": "2dbe89f0bc4ef2db0b59e9672630786ffd823bcfaac0bffb4c7025d936fe831e",
+      "checks": {
+        "causality": {
+          "note": "核对版本后复查选择、连续性与代价。",
+          "quote": "灯还亮着。"
+        },
+        "constraints": {
+          "note": "核对版本后复查选择、连续性与代价。",
+          "quote": "灯还亮着。"
+        },
+        "continuity": {
+          "note": "核对版本后复查选择、连续性与代价。",
+          "quote": "灯还亮着。"
+        },
+        "style": {
+          "note": "核对版本后复查选择、连续性与代价。",
+          "quote": "灯还亮着。"
+        }
+      },
+      "draft_sha256": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+      "issues": []
+    },
+    "sha": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+    "summary": "她核清账本，并留下交接凭据。",
+    "text": "# 第1章\n沈禾在渡口核对第1册账本。她交出钥匙，留下一张收据。灯还亮着。\n她拆开信封，把钥匙放进信封。\n"
+  },
+  "candidate_sha": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+  "candidate_binding_sha": "2dbe89f0bc4ef2db0b59e9672630786ffd823bcfaac0bffb4c7025d936fe831e",
+  "chapter_readback": {
+    "budget": {
+      "limit": 12000,
+      "unit": "utf8_bytes",
+      "used": 363
+    },
+    "chapter": 1,
+    "characters": 53,
+    "end": 53,
+    "next_start": null,
+    "source_sha256": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+    "start": 0,
+    "text": "# 第1章\n沈禾在渡口核对第1册账本。她交出钥匙，留下一张收据。灯还亮着。\n她拆开信封，把钥匙放进信封。\n"
+  },
+  "inspection_status": {
+    "status": "candidate",
+    "receipt": null,
+    "revision": 7,
+    "current_revision": 7,
+    "manifest_sha256": "ce53f3d4d449eba87c1111527f707ba9fa2ee3c4ee9d81014fb765b34f634179",
+    "semantic_reviewed": true,
+    "affected": [
+      {
+        "base_sha256": "23cf7e0cfe0f399d56c7aa11018ce0f6da89fa9f78ce70807ac5b74c12a2eba0",
+        "candidate_sha256": "2dbe89f0bc4ef2db0b59e9672630786ffd823bcfaac0bffb4c7025d936fe831e",
+        "chapter": 1,
+        "draft_sha256": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+        "external_edit": null,
+        "path": "chapters/第一卷 雨夜/第1章 核对交接.md",
+        "reason": "changed_body",
+        "reviewed": true
+      }
+    ],
+    "pages": {
+      "affected": {
+        "complete": true,
+        "limit": 25,
+        "next_offset": null,
+        "offset": 0,
+        "total": 1
+      },
+      "hints": {
+        "complete": true,
+        "limit": 25,
+        "next_offset": null,
+        "offset": 0,
+        "total": 0
+      },
+      "state": {
+        "complete": true,
+        "limit": 50,
+        "next_offset": null,
+        "offset": 0,
+        "total": 1
+      },
+      "world": {
+        "complete": true,
+        "limit": 25,
+        "next_offset": null,
+        "offset": 0,
+        "total": 0
+      }
+    }
+  },
+  "before_after_comparison": {
+    "before": {
+      "source": "Direct observations from this same evaluator's preceding read-only run; no old temporary output file was opened.",
+      "branch_revision": 7,
+      "current_revision": 7,
+      "candidate_sha": "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7",
+      "state_changes": "Not returned; only blank decision template with before/before_sha.",
+      "world_changes": "Not returned; world_review_required was empty.",
+      "semantic_review": "Only semantic_reviewed:true and a blank review_template were returned.",
+      "candidate_text_and_chapter_review_retrievable": true
+    },
+    "after": {
+      "saved_state_changes_retrieved": true,
+      "state_decision_count": 1,
+      "saved_world_changes_retrieved": true,
+      "world_categories": [
+        "entities"
+      ],
+      "saved_semantic_review_retrieved": true,
+      "candidate_text_and_chapter_review_retrievable": true,
+      "candidate_sha_unchanged": true
+    }
+  },
+  "operation_log": [
+    {
+      "command": [
+        "history-saved",
+        "--branch",
+        "6e1c4b13f90e4cdcaef5fe9974e598b8"
+      ],
+      "exit_code": 0,
+      "revision_before": 7,
+      "revision_in_receipt": 7,
+      "current_revision_in_receipt": 7,
+      "revision_after": 7,
+      "changed_exports_before": 0,
+      "changed_exports_after": 0,
+      "pending_exports_before": 0,
+      "pending_exports_after": 0
+    },
+    {
+      "command": [
+        "history-inspect",
+        "--branch",
+        "6e1c4b13f90e4cdcaef5fe9974e598b8",
+        "--chapter",
+        "1"
+      ],
+      "exit_code": 0,
+      "revision_before": 7,
+      "revision_in_receipt": 7,
+      "current_revision_in_receipt": 7,
+      "revision_after": 7,
+      "changed_exports_before": 0,
+      "changed_exports_after": 0,
+      "pending_exports_before": 0,
+      "pending_exports_after": 0
+    },
+    {
+      "command": [
+        "chapter-read",
+        "--chapter",
+        "1",
+        "--sha256",
+        "3d50abb47a9573ec7f55bd21645b3d3c162fb0e72ee1226aaa5b3e1ab92889f7"
+      ],
+      "exit_code": 0,
+      "revision_before": 7,
+      "revision_in_receipt": null,
+      "current_revision_in_receipt": null,
+      "revision_after": 7,
+      "changed_exports_before": 0,
+      "changed_exports_after": 0,
+      "pending_exports_before": 0,
+      "pending_exports_after": 0
+    }
+  ],
+  "verification": {
+    "all_read_operations_revision_unchanged": true,
+    "saved_and_inspected_branch_revision_match": true,
+    "saved_and_inspected_current_revision_match": true,
+    "saved_and_inspected_manifest_match": true,
+    "candidate_readback_matches_saved_text": true,
+    "no_write_or_publish_commands_called": true,
+    "no_publication_observed": true,
+    "original_book_not_deleted": true,
+    "expected_file_not_read": true,
+    "candidate_sha_matches_utf8_text": true
+  },
+  "remaining": "此次恢复请求所需的已保存正文、最终卡片决定、世界修补和整体审查正文均已取回。分支仍为candidate，未发布；本轮没有重写或重新构造已保存内容，也未将读取当作重新批准旧审查。"
+}

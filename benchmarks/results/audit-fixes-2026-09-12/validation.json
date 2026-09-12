@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "scope": "Local post-release fixes for seven confirmed skill audit findings; not a release acceptance report",
+  "created_at": "2026-09-12T07:11:49.033346+00:00",
+  "base_commit": "f2f5aa14712e9a2de273187266e27eb5346dc8c2",
+  "runtime_version": "0.5.4",
+  "environment": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "x86_64",
+    "python": "3.12.14"
+  },
+  "ok": true,
+  "resolved_findings": [
+    "global_rules_without_optional_plan_fields",
+    "missing_history_dependency_recovery_steps",
+    "differential_install_backup_rollback_steps",
+    "optional_H1_closing_markers_in_title_count",
+    "undated_transfer_overwritten_by_opening",
+    "same_tick_state_selection_by_record_ID",
+    "mixed_revision_status_receipt"
+  ],
+  "new_regression_test_cases": 19,
+  "unit_tests": {
+    "ok": true,
+    "status": "passed",
+    "run": 462,
+    "passed": 455,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "counting": "Successful test cases use addSuccess; failure/error/skip counts may include subtests"
+  },
+  "skill_validation": {
+    "passed": 7,
+    "report": "skill-checks.json"
+  },
+  "local_links": {
+    "status": "passed",
+    "files_scanned": 159,
+    "links_checked": 742,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "cli_smoke": {
+    "ok": true,
+    "commands": 20,
+    "report": "smoke.json"
+  },
+  "recovery_workflows": {
+    "history": "history-recovery.json",
+    "installation": "install-rollback.json",
+    "both_passed": true
+  },
+  "independent_skill_exercises": {
+    "cases": 2,
+    "ok": true,
+    "report": "forward-checks.json"
+  },
+  "source_sha256": {
+    "README.md": "8f369a7157d2bdba960bc3bb3e4a5cdfb4b6a2e256f5f1632ef341e938328bdf",
+    "docs/github-release.md": "e06820b36aab5888e95c5007ec01c2a25f3576e0bada2ea9b09a22e6a0337585",
+    "docs/超长篇实操.md": "a29fc3a38abf0f93bf7d63d646a7fcf98bf5cea50d057e792cfb5d0b9c4d4670",
+    "skills/story-codex-review/references/history.md": "e7d70d90042723d3f0f3aea0f8c1094718c003214108076858e5de548929cbb7",
+    "skills/story-codex-write/references/chapter.md": "69156986948bf01bc11312f14603b09d6ff0fd27e7d5de68b9e4813574e67da6",
+    "skills/story-codex-write/references/long-form.md": "d967c10f05a89a96764d1d2d367e2f6fba47f649bbf41b31b091dc6cb911afef",
+    "skills/story-codex/scripts/story.py": "52c3d126571ebc0c0c60c08a16e60c793208aa279d3bf8f53d9f94173b95dd21",
+    "skills/story-codex/scripts/story_world.py": "ae9036384677afe9d7481df42c2a60d60e578b906d2549d3d38c2d4bce465300",
+    "tests/test_skill_audit_fixes.py": "9e3d698e8747f528cde283b56bd64c761513297813af734b629a9bf9e86725cb",
+    "tests/test_world_audit_fixes.py": "925ca8a173a4fd6ef06d846a3e030917a87f4a5fcb4f71a7193edb3db7e185a1"
+  },
+  "limits": [
+    "Executed on Intel macOS only; the seven conditional skips were not treated as passes.",
+    "No GitHub push, release, package publication, or replacement of the real installed skills.",
+    "No new token, capacity, migration or literary quality benchmark; historical v0.5.4 evidence was not overwritten."
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "date": "2026-09-12",
+  "scope": "Historical world_changes consumer coverage and explicit world-record foreign-key propagation",
+  "status": "focused_validation_passed",
+  "isolation": "All behavioral checks used temporary synthetic books with fixture cleanup; no real manuscript, installation, or release was changed.",
+  "implementation": [
+    "Normalize entity/rule dependency aliases to world.entities/world.rules for impact traversal.",
+    "Compare normalized world record values so actual definition/author-plan changes expand scope, while equivalent defaults, repeated links, and no-op record submissions do not.",
+    "Track expanded world seeds through update and refresh; synchronize heads, body hashes, reasons, required state, fences, and world review requirements; invalidate existing chapter and semantic reviews when new chapters enter.",
+    "Block legacy candidates at publication if their saved world changes have uncovered consumers; allow missing-plan recovery through plan, refresh, and resubmitted update without bypassing existing SHA/head/fence checks.",
+    "Traverse source chapters, active chapter-evidence records, explicit fact-to-knowledge/rule_requires relations, and declared chapter consumers through one typed queue; exclude retired record relations and fence reached records.",
+    "Retain actually changed world IDs in publication receipts so later same-target branches recover alias and transitive consumers; unchanged and merely revalidated records are not attached as new target outputs.",
+    "Preserve prepublication consumed dependency hashes. Changed direct world dependencies invalidate derived evidence caches; no hash is automatically replaced to claim a new read."
+  ],
+  "red_evidence": [
+    {
+      "stage": "Original world scope defect before implementation",
+      "command": "python3 -B -m unittest discover -s tests -p test_history_world_scope.py -v",
+      "tests": 9,
+      "failures": 7,
+      "passed_controls": 2,
+      "result": "FAIL",
+      "observed": "Changed entities and author-plan rules left consumers outside affected scope; legacy candidates could publish without consumer review."
+    },
+    {
+      "stage": "Additional explicit world-reference boundary before typed relation closure",
+      "command": "python3 -B -m unittest discover -s tests -p test_history_world_scope.py -v",
+      "tests": 14,
+      "failures": 4,
+      "passed": 10,
+      "result": "FAIL",
+      "observed": "Changed author-plan fact returned affected=[1] instead of [1,2,3] for observed rule/knowledge dependents, or [1,3] for author-plan intermediates with formal consumers; retired relationship control passed."
+    }
+  ],
+  "green_evidence": [
+    {
+      "command": "python3 -B -m unittest discover -s tests -p test_history_world_scope.py -v",
+      "new_tests": 17,
+      "passed": 17,
+      "failures": 0,
+      "seconds": 2.095,
+      "coverage": [
+        "entity/rule alias equivalence, canonical consumers, transitive chapters, independent chapter exclusion",
+        "actual publication updates consumer heads and retains original consumed hashes",
+        "same-target future branch preserves complete consumer range",
+        "normalized no-op world update does not expand or falsely record target production",
+        "changed direct and indirect fences reject refresh without writes",
+        "restoring an already expanded world candidate does not silently shrink review range",
+        "legacy saved patch publication guard and empty-update recovery",
+        "legacy patch plus imported consumer missing a plan recovers through plan/refresh/update",
+        "candidate chapter evidence and same-batch new entity remain stageable and publishable",
+        "insufficient response budget rolls back patch, scope, revision, and database",
+        "author-plan fact to observed or author-plan rule/knowledge reaches formal consumers",
+        "source body to observed fact to author-plan rule/knowledge reaches formal consumers",
+        "retired world relationship does not expand the branch"
+      ]
+    },
+    {
+      "command": "python3 -B -m unittest discover -s tests -p test_history_state_scope.py -v",
+      "tests": 9,
+      "passed": 9,
+      "failures": 0,
+      "seconds": 0.856
+    },
+    {
+      "module": "test_long_history.LongHistoryTests",
+      "tests": 12,
+      "passed": 12,
+      "failures": 0,
+      "seconds": 2.246,
+      "selected_methods": [
+        "test_far_dependency_transitive_closure_excludes_reviewed_side_story",
+        "test_changed_evidence_and_plan_prevent_refresh_of_old_reviews",
+        "test_new_dependent_chapter_cannot_hide_behind_refresh",
+        "test_second_branch_cannot_publish_after_first_changes_same_history",
+        "test_world_evidence_requires_atomic_rebind_and_keeps_old_state_on_failure",
+        "test_world_record_can_be_retired_with_evidence_and_remains_retired_on_next_revision",
+        "test_world_evidence_creates_far_dependency_without_duplicate_chapter_edge",
+        "test_history_cannot_bypass_known_world_rule_conflicts",
+        "test_commit_dependency_declaration_is_preserved_without_extra_history_command",
+        "test_replace_dependency_validation_uses_recorded_preimage_not_postchapter_card",
+        "test_typed_cognition_reference_expands_history_scope_before_retirement",
+        "test_actual_world_patch_is_checked_even_without_time_or_entities_in_plan"
+      ]
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "focused_test_total": 38,
+  "full_suite_run_by_this_agent": false,
+  "pagination_compatibility_followup": {
+    "trigger": "Parent full-suite validation reported that the existing 4000-chapter pagination test saw hints.total=8000 instead of 4000 after source observations were newly added as traversal hints.",
+    "fix": "Keep typed traversal and all fences. Do not add source observations already present in world_review_required as extra traversal hints; preserve existing declared hints and new entity/author-plan/indirect-record hints.",
+    "validation": [
+      {
+        "test": "test_long_history.LongHistoryTests.test_4000_chapter_inspection_pages_all_scopes_without_hashing_omitted_exports",
+        "passed": 1,
+        "seconds": 62.823,
+        "hints_total": 4000,
+        "existing_assertions_unchanged": true
+      },
+      {
+        "test_file": "tests/test_history_world_scope.py",
+        "passed": 17,
+        "seconds": 2.157,
+        "added_assertions": "Source fact stays fenced without a duplicate hint; indirect author-plan rule and entity/rule change hints remain present."
+      },
+      {
+        "command": "git diff --check",
+        "exit_code": 0
+      }
+    ]
+  },
+  "limitations": [
+    "Impact traversal follows recorded identifiers, evidence, receipts, and foreign keys; unrecorded semantic relationships remain author review responsibilities.",
+    "Dependency completeness remains an author declaration. Old consumed hashes are preserved even when a reviewed world mutation makes those cache keys stale."
+  ]
+}

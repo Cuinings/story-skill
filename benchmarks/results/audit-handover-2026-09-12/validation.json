@@ -1,0 +1,90 @@
+{
+  "schema": 1,
+  "scope": "Local skill audit and fact recall repair; not release acceptance",
+  "created_at": "2026-09-12T07:37:01.645932+00:00",
+  "base_commit": "f2f5aa14712e9a2de273187266e27eb5346dc8c2",
+  "runtime_version": "0.5.4",
+  "environment": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "x86_64",
+    "python": "3.12.14"
+  },
+  "ok": true,
+  "previous_validation": "../audit-continuity-2026-09-12/validation.json",
+  "improvements": [
+    {
+      "name": "recall_fact_transitions_after_entity_links_change",
+      "behavior": "Entity links select relevant subject/predicate/clock slots. Later ownership records remain visible from the previous holder context. Actual evidence, story time, unknown order, author plans, retired associations and dependency hashes retain their boundaries."
+    },
+    {
+      "name": "deduplicate_fact_slots_before_lookup",
+      "behavior": "Collect eligible state slots globally, then query each slot once using the existing index; avoids repeated joins for every historical version."
+    }
+  ],
+  "baseline_reproduction": {
+    "tests_run_before_fix": 6,
+    "assertion_failures_including_subtests": 7,
+    "note": "Ambiguous-time subcases were subsequently separated and one retirement control was added."
+  },
+  "new_regression_test_cases": 8,
+  "total_regression_cases_added_since_base": 56,
+  "unit_tests": {
+    "ok": true,
+    "status": "passed",
+    "run": 499,
+    "passed": 492,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "counting": "Successful test cases use addSuccess; failure/error/skip counts may include subtests"
+  },
+  "test_input_stability": {
+    "unchanged": true,
+    "files": 57,
+    "scope": "Python source and test files under skills, scripts and tests",
+    "report": "inputs.json"
+  },
+  "skill_structure": {
+    "ok": true,
+    "skills": 7,
+    "report": "skill-validation.json"
+  },
+  "local_links": {
+    "status": "passed",
+    "files_scanned": 159,
+    "links_checked": 743,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "cli_smoke": {
+    "ok": true,
+    "commands": 20,
+    "report": "smoke.json"
+  },
+  "independent_skill_exercise": {
+    "ok": true,
+    "report": "forward-checks.json",
+    "scope": "Two chapters committed, next chapter context and evidence recovered; injury status uncertainty preserved; no third chapter written."
+  },
+  "independent_code_and_query_review": {
+    "report": "fact-query-review.json",
+    "ok": true
+  },
+  "independent_boundary_review": {
+    "report": "boundary-review.json",
+    "new_defect_found": false
+  },
+  "documentation_sha256": {
+    "README.md": "6edb649465f3165a459da8688fbdda6b6459a7af20bd7f7e6ed70501209261c1",
+    "skills/story-codex-write/references/long-form.md": "fc40d07e733f46f58483180ba76d5f39ea38d4ac2d54f60fc3356be24caec97a"
+  },
+  "limits": [
+    "Executed on Intel macOS only; seven conditional skips are not passes.",
+    "No GitHub push, release, package publication or replacement of installed skills.",
+    "Query cost comparison is a bounded synthetic fixture, not a long novel capacity or literary quality benchmark.",
+    "Prior reports and the fixed release version remain unchanged."
+  ]
+}

@@ -6,6 +6,7 @@ revised or promoted to observations, but never count as observed knowledge,
 balances, or previous ability use. Caller installs SCHEMA before using this API.
 """
 from decimal import Decimal, InvalidOperation, localcontext
+from itertools import groupby
 import json
 import re
 import sqlite3
@@ -456,7 +457,7 @@ def _eligible(row, clock, at):
     return row.get("clock", clock) == clock and (at is None or row.get("at", row.get("start")) is None or row.get("at", row.get("start")) <= at) and (at is None or row.get("end") is None or at < row["end"])
 
 
-def _latest(rows, keys, preserve_ties=False):
+def _latest(rows, keys, preserve_ties=False, publication_order=True):
     """Keep untimed evidence unordered instead of treating NULL as ancient."""
     chosen, undated = {}, {}
     for row in rows:
@@ -465,7 +466,9 @@ def _latest(rows, keys, preserve_ties=False):
         if coordinate is None:
             undated.setdefault(key, []).append(row)
             continue
-        rank = (coordinate, row.get("version", 0), row["evidence"]["chapter"] or 0)
+        rank = (coordinate, row.get("version", 0))
+        if publication_order:
+            rank += (row["evidence"]["chapter"] or 0,)
         if not preserve_ties:
             rank += (row["id"],)
         if key not in chosen or rank > chosen[key][0]:
@@ -482,24 +485,28 @@ def _latest(rows, keys, preserve_ties=False):
 
 
 def _current_rows(book, kind, ids, keys, chapter, clock, at):
-    """Fetch dated winners plus undated evidence; preserve legacy hook ties."""
+    """Fetch dated winners and ambiguous states without inventing event order."""
     ids = sorted(set(ids))
     selected = []
     time_field = "at" if "at" in FIELDS[kind] else "start"
     partition = ",".join("r." + key for key in keys) + ",e.mode"
     version = ",r.version DESC" if kind == "rules" else ""
+    unordered_states = kind in ("facts", "knowledge", "lines")
+    publication = "" if unordered_states else ",e.chapter DESC"
     end_sql = " AND (r.end IS NULL OR ? IS NULL OR r.end>?)" if "end" in FIELDS[kind] else ""
     for offset in range(0, len(ids), 300):
         chunk = ids[offset:offset + 300]
         sql = f"""SELECT id FROM (SELECT r.id,r.{time_field} AS coordinate,DENSE_RANK() OVER
-          (PARTITION BY {partition} ORDER BY r.{time_field} DESC{version},e.chapter DESC) AS rank
+          (PARTITION BY {partition} ORDER BY r.{time_field} DESC{version}{publication}) AS rank
           FROM world_{kind} r JOIN world_evidence e ON e.kind=? AND e.record_id=r.id
           WHERE r.id IN ({','.join('?' for _ in chunk)}) AND r.clock=?
           AND e.retired=0 AND (e.mode='author_plan' OR e.chapter<?)
           AND (? IS NULL OR r.{time_field} IS NULL OR r.{time_field}<=?){end_sql}) WHERE rank=1 OR coordinate IS NULL"""
         args = [kind, *chunk, clock, chapter, at, at] + ([at, at] if end_sql else [])
         selected.extend(r[0] for r in book.db.execute(sql, args))
-    return _latest(_rows(book, kind, selected, chapter), keys, preserve_ties=kind == "hooks")
+    return _latest(_rows(book, kind, selected, chapter), keys,
+                   preserve_ties=unordered_states or kind == "hooks",
+                   publication_order=not unordered_states)
 
 
 def _applicable_rule_ids(book, actor, line, rule=None):
@@ -540,11 +547,14 @@ def _observed_transfers(book, holder, clock, at, chapter):
 
 def _balance_effect(value, row, holder):
     amount = Decimal(row["amount"]) if row["amount"] is not None else None
+    if row["at"] is None:
+        # An undated transfer may follow the opening even when SQL lists it first.
+        value["time_uncertain"] = True
     if row["opening"] and row["receiver"] == holder:
         if value["opening_seen"]:
             value["amount"] = None
         else:
-            value["amount"] = amount if row["at"] is not None else None
+            value["amount"] = amount if not value.get("time_uncertain") else None
         value["opening_seen"] = True
     elif amount is None or row["at"] is None or value["amount"] is None:
         value["amount"] = None
@@ -596,12 +606,15 @@ def context(book, plan, chapter, budget=None):
         ids = [r[0] for r in book.db.execute("SELECT id FROM world_lines WHERE line=? AND clock=? AND (? IS NULL OR at<=? OR at IS NULL)", (plan["line"], clock, at, at))]
         rows = _current_rows(book, "lines", ids, ("line",), chapter, clock, at)
         actual = [r for r in rows if r["evidence"]["mode"] == "chapter"]
-        uncertain = any(r.get("time_uncertain") for r in actual)
+        uncertain = any(r.get("time_uncertain") or r.get("order_uncertain") for r in actual)
         packet["line"] = actual[-1] if actual and not uncertain else None
         if uncertain:
             packet["line_candidates"] = actual
-            packet["warnings"].append({"code": "world_time_unknown", "kind": "lines", "records": [r["id"] for r in actual],
-                                       "message": "Undated checkpoints do not establish a unique current scene."})
+            for flag, code in (("time_uncertain", "world_time_unknown"), ("order_uncertain", "world_order_ambiguous")):
+                affected = [r["id"] for r in actual if r.get(flag)]
+                if affected:
+                    packet["warnings"].append({"code": code, "kind": "lines", "records": affected,
+                                              "message": "These checkpoints do not establish a unique current scene."})
             for record in actual:
                 _verify_current(book, "lines", record)
         packet["planned"]["lines"] = [r for r in rows if r["evidence"]["mode"] == "author_plan"]
@@ -609,6 +622,22 @@ def context(book, plan, chapter, budget=None):
             packet["warnings"].append({"code": "line_checkpoint_unknown", "line": plan["line"]})
     for kind, keys in (("facts", ("subject", "predicate")), ("knowledge", ("actor", "fact")), ("hooks", ("hook",)), ("rules", ("rule",))):
         ids = _related(book, kind, entities)
+        if kind in ("facts", "knowledge"):
+            # Entity links discover state slots. Later ownership or cognition
+            # changes need not repeat every related item or place link.
+            seeds, slots = sorted(ids), set()
+            columns = ",".join("r." + key for key in keys)
+            for offset in range(0, len(seeds), 300):
+                chunk = seeds[offset:offset + 300]
+                slots.update(tuple(r) for r in book.db.execute(
+                    f"SELECT DISTINCT {columns} FROM world_{kind} r JOIN world_evidence e "
+                    "ON e.kind=? AND e.record_id=r.id "
+                    f"WHERE r.id IN ({','.join('?' for _ in chunk)}) AND r.clock=? "
+                    "AND e.retired=0 AND (e.mode='author_plan' OR e.chapter<?)", (kind, *chunk, clock, chapter)))
+            for first, second in sorted(slots):
+                ids.update(r[0] for r in book.db.execute(
+                    f"SELECT id FROM world_{kind} WHERE {keys[0]}=? AND clock=? AND {keys[1]}=?",
+                    (first, clock, second)))
         if kind == "hooks":
             if plan.get("line"):
                 ids.update(r[0] for r in book.db.execute("SELECT id FROM world_hooks WHERE trigger_line=?", (plan["line"],)))
@@ -770,14 +799,14 @@ def _evaluate(book, plan, chapter, packet, rule_horizon):
             if proposition and proposition["evidence"]["mode"] == "chapter":
                 _verify_current(book, "facts", proposition)
                 ids = [r[0] for r in book.db.execute("SELECT id FROM world_facts WHERE subject=? AND predicate=? AND clock=?", (proposition["subject"], proposition["predicate"], clock))]
-                active = [r for r in _current_rows(book, "facts", ids, ("subject", "predicate"), rule_horizon, clock, use["at"]) if r["evidence"]["mode"] == "chapter" and not r.get("time_uncertain")]
+                active = [r for r in _current_rows(book, "facts", ids, ("subject", "predicate"), rule_horizon, clock, use["at"]) if r["evidence"]["mode"] == "chapter" and not r.get("time_uncertain") and not r.get("order_uncertain")]
             if fact not in {r["id"] for r in active}:
                 warnings.append({"code": "rule_prerequisite_unverified", "id": use["id"], "fact": fact})
         if use["exception"]:
             warnings.append({"code": "rule_exception_review", "id": use["id"], "reason": use["exception"]})
         previous[(use["actor"], use["rule"])] = use
-    # Merge recorded and proposed actions in story order. A plan's start can be
-    # unknown or span several actions; its opening packet is not their balance.
+    # Merge recorded and proposed actions by story tick. A shared tick does not
+    # establish income-before-spending order, even across publication chapters.
     actions = packet["planned"]["transfers"]
     matching = [r for r in actions if r["clock"] == clock]
     holders = {r[key] for r in matching for key in ("sender", "receiver") if r[key] is not None}
@@ -787,31 +816,63 @@ def _evaluate(book, plan, chapter, packet, rule_horizon):
     ordered.sort(key=lambda item: (item[0]["at"] if item[0]["at"] is not None else -2**54,
                                    not item[0]["opening"], not item[1], item[0].get("chapter", chapter), item[0]["id"]))
     balances = {}
-    for transfer, is_observed in ordered:
-        if transfer["clock"] != clock:
-            warnings.append({"code": "story_clock_unmatched", "id": transfer["id"]})
-            continue
-        amount = Decimal(transfer["amount"]) if transfer["amount"] is not None else None
-        if not is_observed and (transfer["at"] is None or amount is None):
-            warnings.append({"code": "quantity_or_time_unknown", "id": transfer["id"]})
-        for holder, sign in ((transfer["sender"], -1), (transfer["receiver"], 1)):
-            if holder is None:
+    for tick, batch in groupby(ordered, key=lambda item: item[0]["at"]):
+        flows = {}
+        for transfer, is_observed in batch:
+            if transfer["clock"] != clock:
+                warnings.append({"code": "story_clock_unmatched", "id": transfer["id"]})
                 continue
-            key = (holder, transfer["resource"])
-            existed = key in balances
-            value = balances.setdefault(key, {"amount": None, "opening_seen": False})
+            amount = Decimal(transfer["amount"]) if transfer["amount"] is not None else None
+            if not is_observed and (tick is None or amount is None):
+                warnings.append({"code": "quantity_or_time_unknown", "id": transfer["id"]})
+            for holder, sign in ((transfer["sender"], -1), (transfer["receiver"], 1)):
+                if holder is None:
+                    continue
+                key = (holder, transfer["resource"])
+                if transfer["opening"]:
+                    existed = key in balances
+                    value = balances.setdefault(key, {"amount": None, "opening_seen": False})
+                    _balance_effect(value, transfer, holder)
+                    if not is_observed and tick is not None and amount is not None and existed:
+                        warnings.append({"code": "opening_balance_already_exists", "id": transfer["id"], "holder": holder})
+                else:
+                    flows.setdefault(key, []).append((transfer, is_observed, sign, amount))
+        for (holder, resource), entries in sorted(flows.items()):
+            value = balances.setdefault((holder, resource), {"amount": None, "opening_seen": False})
             current = value["amount"]
-            _balance_effect(value, transfer, holder)
-            if is_observed or transfer["at"] is None or amount is None:
+            incoming, outgoing = Decimal(0), Decimal(0)
+            checked = []
+            for transfer, is_observed, sign, amount in entries:
+                _balance_effect(value, transfer, holder)
+                if amount is not None:
+                    if sign == 1:
+                        incoming = _add_amount(incoming, amount)
+                    else:
+                        outgoing = _add_amount(outgoing, amount)
+                if not is_observed and tick is not None and amount is not None:
+                    checked.append((transfer, sign))
+            if current is None or value["amount"] is None:
+                warnings.extend({"code": "resource_baseline_unknown", "id": transfer["id"], "holder": holder}
+                                for transfer, _ in checked)
+            # Unknown spending cannot cure a shortfall already proved by the
+            # known minimum. Unknown income or baseline can, so keep those open.
+            if current is None or any(sign == 1 and amount is None for _, _, sign, amount in entries):
                 continue
-            if transfer["opening"]:
-                if existed:
-                    warnings.append({"code": "opening_balance_already_exists", "id": transfer["id"], "holder": holder})
+            if not any(sign == -1 for _, sign in checked):
                 continue
-            if current is None:
-                warnings.append({"code": "resource_baseline_unknown", "id": transfer["id"], "holder": holder})
-            elif sign == -1 and value["amount"] < 0:
-                blockers.append({"code": "resource_overdraft", "id": transfer["id"], "holder": holder, "available": format(current, "f"), "required": transfer["amount"]})
+            spending = [transfer for transfer, _, sign, _ in entries if sign == -1]
+            reference = {"id": spending[0]["id"]} if len(spending) == 1 else {"records": sorted(r["id"] for r in spending)}
+            available = _add_amount(current, incoming)
+            detail = {**reference, "holder": holder, "resource": resource, "at": tick,
+                      "available": format(available, "f"), "required": format(outgoing, "f")}
+            if any(sign == -1 and amount is None for _, _, sign, amount in entries):
+                detail["required_is_minimum"] = True
+            if _add_amount(available, outgoing.copy_negate()) < 0:
+                blockers.append({"code": "resource_overdraft", **detail})
+            elif value["amount"] is not None and _add_amount(current, outgoing.copy_negate()) < 0:
+                warnings.append({"code": "resource_order_ambiguous", **detail,
+                                 "records": sorted(transfer["id"] for transfer, _, _, _ in entries),
+                                 "message": "Spending needs income recorded at the same tick; establish their order before treating funds as available."})
     patterns = {}
     for step in packet["arc_steps"]:
         patterns.setdefault((step["actor"], step["pattern"]), []).append(step)

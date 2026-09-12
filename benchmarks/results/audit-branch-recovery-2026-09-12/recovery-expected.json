@@ -1,0 +1,44 @@
+{
+  "book": "/var/folders/4f/b4ym6s71655dtqvxqhrp4dx00000gn/T/story-history-2z94rt2b/book",
+  "branch": "6e1c4b13f90e4cdcaef5fe9974e598b8",
+  "revision": 7,
+  "state_changes": [
+    {
+      "id": "key",
+      "before_sha": "ef8cf026761fc468cbabac33c8f6b63f8d36ecb4fd5d4faa2592f29721166a53",
+      "after": {
+        "critical": false,
+        "due": null,
+        "id": "key",
+        "kind": "fact",
+        "source": "chapter:1 quote:她交出钥匙",
+        "status": "active",
+        "tags": [],
+        "text": "钥匙放进拆开的信封。"
+      },
+      "chapter": 1,
+      "quote": "把钥匙放进信封",
+      "note": "候选稿中的最终去向，以本次检查为准。"
+    }
+  ],
+  "world_changes": {
+    "entities": [
+      {
+        "id": "envelope",
+        "name": "信封",
+        "kind": "item",
+        "description": "封口已拆开"
+      }
+    ]
+  },
+  "semantic_review": {
+    "manifest_sha256": "ce53f3d4d449eba87c1111527f707ba9fa2ee3c4ee9d81014fb765b34f634179",
+    "reviewed_chapters": [
+      1
+    ],
+    "note": "已核对信封与钥匙的候选修订。",
+    "state_review": "钥匙去向与拆封状态相符。",
+    "coverage_review": "此例仅一章，关联范围已核对。",
+    "issues": []
+  }
+}

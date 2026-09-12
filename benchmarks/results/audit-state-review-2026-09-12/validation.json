@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "scope": "Local skill audit: cognition recall and historical state-change review scope; not release acceptance",
+  "created_at": "2026-09-12T07:51:16.724044+00:00",
+  "base_commit": "f2f5aa14712e9a2de273187266e27eb5346dc8c2",
+  "runtime_version": "0.5.4",
+  "environment": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "x86_64",
+    "python": "3.12.14"
+  },
+  "ok": true,
+  "status": "passed",
+  "previous_validation": "../audit-handover-2026-09-12/validation.json",
+  "improvements": [
+    {
+      "name": "recall_cognition_transitions_from_related_entities",
+      "behavior": "Item/place associations discover actor/fact/clock state slots. Later cognition records are included even when their optional related-entity links change; observations, propositions, plans and uncertainty remain distinct."
+    },
+    {
+      "name": "expand_history_scope_for_new_card_decisions",
+      "behavior": "Real extra card changes expand the branch to declared consumers and transitive dependents, refresh required state/world evidence and fences, and invalidate prior reviews. Saved scope never silently shrinks. Legacy candidates have a publication fence and can recover after missing plans are supplied."
+    }
+  ],
+  "new_regression_test_cases": 17,
+  "new_cognition_tests": 8,
+  "new_history_tests": 9,
+  "total_regression_cases_added_since_base": 73,
+  "baseline_reproduction": {
+    "cognition": {
+      "tests_run": 8,
+      "failures_including_subtests": 6
+    },
+    "history": "Extra key-card change initially published target chapter alone while a correctly declared consumer remained unreviewed. A legacy saved-change plus missing-plan recovery combination was reproduced and fixed."
+  },
+  "unit_tests": {
+    "ok": true,
+    "status": "passed",
+    "run": 516,
+    "passed": 509,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "counting": "Successful test cases use addSuccess; failure/error/skip counts may include subtests"
+  },
+  "test_input_stability": {
+    "unchanged": true,
+    "files": 59,
+    "scope": "Python source and test files under skills, scripts and tests",
+    "report": "inputs.json"
+  },
+  "skill_structure": {
+    "ok": true,
+    "skills": 7,
+    "report": "skill-validation.json"
+  },
+  "local_links": {
+    "status": "passed",
+    "files_scanned": 159,
+    "links_checked": 743,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "cli_smoke": {
+    "ok": true,
+    "commands": 20,
+    "report": "smoke.json"
+  },
+  "independent_cognition_exercise": {
+    "ok": true,
+    "report": "forward-checks.json",
+    "scope": "Current key location and a character old location knowledge remain distinct; no next chapter prose written."
+  },
+  "independent_knowledge_review": {
+    "ok": true,
+    "report": "knowledge-review.json",
+    "scope": "Slot boundaries, publication/retirement, linear query growth and actual CLI dependency hashes."
+  },
+  "independent_analysis_boundary_review": {
+    "new_defect_found": false,
+    "report": "analysis-boundary-review.json"
+  },
+  "documentation_sha256": {
+    "README.md": "00e2e0ff5e99b17a323a2c67091fc7d1f52bc14ffb5b705323cfd2a8e50fbe58",
+    "skills/story-codex-write/references/long-form.md": "af76af1899b2e7282186d03e8d75b8e6eb258f0196486e3ade2c4eefdd0eede8",
+    "skills/story-codex-review/references/history.md": "32bc516ba50b58ff5a1cf3a34615156bac9a997878d7c03fa1aeaaad6f0e84c6"
+  },
+  "limits": [
+    "Executed on Intel macOS only; seven conditional skips are not passes.",
+    "No GitHub push, release, package publication, version bump or replacement of installed skills.",
+    "Synthetic fixtures and deterministic checks do not establish long novel capacity or literary quality.",
+    "Previous validation and fixed release reports remain unchanged."
+  ],
+  "completed_at": "2026-09-12T07:54:57.755858+00:00",
+  "independent_history_exercise": {
+    "ok": true,
+    "report": "history-exercise.json",
+    "real_cli_calls": 106,
+    "checks_passed": 17,
+    "scope": "Three-chapter temporary book; extra card correction expands chapter 1 to chapters 1 and 2, clears old reviews, publishes both after renewed review, and preserves chapter 3 and archived prose.",
+    "temporary_book_removed": true,
+    "expected_rejections_included": true
+  }
+}

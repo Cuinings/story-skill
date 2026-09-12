@@ -1,0 +1,98 @@
+{
+  "schema": 1,
+  "scope": "Local skill audit: saved history decisions and world-change consumer coverage; not release acceptance",
+  "created_at": "2026-09-12T11:08:47.671273+00:00",
+  "base_commit": "f2f5aa14712e9a2de273187266e27eb5346dc8c2",
+  "runtime_version": "0.5.4",
+  "environment": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "x86_64",
+    "python": "3.12.14"
+  },
+  "ok": true,
+  "status": "passed",
+  "previous_validation": "../audit-state-review-2026-09-12/validation.json",
+  "improvements": [
+    {
+      "name": "recover_saved_historical_decisions",
+      "behavior": "history-saved returns exact saved state_changes, world_changes, and semantic_review from one read snapshot, including explicit deletions and review notes. Stale and published branches remain readable; hashes are not refreshed. Full output uses an explicit byte budget and never truncates saved decisions."
+    },
+    {
+      "name": "review_world_change_consumers",
+      "behavior": "Actual world-record changes expand chapter review through canonical entity/rule aliases, explicit fact-to-knowledge/rule relationships, recorded source chapters and transitive dependents. Old reviews reset, legacy candidates are fenced, missing plans can be supplied and resumed, and publication retains actual changed world references for future reviews."
+    }
+  ],
+  "new_regression_test_cases": 27,
+  "new_saved_read_tests": 10,
+  "new_world_scope_tests": 17,
+  "total_regression_cases_added_since_base": 100,
+  "unit_tests": {
+    "ok": true,
+    "status": "passed",
+    "run": 543,
+    "passed": 536,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 7,
+    "expected_failures": 0,
+    "unexpected_successes": 0,
+    "counting": "Successful test cases use addSuccess; failure/error/skip counts may include subtests"
+  },
+  "test_input_stability": {
+    "unchanged": true,
+    "files": 61,
+    "scope": "Python source and test files under skills, scripts and tests",
+    "report": "inputs.json"
+  },
+  "full_suite_followup": {
+    "first_run": "One original 4000-chapter pagination test failed because source records were redundantly added as search hints. Corrected with full dependency traversal and fences retained. Original test assertions were not changed.",
+    "final_run": "All 543 cases completed with 536 passed and 7 conditional skips.",
+    "report": "full-suite-followup.json"
+  },
+  "baseline_reproduction": {
+    "saved_read": "read-regression-baseline.json",
+    "world_scope": "world-scope-review.json"
+  },
+  "skill_structure": {
+    "ok": true,
+    "skills": 7,
+    "report": "skill-validation.json"
+  },
+  "local_links": {
+    "status": "passed",
+    "files_scanned": 159,
+    "links_checked": 747,
+    "missing": [],
+    "scope": "Inline local Markdown file targets; remote URLs and heading anchors are not checked"
+  },
+  "cli_smoke": {
+    "ok": true,
+    "commands": 20,
+    "report": "smoke.json",
+    "scope": "Existing 20-command synthetic creation, writing, reconciliation and analysis flow; history-saved CLI is also exercised by the new regression tests."
+  },
+  "independent_recovery": {
+    "ok": true,
+    "report": "recovery-comparison.json",
+    "method": "Independent evaluator used skills and public CLI only; restored decisions matched values recorded before implementation, without access to that expected file. All read operations kept revision 7. Temporary fixture removed after comparison."
+  },
+  "independent_read_and_scope_review": {
+    "report": "read-boundary-review.json",
+    "result": "Read snapshot/budget boundaries passed. An independently found author-plan fact-to-rule-to-chapter gap was corrected and the same case rechecked: scope [1,2,3], old reviews invalidated, canonical content unchanged."
+  },
+  "limitations": [
+    "Scope follows recorded dependencies and evidence, not unrecorded story semantics.",
+    "Dependency completeness remains an author declaration; original consumed hashes stay recorded and changed records can invalidate caches.",
+    "Local Intel macOS checks only; no new Windows/Linux CI or release/package/install validation in this audit.",
+    "No literary quality evaluation in these synthetic correctness checks."
+  ],
+  "delivery": {
+    "source_and_docs_updated": true,
+    "committed": false,
+    "pushed": false,
+    "released": false,
+    "installed_skills_updated": false,
+    "real_novel_modified": false
+  }
+}

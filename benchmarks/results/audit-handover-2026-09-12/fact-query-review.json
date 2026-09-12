@@ -1,0 +1,64 @@
+{
+  "scope": "Read-only narrow audit of current facts slot recall; synthetic isolated in-memory books only",
+  "method": {
+    "fixture": "Public world.save in batches of 500; N distinct dated published versions of one subject/predicate/main-clock, all linked to a; context at N before chapter 2",
+    "measurement": "SQLite set_progress_handler every 1000 VM steps around the complete world.context call; elapsed wall time is informational",
+    "old_query": "Every seed record joins all current records in its slot; DISTINCT applied after expansion",
+    "new_query": "Eligible seeds in batches of 300 produce globally deduplicated subject/predicate slots; each slot scanned once under the selected clock using world_fact_subject",
+    "new_slot_query_plan": [
+      [
+        3,
+        0,
+        61,
+        "SEARCH world_facts USING INDEX world_fact_subject (subject=? AND clock=? AND predicate=?)"
+      ]
+    ]
+  },
+  "old": [
+    {
+      "records": 1000,
+      "vm_steps_approx": 5138000,
+      "seconds": 0.627,
+      "returned_facts": 1
+    },
+    {
+      "records": 2000,
+      "vm_steps_approx": 20296000,
+      "seconds": 2.713,
+      "returned_facts": 1
+    }
+  ],
+  "new": [
+    {
+      "records": 1000,
+      "vm_steps_approx": 131000,
+      "seconds": 0.013326,
+      "returned_facts": 1,
+      "database_and_revision_unchanged": true,
+      "budget_256_rejects_without_mutation": true
+    },
+    {
+      "records": 2000,
+      "vm_steps_approx": 263000,
+      "seconds": 0.023152,
+      "returned_facts": 1,
+      "database_and_revision_unchanged": true,
+      "budget_256_rejects_without_mutation": true
+    }
+  ],
+  "vm_step_growth_ratio": {
+    "old": 3.950175165434021,
+    "new": 2.0076335877862594
+  },
+  "boundary_conclusion": {
+    "targeted_tests": 8,
+    "passed": 8,
+    "cross_subject_predicate_clock_pollution": "No defect reproduced",
+    "retired_association": "Excluded by eligible-seed evidence filter; formal repair retirement regression passed",
+    "planned_vs_observed_and_chapter_horizon": "Regression tests passed; unpublished records remain filtered",
+    "stale_new_owner_evidence": "Still raises stale_world_evidence",
+    "budget": "Full packet rejects at budget 256 without mutation; no silent truncation",
+    "deliverable": "No remaining blocking issue found in the requested narrow scope; quadratic repeated slot expansion corrected"
+  },
+  "files_modified_by_reviewer": []
+}

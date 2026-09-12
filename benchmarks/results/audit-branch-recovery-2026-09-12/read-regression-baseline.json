@@ -1,0 +1,9 @@
+{
+  "scope": "Before adding history-saved; fixture inputs removed before readback",
+  "run": 10,
+  "failed": 1,
+  "errors": 9,
+  "cli_failure": "history-saved invalid choice",
+  "api_error": "branch_saved missing",
+  "independent_reproduction": "recovery-before.json"
+}
